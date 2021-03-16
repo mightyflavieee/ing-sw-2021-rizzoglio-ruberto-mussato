@@ -1,5 +1,5 @@
 public class LeaderCardObserver implements Observer {
-    Board board;
+    private Board board;
 
     @Override
     public void update() {
