@@ -1,4 +1,4 @@
-public class WarehouseObserver implements Observer{
+public class PapaCouncilObserver implements Observer{
     Match match;
 
     @Override
