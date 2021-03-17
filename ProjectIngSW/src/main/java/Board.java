@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Board {
-  private Map<DevCardPosition,List<DevelopmentCard>> mapTray;
+  private Map<DevCardPosition, List<DevelopmentCard>> mapTray;
   private Map<ResourceType, List<Resource>> chest;
   private Warehouse warehouse;
   private List<LeaderCard> leaderCards;
@@ -10,29 +10,35 @@ public class Board {
   private CardContainer cardContainer;
   private ActionTokenContainer actionTokenContainer;
 
-  public Map<DevCardPosition,List<DevelopmentCard>> getMaptray(){
+  public Map<DevCardPosition, List<DevelopmentCard>> getMaptray() {
     return mapTray;
   }
 
-  public Map<ResourceType, List<Resource>> getChest(){
+  public Map<ResourceType, List<Resource>> getChest() {
     return chest;
   }
 
-  public Warehouse getWarehouse(){
+  public Warehouse getWarehouse() {
     return warehouse;
   }
 
-  public FaithMap getFaithMap(){
+  public FaithMap getFaithMap() {
     return faithMap;
   }
-  public Market getMarket(){
+
+  public Market getMarket() {
     return market;
   }
-  public CardContainer getCardContainer(){
+
+  public CardContainer getCardContainer() {
     return cardContainer;
   }
 
-  public ActionTokenContainer getActionTokenContainer(){
+  public List<LeaderCard> getLeaderCards() {
+    return leaderCards;
+  }
+
+  public ActionTokenContainer getActionTokenContainer() {
     return actionTokenContainer;
   }
 }
