@@ -5,10 +5,6 @@ public class Board {
   private Map<ResourceType, List<Resource>> chest;
   private Warehouse warehouse;
   private List<LeaderCard> leaderCards;
-  private FaithMap faithMap;
-  private Market market;
-  private CardContainer cardContainer;
-  private ActionTokenContainer actionTokenContainer;
 
   public Map<DevCardPosition, List<DevelopmentCard>> getMaptray() {
     return mapTray;
@@ -22,23 +18,7 @@ public class Board {
     return warehouse;
   }
 
-  public FaithMap getFaithMap() {
-    return faithMap;
-  }
-
-  public Market getMarket() {
-    return market;
-  }
-
-  public CardContainer getCardContainer() {
-    return cardContainer;
-  }
-
   public List<LeaderCard> getLeaderCards() {
     return leaderCards;
-  }
-
-  public ActionTokenContainer getActionTokenContainer() {
-    return actionTokenContainer;
   }
 }
