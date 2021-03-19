@@ -6,7 +6,7 @@ public class Warehouse {
   private List<Observer> observers;
 
   public Map<ShelfFloor, List<Resource>> getShelfs() {
-    return null;
+    return shelfs;
   }
   public void insertResources(ShelfFloor shelf, List<Resource> resourcesToBeInserted){}
 
@@ -14,6 +14,14 @@ public class Warehouse {
 
   public void clearShelf(ShelfFloor floor){
     
+  }
+
+  public Optional<Map<ExtraResourceType, List<Resource>>> getExtraDeposit(){
+    return extraDeposit;
+  }
+
+  public List<Observer> getObservers(){
+    return observers;
   }
   public void attach(Observer observer){}
   public void detach(Observer observer){}
