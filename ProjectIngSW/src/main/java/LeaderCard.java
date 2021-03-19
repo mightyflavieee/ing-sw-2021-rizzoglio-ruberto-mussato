@@ -1,4 +1,4 @@
-public class LeaderCard {
+public class LeaderCard extends Card{
   private Perk perk;
   private Status status;
 
