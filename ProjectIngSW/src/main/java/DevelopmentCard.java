@@ -4,6 +4,11 @@ public class DevelopmentCard extends Card{
   private CardColor color;
   private CardLevel level;
   private Production production;
+  private String id;
+
+  public DevelopmentCard() {
+
+  }
 
   public CardColor getColor() {
     return color;
@@ -15,6 +20,10 @@ public class DevelopmentCard extends Card{
 
   public Production getProduction(){
     return production;
+  }
+
+  public String getId() {
+    return id;
   }
 
   public List<Resource> useProduction(Warehouse warehouse) {
@@ -33,10 +42,10 @@ public class DevelopmentCard extends Card{
       currentResources.put(firstFloor.get(0).getType(), 1);
     }
     if (!secondFloor.isEmpty()) {
-      currentResources.put(firstFloor.get(0).getType(), 2);
+      currentResources.put(secondFloor.get(0).getType(), secondFloor.size());
     }
     if (!thirdFloor.isEmpty()) {
-      currentResources.put(firstFloor.get(0).getType(), 3);
+      currentResources.put(thirdFloor.get(0).getType(), thirdFloor.size());
     }
 
     // adds to a temporary list 'resourceTypesRequired' the resource types needed for the production
