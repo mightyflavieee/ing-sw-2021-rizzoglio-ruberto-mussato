@@ -5,6 +5,7 @@ public class Board {
   private Map<DevCardPosition, List<DevelopmentCard>> mapTray;
   private Warehouse warehouse;
   private List<LeaderCard> leaderCards;
+  private FaithMap faithMap;
 
   public Map<DevCardPosition, List<DevelopmentCard>> getMapTray() {
     return mapTray;
@@ -38,5 +39,8 @@ public class Board {
     productionCardsMap.put(DevCardPosition.Center, this.mapTray.get(DevCardPosition.Center).get(this.mapTray.get(DevCardPosition.Center).size()-1));
     productionCardsMap.put(DevCardPosition.Right, this.mapTray.get(DevCardPosition.Right).get(this.mapTray.get(DevCardPosition.Right).size()-1));
     return productionCardsMap;
+  }
+  public void moveForward(){
+    faithMap.moveForward();
   }
 }
