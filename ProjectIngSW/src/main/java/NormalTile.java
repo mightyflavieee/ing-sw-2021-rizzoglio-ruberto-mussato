@@ -1,6 +1,6 @@
 public class NormalTile implements ActivableTile {
     @Override
-    public void activate(Player player) {
+    public void activate() {
 
     }
 }

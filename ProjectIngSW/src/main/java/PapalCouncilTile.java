@@ -15,7 +15,7 @@ public class PapalCouncilTile implements ActivableTile{
     }
 
     @Override
-    public void activate(Player player) {
+    public void activate() {
         observers.forEach(Observer::update);
     }
     public void attach(PapalCouncilObserver observer){

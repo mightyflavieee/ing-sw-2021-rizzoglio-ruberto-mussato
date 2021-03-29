@@ -5,7 +5,7 @@ public class FaithMap {
   private int blackMarkerPosition;
   private List<ActivableTile> faithTiles;
   private List<PapalFavourSlot> papalFavourSlots;
-
+  //definire un costruttore (bisogna specificare ogni casella della mappa)
   public int getMarkerPosition(){
     return markerPosition;
   }
@@ -22,10 +22,12 @@ public class FaithMap {
     return papalFavourSlots;
   }
 
-  public void moveForward(){
+  public void moveForward(){ //il player che chiama questa funziona passa se stesso
     markerPosition++;
+    faithTiles.get(markerPosition).activate();
   }
   public void moveForwardBlack(){
     blackMarkerPosition++;
+    faithTiles.get(markerPosition).activate();
   }
 }
