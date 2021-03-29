@@ -138,4 +138,11 @@ public class Player {
     }
     return false;
   }
+
+  public void addVictoryPoints(int newVictoryPoints){
+    this.victoryPoints = this.victoryPoints + newVictoryPoints;
+  }
+  public void moveForward(){
+    board.moveForward(this);
+  }
 }
