@@ -6,7 +6,7 @@ public class Match {
   private Market market;
   private CardContainer cardContainer;
   private ActionTokenContainer actionTokenContainer;
-
+  private Player currentPlayer;
 
   public Match(List<Player> playerList, int maxPlayerNumber) {
     this.playerList = playerList;
@@ -58,14 +58,16 @@ public class Match {
     return actionTokenContainer;
   }
 
-  public void notifyFaithMapsForCouncil(){}
+  public void notifyFaithMapsForCouncil(int numTile){
+      //notifica il consiglio ad ogni player che agisce in base alla posizione in cui si trova
+  }
 
   public void notifyFaithMapsForDiscard(int numDiscardedResources){}
 
   public void playGame(){
     //definire metodo per estrarre primo player 
     int playerIndex = 0;
-    Player currentPlayer = this.playerList.get(playerIndex);
+    currentPlayer = this.playerList.get(playerIndex);
     while (true) {
       boolean endGame = currentPlayer.playTurn(this.market, this.cardContainer, this.actionTokenContainer);
       if(endGame){
@@ -75,5 +77,8 @@ public class Match {
       currentPlayer = nextPlayer(currentPlayer);
     }
 
+  }
+  public void addVictoryPoints(int newVictoryPoints){
+      currentPlayer.addVictoryPoints(newVictoryPoints);
   }
 }

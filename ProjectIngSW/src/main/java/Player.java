@@ -143,6 +143,6 @@ public class Player {
     this.victoryPoints = this.victoryPoints + newVictoryPoints;
   }
   public void moveForward(){
-    board.moveForward(this);
+    board.moveForward();
   }
 }
