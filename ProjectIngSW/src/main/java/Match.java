@@ -18,18 +18,15 @@ public class Match {
     }
   }
 
-  private void playLastTurn(Player currentPlayer){
+  private void playLastTurn(){
     int playerIndex = this.playerList.indexOf(currentPlayer);
-    while (true){
-      if(playerIndex==this.playerList.size()-1) {
-        break;
+      while (playerIndex != this.playerList.size() - 1) {
+          currentPlayer = nextPlayer();
+          currentPlayer.playTurn(this.market, this.cardContainer, this.actionTokenContainer);
       }
-      currentPlayer = nextPlayer(currentPlayer);
-      currentPlayer.playTurn(this.market, this.cardContainer, this.actionTokenContainer);
-    }
   }
 
-  private Player nextPlayer(Player currentPlayer){
+  private Player nextPlayer(){
     int playerIndex = this.playerList.indexOf(currentPlayer);
     playerIndex = playerIndex + 1;
      if(playerIndex> this.playerList.size()-1){
@@ -71,10 +68,10 @@ public class Match {
     while (true) {
       boolean endGame = currentPlayer.playTurn(this.market, this.cardContainer, this.actionTokenContainer);
       if(endGame){
-        playLastTurn(currentPlayer);
+        playLastTurn();
         break;
       }
-      currentPlayer = nextPlayer(currentPlayer);
+      currentPlayer = nextPlayer();
     }
 
   }
