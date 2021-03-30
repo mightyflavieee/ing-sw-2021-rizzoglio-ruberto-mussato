@@ -18,16 +18,25 @@ public class LeaderCard extends Card{
     return status;
   }
 
+  // changes the status of the LeaderCard to Active
   public void activateCard(){
     if (this.status == Status.Active) {
-      System.out.println("Leader Card is already active!");
+      // if the perk is a WarehousePerk and it's active, it is NOT reusable
+      if (this.perk instanceof WarehousePerk) {
+        System.out.println("Leader Card is already active!");
+      } else {
+        // if the perk is reusable, utilize the perk
+        this.perk.usePerk();
+      }
     } else {
       this.status = Status.Active;
       this.perk.usePerk();
     }
   }
 
-  public void discard(){}
+  /*public void discard() {
+
+  }*/
 
   public void attach(Observer observer) {
     this.observers.add(observer);
