@@ -83,7 +83,7 @@ public class Player {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
           String chosenAction = reader.readLine();
-          if(chosenAction=="NO"){
+          if(chosenAction.equals("NO")){
               return false;
           }
         } catch (Exception e) {
