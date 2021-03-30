@@ -26,16 +26,16 @@ public class LeaderCard extends Card{
   // changes the status of the LeaderCard to Active
   public void activateCard(){
     if (this.status == Status.Active) {
-      // if the perk is a WarehousePerk and it's active, it is NOT reusable
-      if (this.perk instanceof WarehousePerk) {
-        System.out.println("Leader Card is already active!");
+      // if the perk is reusable (only ProductionPerk), utilize the perk again
+      if (this.perk instanceof ProductionPerk) {
+        this.perk.usePerk(this.perk.resource);
       } else {
-        // if the perk is reusable, utilize the perk
-        this.perk.usePerk();
+        // if the perk is not a ProductionPerk and it's active, it is NOT reusable
+        System.out.println("Leader Card is already active!");
       }
     } else {
       this.status = Status.Active;
-      this.perk.usePerk();
+      this.perk.usePerk(this.perk.resource);
     }
   }
 
