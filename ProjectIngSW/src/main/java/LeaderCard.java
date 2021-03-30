@@ -5,7 +5,8 @@ public class LeaderCard extends Card{
   private Status status;
   private List<Observer> observers = null;
 
-  public LeaderCard(Perk assignedPerk) {
+  public LeaderCard(String id, Perk assignedPerk) {
+    this.id = id;
     this.perk = assignedPerk;
     this.status = Status.Inactive;
   }
@@ -16,6 +17,10 @@ public class LeaderCard extends Card{
 
   public Status getStatus(){
     return status;
+  }
+
+  public String getId() {
+    return id;
   }
 
   // changes the status of the LeaderCard to Active
