@@ -10,5 +10,8 @@ public class ActionTokenContainer {
     }
     public void attach(Observer observer){}
     public void detach(Observer observer){}
-    public void notifyUpdate(){};
+    public void notifyUpdate(){}
+    public void shuffle(){
+        //da definire
+    }
 }
