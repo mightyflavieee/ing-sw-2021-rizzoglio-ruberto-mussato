@@ -16,4 +16,7 @@ public class CardContainer {
     Map<ResourceType, Integer> currentResources = board.mapAllResources();
     return false;
   }
+  public void discard(CardColor cardColor){
+    // da implementare
+  }
 }
