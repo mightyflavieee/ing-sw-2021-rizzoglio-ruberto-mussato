@@ -20,7 +20,7 @@ public class PapalCouncilTile implements ActivableTile{
     }
     public void attach(PapalCouncilObserver observer){
         this.observers.add(observer);
-        observer.setMyPapalCouncilTile(this);
+        observer.setNumTile(this.numTile);
     }
     //overload nel caso in cui abbia bisogno di attaccare un altro tipo di observer
     public void attach(Observer observer){

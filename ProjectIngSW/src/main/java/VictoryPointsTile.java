@@ -3,15 +3,15 @@ import java.util.List;
 
 public class VictoryPointsTile implements ActivableTile{
     private List<Observer> observers;
-    private int victorypoints;
+    private int victoryPoints;
 
-    public VictoryPointsTile(int victorypoints) {
+    public VictoryPointsTile(int victoryPoints) {
         this.observers = new ArrayList<>();
-        this.victorypoints = victorypoints;
+        this.victoryPoints = victoryPoints;
     }
 
     public int getVictorypoints() {
-        return victorypoints;
+        return victoryPoints;
     }
 
     @Override
@@ -20,7 +20,7 @@ public class VictoryPointsTile implements ActivableTile{
     }
     public void attach(VictoryPointsObserver observer){
         this.observers.add(observer);
-        observer.setMyVictoryPointsTile(this);
+        observer.setVictoryPoints(this.victoryPoints);
     }
     //overload nel caso in cui abbia bisogno di attaccare un altro tipo di observer
     public void attach(Observer observer){

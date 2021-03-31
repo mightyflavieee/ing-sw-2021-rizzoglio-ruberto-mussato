@@ -1,12 +1,12 @@
 public class VictoryPointsObserver implements Observer{
     private Match match;
-    private VictoryPointsTile myVictoryPointsTile;
+    private int victoryPoints;
     @Override
     public void update() {
-        match.addVictoryPoints(myVictoryPointsTile.getVictorypoints());
+        match.addVictoryPoints(victoryPoints);
     }
 
-    public void setMyVictoryPointsTile(VictoryPointsTile myVictoryPointsTile) {
-        this.myVictoryPointsTile = myVictoryPointsTile;
+    public void setVictoryPoints(int victoryPoints) {
+        this.victoryPoints = victoryPoints;
     }
 }

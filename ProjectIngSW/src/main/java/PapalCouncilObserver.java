@@ -1,13 +1,13 @@
 public class PapalCouncilObserver implements Observer{
     private Match match;
-    private PapalCouncilTile myPapalCouncilTile;
+    private int numTile;
     @Override
     public void update() {
-        match.notifyFaithMapsForCouncil(myPapalCouncilTile.getNumTile());
+        match.notifyFaithMapsForCouncil(numTile);
 
     }
 
-    public void setMyPapalCouncilTile(PapalCouncilTile myPapalCouncilTile) {
-        this.myPapalCouncilTile = myPapalCouncilTile;
+    public void setNumTile(int numTile) {
+        this.numTile = numTile;
     }
 }
