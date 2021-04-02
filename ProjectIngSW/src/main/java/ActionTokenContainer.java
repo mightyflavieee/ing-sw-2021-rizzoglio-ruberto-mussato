@@ -1,3 +1,4 @@
+import java.util.Collections;
 import java.util.List;
 
 // è un Singleton
@@ -12,6 +13,6 @@ public class ActionTokenContainer {
     public void detach(Observer observer){}
     public void notifyUpdate(){}
     public void shuffle(){
-        //da definire
+        Collections.shuffle(actionTokens);
     }
 }
