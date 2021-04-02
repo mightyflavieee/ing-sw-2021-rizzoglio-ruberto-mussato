@@ -42,7 +42,7 @@ public class Board {
     return productionCardsMap;
   }
 
-  // serve? la move forward la fa già la FaithMap, che sarà chiamata da Board
+
   public void moveForward(){
     faithMap.moveForward();
   }

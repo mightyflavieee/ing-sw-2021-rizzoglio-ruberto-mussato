@@ -1,5 +1,7 @@
 
 import java.util.*;
+import java.util.stream.Collectors;
+
 public class Match {
   private List<Player> playerList;
   private int maxPlayerNumber;
@@ -59,7 +61,12 @@ public class Match {
       //notifica il consiglio ad ogni player che agisce in base alla posizione in cui si trova
   }
 
-  public void notifyFaithMapsForDiscard(int numDiscardedResources){}
+  public void notifyFaithMapsForDiscard(int numDiscardedResources){
+      //metodo chiamato quando il currentPlayer scarta delle risorse
+      for(int i = 0; i < numDiscardedResources; i++){
+          playerList.stream().filter(x -> x != currentPlayer).forEach(Player::moveForward);
+      }
+  }
 
   public void playGame(){
     //definire metodo per estrarre primo player 
