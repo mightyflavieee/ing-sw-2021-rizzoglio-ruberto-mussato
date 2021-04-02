@@ -145,4 +145,5 @@ public class Player {
   public void moveForward(){
     board.moveForward();
   }
+  public void papalCouncil(int numTile){board.papalCouncil(numTile);}
 }

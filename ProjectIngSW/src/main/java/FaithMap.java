@@ -30,4 +30,7 @@ public class FaithMap {
     blackMarkerPosition++;
     faithTiles.get(markerPosition).activate();
   }
+  public void papalCouncil(int numTile){
+    //i consigli sono ogni 8, implementare di conseguenza; il numero di caselle prima cambia
+  }
 }

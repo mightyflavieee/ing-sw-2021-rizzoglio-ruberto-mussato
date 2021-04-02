@@ -63,4 +63,5 @@ public class Board {
     }
     return currentLeaderCards;
   }
+  public void papalCouncil(int numTile){faithMap.papalCouncil(numTile);}
 }
