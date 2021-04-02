@@ -1,9 +1,9 @@
 public class DiscardActionTokenObserver implements Observer{
-    private CardContainer cardContainer;
+    private Match match;
     private CardColor cardColor;
     @Override
     public void update() {
-        cardContainer.discard(this.cardColor);
+        match.discard(this.cardColor);
     }
     public void setCardColor(CardColor cardColor) {
         this.cardColor = cardColor;

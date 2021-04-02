@@ -26,13 +26,14 @@ public class CardContainer {
   return true;
   }
 
-  public void discard(CardColor cardColor){
+  public boolean discard(CardColor cardColor){
     for(int i = 0; i < 2; i++)
       if (!tryToDiscard(cardColor, CardLevel.One))
         if (!tryToDiscard(cardColor, CardLevel.Two))
-          if (!tryToDiscard(cardColor, CardLevel.Three)){}
-            //notificare in qualche modo che hai perso
-
-    }
+          if (!tryToDiscard(cardColor, CardLevel.Three)){
+            return true; //carte finite quindi hai perso
+          }
+    return false; //hai scartato 2 carte e va bene così
+  }
 
 }

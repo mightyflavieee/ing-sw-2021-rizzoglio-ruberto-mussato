@@ -86,4 +86,11 @@ public class Match {
   public void addVictoryPoints(int newVictoryPoints){
       currentPlayer.addVictoryPoints(newVictoryPoints);
   }
+  public void discard(CardColor cardColor){
+      if(cardContainer.discard(cardColor))
+          this.youLost();
+  }
+  private void youLost(){
+      //da implementare
+  }
 }
