@@ -3,9 +3,13 @@ import java.io.InputStreamReader;
 
 public class ProductionPerk extends Perk{
 
+  public ProductionPerk(Resource resource, Board board) {
+    super(resource, board);
+  }
+
   @Override
   public void usePerk(Resource resource) {
-    System.out.println("Which Resource do you want?\n1. Coin;\n2. Shield;\n3. Servant;\n4. Stone.");
+    System.out.println("Which Resource do you want?\n1. Coin;\n2. Shield;\n3. Servant;\n4. Stone.\n(You will also advance 1 position in the Faith Map!)");
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     String chosenResource;
     try {
@@ -36,9 +40,11 @@ public class ProductionPerk extends Perk{
     }
   }
 
-  @Override
   public Resource getResource() {
-    // TODO Auto-generated method stub
     return super.getResource();
+  }
+
+  public Board getBoard() {
+    return super.getBoard();
   }
 }
