@@ -79,7 +79,7 @@ public class Board {
         this.chest.put(type, numberOfResources);
       }
     });
-    
+
     return true;
   }
 
