@@ -9,7 +9,7 @@ public class LeaderCardObserver implements Observer {
     public void update() {}
 
     // overloading to update activePerks list in Board
-    public void update(Board board, Perk perk) {
+    public void update(Perk perk) {
         this.board.getActivePerks().add(perk);
     }
 }
