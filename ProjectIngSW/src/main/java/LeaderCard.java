@@ -40,11 +40,11 @@ public class LeaderCard extends Card {
     }
   }
 
-  /*
-   * public void discard() {
-   * 
-   * }
-   */
+  public String toString() {
+    String converted;
+    converted = "Perk: " + this.perk.toString() + "\n" + "Status: " + this.status.toString() + "\n" + "Id: " + this.id + "\n";
+    return converted;
+  }
 
   public void attach(Observer observer) {
     this.observers.add(observer);
