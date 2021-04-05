@@ -28,26 +28,39 @@ public class Player {
     return chosenAction;
   }
 
+  private void showPossiblePositions(Integer axis) {
+    Integer maximumPosition;
+    if (axis == 0) {
+      maximumPosition = 4;
+    } else {
+      maximumPosition = 3;
+    }
+    for (int i = 0; i < maximumPosition; i++) {
+      System.out.println(String.format("\"%d\" cell"));
+    }
+  }
+
   private Map<String, Integer> choosePosition() {
     Map<String, Integer> mapOfPositions = new HashMap<String, Integer>();
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     String chosenActionString = "";
-    System.out.println("X position? ");
+    System.out.println("In which axis you want to insert the marble?\n\"0\" for X axis. \n\"1\" for Y axis.");
     while (true) {
       try {
         chosenActionString = reader.readLine();
-        mapOfPositions.put("x", Integer.parseInt(chosenActionString));
+        mapOfPositions.put("axis", Integer.parseInt(chosenActionString));
         break;
       } catch (Exception e) {
         e.printStackTrace();
         System.out.println("Unable to parse integer, insert a Integer!");
       }
     }
-    System.out.println("Y position? ");
+    System.out.println("In which position you want to insert the marble?");
+    showPossiblePositions(mapOfPositions.get("axis"));
     while (true) {
       try {
         chosenActionString = reader.readLine();
-        mapOfPositions.put("y", Integer.parseInt(chosenActionString));
+        mapOfPositions.put("position", Integer.parseInt(chosenActionString));
         break;
       } catch (Exception e) {
         e.printStackTrace();
@@ -59,7 +72,12 @@ public class Player {
 
   private boolean takeResourcesFromMarket(Market market) {
     Map<String, Integer> chosenPosition = choosePosition();
-    List<Resource> acquiredResources = market.insertMarble(chosenPosition.get("x"), chosenPosition.get("y"));
+    List<Resource> acquiredResources = market.insertMarble(chosenPosition.get("axis"), chosenPosition.get("position"));
+    for (Resource resource : acquiredResources) {
+      if (resource.getType() == ResourceType.Faith) {
+        
+      }
+    }
     Warehouse warehouse = this.board.getWarehouse();
     warehouse.insertResources(acquiredResources);
     return true;
@@ -83,8 +101,8 @@ public class Player {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
           String chosenAction = reader.readLine();
-          if(chosenAction=="NO"){
-              return false;
+          if (chosenAction == "NO") {
+            return false;
           }
         } catch (Exception e) {
           e.printStackTrace();
@@ -97,8 +115,8 @@ public class Player {
 
   private boolean activateProduction() {
     boolean hasActivated = this.board.activateProductionOnCard();
-    
-    return true;
+
+    return hasActivated;
   }
 
   public Board getBoard() {
@@ -119,18 +137,18 @@ public class Player {
 
   public boolean playTurn(Market market, CardContainer cardContainer, ActionTokenContainer actionTokenContainer) {
     boolean retry = false;
-    
+
     while (!retry) {
       int chosenAction = chooseAction();
       switch (chosenAction) {
       case 1:
-       retry = takeResourcesFromMarket(market);
+        retry = takeResourcesFromMarket(market);
         break;
       case 2:
-       retry = buyDevelopmentCard(cardContainer);
+        retry = buyDevelopmentCard(cardContainer);
         break;
       case 3:
-       retry = activateProduction();
+        retry = activateProduction();
         break;
       default:
         break;
