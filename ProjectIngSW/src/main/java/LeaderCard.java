@@ -3,7 +3,7 @@ import java.util.List;
 public class LeaderCard extends Card {
   final private Perk perk;
   private Status status;
-  private List<Observer> observers = null;
+  private List<LeaderCardObserver> observers = null;
   private String id;
 
   public LeaderCard(String id, Perk assignedPerk) {
@@ -37,6 +37,9 @@ public class LeaderCard extends Card {
     } else {
       this.status = Status.Active;
       this.perk.usePerk(this.perk.resource);
+      for (LeaderCardObserver observer: observers) {
+        observer.update(this.perk);
+      }
     }
   }
 
@@ -46,11 +49,11 @@ public class LeaderCard extends Card {
     return converted;
   }
 
-  public void attach(Observer observer) {
+  public void attach(LeaderCardObserver observer) {
     this.observers.add(observer);
   }
 
-  public void detach(Observer observer) {
+  public void detach(LeaderCardObserver observer) {
     this.observers.remove(observer);
   }
 }
