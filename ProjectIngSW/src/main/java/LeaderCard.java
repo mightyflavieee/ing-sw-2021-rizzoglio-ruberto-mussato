@@ -1,9 +1,10 @@
 import java.util.List;
 
-public class LeaderCard extends Card{
+public class LeaderCard extends Card {
   final private Perk perk;
   private Status status;
   private List<Observer> observers = null;
+  private String id;
 
   public LeaderCard(String id, Perk assignedPerk) {
     this.id = id;
@@ -11,11 +12,11 @@ public class LeaderCard extends Card{
     this.status = Status.Inactive;
   }
 
-  public Perk getPerk(){
+  public Perk getPerk() {
     return perk;
   }
 
-  public Status getStatus(){
+  public Status getStatus() {
     return status;
   }
 
@@ -24,7 +25,7 @@ public class LeaderCard extends Card{
   }
 
   // changes the status of the LeaderCard to Active
-  public void activateCard(){
+  public void activateCard() {
     if (this.status == Status.Active) {
       // if the perk is reusable (only ProductionPerk), utilize the perk again
       if (this.perk instanceof ProductionPerk) {
@@ -39,16 +40,17 @@ public class LeaderCard extends Card{
     }
   }
 
-  /*public void discard() {
-
-  }*/
+  /*
+   * public void discard() {
+   * 
+   * }
+   */
 
   public void attach(Observer observer) {
     this.observers.add(observer);
   }
 
-  public void detach(Observer observer){
+  public void detach(Observer observer) {
     this.observers.remove(observer);
   }
 }
-
