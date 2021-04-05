@@ -5,8 +5,7 @@ public class WarehousePerk extends Perk{
 
   @Override
   public void usePerk(Resource resource) {
-    // TODO Auto-generated method stub
-    super.usePerk(this.resource);
+    this.board.getWarehouse().addExtraDeposit(this.resource);
   }
 
   public Resource getResource() {
