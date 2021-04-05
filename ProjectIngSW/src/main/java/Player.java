@@ -73,13 +73,16 @@ public class Player {
   private boolean takeResourcesFromMarket(Market market) {
     Map<String, Integer> chosenPosition = choosePosition();
     List<Resource> acquiredResources = market.insertMarble(chosenPosition.get("axis"), chosenPosition.get("position"));
+    List<Resource> filteredResources = new ArrayList<Resource>();
     for (Resource resource : acquiredResources) {
       if (resource.getType() == ResourceType.Faith) {
-
+        this.board.moveForward();
+      } else {
+        filteredResources.add(resource);
       }
     }
     Warehouse warehouse = this.board.getWarehouse();
-    warehouse.insertResources(acquiredResources);
+    warehouse.insertResources(filteredResources);
     return true;
   }
 
