@@ -1,6 +1,5 @@
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Match {
   private List<Player> playerList;
