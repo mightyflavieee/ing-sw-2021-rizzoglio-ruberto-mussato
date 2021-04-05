@@ -135,9 +135,24 @@ public class Warehouse {
     return extraDeposit;
   }
 
-  // adds resources to the extra deposit
+  // adds resources to the extra deposit or creates it if it is not present
   public void addExtraDeposit(Resource resource) {
-    // we need to change the logic of this
+    if (!this.extraDeposit.isPresent()) {
+      Map<ResourceType, Integer> newExtraDeposit = new HashMap<>();
+      newExtraDeposit.put(resource.getType(), 0);
+      this.extraDeposit = Optional.of(newExtraDeposit);
+    } else {
+      if (this.extraDeposit.get().containsKey(resource.getType())) {
+        int currentResourcesInExtraDeposit = this.extraDeposit.get().get(resource.getType());
+        if (currentResourcesInExtraDeposit < 2) {
+          this.extraDeposit.get().put(resource.getType(), currentResourcesInExtraDeposit + 1);
+        } else {
+          System.out.println("Extra deposit already full!");
+        }
+      } else {
+        System.out.println("Cannot insert " + resource.getType().toString() + "in the extra deposit!");
+      }
+    }
   }
 
   public List<WarehouseObserver> getObservers() {
