@@ -95,7 +95,7 @@ public class Warehouse {
       System.out.println(singleMapObject.getKey() + ": " + singleMapObject.getValue());
     });
     System.out.println(
-        "What do you want to do?\nOptions:\n1) Clear a Shelf\n2) Swap two Shelves\n3) Insert resources from hand in a Shelf.\n4) Discard current resources in hand.");
+        "What do you want to do?\nOptions:\n1) Swap two Shelves\n2) Insert resources from hand in a Shelf.\n3) Discard current resources in hand.");
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     String chosenActionString = "";
     while (true) {
@@ -103,15 +103,12 @@ public class Warehouse {
         chosenActionString = reader.readLine();
         switch (Integer.parseInt(chosenActionString)) {
         case 1:
-          clearShelf();
-          break;
-        case 2:
           swapShelves();
           break;
-        case 3:
+        case 2:
           resourcesToBeInserted = insertResourcesFromHand(resourcesToBeInserted);
           break;
-        case 4:
+        case 3:
           discardResources(resourcesToBeInserted.size());
           break;
         default:
@@ -132,13 +129,6 @@ public class Warehouse {
     List<Resource> listOfResourcesSwappee = shelves.get(swappee);
     shelves.put(swappee, shelves.get(swapper));
     shelves.put(swapper, listOfResourcesSwappee);
-  }
-
-  public void clearShelf() {
-    List<Resource> emptyList = new ArrayList<Resource>();
-    ShelfFloor floor;
-    floor = chooseFloor();
-    shelves.put(floor, emptyList);
   }
 
   public Optional<Map<ResourceType, Integer>> getExtraDeposit() {
