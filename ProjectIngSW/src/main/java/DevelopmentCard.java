@@ -29,27 +29,10 @@ public class DevelopmentCard extends Card{
     return id;
   }
 
-  public Map<ResourceType, Integer> useProduction(Warehouse warehouse) {
+  public Map<ResourceType, Integer> useProduction(Map<ResourceType,Integer> currentResourcesInWarehouse) {
     Map<ResourceType, Integer> requiredResources = this.production.getRequiredResources();
     List<ResourceType> resourceTypesRequired = new ArrayList<>();
-    Map<ShelfFloor, List<Resource>> shelfs = warehouse.getShelfs();
-    List<Resource> firstFloor = shelfs.get(ShelfFloor.First);
-    List<Resource> secondFloor = shelfs.get(ShelfFloor.Second);
-    List<Resource> thirdFloor = shelfs.get(ShelfFloor.Third);
     Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
-
-    // constructs a map of the resource types currently present in the warehouse and how many there are
-    // QUA SOPRA NON VENGONO GESTITI GLI SLOT EXTRA DEL MAGAZZINO (acquisiti tramite LeaderCard)
-    Map<ResourceType, Integer> currentResources = new HashMap<>();
-    if (!firstFloor.isEmpty()) {
-      currentResources.put(firstFloor.get(0).getType(), 1);
-    }
-    if (!secondFloor.isEmpty()) {
-      currentResources.put(secondFloor.get(0).getType(), secondFloor.size());
-    }
-    if (!thirdFloor.isEmpty()) {
-      currentResources.put(thirdFloor.get(0).getType(), thirdFloor.size());
-    }
 
     // adds to a temporary list 'resourceTypesRequired' the resource types needed for the production
     if (requiredResources.get(ResourceType.Coin) > 0) {
@@ -67,7 +50,7 @@ public class DevelopmentCard extends Card{
 
     // for each resource type needed for the production, verify if there is enough (or any) in the warehouse
     for (ResourceType type: resourceTypesRequired) {
-      if (currentResources.get(type) == null || requiredResources.get(type) > currentResources.get(type) ) {
+      if (currentResourcesInWarehouse.get(type) == null || requiredResources.get(type) > currentResourcesInWarehouse.get(type) ) {
         System.out.println("Not enough resources");
         return manufacturedResources;
       }
