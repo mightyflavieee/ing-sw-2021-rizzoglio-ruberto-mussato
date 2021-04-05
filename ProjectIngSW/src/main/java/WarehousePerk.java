@@ -1,8 +1,8 @@
 public class WarehousePerk extends Perk{
   @Override
-  public void usePerk() {
+  public void usePerk(Resource resource) {
     // TODO Auto-generated method stub
-    super.usePerk();
+    super.usePerk(this.resource);
   }
 
   @Override

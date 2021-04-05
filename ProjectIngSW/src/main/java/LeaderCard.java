@@ -5,7 +5,8 @@ public class LeaderCard extends Card{
   private Status status;
   private List<Observer> observers = null;
 
-  public LeaderCard(Perk assignedPerk) {
+  public LeaderCard(String id, Perk assignedPerk) {
+    this.id = id;
     this.perk = assignedPerk;
     this.status = Status.Inactive;
   }
@@ -18,16 +19,29 @@ public class LeaderCard extends Card{
     return status;
   }
 
+  public String getId() {
+    return id;
+  }
+
+  // changes the status of the LeaderCard to Active
   public void activateCard(){
     if (this.status == Status.Active) {
-      System.out.println("Leader Card is already active!");
+      // if the perk is reusable (only ProductionPerk), utilize the perk again
+      if (this.perk instanceof ProductionPerk) {
+        this.perk.usePerk(this.perk.resource);
+      } else {
+        // if the perk is not a ProductionPerk and it's active, it is NOT reusable
+        System.out.println("Leader Card is already active!");
+      }
     } else {
       this.status = Status.Active;
-      this.perk.usePerk();
+      this.perk.usePerk(this.perk.resource);
     }
   }
 
-  public void discard(){}
+  /*public void discard() {
+
+  }*/
 
   public void attach(Observer observer) {
     this.observers.add(observer);

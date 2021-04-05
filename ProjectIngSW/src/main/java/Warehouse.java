@@ -142,17 +142,19 @@ public class Warehouse {
     shelves.put(floor, emptyList);
   }
 
-  public Optional<Map<ResourceType, Integer>> getExtraDeposit() {
+  public Optional<Map<ResourceType, Integer>> getExtraDeposit(){
     return extraDeposit;
   }
+  // adds resources to the extra deposit
+  public void addExtraDeposit(Resource resource) {
+    // we need to change the logic of this
+  }
 
-  public List<Observer> getObservers() {
+  public List<Observer> getObservers(){
     return observers;
   }
 
-  public void attach(Observer observer) {
-  }
+  public void attach(Observer observer){}
 
-  public void detach(Observer observer) {
-  }
+  public void detach(Observer observer){}
 }

@@ -36,7 +36,7 @@ public class Player {
       maximumPosition = 3;
     }
     for (int i = 0; i < maximumPosition; i++) {
-      System.out.println(String.format("\"%d\" cell"));
+      System.out.println(String.format("\"%d\" cell", i));
     }
   }
 
@@ -75,7 +75,7 @@ public class Player {
     List<Resource> acquiredResources = market.insertMarble(chosenPosition.get("axis"), chosenPosition.get("position"));
     for (Resource resource : acquiredResources) {
       if (resource.getType() == ResourceType.Faith) {
-        
+
       }
     }
     Warehouse warehouse = this.board.getWarehouse();
@@ -101,7 +101,7 @@ public class Player {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         try {
           String chosenAction = reader.readLine();
-          if (chosenAction == "NO") {
+          if (chosenAction.equals("NO")) {
             return false;
           }
         } catch (Exception e) {
@@ -155,5 +155,17 @@ public class Player {
       }
     }
     return false;
+  }
+
+  public void addVictoryPoints(int newVictoryPoints) {
+    this.victoryPoints = this.victoryPoints + newVictoryPoints;
+  }
+
+  public void moveForward() {
+    board.moveForward();
+  }
+
+  public void papalCouncil(int numTile) {
+    board.papalCouncil(numTile);
   }
 }

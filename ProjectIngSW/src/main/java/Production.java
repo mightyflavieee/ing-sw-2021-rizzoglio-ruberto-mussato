@@ -1,14 +1,14 @@
 import java.util.*;
 
 public class Production {
-    private Map<ResourceType, List<Resource>> requiredResources;
-    private List<Resource> manufacturedResources;
+    private Map<ResourceType, Integer> requiredResources;
+    private Map<ResourceType, Integer> manufacturedResources;
 
-    public List<Resource> getManufacturedResources() {
+    public Map<ResourceType, Integer> getManufacturedResources() {
         return manufacturedResources;
     }
 
-    public Map<ResourceType, List<Resource>> getRequiredResources() {
+    public Map<ResourceType, Integer> getRequiredResources() {
         return requiredResources;
     }
 }

@@ -16,4 +16,24 @@ public class CardContainer {
     Map<ResourceType, Integer> currentResources = board.mapAllResources();
     return false;
   }
+  private boolean tryToDiscard(CardColor cardColor, CardLevel cardLevel){
+    if(cardContainer.get(cardLevel).get(cardColor).isEmpty()){
+      return false;
+    }
+    else{
+      cardContainer.get(cardLevel).get(cardColor).remove(0);
+    }
+  return true;
+  }
+
+  public boolean discard(CardColor cardColor){
+    for(int i = 0; i < 2; i++)
+      if (!tryToDiscard(cardColor, CardLevel.One))
+        if (!tryToDiscard(cardColor, CardLevel.Two))
+          if (!tryToDiscard(cardColor, CardLevel.Three)){
+            return true; //carte finite quindi hai perso
+          }
+    return false; //hai scartato 2 carte e va bene così
+  }
+
 }

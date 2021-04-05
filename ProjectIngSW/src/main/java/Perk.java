@@ -1,4 +1,3 @@
-
 public abstract class Perk {
   Resource resource;
 
@@ -6,5 +5,5 @@ public abstract class Perk {
     return resource;
   }
 
-  public void usePerk(){}
+  public void usePerk(Resource resource){}
 }
