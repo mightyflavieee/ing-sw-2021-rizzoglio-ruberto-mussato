@@ -8,6 +8,7 @@ public class Board {
   private Warehouse warehouse;
   private List<LeaderCard> leaderCards;
   private FaithMap faithMap;
+  private List<Perk> activePerks = new ArrayList<>();
 
   public Map<DevCardPosition, List<DevelopmentCard>> getMapTray() {
     return mapTray;
@@ -19,6 +20,10 @@ public class Board {
 
   public Warehouse getWarehouse() {
     return warehouse;
+  }
+
+  public List<Perk> getActivePerks() {
+    return activePerks;
   }
 
   public List<LeaderCard> getLeaderCards() {
@@ -98,21 +103,36 @@ public class Board {
     faithMap.moveForward();
   }
 
-  public List<LeaderCard> discardLeaderCard(List<LeaderCard> currentLeaderCards) {
-    System.out.println("Choose wich card to eliminate:");
-    for (LeaderCard card : currentLeaderCards) {
-      System.out.println((currentLeaderCards.indexOf(card) + 1) + ". ID:" + card.getId());
+  private void chooseLeaderCard() {
+    System.out.println("Choose which card to eliminate:");
+    for (LeaderCard card : this.leaderCards) {
+      System.out.println((this.leaderCards.indexOf(card) + 1) + ". ID:" + card.getId());
     }
+  }
+
+  private void removeLeaderCard() {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     String chosenLeaderCard;
     try {
       chosenLeaderCard = reader.readLine();
-      currentLeaderCards.remove(Integer.parseInt(chosenLeaderCard) - 1);
+      this.leaderCards.remove(Integer.parseInt(chosenLeaderCard) - 1);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Cannot read commad!");
     }
-    return currentLeaderCards;
+  }
+
+  public void discardLeaderCard(boolean isInitialPhase) {
+    if (isInitialPhase) {
+      for (int i = 0; i < 2; i++) {
+        chooseLeaderCard();
+        removeLeaderCard();
+      }
+    } else {
+      chooseLeaderCard();
+      removeLeaderCard();
+      moveForward();
+    }
   }
 
   public void papalCouncil(int numTile) {
