@@ -155,6 +155,63 @@ public class Warehouse {
     }
   }
 
+  // eliminates resource from shelf from the first floor with the same resource type
+  // as the one choose for the production
+  private void eliminateOneResource(ResourceType resourceType) {
+    if (this.shelves.get(ShelfFloor.First).get(0).getType() == resourceType) {
+      this.shelves.get(ShelfFloor.First).remove(this.shelves.get(ShelfFloor.First).size()-1);
+    } else {
+      if (this.shelves.get(ShelfFloor.Second).get(0).getType() == resourceType) {
+        this.shelves.get(ShelfFloor.Second).remove(this.shelves.get(ShelfFloor.Second).size()-1);
+      } else {
+        this.shelves.get(ShelfFloor.Third).remove(this.shelves.get(ShelfFloor.Third).size()-1);
+      }
+    }
+  }
+
+  // eliminates resource from the extra deposit if it has the same resource type
+  // as the one choose for the production, otherwise calls eliminateOneResource
+  private void eliminateOneResourceFromExtraDeposit(ResourceType resourceType) {
+    if (this.extraDeposit.get().containsKey(resourceType)) {
+      this.extraDeposit.get().put(resourceType, this.extraDeposit.get().get(resourceType)-1);
+    } else {
+      System.out.println("Cannot use the extra deposit for production (correct resource type not present)! Using the normal deposit.");
+      eliminateOneResource(resourceType);
+    }
+  }
+
+  // eliminates one resource for the ProductionPerk production
+  public void eliminateResourceForProductionPerk(ResourceType resourceType) {
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    String chosenLocationToEliminateFrom;
+    if (mapAllContainedResources().containsKey(resourceType)) {
+      if (mapAllContainedResources().get(resourceType) > 0) {
+        if (this.extraDeposit.isPresent()) {
+          System.out.println("What would you like to use for the production?\n1. Normal Deposit;\n2. Extra Deposit.");
+          try {
+            chosenLocationToEliminateFrom = reader.readLine();
+            switch (Integer.parseInt(chosenLocationToEliminateFrom)) {
+              case 1:
+                eliminateOneResource(resourceType);
+                break;
+              case 2:
+                eliminateOneResourceFromExtraDeposit(resourceType);
+                break;
+              default:
+                throw new Exception();
+            }
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        } else {
+          eliminateOneResource(resourceType);
+        }
+      }
+    } else {
+      System.out.println("Cannot use this resource for this perk production!");
+    }
+  }
+
   public List<WarehouseObserver> getObservers() {
     return warehouseObservers;
   }
