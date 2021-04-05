@@ -5,7 +5,7 @@ import java.util.*;
 public class Warehouse {
   private Map<ShelfFloor, List<Resource>> shelves;
   private Optional<Map<ResourceType, Integer>> extraDeposit;
-  private List<Observer> observers;
+  private List<WarehouseObserver> warehouseObservers; // observer che notificano solo ed esclusivamente lo scarto
 
   public Map<ResourceType, Integer> mapAllContainedResources() {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<ResourceType, Integer>();
@@ -78,14 +78,13 @@ public class Warehouse {
   }
 
   private void discardResources(int numDiscardedResources) {
-    // we need to insert here the notification for the discarded resources to the
-    // other players
+    this.warehouseObservers.stream().forEach(x -> x.update(numDiscardedResources));
   }
 
   private List<Resource> insertResourcesFromHand(List<Resource> handResources) {
     ShelfFloor floorSelected;
     floorSelected = chooseFloor();
-    
+
     return null;
   }
 
@@ -142,19 +141,28 @@ public class Warehouse {
     shelves.put(floor, emptyList);
   }
 
-  public Optional<Map<ResourceType, Integer>> getExtraDeposit(){
+  public Optional<Map<ResourceType, Integer>> getExtraDeposit() {
     return extraDeposit;
   }
+
   // adds resources to the extra deposit
   public void addExtraDeposit(Resource resource) {
     // we need to change the logic of this
   }
 
-  public List<Observer> getObservers(){
-    return observers;
+  public List<WarehouseObserver> getObservers() {
+    return warehouseObservers;
   }
 
-  public void attach(Observer observer){}
+  public void attach(WarehouseObserver observer) {
+    // observer che notificano solo ed esclusivamente lo scarto
+    this.warehouseObservers.add(observer);
 
-  public void detach(Observer observer){}
+  }
+
+  public void attach(Observer observer) {
+  }
+
+  public void detach(Observer observer) {
+  }
 }

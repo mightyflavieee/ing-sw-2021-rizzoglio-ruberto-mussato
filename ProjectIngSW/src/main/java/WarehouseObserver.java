@@ -5,4 +5,7 @@ public class WarehouseObserver implements Observer{
     public void update() {
 
     }
+    public void update(int numDiscardedResources){
+        match.notifyFaithMapsForDiscard(numDiscardedResources);
+    }
 }
