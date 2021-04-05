@@ -24,7 +24,7 @@ public class Board {
 
   public Map<ResourceType, Integer> mapAllResources() {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<ResourceType, Integer>();
-    currentResourcesMap = warehouse.mapAllResources();
+    currentResourcesMap = warehouse.mapAllContainedResources();
     return currentResourcesMap;
   }
 
@@ -32,11 +32,14 @@ public class Board {
     return true;
   }
 
-  public Map<DevCardPosition, DevelopmentCard> getCurrentProductionCards() { //prog funz?
+  public Map<DevCardPosition, DevelopmentCard> getCurrentProductionCards() { // prog funz?
     Map<DevCardPosition, DevelopmentCard> productionCardsMap = new HashMap<DevCardPosition, DevelopmentCard>();
-    productionCardsMap.put(DevCardPosition.Left, this.mapTray.get(DevCardPosition.Left).get(this.mapTray.get(DevCardPosition.Left).size()-1));
-    productionCardsMap.put(DevCardPosition.Center, this.mapTray.get(DevCardPosition.Center).get(this.mapTray.get(DevCardPosition.Center).size()-1));
-    productionCardsMap.put(DevCardPosition.Right, this.mapTray.get(DevCardPosition.Right).get(this.mapTray.get(DevCardPosition.Right).size()-1));
+    productionCardsMap.put(DevCardPosition.Left,
+        this.mapTray.get(DevCardPosition.Left).get(this.mapTray.get(DevCardPosition.Left).size() - 1));
+    productionCardsMap.put(DevCardPosition.Center,
+        this.mapTray.get(DevCardPosition.Center).get(this.mapTray.get(DevCardPosition.Center).size() - 1));
+    productionCardsMap.put(DevCardPosition.Right,
+        this.mapTray.get(DevCardPosition.Right).get(this.mapTray.get(DevCardPosition.Right).size() - 1));
     return productionCardsMap;
   }
 }
