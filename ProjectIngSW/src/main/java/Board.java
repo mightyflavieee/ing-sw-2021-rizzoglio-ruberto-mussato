@@ -17,7 +17,9 @@ public class Board {
     return chest;
   }
 
-  public Warehouse getWarehouse() { return warehouse; }
+  public Warehouse getWarehouse() {
+    return warehouse;
+  }
 
   public List<LeaderCard> getLeaderCards() {
     return leaderCards;
@@ -30,8 +32,54 @@ public class Board {
     return currentResourcesMap;
   }
 
+  private DevelopmentCard getLastFromPosition(DevCardPosition position) {
+    return mapTray.get(position).get(mapTray.get(position).size());
+  }
+
   // da implementare per terza opzione di azioni del player
   public boolean activateProductionOnCard() {
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    String chosenDevelopmentCard;
+    System.out.println("Which card do you want to activate?");
+    if (mapTray.get(DevCardPosition.Left).size() > 0) {
+      System.out.println("1. " + getLastFromPosition(DevCardPosition.Left) + ";");
+    }
+    if (mapTray.get(DevCardPosition.Center).size() > 0) {
+      System.out.println("2. " + getLastFromPosition(DevCardPosition.Center) + ";");
+    }
+    if (mapTray.get(DevCardPosition.Right).size() > 0) {
+      System.out.println("3. " + getLastFromPosition(DevCardPosition.Right) + ";");
+    }
+    Map<ResourceType, Integer> manufacturedResources = new HashMap<ResourceType, Integer>();
+    try {
+      chosenDevelopmentCard = reader.readLine();
+      switch (Integer.parseInt(chosenDevelopmentCard)) {
+      case 1:
+        manufacturedResources = getLastFromPosition(DevCardPosition.Left)
+            .useProduction(warehouse.mapAllContainedResources());
+        break;
+      case 2:
+        manufacturedResources = getLastFromPosition(DevCardPosition.Center)
+            .useProduction(warehouse.mapAllContainedResources());
+        break;
+      case 3:
+        manufacturedResources = getLastFromPosition(DevCardPosition.Right)
+            .useProduction(warehouse.mapAllContainedResources());
+        break;
+      default:
+        throw new Exception();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    manufacturedResources.forEach((ResourceType type, Integer numberOfResources) -> {
+      if (this.chest.containsKey(type)) {
+        this.chest.put(type, this.chest.get(type) + numberOfResources);
+      } else {
+        this.chest.put(type, numberOfResources);
+      }
+    });
+    
     return true;
   }
 
@@ -46,8 +94,7 @@ public class Board {
     return productionCardsMap;
   }
 
-
-  public void moveForward(){
+  public void moveForward() {
     faithMap.moveForward();
   }
 
@@ -60,12 +107,15 @@ public class Board {
     String chosenLeaderCard;
     try {
       chosenLeaderCard = reader.readLine();
-      currentLeaderCards.remove(Integer.parseInt(chosenLeaderCard));
+      currentLeaderCards.remove(Integer.parseInt(chosenLeaderCard) - 1);
     } catch (Exception e) {
       e.printStackTrace();
       System.out.println("Cannot read commad!");
     }
     return currentLeaderCards;
   }
-  public void papalCouncil(int numTile){faithMap.papalCouncil(numTile);}
+
+  public void papalCouncil(int numTile) {
+    faithMap.papalCouncil(numTile);
+  }
 }
