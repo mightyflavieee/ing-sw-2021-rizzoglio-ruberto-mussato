@@ -92,4 +92,71 @@ public class Market {
     return listOfObteinResources;
   }
 
+  // quando il Player chiama takeResourcesFromMarket(), verifica se ci sono TransmutationPerk attivi nella Board,
+  // se ci sono, mette isTransmutationPresent a true e lo "propaga" anche a getResourceInColumn(), getResourceInRow()
+  // e convertMarbleToResourceType(). In convertMarbleToResourceType(), se isTransmutationPerk è a true, converto la
+  // Marble bianca nel tipo di risorsa dato dal TransmutationPerk attivo (il tipo di risorsa e passato come parametro
+  // in tutte le funzioni elencate qui sotto).
+
+  /*public List<Resource> insertMarble(Integer axis, Integer position, boolean isTransmutationPresent, ResourceType resourceType) {
+    // if axis chosen was x else y
+    List<Resource> listOfObteinResources;
+    if (axis == 0) {
+      listOfObteinResources = getResourceInColumn(position, isTransmutationPresent, resourceType);
+      shiftMarblesInColumn(position);
+    } else {
+      listOfObteinResources = getResourceInRow(position, isTransmutationPresent, resourceType);
+      shiftMarblesInRow(position);
+    }
+    return listOfObteinResources;
+  }*/
+
+  /*private List<Resource> getResourceInColumn(Integer columnIndex, boolean isTransmutationPresent, ResourceType resourceType) {
+    List<Resource> listOfObteinedResources = new ArrayList<Resource>();
+    Marble[] marbleColumn = tray[columnIndex];
+    for (Marble marble : marbleColumn) {
+      ResourceType type = convertMarbleToResourceType(marble, isTransmutationPresent, resourceType);
+      if (type != null) {
+        listOfObteinedResources.add(new Resource(type));
+      }
+    }
+    return listOfObteinedResources;
+  }*/
+
+  /*private List<Resource> getResourceInRow(Integer rowIndex) {
+    List<Resource> listOfObteinedResources = new ArrayList<Resource>();
+    Marble[] oldArrayOfMarbles = new Marble[4];
+    for (int i = 0; i < tray.length; i++) {
+      oldArrayOfMarbles[i] = tray[i][rowIndex];
+    }
+    for (Marble marble : oldArrayOfMarbles) {
+      ResourceType type = convertMarbleToResourceType(marble, isTransmutationPresent, resourceType);
+      if (type != null) {
+        listOfObteinedResources.add(new Resource(type));
+      }
+    }
+    return listOfObteinedResources;
+  }*/
+
+  /*private ResourceType convertMarbleToResourceType(Marble marble, boolean isTransmutationPresent, ResourceType resourceType) {
+    switch (marble.getType()) {
+      case Black:
+        return ResourceType.Stone;
+      case Blue:
+        return ResourceType.Shield;
+      case Purple:
+        return ResourceType.Servant;
+      case Red:
+        return ResourceType.Faith;
+      case Yellow:
+        return ResourceType.Coin;
+      default:
+        if (isTransmutationPresent) {
+          return resourceType;
+        } else {
+          return null;
+        }
+    }
+  }*/
+
 }
