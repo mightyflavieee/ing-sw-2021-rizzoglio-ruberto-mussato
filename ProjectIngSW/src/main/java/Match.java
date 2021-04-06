@@ -58,7 +58,9 @@ public class Match {
 
   public void notifyFaithMapsForCouncil(int numTile){
       //notifica il consiglio ad ogni player che agisce in base alla posizione in cui si trova
-      playerList.stream().forEach(x -> x.papalCouncil(numTile));
+      playerList.forEach(x -> x.papalCouncil(numTile));
+      if(numTile == 3)
+          this.end();
   }
 
   public void notifyFaithMapsForDiscard(int numDiscardedResources){
@@ -90,6 +92,9 @@ public class Match {
           this.youLost();
   }
   private void youLost(){
+      //da implementare
+  }
+  private void end(){
       //da implementare
   }
 }
