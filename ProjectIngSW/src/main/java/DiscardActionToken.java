@@ -3,6 +3,11 @@ import java.util.List;
 public class DiscardActionToken implements  ActionToken{
     private CardColor cardColor;
     private List<Observer> observers;
+
+    public DiscardActionToken(CardColor cardColor) {
+        this.cardColor = cardColor;
+    }
+
     @Override
     public void Action() {
         observers.forEach(Observer::update);
