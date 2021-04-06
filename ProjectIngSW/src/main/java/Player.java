@@ -24,24 +24,23 @@ public class Player {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    int chosenAction = Integer.parseInt(chosenActionString);
-    return chosenAction;
+    return Integer.parseInt(chosenActionString);
   }
 
   private void showPossiblePositions(Integer axis) {
-    Integer maximumPosition;
+    int maximumPosition;
     if (axis == 0) {
       maximumPosition = 4;
     } else {
       maximumPosition = 3;
     }
     for (int i = 0; i < maximumPosition; i++) {
-      System.out.println(String.format("\"%d\" cell", i));
+      System.out.printf("\"%d\" cell%n", i);
     }
   }
 
   private Map<String, Integer> choosePosition() {
-    Map<String, Integer> mapOfPositions = new HashMap<String, Integer>();
+    Map<String, Integer> mapOfPositions = new HashMap<>();
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     String chosenActionString = "";
     System.out.println("In which axis you want to insert the marble?\n\"0\" for X axis. \n\"1\" for Y axis.");
@@ -73,7 +72,7 @@ public class Player {
   private boolean takeResourcesFromMarket(Market market) {
     Map<String, Integer> chosenPosition = choosePosition();
     List<Resource> acquiredResources = market.insertMarble(chosenPosition.get("axis"), chosenPosition.get("position"));
-    List<Resource> filteredResources = new ArrayList<Resource>();
+    List<Resource> filteredResources = new ArrayList<>();
     for (Resource resource : acquiredResources) {
       if (resource.getType() == ResourceType.Faith) {
         this.board.moveForward();
@@ -89,9 +88,8 @@ public class Player {
   private void showCurrentResources() {
     Map<ResourceType, Integer> currentResources = this.board.mapAllResources();
     System.out.println("Your total resources are:");
-    currentResources.entrySet().stream().forEach(singleMapObject -> {
-      System.out.println(singleMapObject.getKey() + ": " + singleMapObject.getValue());
-    });
+    currentResources.entrySet().forEach(singleMapObject ->
+            System.out.println(singleMapObject.getKey() + ": " + singleMapObject.getValue()));
   }
 
   private boolean buyDevelopmentCard(CardContainer cardContainer) {
@@ -117,9 +115,8 @@ public class Player {
   }
 
   private boolean activateProduction() {
-    boolean hasActivated = this.board.activateProductionOnCard();
 
-    return hasActivated;
+    return this.board.activateProductionOnCard();
   }
 
   public Board getBoard() {
@@ -169,6 +166,7 @@ public class Player {
   }
 
   public void papalCouncil(int numTile) {
-    board.papalCouncil(numTile);
+
+    this.victoryPoints += board.papalCouncil(numTile);
   }
 }

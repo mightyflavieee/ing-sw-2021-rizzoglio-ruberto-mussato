@@ -32,7 +32,7 @@ public class Board {
 
   // verificare che questa funzione serva ---> c'è già in Warehouse
   public Map<ResourceType, Integer> mapAllResources() {
-    Map<ResourceType, Integer> currentResourcesMap = new HashMap<ResourceType, Integer>();
+    Map<ResourceType, Integer> currentResourcesMap = new HashMap<>();
     currentResourcesMap = warehouse.mapAllContainedResources();
     return currentResourcesMap;
   }
@@ -55,7 +55,7 @@ public class Board {
     if (mapTray.get(DevCardPosition.Right).size() > 0) {
       System.out.println("3. " + getLastFromPosition(DevCardPosition.Right) + ";");
     }
-    Map<ResourceType, Integer> manufacturedResources = new HashMap<ResourceType, Integer>();
+    Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
     try {
       chosenDevelopmentCard = reader.readLine();
       switch (Integer.parseInt(chosenDevelopmentCard)) {
@@ -89,7 +89,7 @@ public class Board {
   }
 
   public Map<DevCardPosition, DevelopmentCard> getCurrentProductionCards() { // prog funz?
-    Map<DevCardPosition, DevelopmentCard> productionCardsMap = new HashMap<DevCardPosition, DevelopmentCard>();
+    Map<DevCardPosition, DevelopmentCard> productionCardsMap = new HashMap<>();
     productionCardsMap.put(DevCardPosition.Left,
         this.mapTray.get(DevCardPosition.Left).get(this.mapTray.get(DevCardPosition.Left).size() - 1));
     productionCardsMap.put(DevCardPosition.Center,
@@ -135,7 +135,7 @@ public class Board {
     }
   }
 
-  public void papalCouncil(int numTile) {
-    faithMap.papalCouncil(numTile);
+  public int papalCouncil(int numTile) {
+    return faithMap.papalCouncil(numTile);
   }
 }
