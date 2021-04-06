@@ -14,8 +14,12 @@ public class CardContainer {
   
   public boolean buy(String idCardSelected, Board board){
     Map<ResourceType, Integer> currentResources = board.mapAllResources();
+
+
+
     return false;
   }
+
   private boolean tryToDiscard(CardColor cardColor, CardLevel cardLevel){
     if(cardContainer.get(cardLevel).get(cardColor).isEmpty()){
       return false;

@@ -110,7 +110,7 @@ public class Board {
     }
   }
 
-  private void removeLeaderCard() {
+  private void removeLeaderCardFromList() {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     String chosenLeaderCard;
     try {
@@ -126,11 +126,11 @@ public class Board {
     if (isInitialPhase) {
       for (int i = 0; i < 2; i++) {
         chooseLeaderCard();
-        removeLeaderCard();
+        removeLeaderCardFromList();
       }
     } else {
       chooseLeaderCard();
-      removeLeaderCard();
+      removeLeaderCardFromList();
       moveForward();
     }
   }
