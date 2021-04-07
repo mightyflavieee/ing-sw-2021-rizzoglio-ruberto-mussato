@@ -84,7 +84,7 @@ public class Warehouse {
   private List<Resource> insertResourcesFromHand(List<Resource> handResources) {
     ShelfFloor floorSelected;
     floorSelected = chooseFloor();
-
+    // da finire 
     return null;
   }
 

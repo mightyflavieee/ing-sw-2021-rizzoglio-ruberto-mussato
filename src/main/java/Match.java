@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class Match {
@@ -19,28 +18,28 @@ public class Match {
     }
   }
 
-  private void playLastTurn(){
+  private void playLastTurn() {
     int playerIndex = this.playerList.indexOf(currentPlayer);
-      while (playerIndex != this.playerList.size() - 1) {
-          currentPlayer = nextPlayer();
-          currentPlayer.playTurn(this.market, this.cardContainer, this.actionTokenContainer);
-      }
+    while (playerIndex != this.playerList.size() - 1) {
+      currentPlayer = nextPlayer();
+      currentPlayer.playTurn(this.market, this.cardContainer, this.actionTokenContainer);
+    }
   }
 
-  private Player nextPlayer(){
+  private Player nextPlayer() {
     int playerIndex = this.playerList.indexOf(currentPlayer);
     playerIndex = playerIndex + 1;
-     if(playerIndex> this.playerList.size()-1){
-       playerIndex = 0;
-     }
-     return playerList.get(playerIndex);
- }
+    if (playerIndex > this.playerList.size() - 1) {
+      playerIndex = 0;
+    }
+    return playerList.get(playerIndex);
+  }
 
-  public List<Player> getPlayerList(){
+  public List<Player> getPlayerList() {
     return playerList;
   }
 
-  public int getMaxPlayerNumber(){
+  public int getMaxPlayerNumber() {
     return maxPlayerNumber;
   }
 
@@ -56,27 +55,28 @@ public class Match {
     return actionTokenContainer;
   }
 
-  public void notifyFaithMapsForCouncil(int numTile){
-      //notifica il consiglio ad ogni player che agisce in base alla posizione in cui si trova
-      playerList.forEach(x -> x.papalCouncil(numTile));
-      if(numTile == 3)
-          this.end();
+  public void notifyFaithMapsForCouncil(int numTile) {
+    // notifica il consiglio ad ogni player che agisce in base alla posizione in cui
+    // si trova
+    playerList.forEach(x -> x.papalCouncil(numTile));
+    if (numTile == 3)
+      this.end();
   }
 
-  public void notifyFaithMapsForDiscard(int numDiscardedResources){
-      //metodo chiamato quando il currentPlayer scarta delle risorse
-      for(int i = 0; i < numDiscardedResources; i++){
-          playerList.stream().filter(x -> x != currentPlayer).forEach(Player::moveForward);
-      }
+  public void notifyFaithMapsForDiscard(int numDiscardedResources) {
+    // metodo chiamato quando il currentPlayer scarta delle risorse
+    for (int i = 0; i < numDiscardedResources; i++) {
+      playerList.stream().filter(x -> x != currentPlayer).forEach(Player::moveForward);
+    }
   }
 
-  public void playGame(){
-    //definire metodo per estrarre primo player 
+  public void playGame() {
+    // definire metodo per estrarre primo player
     int playerIndex = 0;
     currentPlayer = this.playerList.get(playerIndex);
     while (true) {
       boolean endGame = currentPlayer.playTurn(this.market, this.cardContainer, this.actionTokenContainer);
-      if(endGame){
+      if (endGame) {
         playLastTurn();
         break;
       }
@@ -84,17 +84,21 @@ public class Match {
     }
 
   }
-  public void addVictoryPoints(int newVictoryPoints){
-      currentPlayer.addVictoryPoints(newVictoryPoints);
+
+  public void addVictoryPoints(int newVictoryPoints) {
+    currentPlayer.addVictoryPoints(newVictoryPoints);
   }
-  public void discard(CardColor cardColor){
-      if(cardContainer.discard(cardColor))
-          this.youLost();
+
+  public void discard(CardColor cardColor) {
+    if (cardContainer.discard(cardColor))
+      this.youLost();
   }
-  private void youLost(){
-      //da implementare
+
+  private void youLost() {
+    // da implementare
   }
-  private void end(){
-      //da implementare
+
+  private void end() {
+    // da implementare
   }
 }

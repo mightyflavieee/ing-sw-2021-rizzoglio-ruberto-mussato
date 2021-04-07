@@ -90,12 +90,9 @@ public class Board {
 
   public Map<DevCardPosition, DevelopmentCard> getCurrentProductionCards() { // prog funz?
     Map<DevCardPosition, DevelopmentCard> productionCardsMap = new HashMap<>();
-    productionCardsMap.put(DevCardPosition.Left,
-        this.mapTray.get(DevCardPosition.Left).get(this.mapTray.get(DevCardPosition.Left).size() - 1));
-    productionCardsMap.put(DevCardPosition.Center,
-        this.mapTray.get(DevCardPosition.Center).get(this.mapTray.get(DevCardPosition.Center).size() - 1));
-    productionCardsMap.put(DevCardPosition.Right,
-        this.mapTray.get(DevCardPosition.Right).get(this.mapTray.get(DevCardPosition.Right).size() - 1));
+    productionCardsMap.put(DevCardPosition.Left, getLastFromPosition(DevCardPosition.Left));
+    productionCardsMap.put(DevCardPosition.Center, getLastFromPosition(DevCardPosition.Center));
+    productionCardsMap.put(DevCardPosition.Right, getLastFromPosition(DevCardPosition.Right));
     return productionCardsMap;
   }
 

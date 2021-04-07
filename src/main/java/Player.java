@@ -88,8 +88,8 @@ public class Player {
   private void showCurrentResources() {
     Map<ResourceType, Integer> currentResources = this.board.mapAllResources();
     System.out.println("Your total resources are:");
-    currentResources.entrySet().forEach(singleMapObject ->
-            System.out.println(singleMapObject.getKey() + ": " + singleMapObject.getValue()));
+    currentResources.entrySet()
+        .forEach(singleMapObject -> System.out.println(singleMapObject.getKey() + ": " + singleMapObject.getValue()));
   }
 
   private boolean buyDevelopmentCard(CardContainer cardContainer) {
@@ -154,7 +154,7 @@ public class Player {
         break;
       }
     }
-    return false;
+    return retry;
   }
 
   public void addVictoryPoints(int newVictoryPoints) {
