@@ -83,7 +83,4 @@ public class ProductionPerk extends Perk{
     return super.getResource();
   }
 
-  public Board getBoard() {
-    return super.getBoard();
-  }
 }

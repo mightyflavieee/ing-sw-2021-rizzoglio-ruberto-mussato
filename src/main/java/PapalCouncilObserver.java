@@ -4,7 +4,6 @@ public class PapalCouncilObserver implements Observer{
     @Override
     public void update() {
         match.notifyFaithMapsForCouncil(numTile);
-
     }
 
     public void setNumTile(int numTile) {

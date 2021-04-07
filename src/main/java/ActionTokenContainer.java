@@ -7,6 +7,8 @@ public class ActionTokenContainer {
     
     private List<ActionToken> actionTokens;
 
+
+    // constructor of ActionTokenContainer, it adds all the different types of actionToken and then shuffles all actionToken
     public ActionTokenContainer() {
         this.actionTokens = new ArrayList<>();
         this.actionTokens.add(new MoveActionToken());

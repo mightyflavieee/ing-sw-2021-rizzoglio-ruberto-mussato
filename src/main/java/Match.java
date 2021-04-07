@@ -56,23 +56,20 @@ public class Match {
   }
 
   public void notifyFaithMapsForCouncil(int numTile) {
-    // notifica il consiglio ad ogni player che agisce in base alla posizione in cui
-    // si trova
     playerList.forEach(x -> x.papalCouncil(numTile));
     if (numTile == 3)
       this.end();
   }
 
   public void notifyFaithMapsForDiscard(int numDiscardedResources) {
-    // metodo chiamato quando il currentPlayer scarta delle risorse
     for (int i = 0; i < numDiscardedResources; i++) {
       playerList.stream().filter(x -> x != currentPlayer).forEach(Player::moveForward);
     }
   }
 
   public void playGame() {
-    // definire metodo per estrarre primo player
     int playerIndex = 0;
+    Collections.shuffle(this.playerList);
     currentPlayer = this.playerList.get(playerIndex);
     while (true) {
       boolean endGame = currentPlayer.playTurn(this.market, this.cardContainer, this.actionTokenContainer);

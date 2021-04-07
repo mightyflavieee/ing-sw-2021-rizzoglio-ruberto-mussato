@@ -12,8 +12,4 @@ public class WarehousePerk extends Perk{
     return super.getResource();
   }
 
-  public Board getBoard() {
-    return super.getBoard();
-  }
-  
 }

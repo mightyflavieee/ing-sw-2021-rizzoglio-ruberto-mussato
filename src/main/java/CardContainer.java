@@ -15,7 +15,7 @@ public class CardContainer {
   public boolean buy(String idCardSelected, Board board){
     Map<ResourceType, Integer> currentResources = board.mapAllResources();
 
-
+    // it needs to be implemented using id of the cards
 
     return false;
   }
@@ -35,9 +35,9 @@ public class CardContainer {
       if (!tryToDiscard(cardColor, CardLevel.One))
         if (!tryToDiscard(cardColor, CardLevel.Two))
           if (!tryToDiscard(cardColor, CardLevel.Three)){
-            return true; //carte finite quindi hai perso
+            return true; // if you finish the cards you loose
           }
-    return false; //hai scartato 2 carte e va bene così
+    return false; 
   }
 
 }

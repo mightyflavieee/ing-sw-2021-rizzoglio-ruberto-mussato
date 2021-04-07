@@ -11,9 +11,5 @@ public abstract class Perk {
     return resource;
   }
 
-  public Board getBoard() {
-    return board;
-  }
-
   public void usePerk(Resource resource){}
 }

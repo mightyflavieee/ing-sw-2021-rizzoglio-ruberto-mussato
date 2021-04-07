@@ -30,18 +30,19 @@ public class Board {
     return leaderCards;
   }
 
-  // verificare che questa funzione serva ---> c'è già in Warehouse
+  // it serves the function mapAllResources to the CardContainer
   public Map<ResourceType, Integer> mapAllResources() {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<>();
     currentResourcesMap = warehouse.mapAllContainedResources();
     return currentResourcesMap;
   }
 
+  // it extracts the last DevelopmentCard in the list at that position
   private DevelopmentCard getLastFromPosition(DevCardPosition position) {
     return mapTray.get(position).get(mapTray.get(position).size());
   }
 
-  // da implementare per terza opzione di azioni del player
+  // it activates production on the specific card the user selects
   public boolean activateProductionOnCard() {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     String chosenDevelopmentCard;
@@ -88,7 +89,8 @@ public class Board {
     return true;
   }
 
-  public Map<DevCardPosition, DevelopmentCard> getCurrentProductionCards() { // prog funz?
+  // it extracts all the last cards for the production
+  public Map<DevCardPosition, DevelopmentCard> getCurrentProductionCards() {
     Map<DevCardPosition, DevelopmentCard> productionCardsMap = new HashMap<>();
     productionCardsMap.put(DevCardPosition.Left, getLastFromPosition(DevCardPosition.Left));
     productionCardsMap.put(DevCardPosition.Center, getLastFromPosition(DevCardPosition.Center));
@@ -96,10 +98,12 @@ public class Board {
     return productionCardsMap;
   }
 
+  // it moves the player forward on the faithMap
   public void moveForward() {
     faithMap.moveForward();
   }
 
+  // it prompts to the user the cards with the id
   private void chooseLeaderCard() {
     System.out.println("Choose which card to eliminate:");
     for (LeaderCard card : this.leaderCards) {
@@ -107,6 +111,8 @@ public class Board {
     }
   }
 
+  // it gets the input from the player for the id and then it removes the element
+  // from the list
   private void removeLeaderCardFromList() {
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     String chosenLeaderCard;
@@ -119,6 +125,7 @@ public class Board {
     }
   }
 
+  // it removes the leaderCard
   public void discardLeaderCard(boolean isInitialPhase) {
     if (isInitialPhase) {
       for (int i = 0; i < 2; i++) {

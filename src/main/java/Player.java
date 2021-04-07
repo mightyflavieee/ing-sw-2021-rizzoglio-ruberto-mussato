@@ -71,7 +71,16 @@ public class Player {
 
   private boolean takeResourcesFromMarket(Market market) {
     Map<String, Integer> chosenPosition = choosePosition();
-    List<Resource> acquiredResources = market.insertMarble(chosenPosition.get("axis"), chosenPosition.get("position"));
+    List<Perk> activePerks = this.board.getActivePerks();
+    ResourceType transmutationResourceType = null;
+    for (Perk perk : activePerks) {
+      if (perk instanceof TransmutationPerk) {
+        transmutationResourceType = perk.resource.getType();
+      }
+    }
+    boolean isTransmutationPresent = transmutationResourceType != null ? true : false;
+    List<Resource> acquiredResources = market.insertMarble(chosenPosition.get("axis"), chosenPosition.get("position"),
+        isTransmutationPresent, transmutationResourceType);
     List<Resource> filteredResources = new ArrayList<>();
     for (Resource resource : acquiredResources) {
       if (resource.getType() == ResourceType.Faith) {

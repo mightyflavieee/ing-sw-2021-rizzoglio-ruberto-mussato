@@ -1,15 +1,15 @@
 import java.util.List;
 
 public class MoveActionToken implements ActionToken{
-    private List<Observer> observers;
+    private List<MoveActionTokenObserver> observers;
     @Override
     public void Action() {
-        observers.forEach(Observer::update);
+        observers.forEach(MoveActionTokenObserver::update);
     }
-    public void attach(Observer observer){
+    public void attach(MoveActionTokenObserver observer){
         this.observers.add(observer);
     }
-    public void detach(Observer observer){
+    public void detach(MoveActionTokenObserver observer){
         this.observers.remove(observer);
     }
 }

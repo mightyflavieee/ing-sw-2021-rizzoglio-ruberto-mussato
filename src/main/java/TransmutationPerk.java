@@ -5,7 +5,6 @@ public class TransmutationPerk extends Perk{
 
   @Override
   public void usePerk(Resource resource) {
-    // TODO Auto-generated method stub
     super.usePerk(this.resource);
   }
 
@@ -13,8 +12,5 @@ public class TransmutationPerk extends Perk{
     return super.getResource();
   }
 
-  public Board getBoard() {
-    return super.getBoard();
-  }
   
 }
