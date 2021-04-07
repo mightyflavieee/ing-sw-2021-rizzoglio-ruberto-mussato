@@ -11,7 +11,7 @@ public class Warehouse {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<ResourceType, Integer>();
     // getting resources from the entire warehouse
     shelves.forEach((ShelfFloor floor, List<Resource> listOfResources) -> {
-      mapResources(currentResourcesMap, listOfResources);
+      mapResourcesHelper(currentResourcesMap, listOfResources);
     });
     // getting resources from extradeposit
     if (extraDeposit.isPresent()) {
@@ -27,7 +27,7 @@ public class Warehouse {
     return currentResourcesMap;
   }
 
-  private void mapResources(Map<ResourceType, Integer> currentResourcesMap, List<Resource> listOfResources) {
+  private void mapResourcesHelper(Map<ResourceType, Integer> currentResourcesMap, List<Resource> listOfResources) {
     listOfResources.forEach((Resource resource) -> {
       ResourceType type = resource.getType();
       boolean hasKey = currentResourcesMap.containsKey(type);
@@ -41,7 +41,7 @@ public class Warehouse {
 
   public Map<ResourceType, Integer> mapResources(List<Resource> inputResourcesList) {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<ResourceType, Integer>();
-    mapResources(currentResourcesMap, inputResourcesList);
+    mapResourcesHelper(currentResourcesMap, inputResourcesList);
     return currentResourcesMap;
   }
 
