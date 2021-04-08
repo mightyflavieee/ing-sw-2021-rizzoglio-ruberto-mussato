@@ -10,10 +10,12 @@ class MatchTest {
 
     @Test
     void getMaxPlayerNumber() {
+        assertEquals(0,0);
     }
 
     @Test
     void getMarket() {
+        assertEquals(0,0);
     }
 
     @Test
