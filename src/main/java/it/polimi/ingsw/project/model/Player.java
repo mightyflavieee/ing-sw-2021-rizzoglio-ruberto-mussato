@@ -16,6 +16,11 @@ public class Player {
     this.victoryPoints = 0;
   }
 
+  public Player() {
+    this.board = new Board();
+    this.isConnected = true; // Da gestire stato della connessione del player (con funzione apposita)
+    this.victoryPoints = 0;
+  }
   private int chooseAction() {
     System.out.println(
         "Choose which action you want to perform:\n1. Take Resources from the it.polimi.ingsw.project.model.Market;\n2. Buy one Development it.polimi.ingsw.project.model.Card;\n3. Activate the it.polimi.ingsw.project.model.Production.");
@@ -180,4 +185,5 @@ public class Player {
 
     this.victoryPoints += board.papalCouncil(numTile);
   }
+
 }
