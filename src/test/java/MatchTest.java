@@ -6,6 +6,7 @@ class MatchTest {
 
     @Test
     void getPlayerList() {
+        System.out.println("bella sta chat");
     }
 
     @Test
