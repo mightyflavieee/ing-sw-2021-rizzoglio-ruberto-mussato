@@ -70,6 +70,7 @@ public class Match {
   }
 
   public void playGame() {
+    //da modificare per MVC
     int playerIndex = 0;
     Collections.shuffle(this.playerList);
     currentPlayer = this.playerList.get(playerIndex);
@@ -79,7 +80,7 @@ public class Match {
         playLastTurn();
         break;
       }
-      currentPlayer = nextPlayer();
+      this.updatePlayer();
     }
 
   }
@@ -99,5 +100,12 @@ public class Match {
 
   private void end() {
     // da implementare
+  }
+
+  public Player getCurrentPlayer() {
+    return currentPlayer;
+  }
+  public void updatePlayer(){
+    this.currentPlayer = this.nextPlayer();
   }
 }
