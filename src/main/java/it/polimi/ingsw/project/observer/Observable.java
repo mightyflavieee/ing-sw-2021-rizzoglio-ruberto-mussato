@@ -21,7 +21,7 @@ public class Observable<T> {
     protected void notify(T message){
         //messaggi in che senso?
         synchronized (observers) {
-            for(Observer observer : observers){
+            for(Observer<T> observer : observers){
                 observer.update();
             }
         }
