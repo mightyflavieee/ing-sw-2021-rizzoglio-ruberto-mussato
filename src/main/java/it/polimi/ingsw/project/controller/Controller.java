@@ -3,6 +3,8 @@ import it.polimi.ingsw.project.model.PlayerMove;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.observer.Observer;
 
+import java.util.Collections;
+
 public class Controller implements Observer<PlayerMove> {
 
     private final Model model;
@@ -26,11 +28,14 @@ public class Controller implements Observer<PlayerMove> {
         model.updateTurn();
     }
 
-
-
     @Override
     public void update(PlayerMove message) {
         performMove(message);
     }
+
+
+    // DA ELIMINARE (quando si ripensa observer)
+    @Override
+    public void update() {}
 
 }

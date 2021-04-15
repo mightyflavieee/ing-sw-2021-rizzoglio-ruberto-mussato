@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.model;
 
+import java.util.Collections;
 import java.util.List;
 
 import it.polimi.ingsw.project.observer.Observable;
@@ -16,7 +17,7 @@ public class Model extends Observable<MoveMessage> {
         return player.getNickname() == match.getCurrentPlayer().getNickname();
     }
 
-    public Player getPlayerCopy(){
+    public Player getPlayerCopy() {
         return playerToSend.clone();
     }
 
@@ -28,6 +29,17 @@ public class Model extends Observable<MoveMessage> {
     public void performMove(PlayerMove move){
         // da fare
         //Match.playGame non va bene
+        //da modificare per MVC
+        while (true) {
+            boolean endGame = this.match.performMove(move);
+            if (endGame) {
+                this.match.playLastTurn();
+                break;
+            }
+            this.updatePlayer();
+        }
+
+
        /* board.setCell(row, column, player.getMarker());
         boolean hasWon = board.isGameOver(player.getMarker());
         notify(new MoveMessage(board.clone(), player));
@@ -36,6 +48,7 @@ public class Model extends Observable<MoveMessage> {
         }
         */
     }
+
 
     public void updateTurn(){
         match.updatePlayer();

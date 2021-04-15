@@ -76,7 +76,6 @@ public class Match {
       }
       this.updatePlayer();
     }
-
   }
 
   public void addVictoryPoints(int newVictoryPoints) {
