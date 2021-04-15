@@ -1,6 +1,8 @@
 package it.polimi.ingsw.project.model;
 
 import java.util.List;
+import it.polimi.ingsw.project.view.View;
+
 
 public class PlayerMove {
     private final MoveType moveType;
