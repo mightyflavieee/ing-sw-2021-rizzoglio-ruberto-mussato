@@ -1,5 +1,8 @@
 package it.polimi.ingsw.project.view;
 
+import java.util.List;
+
+import it.polimi.ingsw.project.model.MoveMessage;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.observer.Observer;
 import it.polimi.ingsw.project.server.ClientConnection;
@@ -11,23 +14,33 @@ public class RemoteView extends View {
         @Override
         public void update(String message) {
             System.out.println("Received: " + message);
-            try{
-                //la stringa (oppure oggetto) che ricevo dal client deve essere in qualche modo convertita
-                //handleMove(movetipe, resources);
-            }catch(IllegalArgumentException e){
+            try {
+                // la stringa (oppure oggetto) che ricevo dal client deve essere in qualche modo
+                // convertita
+                // handleMove(movetipe, resources);
+            } catch (IllegalArgumentException e) {
                 clientConnection.asyncSend("Error!");
             }
+        }
+
+        @Override
+        public void update() {
+            // TODO Auto-generated method stub
+            
         }
 
     }
 
     private ClientConnection clientConnection;
 
-    public RemoteView(Player player, String opponent, ClientConnection c) {
+    public RemoteView(Player player, List<String> opponents, ClientConnection c) {
         super(player);
         this.clientConnection = c;
         c.addObserver(new MessageReceiver());
-        c.asyncSend("Your opponent is: " + opponent);
+        c.asyncSend("Your opponents are:");
+        for (String nameOpponent : opponents) {
+            c.asyncSend(nameOpponent);
+        }
 
     }
 
@@ -37,8 +50,7 @@ public class RemoteView extends View {
     }
 
     @Override
-    public void update(MoveMessage message)
-    {
+    public void update(MoveMessage message) {
         showMessage(message.getBoard());
         String resultMsg = "";
         boolean gameOver = message.getBoard().isGameOver(message.getPlayer().getMarker());
@@ -49,21 +61,24 @@ public class RemoteView extends View {
             } else {
                 resultMsg = gameMessage.loseMessage + "\n";
             }
-        }
-        else {
+        } else {
             if (draw) {
                 resultMsg = gameMessage.drawMessage + "\n";
             }
         }
-        if(message.getPlayer() == getPlayer()){
+        if (message.getPlayer() == getPlayer()) {
             resultMsg += gameMessage.waitMessage;
-        }
-        else{
+        } else {
             resultMsg += gameMessage.moveMessage;
         }
 
         showMessage(resultMsg);
     }
 
-}
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+        
+    }
 
+}
