@@ -1,5 +1,12 @@
 package it.polimi.ingsw.project.server;
 
-public class ClientConnection {
+import it.polimi.ingsw.project.observer.Observer;
 
+public interface ClientConnection{
+
+    void closeConnection();
+
+    void addObserver(Observer<String> observer);
+
+    void asyncSend(Object message);
 }
