@@ -5,12 +5,24 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 public class Board {
+  //TODO: fare clone di tutti gli oggetti
   private Map<ResourceType, Integer> chest;
   private Map<DevCardPosition, List<DevelopmentCard>> mapTray;
   private Warehouse warehouse;
   private List<LeaderCard> leaderCards;
   private FaithMap faithMap;
   private List<Perk> activePerks = new ArrayList<>();
+
+  public final Board clone(){
+    final Board result = new Board();
+    result.chest = chest;
+    result.mapTray = mapTray;
+    result.warehouse = warehouse;
+    result.leaderCards = leaderCards;
+    result.faithMap = faithMap;
+    result.activePerks = activePerks;
+    return result;
+  }
 
   public Map<DevCardPosition, List<DevelopmentCard>> getMapTray() {
     return mapTray;
