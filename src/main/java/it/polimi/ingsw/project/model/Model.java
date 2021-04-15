@@ -47,6 +47,8 @@ public class Model extends Observable<MoveMessage> {
             board.reset();
         }
         */
+        this.playerToSend =
+        notify(match.getCurrentPlayer().clone();); //è il messaggio che verrà inviato a l player
     }
 
 

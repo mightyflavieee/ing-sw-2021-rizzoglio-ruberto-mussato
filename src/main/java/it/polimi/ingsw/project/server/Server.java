@@ -44,7 +44,7 @@ public class Server {
                 model.addObserver(view);
                 view.addObserver(controller);
             }
-            waitingConnection.clear();
+            waitingConnection.clear(); //da cambiare
             listOfClientConnections.forEach((ClientConnection connection) -> {
                 connection.asyncSend(model.getPlayerCopy());
             });
