@@ -18,4 +18,9 @@ public class LeaderCardObserver implements Observer {
     public void update(Perk perk) {
         this.board.getActivePerks().add(perk);
     }
+    @Override
+    public void update(Object message) {
+        // TODO Auto-generated method stub
+        
+    }
 }

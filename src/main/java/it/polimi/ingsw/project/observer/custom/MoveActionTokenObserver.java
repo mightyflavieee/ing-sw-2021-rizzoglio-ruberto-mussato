@@ -10,4 +10,9 @@ public class MoveActionTokenObserver implements Observer {
         faithMap.moveForwardBlack();
         faithMap.moveForwardBlack();
     }
+    @Override
+    public void update(Object message) {
+        // TODO Auto-generated method stub
+        
+    }
 }

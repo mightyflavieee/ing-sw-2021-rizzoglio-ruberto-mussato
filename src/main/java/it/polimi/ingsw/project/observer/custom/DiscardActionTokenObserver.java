@@ -14,5 +14,10 @@ public class DiscardActionTokenObserver implements Observer {
     public void setCardColor(CardColor cardColor) {
         this.cardColor = cardColor;
     }
+    @Override
+    public void update(Object message) {
+        // TODO Auto-generated method stub
+        
+    }
 }
 

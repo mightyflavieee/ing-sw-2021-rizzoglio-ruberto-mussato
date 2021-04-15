@@ -2,6 +2,8 @@ package it.polimi.ingsw.project.model;
 
 import java.util.List;
 
+import it.polimi.ingsw.project.observer.custom.LeaderCardObserver;
+
 public class LeaderCard extends Card {
   final private Perk perk;
   private Status status;

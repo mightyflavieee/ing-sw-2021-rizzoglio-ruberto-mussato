@@ -14,4 +14,9 @@ public class VictoryPointsObserver implements Observer {
     public void setVictoryPoints(int victoryPoints) {
         this.victoryPoints = victoryPoints;
     }
+    @Override
+    public void update(Object message) {
+        // TODO Auto-generated method stub
+        
+    }
 }

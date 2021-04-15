@@ -21,6 +21,17 @@ public class Player {
     this.isConnected = true; // Da gestire stato della connessione del player (con funzione apposita)
     this.victoryPoints = 0;
   }
+
+  @Override
+  protected final Player clone() {
+    final Player result = new Player();
+    result.board = board;
+    result.isConnected = isConnected;
+    result.nickname = nickname;
+    result.victoryPoints = victoryPoints;
+    return result;
+  }
+
   private int chooseAction() {
     System.out.println(
         "Choose which action you want to perform:\n1. Take Resources from the it.polimi.ingsw.project.model.Market;\n2. Buy one Development it.polimi.ingsw.project.model.Card;\n3. Activate the it.polimi.ingsw.project.model.Production.");

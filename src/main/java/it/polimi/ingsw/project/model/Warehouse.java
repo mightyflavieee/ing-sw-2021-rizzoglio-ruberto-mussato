@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.model;
 
 import it.polimi.ingsw.project.observer.Observer;
+import it.polimi.ingsw.project.observer.custom.WarehouseObserver;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

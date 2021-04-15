@@ -12,4 +12,9 @@ public class MoveAndShuffleActionTokenObserver implements Observer {
         faithMap.moveForwardBlack();
         actionTokenContainer.shuffle();
     }
+    @Override
+    public void update(Object message) {
+        // TODO Auto-generated method stub
+        
+    }
 }

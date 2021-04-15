@@ -3,6 +3,8 @@ package it.polimi.ingsw.project.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.ingsw.project.observer.custom.VictoryPointsObserver;
+
 public class VictoryPointsTile implements ActivableTile{
     private List<VictoryPointsObserver> observers;
     private int victoryPoints;

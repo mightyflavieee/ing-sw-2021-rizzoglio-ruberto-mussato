@@ -13,4 +13,9 @@ public class WarehouseObserver implements Observer {
     public void update(int numDiscardedResources){
         match.notifyFaithMapsForDiscard(numDiscardedResources);
     }
+    @Override
+    public void update(Object message) {
+        // TODO Auto-generated method stub
+        
+    }
 }

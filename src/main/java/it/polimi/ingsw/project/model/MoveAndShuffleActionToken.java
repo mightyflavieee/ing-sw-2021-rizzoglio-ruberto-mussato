@@ -2,6 +2,8 @@ package it.polimi.ingsw.project.model;
 
 import java.util.List;
 
+import it.polimi.ingsw.project.observer.custom.MoveAndShuffleActionTokenObserver;
+
 public class MoveAndShuffleActionToken implements ActionToken{
     private List<MoveAndShuffleActionTokenObserver> observers;
     @Override

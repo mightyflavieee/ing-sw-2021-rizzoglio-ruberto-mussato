@@ -4,15 +4,13 @@ import java.util.*;
 
 public class Match {
   private List<Player> playerList;
-  private int maxPlayerNumber;
   private Market market;
   private CardContainer cardContainer;
   private ActionTokenContainer actionTokenContainer;
   private Player currentPlayer;
 
-  public Match(List<Player> playerList, int maxPlayerNumber) {
+  public Match(List<Player> playerList) {
     this.playerList = playerList;
-    this.maxPlayerNumber = maxPlayerNumber;
     this.market = new Market();
     this.cardContainer = new CardContainer();
     if (playerList.size() == 1) {
@@ -39,10 +37,6 @@ public class Match {
 
   public List<Player> getPlayerList() {
     return playerList;
-  }
-
-  public int getMaxPlayerNumber() {
-    return maxPlayerNumber;
   }
 
   public Market getMarket() {

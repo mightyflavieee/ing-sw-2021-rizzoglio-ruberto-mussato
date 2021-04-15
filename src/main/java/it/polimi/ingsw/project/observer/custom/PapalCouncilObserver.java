@@ -14,4 +14,9 @@ public class PapalCouncilObserver implements Observer {
     public void setNumTile(int numTile) {
         this.numTile = numTile;
     }
+    @Override
+    public void update(Object message) {
+        // TODO Auto-generated method stub
+        
+    }
 }

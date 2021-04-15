@@ -3,6 +3,8 @@ package it.polimi.ingsw.project.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.ingsw.project.observer.custom.PapalCouncilObserver;
+
 public class PapalCouncilTile implements ActivableTile{
     private List<PapalCouncilObserver> observers;
     private int numTile; // mi dice quale Council Tile sono

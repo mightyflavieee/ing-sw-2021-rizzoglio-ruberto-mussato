@@ -2,6 +2,8 @@ package it.polimi.ingsw.project.model;
 
 import java.util.List;
 
+import it.polimi.ingsw.project.observer.custom.DiscardActionTokenObserver;
+
 public class DiscardActionToken implements  ActionToken{
     private CardColor cardColor;
     private List<DiscardActionTokenObserver> observers;
