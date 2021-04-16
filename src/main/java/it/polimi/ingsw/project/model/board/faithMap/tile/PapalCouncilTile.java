@@ -3,14 +3,13 @@ package it.polimi.ingsw.project.model.board.faithMap.tile;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.observer.custom.PapalCouncilObserver;
 
-public class PapalCouncilTile implements ActivableTile{
-    private List<PapalCouncilObserver> observers;
+public class PapalCouncilTile extends Observable<PapalCouncilTile> implements ActivableTile{
     private int numTile; // mi dice quale Council Tile sono
 
     public PapalCouncilTile(int numTile) {
-        this.observers = new ArrayList<>();
         this.numTile = numTile;
     }
 
@@ -20,14 +19,7 @@ public class PapalCouncilTile implements ActivableTile{
 
     @Override
     public void activate() {
-        observers.forEach(PapalCouncilObserver::update);
-    }
-    public void attach(PapalCouncilObserver observer){
-        this.observers.add(observer);
-        observer.setNumTile(this.numTile);
+        super.notify(this);
     }
 
-    public void detach(PapalCouncilObserver observer){
-        this.observers.remove(observer);
-    }
 }
