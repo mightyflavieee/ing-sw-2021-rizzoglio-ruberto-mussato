@@ -1,7 +1,9 @@
 package it.polimi.ingsw.project.model.board;
 
+import it.polimi.ingsw.project.model.board.faithMap.tile.PapalCouncilTile;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
+import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.observer.Observer;
 import it.polimi.ingsw.project.observer.custom.WarehouseObserver;
 
@@ -9,10 +11,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class Warehouse {
+public class Warehouse extends Observable<Warehouse> {
   private Map<ShelfFloor, List<Resource>> shelves;
   private Optional<Map<ResourceType, Integer>> extraDeposit;
-  private List<WarehouseObserver> warehouseObservers; // observer che notificano solo ed esclusivamente lo scarto
+  private int numResourcesToDiscard;
 
   public Map<ResourceType, Integer> mapAllContainedResources() {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<ResourceType, Integer>();
@@ -81,7 +83,8 @@ public class Warehouse {
   }
 
   private void discardResources(int numDiscardedResources) {
-    this.warehouseObservers.stream().forEach(x -> x.update(numDiscardedResources));
+    this.numResourcesToDiscard = numDiscardedResources;
+    super.notify(this);
   }
 
   private List<Resource> insertResourcesFromHand(List<Resource> handResources) {
@@ -215,19 +218,8 @@ public class Warehouse {
     }
   }
 
-  public List<WarehouseObserver> getObservers() {
-    return warehouseObservers;
-  }
-
-  public void attach(WarehouseObserver observer) {
-    // observer che notificano solo ed esclusivamente lo scarto
-    this.warehouseObservers.add(observer);
-
-  }
-
-  public void attach(it.polimi.ingsw.project.observer.Observer observer) {
-  }
-
-  public void detach(Observer observer) {
+  public int getNumResourcesToDiscard() {
+    return this.numResourcesToDiscard;
   }
 }
+
