@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.view;
 
 import it.polimi.ingsw.project.model.*;
+import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.observer.Observer;
 

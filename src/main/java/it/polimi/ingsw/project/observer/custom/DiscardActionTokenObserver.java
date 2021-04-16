@@ -1,6 +1,6 @@
 package it.polimi.ingsw.project.observer.custom;
 
-import it.polimi.ingsw.project.model.CardColor;
+import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.observer.Observer;
 

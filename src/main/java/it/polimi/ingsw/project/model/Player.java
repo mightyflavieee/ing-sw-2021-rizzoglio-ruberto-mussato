@@ -1,5 +1,14 @@
 package it.polimi.ingsw.project.model;
 
+import it.polimi.ingsw.project.model.actionTokens.ActionTokenContainer;
+import it.polimi.ingsw.project.model.board.Board;
+import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
+import it.polimi.ingsw.project.model.board.card.leaderCard.perk.TransmutationPerk;
+import it.polimi.ingsw.project.model.board.Warehouse;
+import it.polimi.ingsw.project.model.market.Market;
+import it.polimi.ingsw.project.model.resource.Resource;
+import it.polimi.ingsw.project.model.resource.ResourceType;
+
 import java.io.*;
 import java.util.*;
 
@@ -34,7 +43,7 @@ public class Player {
 
   private int chooseAction() {
     System.out.println(
-        "Choose which action you want to perform:\n1. Take Resources from the it.polimi.ingsw.project.model.Market;\n2. Buy one Development it.polimi.ingsw.project.model.Card;\n3. Activate the it.polimi.ingsw.project.model.Production.");
+        "Choose which action you want to perform:\n1. Take Resources from the it.polimi.ingsw.project.model.market.Market;\n2. Buy one Development it.polimi.ingsw.project.model.board.cards.Card;\n3. Activate the it.polimi.ingsw.project.model.board.cards.Production.");
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     String chosenActionString = "";
     try {

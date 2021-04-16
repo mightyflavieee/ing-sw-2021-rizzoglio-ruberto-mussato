@@ -1,7 +1,7 @@
 package it.polimi.ingsw.project.observer.custom;
 
-import it.polimi.ingsw.project.model.ActionTokenContainer;
-import it.polimi.ingsw.project.model.FaithMap;
+import it.polimi.ingsw.project.model.actionTokens.ActionTokenContainer;
+import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
 import it.polimi.ingsw.project.observer.Observer;
 
 public class MoveAndShuffleActionTokenObserver implements Observer {
