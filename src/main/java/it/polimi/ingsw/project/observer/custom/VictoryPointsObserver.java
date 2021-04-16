@@ -1,22 +1,13 @@
 package it.polimi.ingsw.project.observer.custom;
 
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile;
 import it.polimi.ingsw.project.observer.Observer;
 
-public class VictoryPointsObserver implements Observer {
+public class VictoryPointsObserver implements Observer<VictoryPointsTile> {
     private Match match;
-    private int victoryPoints;
     @Override
-    public void update() {
-        match.addVictoryPoints(victoryPoints);
-    }
-
-    public void setVictoryPoints(int victoryPoints) {
-        this.victoryPoints = victoryPoints;
-    }
-    @Override
-    public void update(Object message) {
-        // TODO Auto-generated method stub
-        
+    public void update(VictoryPointsTile message) {
+        match.addVictoryPoints(message.getVictorypoints());
     }
 }

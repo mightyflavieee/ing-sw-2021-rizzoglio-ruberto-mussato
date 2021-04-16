@@ -3,14 +3,13 @@ package it.polimi.ingsw.project.model.board.faithMap.tile;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.observer.custom.VictoryPointsObserver;
 
-public class VictoryPointsTile implements ActivableTile{
-    private List<VictoryPointsObserver> observers;
+public class VictoryPointsTile extends Observable<VictoryPointsTile> implements ActivableTile{
     private int victoryPoints;
 
     public VictoryPointsTile(int victoryPoints) {
-        this.observers = new ArrayList<>();
         this.victoryPoints = victoryPoints;
     }
 
@@ -20,15 +19,6 @@ public class VictoryPointsTile implements ActivableTile{
 
     @Override
     public void activate() {
-        observers.forEach(VictoryPointsObserver::update);
-    }
-    
-    public void attach(VictoryPointsObserver observer){
-        this.observers.add(observer);
-        observer.setVictoryPoints(this.victoryPoints);
-    }
-    
-    public void detach(VictoryPointsObserver observer){
-        this.observers.remove(observer);
+        super.notify(this);
     }
 }
