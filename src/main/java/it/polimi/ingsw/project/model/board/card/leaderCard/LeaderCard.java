@@ -7,6 +7,8 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.ProductionPerk;
 import it.polimi.ingsw.project.observer.custom.LeaderCardObserver;
 
+//TODO CAMBIARE EREDITARIETà PER OBSERVABLE
+
 public class LeaderCard extends Card {
   final private Perk perk;
   private Status status;
@@ -36,14 +38,14 @@ public class LeaderCard extends Card {
     if (this.status == Status.Active) {
       // if the perk is reusable (only it.polimi.ingsw.project.model.board.card.leaderCard.perk.ProductionPerk), utilize the perk again
       if (this.perk instanceof ProductionPerk) {
-        this.perk.usePerk(this.perk.resource);
+        this.perk.usePerk(this.perk.getResource());
       } else {
         // if the perk is not a it.polimi.ingsw.project.model.board.card.leaderCard.perk.ProductionPerk and it's active, it is NOT reusable
         System.out.println("Leader it.polimi.ingsw.project.model.board.cards.Card is already active!");
       }
     } else {
       this.status = Status.Active;
-      this.perk.usePerk(this.perk.resource);
+      this.perk.usePerk(this.perk.getResource());
       for (LeaderCardObserver observer: observers) {
         observer.update(this.perk);
       }
