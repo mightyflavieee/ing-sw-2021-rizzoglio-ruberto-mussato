@@ -1,18 +1,17 @@
 package it.polimi.ingsw.project.model;
 
-import it.polimi.ingsw.project.model.board.Board;
 
 public class MoveMessage {  //messaggio che rimando al player che viene poi visualizzato
 
-    private final Player player;
+    private final Match match;
 
 
-    MoveMessage(Board board, Player player) {
-        this.player = player;
+    MoveMessage(Match match) {
+        this.match = match;
     }
 
-    public Player getPlayer() {
-        return player;
+    public Match getMatch() {
+        return this.match;
     }
 
 
