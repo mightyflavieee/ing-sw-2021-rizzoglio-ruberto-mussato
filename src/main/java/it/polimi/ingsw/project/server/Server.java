@@ -13,7 +13,7 @@ import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.utils.Utils;
 import it.polimi.ingsw.project.view.RemoteView;
 import it.polimi.ingsw.project.view.View;
-import it.polimi.ingsw.project.view.gameMessage;
+import it.polimi.ingsw.project.utils.gameMessage;
 
 public class Server {
     private static final int PORT = 12345;

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.view;
 
 import it.polimi.ingsw.project.model.*;
+import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.observer.Observer;
@@ -21,9 +22,9 @@ public abstract class View extends Observable<PlayerMove> implements Observer<Mo
 
     protected abstract void showMessage(Object message);
 
-    void handleMove(MoveType moveType, List<Resource> resources) {
+    void handleMove(PlayerMove playerMove) {
         //print lato server che stampa la mossa fatta
-        notify(new PlayerMove(player, moveType, resources, this));
+        notify(new PlayerMove(player,  this));
     }
 
     public void reportError(String message){

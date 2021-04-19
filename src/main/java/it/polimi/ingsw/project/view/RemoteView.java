@@ -4,20 +4,22 @@ import java.util.List;
 
 import it.polimi.ingsw.project.model.MoveMessage;
 import it.polimi.ingsw.project.model.Player;
+import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.observer.Observer;
 import it.polimi.ingsw.project.server.ClientConnection;
+import it.polimi.ingsw.project.utils.gameMessage;
 
 public class RemoteView extends View {
 
-    private class MessageReceiver implements Observer<String> {
+    private class MessageReceiver implements Observer<PlayerMove> {
 
         @Override
-        public void update(String message) {
+        public void update(PlayerMove message) {
             System.out.println("Received: " + message);
             try {
                 // la stringa (oppure oggetto) che ricevo dal client deve essere in qualche modo
                 // convertita
-                // handleMove(movetipe, resources);
+                handleMove(message);
             } catch (IllegalArgumentException e) {
                 clientConnection.asyncSend("Error!");
             }
