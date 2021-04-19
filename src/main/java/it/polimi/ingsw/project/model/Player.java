@@ -102,7 +102,7 @@ public class Player {
     ResourceType transmutationResourceType = null;
     for (Perk perk : activePerks) {
       if (perk instanceof TransmutationPerk) {
-        transmutationResourceType = perk.resource.getType();
+        transmutationResourceType = perk.getResource().getType();
       }
     }
     boolean isTransmutationPresent = transmutationResourceType != null ? true : false;
