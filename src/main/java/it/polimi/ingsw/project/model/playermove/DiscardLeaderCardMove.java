@@ -6,10 +6,9 @@ import it.polimi.ingsw.project.view.View;
 
 
 
-public class DiscardLeaderCardMove extends PlayerMove{
+public class DiscardLeaderCardMove extends Move{
     private String LeaderCardID;
-    public DiscardLeaderCardMove(Player player, View view, String LeaderCardID) {
-        super(player, view);
+    public DiscardLeaderCardMove (String LeaderCardID) {
         this.LeaderCardID = LeaderCardID;
     }
     @Override
@@ -20,6 +19,11 @@ public class DiscardLeaderCardMove extends PlayerMove{
     @Override
     public void performMove(Match match){
         //TODO
+    }
+    @Override
+    public String toString(){
+        //TODO
+        return new String("Generic Move");
     }
 }
 

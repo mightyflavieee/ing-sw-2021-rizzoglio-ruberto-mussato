@@ -1,19 +1,16 @@
 package it.polimi.ingsw.project.model.playermove;
 
-import java.util.List;
-
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
-import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.view.View;
-//messaggio ricevuto dal server
 public class PlayerMove {
     private final Player player;
     private final View view;
-
-    public PlayerMove(Player player, View view) {
+    private final Move move;
+    public PlayerMove(Player player, View view, Move move) {
         this.player = player;
         this.view = view;
+        this.move = move;
     }
 
     public Player getPlayer() {
@@ -24,11 +21,10 @@ public class PlayerMove {
         return view;
     }
 
-    public boolean isFeasibleMove(Match match){
-        //TODO
-        return false;
-    }
     public void performMove(Match match){
-        //TODO
+        this.move.performMove(match);
+    }
+    public boolean isFeasibleMove(Match match) {
+        return this.move.isFeasibleMove(match);
     }
 }

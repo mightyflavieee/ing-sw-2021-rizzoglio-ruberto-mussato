@@ -8,10 +8,9 @@ import it.polimi.ingsw.project.view.View;
 import java.util.Collections;
 import java.util.List;
 
-public class DiscardResourcesMove extends PlayerMove{
+public class DiscardResourcesMove extends Move{
     private List<Resource> discardedResources;
-    public DiscardResourcesMove(Player player, View view, List<Resource> discardedResources) {
-        super(player, view);
+    public DiscardResourcesMove(List<Resource> discardedResources) {
         Collections.copy(this.discardedResources,discardedResources);
     }
     @Override
@@ -22,5 +21,10 @@ public class DiscardResourcesMove extends PlayerMove{
     @Override
     public void performMove(Match match){
         //TODO
+    }
+    @Override
+    public String toString(){
+        //TODO
+        return new String("Generic Move");
     }
 }

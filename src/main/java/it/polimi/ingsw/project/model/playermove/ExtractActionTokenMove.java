@@ -5,10 +5,9 @@ import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.actionTokens.ActionToken;
 import it.polimi.ingsw.project.view.View;
 
-public class ExtractActionTokenMove extends PlayerMove{
+public class ExtractActionTokenMove extends Move{
     private ActionToken actionToken;
-    public ExtractActionTokenMove(Player player, View view, ActionToken actionToken) {
-        super(player, view);
+    public ExtractActionTokenMove( ActionToken actionToken) {
         this.actionToken = actionToken;
     }
     @Override
@@ -19,5 +18,10 @@ public class ExtractActionTokenMove extends PlayerMove{
     @Override
     public void performMove(Match match){
         //TODO
+    }
+    @Override
+    public String toString(){
+        //TODO
+        return new String("Generic Move");
     }
 }

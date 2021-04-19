@@ -8,11 +8,10 @@ import it.polimi.ingsw.project.view.View;
 import java.util.Collections;
 import java.util.List;
 
-public class TakeMarketResourcesMove extends PlayerMove{
+public class TakeMarketResourcesMove extends Move{
     private int axis;
     private List<Resource> discardedResources;
-    public TakeMarketResourcesMove(Player player, View view, int axis, List<Resource> discardedResources) {
-        super(player, view);
+    public TakeMarketResourcesMove(int axis, List<Resource> discardedResources) {
         this.axis = axis;
         Collections.copy(this.discardedResources, discardedResources);
     }
@@ -24,5 +23,10 @@ public class TakeMarketResourcesMove extends PlayerMove{
     @Override
     public void performMove(Match match){
         //TODO
+    }
+    @Override
+    public String toString(){
+        //TODO
+        return new String("Generic Move");
     }
 }

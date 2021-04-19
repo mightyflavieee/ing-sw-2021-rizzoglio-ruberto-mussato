@@ -16,12 +16,12 @@ public class Model extends Observable<MoveMessage> {
         return player.getNickname() == match.getCurrentPlayer().getNickname();
     }
 
-    public boolean isFeasibleMove(PlayerMove move){
-        return move.isFeasibleMove(this.match);
+    public boolean isFeasibleMove(PlayerMove playerMove){
+        return playerMove.isFeasibleMove(this.match);
     }
 
-    public void performMove(PlayerMove move){
-        move.performMove(this.match);
+    public void performMove(PlayerMove playerMove){
+        playerMove.performMove(this.match);
         // da fare
         //Match.playGame non va bene
         //da modificare per MVC
@@ -38,17 +38,20 @@ public class Model extends Observable<MoveMessage> {
         */
        /* board.setCell(row, column, player.getMarker());
         boolean hasWon = board.isGameOver(player.getMarker());
+        //messaggio mandato al player
         notify(new MoveMessage(board.clone(), player));
         if(hasWon || board.isFull()){
             board.reset();
         }
         */
-        notify(this.match.clone()); //è il messaggio che verrà inviato a l player
+        notify(new MoveMessage(playerMove.getPlayer(), this.match.clone())); //è il messaggio che verrà inviato a l player
     }
 
 
     public void updateTurn(){
         match.updatePlayer();
     }
-
+    public Match getMatchCopy(){
+        return this.match.clone();
+    }
 }

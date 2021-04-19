@@ -8,11 +8,10 @@ import it.polimi.ingsw.project.view.View;
 import java.util.Collections;
 import java.util.List;
 
-public class BuyDevCardMove extends PlayerMove{
+public class BuyDevCardMove extends Move{
     private String DevCardID;
     private List<Resource> paidResources;
-    public BuyDevCardMove(Player player, View view, String DevCardID, List<Resource> paidResources) {
-        super(player, view);
+    public BuyDevCardMove(String DevCardID, List<Resource> paidResources) {
         this.DevCardID = DevCardID;
         Collections.copy(this.paidResources, paidResources);
     }
@@ -24,5 +23,10 @@ public class BuyDevCardMove extends PlayerMove{
     @Override
     public void performMove(Match match){
         //TODO
+    }
+    @Override
+    public String toString(){
+        //TODO
+        return new String("Generic Move");
     }
 }
