@@ -46,7 +46,7 @@ public class Server {
             }
             waitingConnection.clear(); //da cambiare
             listOfClientConnections.forEach((ClientConnection connection) -> {
-                connection.asyncSend(model.getPlayerCopy());
+                connection.asyncSend(model.getMatchCopy());
             });
             Collections.shuffle(listOfClientConnections);
             listOfClientConnections.get(0).asyncSend(gameMessage.moveMessage);
