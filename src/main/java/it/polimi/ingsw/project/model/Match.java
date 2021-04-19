@@ -110,7 +110,7 @@ public class Match {
     // TO DO
     return false;
   };
-  public MoveMessage clone(){
+  public Match clone(){
     //TODO
     return null;
   }
