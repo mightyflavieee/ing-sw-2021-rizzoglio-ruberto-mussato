@@ -46,9 +46,7 @@ public class LeaderCard extends Card {
     } else {
       this.status = Status.Active;
       this.perk.usePerk(this.perk.getResource());
-      for (LeaderCardObserver observer: observers) {
-        observer.update(this.perk);
-      }
+      super.notify(this.perk);
     }
   }
 
@@ -57,12 +55,6 @@ public class LeaderCard extends Card {
     converted = "it.polimi.ingsw.project.model.board.cards.Perk: " + this.perk.toString() + "\n" + "it.polimi.ingsw.project.model.board.cards.Status: " + this.status.toString() + "\n" + "Id: " + this.id + "\n";
     return converted;
   }
-
-  public void attach(LeaderCardObserver observer) {
-    this.observers.add(observer);
-  }
-
-  public void detach(LeaderCardObserver observer) {
-    this.observers.remove(observer);
-  }
 }
+
+
