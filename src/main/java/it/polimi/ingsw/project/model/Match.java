@@ -3,6 +3,7 @@ package it.polimi.ingsw.project.model;
 import it.polimi.ingsw.project.model.actionTokens.ActionTokenContainer;
 import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.market.Market;
+import it.polimi.ingsw.project.model.playermove.PlayerMove;
 
 import java.util.*;
 
@@ -109,4 +110,8 @@ public class Match {
     // TO DO
     return false;
   };
+  public MoveMessage clone(){
+    //TODO
+    return null;
+  }
 }
