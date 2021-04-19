@@ -1,9 +1,7 @@
 package it.polimi.ingsw.project.controller;
-import it.polimi.ingsw.project.model.PlayerMove;
+import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.observer.Observer;
-
-import java.util.Collections;
 
 public class Controller implements Observer<PlayerMove> {
 

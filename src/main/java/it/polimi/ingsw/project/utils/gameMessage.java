@@ -1,4 +1,4 @@
-package it.polimi.ingsw.project.view;
+package it.polimi.ingsw.project.utils;
 
 public class gameMessage {
 

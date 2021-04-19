@@ -1,13 +1,12 @@
 package it.polimi.ingsw.project.model;
 
-import java.util.Collections;
 import java.util.List;
 
+import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.observer.Observable;
 
 public class Model extends Observable<MoveMessage> {
     private Match match;
-    private Player playerToSend = new Player();
 
     public Model(List<Player> listOfPlayers) {
         this.match = new Match(listOfPlayers);
@@ -17,29 +16,26 @@ public class Model extends Observable<MoveMessage> {
         return player.getNickname() == match.getCurrentPlayer().getNickname();
     }
 
-    public Player getPlayerCopy() {
-        return playerToSend.clone();
-    }
-
     public boolean isFeasibleMove(PlayerMove move){
-        //da fare
-        return false;
+        return move.isFeasibleMove(this.match);
     }
 
     public void performMove(PlayerMove move){
+        move.performMove(this.match);
         // da fare
         //Match.playGame non va bene
         //da modificare per MVC
+       /*
         while (true) {
             boolean endGame = this.match.performMove(move);
             if (endGame) {
                 this.match.playLastTurn();
                 break;
             }
-            this.updatePlayer();
+            this.updateTurn();
         }
 
-
+        */
        /* board.setCell(row, column, player.getMarker());
         boolean hasWon = board.isGameOver(player.getMarker());
         notify(new MoveMessage(board.clone(), player));
@@ -47,8 +43,7 @@ public class Model extends Observable<MoveMessage> {
             board.reset();
         }
         */
-        this.playerToSend =
-        notify(match.getCurrentPlayer().clone();); //è il messaggio che verrà inviato a l player
+        notify(this.match.clone()); //è il messaggio che verrà inviato a l player
     }
 
 
