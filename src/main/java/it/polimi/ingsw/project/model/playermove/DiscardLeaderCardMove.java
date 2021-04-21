@@ -7,23 +7,21 @@ import it.polimi.ingsw.project.view.View;
 
 
 public class DiscardLeaderCardMove extends Move{
-    private String LeaderCardID;
-    public DiscardLeaderCardMove (String LeaderCardID) {
-        this.LeaderCardID = LeaderCardID;
+    private String leaderCardID;
+    public DiscardLeaderCardMove (String leaderCardID) {
+        this.leaderCardID = leaderCardID;
     }
     @Override
     public boolean isFeasibleMove(Match match){
-        //TODO
-        return false;
+        return match.isFeasibleDiscardLeaderCardMove(this.leaderCardID);
     }
     @Override
     public void performMove(Match match){
-        //TODO
+        match.performDiscardLeaderCardMove(this.leaderCardID);
     }
     @Override
     public String toString(){
-        //TODO
-        return new String("Generic Move");
+        return new String("DiscardLeaderCardMove, LeaderCardID: " + this.leaderCardID);
     }
 }
 

@@ -124,4 +124,11 @@ public class Match {
     //TODO
     return null;
   }
+  public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID){
+    return currentPlayer.isFeasibleDiscardLeaderCardMove(leaderCardID);
+  }
+  public void performDiscardLeaderCardMove(String leaderCardID){
+    this.currentPlayer.performDiscardLeaderCardMove(leaderCardID);
+
+  }
 }

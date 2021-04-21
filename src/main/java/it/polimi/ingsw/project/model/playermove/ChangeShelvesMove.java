@@ -14,7 +14,7 @@ public class ChangeShelvesMove extends Move{
     }
     @Override
     public boolean isFeasibleMove(Match match){
-       // match.isFeasibleChangeShelves(aFloor, bFloor);
+       // match.isFeasibleChangeShelvesMove(aFloor, bFloor);
         return false;
     }
     @Override

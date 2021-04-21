@@ -20,7 +20,7 @@ public class Board {
   private FaithMap faithMap;
   private List<Perk> activePerks = new ArrayList<>();
 
-  public final Board clone(){
+  public final Board clone() {
     final Board result = new Board();
     result.chest = chest;
     result.mapTray = mapTray;
@@ -81,20 +81,20 @@ public class Board {
     try {
       chosenDevelopmentCard = reader.readLine();
       switch (Integer.parseInt(chosenDevelopmentCard)) {
-      case 1:
-        manufacturedResources = getLastFromPosition(DevCardPosition.Left)
-            .useProduction(warehouse.mapAllContainedResources());
-        break;
-      case 2:
-        manufacturedResources = getLastFromPosition(DevCardPosition.Center)
-            .useProduction(warehouse.mapAllContainedResources());
-        break;
-      case 3:
-        manufacturedResources = getLastFromPosition(DevCardPosition.Right)
-            .useProduction(warehouse.mapAllContainedResources());
-        break;
-      default:
-        throw new Exception();
+        case 1:
+          manufacturedResources = getLastFromPosition(DevCardPosition.Left)
+                  .useProduction(warehouse.mapAllContainedResources());
+          break;
+        case 2:
+          manufacturedResources = getLastFromPosition(DevCardPosition.Center)
+                  .useProduction(warehouse.mapAllContainedResources());
+          break;
+        case 3:
+          manufacturedResources = getLastFromPosition(DevCardPosition.Right)
+                  .useProduction(warehouse.mapAllContainedResources());
+          break;
+        default:
+          throw new Exception();
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -132,35 +132,40 @@ public class Board {
     }
   }
 
-  // it gets the input from the player for the id and then it removes the element
-  // from the list
-  private void removeLeaderCardFromList() {
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    String chosenLeaderCard;
-    try {
-      chosenLeaderCard = reader.readLine();
-      this.leaderCards.remove(Integer.parseInt(chosenLeaderCard) - 1);
-    } catch (Exception e) {
-      e.printStackTrace();
-      System.out.println("Cannot read commad!");
-    }
-  }
+
 
   // it removes the leaderCard
   public void discardLeaderCard(boolean isInitialPhase) {
+    //TODO
     if (isInitialPhase) {
       for (int i = 0; i < 2; i++) {
         chooseLeaderCard();
-        removeLeaderCardFromList();
+      //  removeLeaderCardFromList();
       }
     } else {
       chooseLeaderCard();
-      removeLeaderCardFromList();
+     // removeLeaderCardFromList();
       moveForward();
     }
   }
 
   public int papalCouncil(int numTile) {
     return faithMap.papalCouncil(numTile);
+  }
+
+  public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID) {
+    for (int i = 0; i < this.leaderCards.size(); i++) {
+      if (this.leaderCards.get(i).getId() == leaderCardID) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public void performDiscardLeaderCardMove(String leaderCardID){
+    for (int i = 0; i < this.leaderCards.size(); i++) {
+      if (this.leaderCards.get(i).getId() == leaderCardID) {
+        this.leaderCards.remove(i);
+        return; } }
   }
 }

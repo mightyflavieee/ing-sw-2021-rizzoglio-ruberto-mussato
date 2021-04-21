@@ -206,4 +206,12 @@ public class Player {
     this.victoryPoints += board.papalCouncil(numTile);
   }
 
+  public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID){
+    return this.board.isFeasibleDiscardLeaderCardMove(leaderCardID);
+  }
+
+  public void performDiscardLeaderCardMove(String leaderCardID){
+    this.board.performDiscardLeaderCardMove(leaderCardID);
+  }
+
 }

@@ -11,7 +11,6 @@ import it.polimi.ingsw.project.observer.custom.LeaderCardObserver;
 public class LeaderCard extends Card {
   final private Perk perk;
   private Status status;
-  private List<LeaderCardObserver> observers = null;
   private String id;
 
   public LeaderCard(String id, Perk assignedPerk) {
@@ -35,11 +34,13 @@ public class LeaderCard extends Card {
   // changes the status of the it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard to Active
   public void activateCard() {
     if (this.status == Status.Active) {
-      // if the perk is reusable (only it.polimi.ingsw.project.model.board.card.leaderCard.perk.ProductionPerk), utilize the perk again
+      // if the perk is reusable (only it.polimi.ingsw.project.model.board.card.leaderCard.perk.ProductionPerk),
+      // utilize the perk again
       if (this.perk instanceof ProductionPerk) {
         this.perk.usePerk(this.perk.getResource());
       } else {
-        // if the perk is not a it.polimi.ingsw.project.model.board.card.leaderCard.perk.ProductionPerk and it's active, it is NOT reusable
+        // if the perk is not a it.polimi.ingsw.project.model.board.card.leaderCard.perk.ProductionPerk
+        // and it's active, it is NOT reusable
         System.out.println("Leader it.polimi.ingsw.project.model.board.cards.Card is already active!");
       }
     } else {

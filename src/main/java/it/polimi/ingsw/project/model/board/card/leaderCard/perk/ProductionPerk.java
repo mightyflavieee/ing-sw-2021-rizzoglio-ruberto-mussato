@@ -19,7 +19,8 @@ public class ProductionPerk extends Perk{
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     String chosenResourceTypeToEliminate;
     ResourceType type = null;
-    System.out.println("Which it.polimi.ingsw.project.model.resource.Resource would you want to use for the production?\n1. Coin;\n2. Shield;\n3. Servant;\n4. Stone.");
+    System.out.println("Which it.polimi.ingsw.project.model.resource." +
+            "Resource would you want to use for the production?\n1. Coin;\n2. Shield;\n3. Servant;\n4. Stone.");
     try {
       chosenResourceTypeToEliminate = reader.readLine();
       switch (Integer.parseInt(chosenResourceTypeToEliminate)) {
@@ -46,7 +47,9 @@ public class ProductionPerk extends Perk{
   }
 
   private Resource chooseResourceToProduce() {
-    System.out.println("Which it.polimi.ingsw.project.model.resource.Resource do you want?\n1. Coin;\n2. Shield;\n3. Servant;\n4. Stone.\n(You will also advance 1 position in the Faith Map!)");
+    System.out.println("Which it.polimi.ingsw.project.model.resource." +
+            "Resource do you want?\n1. Coin;\n2. Shield;\n3. Servant;\n4. Stone." +
+            "\n(You will also advance 1 position in the Faith Map!)");
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     String chosenResource;
     Resource resourceToAdd = null;
