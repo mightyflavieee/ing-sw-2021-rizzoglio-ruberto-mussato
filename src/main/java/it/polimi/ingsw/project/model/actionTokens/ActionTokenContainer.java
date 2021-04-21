@@ -32,4 +32,11 @@ public class ActionTokenContainer {
         Collections.shuffle(actionTokens);
     }
 
+    public void drawToken(){
+        ActionToken firstActionToken = this.actionTokens.get(0);
+        firstActionToken.Action();
+        this.actionTokens.remove(0);
+        this.actionTokens.add(firstActionToken);
+    }
+
 }
