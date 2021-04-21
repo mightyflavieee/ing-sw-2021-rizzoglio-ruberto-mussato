@@ -57,14 +57,16 @@ public class Match {
   }
 
   public void notifyFaithMapsForCouncil(int numTile) {
+    // devo notificare anche lorenzo?
     playerList.forEach(x -> x.papalCouncil(numTile));
     if (numTile == 3)
       this.end();
   }
 
   public void notifyFaithMapsForDiscard(int numDiscardedResources) {
+    //devo far avanzare anche lorenzo?
     for (int i = 0; i < numDiscardedResources; i++) {
-      playerList.stream().filter(x -> x != currentPlayer).forEach(Player::moveForward);
+      playerList.stream().filter(x -> x.getNickname() != currentPlayer.getNickname()).forEach(Player::moveForward);
     }
   }
 
@@ -107,7 +109,7 @@ public class Match {
     this.currentPlayer = this.nextPlayer();
   }
   public boolean performMove(PlayerMove playerMove){
-    // TO DO
+    // TODO
     return false;
   };
   public Match clone(){
