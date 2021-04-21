@@ -64,7 +64,7 @@ public class Match {
     // devo notificare anche lorenzo?
     playerList.forEach(x -> x.papalCouncil(numTile));
     if (numTile == 3)
-      this.end();
+      this.isLastTurn = true; //qualcuno è arrivato all'ultima casella
   }
 
   public void notifyFaithMapsForDiscard(int numDiscardedResources) {

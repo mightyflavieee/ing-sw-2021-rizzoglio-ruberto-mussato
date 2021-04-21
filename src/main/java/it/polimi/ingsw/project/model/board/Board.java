@@ -21,6 +21,7 @@ public class Board {
   private List<Perk> activePerks = new ArrayList<>();
 
   public final Board clone() {
+    //TODO clone interne
     final Board result = new Board();
     result.chest = chest;
     result.mapTray = mapTray;
@@ -163,6 +164,7 @@ public class Board {
   }
 
   public void performDiscardLeaderCardMove(String leaderCardID){
+    this.moveForward();
     for (int i = 0; i < this.leaderCards.size(); i++) {
       if (this.leaderCards.get(i).getId() == leaderCardID) {
         this.leaderCards.remove(i);
