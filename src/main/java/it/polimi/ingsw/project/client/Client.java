@@ -32,6 +32,7 @@ public class Client {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
+
                 try {
                     while (isActive()) {
                         Object inputObject = socketIn.readObject();

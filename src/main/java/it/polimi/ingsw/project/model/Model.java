@@ -22,7 +22,6 @@ public class Model extends Observable<MoveMessage> {
 
     public void performMove(PlayerMove playerMove){
         playerMove.performMove(this.match);
-        // TODO
         //Match.playGame non va bene
         //da modificare per MVC
        /*
