@@ -7,7 +7,6 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.ProductionPerk;
 import it.polimi.ingsw.project.observer.custom.LeaderCardObserver;
 
-//TODO CAMBIARE EREDITARIETà PER OBSERVABLE
 
 public class LeaderCard extends Card {
   final private Perk perk;

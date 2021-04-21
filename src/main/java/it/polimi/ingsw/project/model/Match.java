@@ -99,11 +99,15 @@ public class Match {
   }
 
   private void youLost() {
-    // da implementare
+    // TODO
+    this.isOver = true;
   }
 
-  private void end() {
-    // da implementare
+  public void end() {
+    if (this.isLastTurn == true &&
+            this.currentPlayer.getNickname() == this.playerList.get(this.playerList.size()-1).getNickname()){
+      this.isOver = true;
+    }
   }
 
   public Player getCurrentPlayer() {
