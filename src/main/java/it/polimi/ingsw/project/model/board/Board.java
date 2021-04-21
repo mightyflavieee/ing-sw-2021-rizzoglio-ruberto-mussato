@@ -170,4 +170,7 @@ public class Board {
         this.leaderCards.remove(i);
         return; } }
   }
+  public int moveForwardBlack(){
+    return this.faithMap.moveForwardBlack();
+  }
 }

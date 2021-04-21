@@ -67,13 +67,14 @@ public class FaithMap {
     return papalFavourSlots;
   }
 
-  public void moveForward(){ //il player che chiama questa funziona passa se stesso
+  public void moveForward(){
     markerPosition++;
     faithTiles.get(markerPosition).activate();
   }
-  public void moveForwardBlack(){
+  public int moveForwardBlack(){
     blackMarkerPosition++;
-    faithTiles.get(markerPosition).activate();
+    faithTiles.get(blackMarkerPosition).activate();
+    return blackMarkerPosition;
   }
   public int papalCouncil(int numTile){
     if(this.papalFavourSlots.get(numTile-1).getStatus() != PapalSlotStatus.Available){

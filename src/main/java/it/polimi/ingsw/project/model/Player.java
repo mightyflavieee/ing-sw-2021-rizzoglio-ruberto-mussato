@@ -213,5 +213,8 @@ public class Player {
   public void performDiscardLeaderCardMove(String leaderCardID){
     this.board.performDiscardLeaderCardMove(leaderCardID);
   }
+  public int moveForwardBlack(){
+    return this.board.moveForwardBlack();
+  }
 
 }
