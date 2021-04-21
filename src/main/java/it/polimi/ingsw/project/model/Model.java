@@ -43,6 +43,7 @@ public class Model extends Observable<MoveMessage> {
             board.reset();
         }
         */
+        this.match.soloGame();
         this.match.end();
         notify(new MoveMessage(playerMove.getPlayer(), this.match.clone())); //è il messaggio che verrà inviato a l player
     }

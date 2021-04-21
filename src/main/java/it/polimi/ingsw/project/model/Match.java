@@ -61,14 +61,15 @@ public class Match {
   public boolean getIsLastTurn() { return this.isLastTurn; }
 
   public void notifyFaithMapsForCouncil(int numTile) {
-    // devo notificare anche lorenzo?
+    // TODO devo notificare anche lorenzo?
     playerList.forEach(x -> x.papalCouncil(numTile));
-    if (numTile == 3)
+    if (numTile == 3) {
       this.isLastTurn = true; //qualcuno è arrivato all'ultima casella
+      }
   }
 
   public void notifyFaithMapsForDiscard(int numDiscardedResources) {
-    //devo far avanzare anche lorenzo?
+    // TODO devo far avanzare anche lorenzo?
     for (int i = 0; i < numDiscardedResources; i++) {
       playerList.stream().filter(x -> x.getNickname() != currentPlayer.getNickname()).forEach(Player::moveForward);
     }
@@ -129,6 +130,17 @@ public class Match {
   }
   public void performDiscardLeaderCardMove(String leaderCardID){
     this.currentPlayer.performDiscardLeaderCardMove(leaderCardID);
+  }
+  public void soloGame(){
+    if(this.playerList.size() != 1){
+      return;
+    }else{
+      this.actionTokenContainer.drawToken();
+    }
+  }
 
+  public void moveForwardBlack(){
+    if(24 == this.currentPlayer.moveForwardBlack()) //cioè se lorenzo è arrivato alla fine
+      this.youLost();
   }
 }
