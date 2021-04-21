@@ -13,6 +13,8 @@ public class Match {
   private CardContainer cardContainer;
   private ActionTokenContainer actionTokenContainer;
   private Player currentPlayer;
+  private boolean isLastTurn;
+  private boolean isOver;
 
   public Match(List<Player> playerList) {
     this.playerList = playerList;
@@ -55,6 +57,8 @@ public class Match {
   public ActionTokenContainer getActionTokenContainer() {
     return actionTokenContainer;
   }
+
+  public boolean getIsLastTurn() { return this.isLastTurn; }
 
   public void notifyFaithMapsForCouncil(int numTile) {
     // devo notificare anche lorenzo?
