@@ -19,7 +19,7 @@ public class BuyDevCardMove extends Move{
 
     @Override
     public boolean isFeasibleMove(Match match){
-        return match.isFeasibleBuyDevCardMove(this.devCardID, this.requiredResources);
+        return match.isFeasibleBuyDevCardMove(this.devCardID, this.requiredResources, this.position);
     }
 
     @Override

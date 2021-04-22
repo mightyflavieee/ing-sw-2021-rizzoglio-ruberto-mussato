@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.model;
 
 import it.polimi.ingsw.project.model.actionTokens.ActionTokenContainer;
 import it.polimi.ingsw.project.model.board.Board;
+import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.TransmutationPerk;
@@ -215,8 +216,8 @@ public class Player {
     this.board.performDiscardLeaderCardMove(leaderCardID);
   }
 
-  public boolean isFeasibleBuyDevCardMove(Map<ResourceType, Integer> requiredResources, CardLevel level) {
-    return this.board.isFeasibleBuyDevCardMove(requiredResources, level);
+  public boolean isFeasibleBuyDevCardMove(Map<ResourceType, Integer> requiredResources, CardLevel level, DevCardPosition position) {
+    return this.board.isFeasibleBuyDevCardMove(requiredResources, level, position);
   }
 
   public void performBuyDevCardMove(String devCardID) {

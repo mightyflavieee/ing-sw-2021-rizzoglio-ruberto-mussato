@@ -175,9 +175,10 @@ public class Board {
         return; } }
   }
 
-  public boolean isFeasibleBuyDevCardMove(Map<ResourceType, Integer> requiredResources, CardLevel level) {
+  // checks if the current player can buy the card he/she selected
+  public boolean isFeasibleBuyDevCardMove(Map<ResourceType, Integer> requiredResources, CardLevel level, DevCardPosition position) {
     int intLevel = 0;
-    boolean isHigherCardLevelPresent = false;
+    boolean isOneLessCardLevelPresent = false;
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
     Map<ResourceType, Integer> currentResources = new HashMap<>();
     List<ResourceType> types = new ArrayList<>();
@@ -185,6 +186,7 @@ public class Board {
     types.add(ResourceType.Coin);
     types.add(ResourceType.Servant);
     types.add(ResourceType.Shield);
+    // this for each loop constructs a map of the current overall resources of the player
     for (ResourceType type : types) {
       if (warehouseResources.containsKey(type)) {
         if (chest.containsKey(type)) {
@@ -196,25 +198,31 @@ public class Board {
         currentResources.put(type, this.chest.get(type));
       }
     }
+    // for each type of resource required, if there isn't enough resources, the move is not feasible (return false)
     for (ResourceType type : requiredResources.keySet()) {
       if (requiredResources.get(type) > currentResources.get(type)) {
         return false;
       }
     }
-    if (level == CardLevel.One) { intLevel = 1; }
-    if (level == CardLevel.Two) { intLevel = 2; }
-    if (level == CardLevel.Three) { intLevel = 3; }
-    for (DevCardPosition position : this.mapTray.keySet()) {
-      CardLevel currentCardLevel = this.mapTray.get(position).get(this.mapTray.get(position).size()).getLevel();
+    // checks if there is a card of one level less (or none at all if the card is level 1) than the card the player
+    // wants to buy on the position indicated by the player (return false if there isn't)
+    if (!this.mapTray.containsKey(position)) {
+      if (level != CardLevel.One) {
+        return false;
+      }
+    } else {
+      CardLevel currentCardLevel = this.mapTray.get(position).get(this.mapTray.get(position).size()-1).getLevel();
       int currentCardIntLevel = 0;
+      if (level == CardLevel.One) { intLevel = 1; }
+      if (level == CardLevel.Two) { intLevel = 2; }
+      if (level == CardLevel.Three) { intLevel = 3; }
       if (currentCardLevel == CardLevel.One) { currentCardIntLevel = 1; }
       if (currentCardLevel == CardLevel.Two) { currentCardIntLevel = 2; }
       if (currentCardLevel == CardLevel.Three) { currentCardIntLevel = 3; }
-      if (currentCardIntLevel > intLevel) {
-        isHigherCardLevelPresent = true;
-      }
+      if (currentCardIntLevel == intLevel-1) { isOneLessCardLevelPresent = true; }
     }
-    if (!isHigherCardLevelPresent) { return false; }
+    // if isOneLessCardLevelPresent is false, the function returns false
+    if (!isOneLessCardLevelPresent) { return false; }
     return true;
   }
 

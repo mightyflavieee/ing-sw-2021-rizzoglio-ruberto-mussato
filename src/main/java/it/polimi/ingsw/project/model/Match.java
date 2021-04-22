@@ -140,12 +140,12 @@ public class Match {
     this.currentPlayer.performDiscardLeaderCardMove(leaderCardID);
   }
 
-  public boolean isFeasibleBuyDevCardMove(String devCardID, Map<ResourceType, Integer> requiredResources) {
+  public boolean isFeasibleBuyDevCardMove(String devCardID, Map<ResourceType, Integer> requiredResources, DevCardPosition position) {
     if (!this.cardContainer.isCardPresent(devCardID)) {
       return false;
     } else {
       DevelopmentCard card = this.cardContainer.fetchCard(devCardID);
-      return this.currentPlayer.isFeasibleBuyDevCardMove(requiredResources, card.getLevel());
+      return this.currentPlayer.isFeasibleBuyDevCardMove(requiredResources, card.getLevel(), position);
     }
   }
 
