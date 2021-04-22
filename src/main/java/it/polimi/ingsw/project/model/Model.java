@@ -13,7 +13,7 @@ public class Model extends Observable<MoveMessage> {
     }
 
     public boolean isPlayerTurn(Player player) {
-        return player.getNickname() == match.getCurrentPlayer().getNickname();
+        return player.getNickname().equals(match.getCurrentPlayer().getNickname());
     }
 
     public boolean isFeasibleMove(PlayerMove playerMove){
