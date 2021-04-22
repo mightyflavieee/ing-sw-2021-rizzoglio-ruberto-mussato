@@ -1,9 +1,12 @@
 package it.polimi.ingsw.project.model;
 
 import it.polimi.ingsw.project.model.actionTokens.ActionTokenContainer;
+import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.card.CardColor;
+import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import java.util.*;
 
@@ -114,23 +117,42 @@ public class Match {
   public Player getCurrentPlayer() {
     return currentPlayer;
   }
+
   public void updatePlayer(){
     this.currentPlayer = this.nextPlayer();
   }
+
   public boolean performMove(PlayerMove playerMove){
     // TODO
     return false;
   };
+
   public Match clone(){
     //TODO
     return null;
   }
+
   public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID){
     return currentPlayer.isFeasibleDiscardLeaderCardMove(leaderCardID);
   }
+
   public void performDiscardLeaderCardMove(String leaderCardID){
     this.currentPlayer.performDiscardLeaderCardMove(leaderCardID);
   }
+
+  public boolean isFeasibleBuyDevCardMove(String devCardID, Map<ResourceType, Integer> requiredResources) {
+    if (!this.cardContainer.isCardPresent(devCardID)) {
+      return false;
+    } else {
+      DevelopmentCard card = this.cardContainer.fetchCard(devCardID);
+      return this.currentPlayer.isFeasibleBuyDevCardMove(requiredResources, card.getLevel());
+    }
+  }
+
+  public void performBuyDevCardMove(String devCardID, DevCardPosition position) {
+    this.currentPlayer.performBuyDevCardMove(devCardID);
+  }
+
   public void soloGame(){
     if(this.playerList.size() != 1){
       return;

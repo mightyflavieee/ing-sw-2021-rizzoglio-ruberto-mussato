@@ -1,6 +1,6 @@
 package it.polimi.ingsw.project.model.board;
 
-import it.polimi.ingsw.project.model.board.card.DevCardPosition;
+import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
@@ -154,9 +154,13 @@ public class Board {
     return faithMap.papalCouncil(numTile);
   }
 
+  public int moveForwardBlack(){
+    return this.faithMap.moveForwardBlack();
+  }
+
   public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID) {
     for (int i = 0; i < this.leaderCards.size(); i++) {
-      if (this.leaderCards.get(i).getId() == leaderCardID) {
+      if (this.leaderCards.get(i).getId().equals(leaderCardID)) {
         return true;
       }
     }
@@ -166,11 +170,56 @@ public class Board {
   public void performDiscardLeaderCardMove(String leaderCardID){
     this.moveForward();
     for (int i = 0; i < this.leaderCards.size(); i++) {
-      if (this.leaderCards.get(i).getId() == leaderCardID) {
+      if (this.leaderCards.get(i).getId().equals(leaderCardID)) {
         this.leaderCards.remove(i);
         return; } }
   }
-  public int moveForwardBlack(){
-    return this.faithMap.moveForwardBlack();
+
+  public boolean isFeasibleBuyDevCardMove(Map<ResourceType, Integer> requiredResources, CardLevel level) {
+    int intLevel = 0;
+    boolean isHigherCardLevelPresent = false;
+    Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
+    Map<ResourceType, Integer> currentResources = new HashMap<>();
+    List<ResourceType> types = new ArrayList<>();
+    types.add(ResourceType.Stone);
+    types.add(ResourceType.Coin);
+    types.add(ResourceType.Servant);
+    types.add(ResourceType.Shield);
+    for (ResourceType type : types) {
+      if (warehouseResources.containsKey(type)) {
+        if (chest.containsKey(type)) {
+          currentResources.put(type, warehouseResources.get(type) + this.chest.get(type));
+        } else {
+          currentResources.put(type, warehouseResources.get(type));
+        }
+      } else {
+        currentResources.put(type, this.chest.get(type));
+      }
+    }
+    for (ResourceType type : requiredResources.keySet()) {
+      if (requiredResources.get(type) > currentResources.get(type)) {
+        return false;
+      }
+    }
+    if (level == CardLevel.One) { intLevel = 1; }
+    if (level == CardLevel.Two) { intLevel = 2; }
+    if (level == CardLevel.Three) { intLevel = 3; }
+    for (DevCardPosition position : this.mapTray.keySet()) {
+      CardLevel currentCardLevel = this.mapTray.get(position).get(this.mapTray.get(position).size()).getLevel();
+      int currentCardIntLevel = 0;
+      if (currentCardLevel == CardLevel.One) { currentCardIntLevel = 1; }
+      if (currentCardLevel == CardLevel.Two) { currentCardIntLevel = 2; }
+      if (currentCardLevel == CardLevel.Three) { currentCardIntLevel = 3; }
+      if (currentCardIntLevel > intLevel) {
+        isHigherCardLevelPresent = true;
+      }
+    }
+    if (!isHigherCardLevelPresent) { return false; }
+    return true;
   }
+
+  public void performBuyDevCardMove(String devCardID) {
+
+  }
+
 }

@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.model;
 
 import it.polimi.ingsw.project.model.actionTokens.ActionTokenContainer;
 import it.polimi.ingsw.project.model.board.Board;
+import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.TransmutationPerk;
 import it.polimi.ingsw.project.model.board.Warehouse;
@@ -213,6 +214,15 @@ public class Player {
   public void performDiscardLeaderCardMove(String leaderCardID){
     this.board.performDiscardLeaderCardMove(leaderCardID);
   }
+
+  public boolean isFeasibleBuyDevCardMove(Map<ResourceType, Integer> requiredResources, CardLevel level) {
+    return this.board.isFeasibleBuyDevCardMove(requiredResources, level);
+  }
+
+  public void performBuyDevCardMove(String devCardID) {
+    this.board.performBuyDevCardMove(devCardID);
+  }
+
   public int moveForwardBlack(){
     return this.board.moveForwardBlack();
   }

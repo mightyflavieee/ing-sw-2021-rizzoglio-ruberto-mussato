@@ -1,29 +1,32 @@
 package it.polimi.ingsw.project.model.playermove;
 
 import it.polimi.ingsw.project.model.Match;
-import it.polimi.ingsw.project.model.Player;
-import it.polimi.ingsw.project.model.resource.Resource;
-import it.polimi.ingsw.project.view.View;
+import it.polimi.ingsw.project.model.board.DevCardPosition;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
 public class BuyDevCardMove extends Move{
-    private String DevCardID;
-    private List<Resource> paidResources;
-    public BuyDevCardMove(String DevCardID, List<Resource> paidResources) {
-        this.DevCardID = DevCardID;
-        Collections.copy(this.paidResources, paidResources);
+    private String devCardID;
+    private DevCardPosition position;
+    private Map<ResourceType, Integer> requiredResources;
+
+    public BuyDevCardMove(String devCardID, DevCardPosition position, Map<ResourceType, Integer> requiredResources) {
+        this.devCardID = devCardID;
+        this.position = position;
+        this.requiredResources = requiredResources;
     }
+
     @Override
     public boolean isFeasibleMove(Match match){
-        //TODO
-        return false;
+        return match.isFeasibleBuyDevCardMove(this.devCardID, this.requiredResources);
     }
+
     @Override
-    public void performMove(Match match){
-        //TODO
+    public void performMove(Match match) {
+        match.performBuyDevCardMove(this.devCardID, this.position);
     }
+
     @Override
     public String toString(){
         //TODO
