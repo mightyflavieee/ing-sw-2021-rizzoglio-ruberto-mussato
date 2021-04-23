@@ -140,17 +140,19 @@ public class Match {
     this.currentPlayer.performDiscardLeaderCardMove(leaderCardID);
   }
 
-  public boolean isFeasibleBuyDevCardMove(String devCardID, Map<ResourceType, Integer> requiredResources, DevCardPosition position) {
+  public boolean isFeasibleBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
     if (!this.cardContainer.isCardPresent(devCardID)) {
       return false;
     } else {
-      DevelopmentCard card = this.cardContainer.fetchCard(devCardID);
-      return this.currentPlayer.isFeasibleBuyDevCardMove(requiredResources, card.getLevel(), position);
+      DevelopmentCard devCard = this.cardContainer.fetchCard(devCardID);
+      return this.currentPlayer.isFeasibleBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
     }
   }
 
-  public void performBuyDevCardMove(String devCardID, DevCardPosition position) {
-    this.currentPlayer.performBuyDevCardMove(devCardID);
+  public void performBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+    this.cardContainer.removeBoughtCard(devCardID);
+    DevelopmentCard devCard = this.cardContainer.fetchCard(devCardID);
+    this.currentPlayer.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
   }
 
   public void soloGame(){

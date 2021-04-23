@@ -4,6 +4,7 @@ import it.polimi.ingsw.project.model.actionTokens.ActionTokenContainer;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
+import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.TransmutationPerk;
 import it.polimi.ingsw.project.model.board.Warehouse;
@@ -216,12 +217,12 @@ public class Player {
     this.board.performDiscardLeaderCardMove(leaderCardID);
   }
 
-  public boolean isFeasibleBuyDevCardMove(Map<ResourceType, Integer> requiredResources, CardLevel level, DevCardPosition position) {
-    return this.board.isFeasibleBuyDevCardMove(requiredResources, level, position);
+  public boolean isFeasibleBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+    return this.board.isFeasibleBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
   }
 
-  public void performBuyDevCardMove(String devCardID) {
-    this.board.performBuyDevCardMove(devCardID);
+  public void performBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+    this.board.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
   }
 
   public int moveForwardBlack(){
