@@ -9,22 +9,24 @@ import java.util.Map;
 public class BuyDevCardMove extends Move{
     private String devCardID;
     private DevCardPosition position;
-    private Map<ResourceType, Integer> requiredResources;
+    private Map<ResourceType, Integer> resourcesToEliminateWarehouse;
+    private Map<ResourceType, Integer> resourcesToEliminateChest;
 
-    public BuyDevCardMove(String devCardID, DevCardPosition position, Map<ResourceType, Integer> requiredResources) {
+    public BuyDevCardMove(String devCardID, DevCardPosition position, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
         this.devCardID = devCardID;
         this.position = position;
-        this.requiredResources = requiredResources;
+        this.resourcesToEliminateWarehouse = resourcesToEliminateWarehouse;
+        this.resourcesToEliminateChest = resourcesToEliminateChest;
     }
 
     @Override
     public boolean isFeasibleMove(Match match){
-        return match.isFeasibleBuyDevCardMove(this.devCardID, this.requiredResources, this.position);
+        return match.isFeasibleBuyDevCardMove(this.devCardID, this.resourcesToEliminateWarehouse, this.resourcesToEliminateChest, this.position);
     }
 
     @Override
     public void performMove(Match match) {
-        match.performBuyDevCardMove(this.devCardID, this.position);
+        match.performBuyDevCardMove(this.devCardID, this.resourcesToEliminateWarehouse, this.resourcesToEliminateChest, this.position);
     }
 
     @Override

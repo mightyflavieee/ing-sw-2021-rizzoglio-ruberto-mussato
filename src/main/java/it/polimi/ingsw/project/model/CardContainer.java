@@ -73,4 +73,18 @@ public class CardContainer {
     return null;
   }
 
+  public DevelopmentCard removeBoughtCard(String devCardID) {
+    DevelopmentCard boughtCard = fetchCard(devCardID);
+    for (CardLevel level : this.cardContainer.keySet()) {
+      for (CardColor color : this.cardContainer.get(level).keySet()) {
+        for (DevelopmentCard card : this.cardContainer.get(level).get(color)) {
+          if (card.getId().equals(devCardID)) {
+            this.cardContainer.get(level).get(color).remove(boughtCard);
+          }
+        }
+      }
+    }
+    return boughtCard;
+  }
+
 }
