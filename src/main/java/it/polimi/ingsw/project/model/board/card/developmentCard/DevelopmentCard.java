@@ -12,29 +12,33 @@ public class DevelopmentCard extends Card {
   final private CardLevel level;
   final private Production production;
   final private String id;
+  final private Map<ResourceType, Integer> requiredResources;
 
-  public DevelopmentCard(CardColor color, CardLevel level, Production production, String id) {
+  public DevelopmentCard(CardColor color, CardLevel level, Production production, String id, Map<ResourceType, Integer> requiredResources) {
     this.color = color;
     this.level = level;
     this.production = production;
     this.id = id;
+    this.requiredResources = requiredResources;
   }
 
   public CardColor getColor() {
-    return color;
+    return this.color;
   }
 
   public CardLevel getLevel() {
-    return level;
+    return this.level;
   }
 
   public Production getProduction(){
-    return production;
+    return this.production;
   }
 
   public String getId() {
-    return id;
+    return this.id;
   }
+
+  public Map<ResourceType, Integer> getRequiredResources() { return this.requiredResources; }
 
   public Map<ResourceType, Integer> useProduction(Map<ResourceType,Integer> currentResourcesInWarehouse) {
     Map<ResourceType, Integer> requiredResources = this.production.getRequiredResources();
