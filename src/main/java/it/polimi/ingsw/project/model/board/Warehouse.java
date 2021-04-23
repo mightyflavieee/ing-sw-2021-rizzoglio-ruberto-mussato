@@ -221,5 +221,14 @@ public class Warehouse extends Observable<Warehouse> {
   public int getNumResourcesToDiscard() {
     return this.numResourcesToDiscard;
   }
+
+  // eliminates resources from the warehouse
+  public void eliminateResources(Map<ResourceType, Integer> resourcesToEliminateWarehouse) {
+    /*for (ShelfFloor floor : this.shelves.keySet()) {
+      for (ResourceType type : this.shelves.get(floor)) {
+
+      }
+    }*/
+  }
 }
 
