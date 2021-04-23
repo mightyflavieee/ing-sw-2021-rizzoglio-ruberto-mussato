@@ -176,46 +176,57 @@ public class Board {
   }
 
   // checks if the current player can buy the card he/she selected
-  public boolean isFeasibleBuyDevCardMove(Map<ResourceType, Integer> requiredResources, CardLevel level, DevCardPosition position) {
+  public boolean isFeasibleBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
     int intLevel = 0;
     boolean isOneLessCardLevelPresent = false;
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
-    Map<ResourceType, Integer> currentResources = new HashMap<>();
-    List<ResourceType> types = new ArrayList<>();
-    types.add(ResourceType.Stone);
-    types.add(ResourceType.Coin);
-    types.add(ResourceType.Servant);
-    types.add(ResourceType.Shield);
-    // this for each loop constructs a map of the current overall resources of the player
-    for (ResourceType type : types) {
-      if (warehouseResources.containsKey(type)) {
-        if (chest.containsKey(type)) {
-          currentResources.put(type, warehouseResources.get(type) + this.chest.get(type));
-        } else {
-          currentResources.put(type, warehouseResources.get(type));
-        }
-      } else {
-        currentResources.put(type, this.chest.get(type));
+    // double checks if the resources indicated by the user are actually present
+    for (ResourceType type : warehouseResources.keySet()) {
+      if (warehouseResources.get(type) < resourcesToEliminateChest.get(type)) {
+        return false;
+      }
+    }
+    for (ResourceType type : this.chest.keySet()) {
+      if (this.chest.get(type) < resourcesToEliminateChest.get(type)) {
+        return false;
       }
     }
     // for each type of resource required, if there isn't enough resources, the move is not feasible (return false)
-    for (ResourceType type : requiredResources.keySet()) {
-      if (requiredResources.get(type) > currentResources.get(type)) {
-        return false;
+    for (ResourceType type : devCard.getRequiredResources().keySet()) {
+      if (resourcesToEliminateWarehouse.containsKey(type)) {
+        if (resourcesToEliminateChest.containsKey(type)) {
+          if (devCard.getRequiredResources().get(type) > (resourcesToEliminateWarehouse.get(type) + resourcesToEliminateChest.get(type))) {
+            return false;
+          }
+        } else {
+          if (devCard.getRequiredResources().get(type) > resourcesToEliminateWarehouse.get(type)) {
+            return false;
+          }
+        }
+      } else {
+        if (resourcesToEliminateChest.containsKey(type)) {
+          if (devCard.getRequiredResources().get(type) > resourcesToEliminateChest.get(type)) {
+            return false;
+          }
+        } else {
+          return false;
+        }
       }
     }
     // checks if there is a card of one level less (or none at all if the card is level 1) than the card the player
     // wants to buy on the position indicated by the player (return false if there isn't)
-    if (!this.mapTray.containsKey(position)) {
-      if (level != CardLevel.One) {
+    if (this.mapTray.get(position).size() == 0) {
+      if (devCard.getLevel() != CardLevel.One) {
         return false;
+      } else {
+        isOneLessCardLevelPresent = true;
       }
     } else {
       CardLevel currentCardLevel = this.mapTray.get(position).get(this.mapTray.get(position).size()-1).getLevel();
       int currentCardIntLevel = 0;
-      if (level == CardLevel.One) { intLevel = 1; }
-      if (level == CardLevel.Two) { intLevel = 2; }
-      if (level == CardLevel.Three) { intLevel = 3; }
+      if (devCard.getLevel() == CardLevel.One) { intLevel = 1; }
+      if (devCard.getLevel() == CardLevel.Two) { intLevel = 2; }
+      if (devCard.getLevel() == CardLevel.Three) { intLevel = 3; }
       if (currentCardLevel == CardLevel.One) { currentCardIntLevel = 1; }
       if (currentCardLevel == CardLevel.Two) { currentCardIntLevel = 2; }
       if (currentCardLevel == CardLevel.Three) { currentCardIntLevel = 3; }
@@ -226,8 +237,23 @@ public class Board {
     return true;
   }
 
-  public void performBuyDevCardMove(String devCardID) {
+  // puts the bought DevelopmentCard in the mapTray and eliminates the required resources from the warehouse or
+  // the strongbox (this.chest)
+  public void performBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+    this.mapTray.get(position).add(devCard);
+    this.warehouse.eliminateResources(resourcesToEliminateWarehouse);
+    eliminateResourcesFromChest(resourcesToEliminateChest);
+  }
 
+  // eliminates resources from the chest, usable only within performBuyDevCardMove()
+  private void eliminateResourcesFromChest(Map<ResourceType, Integer> resourcesToEliminate) {
+    for (ResourceType type : this.chest.keySet()) {
+      if (this.chest.get(type).equals(resourcesToEliminate.get(type))) {
+        this.chest.remove(type);
+      } else {
+        this.chest.put(type, (this.chest.get(type) - resourcesToEliminate.get(type)));
+      }
+    }
   }
 
 }
