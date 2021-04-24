@@ -154,6 +154,17 @@ public class Match {
     this.currentPlayer.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
   }
 
+  public boolean isFeasibleDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
+    if (!this.cardContainer.isCardPresent(devCardID)) {
+      return this.currentPlayer.isFeasibleDevCardProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateChest);
+    }
+    return false;
+  }
+
+  public void performDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
+    this.currentPlayer.performDevCardProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateChest);
+  }
+
   public void soloGame(){
     if(this.playerList.size() != 1){
       return;

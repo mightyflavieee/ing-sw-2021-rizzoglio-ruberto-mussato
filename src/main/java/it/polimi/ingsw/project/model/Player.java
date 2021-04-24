@@ -225,6 +225,14 @@ public class Player {
     this.board.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
   }
 
+  public boolean isFeasibleDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
+    return this.board.isFeasibleDevCardProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateChest);
+  }
+
+  public void performDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
+    this.board.performDevCardProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateChest);
+  }
+
   public int moveForwardBlack(){
     return this.board.moveForwardBlack();
   }

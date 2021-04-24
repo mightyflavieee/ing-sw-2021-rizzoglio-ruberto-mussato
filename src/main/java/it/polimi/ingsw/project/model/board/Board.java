@@ -133,8 +133,6 @@ public class Board {
     }
   }
 
-
-
   // it removes the leaderCard
   public void discardLeaderCard(boolean isInitialPhase) {
     //TODO
@@ -156,6 +154,51 @@ public class Board {
 
   public int moveForwardBlack(){
     return this.faithMap.moveForwardBlack();
+  }
+
+  // fetches a DevelopmentCard by Id in the mapTray, returns null if not present
+  private DevelopmentCard fetchCardById(String devCardID) {
+    for (DevCardPosition position : this.mapTray.keySet()) {
+      for (DevelopmentCard card : this.mapTray.get(position)) {
+        if (card.getId().equals(devCardID)) {
+          return card;
+        }
+      }
+    }
+    // if card not found, return null
+    return null;
+  }
+
+  // double checks if the resources indicated by the user are actually present
+  // usable in "isFeasible" and "perform" methods only
+  private boolean areEnoughResourcesPresent(Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
+    Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
+    if (resourcesToEliminateWarehouse != null) {
+      for (ResourceType type : warehouseResources.keySet()) {
+        if (warehouseResources.get(type) < resourcesToEliminateWarehouse.get(type)) {
+          return false;
+        }
+      }
+    }
+    if (resourcesToEliminateChest != null) {
+      for (ResourceType type : this.chest.keySet()) {
+        if (this.chest.get(type) < resourcesToEliminateChest.get(type)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  // eliminates resources from the chest, usable only within performBuyDevCardMove()
+  private void eliminateResourcesFromChest(Map<ResourceType, Integer> resourcesToEliminate) {
+    for (ResourceType type : this.chest.keySet()) {
+      if (this.chest.get(type).equals(resourcesToEliminate.get(type))) {
+        this.chest.remove(type);
+      } else {
+        this.chest.put(type, (this.chest.get(type) - resourcesToEliminate.get(type)));
+      }
+    }
   }
 
   public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID) {
@@ -181,15 +224,8 @@ public class Board {
     boolean isOneLessCardLevelPresent = false;
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
     // double checks if the resources indicated by the user are actually present
-    for (ResourceType type : warehouseResources.keySet()) {
-      if (warehouseResources.get(type) < resourcesToEliminateChest.get(type)) {
-        return false;
-      }
-    }
-    for (ResourceType type : this.chest.keySet()) {
-      if (this.chest.get(type) < resourcesToEliminateChest.get(type)) {
-        return false;
-      }
+    if (!areEnoughResourcesPresent(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
+      return false;
     }
     // for each type of resource required, if there isn't enough resources, the move is not feasible (return false)
     for (ResourceType type : devCard.getRequiredResources().keySet()) {
@@ -245,15 +281,31 @@ public class Board {
     eliminateResourcesFromChest(resourcesToEliminateChest);
   }
 
-  // eliminates resources from the chest, usable only within performBuyDevCardMove()
-  private void eliminateResourcesFromChest(Map<ResourceType, Integer> resourcesToEliminate) {
-    for (ResourceType type : this.chest.keySet()) {
-      if (this.chest.get(type).equals(resourcesToEliminate.get(type))) {
-        this.chest.remove(type);
-      } else {
-        this.chest.put(type, (this.chest.get(type) - resourcesToEliminate.get(type)));
+  // checks if the current player can activate the production from the selected card
+  public boolean isFeasibleDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
+    Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
+    boolean isDevCardInLastPosition = false;
+    // checks if the card selected is in the last position (so the production is activable)
+    for (DevCardPosition position : this.mapTray.keySet()) {
+      DevelopmentCard lastElement = this.mapTray.get(position).get(this.mapTray.get(position).size()-1);
+      if (lastElement.getId().equals(devCardID)) {
+        isDevCardInLastPosition = true;
+        break;
       }
     }
+    // if the card is not in the last position, return false
+    if (!isDevCardInLastPosition) { return false;}
+    // double checks if the resources indicated by the user are actually present
+    if (!areEnoughResourcesPresent(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
+      return false;
+    }
+    return true;
   }
 
+  public void performDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
+    DevelopmentCard card = fetchCardById(devCardID);
+    Map<ResourceType, Integer> manufacturedResources = card.getProduction().getManufacturedResources();
+    this.warehouse.eliminateResources(resourcesToEliminateWarehouse);
+    eliminateResourcesFromChest(resourcesToEliminateChest);
+  }
 }
