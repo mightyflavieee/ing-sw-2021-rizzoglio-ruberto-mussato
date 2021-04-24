@@ -18,9 +18,10 @@ public class RemoteView extends View {
         public void update(String message) {
             System.out.println("Received: " + message);
             try {
-                // la stringa (oppure oggetto) che ricevo dal client deve essere in qualche modo
+                // TODO la stringa (oppure oggetto) che ricevo dal client deve essere in qualche modo
                 // convertita nel tipo Move
-                //handleMove(message);
+                Move convertedMessage = new Move();
+                handleMove(convertedMessage);
             } catch (IllegalArgumentException e) {
                 clientConnection.asyncSend("Error!");
             }
@@ -51,29 +52,6 @@ public class RemoteView extends View {
     public void update(MoveMessage message) {
         //messaggio che mando al player
         showMessage(message.getMatch());
-        String resultMsg = "";
-        //TODO definire messaggi di fine partita
-        /*
-        boolean gameOver = message.getBoard().isGameOver(message.getPlayer().getMarker());
-        boolean draw = message.getBoard().isFull();
-        if (gameOver) {
-            if (message.getPlayer() == getPlayer()) {
-                resultMsg = gameMessage.winMessage + "\n";
-            } else {
-                resultMsg = gameMessage.loseMessage + "\n";
-            }
-        } else {
-            if (draw) {
-                resultMsg = gameMessage.drawMessage + "\n";
-            }
-        }
-        if (message.getPlayer() == getPlayer()) {
-            resultMsg += gameMessage.waitMessage;
-        } else {
-            resultMsg += gameMessage.moveMessage;
-        }
-        showMessage(resultMsg);
-        */
     }
 
 

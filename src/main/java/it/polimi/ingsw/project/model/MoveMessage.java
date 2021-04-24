@@ -2,7 +2,7 @@ package it.polimi.ingsw.project.model;
 
 
 public class MoveMessage {  //messaggio che rimando al player che viene poi visualizzato
-    private final Player player;
+    private final Player player; //TODO forse player non serve
     private final Match match;
 
 

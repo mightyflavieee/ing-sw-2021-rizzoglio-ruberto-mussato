@@ -22,27 +22,6 @@ public class Model extends Observable<MoveMessage> {
 
     public void performMove(PlayerMove playerMove){
         playerMove.performMove(this.match);
-        //Match.playGame non va bene
-        //da modificare per MVC
-       /*
-        while (true) {
-            boolean endGame = this.match.performMove(move);
-            if (endGame) {
-                this.match.playLastTurn();
-                break;
-            }
-            this.updateTurn();
-        }
-
-        */
-       /* board.setCell(row, column, player.getMarker());
-        boolean hasWon = board.isGameOver(player.getMarker());
-        //messaggio mandato al player
-        notify(new MoveMessage(board.clone(), player));
-        if(hasWon || board.isFull()){
-            board.reset();
-        }
-        */
         this.match.soloGame();
         this.match.end();
         notify(new MoveMessage(playerMove.getPlayer(), this.match.clone())); //è il messaggio che verrà inviato a l player
