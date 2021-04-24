@@ -12,14 +12,12 @@ import it.polimi.ingsw.project.utils.gameMessage;
 
 public class RemoteView extends View {
 
-    private class MessageReceiver implements Observer<String> {
+    private class MessageReceiver implements Observer<Move> {
 
         @Override
-        public void update(String message) {
-            System.out.println("Received: " + message);
+        public void update(Move message) {
+            System.out.println("Received: " + message.toString());
             try {
-                // TODO la stringa (oppure oggetto) che ricevo dal client deve essere in qualche modo
-                // convertita nel tipo Move
                 Move convertedMessage = new Move();
                 handleMove(convertedMessage);
             } catch (IllegalArgumentException e) {

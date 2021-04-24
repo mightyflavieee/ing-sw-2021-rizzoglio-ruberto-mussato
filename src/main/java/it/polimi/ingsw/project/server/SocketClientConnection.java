@@ -1,14 +1,16 @@
 package it.polimi.ingsw.project.server;
 
+import it.polimi.ingsw.project.model.playermove.Move;
 import it.polimi.ingsw.project.observer.*;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-public class SocketClientConnection extends Observable<String> implements ClientConnection, Runnable {
+public class SocketClientConnection extends Observable<Move> implements ClientConnection, Runnable {
     private Socket socket;
     private ObjectOutputStream out;
     private Server server;
@@ -66,6 +68,8 @@ public class SocketClientConnection extends Observable<String> implements Client
     public void run() {
         Scanner in;
         String name;
+        ObjectInputStream socketIn;
+        Object inputObject;
         try {
             in = new Scanner(socket.getInputStream());
             out = new ObjectOutputStream(socket.getOutputStream());
@@ -73,11 +77,12 @@ public class SocketClientConnection extends Observable<String> implements Client
             String read = in.nextLine();
             name = read;
             server.lobby(this, name);
+            socketIn = new ObjectInputStream(socket.getInputStream()); //forse va nel while
             while (isActive()) {
-                read = in.nextLine();
-                notify(read);
+                inputObject = socketIn.readObject();
+                notify((Move) inputObject);
             }
-        } catch (IOException | NoSuchElementException e) {
+        } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
             System.err.println("Error!" + e.getMessage());
         } finally {
             close();
