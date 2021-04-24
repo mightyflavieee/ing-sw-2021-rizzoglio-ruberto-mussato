@@ -150,8 +150,7 @@ public class Match {
   }
 
   public void performBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
-    this.cardContainer.removeBoughtCard(devCardID);
-    DevelopmentCard devCard = this.cardContainer.fetchCard(devCardID);
+    DevelopmentCard devCard = this.cardContainer.removeBoughtCard(devCardID);
     this.currentPlayer.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
   }
 
