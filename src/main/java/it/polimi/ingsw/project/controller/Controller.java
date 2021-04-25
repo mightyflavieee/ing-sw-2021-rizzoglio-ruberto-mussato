@@ -15,16 +15,21 @@ public class Controller implements Observer<PlayerMove> {
 
     private synchronized void performMove(PlayerMove playerMove){
         //TODO tipi di messaggi
-        if(!model.isPlayerTurn(playerMove.getPlayer())){
+        if (!model.isPlayerTurn(playerMove.getPlayer())) {
             playerMove.getView().reportError(gameMessage.wrongTurnMessage);
             return;
         }
-        if(!model.isFeasibleMove(playerMove)){
-          //  playerMove.getView().reportError(gameMessage.occupiedCellMessage);
-            return;
+        // it performs moves one by one
+        for(int i = 0; i < playerMove.getSize(); i++) {
+
+            if (!model.isFeasibleMove(playerMove, i)) {
+                //  playerMove.getView().reportError(gameMessage.occupiedCellMessage);
+                return;
+            }
+            model.performMove(playerMove, i);
         }
-        model.performMove(playerMove);
-        model.updateTurn();
+        // the turn is updated after all moves have been performed
+        model.updateTurn(playerMove);
     }
 
     @Override

@@ -16,19 +16,19 @@ public class Model extends Observable<MoveMessage> {
         return player.getNickname().equals(match.getCurrentPlayer().getNickname());
     }
 
-    public boolean isFeasibleMove(PlayerMove playerMove){
-        return playerMove.isFeasibleMove(this.match);
+    public boolean isFeasibleMove(PlayerMove playerMove, int i){
+        return playerMove.isFeasibleMove(this.match, i);
     }
 
-    public void performMove(PlayerMove playerMove){
-        playerMove.performMove(this.match);
+    public void performMove(PlayerMove playerMove, int i){
+        playerMove.performMove(this.match, i);
         this.match.end();
-        notify(new MoveMessage(playerMove.getPlayer(), this.match.clone())); //è il messaggio che verrà inviato a l player
     }
 
 
-    public void updateTurn(){
+    public void updateTurn(PlayerMove playerMove){
         match.updatePlayer();
+        notify(new MoveMessage(playerMove.getPlayer(), this.match.clone())); //è il messaggio che verrà inviato a l player
     }
     public Match getMatchCopy(){
         return this.match.clone();

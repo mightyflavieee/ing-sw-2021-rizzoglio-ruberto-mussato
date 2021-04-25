@@ -6,11 +6,11 @@ import it.polimi.ingsw.project.view.View;
 public class PlayerMove {
     private final Player player;
     private final View view;
-    private final Move move;
-    public PlayerMove(Player player, View view, Move move) {
+    private final MoveList moveList;
+    public PlayerMove(Player player, View view, MoveList moveList) {
         this.player = player;
         this.view = view;
-        this.move = move;
+        this.moveList = moveList;
     }
 
     public Player getPlayer() {
@@ -20,11 +20,17 @@ public class PlayerMove {
     public View getView() {
         return view;
     }
-
-    public void performMove(Match match){
-        this.move.performMove(match);
+    public int getSize(){
+        return this.moveList.getSize();
     }
-    public boolean isFeasibleMove(Match match) {
-        return this.move.isFeasibleMove(match);
+
+    public void performMove(Match match, int i){
+        this.moveList.get(i).performMove(match);
+    }
+    public boolean isFeasibleMove(Match match, int i) {
+        if(i < this.getSize()) {
+            return this.moveList.get(i).isFeasibleMove(match);
+        }
+        else return false;
     }
 }
