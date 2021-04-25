@@ -163,13 +163,11 @@ public class Match {
     this.currentPlayer.performDevCardProductionMove(devCardID, resourcesToEliminateWarehouse,
         resourcesToEliminateChest);
   }
-
-  public void soloGame() {
-    if (this.playerList.size() != 1) {
-      return;
-    } else {
-      this.actionTokenContainer.drawToken();
-    }
+  public boolean isFeasibleExtractActionTokenMove(){
+    return this.playerList.size() == 1;
+  }
+  public void performExtractActionTokenMove(){
+    this.actionTokenContainer.drawToken();
   }
 
   public void moveForwardBlack() {

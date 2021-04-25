@@ -22,7 +22,6 @@ public class Model extends Observable<MoveMessage> {
 
     public void performMove(PlayerMove playerMove){
         playerMove.performMove(this.match);
-        this.match.soloGame();
         this.match.end();
         notify(new MoveMessage(playerMove.getPlayer(), this.match.clone())); //è il messaggio che verrà inviato a l player
     }
