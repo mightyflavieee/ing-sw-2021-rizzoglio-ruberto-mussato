@@ -5,10 +5,11 @@ import it.polimi.ingsw.project.model.board.faithMap.tile.NormalTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.PapalCouncilTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FaithMap {
+public class FaithMap implements Serializable {
   private int markerPosition;
   private int blackMarkerPosition;
   private List<ActivableTile> faithTiles;

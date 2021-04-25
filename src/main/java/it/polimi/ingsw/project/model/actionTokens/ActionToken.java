@@ -1,5 +1,7 @@
 package it.polimi.ingsw.project.model.actionTokens;
 
-public interface ActionToken {
+import java.io.Serializable;
+
+public interface ActionToken extends Serializable {
     public void Action();
 }

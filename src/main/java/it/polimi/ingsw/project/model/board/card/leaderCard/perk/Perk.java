@@ -3,7 +3,9 @@ package it.polimi.ingsw.project.model.board.card.leaderCard.perk;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.resource.Resource;
 
-public abstract class Perk {
+import java.io.Serializable;
+
+public abstract class Perk implements Serializable {
   Resource resource;
   Board board;
 

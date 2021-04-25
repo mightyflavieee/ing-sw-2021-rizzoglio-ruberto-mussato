@@ -6,9 +6,10 @@ import it.polimi.ingsw.project.observer.Observable;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.*;
 
-public class Warehouse extends Observable<Warehouse> {
+public class Warehouse extends Observable<Warehouse> implements Serializable {
   private Map<ShelfFloor, List<Resource>> shelves;
   private Optional<Map<ResourceType, Integer>> extraDeposit;
   private Map<ResourceType, Integer> temporaryResources;

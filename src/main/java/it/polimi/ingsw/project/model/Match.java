@@ -9,9 +9,10 @@ import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Match {
+public class Match implements Serializable, Cloneable {
   private List<Player> playerList;
   private Market market;
   private CardContainer cardContainer;

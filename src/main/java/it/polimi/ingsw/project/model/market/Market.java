@@ -3,9 +3,10 @@ package it.polimi.ingsw.project.model.market;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Market {
+public class Market implements Cloneable, Serializable {
   // sarebbe da modificare inserendo la posizione delle biglie
   private Marble[][] tray;
   private Marble outsideMarble;

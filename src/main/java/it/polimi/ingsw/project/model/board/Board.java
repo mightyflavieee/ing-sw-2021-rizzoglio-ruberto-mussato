@@ -10,11 +10,12 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.*;
 
 import javax.management.relation.RelationTypeSupport;
 
-public class Board {
+public class Board implements Serializable, Cloneable {
   // TODO: fare clone di tutti gli oggetti
   private Map<ResourceType, Integer> chest;
   private Map<DevCardPosition, List<DevelopmentCard>> mapTray;

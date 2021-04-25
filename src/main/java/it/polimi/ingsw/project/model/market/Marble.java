@@ -1,6 +1,8 @@
 package it.polimi.ingsw.project.model.market;
 
-public class Marble {
+import java.io.Serializable;
+
+public class Marble implements Serializable {
   private MarbleType marble;
 
   public MarbleType getType() {

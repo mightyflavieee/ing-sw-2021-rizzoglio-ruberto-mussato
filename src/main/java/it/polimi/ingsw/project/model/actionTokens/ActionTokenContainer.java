@@ -2,12 +2,13 @@ package it.polimi.ingsw.project.model.actionTokens;
 
 import it.polimi.ingsw.project.model.board.card.CardColor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 // è un Singleton
-public class ActionTokenContainer {
+public class ActionTokenContainer implements Serializable {
     
     private List<ActionToken> actionTokens;
 

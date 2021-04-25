@@ -16,7 +16,7 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import java.io.*;
 import java.util.*;
 
-public class Player {
+public class Player implements Serializable, Cloneable {
   private Board board;
   private boolean isConnected;
   private String nickname;

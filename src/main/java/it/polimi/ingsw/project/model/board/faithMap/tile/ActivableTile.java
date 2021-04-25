@@ -1,5 +1,7 @@
 package it.polimi.ingsw.project.model.board.faithMap.tile;
 
-public interface ActivableTile {
+import java.io.Serializable;
+
+public interface ActivableTile extends Serializable {
      void activate();
 }

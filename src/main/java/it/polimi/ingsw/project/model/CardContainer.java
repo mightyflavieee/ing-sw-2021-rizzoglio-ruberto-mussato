@@ -7,9 +7,10 @@ import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class CardContainer {
+public class CardContainer implements Cloneable, Serializable {
   private Map<CardLevel,Map<CardColor,List<DevelopmentCard>>> cardContainer;
 
   public Map<CardLevel,Map<CardColor,List<DevelopmentCard>>> getCardContainer(){
