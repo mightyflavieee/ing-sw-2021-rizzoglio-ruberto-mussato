@@ -104,15 +104,15 @@ public class Match {
   }
 
   public final Match clone() {
-    // final Match result = new Object();
-    // result.actionTokenContainer = actionTokenContainer;
-    // result.cardContainer = cardContainer;
-    // result.currentPlayer = currentPlayer;
-    // result.isLastTurn = isLastTurn;
-    // result.isOver = isOver;
-    // result.market = market;
-    // result.playerList = playerList;
-    return null;
+    final Match result = new Match(this.playerList);
+    result.actionTokenContainer = actionTokenContainer;
+    result.cardContainer = cardContainer;
+     result.currentPlayer = currentPlayer;
+    result.isLastTurn = isLastTurn;
+     result.isOver = isOver;
+    result.market = market;
+    result.playerList = playerList;
+    return result;
   }
 
   public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID) {
