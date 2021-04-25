@@ -62,6 +62,10 @@ public class Match {
     return actionTokenContainer;
   }
 
+  public Player getCurrentPlayer() {
+    return currentPlayer;
+  }
+
   public boolean getIsLastTurn() {
     return this.isLastTurn;
   }
@@ -78,21 +82,6 @@ public class Match {
     // TODO devo far avanzare anche lorenzo?
     for (int i = 0; i < numDiscardedResources; i++) {
       playerList.stream().filter(x -> x.getNickname() != currentPlayer.getNickname()).forEach(Player::moveForward);
-    }
-  }
-
-  public void playGame() {
-    // da modificare per MVC
-    int playerIndex = 0;
-    Collections.shuffle(this.playerList);
-    currentPlayer = this.playerList.get(playerIndex);
-    while (true) {
-      boolean endGame = currentPlayer.playTurn(this.market, this.cardContainer, this.actionTokenContainer);
-      if (endGame) {
-        playLastTurn();
-        break;
-      }
-      this.updatePlayer();
     }
   }
 
@@ -117,18 +106,9 @@ public class Match {
     }
   }
 
-  public Player getCurrentPlayer() {
-    return currentPlayer;
-  }
-
   public void updatePlayer() {
     this.currentPlayer = this.nextPlayer();
   }
-
-  public boolean performMove(PlayerMove playerMove) {
-    // TODO
-    return false;
-  };
 
   public final Match clone() {
     // final Match result = new Object();
@@ -202,9 +182,5 @@ public class Match {
   public void moveForwardBlack() {
     if (24 == this.currentPlayer.moveForwardBlack()) // cioè se lorenzo è arrivato alla fine
       this.youLost();
-  }
-
-  public void performDiscardResourcesMove() {
-    this.currentPlayer.performDiscardResourcesMove();
   }
 }

@@ -70,53 +70,6 @@ public class Board {
     return mapTray.get(position).get(mapTray.get(position).size());
   }
 
-  // it activates production on the specific card the user selects
-  public boolean activateProductionOnCard() {
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    String chosenDevelopmentCard;
-    System.out.println("Which card do you want to activate?");
-    if (mapTray.get(DevCardPosition.Left).size() > 0) {
-      System.out.println("1. " + getLastFromPosition(DevCardPosition.Left) + ";");
-    }
-    if (mapTray.get(DevCardPosition.Center).size() > 0) {
-      System.out.println("2. " + getLastFromPosition(DevCardPosition.Center) + ";");
-    }
-    if (mapTray.get(DevCardPosition.Right).size() > 0) {
-      System.out.println("3. " + getLastFromPosition(DevCardPosition.Right) + ";");
-    }
-    Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
-    try {
-      chosenDevelopmentCard = reader.readLine();
-      switch (Integer.parseInt(chosenDevelopmentCard)) {
-      case 1:
-        manufacturedResources = getLastFromPosition(DevCardPosition.Left)
-            .useProduction(warehouse.mapAllContainedResources());
-        break;
-      case 2:
-        manufacturedResources = getLastFromPosition(DevCardPosition.Center)
-            .useProduction(warehouse.mapAllContainedResources());
-        break;
-      case 3:
-        manufacturedResources = getLastFromPosition(DevCardPosition.Right)
-            .useProduction(warehouse.mapAllContainedResources());
-        break;
-      default:
-        throw new Exception();
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    manufacturedResources.forEach((ResourceType type, Integer numberOfResources) -> {
-      if (this.chest.containsKey(type)) {
-        this.chest.put(type, this.chest.get(type) + numberOfResources);
-      } else {
-        this.chest.put(type, numberOfResources);
-      }
-    });
-
-    return true;
-  }
-
   // it extracts all the last cards for the production
   public Map<DevCardPosition, DevelopmentCard> getCurrentProductionCards() {
     Map<DevCardPosition, DevelopmentCard> productionCardsMap = new HashMap<>();
@@ -129,29 +82,6 @@ public class Board {
   // it moves the player forward on the faithMap
   public void moveForward() {
     faithMap.moveForward();
-  }
-
-  // it prompts to the user the cards with the id
-  private void chooseLeaderCard() {
-    System.out.println("Choose which card to eliminate:");
-    for (LeaderCard card : this.leaderCards) {
-      System.out.println((this.leaderCards.indexOf(card) + 1) + ". ID:" + card.getId());
-    }
-  }
-
-  // it removes the leaderCard
-  public void discardLeaderCard(boolean isInitialPhase) {
-    // TODO
-    if (isInitialPhase) {
-      for (int i = 0; i < 2; i++) {
-        chooseLeaderCard();
-        // removeLeaderCardFromList();
-      }
-    } else {
-      chooseLeaderCard();
-      // removeLeaderCardFromList();
-      moveForward();
-    }
   }
 
   public int papalCouncil(int numTile) {
@@ -389,9 +319,5 @@ public class Board {
     Map<ResourceType, Integer> manufacturedResources = card.getProduction().getManufacturedResources();
     this.warehouse.eliminateResources(resourcesToEliminateWarehouse);
     eliminateResourcesFromChest(resourcesToEliminateChest);
-  }
-
-  public void performDiscardResourcesMove() {
-    this.warehouse.discardResourcesInHand();
   }
 }

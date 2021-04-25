@@ -9,21 +9,23 @@ import java.util.Collections;
 import java.util.List;
 
 public class ActivateLeaderCardMove extends Move{
-    private String LeaderCardID;
-    private List<Resource> paidResources;
-    public ActivateLeaderCardMove(String LeaderCardID, List<Resource> paidResources) {
-        this.LeaderCardID = LeaderCardID;
-        Collections.copy(this.paidResources, paidResources);
+    private String leaderCardID;
+
+    public ActivateLeaderCardMove(String leaderCardID) {
+        this.leaderCardID = leaderCardID;
     }
+
     @Override
     public boolean isFeasibleMove(Match match){
-        //TODO
-        return false;
+        return true;
+                //match.isFeasibleActivateLeaderCardMove(this.leaderCardID);
     }
+
     @Override
     public void performMove(Match match){
-        //TODO
+        // match.performActivateLeaderCardMove(this.leaderCardID);
     }
+
     @Override
     public String toString(){
         //TODO

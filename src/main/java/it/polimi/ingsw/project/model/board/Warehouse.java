@@ -55,40 +55,12 @@ public class Warehouse extends Observable<Warehouse> {
   public Map<ShelfFloor, List<Resource>> getShelfs() {
     return shelves;
   }
-
-  private ShelfFloor chooseFloor() {
-    System.out.println("Which floor do you want to swap?\nOptions:\n1) First\n2) Second\n3) Third\n");
-    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    String chosenActionString = "";
-    while (true) {
-      try {
-        chosenActionString = reader.readLine();
-        switch (Integer.parseInt(chosenActionString)) {
-        case 1:
-          return ShelfFloor.First;
-        case 2:
-          return ShelfFloor.Second;
-        case 3:
-          return ShelfFloor.Third;
-        default:
-          throw new Exception();
-        }
-      } catch (Exception e) {
-        System.out.println("Please insert a valid integer from those options.");
-        e.printStackTrace();
-      }
-    }
+  public int getNumResourcesToDiscard() {
+    return this.numResourcesToDiscard;
   }
-
   private void discardResources(int numDiscardedResources) {
     this.numResourcesToDiscard = numDiscardedResources;
     super.notify(this);
-  }
-
-  private List<Resource> insertResourcesFromHand(List<Resource> handResources) {
-    ShelfFloor floorSelected;
-    floorSelected = chooseFloor();
-    return null;
   }
 
   public void insertResourcesInHand(List<Resource> resourcesToBeInserted) {
@@ -126,8 +98,7 @@ public class Warehouse extends Observable<Warehouse> {
   }
 
   // eliminates resource from shelf from the first floor with the same resource
-  // type
-  // as the one choose for the production
+  // type as the one choose for the production
   private void eliminateOneResource(ResourceType resourceType) {
     if (this.shelves.get(ShelfFloor.First).get(0).getType() == resourceType) {
       this.shelves.get(ShelfFloor.First).remove(this.shelves.get(ShelfFloor.First).size() - 1);
@@ -184,10 +155,6 @@ public class Warehouse extends Observable<Warehouse> {
     } else {
       System.out.println("Cannot use this resource for this perk production!");
     }
-  }
-
-  public int getNumResourcesToDiscard() {
-    return this.numResourcesToDiscard;
   }
 
   public void discardResourcesInHand() {
