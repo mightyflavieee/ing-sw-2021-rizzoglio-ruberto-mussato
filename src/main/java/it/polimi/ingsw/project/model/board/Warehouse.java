@@ -14,6 +14,7 @@ public class Warehouse extends Observable<Warehouse> {
   private Map<ResourceType, Integer> temporaryResources;
   private int numResourcesToDiscard;
 
+
   public Map<ResourceType, Integer> mapAllContainedResources() {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<ResourceType, Integer>();
     // getting resources from the entire warehouse

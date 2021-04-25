@@ -29,13 +29,6 @@ public class Match {
     }
   }
 
-  private void playLastTurn() {
-    int playerIndex = this.playerList.indexOf(currentPlayer);
-    while (playerIndex != this.playerList.size() - 1) {
-      currentPlayer = nextPlayer();
-      currentPlayer.playTurn(this.market, this.cardContainer, this.actionTokenContainer);
-    }
-  }
 
   private Player nextPlayer() {
     int playerIndex = this.playerList.indexOf(currentPlayer);
@@ -89,7 +82,7 @@ public class Match {
     currentPlayer.addVictoryPoints(newVictoryPoints);
   }
 
-  public void discard(CardColor cardColor) {
+  public void discardForActionToken(CardColor cardColor) {
     if (cardContainer.discard(cardColor))
       this.youLost();
   }
