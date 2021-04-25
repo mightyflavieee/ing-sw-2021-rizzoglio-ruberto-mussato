@@ -84,7 +84,7 @@ public class ProductionPerk extends Perk{
     List<Resource> resourceToBeInserted = new ArrayList<>();
     resourceToBeInserted.add(resourceToAdd);
     this.board.getWarehouse().eliminateResourceForProductionPerk(chooseWhichResourceToEliminate());
-    this.board.getWarehouse().insertResources(resourceToBeInserted);
+    this.board.getWarehouse().insertResourcesInHand(resourceToBeInserted);
     this.board.moveForward();
   }
 
