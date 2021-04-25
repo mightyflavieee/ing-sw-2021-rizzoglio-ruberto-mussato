@@ -1,11 +1,8 @@
 package it.polimi.ingsw.project.model.board;
 
-import it.polimi.ingsw.project.model.board.faithMap.tile.PapalCouncilTile;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.observer.Observable;
-import it.polimi.ingsw.project.observer.Observer;
-import it.polimi.ingsw.project.observer.custom.WarehouseObserver;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -222,13 +219,32 @@ public class Warehouse extends Observable<Warehouse> {
     return this.numResourcesToDiscard;
   }
 
-  // eliminates resources from the warehouse
-  public void eliminateResources(Map<ResourceType, Integer> resourcesToEliminateWarehouse) {
-    /*for (ShelfFloor floor : this.shelves.keySet()) {
-      for (ResourceType type : this.shelves.get(floor)) {
-
+  // eliminates resources from the warehouse (the correctness of the overall elimination must be done beforehand)
+  public void eliminateResources(Map<ResourceType, Integer> resourcesToEliminate) {
+    List<Resource> newFloorResources = null;
+    for (ShelfFloor floor : this.shelves.keySet()) {
+      if (this.shelves.get(floor).size() != 0) {
+        for (ResourceType type : resourcesToEliminate.keySet()) {
+          if (this.shelves.get(floor).get(0).getType() == type) {
+            // if the resources to eliminate are higher then the ones the floor can contain, I remove some of them
+            // first from the extraDeposit (so the correctness of the overall elimination must be done beforehand)
+            if (((resourcesToEliminate.get(type) > 1 && floor == ShelfFloor.First) ||
+                    (resourcesToEliminate.get(type) > 2 && floor == ShelfFloor.Second) ||
+                    (resourcesToEliminate.get(type) > 3 && floor == ShelfFloor.Third)) &&
+                    this.extraDeposit.isPresent()) {
+              int currentResourcesInExtraDeposit = this.extraDeposit.get().get(type);
+              int newExtraDepositResources = Math.max(currentResourcesInExtraDeposit - resourcesToEliminate.get(type), 0);
+              this.extraDeposit.get().put(type, newExtraDepositResources);
+              resourcesToEliminate.put(type, resourcesToEliminate.get(type) - currentResourcesInExtraDeposit);
+            }
+            // here the resources are simply removed from the floor
+            for (int i = 0; i < resourcesToEliminate.get(type)-1; i++) {
+              this.shelves.get(floor).remove(this.shelves.get(floor).get(i));
+            }
+          }
+        }
       }
-    }*/
+    }
   }
 }
 
