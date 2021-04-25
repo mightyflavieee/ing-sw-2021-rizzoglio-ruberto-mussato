@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.model;
 
 import it.polimi.ingsw.project.model.actionTokens.ActionTokenContainer;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
+import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.market.Market;
@@ -61,14 +62,16 @@ public class Match {
     return actionTokenContainer;
   }
 
-  public boolean getIsLastTurn() { return this.isLastTurn; }
+  public boolean getIsLastTurn() {
+    return this.isLastTurn;
+  }
 
   public void notifyFaithMapsForCouncil(int numTile) {
     // TODO devo notificare anche lorenzo?
     playerList.forEach(x -> x.papalCouncil(numTile));
     if (numTile == 3) {
-      this.isLastTurn = true; //qualcuno è arrivato all'ultima casella
-      }
+      this.isLastTurn = true; // qualcuno è arrivato all'ultima casella
+    }
   }
 
   public void notifyFaithMapsForDiscard(int numDiscardedResources) {
@@ -79,7 +82,7 @@ public class Match {
   }
 
   public void playGame() {
-    //da modificare per MVC
+    // da modificare per MVC
     int playerIndex = 0;
     Collections.shuffle(this.playerList);
     currentPlayer = this.playerList.get(playerIndex);
@@ -108,8 +111,8 @@ public class Match {
   }
 
   public void end() {
-    if (this.isLastTurn == true &&
-            this.currentPlayer.getNickname() == this.playerList.get(this.playerList.size()-1).getNickname()){
+    if (this.isLastTurn == true
+        && this.currentPlayer.getNickname() == this.playerList.get(this.playerList.size() - 1).getNickname()) {
       this.isOver = true;
     }
   }
@@ -118,63 +121,90 @@ public class Match {
     return currentPlayer;
   }
 
-  public void updatePlayer(){
+  public void updatePlayer() {
     this.currentPlayer = this.nextPlayer();
   }
 
-  public boolean performMove(PlayerMove playerMove){
+  public boolean performMove(PlayerMove playerMove) {
     // TODO
     return false;
   };
 
-  public Match clone(){
-    //TODO
+  public final Match clone() {
+    // final Match result = new Object();
+    // result.actionTokenContainer = actionTokenContainer;
+    // result.cardContainer = cardContainer;
+    // result.currentPlayer = currentPlayer;
+    // result.isLastTurn = isLastTurn;
+    // result.isOver = isOver;
+    // result.market = market;
+    // result.playerList = playerList;
     return null;
   }
 
-  public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID){
+  public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID) {
     return currentPlayer.isFeasibleDiscardLeaderCardMove(leaderCardID);
   }
 
-  public void performDiscardLeaderCardMove(String leaderCardID){
+  public void performDiscardLeaderCardMove(String leaderCardID) {
     this.currentPlayer.performDiscardLeaderCardMove(leaderCardID);
   }
 
-  public boolean isFeasibleBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+  public boolean isFeasibleChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
+    return currentPlayer.isFeasibleChangeShelvesMove(aFloor, bFloor);
+  }
+
+  public void performChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
+    this.currentPlayer.performChangeShelvesMove(aFloor, bFloor);
+  }
+
+  public boolean isFeasibleBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+      Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
     if (!this.cardContainer.isCardPresent(devCardID)) {
       return false;
     } else {
       DevelopmentCard devCard = this.cardContainer.fetchCard(devCardID);
-      return this.currentPlayer.isFeasibleBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
+      return this.currentPlayer.isFeasibleBuyDevCardMove(devCard, resourcesToEliminateWarehouse,
+          resourcesToEliminateChest, position);
     }
   }
 
-  public void performBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+  public void performBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+      Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
     DevelopmentCard devCard = this.cardContainer.removeBoughtCard(devCardID);
-    this.currentPlayer.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
+    this.currentPlayer.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest,
+        position);
   }
 
-  public boolean isFeasibleDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
+  public boolean isFeasibleDevCardProductionMove(String devCardID,
+      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
     if (!this.cardContainer.isCardPresent(devCardID)) {
-      return this.currentPlayer.isFeasibleDevCardProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateChest);
+      return this.currentPlayer.isFeasibleDevCardProductionMove(devCardID, resourcesToEliminateWarehouse,
+          resourcesToEliminateChest);
     }
     return false;
   }
 
-  public void performDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
-    this.currentPlayer.performDevCardProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateChest);
+  public void performDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+      Map<ResourceType, Integer> resourcesToEliminateChest) {
+    this.currentPlayer.performDevCardProductionMove(devCardID, resourcesToEliminateWarehouse,
+        resourcesToEliminateChest);
   }
 
-  public void soloGame(){
-    if(this.playerList.size() != 1){
+  public void soloGame() {
+    if (this.playerList.size() != 1) {
       return;
-    }else{
+    } else {
       this.actionTokenContainer.drawToken();
     }
   }
 
-  public void moveForwardBlack(){
-    if(24 == this.currentPlayer.moveForwardBlack()) //cioè se lorenzo è arrivato alla fine
+  public void moveForwardBlack() {
+    if (24 == this.currentPlayer.moveForwardBlack()) // cioè se lorenzo è arrivato alla fine
       this.youLost();
+  }
+
+  public void performDiscardResourcesMove() {
+    this.currentPlayer.performDiscardResourcesMove();
   }
 }

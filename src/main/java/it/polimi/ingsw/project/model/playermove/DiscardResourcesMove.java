@@ -15,12 +15,11 @@ public class DiscardResourcesMove extends Move{
     }
     @Override
     public boolean isFeasibleMove(Match match){
-        //TODO
-        return false;
+        return true;
     }
     @Override
     public void performMove(Match match){
-        //TODO
+        match.performDiscardResourcesMove();
     }
     @Override
     public String toString(){

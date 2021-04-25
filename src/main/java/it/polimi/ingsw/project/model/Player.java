@@ -3,6 +3,7 @@ package it.polimi.ingsw.project.model;
 import it.polimi.ingsw.project.model.actionTokens.ActionTokenContainer;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
+import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
@@ -120,7 +121,7 @@ public class Player {
       }
     }
     Warehouse warehouse = this.board.getWarehouse();
-    warehouse.insertResources(filteredResources);
+    warehouse.insertResourcesInHand(filteredResources);
     return true;
   }
 
@@ -209,32 +210,51 @@ public class Player {
     this.victoryPoints += board.papalCouncil(numTile);
   }
 
-  public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID){
+  public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID) {
     return this.board.isFeasibleDiscardLeaderCardMove(leaderCardID);
   }
 
-  public void performDiscardLeaderCardMove(String leaderCardID){
+  public void performDiscardLeaderCardMove(String leaderCardID) {
     this.board.performDiscardLeaderCardMove(leaderCardID);
   }
 
-  public boolean isFeasibleBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
-    return this.board.isFeasibleBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
+  public boolean isFeasibleChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
+    return this.board.isFeasibleChangeShelvesMove(aFloor, bFloor);
   }
 
-  public void performBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+  public void performChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
+    this.board.performChangeShelvesMove(aFloor, bFloor);
+  }
+
+  public boolean isFeasibleBuyDevCardMove(DevelopmentCard devCard,
+      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
+      DevCardPosition position) {
+    return this.board.isFeasibleBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest,
+        position);
+  }
+
+  public void performBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+      Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
     this.board.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
   }
 
-  public boolean isFeasibleDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
-    return this.board.isFeasibleDevCardProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateChest);
+  public boolean isFeasibleDevCardProductionMove(String devCardID,
+      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
+    return this.board.isFeasibleDevCardProductionMove(devCardID, resourcesToEliminateWarehouse,
+        resourcesToEliminateChest);
   }
 
-  public void performDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
+  public void performDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+      Map<ResourceType, Integer> resourcesToEliminateChest) {
     this.board.performDevCardProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateChest);
   }
 
-  public int moveForwardBlack(){
+  public int moveForwardBlack() {
     return this.board.moveForwardBlack();
+  }
+
+  public void performDiscardResourcesMove() {
+    this.board.performDiscardResourcesMove();
   }
 
 }
