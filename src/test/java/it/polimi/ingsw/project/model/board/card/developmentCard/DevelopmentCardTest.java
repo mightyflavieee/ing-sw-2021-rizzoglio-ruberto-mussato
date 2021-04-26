@@ -31,15 +31,15 @@ class DevelopmentCardTest {
     @Test
     void getRequiredResources() {
         Map<ResourceType, Integer> map, returnedMap;
-        map = new HashMap<ResourceType, Integer>();
+        map = new HashMap<>();
         map.put(ResourceType.Coin, 2);
         DevelopmentCard developmentCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, new Production(map,map),
                 "prova", map, 3);
         returnedMap = developmentCard.getRequiredResources();
-        assertTrue(returnedMap != null);
-        assertTrue(returnedMap.size() == map.size());
-        assertTrue(returnedMap.equals(map));
-        assertFalse(map == returnedMap);
+        assertNotNull(returnedMap);
+        assertEquals(returnedMap.size(), map.size());
+        assertEquals(returnedMap, map);
+        assertNotSame(map, returnedMap);
 
     }
 

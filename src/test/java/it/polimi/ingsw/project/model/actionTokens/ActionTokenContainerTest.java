@@ -12,8 +12,8 @@ class ActionTokenContainerTest {
     void getActionTokens() {
        ActionTokenContainer actionTokenContainer;
        actionTokenContainer = new ActionTokenContainer();
-       assertTrue(actionTokenContainer.getActionTokens() != null);
-       assertTrue(actionTokenContainer.getActionTokens().size() == 6);
+        assertNotNull(actionTokenContainer.getActionTokens());
+        assertEquals(6, actionTokenContainer.getActionTokens().size());
     }
 
     @Test
@@ -25,7 +25,7 @@ class ActionTokenContainerTest {
         oldList = actionTokenContainer.getActionTokens();
         actionTokenContainer.shuffle();
         newList = actionTokenContainer.getActionTokens();
-        assertTrue(oldList.size() == newList.size());
+        assertEquals(oldList.size(), newList.size());
         assertTrue(newList.containsAll(oldList));
         assertTrue(oldList.containsAll(newList));
         assertFalse(newList.get(0) == oldList.get(0)
@@ -46,11 +46,11 @@ class ActionTokenContainerTest {
         oldList = actionTokenContainer.getActionTokens();
         actionTokenContainer.drawToken();
         newList = actionTokenContainer.getActionTokens();
-        assertTrue(oldList.size() == newList.size());
+        assertEquals(oldList.size(), newList.size());
         assertTrue(newList.containsAll(oldList));
         assertTrue(oldList.containsAll(newList));
         for(int i = 0; i < newList.size(); i++){
-            assertTrue(oldList.get(i) == newList.get((i+5)% newList.size()));
+            assertSame(oldList.get(i), newList.get((i + 5) % newList.size()));
         }
 
     }

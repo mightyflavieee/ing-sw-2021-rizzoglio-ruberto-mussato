@@ -13,7 +13,7 @@ public class FaithMap implements Serializable {
   private int markerPosition;
   private int blackMarkerPosition;
   private List<ActivableTile> faithTiles;
-  private List<PapalFavourSlot> papalFavourSlots;
+  private final List<PapalFavourSlot> papalFavourSlots;
   //definire un costruttore (bisogna specificare ogni casella della mappa)
 
   public FaithMap() {

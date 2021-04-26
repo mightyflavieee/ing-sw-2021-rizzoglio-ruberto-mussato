@@ -20,8 +20,8 @@ class DiscountPerkTest {
         resource = new Resource(ResourceType.Coin);
         discountPerk = new DiscountPerk(resource, new Board());
         returnedResource = discountPerk.getResource();
-        assertTrue(returnedResource != resource);
-        assertTrue(returnedResource.getType() == resource.getType());
+        assertNotSame(returnedResource, resource);
+        assertSame(returnedResource.getType(), resource.getType());
 
     }
 }

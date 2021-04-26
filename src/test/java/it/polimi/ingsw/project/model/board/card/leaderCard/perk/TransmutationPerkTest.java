@@ -20,7 +20,7 @@ class TransmutationPerkTest {
         resource = new Resource(ResourceType.Coin);
         transmutationPerk = new TransmutationPerk(resource, new Board());
         returnedResource = transmutationPerk.getResource();
-        assertTrue(returnedResource != resource);
-        assertTrue(returnedResource.getType() == resource.getType());
+        assertNotSame(returnedResource, resource);
+        assertSame(returnedResource.getType(), resource.getType());
     }
 }

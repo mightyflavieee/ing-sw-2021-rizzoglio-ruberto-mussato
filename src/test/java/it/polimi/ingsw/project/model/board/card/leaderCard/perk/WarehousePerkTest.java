@@ -20,7 +20,7 @@ class WarehousePerkTest {
         resource = new Resource(ResourceType.Coin);
         warehousePerk = new WarehousePerk(resource, new Board());
         returnedResource = warehousePerk.getResource();
-        assertTrue(returnedResource != resource);
-        assertTrue(returnedResource.getType() == resource.getType());
+        assertNotSame(returnedResource, resource);
+        assertSame(returnedResource.getType(), resource.getType());
     }
 }
