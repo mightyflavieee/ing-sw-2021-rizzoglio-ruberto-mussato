@@ -38,37 +38,10 @@ public class DevelopmentCard extends Card {
     return this.id;
   }
 
-  public Map<ResourceType, Integer> getRequiredResources() { return this.requiredResources; }
+  public Map<ResourceType, Integer> getRequiredResources() {
+    Map<ResourceType, Integer> mapToReturn = new HashMap<>();
+    mapToReturn.putAll(this.requiredResources);
+    return mapToReturn; }
 
-  public Map<ResourceType, Integer> useProduction(Map<ResourceType,Integer> currentResourcesInWarehouse) {
-    Map<ResourceType, Integer> requiredResources = this.production.getRequiredResources();
-    List<ResourceType> resourceTypesRequired = new ArrayList<>();
-    Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
-
-    // adds to a temporary list 'resourceTypesRequired' the resource types needed for the production
-    if (requiredResources.get(ResourceType.Coin) > 0) {
-      resourceTypesRequired.add(ResourceType.Coin);
-    }
-    if (requiredResources.get(ResourceType.Stone) > 0) {
-      resourceTypesRequired.add(ResourceType.Stone);
-    }
-    if (requiredResources.get(ResourceType.Servant) > 0) {
-      resourceTypesRequired.add(ResourceType.Servant);
-    }
-    if (requiredResources.get(ResourceType.Shield) > 0) {
-      resourceTypesRequired.add(ResourceType.Shield);
-    }
-
-    // for each resource type needed for the production, verify if there is enough (or any) in the warehouse
-    for (ResourceType type: resourceTypesRequired) {
-      if (currentResourcesInWarehouse.get(type) == null || requiredResources.get(type) > currentResourcesInWarehouse.get(type) ) {
-        System.out.println("Not enough resources");
-        return manufacturedResources;
-      }
-    }
-
-    manufacturedResources = this.production.getManufacturedResources();
-    return manufacturedResources;
-  }
 
 }
