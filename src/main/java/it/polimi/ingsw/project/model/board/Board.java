@@ -3,7 +3,11 @@ package it.polimi.ingsw.project.model.board;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
+import it.polimi.ingsw.project.model.board.card.leaderCard.Status;
+import it.polimi.ingsw.project.model.board.card.leaderCard.perk.DiscountPerk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
+import it.polimi.ingsw.project.model.board.card.leaderCard.perk.TransmutationPerk;
+import it.polimi.ingsw.project.model.board.card.leaderCard.perk.WarehousePerk;
 import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
@@ -22,7 +26,7 @@ public class Board implements Serializable, Cloneable {
   private Warehouse warehouse;
   private List<LeaderCard> leaderCards;
   private FaithMap faithMap;
-  private List<Perk> activePerks = new ArrayList<>();
+  private Optional<Resource> discount;
 
   public final Board clone() {
     // TODO clone interne
@@ -32,7 +36,7 @@ public class Board implements Serializable, Cloneable {
     result.warehouse = warehouse;
     result.leaderCards = leaderCards;
     result.faithMap = faithMap;
-    result.activePerks = activePerks;
+    result.discount = discount;
     return result;
   }
 
@@ -48,12 +52,12 @@ public class Board implements Serializable, Cloneable {
     return warehouse;
   }
 
-  public List<Perk> getActivePerks() {
-    return activePerks;
-  }
-
   public List<LeaderCard> getLeaderCards() {
     return leaderCards;
+  }
+
+  public Optional<Resource> getDiscount() {
+    return discount;
   }
 
   // it serves the function mapAllResources to the
@@ -94,7 +98,7 @@ public class Board implements Serializable, Cloneable {
   }
 
   // fetches a DevelopmentCard by Id in the mapTray, returns null if not present
-  private DevelopmentCard fetchCardById(String devCardID) {
+  private DevelopmentCard fetchDevCardById(String devCardID) {
     for (DevCardPosition position : this.mapTray.keySet()) {
       for (DevelopmentCard card : this.mapTray.get(position)) {
         if (card.getId().equals(devCardID)) {
@@ -106,9 +110,20 @@ public class Board implements Serializable, Cloneable {
     return null;
   }
 
+  // fetches a LeaderCard by Id in this.leaderCards, returns null if not present
+  private LeaderCard fetchLeaderCardById(String leaderCardID) {
+    for (LeaderCard card : this.leaderCards) {
+      if (card.getId().equals(leaderCardID)) {
+        return card;
+      }
+    }
+    return null;
+  }
+
   // double checks if the resources indicated by the user are actually present
-  // usable in "isFeasible" and "perform" methods only
-  private boolean areEnoughResourcesPresent(Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+  // usable in "isFeasible" and "perform" methods only within BuyDevCardMove
+  // and DevCardProductionMove
+  private boolean areEnoughResourcesPresentForBuyAndProduction(Map<ResourceType, Integer> resourcesToEliminateWarehouse,
       Map<ResourceType, Integer> resourcesToEliminateChest) {
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
     if (resourcesToEliminateWarehouse != null) {
@@ -122,6 +137,35 @@ public class Board implements Serializable, Cloneable {
       for (ResourceType type : this.chest.keySet()) {
         if (this.chest.get(type) < resourcesToEliminateChest.get(type)) {
           return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  // checks if the resources indicated in the parameter are actually present
+  private boolean areEnoughResourcesPresent(Map<ResourceType, Integer> resourcesToCheck) {
+    Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
+    if (resourcesToCheck != null) {
+      for (ResourceType type : resourcesToCheck.keySet()) {
+        if (warehouseResources.containsKey(type)) {
+          if (this.chest.containsKey(type)) {
+            if ((warehouseResources.get(type) + this.chest.get(type)) < resourcesToCheck.get(type)) {
+              return false;
+            }
+          } else {
+            if (warehouseResources.get(type) < resourcesToCheck.get(type)) {
+              return false;
+            }
+          }
+        } else {
+          if (this.chest.containsKey(type)) {
+            if (this.chest.get(type) < resourcesToCheck.get(type)) {
+              return false;
+            }
+          } else {
+            return false;
+          }
         }
       }
     }
@@ -209,7 +253,7 @@ public class Board implements Serializable, Cloneable {
     boolean isOneLessCardLevelPresent = false;
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
     // double checks if the resources indicated by the user are actually present
-    if (!areEnoughResourcesPresent(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
+    if (!areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
       return false;
     }
     // for each type of resource required, if there isn't enough resources, the move
@@ -279,8 +323,7 @@ public class Board implements Serializable, Cloneable {
   }
 
   // puts the bought DevelopmentCard in the mapTray and eliminates the required
-  // resources from the warehouse or
-  // the strongbox (this.chest)
+  // resources from the warehouse or the strongbox (this.chest)
   public void performBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
       Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
     this.mapTray.get(position).add(devCard);
@@ -288,8 +331,7 @@ public class Board implements Serializable, Cloneable {
     eliminateResourcesFromChest(resourcesToEliminateChest);
   }
 
-  // checks if the current player can activate the production from the selected
-  // card
+  // checks if the current player can activate the production from the selected card
   public boolean isFeasibleDevCardProductionMove(String devCardID,
       Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
@@ -308,7 +350,7 @@ public class Board implements Serializable, Cloneable {
       return false;
     }
     // double checks if the resources indicated by the user are actually present
-    if (!areEnoughResourcesPresent(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
+    if (!areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
       return false;
     }
     return true;
@@ -316,9 +358,72 @@ public class Board implements Serializable, Cloneable {
 
   public void performDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
       Map<ResourceType, Integer> resourcesToEliminateChest) {
-    DevelopmentCard card = fetchCardById(devCardID);
+    DevelopmentCard card = fetchDevCardById(devCardID);
     Map<ResourceType, Integer> manufacturedResources = card.getProduction().getManufacturedResources();
     this.warehouse.eliminateResources(resourcesToEliminateWarehouse);
     eliminateResourcesFromChest(resourcesToEliminateChest);
+  }
+
+  // checks if the current player can activate a LeaderCard
+  public boolean isFeasibleActivateLeaderCardMove(String leaderCardID) {
+    LeaderCard card = fetchLeaderCardById(leaderCardID);
+    boolean isDevCardLevelCorrect = false;
+    CardLevel currentCardLevel = null;
+    // checks if such a card is present in the player hand and if so checks if it is not already active
+    if (card != null) {
+      if (card.getStatus() == Status.Active) {
+        return false;
+      }
+    } else {
+      return false;
+    }
+    // checks if there is a card with the required (or higher) CardLevel
+    // if the LeaderCard requires levels to be activated
+    if (card.getRequiredDevCardLevel() != null) {
+      int requiredDevCardLevel = 0;
+      if (card.getRequiredDevCardLevel() == CardLevel.One) { requiredDevCardLevel = 1; }
+      if (card.getRequiredDevCardLevel() == CardLevel.Two) { requiredDevCardLevel = 2; }
+      if (card.getRequiredDevCardLevel() == CardLevel.Three) { requiredDevCardLevel = 3; }
+      for (DevCardPosition position : this.mapTray.keySet()) {
+        if (this.mapTray.get(position).size() > 0) {
+          currentCardLevel = this.mapTray.get(position).get(this.mapTray.get(position).size() - 1).getLevel();
+        }
+        int currentIntCardLevel = 0;
+        if (currentCardLevel == CardLevel.One) { currentIntCardLevel = 1; }
+        if (currentCardLevel == CardLevel.Two) { currentIntCardLevel = 2; }
+        if (currentCardLevel == CardLevel.Three) { currentIntCardLevel = 3; }
+        if (currentIntCardLevel >= requiredDevCardLevel) {
+          isDevCardLevelCorrect = true;
+        }
+      }
+      if (!isDevCardLevelCorrect) { return false; }
+    }
+    // checks if there enough resources in the warehouse and the strongbox
+    // if the LeaderCard requires resources to be activated
+    if (card.getRequiredResources() != null) {
+      if (!areEnoughResourcesPresent(card.getRequiredResources())) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // activates a LeaderCard and its respective Perk
+  public void performActivateLeaderCardMove(String leaderCardID) {
+    for (LeaderCard card : this.leaderCards) {
+      if (card.getId().equals(leaderCardID)) {
+        card.activateCard();
+        if (card.getPerk() instanceof WarehousePerk) {
+          this.warehouse.createExtraDeposit(card.getPerk().getResource());
+        }
+        if (card.getPerk() instanceof DiscountPerk) {
+          this.discount = Optional.of(card.getPerk().getResource());
+        }
+        if (card.getPerk() instanceof TransmutationPerk) {
+          // attivare transmutation
+        }
+        break;
+      }
+    }
   }
 }

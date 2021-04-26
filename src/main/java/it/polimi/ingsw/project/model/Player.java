@@ -141,4 +141,12 @@ public class Player implements Serializable, Cloneable {
     this.board.performDevCardProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateChest);
   }
 
+  public boolean isFeasibleActivateLeaderCardMove(String leaderCardID) {
+    return this.board.isFeasibleActivateLeaderCardMove(leaderCardID);
+  }
+
+  public void performActivateLeaderCardMove(String leaderCardID) {
+    this.board.performActivateLeaderCardMove(leaderCardID);
+  }
+
 }

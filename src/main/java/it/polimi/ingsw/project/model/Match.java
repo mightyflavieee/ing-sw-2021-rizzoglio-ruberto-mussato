@@ -164,11 +164,21 @@ public class Match implements Serializable, Cloneable {
     this.currentPlayer.performDevCardProductionMove(devCardID, resourcesToEliminateWarehouse,
         resourcesToEliminateChest);
   }
+
   public boolean isFeasibleExtractActionTokenMove(){
     return this.playerList.size() == 1;
   }
+
   public void performExtractActionTokenMove(){
     this.actionTokenContainer.drawToken();
+  }
+
+  public boolean isFeasibleActivateLeaderCardMove(String leaderCardID) {
+    return this.currentPlayer.isFeasibleActivateLeaderCardMove(leaderCardID);
+  }
+
+  public void performActivateLeaderCardMove(String leaderCardID) {
+    this.currentPlayer.performActivateLeaderCardMove(leaderCardID);
   }
 
   public void moveForwardBlack() {

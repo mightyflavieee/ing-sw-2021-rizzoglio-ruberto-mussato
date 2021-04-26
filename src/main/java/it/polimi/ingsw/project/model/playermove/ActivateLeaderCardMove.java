@@ -17,13 +17,12 @@ public class ActivateLeaderCardMove extends Move{
 
     @Override
     public boolean isFeasibleMove(Match match){
-        return true;
-                //match.isFeasibleActivateLeaderCardMove(this.leaderCardID);
+        return match.isFeasibleActivateLeaderCardMove(this.leaderCardID);
     }
 
     @Override
     public void performMove(Match match){
-        // match.performActivateLeaderCardMove(this.leaderCardID);
+        match.performActivateLeaderCardMove(this.leaderCardID);
     }
 
     @Override
