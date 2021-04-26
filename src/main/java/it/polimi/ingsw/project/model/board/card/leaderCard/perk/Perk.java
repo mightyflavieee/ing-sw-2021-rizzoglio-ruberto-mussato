@@ -15,8 +15,10 @@ public abstract class Perk implements Serializable {
   }
 
   public Resource getResource() {
-    return resource;
+    return new Resource(this.resource.getType());
   }
 
-  public void usePerk(Resource resource){}
+  public void usePerk(Resource resource){
+    //TODO da implementare
+  }
 }
