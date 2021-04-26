@@ -26,9 +26,12 @@ public class Model extends Observable<MoveMessage> {
     }
 
 
-    public void updateTurn(PlayerMove playerMove){
+    public void updateTurn(){
         match.updatePlayer();
-        notify(new MoveMessage(playerMove.getPlayer(), this.match.clone())); //è il messaggio che verrà inviato a l player
+        notify(new MoveMessage(this.match.clone())); //è il messaggio che verrà inviato a l player
+    }
+    public void notifyPartialMove(){
+        notify(new MoveMessage(this.match.clone())); //è il messaggio che verrà inviato a l player
     }
     public Match getMatchCopy(){
         return this.match.clone();

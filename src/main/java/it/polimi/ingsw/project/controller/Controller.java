@@ -23,13 +23,14 @@ public class Controller implements Observer<PlayerMove> {
         for(int i = 0; i < playerMove.getSize(); i++) {
 
             if (!model.isFeasibleMove(playerMove, i)) {
+                model.notifyPartialMove();
                 //  playerMove.getView().reportError(gameMessage.occupiedCellMessage);
                 return;
             }
             model.performMove(playerMove, i);
         }
         // the turn is updated after all moves have been performed
-        model.updateTurn(playerMove);
+        model.updateTurn();
     }
 
     @Override

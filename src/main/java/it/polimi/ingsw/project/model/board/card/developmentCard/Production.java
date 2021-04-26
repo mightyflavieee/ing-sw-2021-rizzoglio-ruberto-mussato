@@ -8,11 +8,20 @@ public class Production {
     private Map<ResourceType, Integer> requiredResources;
     private Map<ResourceType, Integer> manufacturedResources;
 
+    public Production(Map<ResourceType, Integer> requiredResources, Map<ResourceType, Integer> manufacturedResources) {
+        this.requiredResources = requiredResources;
+        this.manufacturedResources = manufacturedResources;
+    }
+
     public Map<ResourceType, Integer> getManufacturedResources() {
-        return manufacturedResources;
+        Map<ResourceType, Integer> mapToReturn = new HashMap<>();
+        mapToReturn.putAll(this.manufacturedResources);
+        return mapToReturn;
     }
 
     public Map<ResourceType, Integer> getRequiredResources() {
-        return requiredResources;
+        Map<ResourceType, Integer> mapToReturn = new HashMap<>();
+        mapToReturn.putAll(this.requiredResources);
+        return mapToReturn;
     }
 }
