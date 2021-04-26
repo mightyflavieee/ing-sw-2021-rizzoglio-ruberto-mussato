@@ -14,7 +14,8 @@ public class DevelopmentCard extends Card {
   final private String id;
   final private Map<ResourceType, Integer> requiredResources;
 
-  public DevelopmentCard(CardColor color, CardLevel level, Production production, String id, Map<ResourceType, Integer> requiredResources) {
+  public DevelopmentCard(CardColor color, CardLevel level, Production production, String id, Map<ResourceType, Integer> requiredResources, int victoryPoints) {
+    super(victoryPoints);
     this.color = color;
     this.level = level;
     this.production = production;

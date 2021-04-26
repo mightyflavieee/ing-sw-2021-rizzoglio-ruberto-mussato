@@ -34,7 +34,7 @@ class DevelopmentCardTest {
         map = new HashMap<ResourceType, Integer>();
         map.put(ResourceType.Coin, 2);
         DevelopmentCard developmentCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, new Production(map,map),
-                "prova", map);
+                "prova", map, 3);
         returnedMap = developmentCard.getRequiredResources();
         assertTrue(returnedMap != null);
         assertTrue(returnedMap.size() == map.size());

@@ -13,7 +13,8 @@ public class LeaderCard extends Card {
   private Status status;
   private String id;
 
-  public LeaderCard(String id, Perk assignedPerk) {
+  public LeaderCard(String id, Perk assignedPerk, int victoryPoints) {
+    super(victoryPoints);
     this.id = id;
     this.perk = assignedPerk;
     this.status = Status.Inactive;

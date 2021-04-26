@@ -14,11 +14,15 @@ public abstract class Card extends Observable<Perk> implements Serializable {
     return victoryPoints;
   }
 
+  public Card(int victoryPoints) {
+    this.victoryPoints = victoryPoints;
+  }
+
   public List<Object> getResourcesRequired(){
     return resourcesRequired;
   }
   public void notify(Perk perk){
-    //è necessiario?
+    //è necessario?
     super.notify(perk);
   }
 }
