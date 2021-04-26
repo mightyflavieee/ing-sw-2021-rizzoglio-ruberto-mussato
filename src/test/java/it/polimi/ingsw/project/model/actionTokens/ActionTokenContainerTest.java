@@ -1,0 +1,57 @@
+package it.polimi.ingsw.project.model.actionTokens;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class ActionTokenContainerTest {
+
+    @Test
+    void getActionTokens() {
+       ActionTokenContainer actionTokenContainer;
+       actionTokenContainer = new ActionTokenContainer();
+       assertTrue(actionTokenContainer.getActionTokens() != null);
+       assertTrue(actionTokenContainer.getActionTokens().size() == 6);
+    }
+
+    @Test
+    void shuffle() {
+        ActionTokenContainer actionTokenContainer;
+        List<ActionToken> oldList;
+        List<ActionToken> newList;
+        actionTokenContainer = new ActionTokenContainer();
+        oldList = actionTokenContainer.getActionTokens();
+        actionTokenContainer.shuffle();
+        newList = actionTokenContainer.getActionTokens();
+        assertTrue(oldList.size() == newList.size());
+        assertTrue(newList.containsAll(oldList));
+        assertTrue(oldList.containsAll(newList));
+        assertFalse(newList.get(0) == oldList.get(0)
+                    && newList.get(1) == oldList.get(1)
+                    && newList.get(2) == oldList.get(2)
+                    && newList.get(3) == oldList.get(3)
+                    && newList.get(4) == oldList.get(4)
+                    && newList.get(5) == oldList.get(5));
+
+    }
+
+    @Test
+    void drawToken() {
+        ActionTokenContainer actionTokenContainer;
+        List<ActionToken> oldList;
+        List<ActionToken> newList;
+        actionTokenContainer = new ActionTokenContainer();
+        oldList = actionTokenContainer.getActionTokens();
+        actionTokenContainer.drawToken();
+        newList = actionTokenContainer.getActionTokens();
+        assertTrue(oldList.size() == newList.size());
+        assertTrue(newList.containsAll(oldList));
+        assertTrue(oldList.containsAll(newList));
+        for(int i = 0; i < newList.size(); i++){
+            assertTrue(oldList.get(i) == newList.get((i+5)% newList.size()));
+        }
+
+    }
+}
