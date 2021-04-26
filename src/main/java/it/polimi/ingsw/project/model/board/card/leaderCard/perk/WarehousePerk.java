@@ -10,7 +10,7 @@ public class WarehousePerk extends Perk{
 
   @Override
   public void usePerk(Resource resource) {
-    this.board.getWarehouse().addExtraDeposit(this.resource);
+    this.board.getWarehouse().createExtraDeposit(this.resource);
   }
 
   public Resource getResource() {

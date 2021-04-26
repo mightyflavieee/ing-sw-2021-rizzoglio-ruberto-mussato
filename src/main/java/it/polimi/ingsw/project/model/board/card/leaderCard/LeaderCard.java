@@ -1,22 +1,39 @@
 package it.polimi.ingsw.project.model.board.card.leaderCard;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import it.polimi.ingsw.project.model.board.card.Card;
+import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.ProductionPerk;
-import it.polimi.ingsw.project.observer.custom.LeaderCardObserver;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 
 
 public class LeaderCard extends Card {
+  final private String id;
   final private Perk perk;
+  final private Map<ResourceType, Integer> requiredResources;
+  final private CardLevel requiredDevCardLevel;
   private Status status;
-  private String id;
 
-  public LeaderCard(String id, Perk assignedPerk, int victoryPoints) {
+  // creates a LeaderCard activable with a requirement in resources
+  public LeaderCard(String id, Perk assignedPerk, int victoryPoints, Map<ResourceType, Integer> requiredResources) {
     super(victoryPoints);
     this.id = id;
     this.perk = assignedPerk;
+    this.requiredResources = requiredResources;
+    this.requiredDevCardLevel = null;
+    this.status = Status.Inactive;
+  }
+
+  // creates a LeaderCard activable with a requirement in development card levels
+  public LeaderCard(String id, Perk assignedPerk, int victoryPoints, CardLevel requiredDevCardLevel) {
+    super(victoryPoints);
+    this.id = id;
+    this.perk = assignedPerk;
+    this.requiredResources = null;
+    this.requiredDevCardLevel = requiredDevCardLevel;
     this.status = Status.Inactive;
   }
 
@@ -31,6 +48,10 @@ public class LeaderCard extends Card {
   public String getId() {
     return id;
   }
+
+  public Map<ResourceType, Integer> getRequiredResources() { return requiredResources; }
+
+  public CardLevel getRequiredDevCardLevel() { return requiredDevCardLevel; }
 
   // changes the status of the it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard to Active
   public void activateCard() {
