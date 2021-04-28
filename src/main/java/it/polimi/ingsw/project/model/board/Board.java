@@ -66,17 +66,14 @@ public class Board implements Serializable, Cloneable {
     return transmutation;
   }
 
-  // it serves the function mapAllResources to the
-  // it.polimi.ingsw.project.model.CardContainer
+  // it serves the function mapAllResources to the CardContainer
   public Map<ResourceType, Integer> mapAllResources() {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<>();
     currentResourcesMap = warehouse.mapAllContainedResources();
     return currentResourcesMap;
   }
 
-  // it extracts the last
-  // it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard in
-  // the list at that position
+  // it extracts the last DevelopmentCard in from the mapTray at that position
   private DevelopmentCard getLastFromPosition(DevCardPosition position) {
     return mapTray.get(position).get(mapTray.get(position).size()-1);
   }
@@ -199,6 +196,16 @@ public class Board implements Serializable, Cloneable {
     return false;
   }
 
+  public void performDiscardLeaderCardMove(String leaderCardID) {
+    this.moveForward();
+    for (int i = 0; i < this.leaderCards.size(); i++) {
+      if (this.leaderCards.get(i).getId().equals(leaderCardID)) {
+        this.leaderCards.remove(i);
+        return;
+      }
+    }
+  }
+
   public boolean isFeasibleChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
     Map<ShelfFloor, List<Resource>> currentWarehouse = this.warehouse.getShelfs();
     switch (aFloor) {
@@ -239,16 +246,6 @@ public class Board implements Serializable, Cloneable {
 
   public void performChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
     this.warehouse.swapShelves(aFloor, bFloor);
-  }
-
-  public void performDiscardLeaderCardMove(String leaderCardID) {
-    this.moveForward();
-    for (int i = 0; i < this.leaderCards.size(); i++) {
-      if (this.leaderCards.get(i).getId().equals(leaderCardID)) {
-        this.leaderCards.remove(i);
-        return;
-      }
-    }
   }
 
   // checks if the current player can buy the card he/she selected
