@@ -26,7 +26,8 @@ public class Board implements Serializable, Cloneable {
   private Warehouse warehouse;
   private List<LeaderCard> leaderCards;
   private FaithMap faithMap;
-  private Optional<Resource> discount;
+  private Optional<List<ResourceType>> discounts;
+  private Optional<ResourceType> transmutation;
 
   public final Board clone() {
     // TODO clone interne
@@ -36,28 +37,33 @@ public class Board implements Serializable, Cloneable {
     result.warehouse = warehouse;
     result.leaderCards = leaderCards;
     result.faithMap = faithMap;
-    result.discount = discount;
+    result.discounts = discounts;
+    result.transmutation = transmutation;
     return result;
   }
 
   public Map<DevCardPosition, List<DevelopmentCard>> getMapTray() {
-    return mapTray;
+    return this.mapTray;
   }
 
   public Map<ResourceType, Integer> getChest() {
-    return chest;
+    return this.chest;
   }
 
   public Warehouse getWarehouse() {
-    return warehouse;
+    return this.warehouse;
   }
 
   public List<LeaderCard> getLeaderCards() {
-    return leaderCards;
+    return this.leaderCards;
   }
 
-  public Optional<Resource> getDiscount() {
-    return discount;
+  public Optional<List<ResourceType>> getDiscounts() {
+    return this.discounts;
+  }
+
+  public Optional<ResourceType> getTransmutation() {
+    return transmutation;
   }
 
   // it serves the function mapAllResources to the
@@ -251,6 +257,7 @@ public class Board implements Serializable, Cloneable {
       DevCardPosition position) {
     int intLevel = 0;
     boolean isOneLessCardLevelPresent = false;
+    boolean isDiscountPresent = false;
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
     // double checks if the resources indicated by the user are actually present
     if (!areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
@@ -259,21 +266,52 @@ public class Board implements Serializable, Cloneable {
     // for each type of resource required, if there isn't enough resources, the move
     // is not feasible (return false)
     for (ResourceType type : devCard.getRequiredResources().keySet()) {
+      // verifies if there are any discount on the current ResourceType
+      isDiscountPresent = false;
+      if (this.discounts.isPresent()) {
+        for (ResourceType discountType : this.discounts.get()) {
+          if (discountType.equals(type)) {
+            isDiscountPresent = true;
+            break;
+          }
+        }
+      }
+      // verifies if there are enough resources to buy the DevelopmentCard
+      // (takes into account the eventual discounts)
       if (resourcesToEliminateWarehouse.containsKey(type)) {
         if (resourcesToEliminateChest.containsKey(type)) {
-          if (devCard.getRequiredResources()
-              .get(type) > (resourcesToEliminateWarehouse.get(type) + resourcesToEliminateChest.get(type))) {
-            return false;
+          if (isDiscountPresent) {
+            if ((devCard.getRequiredResources()
+                    .get(type) - 1) > (resourcesToEliminateWarehouse.get(type) + resourcesToEliminateChest.get(type))) {
+              return false;
+            }
+          } else {
+            if (devCard.getRequiredResources()
+                    .get(type) > (resourcesToEliminateWarehouse.get(type) + resourcesToEliminateChest.get(type))) {
+              return false;
+            }
           }
         } else {
-          if (devCard.getRequiredResources().get(type) > resourcesToEliminateWarehouse.get(type)) {
-            return false;
+          if (isDiscountPresent) {
+            if ((devCard.getRequiredResources().get(type) - 1) > resourcesToEliminateWarehouse.get(type)) {
+              return false;
+            }
+          } else {
+            if (devCard.getRequiredResources().get(type) > resourcesToEliminateWarehouse.get(type)) {
+              return false;
+            }
           }
         }
       } else {
         if (resourcesToEliminateChest.containsKey(type)) {
-          if (devCard.getRequiredResources().get(type) > resourcesToEliminateChest.get(type)) {
-            return false;
+          if (isDiscountPresent) {
+            if ((devCard.getRequiredResources().get(type) - 1) > resourcesToEliminateChest.get(type)) {
+              return false;
+            }
+          } else {
+            if (devCard.getRequiredResources().get(type) > resourcesToEliminateChest.get(type)) {
+              return false;
+            }
           }
         } else {
           return false;
@@ -281,9 +319,8 @@ public class Board implements Serializable, Cloneable {
       }
     }
     // checks if there is a card of one level less (or none at all if the card is
-    // level 1) than the card the player
-    // wants to buy on the position indicated by the player (return false if there
-    // isn't)
+    // level 1) than the card the player wants to buy on the position indicated
+    // by the player (return false if there isn't)
     if (this.mapTray.get(position).size() == 0) {
       if (devCard.getLevel() != CardLevel.One) {
         return false;
@@ -417,10 +454,16 @@ public class Board implements Serializable, Cloneable {
           this.warehouse.createExtraDeposit(card.getPerk().getResource());
         }
         if (card.getPerk() instanceof DiscountPerk) {
-          this.discount = Optional.of(card.getPerk().getResource());
+          if (this.discounts.isPresent()) {
+            this.discounts.get().add(card.getPerk().getResource().getType());
+          } else {
+            List<ResourceType> discounts = new ArrayList<>();
+            discounts.add(card.getPerk().getResource().getType());
+            this.discounts = Optional.of(discounts);
+          }
         }
         if (card.getPerk() instanceof TransmutationPerk) {
-          // attivare transmutation
+          this.transmutation = Optional.of(card.getPerk().getResource().getType());
         }
         break;
       }
