@@ -10,12 +10,12 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Warehouse extends Observable<Warehouse> implements Serializable {
-  private Map<ShelfFloor, List<Resource>> shelves;
-  private Optional<Map<ResourceType, Integer>> extraDeposit;
+  private Map<ShelfFloor, List<Resource>> shelves = new HashMap<>();
+  private Optional<Map<ResourceType, Integer>> extraDeposit = Optional.empty();
   private Map<ResourceType, Integer> temporaryResources;
   private int numResourcesToDiscard;
 
-
+  //returns ALL resources presents in the warehouse
   public Map<ResourceType, Integer> mapAllContainedResources() {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<ResourceType, Integer>();
     // getting resources from the entire warehouse
@@ -36,6 +36,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     return currentResourcesMap;
   }
 
+  //helper for listToMapResources
   private void mapResourcesHelper(Map<ResourceType, Integer> currentResourcesMap, List<Resource> listOfResources) {
     listOfResources.forEach((Resource resource) -> {
       ResourceType type = resource.getType();
@@ -47,8 +48,8 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
       }
     });
   }
-
-  public Map<ResourceType, Integer> mapResources(List<Resource> inputResourcesList) {
+  //transform a list to a map
+  public Map<ResourceType, Integer> listToMapResources(List<Resource> inputResourcesList) {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<ResourceType, Integer>();
     mapResourcesHelper(currentResourcesMap, inputResourcesList);
     return currentResourcesMap;
@@ -66,7 +67,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
   }
 
   public void insertResourcesInHand(List<Resource> resourcesToBeInserted) {
-    this.temporaryResources = mapResources(resourcesToBeInserted);
+    this.temporaryResources = listToMapResources(resourcesToBeInserted);
   }
 
   public void swapShelves(ShelfFloor swapper, ShelfFloor swappee) {

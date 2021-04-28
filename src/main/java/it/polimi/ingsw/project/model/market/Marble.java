@@ -3,9 +3,13 @@ package it.polimi.ingsw.project.model.market;
 import java.io.Serializable;
 
 public class Marble implements Serializable {
-  private MarbleType marble;
+  private MarbleType marbleType;
+
+  public Marble(MarbleType marbleType) {
+    this.marbleType = marbleType;
+  }
 
   public MarbleType getType() {
-    return marble;
+    return this.marbleType;
   }
 }

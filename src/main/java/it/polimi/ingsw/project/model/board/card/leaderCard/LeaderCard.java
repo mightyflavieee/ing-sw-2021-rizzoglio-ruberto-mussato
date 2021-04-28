@@ -68,7 +68,6 @@ public class LeaderCard extends Card {
     } else {
       this.status = Status.Active;
       this.perk.usePerk(this.perk.getResource());
-      super.notify(this.perk);
     }
   }
 

@@ -6,7 +6,7 @@ import it.polimi.ingsw.project.observer.Observable;
 import java.io.Serializable;
 import java.util.*;
 
-public abstract class Card extends Observable<Perk> implements Serializable {
+public abstract class Card implements Serializable {
   private int victoryPoints;
   private List<Object> resourcesRequired;
   
@@ -20,9 +20,5 @@ public abstract class Card extends Observable<Perk> implements Serializable {
 
   public List<Object> getResourcesRequired(){
     return resourcesRequired;
-  }
-  public void notify(Perk perk){
-    //è necessario?
-    super.notify(perk);
   }
 }

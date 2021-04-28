@@ -72,7 +72,7 @@ public class Board implements Serializable, Cloneable {
   // it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard in
   // the list at that position
   private DevelopmentCard getLastFromPosition(DevCardPosition position) {
-    return mapTray.get(position).get(mapTray.get(position).size());
+    return mapTray.get(position).get(mapTray.get(position).size()-1);
   }
 
   // it extracts all the last cards for the production

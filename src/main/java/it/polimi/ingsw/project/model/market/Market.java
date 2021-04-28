@@ -10,7 +10,7 @@ public class Market implements Cloneable, Serializable {
   // sarebbe da modificare inserendo la posizione delle biglie
   private Marble[][] tray;
   private Marble outsideMarble;
-
+  //TODO costruttore
   public Marble[][] getTray() {
     return tray;
   }
