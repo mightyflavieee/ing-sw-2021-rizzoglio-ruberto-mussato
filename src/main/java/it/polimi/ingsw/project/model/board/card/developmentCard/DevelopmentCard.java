@@ -42,7 +42,6 @@ public class DevelopmentCard extends Card {
   public Map<ResourceType, Integer> getRequiredResources() {
     Map<ResourceType, Integer> mapToReturn = new HashMap<>();
     mapToReturn.putAll(this.requiredResources);
-    return mapToReturn; }
-
-
+    return mapToReturn;
+  }
 }

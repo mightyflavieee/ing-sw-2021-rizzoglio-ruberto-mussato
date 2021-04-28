@@ -53,29 +53,35 @@ public class LeaderCard extends Card {
 
   public CardLevel getRequiredDevCardLevel() { return requiredDevCardLevel; }
 
-  // changes the status of the it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard to Active
+  // changes the status of the LeaderCard to Active
   public void activateCard() {
-    if (this.status == Status.Active) {
-      // if the perk is reusable (only it.polimi.ingsw.project.model.board.card.leaderCard.perk.ProductionPerk),
-      // utilize the perk again
-      if (this.perk instanceof ProductionPerk) {
-        this.perk.usePerk(this.perk.getResource());
-      } else {
-        // if the perk is not a it.polimi.ingsw.project.model.board.card.leaderCard.perk.ProductionPerk
-        // and it's active, it is NOT reusable
-        System.out.println("Leader it.polimi.ingsw.project.model.board.cards.Card is already active!");
-      }
-    } else {
-      this.status = Status.Active;
-      this.perk.usePerk(this.perk.getResource());
-    }
+    this.status = Status.Active;
   }
 
+  // converts the object to a printable string
   public String toString() {
     String converted;
-    converted = "it.polimi.ingsw.project.model.board.cards.Perk: " + this.perk.toString() + "\n" + "it.polimi.ingsw.project.model.board.cards.Status: " + this.status.toString() + "\n" + "Id: " + this.id + "\n";
+    converted = "Id: " + this.id + "\n" + "Perk: " + this.perk.toString() + "\n" + "Status: " + this.status.toString() + "\n";
+    if (this.requiredResources == null) {
+      converted = converted + "Required DevelopmentCard level: " + this.requiredDevCardLevel + "\n";
+    } else {
+      converted = converted + "Required resources:\n";
+      for (ResourceType type : this.requiredResources.keySet()) {
+        if (type == ResourceType.Coin) {
+          converted = converted + "Coin = " + this.requiredResources.get(type) + "\n";
+        }
+        if (type == ResourceType.Servant) {
+          converted = converted + "Servant = " + this.requiredResources.get(type) + "\n";
+        }
+        if (type == ResourceType.Shield) {
+          converted = converted + "Shield = " + this.requiredResources.get(type) + "\n";
+        }
+        if (type == ResourceType.Stone) {
+          converted = converted + "Stone = " + this.requiredResources.get(type) + "\n";
+        }
+      }
+    }
     return converted;
   }
 }
-
 
