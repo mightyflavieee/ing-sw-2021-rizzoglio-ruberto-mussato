@@ -8,7 +8,7 @@ import java.util.*;
 
 public abstract class Card implements Serializable {
   private int victoryPoints;
-  private List<Object> resourcesRequired;
+
   
   public int getPoints(){
     return victoryPoints;
@@ -18,7 +18,4 @@ public abstract class Card implements Serializable {
     this.victoryPoints = victoryPoints;
   }
 
-  public List<Object> getResourcesRequired(){
-    return resourcesRequired;
-  }
 }
