@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class DevCardProductionMove extends Move{
+public class ProductionMove extends Move{
     private String devCardID;
     private String leaderCardId;
     private Map<ResourceType, Integer> resourcesToEliminateWarehouse;
@@ -18,11 +18,11 @@ public class DevCardProductionMove extends Move{
     private ProductionType productionType;
     private List<ResourceType> boardOrPerkManufacturedResource;
 
-    // constructs the DevCardProductionMove. If either devCardID or leaderCardId (or both) aren't required,
+    // constructs the ProductionMove. If either devCardID or leaderCardId (or both) aren't required,
     // put null as a parameter
-    public DevCardProductionMove(String devCardID, String leaderCardId, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-                                 Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType,
-                                 List<ResourceType> boardOrPerkManufacturedResource) {
+    public ProductionMove(String devCardID, String leaderCardId, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                          Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType,
+                          List<ResourceType> boardOrPerkManufacturedResource) {
         this.devCardID = devCardID;
         this.leaderCardId = leaderCardId;
         this.resourcesToEliminateWarehouse = resourcesToEliminateWarehouse;
