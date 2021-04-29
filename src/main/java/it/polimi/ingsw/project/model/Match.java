@@ -163,10 +163,11 @@ public class Match implements Serializable, Cloneable {
             resourcesToEliminateWarehouse, resourcesToEliminateChest, productionType);
   }
 
-  public void performDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-      Map<ResourceType, Integer> resourcesToEliminateChest) {
-    this.currentPlayer.performDevCardProductionMove(devCardID, resourcesToEliminateWarehouse,
-        resourcesToEliminateChest);
+  public void performDevCardProductionMove(String devCardID,
+      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
+      ProductionType productionType, List<ResourceType> boardOrPerkManufacturedResource) {
+    this.currentPlayer.performDevCardProductionMove(devCardID,
+            resourcesToEliminateWarehouse, resourcesToEliminateChest, productionType, boardOrPerkManufacturedResource);
   }
 
   public boolean isFeasibleExtractActionTokenMove(){

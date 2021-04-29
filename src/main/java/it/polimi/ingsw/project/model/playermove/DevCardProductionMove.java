@@ -16,17 +16,19 @@ public class DevCardProductionMove extends Move{
     private Map<ResourceType, Integer> resourcesToEliminateWarehouse;
     private Map<ResourceType, Integer> resourcesToEliminateChest;
     private ProductionType productionType;
+    private List<ResourceType> boardOrPerkManufacturedResource;
 
     // constructs the DevCardProductionMove. If either devCardID or leaderCardId (or both) aren't required,
     // put null as a parameter
-    public DevCardProductionMove(String devCardID, String leaderCardId,
-                                 Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-                                 Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType) {
+    public DevCardProductionMove(String devCardID, String leaderCardId, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                 Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType,
+                                 List<ResourceType> boardOrPerkManufacturedResource) {
         this.devCardID = devCardID;
         this.leaderCardId = leaderCardId;
         this.resourcesToEliminateWarehouse = resourcesToEliminateWarehouse;
         this.resourcesToEliminateChest = resourcesToEliminateChest;
         this.productionType = productionType;
+        this.boardOrPerkManufacturedResource = boardOrPerkManufacturedResource;
     }
 
     @Override
@@ -37,7 +39,8 @@ public class DevCardProductionMove extends Move{
 
     @Override
     public void performMove(Match match){
-        match.performDevCardProductionMove(this.devCardID, this.resourcesToEliminateWarehouse, this.resourcesToEliminateChest);
+        match.performDevCardProductionMove(this.devCardID, this.resourcesToEliminateWarehouse,
+                this.resourcesToEliminateChest, this.productionType, this.boardOrPerkManufacturedResource);
     }
 
     @Override
