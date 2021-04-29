@@ -12,18 +12,27 @@ import java.util.Map;
 
 public class DevCardProductionMove extends Move{
     private String devCardID;
+    private String leaderCardId;
     private Map<ResourceType, Integer> resourcesToEliminateWarehouse;
     private Map<ResourceType, Integer> resourcesToEliminateChest;
+    private ProductionType productionType;
 
-    public DevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
+    // constructs the DevCardProductionMove. If either devCardID or leaderCardId (or both) aren't required,
+    // put null as a parameter
+    public DevCardProductionMove(String devCardID, String leaderCardId,
+                                 Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                 Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType) {
         this.devCardID = devCardID;
+        this.leaderCardId = leaderCardId;
         this.resourcesToEliminateWarehouse = resourcesToEliminateWarehouse;
         this.resourcesToEliminateChest = resourcesToEliminateChest;
+        this.productionType = productionType;
     }
 
     @Override
     public boolean isFeasibleMove(Match match){
-        return match.isFeasibleDevCardProductionMove(this.devCardID, this.resourcesToEliminateWarehouse, this.resourcesToEliminateChest);
+        return match.isFeasibleDevCardProductionMove(this.devCardID, this.leaderCardId, this.resourcesToEliminateWarehouse,
+                this.resourcesToEliminateChest, this.productionType);
     }
 
     @Override

@@ -10,6 +10,7 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.TransmutationPerk;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.market.Market;
+import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
@@ -130,10 +131,11 @@ public class Player implements Serializable, Cloneable {
     this.board.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
   }
 
-  public boolean isFeasibleDevCardProductionMove(String devCardID,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
-    return this.board.isFeasibleDevCardProductionMove(devCardID, resourcesToEliminateWarehouse,
-        resourcesToEliminateChest);
+  public boolean isFeasibleDevCardProductionMove(String devCardID, String leaderCardId,
+      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
+      ProductionType productionType) {
+    return this.board.isFeasibleDevCardProductionMove(devCardID, leaderCardId, resourcesToEliminateWarehouse,
+        resourcesToEliminateChest, productionType);
   }
 
   public void performDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,

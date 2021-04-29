@@ -7,6 +7,7 @@ import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
+import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import java.io.Serializable;
@@ -150,13 +151,16 @@ public class Match implements Serializable, Cloneable {
         position);
   }
 
-  public boolean isFeasibleDevCardProductionMove(String devCardID,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
-    if (!this.cardContainer.isCardPresent(devCardID)) {
-      return this.currentPlayer.isFeasibleDevCardProductionMove(devCardID, resourcesToEliminateWarehouse,
-          resourcesToEliminateChest);
+  public boolean isFeasibleDevCardProductionMove(String devCardID, String leaderCardId,
+      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
+      ProductionType productionType) {
+    if (devCardID != null) {
+      if (this.cardContainer.isCardPresent(devCardID)) {
+        return false;
+      }
     }
-    return false;
+    return this.currentPlayer.isFeasibleDevCardProductionMove(devCardID, leaderCardId,
+            resourcesToEliminateWarehouse, resourcesToEliminateChest, productionType);
   }
 
   public void performDevCardProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,

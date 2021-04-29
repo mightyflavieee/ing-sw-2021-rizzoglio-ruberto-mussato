@@ -9,6 +9,7 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.TransmutationPerk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.WarehousePerk;
 import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
+import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
@@ -366,22 +367,32 @@ public class Board implements Serializable, Cloneable {
   }
 
   // checks if the current player can activate the production from the selected card
-  public boolean isFeasibleDevCardProductionMove(String devCardID,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
-    Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
+  public boolean isFeasibleDevCardProductionMove(String devCardID, String leaderCardId,
+      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
+      ProductionType productionType) {
     boolean isDevCardInLastPosition = false;
-    // checks if the card selected is in the last position (so the production is
-    // activable)
-    for (DevCardPosition position : this.mapTray.keySet()) {
-      DevelopmentCard lastElement = this.mapTray.get(position).get(this.mapTray.get(position).size() - 1);
-      if (lastElement.getId().equals(devCardID)) {
-        isDevCardInLastPosition = true;
-        break;
+    // checks if the DevelopmentCard selected is in the last position (if the DevelopmentCard is required
+    // for the production)
+    if (productionType == ProductionType.DevCard || productionType == ProductionType.BoardAndDevCard ||
+        productionType == ProductionType.BoardAndDevCardAndLeaderCard || productionType == ProductionType.DevCardAndLeader) {
+      for (DevCardPosition position : this.mapTray.keySet()) {
+        DevelopmentCard lastElement = this.mapTray.get(position).get(this.mapTray.get(position).size() - 1);
+        if (lastElement.getId().equals(devCardID)) {
+          isDevCardInLastPosition = true;
+          break;
+        }
+      }
+      // if the card is not in the last position, return false
+      if (!isDevCardInLastPosition) {
+        return false;
       }
     }
-    // if the card is not in the last position, return false
-    if (!isDevCardInLastPosition) {
-      return false;
+    // checks if the LeaderCard is present (if required for the production)
+    if (productionType == ProductionType.LeaderCard || productionType == ProductionType.BoardAndLeaderCard ||
+        productionType == ProductionType.BoardAndDevCardAndLeaderCard || productionType == ProductionType.DevCardAndLeader) {
+      if (fetchLeaderCardById(leaderCardId) == null) {
+        return false;
+      }
     }
     // double checks if the resources indicated by the user are actually present
     if (!areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
