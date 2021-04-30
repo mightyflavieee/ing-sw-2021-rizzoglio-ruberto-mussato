@@ -9,6 +9,7 @@ import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Serializable;
@@ -26,6 +27,16 @@ public class Board implements Serializable, Cloneable {
   private Optional<List<ResourceType>> discounts;
   private Optional<ResourceType> transmutation;
 
+  public Board() {
+    this.chest = new HashMap<>();
+    this.mapTray = new HashMap<>();
+    this.warehouse = new Warehouse();
+    this.leaderCards = new ArrayList<>();
+    this.faithMap = new FaithMap();
+    this.discounts = Optional.empty();
+    this.transmutation = Optional.empty();
+  }
+
   public final Board clone() {
     // TODO clone interne
     final Board result = new Board();
@@ -37,6 +48,10 @@ public class Board implements Serializable, Cloneable {
     result.discounts = discounts;
     result.transmutation = transmutation;
     return result;
+  }
+
+  public FaithMap getFaithMap() {
+    return faithMap;
   }
 
   public Map<DevCardPosition, List<DevelopmentCard>> getMapTray() {

@@ -12,6 +12,10 @@ public class Model extends Observable<MoveMessage> {
         this.match = new Match(listOfPlayers);
     }
 
+    public Match getMatch() {
+        return match;
+    }
+
     public boolean isPlayerTurn(Player player) {
         return player.getNickname().equals(match.getCurrentPlayer().getNickname());
     }

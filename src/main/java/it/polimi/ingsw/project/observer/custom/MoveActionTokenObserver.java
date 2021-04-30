@@ -8,6 +8,10 @@ import it.polimi.ingsw.project.observer.Observer;
 public class MoveActionTokenObserver implements Observer<MoveActionToken> {
     private Match match;
 
+    public MoveActionTokenObserver(Match match) {
+        this.match = match;
+    }
+
     @Override
     public void update(MoveActionToken message) {
         this.match.moveForwardBlack();

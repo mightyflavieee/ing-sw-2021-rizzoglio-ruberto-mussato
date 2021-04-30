@@ -11,7 +11,7 @@ import java.util.*;
 public class Warehouse extends Observable<Warehouse> implements Serializable {
 
   private Map<ShelfFloor, List<Resource>> shelves = new HashMap<>();
-  private Optional<Map<ResourceType, Integer>> extraDeposit = Optional.empty();
+  private Optional<Map<ResourceType, Integer>> extraDeposit = Optional.empty(); // da mettere nel costruttore
   private int numResourcesToDiscard;
 
   //returns ALL resources presents in the warehouse

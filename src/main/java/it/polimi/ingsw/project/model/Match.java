@@ -25,12 +25,16 @@ public class Match implements Serializable, Cloneable {
   private boolean isOver;
 
   public Match(List<Player> playerList) {
-    this.playerList = playerList;
+    this.playerList = new ArrayList<>();
+    this.playerList.addAll(playerList); //la lista mi arriva già shuffled
     this.market = new Market();
     this.cardContainer = new CardContainer();
     if (playerList.size() == 1) {
-      actionTokenContainer = new ActionTokenContainer();
+      actionTokenContainer = new ActionTokenContainer(this);
     }
+    this.currentPlayer = playerList.get(0);
+    this.isLastTurn = false;
+    this.isOver = false;
   }
 
   private Player nextPlayer() {
