@@ -42,23 +42,6 @@ class WarehouseTest {
     void getNumResourcesToDiscard() {
     }
 
-    @Test
-    void insertResourcesInHand() {
-        Warehouse warehouse = new Warehouse();
-        List<Resource> resources = new ArrayList<>();
-        Map<ResourceType, Integer> returnedResources;
-        resources.add(new Resource(ResourceType.Coin));
-        resources.add(new Resource(ResourceType.Servant));
-        resources.add(new Resource(ResourceType.Shield));
-        resources.add(new Resource(ResourceType.Coin));
-        warehouse.insertResourcesInHand(resources);
-        returnedResources = warehouse.mapAllContainedResources();
-        assertNotNull(returnedResources);
-        //TODO
-//        assertEquals(2, (int) returnedResources.get(ResourceType.Coin));
-//        assertEquals(1, (int) returnedResources.get(ResourceType.Servant));
-//        assertEquals(1, (int) returnedResources.get(ResourceType.Shield));
-    }
 
     @Test
     void swapShelves() {
