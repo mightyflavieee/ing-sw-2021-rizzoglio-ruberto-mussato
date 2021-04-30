@@ -1,24 +1,23 @@
 package it.polimi.ingsw.project.model.playermove;
 
 import it.polimi.ingsw.project.model.Match;
-import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.resource.Resource;
-import it.polimi.ingsw.project.view.View;
+
 import java.util.Collections;
 import java.util.List;
 
 public class TakeMarketResourcesMove extends Move {
 
-  private Warehouse warehouse;
-  private List<Resource> discardedResources;
+  private final Warehouse warehouse;
+  private final List<Resource> discardedResources;
 
   public TakeMarketResourcesMove(
     Warehouse warehouse,
     List<Resource> discardedResources
   ) {
     this.warehouse = warehouse;
-    Collections.copy(this.discardedResources, discardedResources);
+    this.discardedResources = discardedResources;
   }
 
   @Override
