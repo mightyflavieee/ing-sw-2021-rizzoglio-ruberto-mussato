@@ -4,20 +4,20 @@ import it.polimi.ingsw.project.model.actionTokens.ActionTokenContainer;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
+import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.TransmutationPerk;
-import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
-
 import java.io.*;
 import java.util.*;
 
 public class Player implements Serializable, Cloneable {
+
   private Board board;
   private boolean isConnected;
   private String nickname;
@@ -111,7 +111,10 @@ public class Player implements Serializable, Cloneable {
     this.board.performDiscardLeaderCardMove(leaderCardID);
   }
 
-  public boolean isFeasibleChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
+  public boolean isFeasibleChangeShelvesMove(
+    ShelfFloor aFloor,
+    ShelfFloor bFloor
+  ) {
     return this.board.isFeasibleChangeShelvesMove(aFloor, bFloor);
   }
 
@@ -119,30 +122,64 @@ public class Player implements Serializable, Cloneable {
     this.board.performChangeShelvesMove(aFloor, bFloor);
   }
 
-  public boolean isFeasibleBuyDevCardMove(DevelopmentCard devCard,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
-      DevCardPosition position) {
-    return this.board.isFeasibleBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest,
-        position);
+  public boolean isFeasibleBuyDevCardMove(
+    DevelopmentCard devCard,
+    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateChest,
+    DevCardPosition position
+  ) {
+    return this.board.isFeasibleBuyDevCardMove(
+        devCard,
+        resourcesToEliminateWarehouse,
+        resourcesToEliminateChest,
+        position
+      );
   }
 
-  public void performBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-      Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
-    this.board.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
+  public void performBuyDevCardMove(
+    DevelopmentCard devCard,
+    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateChest,
+    DevCardPosition position
+  ) {
+    this.board.performBuyDevCardMove(
+        devCard,
+        resourcesToEliminateWarehouse,
+        resourcesToEliminateChest,
+        position
+      );
   }
 
-  public boolean isFeasibleDevCardProductionMove(String devCardID, String leaderCardId,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
-      ProductionType productionType) {
-    return this.board.isFeasibleDevCardProductionMove(devCardID, leaderCardId, resourcesToEliminateWarehouse,
-        resourcesToEliminateChest, productionType);
+  public boolean isFeasibleDevCardProductionMove(
+    String devCardID,
+    String leaderCardId,
+    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateChest,
+    ProductionType productionType
+  ) {
+    return this.board.isFeasibleDevCardProductionMove(
+        devCardID,
+        leaderCardId,
+        resourcesToEliminateWarehouse,
+        resourcesToEliminateChest,
+        productionType
+      );
   }
 
-  public void performDevCardProductionMove(String devCardID,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
-      ProductionType productionType, List<ResourceType> boardOrPerkManufacturedResource) {
-    this.board.performDevCardProductionMove(devCardID, resourcesToEliminateWarehouse,
-        resourcesToEliminateChest, productionType, boardOrPerkManufacturedResource);
+  public void performDevCardProductionMove(
+    String devCardID,
+    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateChest,
+    ProductionType productionType,
+    List<ResourceType> boardOrPerkManufacturedResource
+  ) {
+    this.board.performDevCardProductionMove(
+        devCardID,
+        resourcesToEliminateWarehouse,
+        resourcesToEliminateChest,
+        productionType,
+        boardOrPerkManufacturedResource
+      );
   }
 
   public boolean isFeasibleActivateLeaderCardMove(String leaderCardID) {
@@ -153,4 +190,20 @@ public class Player implements Serializable, Cloneable {
     this.board.performActivateLeaderCardMove(leaderCardID);
   }
 
+  public boolean isFeasibleTakeMarketResourcesMove(
+    Warehouse warehouse,
+    List<Resource> discardedResources
+  ) {
+    return this.board.isFeasibleTakeMarketResourcesMove(
+        warehouse,
+        discardedResources
+      );
+  }
+
+  public void performTakeMarketResourceMove(
+    Warehouse warehouse,
+    List<Resource> discardedResources
+  ) {
+    this.board.performTakeMarketResourceMove(warehouse, discardedResources);
+  }
 }

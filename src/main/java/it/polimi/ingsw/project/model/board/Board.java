@@ -9,15 +9,14 @@ import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.*;
-
 import javax.management.relation.RelationTypeSupport;
 
 public class Board implements Serializable, Cloneable {
+
   // TODO: fare clone di tutti gli oggetti
   private Map<ResourceType, Integer> chest;
   private Map<DevCardPosition, List<DevelopmentCard>> mapTray;
@@ -73,15 +72,24 @@ public class Board implements Serializable, Cloneable {
 
   // it extracts the last DevelopmentCard in from the mapTray at that position
   private DevelopmentCard getLastFromPosition(DevCardPosition position) {
-    return mapTray.get(position).get(mapTray.get(position).size()-1);
+    return mapTray.get(position).get(mapTray.get(position).size() - 1);
   }
 
   // it extracts all the last cards for the production
   public Map<DevCardPosition, DevelopmentCard> getCurrentProductionCards() {
     Map<DevCardPosition, DevelopmentCard> productionCardsMap = new HashMap<>();
-    productionCardsMap.put(DevCardPosition.Left, getLastFromPosition(DevCardPosition.Left));
-    productionCardsMap.put(DevCardPosition.Center, getLastFromPosition(DevCardPosition.Center));
-    productionCardsMap.put(DevCardPosition.Right, getLastFromPosition(DevCardPosition.Right));
+    productionCardsMap.put(
+      DevCardPosition.Left,
+      getLastFromPosition(DevCardPosition.Left)
+    );
+    productionCardsMap.put(
+      DevCardPosition.Center,
+      getLastFromPosition(DevCardPosition.Center)
+    );
+    productionCardsMap.put(
+      DevCardPosition.Right,
+      getLastFromPosition(DevCardPosition.Right)
+    );
     return productionCardsMap;
   }
 
@@ -135,12 +143,17 @@ public class Board implements Serializable, Cloneable {
   // double checks if the resources indicated by the user are actually present
   // usable in "isFeasible" and "perform" methods only within BuyDevCardMove
   // and DevCardProductionMove
-  private boolean areEnoughResourcesPresentForBuyAndProduction(Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-      Map<ResourceType, Integer> resourcesToEliminateChest) {
-    Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
+  private boolean areEnoughResourcesPresentForBuyAndProduction(
+    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateChest
+  ) {
+    Map<ResourceType, Integer> warehouseResources =
+      this.warehouse.mapAllContainedResources();
     if (resourcesToEliminateWarehouse != null) {
       for (ResourceType type : warehouseResources.keySet()) {
-        if (warehouseResources.get(type) < resourcesToEliminateWarehouse.get(type)) {
+        if (
+          warehouseResources.get(type) < resourcesToEliminateWarehouse.get(type)
+        ) {
           return false;
         }
       }
@@ -156,13 +169,19 @@ public class Board implements Serializable, Cloneable {
   }
 
   // checks if the resources indicated in the parameter are actually present
-  private boolean areEnoughResourcesPresent(Map<ResourceType, Integer> resourcesToCheck) {
-    Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
+  private boolean areEnoughResourcesPresent(
+    Map<ResourceType, Integer> resourcesToCheck
+  ) {
+    Map<ResourceType, Integer> warehouseResources =
+      this.warehouse.mapAllContainedResources();
     if (resourcesToCheck != null) {
       for (ResourceType type : resourcesToCheck.keySet()) {
         if (warehouseResources.containsKey(type)) {
           if (this.chest.containsKey(type)) {
-            if ((warehouseResources.get(type) + this.chest.get(type)) < resourcesToCheck.get(type)) {
+            if (
+              (warehouseResources.get(type) + this.chest.get(type)) <
+              resourcesToCheck.get(type)
+            ) {
               return false;
             }
           } else {
@@ -186,12 +205,17 @@ public class Board implements Serializable, Cloneable {
 
   // eliminates resources from the chest, usable only within
   // performBuyDevCardMove()
-  private void eliminateResourcesFromChest(Map<ResourceType, Integer> resourcesToEliminate) {
+  private void eliminateResourcesFromChest(
+    Map<ResourceType, Integer> resourcesToEliminate
+  ) {
     for (ResourceType type : this.chest.keySet()) {
       if (this.chest.get(type).equals(resourcesToEliminate.get(type))) {
         this.chest.remove(type);
       } else {
-        this.chest.put(type, (this.chest.get(type) - resourcesToEliminate.get(type)));
+        this.chest.put(
+            type,
+            (this.chest.get(type) - resourcesToEliminate.get(type))
+          );
       }
     }
   }
@@ -215,42 +239,45 @@ public class Board implements Serializable, Cloneable {
     }
   }
 
-  public boolean isFeasibleChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
-    Map<ShelfFloor, List<Resource>> currentWarehouse = this.warehouse.getShelfs();
+  public boolean isFeasibleChangeShelvesMove(
+    ShelfFloor aFloor,
+    ShelfFloor bFloor
+  ) {
+    Map<ShelfFloor, List<Resource>> currentWarehouse =
+      this.warehouse.getShelfs();
     switch (aFloor) {
-    case First:
-      if (currentWarehouse.get(bFloor).size() > 1) {
+      case First:
+        if (currentWarehouse.get(bFloor).size() > 1) {
+          return false;
+        }
+        return true;
+      case Second:
+        if (bFloor == ShelfFloor.First) {
+          if (currentWarehouse.get(aFloor).size() > 1) {
+            return false;
+          }
+          return true;
+        } else {
+          if (currentWarehouse.get(bFloor).size() > 2) {
+            return false;
+          }
+          return true;
+        }
+      case Third:
+        if (bFloor == ShelfFloor.First) {
+          if (currentWarehouse.get(aFloor).size() > 1) {
+            return false;
+          }
+          return true;
+        } else {
+          if (currentWarehouse.get(aFloor).size() > 2) {
+            return false;
+          }
+          return true;
+        }
+      default:
         return false;
-      }
-      return true;
-    case Second:
-      if (bFloor == ShelfFloor.First) {
-        if (currentWarehouse.get(aFloor).size() > 1) {
-          return false;
-        }
-        return true;
-      } else {
-        if (currentWarehouse.get(bFloor).size() > 2) {
-          return false;
-        }
-        return true;
-      }
-    case Third:
-      if (bFloor == ShelfFloor.First) {
-        if (currentWarehouse.get(aFloor).size() > 1) {
-          return false;
-        }
-        return true;
-      } else {
-        if (currentWarehouse.get(aFloor).size() > 2) {
-          return false;
-        }
-        return true;
-      }
-    default:
-      return false;
     }
-
   }
 
   public void performChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
@@ -258,15 +285,24 @@ public class Board implements Serializable, Cloneable {
   }
 
   // checks if the current player can buy the card he/she selected
-  public boolean isFeasibleBuyDevCardMove(DevelopmentCard devCard,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
-      DevCardPosition position) {
+  public boolean isFeasibleBuyDevCardMove(
+    DevelopmentCard devCard,
+    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateChest,
+    DevCardPosition position
+  ) {
     int intLevel = 0;
     boolean isOneLessCardLevelPresent = false;
     boolean isDiscountPresent = false;
-    Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
+    Map<ResourceType, Integer> warehouseResources =
+      this.warehouse.mapAllContainedResources();
     // double checks if the resources indicated by the user are actually present
-    if (!areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
+    if (
+      !areEnoughResourcesPresentForBuyAndProduction(
+        resourcesToEliminateWarehouse,
+        resourcesToEliminateChest
+      )
+    ) {
       return false;
     }
     // for each type of resource required, if there isn't enough resources, the move
@@ -287,23 +323,39 @@ public class Board implements Serializable, Cloneable {
       if (resourcesToEliminateWarehouse.containsKey(type)) {
         if (resourcesToEliminateChest.containsKey(type)) {
           if (isDiscountPresent) {
-            if ((devCard.getRequiredResources()
-                    .get(type) - 1) > (resourcesToEliminateWarehouse.get(type) + resourcesToEliminateChest.get(type))) {
+            if (
+              (devCard.getRequiredResources().get(type) - 1) >
+              (
+                resourcesToEliminateWarehouse.get(type) +
+                resourcesToEliminateChest.get(type)
+              )
+            ) {
               return false;
             }
           } else {
-            if (devCard.getRequiredResources()
-                    .get(type) > (resourcesToEliminateWarehouse.get(type) + resourcesToEliminateChest.get(type))) {
+            if (
+              devCard.getRequiredResources().get(type) >
+              (
+                resourcesToEliminateWarehouse.get(type) +
+                resourcesToEliminateChest.get(type)
+              )
+            ) {
               return false;
             }
           }
         } else {
           if (isDiscountPresent) {
-            if ((devCard.getRequiredResources().get(type) - 1) > resourcesToEliminateWarehouse.get(type)) {
+            if (
+              (devCard.getRequiredResources().get(type) - 1) >
+              resourcesToEliminateWarehouse.get(type)
+            ) {
               return false;
             }
           } else {
-            if (devCard.getRequiredResources().get(type) > resourcesToEliminateWarehouse.get(type)) {
+            if (
+              devCard.getRequiredResources().get(type) >
+              resourcesToEliminateWarehouse.get(type)
+            ) {
               return false;
             }
           }
@@ -311,11 +363,17 @@ public class Board implements Serializable, Cloneable {
       } else {
         if (resourcesToEliminateChest.containsKey(type)) {
           if (isDiscountPresent) {
-            if ((devCard.getRequiredResources().get(type) - 1) > resourcesToEliminateChest.get(type)) {
+            if (
+              (devCard.getRequiredResources().get(type) - 1) >
+              resourcesToEliminateChest.get(type)
+            ) {
               return false;
             }
           } else {
-            if (devCard.getRequiredResources().get(type) > resourcesToEliminateChest.get(type)) {
+            if (
+              devCard.getRequiredResources().get(type) >
+              resourcesToEliminateChest.get(type)
+            ) {
               return false;
             }
           }
@@ -334,7 +392,10 @@ public class Board implements Serializable, Cloneable {
         isOneLessCardLevelPresent = true;
       }
     } else {
-      CardLevel currentCardLevel = this.mapTray.get(position).get(this.mapTray.get(position).size() - 1).getLevel();
+      CardLevel currentCardLevel =
+        this.mapTray.get(position)
+          .get(this.mapTray.get(position).size() - 1)
+          .getLevel();
       int currentCardIntLevel = 0;
       if (devCard.getLevel() == CardLevel.One) {
         intLevel = 1;
@@ -367,24 +428,37 @@ public class Board implements Serializable, Cloneable {
 
   // puts the bought DevelopmentCard in the mapTray and eliminates the required
   // resources from the warehouse or the strongbox (this.chest)
-  public void performBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-      Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+  public void performBuyDevCardMove(
+    DevelopmentCard devCard,
+    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateChest,
+    DevCardPosition position
+  ) {
     this.mapTray.get(position).add(devCard);
     this.warehouse.eliminateResources(resourcesToEliminateWarehouse);
     eliminateResourcesFromChest(resourcesToEliminateChest);
   }
 
   // checks if the current player can activate the production selected
-  public boolean isFeasibleDevCardProductionMove(String devCardID, String leaderCardId,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
-      ProductionType productionType) {
+  public boolean isFeasibleDevCardProductionMove(
+    String devCardID,
+    String leaderCardId,
+    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateChest,
+    ProductionType productionType
+  ) {
     boolean isDevCardInLastPosition = false;
     // checks if the DevelopmentCard selected is in the last position (if the DevelopmentCard is required
     // for the production)
-    if (productionType == ProductionType.DevCard || productionType == ProductionType.BoardAndDevCard ||
-        productionType == ProductionType.BoardAndDevCardAndLeaderCard || productionType == ProductionType.DevCardAndLeader) {
+    if (
+      productionType == ProductionType.DevCard ||
+      productionType == ProductionType.BoardAndDevCard ||
+      productionType == ProductionType.BoardAndDevCardAndLeaderCard ||
+      productionType == ProductionType.DevCardAndLeader
+    ) {
       for (DevCardPosition position : this.mapTray.keySet()) {
-        DevelopmentCard lastElement = this.mapTray.get(position).get(this.mapTray.get(position).size() - 1);
+        DevelopmentCard lastElement =
+          this.mapTray.get(position).get(this.mapTray.get(position).size() - 1);
         if (lastElement.getId().equals(devCardID)) {
           isDevCardInLastPosition = true;
           break;
@@ -396,14 +470,23 @@ public class Board implements Serializable, Cloneable {
       }
     }
     // checks if the LeaderCard is present (if required for the production)
-    if (productionType == ProductionType.LeaderCard || productionType == ProductionType.BoardAndLeaderCard ||
-        productionType == ProductionType.BoardAndDevCardAndLeaderCard || productionType == ProductionType.DevCardAndLeader) {
+    if (
+      productionType == ProductionType.LeaderCard ||
+      productionType == ProductionType.BoardAndLeaderCard ||
+      productionType == ProductionType.BoardAndDevCardAndLeaderCard ||
+      productionType == ProductionType.DevCardAndLeader
+    ) {
       if (fetchLeaderCardById(leaderCardId) == null) {
         return false;
       }
     }
     // double checks if the resources indicated by the user are actually present
-    if (!areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
+    if (
+      !areEnoughResourcesPresentForBuyAndProduction(
+        resourcesToEliminateWarehouse,
+        resourcesToEliminateChest
+      )
+    ) {
       return false;
     }
     return true;
@@ -411,29 +494,46 @@ public class Board implements Serializable, Cloneable {
 
   // performs the production putting the resources manufactured in the strongbox and eliminating
   // the resources required
-  public void performDevCardProductionMove(String devCardID,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
-      ProductionType productionType, List<ResourceType> boardOrPerkManufacturedResource) {
+  public void performDevCardProductionMove(
+    String devCardID,
+    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateChest,
+    ProductionType productionType,
+    List<ResourceType> boardOrPerkManufacturedResource
+  ) {
     Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
-    if (productionType == ProductionType.DevCard || productionType == ProductionType.BoardAndDevCard) {
+    if (
+      productionType == ProductionType.DevCard ||
+      productionType == ProductionType.BoardAndDevCard
+    ) {
       DevelopmentCard card = fetchDevCardById(devCardID);
       manufacturedResources = card.getProduction().getManufacturedResources();
       if (productionType == ProductionType.BoardAndDevCard) {
         // aggiunge a manufacturedResources le risorse prodotte dalla Board
         for (ResourceType type : manufacturedResources.keySet()) {
           if (boardOrPerkManufacturedResource.get(0) == type) {
-            manufacturedResources.put(type, manufacturedResources.get(type) + 1);
+            manufacturedResources.put(
+              type,
+              manufacturedResources.get(type) + 1
+            );
           }
         }
       }
     }
-    if (productionType == ProductionType.LeaderCard || productionType == ProductionType.BoardAndLeaderCard) {
+    if (
+      productionType == ProductionType.LeaderCard ||
+      productionType == ProductionType.BoardAndLeaderCard
+    ) {
       // aggiunge a manufacturedResources le risorse prodotte dal ProductionPerk (LeaderCard
       moveForward();
       manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 1);
       // aggiungere a manufacturedResources le risorse prodotte dalla Board
       if (productionType == ProductionType.BoardAndLeaderCard) {
-        if (manufacturedResources.containsKey(boardOrPerkManufacturedResource.get(1))) {
+        if (
+          manufacturedResources.containsKey(
+            boardOrPerkManufacturedResource.get(1)
+          )
+        ) {
           manufacturedResources.put(boardOrPerkManufacturedResource.get(1), 2);
         } else {
           manufacturedResources.put(boardOrPerkManufacturedResource.get(1), 1);
@@ -494,22 +594,39 @@ public class Board implements Serializable, Cloneable {
     // if the LeaderCard requires levels to be activated
     if (card.getRequiredDevCardLevel() != null) {
       int requiredDevCardLevel = 0;
-      if (card.getRequiredDevCardLevel() == CardLevel.One) { requiredDevCardLevel = 1; }
-      if (card.getRequiredDevCardLevel() == CardLevel.Two) { requiredDevCardLevel = 2; }
-      if (card.getRequiredDevCardLevel() == CardLevel.Three) { requiredDevCardLevel = 3; }
+      if (card.getRequiredDevCardLevel() == CardLevel.One) {
+        requiredDevCardLevel = 1;
+      }
+      if (card.getRequiredDevCardLevel() == CardLevel.Two) {
+        requiredDevCardLevel = 2;
+      }
+      if (card.getRequiredDevCardLevel() == CardLevel.Three) {
+        requiredDevCardLevel = 3;
+      }
       for (DevCardPosition position : this.mapTray.keySet()) {
         if (this.mapTray.get(position).size() > 0) {
-          currentCardLevel = this.mapTray.get(position).get(this.mapTray.get(position).size() - 1).getLevel();
+          currentCardLevel =
+            this.mapTray.get(position)
+              .get(this.mapTray.get(position).size() - 1)
+              .getLevel();
         }
         int currentIntCardLevel = 0;
-        if (currentCardLevel == CardLevel.One) { currentIntCardLevel = 1; }
-        if (currentCardLevel == CardLevel.Two) { currentIntCardLevel = 2; }
-        if (currentCardLevel == CardLevel.Three) { currentIntCardLevel = 3; }
+        if (currentCardLevel == CardLevel.One) {
+          currentIntCardLevel = 1;
+        }
+        if (currentCardLevel == CardLevel.Two) {
+          currentIntCardLevel = 2;
+        }
+        if (currentCardLevel == CardLevel.Three) {
+          currentIntCardLevel = 3;
+        }
         if (currentIntCardLevel >= requiredDevCardLevel) {
           isDevCardLevelCorrect = true;
         }
       }
-      if (!isDevCardLevelCorrect) { return false; }
+      if (!isDevCardLevelCorrect) {
+        return false;
+      }
     }
     // checks if there enough resources in the warehouse and the strongbox
     // if the LeaderCard requires resources to be activated
@@ -539,10 +656,29 @@ public class Board implements Serializable, Cloneable {
           }
         }
         if (card.getPerk() instanceof TransmutationPerk) {
-          this.transmutation = Optional.of(card.getPerk().getResource().getType());
+          this.transmutation =
+            Optional.of(card.getPerk().getResource().getType());
         }
         break;
       }
     }
+  }
+
+  public boolean isFeasibleTakeMarketResourcesMove(
+    Warehouse warehouse,
+    List<Resource> discardedResources
+  ) {
+    return this.warehouse.isFeasibleTakeMarketResourcesMove(
+        warehouse,
+        discardedResources
+      );
+  }
+
+  public void performTakeMarketResourceMove(
+    Warehouse warehouse,
+    List<Resource> discardedResources
+  ) {
+    this.warehouse = warehouse;
+    this.warehouse.discardResourcesInHand(discardedResources);
   }
 }

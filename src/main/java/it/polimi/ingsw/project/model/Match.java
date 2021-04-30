@@ -3,17 +3,19 @@ package it.polimi.ingsw.project.model;
 import it.polimi.ingsw.project.model.actionTokens.ActionTokenContainer;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
+import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
+import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
-
 import java.io.Serializable;
 import java.util.*;
 
 public class Match implements Serializable, Cloneable {
+
   private List<Player> playerList;
   private Market market;
   private CardContainer cardContainer;
@@ -30,7 +32,6 @@ public class Match implements Serializable, Cloneable {
       actionTokenContainer = new ActionTokenContainer();
     }
   }
-
 
   private Player nextPlayer() {
     int playerIndex = this.playerList.indexOf(currentPlayer);
@@ -76,7 +77,10 @@ public class Match implements Serializable, Cloneable {
   public void notifyFaithMapsForDiscard(int numDiscardedResources) {
     // TODO devo far avanzare anche lorenzo?
     for (int i = 0; i < numDiscardedResources; i++) {
-      playerList.stream().filter(x -> x.getNickname() != currentPlayer.getNickname()).forEach(Player::moveForward);
+      playerList
+        .stream()
+        .filter(x -> x.getNickname() != currentPlayer.getNickname())
+        .forEach(Player::moveForward);
     }
   }
 
@@ -85,8 +89,7 @@ public class Match implements Serializable, Cloneable {
   }
 
   public void discardForActionToken(CardColor cardColor) {
-    if (cardContainer.discard(cardColor))
-      this.youLost();
+    if (cardContainer.discard(cardColor)) this.youLost();
   }
 
   private void youLost() {
@@ -95,8 +98,11 @@ public class Match implements Serializable, Cloneable {
   }
 
   public void end() {
-    if (this.isLastTurn == true
-        && this.currentPlayer.getNickname() == this.playerList.get(this.playerList.size() - 1).getNickname()) {
+    if (
+      this.isLastTurn == true &&
+      this.currentPlayer.getNickname() ==
+      this.playerList.get(this.playerList.size() - 1).getNickname()
+    ) {
       this.isOver = true;
     }
   }
@@ -109,9 +115,9 @@ public class Match implements Serializable, Cloneable {
     final Match result = new Match(this.playerList);
     result.actionTokenContainer = actionTokenContainer;
     result.cardContainer = cardContainer;
-     result.currentPlayer = currentPlayer;
+    result.currentPlayer = currentPlayer;
     result.isLastTurn = isLastTurn;
-     result.isOver = isOver;
+    result.isOver = isOver;
     result.market = market;
     result.playerList = playerList;
     return result;
@@ -125,7 +131,10 @@ public class Match implements Serializable, Cloneable {
     this.currentPlayer.performDiscardLeaderCardMove(leaderCardID);
   }
 
-  public boolean isFeasibleChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
+  public boolean isFeasibleChangeShelvesMove(
+    ShelfFloor aFloor,
+    ShelfFloor bFloor
+  ) {
     return currentPlayer.isFeasibleChangeShelvesMove(aFloor, bFloor);
   }
 
@@ -133,48 +142,102 @@ public class Match implements Serializable, Cloneable {
     this.currentPlayer.performChangeShelvesMove(aFloor, bFloor);
   }
 
-  public boolean isFeasibleBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-      Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+  public boolean isFeasibleBuyDevCardMove(
+    String devCardID,
+    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateChest,
+    DevCardPosition position
+  ) {
     if (!this.cardContainer.isCardPresent(devCardID)) {
       return false;
     } else {
       DevelopmentCard devCard = this.cardContainer.fetchCard(devCardID);
-      return this.currentPlayer.isFeasibleBuyDevCardMove(devCard, resourcesToEliminateWarehouse,
-          resourcesToEliminateChest, position);
+      return this.currentPlayer.isFeasibleBuyDevCardMove(
+          devCard,
+          resourcesToEliminateWarehouse,
+          resourcesToEliminateChest,
+          position
+        );
     }
   }
 
-  public void performBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-      Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+  public void performBuyDevCardMove(
+    String devCardID,
+    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateChest,
+    DevCardPosition position
+  ) {
     DevelopmentCard devCard = this.cardContainer.removeBoughtCard(devCardID);
-    this.currentPlayer.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest,
-        position);
+    this.currentPlayer.performBuyDevCardMove(
+        devCard,
+        resourcesToEliminateWarehouse,
+        resourcesToEliminateChest,
+        position
+      );
   }
 
-  public boolean isFeasibleDevCardProductionMove(String devCardID, String leaderCardId,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
-      ProductionType productionType) {
+  public boolean isFeasibleDevCardProductionMove(
+    String devCardID,
+    String leaderCardId,
+    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateChest,
+    ProductionType productionType
+  ) {
     if (devCardID != null) {
       if (this.cardContainer.isCardPresent(devCardID)) {
         return false;
       }
     }
-    return this.currentPlayer.isFeasibleDevCardProductionMove(devCardID, leaderCardId,
-            resourcesToEliminateWarehouse, resourcesToEliminateChest, productionType);
+    return this.currentPlayer.isFeasibleDevCardProductionMove(
+        devCardID,
+        leaderCardId,
+        resourcesToEliminateWarehouse,
+        resourcesToEliminateChest,
+        productionType
+      );
   }
 
-  public void performDevCardProductionMove(String devCardID,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
-      ProductionType productionType, List<ResourceType> boardOrPerkManufacturedResource) {
-    this.currentPlayer.performDevCardProductionMove(devCardID,
-            resourcesToEliminateWarehouse, resourcesToEliminateChest, productionType, boardOrPerkManufacturedResource);
+  public void performDevCardProductionMove(
+    String devCardID,
+    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateChest,
+    ProductionType productionType,
+    List<ResourceType> boardOrPerkManufacturedResource
+  ) {
+    this.currentPlayer.performDevCardProductionMove(
+        devCardID,
+        resourcesToEliminateWarehouse,
+        resourcesToEliminateChest,
+        productionType,
+        boardOrPerkManufacturedResource
+      );
   }
 
-  public boolean isFeasibleExtractActionTokenMove(){
+  public boolean isFeasibleTakeMarketResourcesMove(
+    Warehouse warehouse,
+    List<Resource> discardedResources
+  ) {
+    return this.currentPlayer.isFeasibleTakeMarketResourcesMove(
+        warehouse,
+        discardedResources
+      );
+  }
+
+  public void performTakeMarketResourceMove(
+    Warehouse warehouse,
+    List<Resource> discardedResources
+  ) {
+    this.currentPlayer.performTakeMarketResourceMove(
+        warehouse,
+        discardedResources
+      );
+  }
+
+  public boolean isFeasibleExtractActionTokenMove() {
     return this.playerList.size() == 1;
   }
 
-  public void performExtractActionTokenMove(){
+  public void performExtractActionTokenMove() {
     this.actionTokenContainer.drawToken();
   }
 
@@ -187,7 +250,6 @@ public class Match implements Serializable, Cloneable {
   }
 
   public void moveForwardBlack() {
-    if (24 == this.currentPlayer.moveForwardBlack()) // cioè se lorenzo è arrivato alla fine
-      this.youLost();
+    if (24 == this.currentPlayer.moveForwardBlack()) this.youLost(); // cioè se lorenzo è arrivato alla fine
   }
 }
