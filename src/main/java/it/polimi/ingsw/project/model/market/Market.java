@@ -8,11 +8,42 @@ import java.util.*;
 
 public class Market implements Cloneable, Serializable {
   // sarebbe da modificare inserendo la posizione delle biglie
-  private Marble[][] tray;
+  private Marble[][] tray = new Marble[4][3];
   private Marble outsideMarble;
   //TODO costruttore
+
+  public Market() {
+    List<Marble> trayList = new ArrayList<Marble>();
+    trayList.add(new Marble(MarbleType.White));
+    trayList.add(new Marble(MarbleType.White));
+    trayList.add(new Marble(MarbleType.White));
+    trayList.add(new Marble(MarbleType.White));
+    trayList.add(new Marble(MarbleType.Blue));
+    trayList.add(new Marble(MarbleType.Blue));
+    trayList.add(new Marble(MarbleType.Grey));
+    trayList.add(new Marble(MarbleType.Grey));
+    trayList.add(new Marble(MarbleType.Yellow));
+    trayList.add(new Marble(MarbleType.Yellow));
+    trayList.add(new Marble(MarbleType.Purple));
+    trayList.add(new Marble(MarbleType.Purple));
+    trayList.add(new Marble(MarbleType.Red));
+    Collections.shuffle(trayList);
+    this.outsideMarble = trayList.get(0);
+    trayList.remove(0);
+    for(int i = 0; i < 4; i++){
+      for (int j = 0; j < 3; j++){
+        tray[i][j] = trayList.get(0);
+        trayList.remove(0);
+      }
+    }
+
+
+  }
+
   public Marble[][] getTray() {
-    return tray;
+    Marble [][] trayToReturn = new Marble[4][3];
+    System.arraycopy(this.tray,0,trayToReturn,0,4);
+    return trayToReturn;
   }
 
   public Marble getOutSideMarble() {
@@ -22,7 +53,7 @@ public class Market implements Cloneable, Serializable {
   private ResourceType convertMarbleToResourceType(Marble marble, boolean isTransmutationPresent,
                                                    ResourceType resourceType) {
     switch (marble.getType()) {
-    case Black:
+    case Grey:
       return ResourceType.Stone;
     case Blue:
       return ResourceType.Shield;
