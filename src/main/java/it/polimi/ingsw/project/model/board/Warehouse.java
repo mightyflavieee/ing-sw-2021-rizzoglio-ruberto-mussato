@@ -84,9 +84,6 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     super.notify(this);
   }
 
-  public void insertResourcesInHand(List<Resource> resourcesToBeInserted) {
-    this.temporaryResources = listToMapResources(resourcesToBeInserted);
-  }
 
   public void swapShelves(ShelfFloor swapper, ShelfFloor swappee) {
     List<Resource> listOfResourcesSwappee = shelves.get(swappee);
@@ -259,8 +256,6 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
       if (shelfFloor == ShelfFloor.Third) {
         if (resourcesOnFloor.size() > 3) {
           return false;
-        } else {
-          continue;
         }
       }
     }
@@ -275,7 +270,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
         }
         oldResourceOnFloor = resource;
       }
-      oldResourceOnPreviousFloor.add(resource);
+      oldResourceOnPreviousFloor.add(oldResourceOnFloor);
     }
     for (int i = 0; i < oldResourceOnPreviousFloor.size(); i++) {
       final Resource resourceToAnalyze = oldResourceOnPreviousFloor.get(i);
