@@ -70,6 +70,10 @@ public class Match implements Serializable, Cloneable {
     return this.isLastTurn;
   }
 
+  public boolean getisOver() {
+    return isOver;
+  }
+
   public void notifyFaithMapsForCouncil(int numTile) {
     // TODO devo notificare anche lorenzo?
     playerList.forEach(x -> x.papalCouncil(numTile));

@@ -73,8 +73,8 @@ public class FaithMap implements Serializable {
     faithTiles.get(markerPosition).activate();
   }
   public int moveForwardBlack(){
-    blackMarkerPosition++;
     faithTiles.get(blackMarkerPosition).activate();
+    blackMarkerPosition++;
     return blackMarkerPosition;
   }
   public int papalCouncil(int numTile){

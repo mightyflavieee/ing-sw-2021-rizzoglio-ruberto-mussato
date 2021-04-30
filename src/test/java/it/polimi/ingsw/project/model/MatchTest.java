@@ -115,15 +115,6 @@ class MatchTest {
         match.performExtractActionTokenMove();
         assertEquals(2, player.getBoard().getFaithMap().getBlackMarkerPosition());
     }
-
-    @Test
-    void isFeasibleActivateLeaderCardMove() {
-    }
-
-    @Test
-    void performActivateLeaderCardMove() {
-    }
-
     @Test
     void moveForwardBlack() {
         Player player = new Player("pinco pallino");
@@ -133,4 +124,31 @@ class MatchTest {
         match.moveForwardBlack();
         assertEquals(1, player.getBoard().getFaithMap().getBlackMarkerPosition());
     }
+    @Test
+    void endGameforBlack(){
+        Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Match match = new Match(playerList);
+        for(int i = 1; i < 13 ; i++) {
+            while (!(match.getActionTokenContainer().getActionTokens().get(0) instanceof MoveActionToken)) {
+                match.getActionTokenContainer().shuffle();
+            }
+            match.performExtractActionTokenMove();
+            assertEquals(2*i, player.getBoard().getFaithMap().getBlackMarkerPosition());
+        }
+        assertEquals(24, player.getBoard().getFaithMap().getBlackMarkerPosition());
+        assertTrue(match.getisOver());
+
+    }
+
+    @Test
+    void isFeasibleActivateLeaderCardMove() {
+    }
+
+    @Test
+    void performActivateLeaderCardMove() {
+    }
+
+
 }
