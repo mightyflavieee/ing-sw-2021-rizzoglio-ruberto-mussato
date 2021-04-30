@@ -80,7 +80,7 @@ public class Player implements Serializable, Cloneable {
   }
 
   public String getNickname() {
-    return nickname;
+    return this.nickname;
   }
 
   public int getVictoryPoints() {
