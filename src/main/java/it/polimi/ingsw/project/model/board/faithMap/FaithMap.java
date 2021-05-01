@@ -4,6 +4,8 @@ import it.polimi.ingsw.project.model.board.faithMap.tile.ActivableTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.NormalTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.PapalCouncilTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile;
+import it.polimi.ingsw.project.observer.custom.PapalCouncilObserver;
+import it.polimi.ingsw.project.observer.custom.VictoryPointsObserver;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -51,6 +53,54 @@ public class FaithMap implements Serializable {
     this.faithTiles.add(new NormalTile());
     this.faithTiles.add(new NormalTile());
     this.faithTiles.add(new PapalCouncilTile(3));//è anche una it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile
+
+//    this.faithTiles = new ArrayList<>();
+//    this.faithTiles.add(new NormalTile());//1
+//    this.faithTiles.add(new NormalTile());
+//    VictoryPointsTile victoryPointsTile = new VictoryPointsTile(1);
+//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+//    this.faithTiles.add(victoryPointsTile);//3
+//    this.faithTiles.add(new NormalTile());
+//    this.faithTiles.add(new NormalTile());
+//    victoryPointsTile = new VictoryPointsTile(2);
+//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+//    this.faithTiles.add(victoryPointsTile);//6
+//    this.faithTiles.add(new NormalTile());
+//    PapalCouncilTile papalCouncilTile = new PapalCouncilTile(1);
+//    papalCouncilTile.addObserver(new PapalCouncilObserver(match));
+//    this.faithTiles.add(papalCouncilTile);
+//    victoryPointsTile = new VictoryPointsTile(4);
+//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+//    this.faithTiles.add(victoryPointsTile);//9
+//    this.faithTiles.add(new NormalTile());
+//    this.faithTiles.add(new NormalTile());
+//    victoryPointsTile = new VictoryPointsTile(6);
+//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+//    this.faithTiles.add(victoryPointsTile);//12
+//    this.faithTiles.add(new NormalTile());
+//    this.faithTiles.add(new NormalTile());
+//    victoryPointsTile = new VictoryPointsTile(9);
+//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+//    this.faithTiles.add(victoryPointsTile);//15
+//    papalCouncilTile = new PapalCouncilTile(2);
+//    papalCouncilTile.addObserver(new PapalCouncilObserver(match));
+//    this.faithTiles.add(papalCouncilTile);
+//    this.faithTiles.add(new NormalTile());
+//    victoryPointsTile = new VictoryPointsTile(12);
+//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+//    this.faithTiles.add(victoryPointsTile);//18
+//    this.faithTiles.add(new NormalTile());
+//    this.faithTiles.add(new NormalTile());
+//    victoryPointsTile = new VictoryPointsTile(16);
+//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+//    this.faithTiles.add(victoryPointsTile);//21
+//    this.faithTiles.add(new NormalTile());
+//    this.faithTiles.add(new NormalTile());
+//    papalCouncilTile = new PapalCouncilTile(3);
+//    papalCouncilTile.addObserver(new PapalCouncilObserver(match));
+//    this.faithTiles.add(papalCouncilTile);//è anche una it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile
+
+
   }
   public int getMarkerPosition(){
     return markerPosition;
@@ -69,8 +119,8 @@ public class FaithMap implements Serializable {
   }
 
   public void moveForward(){
-    markerPosition++;
     faithTiles.get(markerPosition).activate();
+    markerPosition++;
   }
   public int moveForwardBlack(){
     faithTiles.get(blackMarkerPosition).activate();

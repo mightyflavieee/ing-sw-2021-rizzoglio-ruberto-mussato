@@ -1,6 +1,11 @@
 package it.polimi.ingsw.project.model.board;
 
+import it.polimi.ingsw.project.model.Player;
+import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 import org.junit.jupiter.api.Test;
+
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,6 +50,9 @@ class BoardTest {
 
     @Test
     void moveForward() {
+        Board board = new Board();
+        board.moveForward();
+        assertEquals(1, board.getFaithMap().getMarkerPosition());
     }
 
     @Test
@@ -69,6 +77,13 @@ class BoardTest {
 
     @Test
     void performDiscardLeaderCardMove() {
+        Board board = new Board();
+        LeaderCard leaderCard = new LeaderCard("prova", null, 1, (Map<ResourceType, Integer>) null);
+        board.getLeaderCards().add(leaderCard);
+        assertEquals(1,board.getLeaderCards().size());
+        board.performDiscardLeaderCardMove("prova");
+        assertEquals(0,board.getLeaderCards().size());
+        assertEquals(1, board.getFaithMap().getMarkerPosition());
     }
 
     @Test

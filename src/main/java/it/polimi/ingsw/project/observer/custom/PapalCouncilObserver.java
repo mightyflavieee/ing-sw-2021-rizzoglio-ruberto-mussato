@@ -6,6 +6,11 @@ import it.polimi.ingsw.project.observer.Observer;
 
 public class PapalCouncilObserver implements Observer<PapalCouncilTile> {
     private Match match;
+
+    public PapalCouncilObserver(Match match) {
+        this.match = match;
+    }
+
     @Override
     public void update(PapalCouncilTile message) {
         match.notifyFaithMapsForCouncil(message.getNumTile());

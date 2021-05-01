@@ -1,9 +1,14 @@
 package it.polimi.ingsw.project.model;
 
+import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
+import it.polimi.ingsw.project.model.playermove.DiscardLeaderCardMove;
+import it.polimi.ingsw.project.model.playermove.Move;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,7 +39,9 @@ class PlayerTest {
     }
 
     @Test
-    void moveForward() {
+    void moveForward() {Player player = new Player("pinco pallino");
+        player.moveForward();
+        assertEquals(1, player.getBoard().getFaithMap().getMarkerPosition());
     }
 
     @Test

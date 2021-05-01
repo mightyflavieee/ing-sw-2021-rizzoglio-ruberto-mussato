@@ -6,6 +6,11 @@ import it.polimi.ingsw.project.observer.Observer;
 
 public class VictoryPointsObserver implements Observer<VictoryPointsTile> {
     private Match match;
+
+    public VictoryPointsObserver(Match match) {
+        this.match = match;
+    }
+
     @Override
     public void update(VictoryPointsTile message) {
         match.addVictoryPoints(message.getVictorypoints());
