@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.model.board.faithMap;
 
+import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.faithMap.tile.ActivableTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.NormalTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.PapalCouncilTile;
@@ -18,87 +19,87 @@ public class FaithMap implements Serializable {
   private final List<PapalFavourSlot> papalFavourSlots;
   //definire un costruttore (bisogna specificare ogni casella della mappa)
 
-  public FaithMap() {
+  public FaithMap(Match match) {
     this.markerPosition = 0;
     this.blackMarkerPosition = 0;
-    this.generateMap();
+    this.generateMap(match);
     this.papalFavourSlots = new ArrayList<>();
     this.papalFavourSlots.add(new PapalFavourSlot(2));
     this.papalFavourSlots.add(new PapalFavourSlot(3));
     this.papalFavourSlots.add(new PapalFavourSlot(4));
   }
-  private void generateMap(){ //la faithmap è fissa
-    this.faithTiles = new ArrayList<>();
-    this.faithTiles.add(new NormalTile());//1
-    this.faithTiles.add(new NormalTile());
-    this.faithTiles.add(new VictoryPointsTile(1));//3
-    this.faithTiles.add(new NormalTile());
-    this.faithTiles.add(new NormalTile());
-    this.faithTiles.add(new VictoryPointsTile(2));//6
-    this.faithTiles.add(new NormalTile());
-    this.faithTiles.add(new PapalCouncilTile(1));
-    this.faithTiles.add(new VictoryPointsTile(4));//9
-    this.faithTiles.add(new NormalTile());
-    this.faithTiles.add(new NormalTile());
-    this.faithTiles.add(new VictoryPointsTile(6));//12
-    this.faithTiles.add(new NormalTile());
-    this.faithTiles.add(new NormalTile());
-    this.faithTiles.add(new VictoryPointsTile(9));//15
-    this.faithTiles.add(new PapalCouncilTile(2));
-    this.faithTiles.add(new NormalTile());
-    this.faithTiles.add(new VictoryPointsTile(12));//18
-    this.faithTiles.add(new NormalTile());
-    this.faithTiles.add(new NormalTile());
-    this.faithTiles.add(new VictoryPointsTile(16));//21
-    this.faithTiles.add(new NormalTile());
-    this.faithTiles.add(new NormalTile());
-    this.faithTiles.add(new PapalCouncilTile(3));//è anche una it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile
-
+  private void generateMap(Match match){ //la faithmap è fissa
 //    this.faithTiles = new ArrayList<>();
 //    this.faithTiles.add(new NormalTile());//1
 //    this.faithTiles.add(new NormalTile());
-//    VictoryPointsTile victoryPointsTile = new VictoryPointsTile(1);
-//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
-//    this.faithTiles.add(victoryPointsTile);//3
+//    this.faithTiles.add(new VictoryPointsTile(1));//3
 //    this.faithTiles.add(new NormalTile());
 //    this.faithTiles.add(new NormalTile());
-//    victoryPointsTile = new VictoryPointsTile(2);
-//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
-//    this.faithTiles.add(victoryPointsTile);//6
+//    this.faithTiles.add(new VictoryPointsTile(2));//6
 //    this.faithTiles.add(new NormalTile());
-//    PapalCouncilTile papalCouncilTile = new PapalCouncilTile(1);
-//    papalCouncilTile.addObserver(new PapalCouncilObserver(match));
-//    this.faithTiles.add(papalCouncilTile);
-//    victoryPointsTile = new VictoryPointsTile(4);
-//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
-//    this.faithTiles.add(victoryPointsTile);//9
+//    this.faithTiles.add(new PapalCouncilTile(1));
+//    this.faithTiles.add(new VictoryPointsTile(4));//9
 //    this.faithTiles.add(new NormalTile());
 //    this.faithTiles.add(new NormalTile());
-//    victoryPointsTile = new VictoryPointsTile(6);
-//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
-//    this.faithTiles.add(victoryPointsTile);//12
+//    this.faithTiles.add(new VictoryPointsTile(6));//12
 //    this.faithTiles.add(new NormalTile());
 //    this.faithTiles.add(new NormalTile());
-//    victoryPointsTile = new VictoryPointsTile(9);
-//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
-//    this.faithTiles.add(victoryPointsTile);//15
-//    papalCouncilTile = new PapalCouncilTile(2);
-//    papalCouncilTile.addObserver(new PapalCouncilObserver(match));
-//    this.faithTiles.add(papalCouncilTile);
+//    this.faithTiles.add(new VictoryPointsTile(9));//15
+//    this.faithTiles.add(new PapalCouncilTile(2));
 //    this.faithTiles.add(new NormalTile());
-//    victoryPointsTile = new VictoryPointsTile(12);
-//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
-//    this.faithTiles.add(victoryPointsTile);//18
+//    this.faithTiles.add(new VictoryPointsTile(12));//18
 //    this.faithTiles.add(new NormalTile());
 //    this.faithTiles.add(new NormalTile());
-//    victoryPointsTile = new VictoryPointsTile(16);
-//    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
-//    this.faithTiles.add(victoryPointsTile);//21
+//    this.faithTiles.add(new VictoryPointsTile(16));//21
 //    this.faithTiles.add(new NormalTile());
 //    this.faithTiles.add(new NormalTile());
-//    papalCouncilTile = new PapalCouncilTile(3);
-//    papalCouncilTile.addObserver(new PapalCouncilObserver(match));
-//    this.faithTiles.add(papalCouncilTile);//è anche una it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile
+//    this.faithTiles.add(new PapalCouncilTile(3));//è anche una it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile
+
+    this.faithTiles = new ArrayList<>();
+    this.faithTiles.add(new NormalTile());//1
+    this.faithTiles.add(new NormalTile());
+    VictoryPointsTile victoryPointsTile = new VictoryPointsTile(1);
+    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    this.faithTiles.add(victoryPointsTile);//3
+    this.faithTiles.add(new NormalTile());
+    this.faithTiles.add(new NormalTile());
+    victoryPointsTile = new VictoryPointsTile(2);
+    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    this.faithTiles.add(victoryPointsTile);//6
+    this.faithTiles.add(new NormalTile());
+    PapalCouncilTile papalCouncilTile = new PapalCouncilTile(1);
+    papalCouncilTile.addObserver(new PapalCouncilObserver(match));
+    this.faithTiles.add(papalCouncilTile);
+    victoryPointsTile = new VictoryPointsTile(4);
+    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    this.faithTiles.add(victoryPointsTile);//9
+    this.faithTiles.add(new NormalTile());
+    this.faithTiles.add(new NormalTile());
+    victoryPointsTile = new VictoryPointsTile(6);
+    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    this.faithTiles.add(victoryPointsTile);//12
+    this.faithTiles.add(new NormalTile());
+    this.faithTiles.add(new NormalTile());
+    victoryPointsTile = new VictoryPointsTile(9);
+    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    this.faithTiles.add(victoryPointsTile);//15
+    papalCouncilTile = new PapalCouncilTile(2);
+    papalCouncilTile.addObserver(new PapalCouncilObserver(match));
+    this.faithTiles.add(papalCouncilTile);
+    this.faithTiles.add(new NormalTile());
+    victoryPointsTile = new VictoryPointsTile(12);
+    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    this.faithTiles.add(victoryPointsTile);//18
+    this.faithTiles.add(new NormalTile());
+    this.faithTiles.add(new NormalTile());
+    victoryPointsTile = new VictoryPointsTile(16);
+    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    this.faithTiles.add(victoryPointsTile);//21
+    this.faithTiles.add(new NormalTile());
+    this.faithTiles.add(new NormalTile());
+    papalCouncilTile = new PapalCouncilTile(3);
+    papalCouncilTile.addObserver(new PapalCouncilObserver(match));
+    this.faithTiles.add(papalCouncilTile);//è anche una it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile
 
 
   }

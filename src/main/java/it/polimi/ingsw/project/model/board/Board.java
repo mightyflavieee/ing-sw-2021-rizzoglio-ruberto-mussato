@@ -34,11 +34,12 @@ public class Board implements Serializable, Cloneable {
     this.mapTray = new HashMap<>();
     this.warehouse = new Warehouse();
     this.leaderCards = new ArrayList<>();
-    this.faithMap = new FaithMap();
     this.discounts = Optional.empty();
     this.transmutation = Optional.empty();
   }
-
+ public void createFaithMap(Match match){
+   this.faithMap = new FaithMap(match);
+ }
   public final Board clone() {
     // TODO clone interne
     final Board result = new Board();

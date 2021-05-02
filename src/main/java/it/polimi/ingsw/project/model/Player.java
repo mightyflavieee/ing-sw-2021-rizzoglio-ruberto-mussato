@@ -35,6 +35,9 @@ public class Player implements Serializable, Cloneable {
     this.isConnected = true; // Da gestire stato della connessione del player (con funzione apposita)
     this.victoryPoints = 0;
   }
+  public void createFaithMap(Match match){
+    this.board.createFaithMap(match);
+  }
 
   @Override
   protected final Player clone() {

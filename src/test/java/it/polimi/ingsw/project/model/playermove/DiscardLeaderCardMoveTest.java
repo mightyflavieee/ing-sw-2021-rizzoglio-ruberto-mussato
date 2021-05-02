@@ -54,7 +54,7 @@ class DiscardLeaderCardMoveTest {
             assertEquals(i, player.getBoard().getFaithMap().getMarkerPosition());
         }
         assertEquals(24, player.getBoard().getFaithMap().getMarkerPosition());
-        //assertTrue(match.getIsLastTurn());
+        assertTrue(match.getIsLastTurn());
     }
 
     @Test

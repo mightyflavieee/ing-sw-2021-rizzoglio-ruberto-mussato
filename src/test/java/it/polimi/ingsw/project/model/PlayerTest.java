@@ -40,6 +40,9 @@ class PlayerTest {
 
     @Test
     void moveForward() {Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        player.createFaithMap(new Match(playerList));
         player.moveForward();
         assertEquals(1, player.getBoard().getFaithMap().getMarkerPosition());
     }
@@ -47,6 +50,9 @@ class PlayerTest {
     @Test
     void moveForwardBlack() {
         Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        player.createFaithMap(new Match(playerList));
         player.moveForwardBlack();
         assertEquals(1, player.getBoard().getFaithMap().getBlackMarkerPosition());
     }

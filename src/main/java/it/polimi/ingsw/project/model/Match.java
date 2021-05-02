@@ -27,6 +27,7 @@ public class Match implements Serializable, Cloneable {
   public Match(List<Player> playerList) {
     this.playerList = new ArrayList<>();
     this.playerList.addAll(playerList); //la lista mi arriva già shuffled
+    this.playerList.forEach(x -> x.createFaithMap(this)); //serve per l'inizio partita
     this.market = new Market();
     this.cardContainer = new CardContainer();
     if (playerList.size() == 1) {
@@ -35,6 +36,9 @@ public class Match implements Serializable, Cloneable {
     this.currentPlayer = playerList.get(0);
     this.isLastTurn = false;
     this.isOver = false;
+  }
+
+  public Match() { // da usare nella clone
   }
 
   private Player nextPlayer() {
@@ -120,7 +124,7 @@ public class Match implements Serializable, Cloneable {
   }
 
   public final Match clone() {
-    final Match result = new Match(this.playerList);
+    final Match result = new Match();
     result.actionTokenContainer = actionTokenContainer;
     result.cardContainer = cardContainer;
     result.currentPlayer = currentPlayer;
