@@ -1,11 +1,8 @@
 package it.polimi.ingsw.project.model;
 
-import it.polimi.ingsw.project.model.board.Board;
-import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
-import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import java.io.Serializable;
 import java.util.*;
@@ -16,7 +13,6 @@ public class CardContainer implements Cloneable, Serializable {
   public Map<CardLevel,Map<CardColor,List<DevelopmentCard>>> getCardContainer(){
     return cardContainer;
   }
-
 
   private boolean tryToDiscard(CardColor cardColor, CardLevel cardLevel){
     if(cardContainer.get(cardLevel).get(cardColor).isEmpty()){

@@ -14,6 +14,15 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
   private Optional<Map<ResourceType, Integer>> extraDeposit = Optional.empty(); // da mettere nel costruttore
   private int numResourcesToDiscard;
 
+  public Warehouse() {
+    this.shelves = new HashMap<>();
+    this.shelves.put(ShelfFloor.First, null);
+    this.shelves.put(ShelfFloor.Second, null);
+    this.shelves.put(ShelfFloor.Third, null);
+    this.extraDeposit = Optional.empty();
+    this.numResourcesToDiscard = 0;
+  }
+
   //returns ALL resources presents in the warehouse
   public Map<ResourceType, Integer> mapAllContainedResources() {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<ResourceType, Integer>();
