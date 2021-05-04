@@ -265,7 +265,7 @@ public class Board implements Serializable, Cloneable {
     ShelfFloor bFloor
   ) {
     Map<ShelfFloor, List<Resource>> currentWarehouse =
-      this.warehouse.getShelfs();
+      this.warehouse.getShelves();
     switch (aFloor) {
       case First:
         if (currentWarehouse.get(bFloor).size() > 1) {
