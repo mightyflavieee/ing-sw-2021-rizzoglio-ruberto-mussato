@@ -4,6 +4,7 @@ import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
+import it.polimi.ingsw.project.model.board.card.leaderCard.Status;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 import org.junit.jupiter.api.Test;
@@ -80,6 +81,40 @@ class ActivateLeaderCardMoveTest {
 
     @Test
     void performMove() {
-
+        Player player = new Player("piero");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Match match = new Match(playerList);
+        // creates the LeaderCard
+        Map<ResourceType, Integer> resourcesRequired = new HashMap<>();
+        resourcesRequired.put(ResourceType.Coin, 1);
+        resourcesRequired.put(ResourceType.Stone, 2);
+        LeaderCard leaderCard = new LeaderCard("test", null, 1, resourcesRequired);
+        // adds the LeaderCard to the Board (same card as before)
+        player.getBoard().getLeaderCards().add(leaderCard);
+        // adds resources to the Warehouse
+        List<Resource> resourcesListFirstFloor = new ArrayList<>();
+        List<Resource> resourcesListSecondFloor = new ArrayList<>();
+        List<Resource> resourcesListThirdFloor = new ArrayList<>();
+        Map<ShelfFloor, List<Resource>> shelves = player.getBoard().getWarehouse().getShelves();
+        Resource resource0 = new Resource(ResourceType.Coin);
+        Resource resource1 = new Resource(ResourceType.Stone);
+        Resource resource2 = new Resource(ResourceType.Stone);
+        Resource resource3 = new Resource(ResourceType.Servant);
+        Resource resource4 = new Resource(ResourceType.Servant);
+        Resource resource5 = new Resource(ResourceType.Servant);
+        resourcesListFirstFloor.add(resource0);
+        resourcesListSecondFloor.add(resource1);
+        resourcesListSecondFloor.add(resource2);
+        resourcesListThirdFloor.add(resource3);
+        resourcesListThirdFloor.add(resource4);
+        resourcesListThirdFloor.add(resource5);
+        shelves.put(ShelfFloor.First, resourcesListFirstFloor);
+        shelves.put(ShelfFloor.Second, resourcesListSecondFloor);
+        shelves.put(ShelfFloor.Third, resourcesListThirdFloor);
+        // creates the move
+        Move activateLeaderCard = new ActivateLeaderCardMove("test");
+        // tests the function
+        assertEquals(player.getBoard().getLeaderCards().get(0).getStatus(), Status.Active);
     }
 }
