@@ -32,6 +32,9 @@ public class Board implements Serializable, Cloneable {
   public Board() {
     this.chest = new HashMap<>();
     this.mapTray = new HashMap<>();
+    this.mapTray.put(DevCardPosition.Left, null);
+    this.mapTray.put(DevCardPosition.Center, null);
+    this.mapTray.put(DevCardPosition.Right, null);
     this.warehouse = new Warehouse();
     this.leaderCards = new ArrayList<>();
     this.discounts = Optional.empty();
