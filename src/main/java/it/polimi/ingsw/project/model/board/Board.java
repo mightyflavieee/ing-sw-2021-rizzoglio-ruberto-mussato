@@ -664,10 +664,10 @@ public class Board implements Serializable, Cloneable {
     for (LeaderCard card : this.leaderCards) {
       if (card.getId().equals(leaderCardID)) {
         card.activateCard();
-        if (card.getPerk() instanceof WarehousePerk) {
+        if (card.getPerk().getType() == PerkType.Warehouse) {
           this.warehouse.createExtraDeposit(card.getPerk().getResource());
         }
-        if (card.getPerk() instanceof DiscountPerk) {
+        if (card.getPerk().getType() == PerkType.Discount) {
           if (this.discounts.isPresent()) {
             this.discounts.get().add(card.getPerk().getResource().getType());
           } else {
@@ -676,7 +676,7 @@ public class Board implements Serializable, Cloneable {
             this.discounts = Optional.of(discounts);
           }
         }
-        if (card.getPerk() instanceof TransmutationPerk) {
+        if (card.getPerk().getType() == PerkType.Transmutation) {
           this.transmutation =
             Optional.of(card.getPerk().getResource().getType());
         }
