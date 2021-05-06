@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.model;
 
+import it.polimi.ingsw.project.model.board.card.Card;
 import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
@@ -9,9 +10,38 @@ import java.util.*;
 
 public class CardContainer implements Cloneable, Serializable {
   private Map<CardLevel,Map<CardColor,List<DevelopmentCard>>> cardContainer;
-  //TODO costruttore
+
   public Map<CardLevel,Map<CardColor,List<DevelopmentCard>>> getCardContainer(){
     return cardContainer;
+  }
+
+  // DA MIGLIORARE CON JSON
+  public CardContainer() {
+    List<DevelopmentCard> developmentCardList = new ArrayList<>();
+    Map<CardColor,List<DevelopmentCard>> firstLevelMap = new HashMap<>();
+    Map<CardColor,List<DevelopmentCard>> secondLevelMap = new HashMap<>();
+    Map<CardColor,List<DevelopmentCard>> thirdLevelMap = new HashMap<>();
+    firstLevelMap.put(CardColor.Gold, developmentCardList);
+    firstLevelMap.put(CardColor.Sapphire, developmentCardList);
+    firstLevelMap.put(CardColor.Emerald, developmentCardList);
+    firstLevelMap.put(CardColor.Amethyst, developmentCardList);
+    secondLevelMap.put(CardColor.Gold, developmentCardList);
+    secondLevelMap.put(CardColor.Sapphire, developmentCardList);
+    secondLevelMap.put(CardColor.Emerald, developmentCardList);
+    secondLevelMap.put(CardColor.Amethyst, developmentCardList);
+    thirdLevelMap.put(CardColor.Gold, developmentCardList);
+    thirdLevelMap.put(CardColor.Sapphire, developmentCardList);
+    thirdLevelMap.put(CardColor.Emerald, developmentCardList);
+    thirdLevelMap.put(CardColor.Amethyst, developmentCardList);
+    Map<CardLevel,Map<CardColor,List<DevelopmentCard>>> container = new HashMap<>();
+    container.put(CardLevel.One, firstLevelMap);
+    container.put(CardLevel.Two, secondLevelMap);
+    container.put(CardLevel.Three, thirdLevelMap);
+    this.cardContainer = container;
+  }
+
+  public void addCardToContainer(CardLevel cardLevel, CardColor cardColor, DevelopmentCard developmentCard) {
+    this.cardContainer.get(cardLevel).get(cardColor).add(developmentCard);
   }
 
   private boolean tryToDiscard(CardColor cardColor, CardLevel cardLevel){
