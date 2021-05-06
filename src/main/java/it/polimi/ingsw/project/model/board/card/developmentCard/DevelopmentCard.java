@@ -12,15 +12,13 @@ public class DevelopmentCard extends Card {
   final private CardLevel level;
   final private Production production;
   final private String id;
-  final private Map<ResourceType, Integer> requiredResources;
 
-  public DevelopmentCard(CardColor color, CardLevel level, Production production, String id, Map<ResourceType, Integer> requiredResources, int victoryPoints) {
+  public DevelopmentCard(CardColor color, CardLevel level, Production production, String id, int victoryPoints) {
     super(victoryPoints);
     this.color = color;
     this.level = level;
     this.production = production;
     this.id = id;
-    this.requiredResources = requiredResources;
   }
 
   public CardColor getColor() {
@@ -41,7 +39,7 @@ public class DevelopmentCard extends Card {
 
   public Map<ResourceType, Integer> getRequiredResources() {
     Map<ResourceType, Integer> mapToReturn = new HashMap<>();
-    mapToReturn.putAll(this.requiredResources);
+    mapToReturn.putAll(this.production.getRequiredResources());
     return mapToReturn;
   }
 }

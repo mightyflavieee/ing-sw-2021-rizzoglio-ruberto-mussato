@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.model.board;
 
+import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
@@ -9,10 +10,12 @@ import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.*;
+import javax.crypto.Mac;
 import javax.management.relation.RelationTypeSupport;
 
 public class Board implements Serializable, Cloneable {
@@ -26,6 +29,20 @@ public class Board implements Serializable, Cloneable {
   private Optional<List<ResourceType>> discounts;
   private Optional<ResourceType> transmutation;
 
+  public Board() {
+    this.chest = new HashMap<>();
+    this.mapTray = new HashMap<>();
+    this.mapTray.put(DevCardPosition.Left, null);
+    this.mapTray.put(DevCardPosition.Center, null);
+    this.mapTray.put(DevCardPosition.Right, null);
+    this.warehouse = new Warehouse();
+    this.leaderCards = new ArrayList<>();
+    this.discounts = Optional.empty();
+    this.transmutation = Optional.empty();
+  }
+ public void createFaithMap(Match match){
+   this.faithMap = new FaithMap(match);
+ }
   public final Board clone() {
     // TODO clone interne
     final Board result = new Board();
@@ -37,6 +54,10 @@ public class Board implements Serializable, Cloneable {
     result.discounts = discounts;
     result.transmutation = transmutation;
     return result;
+  }
+
+  public FaithMap getFaithMap() {
+    return faithMap;
   }
 
   public Map<DevCardPosition, List<DevelopmentCard>> getMapTray() {
@@ -244,7 +265,7 @@ public class Board implements Serializable, Cloneable {
     ShelfFloor bFloor
   ) {
     Map<ShelfFloor, List<Resource>> currentWarehouse =
-      this.warehouse.getShelfs();
+      this.warehouse.getShelves();
     switch (aFloor) {
       case First:
         if (currentWarehouse.get(bFloor).size() > 1) {
@@ -643,10 +664,10 @@ public class Board implements Serializable, Cloneable {
     for (LeaderCard card : this.leaderCards) {
       if (card.getId().equals(leaderCardID)) {
         card.activateCard();
-        if (card.getPerk() instanceof WarehousePerk) {
+        if (card.getPerk().getType() == PerkType.Warehouse) {
           this.warehouse.createExtraDeposit(card.getPerk().getResource());
         }
-        if (card.getPerk() instanceof DiscountPerk) {
+        if (card.getPerk().getType() == PerkType.Discount) {
           if (this.discounts.isPresent()) {
             this.discounts.get().add(card.getPerk().getResource().getType());
           } else {
@@ -655,7 +676,7 @@ public class Board implements Serializable, Cloneable {
             this.discounts = Optional.of(discounts);
           }
         }
-        if (card.getPerk() instanceof TransmutationPerk) {
+        if (card.getPerk().getType() == PerkType.Transmutation) {
           this.transmutation =
             Optional.of(card.getPerk().getResource().getType());
         }

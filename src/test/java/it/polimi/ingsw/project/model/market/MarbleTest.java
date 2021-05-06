@@ -8,7 +8,7 @@ class MarbleTest {
 
     @Test
     void getType() {
-        MarbleType marbleType = MarbleType.Black;
+        MarbleType marbleType = MarbleType.Grey;
         Marble marble = new Marble(marbleType);
         assertEquals(marbleType,marble.getType());
     }

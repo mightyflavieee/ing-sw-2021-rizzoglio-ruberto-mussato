@@ -9,6 +9,12 @@ import it.polimi.ingsw.project.observer.Observer;
 public class MoveAndShuffleActionTokenObserver implements Observer<MoveAndShuffleActionToken> {
     private Match match;
     private ActionTokenContainer actionTokenContainer;
+
+    public MoveAndShuffleActionTokenObserver(Match match, ActionTokenContainer actionTokenContainer) {
+        this.match = match;
+        this.actionTokenContainer = actionTokenContainer;
+    }
+
     @Override
     public void update(MoveAndShuffleActionToken message) {
         actionTokenContainer.shuffle();

@@ -11,8 +11,14 @@ import java.util.*;
 public class Warehouse extends Observable<Warehouse> implements Serializable {
 
   private Map<ShelfFloor, List<Resource>> shelves = new HashMap<>();
-  private Optional<Map<ResourceType, Integer>> extraDeposit = Optional.empty();
+  private Optional<Map<ResourceType, Integer>> extraDeposit = Optional.empty(); // da mettere nel costruttore
   private int numResourcesToDiscard;
+
+  public Warehouse() {
+    this.shelves = new HashMap<>();
+    this.extraDeposit = Optional.empty();
+    this.numResourcesToDiscard = 0;
+  }
 
   //returns ALL resources presents in the warehouse
   public Map<ResourceType, Integer> mapAllContainedResources() {
@@ -71,7 +77,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     return currentResourcesMap;
   }
 
-  public Map<ShelfFloor, List<Resource>> getShelfs() {
+  public Map<ShelfFloor, List<Resource>> getShelves() {
     return shelves;
   }
 
@@ -236,7 +242,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     Warehouse warehouse,
     List<Resource> discardedResources
   ) {
-    final Map<ShelfFloor, List<Resource>> shelfs = warehouse.getShelfs();
+    final Map<ShelfFloor, List<Resource>> shelfs = warehouse.getShelves();
     for (ShelfFloor shelfFloor : shelfs.keySet()) {
       final List<Resource> resourcesOnFloor = shelfs.get(shelfFloor);
       if (shelfFloor == ShelfFloor.First) {

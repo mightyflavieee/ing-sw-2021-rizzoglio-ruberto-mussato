@@ -1,12 +1,10 @@
 package it.polimi.ingsw.project.model.board.card.leaderCard;
 
 import java.util.Map;
-import java.util.Optional;
 
 import it.polimi.ingsw.project.model.board.card.Card;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
-import it.polimi.ingsw.project.model.board.card.leaderCard.perk.ProductionPerk;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 

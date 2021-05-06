@@ -8,7 +8,7 @@
   <artifactId>GC23</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>ProjectIngSW</name>
+  <name>GC23</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -32,6 +32,14 @@
       <version>RELEASE</version>
       <scope>test</scope>
     </dependency>
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.8.6</version>
+    </dependency>
+
+
   </dependencies>
 
   <build>

@@ -9,11 +9,39 @@ import java.util.*;
 
 public class CardContainer implements Cloneable, Serializable {
   private Map<CardLevel,Map<CardColor,List<DevelopmentCard>>> cardContainer;
-  //TODO costruttore
+
   public Map<CardLevel,Map<CardColor,List<DevelopmentCard>>> getCardContainer(){
     return cardContainer;
   }
 
+  // DA MIGLIORARE CON JSON
+  public CardContainer() {
+    List<DevelopmentCard> developmentCardList = new ArrayList<>();
+    Map<CardColor,List<DevelopmentCard>> firstLevelMap = new HashMap<>();
+    Map<CardColor,List<DevelopmentCard>> secondLevelMap = new HashMap<>();
+    Map<CardColor,List<DevelopmentCard>> thirdLevelMap = new HashMap<>();
+    firstLevelMap.put(CardColor.Gold, developmentCardList);
+    firstLevelMap.put(CardColor.Sapphire, developmentCardList);
+    firstLevelMap.put(CardColor.Emerald, developmentCardList);
+    firstLevelMap.put(CardColor.Amethyst, developmentCardList);
+    secondLevelMap.put(CardColor.Gold, developmentCardList);
+    secondLevelMap.put(CardColor.Sapphire, developmentCardList);
+    secondLevelMap.put(CardColor.Emerald, developmentCardList);
+    secondLevelMap.put(CardColor.Amethyst, developmentCardList);
+    thirdLevelMap.put(CardColor.Gold, developmentCardList);
+    thirdLevelMap.put(CardColor.Sapphire, developmentCardList);
+    thirdLevelMap.put(CardColor.Emerald, developmentCardList);
+    thirdLevelMap.put(CardColor.Amethyst, developmentCardList);
+    Map<CardLevel,Map<CardColor,List<DevelopmentCard>>> container = new HashMap<>();
+    container.put(CardLevel.One, firstLevelMap);
+    container.put(CardLevel.Two, secondLevelMap);
+    container.put(CardLevel.Three, thirdLevelMap);
+    this.cardContainer = container;
+  }
+
+  public void addCardToContainer(DevelopmentCard developmentCard) {
+    this.cardContainer.get(developmentCard.getLevel()).get(developmentCard.getColor()).add(developmentCard);
+  }
 
   private boolean tryToDiscard(CardColor cardColor, CardLevel cardLevel){
     if(cardContainer.get(cardLevel).get(cardColor).isEmpty()){
