@@ -40,8 +40,8 @@ public class CardContainer implements Cloneable, Serializable {
     this.cardContainer = container;
   }
 
-  public void addCardToContainer(CardLevel cardLevel, CardColor cardColor, DevelopmentCard developmentCard) {
-    this.cardContainer.get(cardLevel).get(cardColor).add(developmentCard);
+  public void addCardToContainer(DevelopmentCard developmentCard) {
+    this.cardContainer.get(developmentCard.getLevel()).get(developmentCard.getColor()).add(developmentCard);
   }
 
   private boolean tryToDiscard(CardColor cardColor, CardLevel cardLevel){
