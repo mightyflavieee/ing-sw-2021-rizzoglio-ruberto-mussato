@@ -32,9 +32,10 @@ public class Board implements Serializable, Cloneable {
   public Board() {
     this.chest = new HashMap<>();
     this.mapTray = new HashMap<>();
-    this.mapTray.put(DevCardPosition.Left, null);
-    this.mapTray.put(DevCardPosition.Center, null);
-    this.mapTray.put(DevCardPosition.Right, null);
+    List<DevelopmentCard> listOfDevCards = new ArrayList<>();
+    this.mapTray.put(DevCardPosition.Left, listOfDevCards);
+    this.mapTray.put(DevCardPosition.Center, listOfDevCards);
+    this.mapTray.put(DevCardPosition.Right, listOfDevCards);
     this.warehouse = new Warehouse();
     this.leaderCards = new ArrayList<>();
     this.discounts = Optional.empty();
@@ -171,17 +172,23 @@ public class Board implements Serializable, Cloneable {
     Map<ResourceType, Integer> warehouseResources =
       this.warehouse.mapAllContainedResources();
     if (resourcesToEliminateWarehouse != null) {
-      for (ResourceType type : warehouseResources.keySet()) {
-        if (
-          warehouseResources.get(type) < resourcesToEliminateWarehouse.get(type)
-        ) {
+      for (ResourceType type : resourcesToEliminateWarehouse.keySet()) {
+        if (warehouseResources.containsKey(type)) {
+          if (warehouseResources.get(type) < resourcesToEliminateWarehouse.get(type)) {
+            return false;
+          }
+        } else {
           return false;
         }
       }
     }
     if (resourcesToEliminateChest != null) {
-      for (ResourceType type : this.chest.keySet()) {
-        if (this.chest.get(type) < resourcesToEliminateChest.get(type)) {
+      for (ResourceType type : resourcesToEliminateChest.keySet()) {
+        if (this.chest.containsKey(type)) {
+          if (this.chest.get(type) < resourcesToEliminateChest.get(type)) {
+            return false;
+          }
+        } else {
           return false;
         }
       }
@@ -318,12 +325,7 @@ public class Board implements Serializable, Cloneable {
     Map<ResourceType, Integer> warehouseResources =
       this.warehouse.mapAllContainedResources();
     // double checks if the resources indicated by the user are actually present
-    if (
-      !areEnoughResourcesPresentForBuyAndProduction(
-        resourcesToEliminateWarehouse,
-        resourcesToEliminateChest
-      )
-    ) {
+    if (!areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
       return false;
     }
     // for each type of resource required, if there isn't enough resources, the move
@@ -413,10 +415,7 @@ public class Board implements Serializable, Cloneable {
         isOneLessCardLevelPresent = true;
       }
     } else {
-      CardLevel currentCardLevel =
-        this.mapTray.get(position)
-          .get(this.mapTray.get(position).size() - 1)
-          .getLevel();
+      CardLevel currentCardLevel = this.mapTray.get(position).get(this.mapTray.get(position).size() - 1).getLevel();
       int currentCardIntLevel = 0;
       if (devCard.getLevel() == CardLevel.One) {
         intLevel = 1;
