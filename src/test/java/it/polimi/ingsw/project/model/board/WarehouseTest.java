@@ -14,6 +14,31 @@ class WarehouseTest {
 
     @Test
     void mapAllContainedResources() {
+        Warehouse warehouse = new Warehouse();
+        List<Resource> resourcesListFirstFloor = new ArrayList<>();
+        List<Resource> resourcesListSecondFloor = new ArrayList<>();
+        List<Resource> resourcesListThirdFloor = new ArrayList<>();
+        Resource resource0 = new Resource(ResourceType.Coin);
+        Resource resource1 = new Resource(ResourceType.Stone);
+        Resource resource2 = new Resource(ResourceType.Stone);
+        Resource resource3 = new Resource(ResourceType.Servant);
+        Resource resource4 = new Resource(ResourceType.Servant);
+        Resource resource5 = new Resource(ResourceType.Servant);
+        resourcesListFirstFloor.add(resource0);
+        resourcesListSecondFloor.add(resource1);
+        resourcesListSecondFloor.add(resource2);
+        resourcesListThirdFloor.add(resource3);
+        resourcesListThirdFloor.add(resource4);
+        resourcesListThirdFloor.add(resource5);
+        warehouse.getShelves().put(ShelfFloor.First, resourcesListFirstFloor);
+        warehouse.getShelves().put(ShelfFloor.Second, resourcesListSecondFloor);
+        warehouse.getShelves().put(ShelfFloor.Third, resourcesListThirdFloor);
+        Map<ResourceType, Integer> allResources = warehouse.mapAllContainedResources();
+        for (ResourceType resourceType : allResources.keySet()) {
+            Integer num = allResources.get(resourceType);
+            System.out.println(num);
+            assertNotNull(num);
+        }
     }
 
     @Test
