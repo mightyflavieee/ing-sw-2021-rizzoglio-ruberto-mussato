@@ -18,13 +18,15 @@ public class DevelopmentCard extends Card {
   final private CardLevel level;
   final private Production production;
   final private String id;
+  final private Map<ResourceType, Integer> cost;
 
-  public DevelopmentCard(CardColor color, CardLevel level, Production production, String id, int victoryPoints) {
+  public DevelopmentCard(CardColor color, CardLevel level, Production production, String id, int victoryPoints, Map<ResourceType, Integer> cost) {
     super(victoryPoints);
     this.color = color;
     this.level = level;
     this.production = production;
     this.id = id;
+    this.cost = cost;
   }
 
   public void toJson() {
@@ -55,7 +57,7 @@ public class DevelopmentCard extends Card {
 
   public Map<ResourceType, Integer> getRequiredResources() {
     Map<ResourceType, Integer> mapToReturn = new HashMap<>();
-    mapToReturn.putAll(this.production.getRequiredResources());
+    mapToReturn.putAll(this.cost);
     return mapToReturn;
   }
 }

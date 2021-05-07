@@ -34,8 +34,11 @@ class DevelopmentCardTest {
         requiredResources.put(ResourceType.Stone, 1);
         Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
         manufacturedResources.put(ResourceType.Faith, 1);
+        Map<ResourceType, Integer> costResources = new HashMap<>();
+        costResources.put(ResourceType.Coin, 2);
         Production demoProduction = new Production(requiredResources, manufacturedResources);
-        DevelopmentCard devCard = new DevelopmentCard(CardColor.Amethyst, CardLevel.One, demoProduction, "id", 1);
+        DevelopmentCard devCard = new DevelopmentCard(CardColor.Amethyst, CardLevel.One, demoProduction, "id", 1,
+                costResources);
         devCard.toJson();
     }
 
@@ -45,7 +48,7 @@ class DevelopmentCardTest {
         map = new HashMap<>();
         map.put(ResourceType.Coin, 2);
         DevelopmentCard developmentCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, new Production(map, map),
-                "prova", 3);
+                "prova", 3, map);
         returnedMap = developmentCard.getRequiredResources();
         assertNotNull(returnedMap);
         assertEquals(returnedMap.size(), map.size());

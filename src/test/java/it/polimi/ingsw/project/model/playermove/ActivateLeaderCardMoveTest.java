@@ -5,6 +5,8 @@ import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.Status;
+import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
+import it.polimi.ingsw.project.model.board.card.leaderCard.perk.PerkType;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 import org.junit.jupiter.api.Test;
@@ -85,11 +87,13 @@ class ActivateLeaderCardMoveTest {
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
         Match match = new Match(playerList);
+        // creates the Perk
+        Perk perk = new Perk(new Resource(ResourceType.Coin), PerkType.Warehouse);
         // creates the LeaderCard
         Map<ResourceType, Integer> resourcesRequired = new HashMap<>();
         resourcesRequired.put(ResourceType.Coin, 1);
         resourcesRequired.put(ResourceType.Stone, 2);
-        LeaderCard leaderCard = new LeaderCard("test", null, 1, resourcesRequired);
+        LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequired);
         // adds the LeaderCard to the Board (same card as before)
         player.getBoard().getLeaderCards().add(leaderCard);
         // adds resources to the Warehouse
@@ -114,7 +118,8 @@ class ActivateLeaderCardMoveTest {
         shelves.put(ShelfFloor.Third, resourcesListThirdFloor);
         // creates the move
         Move activateLeaderCard = new ActivateLeaderCardMove("test");
+        activateLeaderCard.performMove(match);
         // tests the function
-        assertEquals(player.getBoard().getLeaderCards().get(0).getStatus(), Status.Active);
+        assertEquals(Status.Active, player.getBoard().getLeaderCards().get(0).getStatus());
     }
 }
