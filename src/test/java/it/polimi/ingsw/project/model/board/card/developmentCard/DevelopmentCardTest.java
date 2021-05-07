@@ -1,12 +1,20 @@
 package it.polimi.ingsw.project.model.board.card.developmentCard;
 
+import it.polimi.ingsw.project.model.CardContainer;
 import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import com.google.gson.Gson;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,6 +34,20 @@ class DevelopmentCardTest {
 
     @Test
     void getId() {
+    }
+
+    @Test
+    void extractJson() {
+        Gson gson = new Gson();
+
+        try (Reader reader = new FileReader("src/main/resources/developmentCards.json")) {
+
+            // Convert JSON File to Java Object
+            CardContainer cardContainer = gson.fromJson(reader, CardContainer.class);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
