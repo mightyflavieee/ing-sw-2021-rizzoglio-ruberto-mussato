@@ -29,11 +29,22 @@ class DevelopmentCardTest {
     }
 
     @Test
+    void buildJson() {
+        Map<ResourceType, Integer> requiredResources = new HashMap<>();
+        requiredResources.put(ResourceType.Stone, 1);
+        Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
+        manufacturedResources.put(ResourceType.Faith, 1);
+        Production demoProduction = new Production(requiredResources, manufacturedResources);
+        DevelopmentCard devCard = new DevelopmentCard(CardColor.Amethyst, CardLevel.One, demoProduction, "id", 1);
+        devCard.toJson();
+    }
+
+    @Test
     void getRequiredResources() {
         Map<ResourceType, Integer> map, returnedMap;
         map = new HashMap<>();
         map.put(ResourceType.Coin, 2);
-        DevelopmentCard developmentCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, new Production(map,map),
+        DevelopmentCard developmentCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, new Production(map, map),
                 "prova", 3);
         returnedMap = developmentCard.getRequiredResources();
         assertNotNull(returnedMap);
@@ -42,6 +53,5 @@ class DevelopmentCardTest {
         assertNotSame(map, returnedMap);
 
     }
-
 
 }

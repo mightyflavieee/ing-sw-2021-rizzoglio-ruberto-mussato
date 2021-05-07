@@ -1,0 +1,22 @@
+[
+  {
+    "color": "Emerald",
+    "level": "One",
+    "production": {
+      "requiredResources": { "Coin": 1 },
+      "manufacturedResources": { "Faith": 1 }
+    },
+    "id": "id",
+    "victoryPoints": 1
+  },
+  {
+    "color": "Amethyst",
+    "level": "One",
+    "production": {
+      "requiredResources": { "Stone": 1 },
+      "manufacturedResources": { "Faith": 1 }
+    },
+    "id": "id",
+    "victoryPoints": 1
+  }
+]
