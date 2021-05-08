@@ -1,0 +1,242 @@
+[
+  {
+    "id": "1",
+    "perk": {
+      "resource": {
+        "type": "Servant"
+      },
+      "type": "Discount"
+    },
+    "required-resources": "",
+    "required-devcards": [{"color": "Gold", "quantity": 1},
+      {"color": "Emerald", "quantity": 1}
+    ],
+    "required-devcard-level": "",
+    "status": "Inactive",
+    "victory-points": 2
+  },
+  {
+    "id": "2",
+    "perk": {
+      "resource": {
+        "type": "Shield"
+      },
+      "type": "Discount"
+    },
+    "required-resources": "",
+    "required-devcards": [{"color": "Sapphire", "quantity": 1},
+      {"color": "Amethyst", "quantity": 1}
+    ],
+    "required-devcard-level": "",
+    "status": "Inactive",
+    "victory-points": 2
+  },
+  {
+    "id": "3",
+    "perk": {
+      "resource": {
+        "type": "Stone"
+      },
+      "type": "Discount"
+    },
+    "required-resources": "",
+    "required-devcards": [{"color": "Emerald", "quantity": 1},
+      {"color": "Sapphire", "quantity": 1}
+    ],
+    "required-devcard-level": "",
+    "status": "Inactive",
+    "victory-points": 2
+  },
+  {
+    "id": "4",
+    "perk": {
+      "resource": {
+        "type": "Coin"
+      },
+      "type": "Discount"
+    },
+    "required-resources": "",
+    "required-devcards": [{"color": "Gold", "quantity": 1},
+      {"color": "Amethyst", "quantity": 1}
+    ],
+    "required-devcard-level": "",
+    "status": "Inactive",
+    "victory-points": 2
+  },
+  {
+    "id": "5",
+    "perk": {
+      "resource": {
+        "type": "Stone"
+      },
+      "type": "Warehouse"
+    },
+    "required-resources": [{"type": "Coin", "quantity": 5}],
+    "required-devcards": "",
+    "required-devcard-level": "",
+    "status": "Inactive",
+    "victory-points": 3
+  },
+  {
+    "id": "6",
+    "perk": {
+      "resource": {
+        "type": "Servant"
+      },
+      "type": "Warehouse"
+    },
+    "required-resources": [{"type": "Stone", "quantity": 5}],
+    "required-devcards": "",
+    "required-devcard-level": "",
+    "status": "Inactive",
+    "victory-points": 3
+  },
+  {
+    "id": "7",
+    "perk": {
+      "resource": {
+        "type": "Shield"
+      },
+      "type": "Warehouse"
+    },
+    "required-resources": [{"type": "Servant", "quantity": 5}],
+    "required-devcards": "",
+    "required-devcard-level": "",
+    "status": "Inactive",
+    "victory-points": 3
+  },
+  {
+    "id": "8",
+    "perk": {
+      "resource": {
+        "type": "Coin"
+      },
+      "type": "Warehouse"
+    },
+    "required-resources": [{"type": "Shield", "quantity": 5}],
+    "required-devcards": "",
+    "required-devcard-level": "",
+    "status": "Inactive",
+    "victory-points": 3
+  },
+  {
+    "id": "9",
+    "perk": {
+      "resource": {
+        "type": "Servant"
+      },
+      "type": "Transmutation"
+    },
+    "required-resources": "",
+    "required-devcards": [{"color": "Gold", "quantity": 2},
+      {"color": "Sapphire", "quantity": 1}
+    ],
+    "required-devcard-level": "",
+    "status": "Inactive",
+    "victory-points": 5
+  },
+  {
+    "id": "10",
+    "perk": {
+      "resource": {
+        "type": "Shield"
+      },
+      "type": "Transmutation"
+    },
+    "required-resources": "",
+    "required-devcards": [{"color": "Emerald", "quantity": 2},
+      {"color": "Amethyst", "quantity": 1}
+    ],
+    "required-devcard-level": "",
+    "status": "Inactive",
+    "victory-points": 5
+  },
+  {
+    "id": "11",
+    "perk": {
+      "resource": {
+        "type": "Stone"
+      },
+      "type": "Transmutation"
+    },
+    "required-resources": "",
+    "required-devcards": [{"color": "Sapphire", "quantity": 2},
+      {"color": "Gold", "quantity": 1}
+    ],
+    "required-devcard-level": "",
+    "status": "Inactive",
+    "victory-points": 5
+  },
+  {
+    "id": "12",
+    "perk": {
+      "resource": {
+        "type": "Coin"
+      },
+      "type": "Transmutation"
+    },
+    "required-resources": "",
+    "required-devcards": [{"color": "Amethyst", "quantity": 2},
+      {"color": "Emerald", "quantity": 1}
+    ],
+    "required-devcard-level": "",
+    "status": "Inactive",
+    "victory-points": 5
+  },
+  {
+    "id": "13",
+    "perk": {
+      "resource": {
+        "type": "Shield"
+      },
+      "type": "Production"
+    },
+    "required-resources": "",
+    "required-devcards": "",
+    "required-devcard-level": [{"color": "Gold", "level": 2}],
+    "status": "Inactive",
+    "victory-points": 4
+  },
+  {
+    "id": "14",
+    "perk": {
+      "resource": {
+        "type": "Servant"
+      },
+      "type": "Production"
+    },
+    "required-resources": "",
+    "required-devcards": "",
+    "required-devcard-level": [{"color": "Sapphire", "level": 2}],
+    "status": "Inactive",
+    "victory-points": 4
+  },
+  {
+    "id": "15",
+    "perk": {
+      "resource": {
+        "type": "Stone"
+      },
+      "type": "Production"
+    },
+    "required-resources": "",
+    "required-devcards": "",
+    "required-devcard-level": [{"color": "Amethyst", "level": 2}],
+    "status": "Inactive",
+    "victory-points": 4
+  },
+  {
+    "id": "16",
+    "perk": {
+      "resource": {
+        "type": "Coin"
+      },
+      "type": "Production"
+    },
+    "required-resources": "",
+    "required-devcards": "",
+    "required-devcard-level": [{"color": "Emerald", "level": 2}],
+    "status": "Inactive",
+    "victory-points": 4
+  }
+]
