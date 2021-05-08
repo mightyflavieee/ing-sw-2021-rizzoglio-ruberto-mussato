@@ -9,7 +9,6 @@ import java.util.*;
 
 public class CardContainer implements Cloneable, Serializable {
   private Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> cardContainer;
-  public List<DevelopmentCard> allCards;
 
   public Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> getCardContainer() {
     return cardContainer;
@@ -17,27 +16,29 @@ public class CardContainer implements Cloneable, Serializable {
 
   // DA MIGLIORARE CON JSON
   public CardContainer() {
-    List<DevelopmentCard> developmentCardList = new ArrayList<>();
-    Map<CardColor, List<DevelopmentCard>> firstLevelMap = new HashMap<>();
-    Map<CardColor, List<DevelopmentCard>> secondLevelMap = new HashMap<>();
-    Map<CardColor, List<DevelopmentCard>> thirdLevelMap = new HashMap<>();
-    firstLevelMap.put(CardColor.Gold, developmentCardList);
-    firstLevelMap.put(CardColor.Sapphire, developmentCardList);
-    firstLevelMap.put(CardColor.Emerald, developmentCardList);
-    firstLevelMap.put(CardColor.Amethyst, developmentCardList);
-    secondLevelMap.put(CardColor.Gold, developmentCardList);
-    secondLevelMap.put(CardColor.Sapphire, developmentCardList);
-    secondLevelMap.put(CardColor.Emerald, developmentCardList);
-    secondLevelMap.put(CardColor.Amethyst, developmentCardList);
-    thirdLevelMap.put(CardColor.Gold, developmentCardList);
-    thirdLevelMap.put(CardColor.Sapphire, developmentCardList);
-    thirdLevelMap.put(CardColor.Emerald, developmentCardList);
-    thirdLevelMap.put(CardColor.Amethyst, developmentCardList);
-    Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> container = new HashMap<>();
-    container.put(CardLevel.One, firstLevelMap);
-    container.put(CardLevel.Two, secondLevelMap);
-    container.put(CardLevel.Three, thirdLevelMap);
-    this.cardContainer = container;
+
+    // Convert JSON File to Java Object
+    CardContainerBuilder cardContainerBuilder = new CardContainerBuilder("src/main/resources/developmentCards.json");
+    List<DevelopmentCard> allCards = cardContainerBuilder.allCards;
+    Collections.shuffle(allCards);
+    Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> tempCardContainer = initMapCards();
+    for (DevelopmentCard developmentCard : allCards) {
+      tempCardContainer.get(developmentCard.getLevel()).get(developmentCard.getColor()).add(developmentCard);
+    }
+    this.cardContainer = tempCardContainer;
+
+  }
+
+  private Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> initMapCards() {
+    Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> tempCardContainer = new HashMap<CardLevel, Map<CardColor, List<DevelopmentCard>>>();
+    for (CardLevel cardLevel : CardLevel.values()) {
+      final Map<CardColor, List<DevelopmentCard>> mapColorCard = new HashMap<CardColor, List<DevelopmentCard>>();
+      for (CardColor cardColor : CardColor.values()) {
+        mapColorCard.put(cardColor, new ArrayList<DevelopmentCard>());
+      }
+      tempCardContainer.put(cardLevel, mapColorCard);
+    }
+    return tempCardContainer;
   }
 
   public void addCardToContainer(DevelopmentCard developmentCard) {

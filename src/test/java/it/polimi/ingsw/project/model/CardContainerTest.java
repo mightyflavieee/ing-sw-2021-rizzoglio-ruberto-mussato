@@ -7,6 +7,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class CardContainerTest {
 
     @Test
+    void constructor() {
+        new CardContainer();
+    }
+
+    @Test
     void getCardContainer() {
     }
 

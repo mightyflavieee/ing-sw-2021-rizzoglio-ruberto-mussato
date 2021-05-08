@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.model.board.card.developmentCard;
 
 import it.polimi.ingsw.project.model.CardContainer;
+import it.polimi.ingsw.project.model.CardContainerBuilder;
 import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.resource.ResourceType;
@@ -34,34 +35,6 @@ class DevelopmentCardTest {
 
     @Test
     void getId() {
-    }
-
-    @Test
-    void extractJson() {
-        Gson gson = new Gson();
-
-        try (Reader reader = new FileReader("src/main/resources/developmentCards.json")) {
-
-            // Convert JSON File to Java Object
-            CardContainer cardContainer = gson.fromJson(reader, CardContainer.class);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Test
-    void buildJson() {
-        Map<ResourceType, Integer> requiredResources = new HashMap<>();
-        requiredResources.put(ResourceType.Stone, 1);
-        Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
-        manufacturedResources.put(ResourceType.Faith, 1);
-        Map<ResourceType, Integer> costResources = new HashMap<>();
-        costResources.put(ResourceType.Coin, 2);
-        Production demoProduction = new Production(requiredResources, manufacturedResources);
-        DevelopmentCard devCard = new DevelopmentCard(CardColor.Amethyst, CardLevel.One, demoProduction, "id", 1,
-                costResources);
-        devCard.toJson();
     }
 
     @Test
