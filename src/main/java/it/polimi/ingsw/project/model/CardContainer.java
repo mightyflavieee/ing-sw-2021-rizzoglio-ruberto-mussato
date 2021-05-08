@@ -97,6 +97,7 @@ public class CardContainer implements Cloneable, Serializable {
         for (DevelopmentCard card : this.cardContainer.get(level).get(color)) {
           if (card.getId().equals(devCardID)) {
             this.cardContainer.get(level).get(color).remove(boughtCard);
+            break;
           }
         }
       }

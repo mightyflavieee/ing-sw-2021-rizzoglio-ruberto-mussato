@@ -1,6 +1,6 @@
 [
   {
-    "id": "1",
+    "id": "id1",
     "perk": {
       "resource": {
         "type": "Servant"
@@ -8,15 +8,16 @@
       "type": "Discount"
     },
     "required-resources": "",
-    "required-devcards": [{"color": "Gold", "quantity": 1},
-      {"color": "Emerald", "quantity": 1}
+    "required-devcards": [
+      {"color": "Gold", "quantity":  1},
+      {"color": "Emerald", "quantity":  1}
     ],
     "required-devcard-level": "",
     "status": "Inactive",
     "victory-points": 2
   },
   {
-    "id": "2",
+    "id": "id2",
     "perk": {
       "resource": {
         "type": "Shield"
@@ -24,15 +25,16 @@
       "type": "Discount"
     },
     "required-resources": "",
-    "required-devcards": [{"color": "Sapphire", "quantity": 1},
-      {"color": "Amethyst", "quantity": 1}
+    "required-devcards": [
+      {"color": "Sapphire", "quantity":  1},
+      {"color": "Amethyst", "quantity":  1}
     ],
     "required-devcard-level": "",
     "status": "Inactive",
     "victory-points": 2
   },
   {
-    "id": "3",
+    "id": "id3",
     "perk": {
       "resource": {
         "type": "Stone"
@@ -40,15 +42,16 @@
       "type": "Discount"
     },
     "required-resources": "",
-    "required-devcards": [{"color": "Emerald", "quantity": 1},
-      {"color": "Sapphire", "quantity": 1}
+    "required-devcards": [
+      {"color": "Emerald", "quantity":  1},
+      {"color": "Sapphire", "quantity":  1}
     ],
     "required-devcard-level": "",
     "status": "Inactive",
     "victory-points": 2
   },
   {
-    "id": "4",
+    "id": "id4",
     "perk": {
       "resource": {
         "type": "Coin"
@@ -56,15 +59,16 @@
       "type": "Discount"
     },
     "required-resources": "",
-    "required-devcards": [{"color": "Gold", "quantity": 1},
-      {"color": "Amethyst", "quantity": 1}
+    "required-devcards": [
+      {"color": "Gold", "quantity":  1},
+      {"color": "Amethyst", "quantity":  1}
     ],
     "required-devcard-level": "",
     "status": "Inactive",
-    "victory-points": 2
+    "victory-points": 3
   },
   {
-    "id": "5",
+    "id": "id5",
     "perk": {
       "resource": {
         "type": "Stone"
@@ -78,7 +82,7 @@
     "victory-points": 3
   },
   {
-    "id": "6",
+    "id": "id6",
     "perk": {
       "resource": {
         "type": "Servant"
@@ -92,7 +96,7 @@
     "victory-points": 3
   },
   {
-    "id": "7",
+    "id": "id7",
     "perk": {
       "resource": {
         "type": "Shield"
@@ -106,7 +110,7 @@
     "victory-points": 3
   },
   {
-    "id": "8",
+    "id": "id8",
     "perk": {
       "resource": {
         "type": "Coin"
@@ -120,7 +124,7 @@
     "victory-points": 3
   },
   {
-    "id": "9",
+    "id": "id9",
     "perk": {
       "resource": {
         "type": "Servant"
@@ -128,15 +132,16 @@
       "type": "Transmutation"
     },
     "required-resources": "",
-    "required-devcards": [{"color": "Gold", "quantity": 2},
-      {"color": "Sapphire", "quantity": 1}
+    "required-devcards": [
+      {"color": "Gold", "quantity":  2},
+      {"color": "Sapphire", "quantity":  1}
     ],
     "required-devcard-level": "",
     "status": "Inactive",
     "victory-points": 5
   },
   {
-    "id": "10",
+    "id": "id10",
     "perk": {
       "resource": {
         "type": "Shield"
@@ -144,15 +149,16 @@
       "type": "Transmutation"
     },
     "required-resources": "",
-    "required-devcards": [{"color": "Emerald", "quantity": 2},
-      {"color": "Amethyst", "quantity": 1}
+    "required-devcards": [
+      {"color": "Emerald", "quantity":  2},
+      {"color": "Amethyst", "quantity":  1}
     ],
     "required-devcard-level": "",
     "status": "Inactive",
     "victory-points": 5
   },
   {
-    "id": "11",
+    "id": "id11",
     "perk": {
       "resource": {
         "type": "Stone"
@@ -160,15 +166,16 @@
       "type": "Transmutation"
     },
     "required-resources": "",
-    "required-devcards": [{"color": "Sapphire", "quantity": 2},
-      {"color": "Gold", "quantity": 1}
+    "required-devcards": [
+      {"color": "Sapphire", "quantity":  2},
+      {"color": "Gold", "quantity":  1}
     ],
     "required-devcard-level": "",
     "status": "Inactive",
     "victory-points": 5
   },
   {
-    "id": "12",
+    "id": "id12",
     "perk": {
       "resource": {
         "type": "Coin"
@@ -176,15 +183,16 @@
       "type": "Transmutation"
     },
     "required-resources": "",
-    "required-devcards": [{"color": "Amethyst", "quantity": 2},
-      {"color": "Emerald", "quantity": 1}
+    "required-devcards": [
+      {"color": "Amethyst", "quantity":  2},
+      {"color": "Emerald", "quantity":  1}
     ],
     "required-devcard-level": "",
     "status": "Inactive",
     "victory-points": 5
   },
   {
-    "id": "13",
+    "id": "id13",
     "perk": {
       "resource": {
         "type": "Shield"
@@ -193,12 +201,12 @@
     },
     "required-resources": "",
     "required-devcards": "",
-    "required-devcard-level": [{"color": "Gold", "level": 2}],
+    "required-devcard-level": [{"color": "Gold", "level":  2}],
     "status": "Inactive",
     "victory-points": 4
   },
   {
-    "id": "14",
+    "id": "id14",
     "perk": {
       "resource": {
         "type": "Servant"
@@ -207,12 +215,12 @@
     },
     "required-resources": "",
     "required-devcards": "",
-    "required-devcard-level": [{"color": "Sapphire", "level": 2}],
+    "required-devcard-level": [{"color": "Sapphire", "level":  2}],
     "status": "Inactive",
     "victory-points": 4
   },
   {
-    "id": "15",
+    "id": "id15",
     "perk": {
       "resource": {
         "type": "Stone"
@@ -221,12 +229,12 @@
     },
     "required-resources": "",
     "required-devcards": "",
-    "required-devcard-level": [{"color": "Amethyst", "level": 2}],
+    "required-devcard-level": [{"color": "Amethyst", "level":  2}],
     "status": "Inactive",
     "victory-points": 4
   },
   {
-    "id": "16",
+    "id": "id16",
     "perk": {
       "resource": {
         "type": "Coin"
@@ -235,8 +243,9 @@
     },
     "required-resources": "",
     "required-devcards": "",
-    "required-devcard-level": [{"color": "Emerald", "level": 2}],
+    "required-devcard-level": [{"color": "Emerald", "level":  2}],
     "status": "Inactive",
     "victory-points": 4
   }
 ]
+
