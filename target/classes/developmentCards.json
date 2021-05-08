@@ -1,0 +1,532 @@
+{
+  "allCards": [
+    {
+      "color": "Emerald",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Coin": 1 },
+        "manufacturedResources": { "Faith": 1 }
+      },
+      "id": "id",
+      "cost": { "Shield": 2 },
+      "victoryPoints": 1
+    },
+    {
+      "color": "Amethyst",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Stone": 1 },
+        "manufacturedResources": { "Faith": 1 }
+      },
+      "cost": { "Servant": 2 },
+      "id": "id2",
+      "victoryPoints": 1
+    },
+    {
+      "color": "Sapphire",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Shield": 1 },
+        "manufacturedResources": { "Faith": 1 }
+      },
+      "cost": { "Coin": 2 },
+      "id": "id3",
+      "victoryPoints": 1
+    },
+    {
+      "color": "Gold",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Servant": 1 },
+        "manufacturedResources": { "Faith": 1 }
+      },
+      "cost": { "Stone": 2 },
+      "id": "id4",
+      "victoryPoints": 1
+    },
+    {
+      "color": "Emerald",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Stone": 1 },
+        "manufacturedResources": { "Servant": 1 }
+      },
+      "cost": { "Servant": 1, "Stone": 1, "Shield": 1 },
+      "id": "id5",
+      "victoryPoints": 2
+    },
+    {
+      "color": "Amethyst",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Coin": 1 },
+        "manufacturedResources": { "Shield": 1 }
+      },
+      "cost": { "Servant": 1, "Coin": 1, "Shield": 1 },
+      "id": "id6",
+      "victoryPoints": 2
+    },
+    {
+      "color": "Sapphire",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Servant": 1 },
+        "manufacturedResources": { "Stone": 1 }
+      },
+      "cost": { "Servant": 1, "Coin": 1, "Stone": 1 },
+      "id": "id7",
+      "victoryPoints": 2
+    },
+    {
+      "color": "Gold",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Shield": 1 },
+        "manufacturedResources": { "Coin": 1 }
+      },
+      "cost": { "Shield": 1, "Stone": 1, "Coin": 1 },
+      "id": "id8",
+      "victoryPoints": 2
+    },
+    {
+      "color": "Emerald",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Servant": 2 },
+        "manufacturedResources": { "Coin": 1, "Shield": 1, "Stone": 1 }
+      },
+      "cost": { "Shield": 3 },
+      "id": "id9",
+      "victoryPoints": 3
+    },
+    {
+      "color": "Amethyst",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Coin": 2 },
+        "manufacturedResources": { "Servant": 1, "Shield": 1, "Stone": 1 }
+      },
+      "cost": { "Servant": 3 },
+      "id": "id10",
+      "victoryPoints": 3
+    },
+    {
+      "color": "Sapphire",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Stone": 2 },
+        "manufacturedResources": { "Servant": 1, "Coin": 1, "Shield": 1 }
+      },
+      "cost": { "Coin": 3 },
+      "id": "id11",
+      "victoryPoints": 3
+    },
+    {
+      "color": "Gold",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Shield": 2 },
+        "manufacturedResources": { "Coin": 1, "Servant": 1, "Stone": 1 }
+      },
+      "cost": { "Stone": 3 },
+      "id": "id12",
+      "victoryPoints": 3
+    },
+    {
+      "color": "Emerald",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Stone": 1, "Servant": 1 },
+        "manufacturedResources": { "Faith": 1, "Coin": 2 }
+      },
+      "cost": { "Shield": 2, "Coin": 2 },
+      "id": "id13",
+      "victoryPoints": 4
+    },
+    {
+      "color": "Amethyst",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Coin": 1, "Shield": 1 },
+        "manufacturedResources": { "Faith": 1, "Stone": 2 }
+      },
+      "cost": { "Servant": 2, "Stone": 2 },
+      "id": "id14",
+      "victoryPoints": 4
+    },
+    {
+      "color": "Sapphire",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Shield": 1, "Stone": 1 },
+        "manufacturedResources": { "Faith": 1, "Servant": 2 }
+      },
+      "cost": { "Servant": 2, "Coin": 2 },
+      "id": "id15",
+      "victoryPoints": 4
+    },
+    {
+      "color": "Gold",
+      "level": "One",
+      "production": {
+        "requiredResources": { "Coin": 1, "Servant": 1 },
+        "manufacturedResources": { "Faith": 1, "Shield": 2 }
+      },
+      "cost": { "Stone": 2, "Shield": 2 },
+      "id": "id16",
+      "victoryPoints": 4
+    },
+    {
+      "color": "Emerald",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Stone": 1 },
+        "manufacturedResources": { "Faith": 2 }
+      },
+      "cost": { "Shield": 4 },
+      "id": "id17",
+      "victoryPoints": 5
+    },
+    {
+      "color": "Amethyst",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Coin": 1 },
+        "manufacturedResources": { "Faith": 2 }
+      },
+      "cost": { "Servant": 4 },
+      "id": "id18",
+      "victoryPoints": 5
+    },
+    {
+      "color": "Sapphire",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Servant": 1 },
+        "manufacturedResources": { "Faith": 2 }
+      },
+      "cost": { "Coin": 4 },
+      "id": "id19",
+      "victoryPoints": 5
+    },
+    {
+      "color": "Gold",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Shield": 1 },
+        "manufacturedResources": { "Faith": 2 }
+      },
+      "cost": { "Stone": 4 },
+      "id": "id20",
+      "victoryPoints": 5
+    },
+    {
+      "color": "Emerald",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Shield": 1, "Servant": 1 },
+        "manufacturedResources": { "Stone": 3 }
+      },
+      "cost": { "Servant": 2, "Shield": 3 },
+      "id": "id21",
+      "victoryPoints": 6
+    },
+    {
+      "color": "Amethyst",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Coin": 1, "Servant": 1 },
+        "manufacturedResources": { "Shield": 3 }
+      },
+      "cost": { "Servant": 3, "Coin": 2 },
+      "id": "id22",
+      "victoryPoints": 6
+    },
+    {
+      "color": "Sapphire",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Stone": 1, "Coin": 1 },
+        "manufacturedResources": { "Servant": 3 }
+      },
+      "cost": { "Coin": 3, "Stone": 2 },
+      "id": "id23",
+      "victoryPoints": 6
+    },
+    {
+      "color": "Gold",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Stone": 1, "Shield": 1 },
+        "manufacturedResources": { "Coin": 3 }
+      },
+      "cost": { "Stone": 3, "Shield": 2 },
+      "id": "id24",
+      "victoryPoints": 6
+    },
+    {
+      "color": "Emerald",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Coin": 2 },
+        "manufacturedResources": { "Faith": 2, "Stone": 2 }
+      },
+      "cost": { "Shield": 5 },
+      "id": "id25",
+      "victoryPoints": 7
+    },
+    {
+      "color": "Amethyst",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Stone": 2 },
+        "manufacturedResources": { "Faith": 2, "Coin": 2 }
+      },
+      "cost": { "Servant": 5 },
+      "id": "id26",
+      "victoryPoints": 7
+    },
+    {
+      "color": "Sapphire",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Servant": 2 },
+        "manufacturedResources": { "Faith": 2, "Shield": 2 }
+      },
+      "cost": { "Coin": 5 },
+      "id": "id27",
+      "victoryPoints": 7
+    },
+    {
+      "color": "Gold",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Shield": 2 },
+        "manufacturedResources": { "Faith": 2, "Servant": 2 }
+      },
+      "cost": { "Stone": 5 },
+      "id": "id28",
+      "victoryPoints": 7
+    },
+    {
+      "color": "Emerald",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Coin": 1 },
+        "manufacturedResources": { "Faith": 1, "Shield": 2 }
+      },
+      "cost": { "Shield": 3, "Coin": 3 },
+      "id": "id29",
+      "victoryPoints": 8
+    },
+    {
+      "color": "Amethyst",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Stone": 1 },
+        "manufacturedResources": { "Faith": 1, "Servant": 2 }
+      },
+      "cost": { "Servant": 3, "Shield": 3 },
+      "id": "id30",
+      "victoryPoints": 8
+    },
+    {
+      "color": "Sapphire",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Servant": 1 },
+        "manufacturedResources": { "Stone": 2, "Faith": 1 }
+      },
+      "cost": { "Coin": 3, "Stone": 3 },
+      "id": "id31",
+      "victoryPoints": 8
+    },
+    {
+      "color": "Gold",
+      "level": "Two",
+      "production": {
+        "requiredResources": { "Shield": 1 },
+        "manufacturedResources": { "Faith": 1, "Coin": 2 }
+      },
+      "cost": { "Servant": 3, "Stone": 3 },
+      "id": "id32",
+      "victoryPoints": 8
+    },
+    {
+      "color": "Emerald",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Coin": 2 },
+        "manufacturedResources": { "Faith": 2, "Stone": 3 }
+      },
+      "cost": { "Shield": 6 },
+      "id": "id33",
+      "victoryPoints": 9
+    },
+    {
+      "color": "Amethyst",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Stone": 2 },
+        "manufacturedResources": { "Faith": 2, "Coin": 3 }
+      },
+      "cost": { "Servant": 6 },
+      "id": "id34",
+      "victoryPoints": 9
+    },
+    {
+      "color": "Sapphire",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Servant": 2 },
+        "manufacturedResources": { "Faith": 2, "Shield": 3 }
+      },
+      "cost": { "Coin": 6 },
+      "id": "id35",
+      "victoryPoints": 9
+    },
+    {
+      "color": "Gold",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Shield": 2 },
+        "manufacturedResources": { "Faith": 2, "Servant": 3 }
+      },
+      "cost": { "Stone": 6 },
+      "id": "id36",
+      "victoryPoints": 9
+    },
+    {
+      "color": "Emerald",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Servant": 1, "Coin": 1 },
+        "manufacturedResources": { "Faith": 1, "Shield": 2, "Stone": 2 }
+      },
+      "cost": { "Shield": 5, "Servant": 2 },
+      "id": "id37",
+      "victoryPoints": 10
+    },
+    {
+      "color": "Amethyst",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Stone": 1, "Shield": 1 },
+        "manufacturedResources": { "Faith": 1, "Coin": 2, "Servant": 2 }
+      },
+      "cost": { "Servant": 5, "Coin": 2 },
+      "id": "id38",
+      "victoryPoints": 10
+    },
+    {
+      "color": "Sapphire",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Coin": 1, "Shield": 1 },
+        "manufacturedResources": { "Faith": 1, "Servant": 2, "Stone": 2 }
+      },
+      "cost": { "Coin": 5, "Stone": 2 },
+      "id": "id39",
+      "victoryPoints": 10
+    },
+    {
+      "color": "Gold",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Stone": 1, "Servant": 1 },
+        "manufacturedResources": { "Faith": 1, "Shield": 2, "Coin": 2 }
+      },
+      "cost": { "Servant": 2, "Stone": 5 },
+      "id": "id40",
+      "victoryPoints": 10
+    },
+    {
+      "color": "Emerald",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Servant": 1 },
+        "manufacturedResources": { "Faith": 3, "Coin": 1 }
+      },
+      "cost": { "Shield": 7 },
+      "id": "id41",
+      "victoryPoints": 11
+    },
+    {
+      "color": "Amethyst",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Coin": 1 },
+        "manufacturedResources": { "Faith": 3, "Stone": 1 }
+      },
+      "cost": { "Servant": 7 },
+      "id": "id42",
+      "victoryPoints": 11
+    },
+    {
+      "color": "Sapphire",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Stone": 1 },
+        "manufacturedResources": { "Faith": 3, "Shield": 1 }
+      },
+      "cost": { "Coin": 7 },
+      "id": "id43",
+      "victoryPoints": 11
+    },
+    {
+      "color": "Gold",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Shield": 1 },
+        "manufacturedResources": { "Faith": 3, "Servant": 1 }
+      },
+      "cost": { "Stone": 7 },
+      "id": "id44",
+      "victoryPoints": 11
+    },
+    {
+      "color": "Emerald",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Stone": 1 },
+        "manufacturedResources": { "Shield": 1, "Coin": 3 }
+      },
+      "cost": { "Coin": 4, "Shield": 4 },
+      "id": "id45",
+      "victoryPoints": 12
+    },
+    {
+      "color": "Amethyst",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Coin": 1 },
+        "manufacturedResources": { "Servant": 1, "Stone": 3 }
+      },
+      "cost": { "Servant": 4, "Shield": 4 },
+      "id": "id46",
+      "victoryPoints": 12
+    },
+    {
+      "color": "Sapphire",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Servant": 1 },
+        "manufacturedResources": { "Shield": 3, "Coin": 1 }
+      },
+      "cost": { "Coin": 4, "Stone": 4 },
+      "id": "id47",
+      "victoryPoints": 12
+    },
+    {
+      "color": "Gold",
+      "level": "Three",
+      "production": {
+        "requiredResources": { "Shield": 1 },
+        "manufacturedResources": { "Stone": 1, "Servant": 3 }
+      },
+      "cost": { "Stone": 4, "Servant": 4 },
+      "id": "id48",
+      "victoryPoints": 12
+    }
+  ]
+}

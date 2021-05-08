@@ -1,15 +1,16 @@
 {
-    "id": "1",
-    "perk": {
-        "resource": {
-	"type": "Coin"
-},
-        "type": "Transmutation"
+  "id": "1",
+  "perk": {
+    "resource": {
+      "type": "Coin"
     },
-    "required-resources": [{"type": "Coin", "quantity": 1}, 
-        {"type": "Servant", "quantity": 1},
-        {"type": "Stone", "quantity": 1}
-    ],
-    "required-devcard-level": "",
-    "status": "Active"
+    "type": "Transmutation"
+  },
+  "required-resources": [
+    { "type": "Coin", "quantity": 1 },
+    { "type": "Servant", "quantity": 1 },
+    { "type": "Stone", "quantity": 1 }
+  ],
+  "required-devcard-level": "",
+  "status": "Active"
 }
