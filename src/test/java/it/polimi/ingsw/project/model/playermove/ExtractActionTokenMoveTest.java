@@ -108,6 +108,35 @@ class ExtractActionTokenMoveTest {
         assertTrue(match.getisOver());
     }
 
+    @Test
+    void lostByDiscardOdds(){
+        Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Match match = new Match(playerList);
+        MoveList moveList = new MoveList();
+        Move extractActionTokenMove = new ExtractActionTokenMove();
+        moveList.add(extractActionTokenMove);
+        PlayerMove playerMove = new PlayerMove(player,
+                null,moveList);
+        assertTrue(playerMove.isFeasibleMove(match,0));
+        match.getCardContainer().getCardContainer().get(CardLevel.Three).get(CardColor.Emerald).remove(0); //odds cards
+        DiscardActionToken discardActionToken;
+        for(int i = 0; i < 6; i++) {
+            do {
+                match.getActionTokenContainer().shuffle();
+                while (!(match.getActionTokenContainer().getActionTokens().get(0) instanceof DiscardActionToken)) {
+                    match.getActionTokenContainer().shuffle();
+                }
+                discardActionToken = (DiscardActionToken) match.getActionTokenContainer().getActionTokens().get(0);
+            } while (discardActionToken.getCardColor() != CardColor.Emerald);
+            extractActionTokenMove.performMove(match);
+        }
+        assertEquals(0,player.getVictoryPoints());
+        assertEquals(0,player.getBoard().getFaithMap().getMarkerPosition());
+        assertTrue(match.getisOver());
+    }
+
 
 
     @Test
