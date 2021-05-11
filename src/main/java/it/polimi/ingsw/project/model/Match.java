@@ -187,7 +187,7 @@ public class Match implements Serializable, Cloneable {
       );
   }
 
-  public boolean isFeasibleDevCardProductionMove(
+  public boolean isFeasibleProductionMove(
     String devCardID,
     String leaderCardId,
     Map<ResourceType, Integer> resourcesToEliminateWarehouse,
@@ -199,7 +199,7 @@ public class Match implements Serializable, Cloneable {
         return false;
       }
     }
-    return this.currentPlayer.isFeasibleDevCardProductionMove(
+    return this.currentPlayer.isFeasibleProductionMove(
         devCardID,
         leaderCardId,
         resourcesToEliminateWarehouse,
@@ -208,14 +208,14 @@ public class Match implements Serializable, Cloneable {
       );
   }
 
-  public void performDevCardProductionMove(
+  public void performProductionMove(
     String devCardID,
     Map<ResourceType, Integer> resourcesToEliminateWarehouse,
     Map<ResourceType, Integer> resourcesToEliminateChest,
     ProductionType productionType,
     List<ResourceType> boardOrPerkManufacturedResource
   ) {
-    this.currentPlayer.performDevCardProductionMove(
+    this.currentPlayer.performProductionMove(
         devCardID,
         resourcesToEliminateWarehouse,
         resourcesToEliminateChest,

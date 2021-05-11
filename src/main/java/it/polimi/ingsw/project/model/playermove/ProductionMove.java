@@ -33,13 +33,13 @@ public class ProductionMove extends Move{
 
     @Override
     public boolean isFeasibleMove(Match match){
-        return match.isFeasibleDevCardProductionMove(this.devCardID, this.leaderCardId, this.resourcesToEliminateWarehouse,
+        return match.isFeasibleProductionMove(this.devCardID, this.leaderCardId, this.resourcesToEliminateWarehouse,
                 this.resourcesToEliminateChest, this.productionType);
     }
 
     @Override
     public void performMove(Match match){
-        match.performDevCardProductionMove(this.devCardID, this.resourcesToEliminateWarehouse,
+        match.performProductionMove(this.devCardID, this.resourcesToEliminateWarehouse,
                 this.resourcesToEliminateChest, this.productionType, this.boardOrPerkManufacturedResource);
     }
 

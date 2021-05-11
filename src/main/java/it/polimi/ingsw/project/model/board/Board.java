@@ -460,7 +460,7 @@ public class Board implements Serializable, Cloneable {
   }
 
   // checks if the current player can activate the production selected
-  public boolean isFeasibleDevCardProductionMove(
+  public boolean isFeasibleProductionMove(
     String devCardID,
     String leaderCardId,
     Map<ResourceType, Integer> resourcesToEliminateWarehouse,
@@ -514,7 +514,7 @@ public class Board implements Serializable, Cloneable {
 
   // performs the production putting the resources manufactured in the strongbox and eliminating
   // the resources required
-  public void performDevCardProductionMove(
+  public void performProductionMove(
     String devCardID,
     Map<ResourceType, Integer> resourcesToEliminateWarehouse,
     Map<ResourceType, Integer> resourcesToEliminateChest,
