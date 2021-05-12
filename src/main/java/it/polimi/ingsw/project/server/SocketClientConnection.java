@@ -65,22 +65,66 @@ public class SocketClientConnection extends Observable<MoveList> implements Clie
         }).start();
     }
 
+    private String joinGame(Scanner in) {
+        while (true) {
+            send("Which game do you want to join?");
+            String gameId = in.nextLine();
+            if (server.isGamePresent(gameId)) {
+                if (server.isGameNotFull(gameId)) {
+                    return gameId;
+                } else {
+                    send("The game is full. You can't join. Change game or create a new one.");
+                }
+            } else {
+                send("No Games are present with that id. Retry.");
+            }
+
+        }
+    }
+
+    private String createGame(Scanner in) {
+        while (true) {
+            send("How many people do you want in your game? (max 4)");
+            try {
+                Integer playersNumber = in.nextInt();
+                if (playersNumber > 4) {
+                    throw new Exception();
+                }
+                return server.createGame(playersNumber);
+            } catch (Exception e) {
+                send("Insert a integer number less than equal 4.");
+            }
+        }
+    }
+
     @Override
     public void run() {
-        Scanner in;
-        String name;
-        ObjectInputStream socketIn;
-        Object inputObject;
         try {
-            in = new Scanner(socket.getInputStream());
+            Scanner in = new Scanner(socket.getInputStream());
             out = new ObjectOutputStream(socket.getOutputStream());
             send("Welcome!\nWhat is your name?");
-            String read = in.nextLine();
-            name = read;
-            server.lobby(this, name);
-            socketIn = new ObjectInputStream(socket.getInputStream());
+            String name = in.nextLine();
+            send("Do you want to \'join\' or \'create\' a game?");
+            String decision;
+            String gameId;
+            while (true) {
+                decision = in.nextLine();
+                if (decision.equals("join") || decision.equals("create")) {
+                    if (decision.equals("join")) {
+                        gameId = this.joinGame(in);
+                    } else {
+                        gameId = this.createGame(in);
+                    }
+                    break;
+                } else {
+                    send("Operation not permitted! Type 'create' or 'join'.");
+                }
+            }
+            server.addToLobby(gameId, this, name);
+            send("Your game id is: " + gameId + ".\n Wait for the other players.");
+            ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
             while (isActive()) {
-                inputObject = socketIn.readObject();
+                Object inputObject = socketIn.readObject();
                 notify((MoveList) inputObject);
             }
         } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
@@ -89,4 +133,5 @@ public class SocketClientConnection extends Observable<MoveList> implements Clie
             close();
         }
     }
+
 }

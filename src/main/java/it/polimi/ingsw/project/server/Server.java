@@ -20,9 +20,10 @@ public class Server {
     private ServerSocket serverSocket;
     private ExecutorService executor = Executors.newFixedThreadPool(128);
     private Map<String, Lobby> mapOfAvailableLobbies = new HashMap<String, Lobby>();
+    private Map<String, Lobby> mapOfUnavailableLobbies = new HashMap<String, Lobby>();
     private Map<ClientConnection, ClientConnection> playingConnection = new HashMap<>();
 
-    public synchronized void lobby(String matchId, ClientConnection c, String name) {
+    public synchronized void addToLobby(String matchId, ClientConnection c, String name) {
         Lobby currentLobby = mapOfAvailableLobbies.get(matchId);
         currentLobby.insertPlayer(name, c);
         if (currentLobby.lenght() == currentLobby.getMaxNumberOfPlayers()) {
@@ -55,6 +56,17 @@ public class Server {
             listOfClientConnections.forEach((ClientConnection connection) -> {
                 connection.asyncSend(gameMessage.waitMessage);
             });
+            mapOfUnavailableLobbies.put(matchId, mapOfAvailableLobbies.get(matchId));
+            mapOfAvailableLobbies.remove(matchId);
+        }
+
+    }
+
+    public boolean isGamePresent(String id) {
+        if (this.mapOfAvailableLobbies.keySet().contains(id)) {
+            return true;
+        } else {
+            return false;
         }
 
     }
@@ -82,11 +94,26 @@ public class Server {
         }
         playingConnection.remove(socketClientConnection);
         playingConnection.remove(opponent);
-        Iterator<String> iterator = waitingConnection.keySet().iterator();
-        while (iterator.hasNext()) {
-            if (waitingConnection.get(iterator.next()) == socketClientConnection) {
-                iterator.remove();
+    }
+
+    public String createGame(Integer playersNumber) {
+        while (true) {
+            UUID uuid = UUID.randomUUID();
+            String gameId = uuid.toString().substring(0, 5);
+            if (!this.mapOfAvailableLobbies.containsKey(gameId)) {
+                Map<String, ClientConnection> mapOfConnections = new HashMap<String, ClientConnection>();
+                this.mapOfAvailableLobbies.put(gameId, new Lobby(gameId, playersNumber, mapOfConnections));
+                return gameId;
             }
+        }
+    }
+
+    public boolean isGameNotFull(String gameId) {
+        if (this.mapOfAvailableLobbies.get(gameId).getMaxNumberOfPlayers() == this.mapOfAvailableLobbies.get(gameId)
+                .lenght()) {
+            return false;
+        } else {
+            return true;
         }
     }
 }

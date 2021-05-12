@@ -7,6 +7,12 @@ public class Lobby {
     private Integer maxNumberOfPlayers;
     private Map<String, ClientConnection> mapOfConnections;
 
+    public Lobby(String id, Integer maxNumberOfPlayers, Map<String, ClientConnection> mapOfConnections) {
+        this.id = id;
+        this.maxNumberOfPlayers = maxNumberOfPlayers;
+        this.mapOfConnections = mapOfConnections;
+    }
+
     public String getId() {
         return this.id;
     }
