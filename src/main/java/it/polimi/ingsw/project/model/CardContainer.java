@@ -51,7 +51,8 @@ public class CardContainer implements Cloneable, Serializable {
     } else {
       cardContainer.get(cardLevel).get(cardColor).remove(0);
     }
-    return true;
+    return true &&
+            !(cardContainer.get(CardLevel.Three).get(cardColor).isEmpty());
   }
 
   public boolean discard(CardColor cardColor) {

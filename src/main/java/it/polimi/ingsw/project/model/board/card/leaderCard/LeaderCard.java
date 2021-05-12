@@ -1,8 +1,10 @@
 package it.polimi.ingsw.project.model.board.card.leaderCard;
 
 import java.util.Map;
+import java.util.List;
 
 import it.polimi.ingsw.project.model.board.card.Card;
+import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.resource.ResourceType;
@@ -12,28 +14,43 @@ public class LeaderCard extends Card {
   final private String id;
   final private Perk perk;
   final private Map<ResourceType, Integer> requiredResources;
-  final private CardLevel requiredDevCardLevel;
+  final private Map<CardColor, Integer> requiredDevCards;
+  final private Map<CardColor, CardLevel> requiredDevCardLevel;
   private Status status;
 
   // creates a LeaderCard activable with a requirement in resources
-  public LeaderCard(String id, Perk assignedPerk, int victoryPoints, Map<ResourceType, Integer> requiredResources) {
+  public LeaderCard(String id, Perk assignedPerk, int victoryPoints, Map<ResourceType, Integer> requiredResources,
+                    Map<CardColor, Integer> requiredDevCards, Map<CardColor, CardLevel> requiredDevCardLevel) {
     super(victoryPoints);
     this.id = id;
     this.perk = assignedPerk;
     this.requiredResources = requiredResources;
-    this.requiredDevCardLevel = null;
+    this.requiredDevCards = requiredDevCards;
+    this.requiredDevCardLevel = requiredDevCardLevel;
     this.status = Status.Inactive;
   }
 
-  // creates a LeaderCard activable with a requirement in development card levels
+  /*// creates a LeaderCard activable with a requirement in development card levels
   public LeaderCard(String id, Perk assignedPerk, int victoryPoints, CardLevel requiredDevCardLevel) {
     super(victoryPoints);
     this.id = id;
     this.perk = assignedPerk;
     this.requiredResources = null;
     this.requiredDevCardLevel = requiredDevCardLevel;
+    this.requiredDevCards = null;
     this.status = Status.Inactive;
   }
+
+  // creates a LeaderCard activable with a requirement in development card levels
+  public LeaderCard(String id, Perk assignedPerk, int victoryPoints, List<CardColor> requiredDevCards) {
+    super(victoryPoints);
+    this.id = id;
+    this.perk = assignedPerk;
+    this.requiredResources = null;
+    this.requiredDevCardLevel = null;
+    this.requiredDevCards = requiredDevCards;
+    this.status = Status.Inactive;
+  }*/
 
   public Perk getPerk() {
     return perk;
@@ -49,7 +66,9 @@ public class LeaderCard extends Card {
 
   public Map<ResourceType, Integer> getRequiredResources() { return requiredResources; }
 
-  public CardLevel getRequiredDevCardLevel() { return requiredDevCardLevel; }
+  public Map<CardColor, Integer> getRequiredDevCards() { return requiredDevCards; }
+
+  public Map<CardColor, CardLevel> getRequiredDevCardLevel() { return requiredDevCardLevel; }
 
   // changes the status of the LeaderCard to Active
   public void activateCard() {

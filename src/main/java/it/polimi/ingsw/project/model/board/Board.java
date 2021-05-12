@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.model.board;
 
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
@@ -237,15 +238,110 @@ public class Board implements Serializable, Cloneable {
     Map<ResourceType, Integer> resourcesToEliminate
   ) {
     for (ResourceType type : this.chest.keySet()) {
-      if (this.chest.get(type).equals(resourcesToEliminate.get(type))) {
-        this.chest.remove(type);
-      } else {
-        this.chest.put(
-            type,
-            (this.chest.get(type) - resourcesToEliminate.get(type))
-          );
+      if (resourcesToEliminate.containsKey(type)) {
+        if (this.chest.get(type).equals(resourcesToEliminate.get(type))) {
+          this.chest.remove(type);
+        } else {
+          this.chest.put(type, this.chest.get(type) - resourcesToEliminate.get(type));
+        }
       }
     }
+  }
+
+  // converts a CardLevel type to int
+  private int getIntegerFromCardLevel(CardLevel level) {
+    if (level.equals(CardLevel.One)) {
+      return 1;
+    } else {
+      if (level.equals(CardLevel.Two)) {
+        return 2;
+      } else {
+        return 3;
+      }
+    }
+  }
+
+  // extracts the number of DevelopmentCards by color
+  private Map<CardColor, Integer> getCurrentDevCardsNumberByColor() {
+    Map<CardColor, Integer> currentDevCards = new HashMap<>();
+    int emeraldCount = 0;
+    int amethystCount = 0;
+    int sapphireCount = 0;
+    int goldCount = 0;
+    for (DevCardPosition position : this.mapTray.keySet()) {
+      for (DevelopmentCard devCard : this.mapTray.get(position)) {
+        if (devCard.getColor().equals(CardColor.Emerald)) {
+          emeraldCount++;
+        }
+        if (devCard.getColor().equals(CardColor.Amethyst)) {
+          amethystCount++;
+        }
+        if (devCard.getColor().equals(CardColor.Sapphire)) {
+          sapphireCount++;
+        }
+        if (devCard.getColor().equals(CardColor.Gold)) {
+          goldCount++;
+        }
+      }
+    }
+    currentDevCards.put(CardColor.Emerald, emeraldCount);
+    currentDevCards.put(CardColor.Amethyst, amethystCount);
+    currentDevCards.put(CardColor.Sapphire, sapphireCount);
+    currentDevCards.put(CardColor.Gold, goldCount);
+    return currentDevCards;
+  }
+
+  private Map<CardColor, CardLevel> getCurrentDevCardHigherLevelForEachCardColor() {
+    Map<CardColor, CardLevel> currentDevCardsHigherLevels = new HashMap<>();
+    currentDevCardsHigherLevels.put(CardColor.Gold, null);
+    currentDevCardsHigherLevels.put(CardColor.Amethyst, null);
+    currentDevCardsHigherLevels.put(CardColor.Emerald, null);
+    currentDevCardsHigherLevels.put(CardColor.Sapphire, null);
+    for (DevCardPosition position : this.mapTray.keySet()) {
+      for (DevelopmentCard devCard : this.mapTray.get(position)) {
+        if (devCard.getColor().equals(CardColor.Gold)) {
+          if (currentDevCardsHigherLevels.get(CardColor.Gold) == null) {
+            currentDevCardsHigherLevels.put(CardColor.Gold, devCard.getLevel());
+          } else {
+            if (getIntegerFromCardLevel(currentDevCardsHigherLevels.get(CardColor.Gold))
+                    < getIntegerFromCardLevel(devCard.getLevel())) {
+              currentDevCardsHigherLevels.put(CardColor.Gold, devCard.getLevel());
+            }
+          }
+        }
+        if (devCard.getColor().equals(CardColor.Emerald)) {
+          if (currentDevCardsHigherLevels.get(CardColor.Emerald) == null) {
+            currentDevCardsHigherLevels.put(CardColor.Emerald, devCard.getLevel());
+          } else {
+            if (getIntegerFromCardLevel(currentDevCardsHigherLevels.get(CardColor.Emerald))
+                    < getIntegerFromCardLevel(devCard.getLevel())) {
+              currentDevCardsHigherLevels.put(CardColor.Emerald, devCard.getLevel());
+            }
+          }
+        }
+        if (devCard.getColor().equals(CardColor.Amethyst)) {
+          if (currentDevCardsHigherLevels.get(CardColor.Amethyst) == null) {
+            currentDevCardsHigherLevels.put(CardColor.Amethyst, devCard.getLevel());
+          } else {
+            if (getIntegerFromCardLevel(currentDevCardsHigherLevels.get(CardColor.Amethyst))
+                    < getIntegerFromCardLevel(devCard.getLevel())) {
+              currentDevCardsHigherLevels.put(CardColor.Amethyst, devCard.getLevel());
+            }
+          }
+        }
+        if (devCard.getColor().equals(CardColor.Sapphire)) {
+          if (currentDevCardsHigherLevels.get(CardColor.Sapphire) == null) {
+            currentDevCardsHigherLevels.put(CardColor.Sapphire, devCard.getLevel());
+          } else {
+            if (getIntegerFromCardLevel(currentDevCardsHigherLevels.get(CardColor.Sapphire))
+                    < getIntegerFromCardLevel(devCard.getLevel())) {
+              currentDevCardsHigherLevels.put(CardColor.Sapphire, devCard.getLevel());
+            }
+          }
+        }
+      }
+    }
+    return currentDevCardsHigherLevels;
   }
 
   public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID) {
@@ -460,7 +556,7 @@ public class Board implements Serializable, Cloneable {
   }
 
   // checks if the current player can activate the production selected
-  public boolean isFeasibleDevCardProductionMove(
+  public boolean isFeasibleProductionMove(
     String devCardID,
     String leaderCardId,
     Map<ResourceType, Integer> resourcesToEliminateWarehouse,
@@ -514,7 +610,7 @@ public class Board implements Serializable, Cloneable {
 
   // performs the production putting the resources manufactured in the strongbox and eliminating
   // the resources required
-  public void performDevCardProductionMove(
+  public void performProductionMove(
     String devCardID,
     Map<ResourceType, Integer> resourcesToEliminateWarehouse,
     Map<ResourceType, Integer> resourcesToEliminateChest,
@@ -610,42 +706,28 @@ public class Board implements Serializable, Cloneable {
     } else {
       return false;
     }
-    // checks if there is a card with the required (or higher) CardLevel
+    // checks if there is a card (or cards) with the required (or higher) CardLevel
     // if the LeaderCard requires levels to be activated
     if (card.getRequiredDevCardLevel() != null) {
-      int requiredDevCardLevel = 0;
-      if (card.getRequiredDevCardLevel() == CardLevel.One) {
-        requiredDevCardLevel = 1;
-      }
-      if (card.getRequiredDevCardLevel() == CardLevel.Two) {
-        requiredDevCardLevel = 2;
-      }
-      if (card.getRequiredDevCardLevel() == CardLevel.Three) {
-        requiredDevCardLevel = 3;
-      }
-      for (DevCardPosition position : this.mapTray.keySet()) {
-        if (this.mapTray.get(position).size() > 0) {
-          currentCardLevel =
-            this.mapTray.get(position)
-              .get(this.mapTray.get(position).size() - 1)
-              .getLevel();
+      Map<CardColor, CardLevel> currentDevCardsHigherLevels = getCurrentDevCardHigherLevelForEachCardColor();
+      for (CardColor color : card.getRequiredDevCardLevel().keySet()) {
+        if (currentDevCardsHigherLevels.get(color) == null) {
+          return false;
         }
-        int currentIntCardLevel = 0;
-        if (currentCardLevel == CardLevel.One) {
-          currentIntCardLevel = 1;
-        }
-        if (currentCardLevel == CardLevel.Two) {
-          currentIntCardLevel = 2;
-        }
-        if (currentCardLevel == CardLevel.Three) {
-          currentIntCardLevel = 3;
-        }
-        if (currentIntCardLevel >= requiredDevCardLevel) {
-          isDevCardLevelCorrect = true;
+        if (getIntegerFromCardLevel(card.getRequiredDevCardLevel().get(color))
+                > getIntegerFromCardLevel(currentDevCardsHigherLevels.get(color))) {
+          return false;
         }
       }
-      if (!isDevCardLevelCorrect) {
-        return false;
+    }
+    // checks if there are enough DevelopmentCards (of a specific color)
+    // if the LeaderCard requires them
+    if (card.getRequiredDevCards() != null) {
+      Map<CardColor, Integer> currentDevCards = getCurrentDevCardsNumberByColor();
+      for (CardColor color : card.getRequiredDevCards().keySet()) {
+        if (currentDevCards.get(color) < card.getRequiredDevCards().get(color)) {
+          return false;
+        }
       }
     }
     // checks if there enough resources in the warehouse and the strongbox

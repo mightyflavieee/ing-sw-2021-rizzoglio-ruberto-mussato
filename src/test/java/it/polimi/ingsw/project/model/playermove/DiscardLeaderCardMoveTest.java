@@ -7,6 +7,7 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +21,11 @@ class DiscardLeaderCardMoveTest {
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
         Match match = new Match(playerList);
-        LeaderCard leaderCard = new LeaderCard("prova", null, 1, (Map<ResourceType, Integer>) null);
+        Map<ResourceType, Integer> resoucesRequired = new HashMap<>();
+        resoucesRequired.put(ResourceType.Servant, 1);
+        resoucesRequired.put(ResourceType.Shield, 1);
+        LeaderCard leaderCard = new LeaderCard("prova", null, 1, resoucesRequired,
+                null, null);
         player.getBoard().getLeaderCards().add(leaderCard);
         Move discardLeaderCardMove = new DiscardLeaderCardMove("prova");
         assertTrue(discardLeaderCardMove.isFeasibleMove(match));
@@ -32,7 +37,11 @@ class DiscardLeaderCardMoveTest {
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
         Match match = new Match(playerList);
-        LeaderCard leaderCard = new LeaderCard("prova", null, 1, (Map<ResourceType, Integer>) null);
+        Map<ResourceType, Integer> resoucesRequired = new HashMap<>();
+        resoucesRequired.put(ResourceType.Servant, 1);
+        resoucesRequired.put(ResourceType.Shield, 1);
+        LeaderCard leaderCard = new LeaderCard("prova", null, 1, resoucesRequired,
+                null, null);
         player.getBoard().getLeaderCards().add(leaderCard);
         Move discardLeaderCardMove = new DiscardLeaderCardMove("prova");
         assertTrue(discardLeaderCardMove.isFeasibleMove(match));
@@ -46,7 +55,11 @@ class DiscardLeaderCardMoveTest {
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
         Match match = new Match(playerList);
-        LeaderCard leaderCard = new LeaderCard("prova", null, 1, (Map<ResourceType, Integer>) null);
+        Map<ResourceType, Integer> resoucesRequired = new HashMap<>();
+        resoucesRequired.put(ResourceType.Servant, 1);
+        resoucesRequired.put(ResourceType.Shield, 1);
+        LeaderCard leaderCard = new LeaderCard("prova", null, 1, resoucesRequired,
+                null, null);
         Move discardLeaderCardMove = new DiscardLeaderCardMove("prova");
         for(int i = 1; i < 25; i++) {
             player.getBoard().getLeaderCards().add(leaderCard);

@@ -149,14 +149,14 @@ public class Player implements Serializable, Cloneable {
       );
   }
 
-  public boolean isFeasibleDevCardProductionMove(
+  public boolean isFeasibleProductionMove(
     String devCardID,
     String leaderCardId,
     Map<ResourceType, Integer> resourcesToEliminateWarehouse,
     Map<ResourceType, Integer> resourcesToEliminateChest,
     ProductionType productionType
   ) {
-    return this.board.isFeasibleDevCardProductionMove(
+    return this.board.isFeasibleProductionMove(
         devCardID,
         leaderCardId,
         resourcesToEliminateWarehouse,
@@ -165,14 +165,14 @@ public class Player implements Serializable, Cloneable {
       );
   }
 
-  public void performDevCardProductionMove(
+  public void performProductionMove(
     String devCardID,
     Map<ResourceType, Integer> resourcesToEliminateWarehouse,
     Map<ResourceType, Integer> resourcesToEliminateChest,
     ProductionType productionType,
     List<ResourceType> boardOrPerkManufacturedResource
   ) {
-    this.board.performDevCardProductionMove(
+    this.board.performProductionMove(
         devCardID,
         resourcesToEliminateWarehouse,
         resourcesToEliminateChest,
