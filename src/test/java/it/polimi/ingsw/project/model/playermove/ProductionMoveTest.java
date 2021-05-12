@@ -81,6 +81,8 @@ class ProductionMoveTest {
 
     @Test
     // DevelopmentCard production with enough resources
+    // DEVCARD: required = Coin: 1; Stone: 2
+    //          manufactured = Shield: 1; Servant: 2
     void enoughResourcesDevCardProduction() {
         // creates the Player and the Match
         Player player = new Player("flavio99");
@@ -89,9 +91,12 @@ class ProductionMoveTest {
         Match match = new Match(playerList);
         // creates the DevelopmentCard
         Map<ResourceType, Integer> resourcesRequired = new HashMap<>();
+        Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
         resourcesRequired.put(ResourceType.Coin, 1);
         resourcesRequired.put(ResourceType.Stone, 2);
-        Production production = new Production(resourcesRequired, resourcesRequired);
+        manufacturedResources.put(ResourceType.Shield, 1);
+        manufacturedResources.put(ResourceType.Servant, 2);
+        Production production = new Production(resourcesRequired, manufacturedResources);
         DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "test", 1, resourcesRequired);
         // adds the card to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
@@ -111,6 +116,17 @@ class ProductionMoveTest {
                 resourcesToEliminateChest, ProductionType.DevCard, null);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
+        productionMove.performMove(match);
+        Map<ResourceType, Integer> newCurrentChestResources = new HashMap<>();
+        Map<ResourceType, Integer> newCurrentWarehouseResources = new HashMap<>();
+        newCurrentChestResources.put(ResourceType.Stone, 1);
+        newCurrentChestResources.put(ResourceType.Shield, 1);
+        newCurrentChestResources.put(ResourceType.Servant, 2);
+        for (ResourceType type : newCurrentChestResources.keySet()) {
+            assertTrue(player.getBoard().getChest().containsKey(type));
+            assertEquals(newCurrentChestResources.get(type), player.getBoard().getChest().get(type));
+        }
+        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
     }
 
     @Test
