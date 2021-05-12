@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class ProductionMoveTest {
 
     @Test
-    // Board only production with enough resources
+    // Board production with enough resources
     void enoughResourcesBoardProduction() {
         // creates the Player and the Match
         Player player = new Player("flavio99");
@@ -202,6 +202,72 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         ProductionMove productionMove = new ProductionMove(null, "test", resourcesToEliminateWarehouse,
                 null, ProductionType.LeaderCard, boardManufacturedResource);
+        // tests the move
+        assertFalse(productionMove.isFeasibleMove(match));
+    }
+
+    @Test
+    // Board and DevelopmentCard production with enough resources
+    void enoughResourcesBoardAndDevCardProduction() {
+        // creates the Player and the Match
+        Player player = new Player("flavio99");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Match match = new Match(playerList);
+        // creates the DevelopmentCard
+        Map<ResourceType, Integer> resourcesRequired = new HashMap<>();
+        resourcesRequired.put(ResourceType.Coin, 1);
+        resourcesRequired.put(ResourceType.Stone, 2);
+        Production production = new Production(resourcesRequired, resourcesRequired);
+        DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "test", 1, resourcesRequired);
+        // adds the card to the Board
+        player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
+        // adds necessary resources to the Warehouse and chest
+        Map<ShelfFloor, List<Resource>> shelves = player.getBoard().getWarehouse().getShelves();
+        List<Resource> resourcesListFirstFloor = new ArrayList<>();
+        Resource resource0 = new Resource(ResourceType.Coin);
+        resourcesListFirstFloor.add(resource0);
+        resourcesListFirstFloor.add(resource0);
+        shelves.put(ShelfFloor.First, resourcesListFirstFloor);
+        player.getBoard().getChest().put(ResourceType.Stone, 3);
+        // creates the move
+        Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
+        Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
+        List<ResourceType> boardManufacturedResource = new ArrayList<>();
+        boardManufacturedResource.add(ResourceType.Shield);
+        resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
+        resourcesToEliminateChest.put(ResourceType.Stone, 3);
+        ProductionMove productionMove = new ProductionMove("test", null, resourcesToEliminateWarehouse,
+                resourcesToEliminateChest, ProductionType.BoardAndDevCard, boardManufacturedResource);
+        // tests the move
+        assertTrue(productionMove.isFeasibleMove(match));
+    }
+
+    @Test
+        // Board and DevelopmentCard production with enough resources
+    void notEnoughResourcesBoardAndDevCardProduction() {
+        // creates the Player and the Match
+        Player player = new Player("flavio99");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Match match = new Match(playerList);
+        // creates the DevelopmentCard
+        Map<ResourceType, Integer> resourcesRequired = new HashMap<>();
+        resourcesRequired.put(ResourceType.Coin, 1);
+        resourcesRequired.put(ResourceType.Stone, 2);
+        Production production = new Production(resourcesRequired, resourcesRequired);
+        DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "test", 1, resourcesRequired);
+        // adds the card to the Board
+        player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
+        // creates the move
+        Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
+        Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
+        List<ResourceType> boardManufacturedResource = new ArrayList<>();
+        boardManufacturedResource.add(ResourceType.Shield);
+        resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
+        resourcesToEliminateChest.put(ResourceType.Stone, 3);
+        ProductionMove productionMove = new ProductionMove("test", null, resourcesToEliminateWarehouse,
+                resourcesToEliminateChest, ProductionType.BoardAndDevCard, boardManufacturedResource);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
