@@ -89,7 +89,7 @@ class BoardTest {
         playerList.add(player);
         Board board = new Board();
         board.createFaithMap(new Match(playerList));
-        LeaderCard leaderCard = new LeaderCard("prova", null, 1, (Map<ResourceType, Integer>) null);
+        LeaderCard leaderCard = new LeaderCard("prova", null, 1, null, null, null);
         board.getLeaderCards().add(leaderCard);
         assertEquals(1,board.getLeaderCards().size());
         board.performDiscardLeaderCardMove("prova");

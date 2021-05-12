@@ -175,7 +175,7 @@ class ProductionMoveTest {
         Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
-        LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequiredForActivation);
+        LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequiredForActivation, null, null);
         // adds the LeaderCard to the Board
         player.getBoard().getLeaderCards().add(leaderCard);
         // adds necessary resources to the Warehouse and chest
@@ -208,7 +208,7 @@ class ProductionMoveTest {
         Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
-        LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequiredForActivation);
+        LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequiredForActivation, null, null);
         // adds the LeaderCard to the Board
         player.getBoard().getLeaderCards().add(leaderCard);
         // creates the move
@@ -301,7 +301,7 @@ class ProductionMoveTest {
         Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
-        LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequiredForActivation);
+        LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequiredForActivation, null, null);
         // adds the LeaderCard to the Board
         player.getBoard().getLeaderCards().add(leaderCard);
         // adds necessary resources to the Warehouse and chest
@@ -338,7 +338,7 @@ class ProductionMoveTest {
         Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
-        LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequiredForActivation);
+        LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequiredForActivation, null, null);
         // adds the LeaderCard to the Board
         player.getBoard().getLeaderCards().add(leaderCard);
         // adds necessary resources to the Warehouse and chest
@@ -390,7 +390,7 @@ class ProductionMoveTest {
         Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
-        LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation);
+        LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation, null, null);
         // adds the DevelopmentCard and the LeaderCard to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
         player.getBoard().getLeaderCards().add(leaderCard);
@@ -439,7 +439,7 @@ class ProductionMoveTest {
         Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
-        LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation);
+        LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation, null, null);
         // adds the DevelopmentCard and the LeaderCard to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
         player.getBoard().getLeaderCards().add(leaderCard);
@@ -492,7 +492,7 @@ class ProductionMoveTest {
         Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
-        LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation);
+        LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation, null, null);
         // adds the DevelopmentCard and the LeaderCard to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
         player.getBoard().getLeaderCards().add(leaderCard);
@@ -543,7 +543,7 @@ class ProductionMoveTest {
         Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
-        LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation);
+        LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation, null, null);
         // adds the DevelopmentCard and the LeaderCard to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
         player.getBoard().getLeaderCards().add(leaderCard);

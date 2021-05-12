@@ -32,7 +32,8 @@ class ActivateLeaderCardMoveTest {
         Map<ResourceType, Integer> resourcesRequired = new HashMap<>();
         resourcesRequired.put(ResourceType.Coin, 1);
         resourcesRequired.put(ResourceType.Stone, 2);
-        LeaderCard leaderCard = new LeaderCard("test", null, 1, resourcesRequired);
+        LeaderCard leaderCard = new LeaderCard("test", null, 1, resourcesRequired,
+                null, null);
         // adds the LeaderCard to the Board
         player.getBoard().getLeaderCards().add(leaderCard);
         // creates the move
@@ -52,7 +53,8 @@ class ActivateLeaderCardMoveTest {
         Map<ResourceType, Integer> resourcesRequired = new HashMap<>();
         resourcesRequired.put(ResourceType.Coin, 1);
         resourcesRequired.put(ResourceType.Stone, 2);
-        LeaderCard leaderCard = new LeaderCard("test", null, 1, resourcesRequired);
+        LeaderCard leaderCard = new LeaderCard("test", null, 1, resourcesRequired,
+                null, null);
         // adds the LeaderCard to the Board (same card as before)
         player.getBoard().getLeaderCards().add(leaderCard);
         // adds resources to the Warehouse
@@ -93,7 +95,8 @@ class ActivateLeaderCardMoveTest {
         Map<ResourceType, Integer> resourcesRequired = new HashMap<>();
         resourcesRequired.put(ResourceType.Coin, 1);
         resourcesRequired.put(ResourceType.Stone, 2);
-        LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequired);
+        LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequired,
+                null, null);
         // adds the LeaderCard to the Board (same card as before)
         player.getBoard().getLeaderCards().add(leaderCard);
         // adds resources to the Warehouse
