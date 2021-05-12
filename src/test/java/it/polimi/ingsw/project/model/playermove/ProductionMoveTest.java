@@ -451,7 +451,103 @@ class ProductionMoveTest {
     }
 
     @Test
-    void performMove() {
+    // Board, DevelopmentCard and LeaderCard production with enough resources
+    // DEVCARD: required = Coin: 1; Stone: 2
+    //          manufactured = Shield: 1; Servant: 2
+    // LEADERCARD: required = Coin: 1
+    //             manufactured = Servant: 1
+    void enoughResourcesDevCardAndLeaderCardProduction() {
+        // creates the Player and the Match
+        Player player = new Player("flavio99");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Match match = new Match(playerList);
+        // creates the DevelopmentCard
+        Map<ResourceType, Integer> resourcesRequired = new HashMap<>();
+        Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
+        resourcesRequired.put(ResourceType.Coin, 1);
+        resourcesRequired.put(ResourceType.Stone, 2);
+        manufacturedResources.put(ResourceType.Shield, 1);
+        manufacturedResources.put(ResourceType.Servant, 2);
+        Production production = new Production(resourcesRequired, manufacturedResources);
+        DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "DEV_id", 1, resourcesRequired);
+        // creates the LeaderCard
+        Perk perk = new Perk(new Resource(ResourceType.Coin), PerkType.Production);
+        Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
+        resourcesRequiredForActivation.put(ResourceType.Coin, 1);
+        resourcesRequiredForActivation.put(ResourceType.Stone, 2);
+        LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation);
+        // adds the DevelopmentCard and the LeaderCard to the Board
+        player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
+        player.getBoard().getLeaderCards().add(leaderCard);
+        // adds necessary resources to the Warehouse and chest
+        Map<ShelfFloor, List<Resource>> shelves = player.getBoard().getWarehouse().getShelves();
+        List<Resource> resourcesListThirdFloor = new ArrayList<>();
+        Resource resource0 = new Resource(ResourceType.Coin);
+        resourcesListThirdFloor.add(resource0);
+        resourcesListThirdFloor.add(resource0);
+        shelves.put(ShelfFloor.Second, resourcesListThirdFloor);
+        player.getBoard().getChest().put(ResourceType.Stone, 2);
+        // creates the move
+        Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
+        Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
+        List<ResourceType> LeaderCardManufacturedResources = new ArrayList<>();
+        LeaderCardManufacturedResources.add(ResourceType.Servant);
+        resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
+        resourcesToEliminateChest.put(ResourceType.Stone, 2);
+        ProductionMove productionMove = new ProductionMove("DEV_id", "LEADER_id", resourcesToEliminateWarehouse,
+                resourcesToEliminateChest, ProductionType.BoardAndDevCardAndLeaderCard, LeaderCardManufacturedResources);
+        // tests the move
+        assertTrue(productionMove.isFeasibleMove(match));
+    }
 
+    @Test
+    // Board, DevelopmentCard and LeaderCard production with enough resources
+    // DEVCARD: required = Coin: 1; Stone: 2
+    //          manufactured = Shield: 1; Servant: 2
+    // LEADERCARD: required = Coin: 1
+    //             manufactured = Servant: 1
+    void notEnoughResourcesDevCardAndLeaderCardProduction() {
+        // creates the Player and the Match
+        Player player = new Player("flavio99");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Match match = new Match(playerList);
+        // creates the DevelopmentCard
+        Map<ResourceType, Integer> resourcesRequired = new HashMap<>();
+        Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
+        resourcesRequired.put(ResourceType.Coin, 1);
+        resourcesRequired.put(ResourceType.Stone, 2);
+        manufacturedResources.put(ResourceType.Shield, 1);
+        manufacturedResources.put(ResourceType.Servant, 2);
+        Production production = new Production(resourcesRequired, manufacturedResources);
+        DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "DEV_id", 1, resourcesRequired);
+        // creates the LeaderCard
+        Perk perk = new Perk(new Resource(ResourceType.Coin), PerkType.Production);
+        Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
+        resourcesRequiredForActivation.put(ResourceType.Coin, 1);
+        resourcesRequiredForActivation.put(ResourceType.Stone, 2);
+        LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation);
+        // adds the DevelopmentCard and the LeaderCard to the Board
+        player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
+        player.getBoard().getLeaderCards().add(leaderCard);
+        // adds necessary resources to the Warehouse and chest
+        Map<ShelfFloor, List<Resource>> shelves = player.getBoard().getWarehouse().getShelves();
+        List<Resource> resourcesListThirdFloor = new ArrayList<>();
+        Resource resource0 = new Resource(ResourceType.Coin);
+        resourcesListThirdFloor.add(resource0);
+        shelves.put(ShelfFloor.First, resourcesListThirdFloor);
+        player.getBoard().getChest().put(ResourceType.Stone, 1);
+        // creates the move
+        Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
+        Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
+        List<ResourceType> LeaderCardManufacturedResources = new ArrayList<>();
+        LeaderCardManufacturedResources.add(ResourceType.Servant);
+        resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
+        resourcesToEliminateChest.put(ResourceType.Stone, 2);
+        ProductionMove productionMove = new ProductionMove("DEV_id", "LEADER_id", resourcesToEliminateWarehouse,
+                resourcesToEliminateChest, ProductionType.BoardAndDevCardAndLeaderCard, LeaderCardManufacturedResources);
+        // tests the move
+        assertFalse(productionMove.isFeasibleMove(match));
     }
 }
