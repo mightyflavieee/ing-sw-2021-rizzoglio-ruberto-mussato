@@ -78,7 +78,7 @@ public class SocketClientConnection extends Observable<MoveList> implements Clie
             String read = in.nextLine();
             name = read;
             server.lobby(this, name);
-            socketIn = new ObjectInputStream(socket.getInputStream()); //forse va nel while
+            socketIn = new ObjectInputStream(socket.getInputStream());
             while (isActive()) {
                 inputObject = socketIn.readObject();
                 notify((MoveList) inputObject);

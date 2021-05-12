@@ -19,22 +19,23 @@ public class Server {
     private static final int PORT = 12345;
     private ServerSocket serverSocket;
     private ExecutorService executor = Executors.newFixedThreadPool(128);
-    private Map<String, ClientConnection> waitingConnection = new HashMap<>();
+    private Map<String, Lobby> mapOfAvailableLobbies = new HashMap<String, Lobby>();
     private Map<ClientConnection, ClientConnection> playingConnection = new HashMap<>();
 
-    public synchronized void lobby(ClientConnection c, String name) {
-        waitingConnection.put(name, c);
-        if (waitingConnection.size() == 4) {
+    public synchronized void lobby(String matchId, ClientConnection c, String name) {
+        Lobby currentLobby = mapOfAvailableLobbies.get(matchId);
+        currentLobby.insertPlayer(name, c);
+        if (currentLobby.lenght() == currentLobby.getMaxNumberOfPlayers()) {
             List<ClientConnection> listOfClientConnections = new ArrayList<ClientConnection>();
-            waitingConnection.forEach((nickname, client) -> {
+            currentLobby.getMapOfConnections().forEach((nickname, client) -> {
                 listOfClientConnections.add(client);
             });
             List<Player> listOfPlayer = new ArrayList<Player>();
-            waitingConnection.forEach((nickname, client) -> {
+            currentLobby.getMapOfConnections().forEach((nickname, client) -> {
                 listOfPlayer.add(new Player(nickname));
             });
             List<View> listOfViews = new ArrayList<View>();
-            for (int i = 0; i < waitingConnection.size(); i++) {
+            for (int i = 0; i < currentLobby.getMapOfConnections().size(); i++) {
                 listOfViews.add(new RemoteView(listOfPlayer.get(i),
                         Utils.extractOpponentsName(listOfPlayer.get(i), listOfPlayer), listOfClientConnections.get(i)));
             }
@@ -44,7 +45,7 @@ public class Server {
                 model.addObserver(view);
                 view.addObserver(controller);
             }
-            waitingConnection.clear(); //da cambiare
+            mapOfAvailableLobbies.remove(matchId); // da cambiare
             listOfClientConnections.forEach((ClientConnection connection) -> {
                 connection.asyncSend(model.getMatchCopy());
             });
