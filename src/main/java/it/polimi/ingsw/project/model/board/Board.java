@@ -237,13 +237,19 @@ public class Board implements Serializable, Cloneable {
   private void eliminateResourcesFromChest(
     Map<ResourceType, Integer> resourcesToEliminate
   ) {
+    List<ResourceType> resourceTypeToEliminate = new ArrayList<>();
     for (ResourceType type : this.chest.keySet()) {
       if (resourcesToEliminate.containsKey(type)) {
         if (this.chest.get(type).equals(resourcesToEliminate.get(type))) {
-          this.chest.remove(type);
+          resourceTypeToEliminate.add(type);
         } else {
           this.chest.put(type, this.chest.get(type) - resourcesToEliminate.get(type));
         }
+      }
+    }
+    if (resourceTypeToEliminate.size() > 0) {
+      for (ResourceType type : resourceTypeToEliminate) {
+        this.chest.remove(type);
       }
     }
   }
@@ -689,8 +695,12 @@ public class Board implements Serializable, Cloneable {
     }
     // adds resources to the Strongbox and eliminates the resources required for the production
     addToStrongbox(manufacturedResources);
-    this.warehouse.eliminateResources(resourcesToEliminateWarehouse);
-    eliminateResourcesFromChest(resourcesToEliminateChest);
+    if (resourcesToEliminateWarehouse != null) {
+      this.warehouse.eliminateResources(resourcesToEliminateWarehouse);
+    }
+    if (resourcesToEliminateChest != null) {
+      eliminateResourcesFromChest(resourcesToEliminateChest);
+    }
   }
 
   // checks if the current player can activate a LeaderCard

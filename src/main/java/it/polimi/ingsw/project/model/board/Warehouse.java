@@ -207,7 +207,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
             }
             // here the resources are simply removed from the floor
             for (int i = 0; i < resourcesToEliminate.get(type); i++) {
-              this.shelves.get(floor).remove(this.shelves.get(floor).get(i));
+              this.shelves.get(floor).remove(this.shelves.get(floor).get(0));
             }
           }
         }

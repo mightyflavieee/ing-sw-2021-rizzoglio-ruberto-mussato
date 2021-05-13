@@ -50,6 +50,15 @@ class ProductionMoveTest {
                 resourcesToEliminateChest, ProductionType.Board, boardManufacturedResource);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
+        productionMove.performMove(match);
+        Map<ResourceType, Integer> newCurrentChestResources = new HashMap<>();
+        newCurrentChestResources.put(ResourceType.Stone, 2);
+        newCurrentChestResources.put(ResourceType.Shield, 1);
+        for (ResourceType type : newCurrentChestResources.keySet()) {
+            assertTrue(player.getBoard().getChest().containsKey(type));
+            assertEquals(newCurrentChestResources.get(type), player.getBoard().getChest().get(type));
+        }
+        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
     }
 
     @Test
@@ -193,6 +202,12 @@ class ProductionMoveTest {
                 null, ProductionType.LeaderCard, boardManufacturedResource);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
+        productionMove.performMove(match);
+        Map<ResourceType, Integer> newCurrentChestResources = new HashMap<>();
+        newCurrentChestResources.put(ResourceType.Shield, 1);
+        assertTrue(player.getBoard().getChest().containsKey(ResourceType.Shield));
+        assertEquals(newCurrentChestResources.get(ResourceType.Shield), player.getBoard().getChest().get(ResourceType.Shield));
+        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
     }
 
     @Test
@@ -232,19 +247,22 @@ class ProductionMoveTest {
         Match match = new Match(playerList);
         // creates the DevelopmentCard
         Map<ResourceType, Integer> resourcesRequired = new HashMap<>();
+        Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
+        manufacturedResources.put(ResourceType.Shield, 1);
+        manufacturedResources.put(ResourceType.Servant, 2);
         resourcesRequired.put(ResourceType.Coin, 1);
         resourcesRequired.put(ResourceType.Stone, 2);
-        Production production = new Production(resourcesRequired, resourcesRequired);
+        Production production = new Production(resourcesRequired, manufacturedResources);
         DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "test", 1, resourcesRequired);
         // adds the card to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
         // adds necessary resources to the Warehouse and chest
         Map<ShelfFloor, List<Resource>> shelves = player.getBoard().getWarehouse().getShelves();
-        List<Resource> resourcesListFirstFloor = new ArrayList<>();
+        List<Resource> resourcesListSecondFloor = new ArrayList<>();
         Resource resource0 = new Resource(ResourceType.Coin);
-        resourcesListFirstFloor.add(resource0);
-        resourcesListFirstFloor.add(resource0);
-        shelves.put(ShelfFloor.First, resourcesListFirstFloor);
+        resourcesListSecondFloor.add(resource0);
+        resourcesListSecondFloor.add(resource0);
+        shelves.put(ShelfFloor.Second, resourcesListSecondFloor);
         player.getBoard().getChest().put(ResourceType.Stone, 3);
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
@@ -257,6 +275,16 @@ class ProductionMoveTest {
                 resourcesToEliminateChest, ProductionType.BoardAndDevCard, boardManufacturedResource);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
+        productionMove.performMove(match);
+        Map<ResourceType, Integer> newCurrentChestResources = new HashMap<>();
+        Map<ResourceType, Integer> newCurrentWarehouseResources = new HashMap<>();
+        newCurrentChestResources.put(ResourceType.Shield, 2);
+        newCurrentChestResources.put(ResourceType.Servant, 2);
+        for (ResourceType type : newCurrentChestResources.keySet()) {
+            assertTrue(player.getBoard().getChest().containsKey(type));
+            assertEquals(newCurrentChestResources.get(type), player.getBoard().getChest().get(type));
+        }
+        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
     }
 
     @Test
@@ -317,12 +345,23 @@ class ProductionMoveTest {
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
         List<ResourceType> boardManufacturedResource = new ArrayList<>();
         boardManufacturedResource.add(ResourceType.Shield);
+        boardManufacturedResource.add(ResourceType.Servant);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 1);
         ProductionMove productionMove = new ProductionMove(null, "test", resourcesToEliminateWarehouse,
                 resourcesToEliminateChest, ProductionType.BoardAndLeaderCard, boardManufacturedResource);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
+        productionMove.performMove(match);
+        Map<ResourceType, Integer> newCurrentChestResources = new HashMap<>();
+        newCurrentChestResources.put(ResourceType.Shield, 1);
+        newCurrentChestResources.put(ResourceType.Servant, 1);
+        newCurrentChestResources.put(ResourceType.Stone, 2);
+        for (ResourceType type : newCurrentChestResources.keySet()) {
+            assertTrue(player.getBoard().getChest().containsKey(type));
+            assertEquals(newCurrentChestResources.get(type), player.getBoard().getChest().get(type));
+        }
+        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
     }
 
     @Test
@@ -415,6 +454,15 @@ class ProductionMoveTest {
                 resourcesToEliminateChest, ProductionType.BoardAndDevCardAndLeaderCard, boardAndPerkManufacturedResources);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
+        productionMove.performMove(match);
+        Map<ResourceType, Integer> newCurrentChestResources = new HashMap<>();
+        newCurrentChestResources.put(ResourceType.Shield, 2);
+        newCurrentChestResources.put(ResourceType.Servant, 3);
+        for (ResourceType type : newCurrentChestResources.keySet()) {
+            assertTrue(player.getBoard().getChest().containsKey(type));
+            assertEquals(newCurrentChestResources.get(type), player.getBoard().getChest().get(type));
+        }
+        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
     }
 
     @Test
@@ -512,9 +560,18 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
         ProductionMove productionMove = new ProductionMove("DEV_id", "LEADER_id", resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, ProductionType.BoardAndDevCardAndLeaderCard, LeaderCardManufacturedResources);
+                resourcesToEliminateChest, ProductionType.DevCardAndLeader, LeaderCardManufacturedResources);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
+        productionMove.performMove(match);
+        Map<ResourceType, Integer> newCurrentChestResources = new HashMap<>();
+        newCurrentChestResources.put(ResourceType.Shield, 1);
+        newCurrentChestResources.put(ResourceType.Servant, 3);
+        for (ResourceType type : newCurrentChestResources.keySet()) {
+            assertTrue(player.getBoard().getChest().containsKey(type));
+            assertEquals(newCurrentChestResources.get(type), player.getBoard().getChest().get(type));
+        }
+        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
     }
 
     @Test
@@ -562,7 +619,7 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
         ProductionMove productionMove = new ProductionMove("DEV_id", "LEADER_id", resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, ProductionType.BoardAndDevCardAndLeaderCard, LeaderCardManufacturedResources);
+                resourcesToEliminateChest, ProductionType.DevCardAndLeader, LeaderCardManufacturedResources);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
