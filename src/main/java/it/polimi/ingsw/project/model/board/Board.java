@@ -689,8 +689,12 @@ public class Board implements Serializable, Cloneable {
     }
     // adds resources to the Strongbox and eliminates the resources required for the production
     addToStrongbox(manufacturedResources);
-    this.warehouse.eliminateResources(resourcesToEliminateWarehouse);
-    eliminateResourcesFromChest(resourcesToEliminateChest);
+    if (resourcesToEliminateWarehouse != null) {
+      this.warehouse.eliminateResources(resourcesToEliminateWarehouse);
+    }
+    if (resourcesToEliminateChest != null) {
+      eliminateResourcesFromChest(resourcesToEliminateChest);
+    }
   }
 
   // checks if the current player can activate a LeaderCard
