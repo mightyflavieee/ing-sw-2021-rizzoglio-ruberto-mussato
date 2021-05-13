@@ -255,7 +255,7 @@ public class Board implements Serializable, Cloneable {
   }
 
   // converts a CardLevel type to int
-  private int getIntegerFromCardLevel(CardLevel level) {
+  private int getIntegerFromCardLevel(CardLevel level) { //TODO no va bene
     if (level.equals(CardLevel.One)) {
       return 1;
     } else {

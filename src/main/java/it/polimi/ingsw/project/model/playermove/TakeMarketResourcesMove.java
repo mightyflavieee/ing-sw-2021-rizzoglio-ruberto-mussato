@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.model.playermove;
 
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.Warehouse;
+import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.resource.Resource;
 
 import java.util.Collections;

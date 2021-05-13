@@ -31,8 +31,7 @@ public class Market implements Cloneable, Serializable {
     this.outsideMarble = trayList.remove(0);
     for(int i = 0; i < 4; i++){
       for (int j = 0; j < 3; j++){
-        tray[i][j] = trayList.get(0);
-        trayList.remove(0);
+        tray[i][j] =  trayList.remove(0);
       }
     }
 
@@ -43,6 +42,14 @@ public class Market implements Cloneable, Serializable {
     Marble [][] trayToReturn = new Marble[4][3];
     System.arraycopy(this.tray,0,trayToReturn,0,4);
     return trayToReturn;
+  }
+
+  public void setTray(Marble[][] tray) {
+    this.tray = tray;
+  }
+
+  public void setOutsideMarble(Marble outsideMarble) {
+    this.outsideMarble = outsideMarble;
   }
 
   public Marble getOutSideMarble() {
