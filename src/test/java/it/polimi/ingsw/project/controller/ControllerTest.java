@@ -5,6 +5,7 @@ import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.actionTokens.MoveActionToken;
+import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.CardColor;
@@ -104,6 +105,13 @@ class ControllerTest {
         LeaderCard leaderCardLeo2 = new LeaderCard("id6", perkLeaderCardLeo2, 3, requirementsLeaderCardLeo2, null,
                 null);
 
+        gianluca.getBoard().getLeaderCards().add(leaderCardGian1);
+        gianluca.getBoard().getLeaderCards().add(leaderCardGian2);
+        flavio.getBoard().getLeaderCards().add(leaderCardFlavio1);
+        flavio.getBoard().getLeaderCards().add(leaderCardFlavio2);
+        leo.getBoard().getLeaderCards().add(leaderCardLeo1);
+        leo.getBoard().getLeaderCards().add(leaderCardLeo2);
+
         // removing the random beginning of the match
         Marble[][] tray = new Marble[4][3];
         List<Marble> trayList = new ArrayList<Marble>();
@@ -132,7 +140,7 @@ class ControllerTest {
 
         // beginning of the match
 
-        // turn 1 Gianluca
+        // turn 1 gianluca
         Market localMarket = new Market();
         localMarket.setTray(tray);
         localMarket.setOutsideMarble(outsideMarble);
