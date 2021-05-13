@@ -1,16 +1,16 @@
 package it.polimi.ingsw.project.server;
 
-import java.util.Map;
+import java.util.List;
 
 public class Lobby {
     private String id;
     private Integer maxNumberOfPlayers;
-    private Map<String, ClientConnection> mapOfConnections;
+    private List<PlayerConnection> listOfPlayerConnections;
 
-    public Lobby(String id, Integer maxNumberOfPlayers, Map<String, ClientConnection> mapOfConnections) {
+    public Lobby(String id, Integer maxNumberOfPlayers, List<PlayerConnection> listOfPlayerConnections) {
         this.id = id;
         this.maxNumberOfPlayers = maxNumberOfPlayers;
-        this.mapOfConnections = mapOfConnections;
+        this.listOfPlayerConnections = listOfPlayerConnections;
     }
 
     public String getId() {
@@ -21,15 +21,16 @@ public class Lobby {
         return this.maxNumberOfPlayers;
     }
 
-    public Map<String, ClientConnection> getMapOfConnections() {
-        return mapOfConnections;
+    public List<PlayerConnection> getListOfPlayerConnections() {
+        return listOfPlayerConnections;
     }
 
     public Integer lenght() {
-        return mapOfConnections.size();
+        return listOfPlayerConnections.size();
     }
 
     public void insertPlayer(String name, ClientConnection connection) {
-        this.mapOfConnections.put(name, connection);
+        PlayerConnection newPlayerConnection = new PlayerConnection(name, connection);
+        this.listOfPlayerConnections.add(newPlayerConnection);
     }
 }

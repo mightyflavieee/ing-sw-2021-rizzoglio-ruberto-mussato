@@ -37,7 +37,7 @@ public class Client {
                     while (isActive()) {
                         Object inputObject = socketIn.readObject();
                         if (inputObject instanceof String) {
-                            System.out.println(inputObject);
+                            System.out.println((String) inputObject);
                         } else if (inputObject instanceof Player) {
                             // ((Player)inputObject).print();
                         } else {

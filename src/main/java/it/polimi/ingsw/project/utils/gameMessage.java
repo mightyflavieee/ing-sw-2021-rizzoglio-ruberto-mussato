@@ -1,6 +1,8 @@
 package it.polimi.ingsw.project.utils;
 
-public class gameMessage {
+import java.io.Serializable;
+
+public class gameMessage implements Serializable {
 
     public static String moveMessage = "What do you want to do?\n";
     public static String waitMessage = "Wait for the other player's move!";
