@@ -3,6 +3,7 @@ package it.polimi.ingsw.project.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,48 +22,60 @@ public class Server {
     private ExecutorService executor = Executors.newFixedThreadPool(128);
     private Map<String, Lobby> mapOfAvailableLobbies = new HashMap<String, Lobby>();
     private Map<String, Lobby> mapOfUnavailableLobbies = new HashMap<String, Lobby>();
-    private Map<ClientConnection, ClientConnection> playingConnection = new HashMap<>();
+    private Map<ClientConnection, ClientConnection> playingConnection = new HashMap<ClientConnection, ClientConnection>();
 
-    public synchronized void addToLobby(String matchId, ClientConnection c, String name) {
+    public synchronized void addToLobby(String matchId, SocketClientConnection connection, String name)
+            throws Exception {
         Lobby currentLobby = mapOfAvailableLobbies.get(matchId);
-        currentLobby.insertPlayer(name, c);
-        if (currentLobby.lenght() == currentLobby.getMaxNumberOfPlayers()) {
-            List<ClientConnection> listOfClientConnections = new ArrayList<ClientConnection>();
-            currentLobby.getMapOfConnections().forEach((nickname, client) -> {
-                listOfClientConnections.add(client);
-            });
-            List<Player> listOfPlayer = new ArrayList<Player>();
-            currentLobby.getMapOfConnections().forEach((nickname, client) -> {
-                listOfPlayer.add(new Player(nickname));
-            });
-            List<View> listOfViews = new ArrayList<View>();
-            for (int i = 0; i < currentLobby.getMapOfConnections().size(); i++) {
-                listOfViews.add(new RemoteView(listOfPlayer.get(i),
-                        Utils.extractOpponentsName(listOfPlayer.get(i), listOfPlayer), listOfClientConnections.get(i)));
-            }
-            Model model = new Model(listOfPlayer);
-            Controller controller = new Controller(model);
-            for (View view : listOfViews) {
-                model.addObserver(view);
-                view.addObserver(controller);
-            }
-            mapOfAvailableLobbies.remove(matchId); // da cambiare
-            listOfClientConnections.forEach((ClientConnection connection) -> {
-                connection.asyncSend(model.getMatchCopy());
-            });
-            Collections.shuffle(listOfClientConnections);
-            listOfClientConnections.get(0).asyncSend(gameMessage.moveMessage);
-            listOfClientConnections.remove(0);
-            listOfClientConnections.forEach((ClientConnection connection) -> {
-                connection.asyncSend(gameMessage.waitMessage);
-            });
-            mapOfUnavailableLobbies.put(matchId, mapOfAvailableLobbies.get(matchId));
-            mapOfAvailableLobbies.remove(matchId);
+        if (currentLobby.lenght() + 1 <= currentLobby.getMaxNumberOfPlayers()) {
+            currentLobby.insertPlayer(name, connection);
+        } else {
+            throw new Exception("The lobby is already full.");
         }
-
     }
 
-    public boolean isGamePresent(String id) {
+    public synchronized boolean tryToStartGame(String matchId) {
+        Lobby currentLobby = mapOfAvailableLobbies.get(matchId);
+        if (currentLobby.lenght() == currentLobby.getMaxNumberOfPlayers()) {
+            mapOfUnavailableLobbies.put(matchId, mapOfAvailableLobbies.get(matchId));
+            mapOfAvailableLobbies.remove(matchId);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void startGame(String matchId) {
+        Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
+        List<ClientConnection> listOfClientConnections = new ArrayList<ClientConnection>();
+        List<Player> listOfPlayer = new ArrayList<Player>();
+        currentLobby.getListOfPlayerConnections().forEach((playerConnection) -> {
+            listOfPlayer.add(new Player(playerConnection.getName()));
+            listOfClientConnections.add(playerConnection.getConnection());
+        });
+        List<View> listOfViews = new ArrayList<View>();
+        for (int i = 0; i < currentLobby.getListOfPlayerConnections().size(); i++) {
+            listOfViews.add(new RemoteView(listOfPlayer.get(i),
+                    Utils.extractOpponentsName(listOfPlayer.get(i), listOfPlayer), listOfClientConnections.get(i)));
+        }
+        Model model = new Model(listOfPlayer);
+        Controller controller = new Controller(model);
+        for (View view : listOfViews) {
+            model.addObserver(view);
+            view.addObserver(controller);
+        }
+        listOfClientConnections.forEach((ClientConnection connection) -> {
+            connection.asyncSend(model.getMatchCopy());
+        });
+        Collections.shuffle(listOfClientConnections);
+        listOfClientConnections.get(0).asyncSend(gameMessage.moveMessage);
+        listOfClientConnections.remove(0);
+        listOfClientConnections.forEach((ClientConnection connection) -> {
+            connection.asyncSend(gameMessage.waitMessage);
+        });
+    }
+
+    public synchronized boolean isGamePresent(String id) {
         if (this.mapOfAvailableLobbies.keySet().contains(id)) {
             return true;
         } else {
@@ -101,8 +114,8 @@ public class Server {
             UUID uuid = UUID.randomUUID();
             String gameId = uuid.toString().substring(0, 5);
             if (!this.mapOfAvailableLobbies.containsKey(gameId)) {
-                Map<String, ClientConnection> mapOfConnections = new HashMap<String, ClientConnection>();
-                this.mapOfAvailableLobbies.put(gameId, new Lobby(gameId, playersNumber, mapOfConnections));
+                List<PlayerConnection> listPlayerConnections = new ArrayList<PlayerConnection>();
+                this.mapOfAvailableLobbies.put(gameId, new Lobby(gameId, playersNumber, listPlayerConnections));
                 return gameId;
             }
         }

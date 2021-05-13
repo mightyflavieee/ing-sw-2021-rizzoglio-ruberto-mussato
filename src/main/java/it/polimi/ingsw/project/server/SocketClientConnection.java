@@ -115,13 +115,20 @@ public class SocketClientConnection extends Observable<MoveList> implements Clie
                     } else {
                         gameId = this.createGame(in);
                     }
-                    break;
+                    try {
+                        server.addToLobby(gameId, this, name);
+                        break;
+                    } catch (Exception e) {
+                        send(e.getMessage());
+                    }
                 } else {
                     send("Operation not permitted! Type 'create' or 'join'.");
                 }
             }
-            server.addToLobby(gameId, this, name);
-            send("Your game id is: " + gameId + ".\n Wait for the other players.");
+            send("Your game id is: " + gameId + ".\nWait for the other players.");
+            if (server.tryToStartGame(gameId)) {
+                server.startGame(gameId);
+            }
             ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
             while (isActive()) {
                 Object inputObject = socketIn.readObject();
