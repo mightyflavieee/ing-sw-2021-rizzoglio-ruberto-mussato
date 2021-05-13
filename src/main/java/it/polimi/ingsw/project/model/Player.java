@@ -201,8 +201,9 @@ public class Player implements Serializable, Cloneable {
 
   public void performTakeMarketResourceMove(
     Warehouse warehouse,
-    List<Resource> discardedResources
+    List<Resource> discardedResources,
+    Boolean hasRedMarble
   ) {
-    this.board.performTakeMarketResourceMove(warehouse, discardedResources);
+    this.board.performTakeMarketResourceMove(warehouse, discardedResources, hasRedMarble);
   }
 }

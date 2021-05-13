@@ -13,15 +13,18 @@ public class TakeMarketResourcesMove extends Move {
     private final Warehouse warehouse;
     private final List<Resource> discardedResources;
     private final Market market;
+    private final Boolean hasRedMarble;
 
     public TakeMarketResourcesMove(
             Warehouse warehouse,
             List<Resource> discardedResources,
-            Market market
+            Market market,
+            Boolean hasRedMarble
     ) {
         this.warehouse = warehouse;
         this.discardedResources = discardedResources;
         this.market = market;
+        this.hasRedMarble = hasRedMarble;
     }
 
     @Override
@@ -35,7 +38,7 @@ public class TakeMarketResourcesMove extends Move {
 
     @Override
     public void performMove(Match match) {
-        match.performTakeMarketResourceMove(warehouse, discardedResources, market);
+        match.performTakeMarketResourceMove(warehouse, discardedResources, market, hasRedMarble);
     }
 
     @Override

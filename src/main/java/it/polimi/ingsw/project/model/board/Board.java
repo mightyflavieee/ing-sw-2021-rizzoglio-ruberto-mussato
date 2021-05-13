@@ -788,8 +788,12 @@ public class Board implements Serializable, Cloneable {
 
   public void performTakeMarketResourceMove(
     Warehouse warehouse,
-    List<Resource> discardedResources
+    List<Resource> discardedResources,
+    boolean hasRedMarble
   ) {
+    if(hasRedMarble){
+      this.moveForward();
+    }
     this.warehouse = warehouse;
     this.warehouse.discardResourcesInHand(discardedResources);
   }
