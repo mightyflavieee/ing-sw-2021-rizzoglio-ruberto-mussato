@@ -13,10 +13,10 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 public class LeaderCardContainerBuilder implements Serializable {
     private List<LeaderCard> leaderCards;
 
-    public LeaderCardContainerBuilder() {
+    public LeaderCardContainerBuilder(String src) {
         Gson gson = new Gson();
         try {
-            Reader reader = new FileReader("src/main/resources/leadercards.json");
+            Reader reader = new FileReader(src);
             this.leaderCards = gson.fromJson(reader, LeaderCardContainerBuilder.class).leaderCards;
         } catch (FileNotFoundException e) {
             e.printStackTrace();

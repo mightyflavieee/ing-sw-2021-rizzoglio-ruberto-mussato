@@ -10,7 +10,7 @@ public class LeaderCardContainer {
     private List<LeaderCard> leaderCards;
 
     public LeaderCardContainer() {
-        LeaderCardContainerBuilder leaderCardContainerBuilder = new LeaderCardContainerBuilder();
+        LeaderCardContainerBuilder leaderCardContainerBuilder = new LeaderCardContainerBuilder("src/main/resources/leadercards.json");
         List<LeaderCard> leaderCards = leaderCardContainerBuilder.getLeaderCards();
         Collections.shuffle(leaderCards);
         this.leaderCards = leaderCards;

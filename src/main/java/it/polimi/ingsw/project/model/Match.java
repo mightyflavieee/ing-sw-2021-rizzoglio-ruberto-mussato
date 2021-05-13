@@ -24,7 +24,7 @@ public class Match implements Serializable, Cloneable {
   private boolean isOver;
 
   public Match(List<Player> playerList) {
-    this.playerList = new ArrayList<>();
+    this.playerList = new ArrayList<Player>();
     this.playerList.addAll(playerList); //la lista mi arriva già shuffled
     this.playerList.forEach(x -> x.createFaithMap(this)); //serve per l'inizio partita
     this.market = new Market();
@@ -226,22 +226,26 @@ public class Match implements Serializable, Cloneable {
 
   public boolean isFeasibleTakeMarketResourcesMove(
     Warehouse warehouse,
-    List<Resource> discardedResources
+    List<Resource> discardedResources,
+    Market market
   ) {
     return this.currentPlayer.isFeasibleTakeMarketResourcesMove(
         warehouse,
         discardedResources
       );
+
   }
 
   public void performTakeMarketResourceMove(
     Warehouse warehouse,
-    List<Resource> discardedResources
+    List<Resource> discardedResources,
+    Market market
   ) {
     this.currentPlayer.performTakeMarketResourceMove(
         warehouse,
         discardedResources
       );
+    this.market = market;
   }
 
   public boolean isFeasibleExtractActionTokenMove() {

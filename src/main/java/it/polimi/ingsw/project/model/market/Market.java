@@ -28,8 +28,7 @@ public class Market implements Cloneable, Serializable {
     trayList.add(new Marble(MarbleType.Purple));
     trayList.add(new Marble(MarbleType.Red));
     Collections.shuffle(trayList);
-    this.outsideMarble = trayList.get(0);
-    trayList.remove(0);
+    this.outsideMarble = trayList.remove(0);
     for(int i = 0; i < 4; i++){
       for (int j = 0; j < 3; j++){
         tray[i][j] = trayList.get(0);

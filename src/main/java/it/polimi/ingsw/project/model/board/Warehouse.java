@@ -10,12 +10,12 @@ import java.util.*;
 
 public class Warehouse extends Observable<Warehouse> implements Serializable {
 
-  private Map<ShelfFloor, List<Resource>> shelves = new HashMap<>();
-  private Optional<Map<ResourceType, Integer>> extraDeposit = Optional.empty(); // da mettere nel costruttore
+  private Map<ShelfFloor, List<Resource>> shelves;
+  private Optional<Map<ResourceType, Integer>> extraDeposit; // da mettere nel costruttore
   private int numResourcesToDiscard;
 
   public Warehouse() {
-    this.shelves = new HashMap<>();
+    this.shelves = this.initShelves();
     this.extraDeposit = Optional.empty();
     this.numResourcesToDiscard = 0;
   }
@@ -50,6 +50,13 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     return currentResourcesMap;
   }
 
+  private Map<ShelfFloor, List<Resource>> initShelves(){
+    Map<ShelfFloor, List<Resource>> tempShelf= new HashMap<ShelfFloor, List<Resource>>();
+    tempShelf.put(ShelfFloor.First, new ArrayList<>());
+    tempShelf.put(ShelfFloor.Second, new ArrayList<>());
+    tempShelf.put(ShelfFloor.Third, new ArrayList<>());
+    return  tempShelf;
+  }
   //helper for listToMapResources
   private void mapResourcesHelper(
     Map<ResourceType, Integer> currentResourcesMap,
