@@ -237,13 +237,19 @@ public class Board implements Serializable, Cloneable {
   private void eliminateResourcesFromChest(
     Map<ResourceType, Integer> resourcesToEliminate
   ) {
+    List<ResourceType> resourceTypeToEliminate = new ArrayList<>();
     for (ResourceType type : this.chest.keySet()) {
       if (resourcesToEliminate.containsKey(type)) {
         if (this.chest.get(type).equals(resourcesToEliminate.get(type))) {
-          this.chest.remove(type);
+          resourceTypeToEliminate.add(type);
         } else {
           this.chest.put(type, this.chest.get(type) - resourcesToEliminate.get(type));
         }
+      }
+    }
+    if (resourceTypeToEliminate.size() > 0) {
+      for (ResourceType type : resourceTypeToEliminate) {
+        this.chest.remove(type);
       }
     }
   }
