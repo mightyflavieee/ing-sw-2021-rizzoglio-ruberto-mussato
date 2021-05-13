@@ -10,7 +10,7 @@ public class Market implements Cloneable, Serializable {
   // sarebbe da modificare inserendo la posizione delle biglie
   private Marble[][] tray = new Marble[4][3];
   private Marble outsideMarble;
-  //TODO costruttore
+  // TODO costruttore
 
   public Market() {
     List<Marble> trayList = new ArrayList<Marble>();
@@ -29,18 +29,17 @@ public class Market implements Cloneable, Serializable {
     trayList.add(new Marble(MarbleType.Red));
     Collections.shuffle(trayList);
     this.outsideMarble = trayList.remove(0);
-    for(int i = 0; i < 4; i++){
-      for (int j = 0; j < 3; j++){
-        tray[i][j] =  trayList.remove(0);
+    for (int i = 0; i < 4; i++) {
+      for (int j = 0; j < 3; j++) {
+        tray[i][j] = trayList.remove(0);
       }
     }
-
 
   }
 
   public Marble[][] getTray() {
-    Marble [][] trayToReturn = new Marble[4][3];
-    System.arraycopy(this.tray,0,trayToReturn,0,4);
+    Marble[][] trayToReturn = new Marble[4][3];
+    System.arraycopy(this.tray, 0, trayToReturn, 0, 4);
     return trayToReturn;
   }
 
@@ -57,30 +56,29 @@ public class Market implements Cloneable, Serializable {
   }
 
   private ResourceType convertMarbleToResourceType(Marble marble, boolean isTransmutationPresent,
-                                                   ResourceType resourceType) {
+      ResourceType resourceType) {
     switch (marble.getType()) {
-    case Grey:
-      return ResourceType.Stone;
-    case Blue:
-      return ResourceType.Shield;
-    case Purple:
-      return ResourceType.Servant;
-    case Red:
-      return ResourceType.Faith;
-    case Yellow:
-      return ResourceType.Coin;
-    default:
-      if (isTransmutationPresent) {
-        return resourceType;
-      } else {
-        return null;
-      }
+      case Grey:
+        return ResourceType.Stone;
+      case Blue:
+        return ResourceType.Shield;
+      case Purple:
+        return ResourceType.Servant;
+      case Red:
+        return ResourceType.Faith;
+      case Yellow:
+        return ResourceType.Coin;
+      default:
+        if (isTransmutationPresent) {
+          return resourceType;
+        } else {
+          return null;
+        }
     }
   }
 
-
   private List<Resource> getResourceInColumn(Integer columnIndex, boolean isTransmutationPresent,
-                                             ResourceType resourceType) {
+      ResourceType resourceType) {
     List<Resource> listOfObteinedResources = new ArrayList<Resource>();
     Marble[] marbleColumn = tray[columnIndex];
     for (Marble marble : marbleColumn) {
@@ -91,7 +89,6 @@ public class Market implements Cloneable, Serializable {
     }
     return listOfObteinedResources;
   }
-
 
   private List<Resource> getResourceInRow(Integer rowIndex, boolean isTransmutationPresent, ResourceType resourceType) {
     List<Resource> listOfObteinedResources = new ArrayList<Resource>();
@@ -108,16 +105,14 @@ public class Market implements Cloneable, Serializable {
     return listOfObteinedResources;
   }
 
-
   private void shiftMarblesInColumn(Integer position) {
-    Marble[] oldArrayOfMarbles = tray[position];
+    Marble[] oldArrayOfMarbles = tray[position].clone();
     tray[position][0] = outsideMarble;
     for (int i = 1; i < tray[position].length; i++) {
       tray[position][i] = oldArrayOfMarbles[i - 1];
     }
-    outsideMarble = oldArrayOfMarbles[oldArrayOfMarbles.length];
+    outsideMarble = oldArrayOfMarbles[oldArrayOfMarbles.length - 1];
   }
-
 
   private void shiftMarblesInRow(Integer position) {
     Marble[] oldArrayOfMarbles = new Marble[4];
@@ -126,9 +121,8 @@ public class Market implements Cloneable, Serializable {
     }
     tray[0][position] = outsideMarble;
     tray[position] = oldArrayOfMarbles;
-    outsideMarble = oldArrayOfMarbles[oldArrayOfMarbles.length];
+    outsideMarble = oldArrayOfMarbles[oldArrayOfMarbles.length - 1];
   }
-
 
   public List<Resource> insertMarble(Integer axis, Integer position, boolean isTransmutationPresent,
       ResourceType resourceType) {

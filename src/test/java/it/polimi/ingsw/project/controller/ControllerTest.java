@@ -48,19 +48,18 @@ class ControllerTest {
         MoveList moveList = new MoveList();
         Move extractActionTokenMove = new ExtractActionTokenMove();
         moveList.add(extractActionTokenMove);
-        PlayerMove playerMove = new PlayerMove(player,
-                null,moveList);
+        PlayerMove playerMove = new PlayerMove(player, null, moveList);
         Controller controller = new Controller(model);
-        while(!(model.getMatch().getActionTokenContainer().getActionTokens().get(0) instanceof MoveActionToken)){
+        while (!(model.getMatch().getActionTokenContainer().getActionTokens().get(0) instanceof MoveActionToken)) {
             model.getMatch().getActionTokenContainer().shuffle();
         }
         controller.update(playerMove);
-        assertTrue(2==player.getBoard().getFaithMap().getBlackMarkerPosition());
+        assertTrue(2 == player.getBoard().getFaithMap().getBlackMarkerPosition());
 
     }
 
     @Test
-    void completeTest(){
+    void completeTest() {
         Player gianluca = new Player("Gianluca");
         Player flavio = new Player("Flavio");
         Player leo = new Player("Leo");
@@ -92,15 +91,20 @@ class ControllerTest {
         requirementsLeaderCardFlavio2.put(CardColor.Amethyst, 1);
         requirementsLeaderCardLeo1.put(ResourceType.Coin, 5);
         requirementsLeaderCardLeo2.put(ResourceType.Stone, 5);
-        LeaderCard leaderCardGian1 = new LeaderCard("id1", perkLeaderCardGian1, 2, null, requirementsLeaderCardGian1, null);
-        LeaderCard leaderCardGian2 = new LeaderCard("id2", perkLeaderCardGian2, 2, null, requirementsLeaderCardGian2, null);
-        LeaderCard leaderCardFlavio1 = new LeaderCard("id3", perkLeaderCardFlavio1, 2, null, requirementsLeaderCardFlavio1, null);
-        LeaderCard leaderCardFlavio2 = new LeaderCard("id4", perkLeaderCardFlavio2, 2, null, requirementsLeaderCardFlavio2, null);
-        LeaderCard leaderCardLeo1 = new LeaderCard("id5", perkLeaderCardLeo1, 3, requirementsLeaderCardLeo1, null, null);
-        LeaderCard leaderCardLeo2 = new LeaderCard("id6", perkLeaderCardLeo2, 3, requirementsLeaderCardLeo2, null, null);
+        LeaderCard leaderCardGian1 = new LeaderCard("id1", perkLeaderCardGian1, 2, null, requirementsLeaderCardGian1,
+                null);
+        LeaderCard leaderCardGian2 = new LeaderCard("id2", perkLeaderCardGian2, 2, null, requirementsLeaderCardGian2,
+                null);
+        LeaderCard leaderCardFlavio1 = new LeaderCard("id3", perkLeaderCardFlavio1, 2, null,
+                requirementsLeaderCardFlavio1, null);
+        LeaderCard leaderCardFlavio2 = new LeaderCard("id4", perkLeaderCardFlavio2, 2, null,
+                requirementsLeaderCardFlavio2, null);
+        LeaderCard leaderCardLeo1 = new LeaderCard("id5", perkLeaderCardLeo1, 3, requirementsLeaderCardLeo1, null,
+                null);
+        LeaderCard leaderCardLeo2 = new LeaderCard("id6", perkLeaderCardLeo2, 3, requirementsLeaderCardLeo2, null,
+                null);
 
-
-        //removing the random beginning of the match
+        // removing the random beginning of the match
         Marble[][] tray = new Marble[4][3];
         List<Marble> trayList = new ArrayList<Marble>();
         trayList.add(new Marble(MarbleType.White));
@@ -116,38 +120,36 @@ class ControllerTest {
         trayList.add(new Marble(MarbleType.Purple));
         trayList.add(new Marble(MarbleType.Purple));
         trayList.add(new Marble(MarbleType.Red));
-        for(int i = 0; i < 4; i++){
-            for (int j = 0; j < 3; j++){
-                tray[i][j] =  trayList.remove(0);
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 3; j++) {
+                tray[i][j] = trayList.remove(0);
             }
         }
         Marble outsideMarble = trayList.remove(0);
         model.getMatch().getMarket().setOutsideMarble(outsideMarble);
-        assertEquals(outsideMarble.getType(),model.getMatch().getMarket().getOutSideMarble().getType());
+        assertEquals(outsideMarble.getType(), model.getMatch().getMarket().getOutSideMarble().getType());
         model.getMatch().getMarket().setTray(tray);
 
-        //beginning of the match
+        // beginning of the match
 
-        //turn 1 Gianluca
+        // turn 1 Gianluca
         Market localMarket = new Market();
         localMarket.setTray(tray);
         localMarket.setOutsideMarble(outsideMarble);
         List<Resource> resourceList1Gian = new ArrayList<>();
-        //inserisco in basso a destra una biglia rossa
-       // resourceList1Gian = localMarket.insertMarble(0,0,false,ResourceType.Faith);
+        // inserisco in basso a destra una biglia rossa
+        resourceList1Gian = localMarket.insertMarble(0, 0, false, ResourceType.Faith);
         Warehouse warehouse1Gian = new Warehouse();
         warehouse1Gian.getShelves().get(ShelfFloor.First).add(new Resource(ResourceType.Coin));
         warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
         warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
-        Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, null,localMarket);
+        Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, null, localMarket);
         MoveList moveList1Gian = new MoveList();
         moveList1Gian.add(move1Gian);
-        PlayerMove playerMove1Gian = new PlayerMove(gianluca,null,moveList1Gian);
-        //controller.update(playerMove1Gian);
+        PlayerMove playerMove1Gian = new PlayerMove(gianluca, null, moveList1Gian);
+        // controller.update(playerMove1Gian);
 
-
-        //move flavio
-
+        // move flavio
 
     }
 
