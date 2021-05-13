@@ -138,7 +138,7 @@ class ControllerTest {
         localMarket.setOutsideMarble(outsideMarble);
         List<Resource> resourceList1Gian = new ArrayList<>();
         // inserisco in basso a destra una biglia rossa
-        resourceList1Gian = localMarket.insertMarble(0, 0, false, ResourceType.Faith);
+        resourceList1Gian = localMarket.insertMarble(1, 0, false, ResourceType.Faith);
         Warehouse warehouse1Gian = new Warehouse();
         warehouse1Gian.getShelves().get(ShelfFloor.First).add(new Resource(ResourceType.Coin));
         warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));

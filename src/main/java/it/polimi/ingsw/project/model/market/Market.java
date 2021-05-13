@@ -119,8 +119,8 @@ public class Market implements Cloneable, Serializable {
     for (int i = 0; i < tray.length; i++) {
       oldArrayOfMarbles[i] = tray[i][position];
     }
-    tray[0][position] = outsideMarble;
     tray[position] = oldArrayOfMarbles;
+    tray[0][position] = outsideMarble;
     outsideMarble = oldArrayOfMarbles[oldArrayOfMarbles.length - 1];
   }
 
