@@ -144,21 +144,155 @@ class ControllerTest {
         Market localMarket = new Market();
         localMarket.setTray(tray);
         localMarket.setOutsideMarble(outsideMarble);
-        List<Resource> resourceList1Gian = new ArrayList<>();
-        // inserisco in basso a destra una biglia rossa
-        resourceList1Gian = localMarket.insertMarble(1, 0, false, ResourceType.Faith);
-        Warehouse warehouse1Gian = new Warehouse();
+        List<Resource> resourceList1Gian = localMarket.insertMarble(0, 1, Optional.empty());
+        Warehouse warehouse1Gian = new Warehouse(model.getMatch());
         warehouse1Gian.getShelves().get(ShelfFloor.First).add(new Resource(ResourceType.Coin));
         warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
         warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
-        Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, null, localMarket);
+        Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, new ArrayList<Resource>(), localMarket, false);
         MoveList moveList1Gian = new MoveList();
         moveList1Gian.add(move1Gian);
         PlayerMove playerMove1Gian = new PlayerMove(gianluca, null, moveList1Gian);
-        // controller.update(playerMove1Gian);
+        controller.update(playerMove1Gian);
+        assertEquals(0, gianluca.getVictoryPoints());
+        assertEquals(0, gianluca.getBoard().getFaithMap().getMarkerPosition());
+        assertEquals(1, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.First).size());
+        assertEquals(2, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.Second).size());
+        assertEquals(ResourceType.Coin, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.First).get(0).getType());
+        assertEquals(ResourceType.Servant, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.Second).get(0).getType());
+        assertEquals(ResourceType.Servant, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.Second).get(1).getType());
 
-        // move flavio
 
+        // turn 1 flavio
+        Warehouse warehouse1Flavio = new Warehouse(model.getMatch());
+        localMarket.insertMarble(0, 2, Optional.empty());
+        warehouse1Flavio.getShelves().get(ShelfFloor.Third).add(new Resource(ResourceType.Servant));
+        warehouse1Flavio.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Stone));
+        warehouse1Flavio.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Stone));
+        Move move1Flavio = new TakeMarketResourcesMove(warehouse1Flavio, new ArrayList<Resource>(), localMarket, false);
+        MoveList moveList1Flavio = new MoveList();
+        moveList1Flavio.add(move1Flavio);
+        PlayerMove playerMove1Flavio = new PlayerMove(flavio, null, moveList1Flavio);
+        controller.update(playerMove1Flavio);
+        assertEquals(0, flavio.getVictoryPoints());
+        assertEquals(0, flavio.getBoard().getFaithMap().getMarkerPosition());
+        assertEquals(ResourceType.Servant, flavio.getBoard().getWarehouse().getShelves().get(ShelfFloor.Third).get(0).getType());
+        assertEquals(ResourceType.Stone, flavio.getBoard().getWarehouse().getShelves().get(ShelfFloor.Second).get(0).getType());
+        assertEquals(ResourceType.Stone, flavio.getBoard().getWarehouse().getShelves().get(ShelfFloor.Second).get(1).getType());
+
+
+        // turn 1
+        Warehouse warehouse1Leo = new Warehouse(model.getMatch());
+        localMarket.insertMarble(1, 2, Optional.empty());
+        warehouse1Leo.getShelves().get(ShelfFloor.Third).add(new Resource(ResourceType.Shield));
+        warehouse1Leo.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Coin));
+        warehouse1Leo.getShelves().get(ShelfFloor.First).add(new Resource(ResourceType.Stone));
+        Boolean hasRedMarble = true;
+        Move move1Leo = new TakeMarketResourcesMove(warehouse1Leo, new ArrayList<Resource>(), localMarket, hasRedMarble);
+        MoveList moveList1Leo = new MoveList();
+        moveList1Leo.add(move1Leo);
+        PlayerMove playerMove1Leo = new PlayerMove(leo, null, moveList1Leo);
+        controller.update(playerMove1Leo);
+        assertEquals(0, leo.getVictoryPoints());
+        assertEquals(1, leo.getBoard().getFaithMap().getMarkerPosition());
+        assertEquals(ResourceType.Shield, leo.getBoard().getWarehouse().getShelves().get(ShelfFloor.Third).get(0).getType());
+        assertEquals(ResourceType.Coin, leo.getBoard().getWarehouse().getShelves().get(ShelfFloor.Second).get(0).getType());
+        assertEquals(ResourceType.Stone, leo.getBoard().getWarehouse().getShelves().get(ShelfFloor.First).get(0).getType());
+
+        // turn 2 gianluca
+        Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
+        resourcesToEliminateWarehouse.put(ResourceType.Servant, 2);
+        Move move2Gian = new BuyDevCardMove("id2", DevCardPosition.Right, resourcesToEliminateWarehouse, new HashMap<>());
+        MoveList moveList2Gian = new MoveList();
+        moveList2Gian.add(move2Gian);
+        PlayerMove playerMove2Gian = new PlayerMove(gianluca, null, moveList2Gian);
+        controller.update(playerMove2Gian);
+        assertEquals(0, gianluca.getVictoryPoints());
+        assertEquals(0, gianluca.getBoard().getFaithMap().getMarkerPosition());
+        assertEquals(1, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.First).size());
+        assertEquals(0, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.Second).size());
+        assertEquals(ResourceType.Coin, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.First).get(0).getType());
+        assertEquals(2, gianluca.getBoard().getLeaderCards().size());
+        assertTrue(gianluca.getBoard().getMapTray().get(DevCardPosition.Right).get(0).getId().equals("id2"));
+
+
+        // turn 2 flavio
+        resourcesToEliminateWarehouse.clear();
+        Move move2Flavio = new DiscardLeaderCardMove("id3");
+        MoveList moveList2Flavio = new MoveList();
+        moveList2Flavio.add(move2Flavio);
+        PlayerMove playerMove2Flavio = new PlayerMove(flavio, null, moveList2Flavio);
+        controller.update(playerMove2Flavio);
+        assertEquals(1, flavio.getBoard().getLeaderCards().size());
+        assertEquals("id4", flavio.getBoard().getLeaderCards().get(0).getId());
+        assertEquals(1, flavio.getBoard().getFaithMap().getMarkerPosition());
+        assertEquals(0, flavio.getVictoryPoints());
+
+
+        // turn 2 Leo
+        resourcesToEliminateWarehouse.clear();
+        Move move2Leo = new DiscardLeaderCardMove("id3");
+        Warehouse warehouse2Leo = new Warehouse(model.getMatch());
+        localMarket.insertMarble(1, 2, Optional.empty());
+        warehouse2Leo.getShelves().get(ShelfFloor.Third).add(new Resource(ResourceType.Shield));
+        warehouse2Leo.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Coin));
+        warehouse2Leo.getShelves().get(ShelfFloor.First).add(new Resource(ResourceType.Stone));
+        List<Resource> discardedResources = new ArrayList<Resource>();
+        discardedResources.add(new Resource(ResourceType.Shield));
+        discardedResources.add(new Resource(ResourceType.Servant));
+        discardedResources.add(new Resource(ResourceType.Servant));
+        Move move3Leo = new TakeMarketResourcesMove(warehouse2Leo, discardedResources, localMarket, false);
+        MoveList moveList2Leo = new MoveList();
+        moveList2Leo.add(move2Leo);
+        moveList2Leo.add(move3Leo);
+        PlayerMove playerMove2Leo = new PlayerMove(leo, null, moveList2Leo);
+        controller.update(playerMove2Leo);
+        assertEquals(2, leo.getBoard().getLeaderCards().size());
+        assertEquals(1, leo.getBoard().getFaithMap().getMarkerPosition());
+        MoveList moveList3Leo = new MoveList();
+        moveList3Leo.add(move3Leo);
+        PlayerMove playerMove3Leo = new PlayerMove(leo, null, moveList3Leo);
+        controller.update(playerMove3Leo);
+        assertEquals(0, leo.getVictoryPoints());
+        assertEquals(4, flavio.getBoard().getFaithMap().getMarkerPosition());
+        assertEquals(3, gianluca.getBoard().getFaithMap().getMarkerPosition());
+        assertEquals(1, flavio.getVictoryPoints());
+        assertEquals(1, gianluca.getVictoryPoints());
+
+
+        // turn 3 gianluca
+        resourcesToEliminateWarehouse.clear();
+        resourcesToEliminateWarehouse = gianluca.getBoard().getMapTray().get(DevCardPosition.Right).get(0).getProduction().getRequiredResources();
+        ProductionMove move3Gian = new ProductionMove("id2", null, resourcesToEliminateWarehouse,
+                null, ProductionType.Board, null);
+        MoveList moveList3Gian = new MoveList();
+        moveList3Gian.add(move3Gian);
+        PlayerMove playerMove3Gian = new PlayerMove(gianluca, null, moveList3Gian);
+        controller.update(playerMove3Gian);
+
+        // end game
+        flavio.getBoard().moveForward();//1
+        flavio.getBoard().moveForward();//2
+        flavio.getBoard().moveForward();
+        flavio.getBoard().moveForward();//4
+        flavio.getBoard().moveForward();
+        flavio.getBoard().moveForward();//6
+        flavio.getBoard().moveForward();
+        flavio.getBoard().moveForward();//8
+        flavio.getBoard().moveForward();
+        flavio.getBoard().moveForward();//10
+        flavio.getBoard().moveForward();
+        flavio.getBoard().moveForward();//12
+        flavio.getBoard().moveForward();
+        flavio.getBoard().moveForward();//14
+        flavio.getBoard().moveForward();
+        flavio.getBoard().moveForward();//16
+        flavio.getBoard().moveForward();
+        flavio.getBoard().moveForward();//18
+        flavio.getBoard().moveForward();//4+19=23 partita non finita
+        assertFalse(model.getMatch().getIsLastTurn());
+        flavio.getBoard().moveForward();
+        assertTrue(model.getMatch().getIsLastTurn());
     }
 
 }

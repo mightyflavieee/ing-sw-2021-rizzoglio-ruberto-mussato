@@ -14,7 +14,7 @@ class WarehouseTest {
 
     @Test
     void mapAllContainedResources() {
-        Warehouse warehouse = new Warehouse();
+        Warehouse warehouse = new Warehouse(null);
         List<Resource> resourcesListFirstFloor = new ArrayList<>();
         List<Resource> resourcesListSecondFloor = new ArrayList<>();
         List<Resource> resourcesListThirdFloor = new ArrayList<>();
@@ -43,7 +43,7 @@ class WarehouseTest {
 
     @Test
     void listToMapResources() {
-        Warehouse warehouse = new Warehouse();
+        Warehouse warehouse = new Warehouse(null);
         List<Resource> resources = new ArrayList<>();
         Map<ResourceType, Integer> returnedResources;
         resources.add(new Resource(ResourceType.Coin));

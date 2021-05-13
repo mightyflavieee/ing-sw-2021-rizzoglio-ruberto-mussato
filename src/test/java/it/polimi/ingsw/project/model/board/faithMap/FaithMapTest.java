@@ -19,7 +19,7 @@ class FaithMapTest {
 
     @Test
     void getFaithTiles() {
-        FaithMap faithMap = new FaithMap(null);
+        FaithMap faithMap = new FaithMap(null,null);
         List<ActivableTile> returnedList;
         returnedList = faithMap.getFaithTiles();
         assertNotNull(returnedList);
@@ -28,7 +28,7 @@ class FaithMapTest {
 
     @Test
     void getPapalFavourSlots() {
-        FaithMap faithMap = new FaithMap(null);
+        FaithMap faithMap = new FaithMap(null,null);
         List<PapalFavourSlot> returnedList;
         returnedList = faithMap.getPapalFavourSlots();
         assertNotNull(returnedList);
@@ -37,7 +37,7 @@ class FaithMapTest {
 
     @Test
     void moveForward() {
-        FaithMap faithMap = new FaithMap(null);
+        FaithMap faithMap = new FaithMap(null, null);
         int oldPosition, newPosition;
         oldPosition = faithMap.getMarkerPosition();
         assertEquals(0, oldPosition);
@@ -49,7 +49,7 @@ class FaithMapTest {
 
     @Test
     void moveForwardBlack() {
-        FaithMap faithMap = new FaithMap(null);
+        FaithMap faithMap = new FaithMap(null, null);
         int oldPosition, newPosition;
         oldPosition = faithMap.getBlackMarkerPosition();
         assertEquals(0, oldPosition);
@@ -61,7 +61,7 @@ class FaithMapTest {
 
     @Test
     void papalCouncil() {
-        FaithMap faithMap = new FaithMap(null);
+        FaithMap faithMap = new FaithMap(null, null);
         for(int i = 1; i < 4; i++){
             {
                 int result = faithMap.papalCouncil(i);

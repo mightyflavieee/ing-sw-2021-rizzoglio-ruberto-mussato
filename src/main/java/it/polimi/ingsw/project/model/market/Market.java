@@ -2,15 +2,19 @@ package it.polimi.ingsw.project.model.market;
 
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
+import it.polimi.ingsw.project.observer.Observable;
 
 import java.io.Serializable;
 import java.util.*;
 
-public class Market implements Cloneable, Serializable {
-  // sarebbe da modificare inserendo la posizione delle biglie
-  private Marble[][] tray = new Marble[4][3];
-  private Marble outsideMarble;
-  // TODO costruttore
+public class Market extends Observable<Market> implements Cloneable, Serializable {
+    // sarebbe da modificare inserendo la posizione delle biglie
+    private Marble[][] tray = new Marble[4][3];
+    //(0,2),(1,2),(2,2),(3,2)
+    //(0,1),(1,1),(2,1),(3,1)
+    //(0,0),(1,0),(2,0),(3,0)
+    private Marble outsideMarble;
+    // TODO costruttore
 
     public Market() {
         List<Marble> trayList = new ArrayList<Marble>();
@@ -122,17 +126,22 @@ public class Market implements Cloneable, Serializable {
         outsideMarble = oldArrayOfMarbles[0];
     }
 
-  public List<Resource> insertMarble(Integer axis, Integer position, boolean isTransmutationPresent,
-      ResourceType resourceType) {
-    // if axis chosen was x else y
-    List<Resource> listOfObteinResources;
-    if (axis == 0) {
-      listOfObteinResources = getResourceInColumn(position, isTransmutationPresent, resourceType);
-      shiftMarblesInColumn(position);
-    } else {
-      listOfObteinResources = getResourceInRow(position, isTransmutationPresent, resourceType);
-      shiftMarblesInRow(position);
+    public List<Resource> insertMarble(Integer axis, Integer position, Optional<ResourceType> transmutationPerk) {
+        // axis = 1 = horizontal, position can be 0 1 2
+        // axis = 0 = vertical, position can be 0 1 2 3
+        // from right to left, from bottom to up
+        //(0,2),(1,2),(2,2),(3,2)<--1
+        //(0,1),(1,1),(2,1),(3,1)<--1
+        //(0,0),(1,0),(2,0),(3,0)<--1
+        //  0     0     0     0
+        List<Resource> listOfObteinResources;
+        if (axis == 0) {
+            listOfObteinResources = getResourceInColumn(position, transmutationPerk);
+            shiftMarblesInColumn(position);
+        } else {
+            listOfObteinResources = getResourceInRow(position, transmutationPerk);
+            shiftMarblesInRow(position);
+        }
+        return listOfObteinResources;
     }
-    return listOfObteinResources;
-  }
 }

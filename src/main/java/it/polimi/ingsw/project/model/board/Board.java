@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.model.board;
 
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
@@ -37,13 +38,13 @@ public class Board implements Serializable, Cloneable {
     this.mapTray.put(DevCardPosition.Left, listOfDevCards);
     this.mapTray.put(DevCardPosition.Center, listOfDevCards);
     this.mapTray.put(DevCardPosition.Right, listOfDevCards);
-    this.warehouse = new Warehouse();
     this.leaderCards = new ArrayList<>();
     this.discounts = Optional.empty();
     this.transmutation = Optional.empty();
   }
- public void createFaithMap(Match match){
-   this.faithMap = new FaithMap(match);
+ public void createFaithMapAndWarehouse(Match match, Player player){
+   this.faithMap = new FaithMap(match, player);
+   this.warehouse = new Warehouse(match);
  }
   public final Board clone() {
     // TODO clone interne

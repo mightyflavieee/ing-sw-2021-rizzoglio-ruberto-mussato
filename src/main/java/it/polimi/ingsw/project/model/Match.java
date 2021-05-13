@@ -267,7 +267,8 @@ public class Match implements Serializable, Cloneable {
         this.currentPlayer.performActivateLeaderCardMove(leaderCardID);
     }
 
-  public void moveForwardBlack() {
-    if (24 == this.currentPlayer.moveForwardBlack()) this.youLost(); // cioè se lorenzo è arrivato alla fine
-  }
+    public void moveForwardBlack() {
+        if (24 == this.currentPlayer.moveForwardBlack()) this.youLost(); // cioè se lorenzo è arrivato alla fine
+    }
+
 }

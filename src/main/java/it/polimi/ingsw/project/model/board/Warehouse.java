@@ -1,8 +1,12 @@
 package it.polimi.ingsw.project.model.board;
 
+import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.observer.Observable;
+import it.polimi.ingsw.project.observer.Observer;
+import it.polimi.ingsw.project.observer.custom.WarehouseObserver;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Serializable;
@@ -14,10 +18,11 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
   private Optional<Map<ResourceType, Integer>> extraDeposit; // da mettere nel costruttore
   private int numResourcesToDiscard;
 
-  public Warehouse() {
+  public Warehouse(Match match) {
     this.shelves = this.initShelves();
     this.extraDeposit = Optional.empty();
     this.numResourcesToDiscard = 0;
+    this.addObserver(new WarehouseObserver(match));
   }
 
   //returns ALL resources presents in the warehouse
@@ -252,9 +257,10 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     Resource oldResourceOnFloor = null;
     List<Resource> oldResourceOnPreviousFloor = new ArrayList<Resource>();
     for (ShelfFloor shelfFloor : shelfs.keySet()) {
+      oldResourceOnFloor = null;
       for (Resource resource : shelfs.get(shelfFloor)) {
         if (oldResourceOnFloor != null) {
-          if (oldResourceOnFloor != resource) {
+          if (oldResourceOnFloor.getType() != resource.getType()) {
             return false;
           }
         }

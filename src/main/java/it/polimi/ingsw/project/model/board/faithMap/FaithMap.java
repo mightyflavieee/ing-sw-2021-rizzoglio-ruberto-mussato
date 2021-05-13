@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.model.board.faithMap;
 
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.faithMap.tile.ActivableTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.NormalTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.PapalCouncilTile;
@@ -19,16 +20,16 @@ public class FaithMap implements Serializable {
   private final List<PapalFavourSlot> papalFavourSlots;
   //definire un costruttore (bisogna specificare ogni casella della mappa)
 
-  public FaithMap(Match match) {
+  public FaithMap(Match match, Player player) {
     this.markerPosition = 0;
     this.blackMarkerPosition = 0;
-    this.generateMap(match);
+    this.generateMap(match, player);
     this.papalFavourSlots = new ArrayList<>();
     this.papalFavourSlots.add(new PapalFavourSlot(2));
     this.papalFavourSlots.add(new PapalFavourSlot(3));
     this.papalFavourSlots.add(new PapalFavourSlot(4));
   }
-  private void generateMap(Match match){ //la faithmap è fissa
+  private void generateMap(Match match, Player player){ //la faithmap è fissa
 //    this.faithTiles = new ArrayList<>();
 //    this.faithTiles.add(new NormalTile());//1
 //    this.faithTiles.add(new NormalTile());
@@ -59,41 +60,41 @@ public class FaithMap implements Serializable {
     this.faithTiles.add(new NormalTile());//1
     this.faithTiles.add(new NormalTile());
     VictoryPointsTile victoryPointsTile = new VictoryPointsTile(1);
-    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    victoryPointsTile.addObserver(new VictoryPointsObserver(player));
     this.faithTiles.add(victoryPointsTile);//3
     this.faithTiles.add(new NormalTile());
     this.faithTiles.add(new NormalTile());
     victoryPointsTile = new VictoryPointsTile(2);
-    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    victoryPointsTile.addObserver(new VictoryPointsObserver(player));
     this.faithTiles.add(victoryPointsTile);//6
     this.faithTiles.add(new NormalTile());
     PapalCouncilTile papalCouncilTile = new PapalCouncilTile(1);
     papalCouncilTile.addObserver(new PapalCouncilObserver(match));
     this.faithTiles.add(papalCouncilTile);
     victoryPointsTile = new VictoryPointsTile(4);
-    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    victoryPointsTile.addObserver(new VictoryPointsObserver(player));
     this.faithTiles.add(victoryPointsTile);//9
     this.faithTiles.add(new NormalTile());
     this.faithTiles.add(new NormalTile());
     victoryPointsTile = new VictoryPointsTile(6);
-    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    victoryPointsTile.addObserver(new VictoryPointsObserver(player));
     this.faithTiles.add(victoryPointsTile);//12
     this.faithTiles.add(new NormalTile());
     this.faithTiles.add(new NormalTile());
     victoryPointsTile = new VictoryPointsTile(9);
-    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    victoryPointsTile.addObserver(new VictoryPointsObserver(player));
     this.faithTiles.add(victoryPointsTile);//15
     papalCouncilTile = new PapalCouncilTile(2);
     papalCouncilTile.addObserver(new PapalCouncilObserver(match));
     this.faithTiles.add(papalCouncilTile);
     this.faithTiles.add(new NormalTile());
     victoryPointsTile = new VictoryPointsTile(12);
-    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    victoryPointsTile.addObserver(new VictoryPointsObserver(player));
     this.faithTiles.add(victoryPointsTile);//18
     this.faithTiles.add(new NormalTile());
     this.faithTiles.add(new NormalTile());
     victoryPointsTile = new VictoryPointsTile(16);
-    victoryPointsTile.addObserver(new VictoryPointsObserver(match));
+    victoryPointsTile.addObserver(new VictoryPointsObserver(player));
     this.faithTiles.add(victoryPointsTile);//21
     this.faithTiles.add(new NormalTile());
     this.faithTiles.add(new NormalTile());

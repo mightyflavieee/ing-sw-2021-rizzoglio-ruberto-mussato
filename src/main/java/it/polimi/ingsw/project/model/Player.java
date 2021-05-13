@@ -32,7 +32,7 @@ public class Player implements Serializable, Cloneable {
     this.victoryPoints = 0;
   }
   public void createFaithMap(Match match){
-    this.board.createFaithMap(match);
+    this.board.createFaithMapAndWarehouse(match, this);
   }
 
   @Override
