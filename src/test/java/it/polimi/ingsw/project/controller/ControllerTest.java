@@ -12,6 +12,8 @@ import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.PerkType;
+import it.polimi.ingsw.project.model.board.faithMap.PapalSlotStatus;
+import it.polimi.ingsw.project.model.board.faithMap.tile.PapalCouncilTile;
 import it.polimi.ingsw.project.model.market.Marble;
 import it.polimi.ingsw.project.model.market.MarbleType;
 import it.polimi.ingsw.project.model.market.Market;
@@ -291,8 +293,14 @@ class ControllerTest {
         flavio.getBoard().moveForward();//18
         flavio.getBoard().moveForward();//4+19=23 partita non finita
         assertFalse(model.getMatch().getIsLastTurn());
+        assertEquals(PapalSlotStatus.Taken,flavio.getBoard().getFaithMap().getPapalFavourSlots().get(0).getStatus());
+        assertEquals(PapalSlotStatus.Taken,flavio.getBoard().getFaithMap().getPapalFavourSlots().get(1).getStatus());
+        assertEquals(PapalSlotStatus.Available,flavio.getBoard().getFaithMap().getPapalFavourSlots().get(2).getStatus());
         flavio.getBoard().moveForward();
         assertTrue(model.getMatch().getIsLastTurn());
+        assertEquals(PapalSlotStatus.Taken,flavio.getBoard().getFaithMap().getPapalFavourSlots().get(0).getStatus());
+        assertEquals(PapalSlotStatus.Taken,flavio.getBoard().getFaithMap().getPapalFavourSlots().get(1).getStatus());
+        assertEquals(PapalSlotStatus.Taken,flavio.getBoard().getFaithMap().getPapalFavourSlots().get(2).getStatus());
     }
 
 }
