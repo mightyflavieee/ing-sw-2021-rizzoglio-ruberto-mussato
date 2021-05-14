@@ -1,11 +1,6 @@
 package it.polimi.ingsw.project.model;
 
-import it.polimi.ingsw.project.controller.Controller;
 import it.polimi.ingsw.project.model.actionTokens.MoveActionToken;
-import it.polimi.ingsw.project.model.playermove.ExtractActionTokenMove;
-import it.polimi.ingsw.project.model.playermove.Move;
-import it.polimi.ingsw.project.model.playermove.MoveList;
-import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

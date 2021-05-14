@@ -1,9 +1,6 @@
 package it.polimi.ingsw.project.controller;
 
-import it.polimi.ingsw.project.model.LeaderCardContainerBuilder;
-import it.polimi.ingsw.project.model.Match;
-import it.polimi.ingsw.project.model.Model;
-import it.polimi.ingsw.project.model.Player;
+import it.polimi.ingsw.project.model.*;
 import it.polimi.ingsw.project.model.actionTokens.MoveActionToken;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
@@ -13,23 +10,14 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.PerkType;
 import it.polimi.ingsw.project.model.board.faithMap.PapalSlotStatus;
-import it.polimi.ingsw.project.model.board.faithMap.tile.PapalCouncilTile;
 import it.polimi.ingsw.project.model.market.Marble;
 import it.polimi.ingsw.project.model.market.MarbleType;
 import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.playermove.*;
-import it.polimi.ingsw.project.*;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
-import it.polimi.ingsw.project.server.ClientConnection;
-import it.polimi.ingsw.project.server.Server;
-import it.polimi.ingsw.project.server.SocketClientConnection;
-import it.polimi.ingsw.project.view.RemoteView;
-import it.polimi.ingsw.project.view.View;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.net.Socket;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -48,22 +36,18 @@ class ControllerTest {
                 List<Player> playerList = new ArrayList<>();
                 playerList.add(player);
                 Model model = new Model(playerList);
-                MoveList moveList = new MoveList();
-                Move extractActionTokenMove = new ExtractActionTokenMove();
-                moveList.add(extractActionTokenMove);
-                PlayerMove playerMove = new PlayerMove(player, null, moveList);
-                Controller controller = new Controller(model);
                 while (!(model.getMatch().getActionTokenContainer().getActionTokens()
                                 .get(0) instanceof MoveActionToken)) {
                         model.getMatch().getActionTokenContainer().shuffle();
                 }
-                controller.update(playerMove);
+                model.getMatch().performExtractActionTokenMove();
                 assertTrue(2 == player.getBoard().getFaithMap().getBlackMarkerPosition());
 
         }
 
         @Test
         void completeTest() {
+
                 Player gianluca = new Player("Gianluca");
                 Player flavio = new Player("Flavio");
                 Player leo = new Player("Leo");
@@ -159,6 +143,9 @@ class ControllerTest {
                 model.updateTurn(); //now i am in the main phase
                 assertEquals(TurnPhase.MainPhase,gianluca.getTurnPhase());
                 controller.update(playerMove1Gian);
+                assertEquals(TurnPhase.EndPhase,gianluca.getTurnPhase());
+                model.updateTurn();
+                assertEquals(TurnPhase.WaitPhase,gianluca.getTurnPhase());
                 assertEquals(0, gianluca.getVictoryPoints());
                 assertEquals(0, gianluca.getBoard().getFaithMap().getMarkerPosition());
                 assertEquals(1, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.First).size());
@@ -183,6 +170,7 @@ class ControllerTest {
                 model.updateTurn();
                 assertEquals(TurnPhase.MainPhase,flavio.getTurnPhase());
                 controller.update(playerMove1Flavio);
+                model.updateTurn();
                 assertEquals(0, flavio.getVictoryPoints());
                 assertEquals(0, flavio.getBoard().getFaithMap().getMarkerPosition());
                 assertEquals(ResourceType.Servant,
@@ -204,6 +192,7 @@ class ControllerTest {
                 PlayerMove playerMove1Leo = new PlayerMove(leo, null, move1Leo);
                 model.updateTurn();
                 controller.update(playerMove1Leo);
+                model.updateTurn();
                 assertEquals(0, leo.getVictoryPoints());
                 assertEquals(1, leo.getBoard().getFaithMap().getMarkerPosition());
                 assertEquals(ResourceType.Shield,
@@ -221,6 +210,7 @@ class ControllerTest {
                 PlayerMove playerMove2Gian = new PlayerMove(gianluca, null, move2Gian);
                 model.updateTurn();
                 controller.update(playerMove2Gian);
+                model.updateTurn();
                 assertEquals(0, gianluca.getVictoryPoints());
                 assertEquals(0, gianluca.getBoard().getFaithMap().getMarkerPosition());
                 assertEquals(1, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.First).size());
@@ -235,6 +225,8 @@ class ControllerTest {
                 Move move2Flavio = new DiscardLeaderCardMove("id3");
                 PlayerMove playerMove2Flavio = new PlayerMove(flavio, null, move2Flavio);
                 controller.update(playerMove2Flavio);
+                model.updateTurn();
+                model.updateTurn();
                 assertEquals(1, flavio.getBoard().getLeaderCards().size());
                 assertEquals("id4", flavio.getBoard().getLeaderCards().get(0).getId());
                 assertEquals(1, flavio.getBoard().getFaithMap().getMarkerPosition());
@@ -260,6 +252,7 @@ class ControllerTest {
                 PlayerMove playerMove3Leo = new PlayerMove(leo, null, move3Leo);
                 model.updateTurn();
                 controller.update(playerMove3Leo);
+                model.updateTurn();
                 assertEquals(0, leo.getVictoryPoints());
                 assertEquals(4, flavio.getBoard().getFaithMap().getMarkerPosition());
                 assertEquals(3, gianluca.getBoard().getFaithMap().getMarkerPosition());
@@ -311,6 +304,11 @@ class ControllerTest {
                                 flavio.getBoard().getFaithMap().getPapalFavourSlots().get(1).getStatus());
                 assertEquals(PapalSlotStatus.Taken,
                                 flavio.getBoard().getFaithMap().getPapalFavourSlots().get(2).getStatus());
+
+
+
+
+
         }
 
 }

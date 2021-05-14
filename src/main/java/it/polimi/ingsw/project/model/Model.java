@@ -21,17 +21,20 @@ public class Model extends Observable<MoveMessage> implements Serializable{
         return player.getNickname().equals(match.getCurrentPlayer().getNickname());
     }
 
-    public boolean isFeasibleMove(PlayerMove playerMove, int i){
-        return playerMove.isFeasibleMove(this.match, i);
+    public boolean isFeasibleMove(PlayerMove playerMove){
+        return playerMove.isFeasibleMove(this.match);
     }
 
-    public void performMove(PlayerMove playerMove, int i){
-        playerMove.performMove(this.match, i);
+    public void performMove(PlayerMove playerMove){
+        playerMove.performMove(this.match);
         this.match.end();
     }
 
 
     public void updateTurn(){
+        if(match.getPlayerList().size()==1 && match.getCurrentPlayer().getTurnPhase() == TurnPhase.EndPhase){
+            match.performExtractActionTokenMove();
+        }
         match.updatePlayer();
         notify(new MoveMessage(this.match.clone())); //è il messaggio che verrà inviato a l player
     }
@@ -40,5 +43,9 @@ public class Model extends Observable<MoveMessage> implements Serializable{
     }
     public Match getMatchCopy(){
         return this.match.clone();
+    }
+
+    public boolean isRightTurnPhase(PlayerMove playerMove){
+        return this.match.isRightTurnPhase(playerMove);
     }
 }

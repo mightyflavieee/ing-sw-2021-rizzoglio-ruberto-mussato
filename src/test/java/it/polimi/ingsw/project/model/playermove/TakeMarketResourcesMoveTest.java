@@ -74,9 +74,7 @@ class TakeMarketResourcesMoveTest {
         warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
         warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
         Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, new ArrayList<Resource>(), localMarket, false);
-        MoveList moveList1Gian = new MoveList();
-        moveList1Gian.add(move1Gian);
-        PlayerMove playerMove1Gian = new PlayerMove(gianluca, null, moveList1Gian);
+        PlayerMove playerMove1Gian = new PlayerMove(gianluca, null, move1Gian);
         assertTrue(move1Gian.isFeasibleMove(match));
 
     }

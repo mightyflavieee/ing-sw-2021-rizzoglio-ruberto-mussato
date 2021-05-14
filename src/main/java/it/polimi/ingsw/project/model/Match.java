@@ -2,11 +2,11 @@ package it.polimi.ingsw.project.model;
 
 import it.polimi.ingsw.project.model.actionTokens.ActionTokenContainer;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
-import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.market.Market;
+import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
@@ -34,6 +34,7 @@ public class Match implements Serializable, Cloneable {
             actionTokenContainer = new ActionTokenContainer(this);
         }
         this.currentPlayer = playerList.get(0);
+        this.currentPlayer.updateTurnPhase();
         this.isLastTurn = false;
         this.isOver = false;
     }
@@ -120,7 +121,11 @@ public class Match implements Serializable, Cloneable {
     }
 
     public void updatePlayer() {
-        this.currentPlayer = this.nextPlayer();
+        if(this.currentPlayer.getTurnPhase() == TurnPhase.EndPhase) {
+            this.currentPlayer.updateTurnPhase();
+            this.currentPlayer = this.nextPlayer();
+        }
+        this.currentPlayer.updateTurnPhase();
     }
 
     public final Match clone() {
@@ -261,4 +266,16 @@ public class Match implements Serializable, Cloneable {
         if (24 == this.currentPlayer.moveForwardBlack()) this.youLost(); // cioè se lorenzo è arrivato alla fine
     }
 
+    public boolean isRightTurnPhase(PlayerMove playerMove) {
+        if(currentPlayer.getTurnPhase()==TurnPhase.WaitPhase){
+            return false;
+        }
+        if(playerMove.isMainMove()){
+           return (currentPlayer.getTurnPhase()==TurnPhase.MainPhase);
+        }else
+        {
+            return (currentPlayer.getTurnPhase()!=TurnPhase.MainPhase);
+        }
+
+    }
 }

@@ -23,5 +23,10 @@ public class DiscardLeaderCardMove extends Move{
     public String toString(){
         return new String("DiscardLeaderCardMove, LeaderCardID: " + this.leaderCardID);
     }
+
+
+    public boolean isMainMove(){
+        return false;
+    }
 }
 

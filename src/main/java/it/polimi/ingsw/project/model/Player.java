@@ -2,7 +2,6 @@ package it.polimi.ingsw.project.model;
 
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
-import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.market.Market;
@@ -18,12 +17,14 @@ public class Player implements Serializable, Cloneable {
   private boolean isConnected;
   private String nickname;
   private int victoryPoints;
+  private TurnPhase turnPhase;
 
   public Player(String nickname) {
     this.board = new Board();
     this.isConnected = true; // Da gestire stato della connessione del player (con funzione apposita)
     this.nickname = nickname;
     this.victoryPoints = 0;
+    this.turnPhase = TurnPhase.WaitPhase;
   }
 
   public Player() {
@@ -42,7 +43,12 @@ public class Player implements Serializable, Cloneable {
     result.isConnected = isConnected;
     result.nickname = nickname;
     result.victoryPoints = victoryPoints;
+    result.turnPhase = turnPhase;
     return result;
+  }
+
+  public void updateTurnPhase() {
+    this.turnPhase = turnPhase.next();
   }
 
   private boolean takeResourcesFromMarket(Market market) {
@@ -194,5 +200,9 @@ public class Player implements Serializable, Cloneable {
     Boolean hasRedMarble
   ) {
     this.board.performTakeMarketResourceMove(warehouse, discardedResources, hasRedMarble);
+  }
+
+  public TurnPhase getTurnPhase() {
+    return turnPhase;
   }
 }

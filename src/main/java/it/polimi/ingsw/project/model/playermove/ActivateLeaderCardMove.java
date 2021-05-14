@@ -30,4 +30,8 @@ public class ActivateLeaderCardMove extends Move{
         //TODO
         return new String("Generic Move");
     }
+
+    public boolean isMainMove(){
+        return false;
+    }
 }

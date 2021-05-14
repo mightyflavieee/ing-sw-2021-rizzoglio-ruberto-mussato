@@ -10,6 +10,6 @@ public class gameMessage implements Serializable {
     public static String loseMessage = "You lose!";
     public static String drawMessage = "Draw!";
     public static String wrongTurnMessage = "It is not your turn!";
-    public static String occupiedCellMessage = "The chosen cell is not empty!";
+    public static String wrongPhaseMessage = "Wrong phase";
 
 }

@@ -5,18 +5,15 @@ import java.util.List;
 import it.polimi.ingsw.project.model.MoveMessage;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.playermove.Move;
-import it.polimi.ingsw.project.model.playermove.MoveList;
-import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.observer.Observer;
 import it.polimi.ingsw.project.server.ClientConnection;
-import it.polimi.ingsw.project.utils.gameMessage;
 
 public class RemoteView extends View {
 
-    private class MessageReceiver implements Observer<MoveList> {
+    private class MessageReceiver implements Observer<Move> {
 
         @Override
-        public void update(MoveList message) {
+        public void update(Move message) {
             System.out.println("Received: " + message.toString());
             try {
 

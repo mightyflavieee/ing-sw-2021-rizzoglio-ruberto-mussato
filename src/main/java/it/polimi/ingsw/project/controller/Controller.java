@@ -19,16 +19,19 @@ public class Controller implements Observer<PlayerMove> {
             playerMove.getView().reportError(gameMessage.wrongTurnMessage);
             return;
         }
+        if(!model.isRightTurnPhase(playerMove)){
+            playerMove.getView().reportError(gameMessage.wrongPhaseMessage);
+            return;
+        }
         // it performs moves one by one
-        for(int i = 0; i < playerMove.getSize(); i++) {
 
-            if (!model.isFeasibleMove(playerMove, i)) {
+            if (!model.isFeasibleMove(playerMove)) {
                 model.notifyPartialMove();
                 //  playerMove.getView().reportError(gameMessage.occupiedCellMessage);
                 return;
             }
-            model.performMove(playerMove, i);
-        }
+            model.performMove(playerMove);
+
         // the turn is updated after all moves have been performed
         model.updateTurn();
     }

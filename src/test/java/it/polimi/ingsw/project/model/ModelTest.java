@@ -1,10 +1,7 @@
 package it.polimi.ingsw.project.model;
 
-import it.polimi.ingsw.project.controller.Controller;
 import it.polimi.ingsw.project.model.actionTokens.MoveActionToken;
-import it.polimi.ingsw.project.model.playermove.ExtractActionTokenMove;
 import it.polimi.ingsw.project.model.playermove.Move;
-import it.polimi.ingsw.project.model.playermove.MoveList;
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import org.junit.jupiter.api.Test;
 
@@ -49,15 +46,9 @@ class ModelTest {
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
         Model model = new Model(playerList);
-        MoveList moveList = new MoveList();
-        Move extractActionTokenMove = new ExtractActionTokenMove();
-        moveList.add(extractActionTokenMove);
-        PlayerMove playerMove = new PlayerMove(player,
-                null,moveList);
         while(!(model.getMatch().getActionTokenContainer().getActionTokens().get(0) instanceof MoveActionToken)){
             model.getMatch().getActionTokenContainer().shuffle();
         }
-        assertTrue(model.isFeasibleMove(playerMove,0));
     }
     @Test
     void performLorenzoMove(){
@@ -65,15 +56,10 @@ class ModelTest {
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
         Model model = new Model(playerList);
-        MoveList moveList = new MoveList();
-        Move extractActionTokenMove = new ExtractActionTokenMove();
-        moveList.add(extractActionTokenMove);
-        PlayerMove playerMove = new PlayerMove(player,
-                null,moveList);
         while(!(model.getMatch().getActionTokenContainer().getActionTokens().get(0) instanceof MoveActionToken)){
             model.getMatch().getActionTokenContainer().shuffle();
         }
-        model.performMove(playerMove,0);
+        model.getMatch().performExtractActionTokenMove();
         assertTrue(2==player.getBoard().getFaithMap().getBlackMarkerPosition());
     }
 }
