@@ -8,11 +8,9 @@
         },
         "type": "Discount"
       },
-      "required-resources": "",
-      "required-devcards": {"Gold": 1, "Emerald":  1},
-      "required-devcard-level": "",
+      "requiredDevCards": { "Gold": 1, "Emerald": 1 },
       "status": "Inactive",
-      "victory-points": 2
+      "victoryPoints": 2
     },
     {
       "id": "id2",
@@ -22,11 +20,9 @@
         },
         "type": "Discount"
       },
-      "required-resources": "",
-      "required-devcards": {"Sapphire": 1, "Amethyst":  1},
-      "required-devcard-level": "",
+      "requiredDevCards": { "Sapphire": 1, "Amethyst": 1 },
       "status": "Inactive",
-      "victory-points": 2
+      "victoryPoints": 2
     },
     {
       "id": "id3",
@@ -36,11 +32,9 @@
         },
         "type": "Discount"
       },
-      "required-resources": "",
-      "required-devcards": {"Emerald": 1, "Sapphire":  1},
-      "required-devcard-level": "",
+      "requiredDevCards": { "Emerald": 1, "Sapphire": 1 },
       "status": "Inactive",
-      "victory-points": 2
+      "victoryPoints": 2
     },
     {
       "id": "id4",
@@ -50,9 +44,7 @@
         },
         "type": "Discount"
       },
-      "required-resources": "",
-      "required-devcards": {"Gold": 1, "Amethyst":  1},
-      "required-devcard-level": "",
+      "requiredDevCards": { "Gold": 1, "Amethyst": 1 },
       "status": "Inactive",
       "victory-points": 2
     },
@@ -64,9 +56,7 @@
         },
         "type": "Warehouse"
       },
-        "required-resources": {"Coin": 5},
-      "required-devcards": "",
-      "required-devcard-level": "",
+      "requiredResources": { "Coin": 5 },
       "status": "Inactive",
       "victory-points": 3
     },
@@ -78,9 +68,7 @@
         },
         "type": "Warehouse"
       },
-      "required-resources": {"Stone": 5},
-      "required-devcards": "",
-      "required-devcard-level": "",
+      "requiredResources": { "Stone": 5 },
       "status": "Inactive",
       "victory-points": 3
     },
@@ -92,9 +80,7 @@
         },
         "type": "Warehouse"
       },
-      "required-resources": {"Servant": 5},
-      "required-devcards": "",
-      "required-devcard-level": "",
+      "requiredResources": { "Servant": 5 },
       "status": "Inactive",
       "victory-points": 3
     },
@@ -106,9 +92,7 @@
         },
         "type": "Warehouse"
       },
-      "required-resources": {"Shield": 5},
-      "required-devcards": "",
-      "required-devcard-level": "",
+      "requiredResources": { "Shield": 5 },
       "status": "Inactive",
       "victory-points": 3
     },
@@ -120,9 +104,7 @@
         },
         "type": "Transmutation"
       },
-      "required-resources": "",
-      "required-devcards": {"Gold": 2, "Sapphire":  1},
-      "required-devcard-level": "",
+      "requiredDevCards": { "Gold": 2, "Sapphire": 1 },
       "status": "Inactive",
       "victory-points": 5
     },
@@ -134,9 +116,7 @@
         },
         "type": "Transmutation"
       },
-      "required-resources": "",
-      "required-devcards": {"Emerald": 2, "Amethyst":  1},
-      "required-devcard-level": "",
+      "requiredDevCards": { "Emerald": 2, "Amethyst": 1 },
       "status": "Inactive",
       "victory-points": 5
     },
@@ -148,9 +128,7 @@
         },
         "type": "Transmutation"
       },
-      "required-resources": "",
-      "required-devcards": {"Sapphire": 2, "Gold":  1},
-      "required-devcard-level": "",
+      "requiredDevCards": { "Sapphire": 2, "Gold": 1 },
       "status": "Inactive",
       "victory-points": 5
     },
@@ -162,9 +140,7 @@
         },
         "type": "Transmutation"
       },
-      "required-resources": "",
-      "required-devcards": {"Amethyst": 2, "Emerald":  1},
-      "required-devcard-level": "",
+      "requiredDevCards": { "Amethyst": 2, "Emerald": 1 },
       "status": "Inactive",
       "victory-points": 5
     },
@@ -176,9 +152,7 @@
         },
         "type": "Production"
       },
-      "required-resources": "",
-      "required-devcards": "",
-      "required-devcard-level": {"Gold": 2},
+      "requiredDevCardLevel": { "Gold": "Two" },
       "status": "Inactive",
       "victory-points": 4
     },
@@ -190,9 +164,7 @@
         },
         "type": "Production"
       },
-      "required-resources": "",
-      "required-devcards": "",
-      "required-devcard-level": {"Sapphire": 2},
+      "requiredDevCardLevel": { "Sapphire": "Two" },
       "status": "Inactive",
       "victory-points": 4
     },
@@ -204,9 +176,7 @@
         },
         "type": "Production"
       },
-      "required-resources": "",
-      "required-devcards": "",
-      "required-devcard-level": {"Amethyst": 2},
+      "requiredDevCardLevel": { "Amethyst": "Two" },
       "status": "Inactive",
       "victory-points": 4
     },
@@ -218,12 +188,9 @@
         },
         "type": "Production"
       },
-      "required-resources": "",
-      "required-devcards": "",
-      "required-devcard-level": {"Emerald": 2},
+      "requiredDevCardLevel": { "Emerald": "Two" },
       "status": "Inactive",
       "victory-points": 4
     }
   ]
 }
-
