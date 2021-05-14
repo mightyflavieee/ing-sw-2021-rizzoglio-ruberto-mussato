@@ -64,9 +64,9 @@ public class Server {
             model.addObserver(view);
             view.addObserver(controller);
         }
-        // listOfClientConnections.forEach((ClientConnection connection) -> {
-        //     connection.asyncSend(model.getMatchCopy());
-        // });
+        listOfClientConnections.forEach((ClientConnection connection) -> {
+            connection.asyncSend(model.getMatchCopy());
+        });
         Collections.shuffle(listOfClientConnections);
         listOfClientConnections.get(0).asyncSend(gameMessage.moveMessage);
         listOfClientConnections.remove(0);
