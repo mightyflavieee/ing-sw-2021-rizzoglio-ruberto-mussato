@@ -348,47 +348,6 @@ public class Board implements Serializable, Cloneable {
     }
   }
 
-  public boolean isFeasibleChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
-    Map<ShelfFloor, List<Resource>> currentWarehouse = this.warehouse.getShelves();
-    switch (aFloor) {
-      case First:
-        if (currentWarehouse.get(bFloor).size() > 1) {
-          return false;
-        }
-        return true;
-      case Second:
-        if (bFloor == ShelfFloor.First) {
-          if (currentWarehouse.get(aFloor).size() > 1) {
-            return false;
-          }
-          return true;
-        } else {
-          if (currentWarehouse.get(bFloor).size() > 2) {
-            return false;
-          }
-          return true;
-        }
-      case Third:
-        if (bFloor == ShelfFloor.First) {
-          if (currentWarehouse.get(aFloor).size() > 1) {
-            return false;
-          }
-          return true;
-        } else {
-          if (currentWarehouse.get(aFloor).size() > 2) {
-            return false;
-          }
-          return true;
-        }
-      default:
-        return false;
-    }
-  }
-
-  public void performChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
-    this.warehouse.swapShelves(aFloor, bFloor);
-  }
-
   // checks if the current player can buy the card he/she selected
   public boolean isFeasibleBuyDevCardMove(DevelopmentCard devCard,
       Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,

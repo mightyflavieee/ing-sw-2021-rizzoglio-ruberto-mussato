@@ -110,17 +110,6 @@ public class Player implements Serializable, Cloneable {
     this.board.performDiscardLeaderCardMove(leaderCardID);
   }
 
-  public boolean isFeasibleChangeShelvesMove(
-    ShelfFloor aFloor,
-    ShelfFloor bFloor
-  ) {
-    return this.board.isFeasibleChangeShelvesMove(aFloor, bFloor);
-  }
-
-  public void performChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
-    this.board.performChangeShelvesMove(aFloor, bFloor);
-  }
-
   public boolean isFeasibleBuyDevCardMove(
     DevelopmentCard devCard,
     Map<ResourceType, Integer> resourcesToEliminateWarehouse,

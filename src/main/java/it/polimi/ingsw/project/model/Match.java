@@ -143,16 +143,6 @@ public class Match implements Serializable, Cloneable {
         this.currentPlayer.performDiscardLeaderCardMove(leaderCardID);
     }
 
-    public boolean isFeasibleChangeShelvesMove(
-            ShelfFloor aFloor,
-            ShelfFloor bFloor
-    ) {
-        return currentPlayer.isFeasibleChangeShelvesMove(aFloor, bFloor);
-    }
-
-    public void performChangeShelvesMove(ShelfFloor aFloor, ShelfFloor bFloor) {
-        this.currentPlayer.performChangeShelvesMove(aFloor, bFloor);
-    }
 
     public boolean isFeasibleBuyDevCardMove(
             String devCardID,
