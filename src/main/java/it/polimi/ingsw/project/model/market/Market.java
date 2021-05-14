@@ -10,9 +10,9 @@ import java.util.*;
 public class Market extends Observable<Market> implements Cloneable, Serializable {
     // sarebbe da modificare inserendo la posizione delle biglie
     private Marble[][] tray = new Marble[4][3];
-    //(0,2),(1,2),(2,2),(3,2)
-    //(0,1),(1,1),(2,1),(3,1)
-    //(0,0),(1,0),(2,0),(3,0)
+    // (0,2),(1,2),(2,2),(3,2)
+    // (0,1),(1,1),(2,1),(3,1)
+    // (0,0),(1,0),(2,0),(3,0)
     private Marble outsideMarble;
     // TODO costruttore
 
@@ -57,7 +57,7 @@ public class Market extends Observable<Market> implements Cloneable, Serializabl
         return outsideMarble;
     }
 
-    private ResourceType convertMarbleToResourceType(Marble marble, Optional<ResourceType> transmutationPerk) {
+    private ResourceType convertMarbleToResourceType(Marble marble, ResourceType transmutationPerk) {
         switch (marble.getType()) {
             case Grey:
                 return ResourceType.Stone;
@@ -70,15 +70,15 @@ public class Market extends Observable<Market> implements Cloneable, Serializabl
             case Yellow:
                 return ResourceType.Coin;
             default:
-                if (!transmutationPerk.isEmpty()) {
-                    return transmutationPerk.get();
+                if (transmutationPerk != null) {
+                    return transmutationPerk;
                 } else {
                     return null;
                 }
         }
     }
 
-    private List<Resource> getResourceInColumn(Integer columnIndex, Optional<ResourceType> transmutationPerk) {
+    private List<Resource> getResourceInColumn(Integer columnIndex, ResourceType transmutationPerk) {
         List<Resource> listOfObteinedResources = new ArrayList<Resource>();
         Marble[] marbleColumn = tray[columnIndex];
         for (Marble marble : marbleColumn) {
@@ -90,7 +90,7 @@ public class Market extends Observable<Market> implements Cloneable, Serializabl
         return listOfObteinedResources;
     }
 
-    private List<Resource> getResourceInRow(Integer rowIndex, Optional<ResourceType> transmutationPerk) {
+    private List<Resource> getResourceInRow(Integer rowIndex, ResourceType transmutationPerk) {
         List<Resource> listOfObteinedResources = new ArrayList<Resource>();
         Marble[] oldArrayOfMarbles = new Marble[4];
         for (int i = 0; i < tray.length; i++) {
@@ -119,21 +119,21 @@ public class Market extends Observable<Market> implements Cloneable, Serializabl
         for (int i = tray.length - 1; i >= 0; i--) {
             oldArrayOfMarbles[i] = tray[i][position];
         }
-        for(int j = 1; j< tray.length; j++){
-            tray[j-1][position]= oldArrayOfMarbles[j];
+        for (int j = 1; j < tray.length; j++) {
+            tray[j - 1][position] = oldArrayOfMarbles[j];
         }
         tray[3][position] = outsideMarble;
         outsideMarble = oldArrayOfMarbles[0];
     }
 
-    public List<Resource> insertMarble(Integer axis, Integer position, Optional<ResourceType> transmutationPerk) {
+    public List<Resource> insertMarble(Integer axis, Integer position, ResourceType transmutationPerk) {
         // axis = 1 = horizontal, position can be 0 1 2
         // axis = 0 = vertical, position can be 0 1 2 3
         // from right to left, from bottom to up
-        //(0,2),(1,2),(2,2),(3,2)<--1
-        //(0,1),(1,1),(2,1),(3,1)<--1
-        //(0,0),(1,0),(2,0),(3,0)<--1
-        //  0     0     0     0
+        // (0,2),(1,2),(2,2),(3,2)<--1
+        // (0,1),(1,1),(2,1),(3,1)<--1
+        // (0,0),(1,0),(2,0),(3,0)<--1
+        // 0 0 0 0
         List<Resource> listOfObteinResources;
         if (axis == 0) {
             listOfObteinResources = getResourceInColumn(position, transmutationPerk);

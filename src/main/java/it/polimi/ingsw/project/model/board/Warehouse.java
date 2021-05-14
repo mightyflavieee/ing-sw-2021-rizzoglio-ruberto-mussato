@@ -15,75 +15,60 @@ import java.util.*;
 public class Warehouse extends Observable<Warehouse> implements Serializable {
 
   private Map<ShelfFloor, List<Resource>> shelves;
-  private Optional<Map<ResourceType, Integer>> extraDeposit; // da mettere nel costruttore
+  private Map<ResourceType, Integer> extraDeposit; // da mettere nel costruttore
   private int numResourcesToDiscard;
 
   public Warehouse(Match match) {
     this.shelves = this.initShelves();
-    this.extraDeposit = Optional.empty();
+    this.extraDeposit = null;
     this.numResourcesToDiscard = 0;
     this.addObserver(new WarehouseObserver(match));
   }
 
-  //returns ALL resources presents in the warehouse
+  // returns ALL resources presents in the warehouse
   public Map<ResourceType, Integer> mapAllContainedResources() {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<ResourceType, Integer>();
     // getting resources from the entire warehouse
-    shelves.forEach(
-      (ShelfFloor floor, List<Resource> listOfResources) -> {
-        mapResourcesHelper(currentResourcesMap, listOfResources);
-      }
-    );
+    shelves.forEach((ShelfFloor floor, List<Resource> listOfResources) -> {
+      mapResourcesHelper(currentResourcesMap, listOfResources);
+    });
     // getting resources from extradeposit
-    if (extraDeposit.isPresent()) {
-      extraDeposit
-        .get()
-        .forEach(
-          (ResourceType resourceType, Integer numberOfResources) -> {
-            boolean hasKey = currentResourcesMap.containsKey(resourceType);
-            if (hasKey) {
-              currentResourcesMap.put(
-                resourceType,
-                currentResourcesMap.get(resourceType) + 1
-              );
-            } else {
-              currentResourcesMap.put(resourceType, 1);
-            }
-          }
-        );
+    if (extraDeposit != null) {
+      extraDeposit.forEach((ResourceType resourceType, Integer numberOfResources) -> {
+        boolean hasKey = currentResourcesMap.containsKey(resourceType);
+        if (hasKey) {
+          currentResourcesMap.put(resourceType, currentResourcesMap.get(resourceType) + 1);
+        } else {
+          currentResourcesMap.put(resourceType, 1);
+        }
+      });
     }
     return currentResourcesMap;
   }
 
-  private Map<ShelfFloor, List<Resource>> initShelves(){
-    Map<ShelfFloor, List<Resource>> tempShelf= new HashMap<ShelfFloor, List<Resource>>();
+  private Map<ShelfFloor, List<Resource>> initShelves() {
+    Map<ShelfFloor, List<Resource>> tempShelf = new HashMap<ShelfFloor, List<Resource>>();
     tempShelf.put(ShelfFloor.First, new ArrayList<>());
     tempShelf.put(ShelfFloor.Second, new ArrayList<>());
     tempShelf.put(ShelfFloor.Third, new ArrayList<>());
-    return  tempShelf;
-  }
-  //helper for listToMapResources
-  private void mapResourcesHelper(
-    Map<ResourceType, Integer> currentResourcesMap,
-    List<Resource> listOfResources
-  ) {
-    listOfResources.forEach(
-      (Resource resource) -> {
-        ResourceType type = resource.getType();
-        boolean hasKey = currentResourcesMap.containsKey(type);
-        if (hasKey) {
-          currentResourcesMap.put(type, currentResourcesMap.get(type) + 1);
-        } else {
-          currentResourcesMap.put(type, 1);
-        }
-      }
-    );
+    return tempShelf;
   }
 
-  //transform a list to a map
-  public Map<ResourceType, Integer> listToMapResources(
-    List<Resource> inputResourcesList
-  ) {
+  // helper for listToMapResources
+  private void mapResourcesHelper(Map<ResourceType, Integer> currentResourcesMap, List<Resource> listOfResources) {
+    listOfResources.forEach((Resource resource) -> {
+      ResourceType type = resource.getType();
+      boolean hasKey = currentResourcesMap.containsKey(type);
+      if (hasKey) {
+        currentResourcesMap.put(type, currentResourcesMap.get(type) + 1);
+      } else {
+        currentResourcesMap.put(type, 1);
+      }
+    });
+  }
+
+  // transform a list to a map
+  public Map<ResourceType, Integer> listToMapResources(List<Resource> inputResourcesList) {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<ResourceType, Integer>();
     mapResourcesHelper(currentResourcesMap, inputResourcesList);
     return currentResourcesMap;
@@ -102,23 +87,22 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     super.notify(this);
   }
 
-
   public void swapShelves(ShelfFloor swapper, ShelfFloor swappee) {
     List<Resource> listOfResourcesSwappee = shelves.get(swappee);
     shelves.put(swappee, shelves.get(swapper));
     shelves.put(swapper, listOfResourcesSwappee);
   }
 
-  public Optional<Map<ResourceType, Integer>> getExtraDeposit() {
+  public Map<ResourceType, Integer> getExtraDeposit() {
     return extraDeposit;
   }
 
   // creates the extra deposit
   public void createExtraDeposit(Resource resource) {
-    if (!this.extraDeposit.isPresent()) {
+    if (this.extraDeposit != null) {
       Map<ResourceType, Integer> newExtraDeposit = new HashMap<>();
       newExtraDeposit.put(resource.getType(), 0);
-      this.extraDeposit = Optional.of(newExtraDeposit);
+      this.extraDeposit = newExtraDeposit;
     }
   }
 
@@ -126,17 +110,12 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
   // type as the one choose for the production
   private void eliminateOneResource(ResourceType resourceType) {
     if (this.shelves.get(ShelfFloor.First).get(0).getType() == resourceType) {
-      this.shelves.get(ShelfFloor.First)
-        .remove(this.shelves.get(ShelfFloor.First).size() - 1);
+      this.shelves.get(ShelfFloor.First).remove(this.shelves.get(ShelfFloor.First).size() - 1);
     } else {
-      if (
-        this.shelves.get(ShelfFloor.Second).get(0).getType() == resourceType
-      ) {
-        this.shelves.get(ShelfFloor.Second)
-          .remove(this.shelves.get(ShelfFloor.Second).size() - 1);
+      if (this.shelves.get(ShelfFloor.Second).get(0).getType() == resourceType) {
+        this.shelves.get(ShelfFloor.Second).remove(this.shelves.get(ShelfFloor.Second).size() - 1);
       } else {
-        this.shelves.get(ShelfFloor.Third)
-          .remove(this.shelves.get(ShelfFloor.Third).size() - 1);
+        this.shelves.get(ShelfFloor.Third).remove(this.shelves.get(ShelfFloor.Third).size() - 1);
       }
     }
   }
@@ -144,13 +123,11 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
   // eliminates resource from the extra deposit if it has the same resource type
   // as the one choose for the production, otherwise calls eliminateOneResource
   private void eliminateOneResourceFromExtraDeposit(ResourceType resourceType) {
-    if (this.extraDeposit.get().containsKey(resourceType)) {
-      this.extraDeposit.get()
-        .put(resourceType, this.extraDeposit.get().get(resourceType) - 1);
+    if (this.extraDeposit.containsKey(resourceType)) {
+      this.extraDeposit.put(resourceType, this.extraDeposit.get(resourceType) - 1);
     } else {
       System.out.println(
-        "Cannot use the extra deposit for production (correct resource type not present)! Using the normal deposit."
-      );
+          "Cannot use the extra deposit for production (correct resource type not present)! Using the normal deposit.");
       eliminateOneResource(resourceType);
     }
   }
@@ -159,16 +136,12 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
   // it.polimi.ingsw.project.model.board.card.leaderCard.perk.ProductionPerk
   // production
   public void eliminateResourceForProductionPerk(ResourceType resourceType) {
-    BufferedReader reader = new BufferedReader(
-      new InputStreamReader(System.in)
-    );
+    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     String chosenLocationToEliminateFrom;
     if (mapAllContainedResources().containsKey(resourceType)) {
       if (mapAllContainedResources().get(resourceType) > 0) {
-        if (this.extraDeposit.isPresent()) {
-          System.out.println(
-            "What would you like to use for the production?\n1. Normal Deposit;\n2. Extra Deposit."
-          );
+        if (this.extraDeposit != null) {
+          System.out.println("What would you like to use for the production?\n1. Normal Deposit;\n2. Extra Deposit.");
           try {
             chosenLocationToEliminateFrom = reader.readLine();
             switch (Integer.parseInt(chosenLocationToEliminateFrom)) {
@@ -209,12 +182,13 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
             // I remove some of them
             // first from the extraDeposit (so the correctness of the overall elimination
             // must be done beforehand)
-            if (((resourcesToEliminate.get(type) > 1 && floor == ShelfFloor.First) ||
-                (resourcesToEliminate.get(type) > 2 && floor == ShelfFloor.Second) ||
-                (resourcesToEliminate.get(type) > 3 && floor == ShelfFloor.Third)) && this.extraDeposit.isPresent()) {
-              int currentResourcesInExtraDeposit = this.extraDeposit.get().get(type);
-              int newExtraDepositResources = Math.max(currentResourcesInExtraDeposit - resourcesToEliminate.get(type), 0);
-              this.extraDeposit.get().put(type, newExtraDepositResources);
+            if (((resourcesToEliminate.get(type) > 1 && floor == ShelfFloor.First)
+                || (resourcesToEliminate.get(type) > 2 && floor == ShelfFloor.Second)
+                || (resourcesToEliminate.get(type) > 3 && floor == ShelfFloor.Third)) && this.extraDeposit != null) {
+              int currentResourcesInExtraDeposit = this.extraDeposit.get(type);
+              int newExtraDepositResources = Math.max(currentResourcesInExtraDeposit - resourcesToEliminate.get(type),
+                  0);
+              this.extraDeposit.put(type, newExtraDepositResources);
               resourcesToEliminate.put(type, resourcesToEliminate.get(type) - currentResourcesInExtraDeposit);
             }
             // here the resources are simply removed from the floor
@@ -227,10 +201,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     }
   }
 
-  public boolean isFeasibleTakeMarketResourcesMove(
-    Warehouse warehouse,
-    List<Resource> discardedResources
-  ) {
+  public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse, List<Resource> discardedResources) {
     final Map<ShelfFloor, List<Resource>> shelfs = warehouse.getShelves();
     for (ShelfFloor shelfFloor : shelfs.keySet()) {
       final List<Resource> resourcesOnFloor = shelfs.get(shelfFloor);

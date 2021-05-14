@@ -73,12 +73,12 @@ class MarketTest {
     void getOutSideMarble() {
         Market market = new Market();
         assertNotNull(market.getOutSideMarble());
-        assertTrue(MarbleType.Grey == market.getOutSideMarble().getType() ||
-                MarbleType.Blue == market.getOutSideMarble().getType() ||
-                MarbleType.Purple == market.getOutSideMarble().getType() ||
-                MarbleType.Red == market.getOutSideMarble().getType() ||
-                MarbleType.White == market.getOutSideMarble().getType() ||
-                MarbleType.Yellow == market.getOutSideMarble().getType());
+        assertTrue(MarbleType.Grey == market.getOutSideMarble().getType()
+                || MarbleType.Blue == market.getOutSideMarble().getType()
+                || MarbleType.Purple == market.getOutSideMarble().getType()
+                || MarbleType.Red == market.getOutSideMarble().getType()
+                || MarbleType.White == market.getOutSideMarble().getType()
+                || MarbleType.Yellow == market.getOutSideMarble().getType());
     }
 
     @Test
@@ -108,7 +108,7 @@ class MarketTest {
         Marble outsideMarble = trayList.remove(0);
         market.setOutsideMarble(outsideMarble);
         market.setTray(tray);
-        returnedResourceList = market.insertMarble(1, 2, java.util.Optional.empty());
+        returnedResourceList = market.insertMarble(1, 2, null);
         int grey = 0, blue = 0, purple = 0, red = 0, white = 0, yellow = 0;
 
         for (int j = 0; j < returnedResourceList.size(); j++) {
@@ -133,9 +133,9 @@ class MarketTest {
                     break;
             }
         }
-    assertEquals(purple,1);
-    assertEquals(yellow,1);
-    assertEquals(blue,1);
+        assertEquals(purple, 1);
+        assertEquals(yellow, 1);
+        assertEquals(blue, 1);
         Marble[][] newtray = new Marble[4][3];
         trayList.add(new Marble(MarbleType.White));
         trayList.add(new Marble(MarbleType.White));
@@ -156,16 +156,15 @@ class MarketTest {
             }
         }
         Marble newoutsideMarble = trayList.remove(0);
-    for(int i = 0; i < 3; i++){
-        newtray[i][2] = newtray[i+1][2];
-    }
-    newtray[3][2] = newoutsideMarble;
-    for(int i = 0; i < 4; i++){
-        for(int j = 0; j < 3; j++){
-            assertEquals(newtray[i][j].getType(),market.getTray()[i][j].getType());
+        for (int i = 0; i < 3; i++) {
+            newtray[i][2] = newtray[i + 1][2];
+        }
+        newtray[3][2] = newoutsideMarble;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 3; j++) {
+                assertEquals(newtray[i][j].getType(), market.getTray()[i][j].getType());
+            }
         }
     }
-    }
-
 
 }

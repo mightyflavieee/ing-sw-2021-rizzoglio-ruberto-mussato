@@ -68,7 +68,7 @@ class TakeMarketResourcesMoveTest {
         localMarket.setOutsideMarble(outsideMarble);
         List<Resource> resourceList1Gian = new ArrayList<>();
         // inserisco in basso a destra una biglia rossa
-        resourceList1Gian = localMarket.insertMarble(0,1, Optional.empty());
+        resourceList1Gian = localMarket.insertMarble(0, 1, null);
         Warehouse warehouse1Gian = new Warehouse(null);
         warehouse1Gian.getShelves().get(ShelfFloor.First).add(new Resource(ResourceType.Coin));
         warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
