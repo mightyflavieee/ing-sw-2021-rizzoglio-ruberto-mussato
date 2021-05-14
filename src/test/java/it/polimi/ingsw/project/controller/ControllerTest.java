@@ -154,9 +154,10 @@ class ControllerTest {
                 warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
                 Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, new ArrayList<Resource>(), localMarket,
                                 false);
-                MoveList moveList1Gian = new MoveList();
-                moveList1Gian.add(move1Gian);
-                PlayerMove playerMove1Gian = new PlayerMove(gianluca, null, moveList1Gian);
+                PlayerMove playerMove1Gian = new PlayerMove(gianluca, null, move1Gian);
+                assertEquals(TurnPhase.InitialPhase,gianluca.getTurnPhase());
+                model.updateTurn(); //now i am in the main phase
+                assertEquals(TurnPhase.MainPhase,gianluca.getTurnPhase());
                 controller.update(playerMove1Gian);
                 assertEquals(0, gianluca.getVictoryPoints());
                 assertEquals(0, gianluca.getBoard().getFaithMap().getMarkerPosition());
@@ -177,9 +178,10 @@ class ControllerTest {
                 warehouse1Flavio.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Stone));
                 Move move1Flavio = new TakeMarketResourcesMove(warehouse1Flavio, new ArrayList<Resource>(), localMarket,
                                 false);
-                MoveList moveList1Flavio = new MoveList();
-                moveList1Flavio.add(move1Flavio);
-                PlayerMove playerMove1Flavio = new PlayerMove(flavio, null, moveList1Flavio);
+                PlayerMove playerMove1Flavio = new PlayerMove(flavio, null, move1Flavio);
+                assertEquals(TurnPhase.InitialPhase,flavio.getTurnPhase());
+                model.updateTurn();
+                assertEquals(TurnPhase.MainPhase,flavio.getTurnPhase());
                 controller.update(playerMove1Flavio);
                 assertEquals(0, flavio.getVictoryPoints());
                 assertEquals(0, flavio.getBoard().getFaithMap().getMarkerPosition());
@@ -199,9 +201,8 @@ class ControllerTest {
                 Boolean hasRedMarble = true;
                 Move move1Leo = new TakeMarketResourcesMove(warehouse1Leo, new ArrayList<Resource>(), localMarket,
                                 hasRedMarble);
-                MoveList moveList1Leo = new MoveList();
-                moveList1Leo.add(move1Leo);
-                PlayerMove playerMove1Leo = new PlayerMove(leo, null, moveList1Leo);
+                PlayerMove playerMove1Leo = new PlayerMove(leo, null, move1Leo);
+                model.updateTurn();
                 controller.update(playerMove1Leo);
                 assertEquals(0, leo.getVictoryPoints());
                 assertEquals(1, leo.getBoard().getFaithMap().getMarkerPosition());
@@ -217,9 +218,8 @@ class ControllerTest {
                 resourcesToEliminateWarehouse.put(ResourceType.Servant, 2);
                 Move move2Gian = new BuyDevCardMove("id2", DevCardPosition.Right, resourcesToEliminateWarehouse,
                                 new HashMap<>());
-                MoveList moveList2Gian = new MoveList();
-                moveList2Gian.add(move2Gian);
-                PlayerMove playerMove2Gian = new PlayerMove(gianluca, null, moveList2Gian);
+                PlayerMove playerMove2Gian = new PlayerMove(gianluca, null, move2Gian);
+                model.updateTurn();
                 controller.update(playerMove2Gian);
                 assertEquals(0, gianluca.getVictoryPoints());
                 assertEquals(0, gianluca.getBoard().getFaithMap().getMarkerPosition());
@@ -233,9 +233,7 @@ class ControllerTest {
                 // turn 2 flavio
                 resourcesToEliminateWarehouse.clear();
                 Move move2Flavio = new DiscardLeaderCardMove("id3");
-                MoveList moveList2Flavio = new MoveList();
-                moveList2Flavio.add(move2Flavio);
-                PlayerMove playerMove2Flavio = new PlayerMove(flavio, null, moveList2Flavio);
+                PlayerMove playerMove2Flavio = new PlayerMove(flavio, null, move2Flavio);
                 controller.update(playerMove2Flavio);
                 assertEquals(1, flavio.getBoard().getLeaderCards().size());
                 assertEquals("id4", flavio.getBoard().getLeaderCards().get(0).getId());
@@ -255,16 +253,12 @@ class ControllerTest {
                 discardedResources.add(new Resource(ResourceType.Servant));
                 discardedResources.add(new Resource(ResourceType.Servant));
                 Move move3Leo = new TakeMarketResourcesMove(warehouse2Leo, discardedResources, localMarket, false);
-                MoveList moveList2Leo = new MoveList();
-                moveList2Leo.add(move2Leo);
-                moveList2Leo.add(move3Leo);
-                PlayerMove playerMove2Leo = new PlayerMove(leo, null, moveList2Leo);
+                PlayerMove playerMove2Leo = new PlayerMove(leo, null, move2Leo);
                 controller.update(playerMove2Leo);
                 assertEquals(2, leo.getBoard().getLeaderCards().size());
                 assertEquals(1, leo.getBoard().getFaithMap().getMarkerPosition());
-                MoveList moveList3Leo = new MoveList();
-                moveList3Leo.add(move3Leo);
-                PlayerMove playerMove3Leo = new PlayerMove(leo, null, moveList3Leo);
+                PlayerMove playerMove3Leo = new PlayerMove(leo, null, move3Leo);
+                model.updateTurn();
                 controller.update(playerMove3Leo);
                 assertEquals(0, leo.getVictoryPoints());
                 assertEquals(4, flavio.getBoard().getFaithMap().getMarkerPosition());
@@ -278,11 +272,10 @@ class ControllerTest {
                                 .getProduction().getRequiredResources();
                 ProductionMove move3Gian = new ProductionMove("id2", null, resourcesToEliminateWarehouse, null,
                                 ProductionType.Board, null);
-                MoveList moveList3Gian = new MoveList();
-                moveList3Gian.add(move3Gian);
-                PlayerMove playerMove3Gian = new PlayerMove(gianluca, null, moveList3Gian);
+                PlayerMove playerMove3Gian = new PlayerMove(gianluca, null, move3Gian);
+                model.updateTurn();
                 controller.update(playerMove3Gian);
-
+                model.updateTurn();
                 // end game
                 flavio.getBoard().moveForward();// 1
                 flavio.getBoard().moveForward();// 2
