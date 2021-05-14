@@ -32,14 +32,14 @@ public class SocketClientConnection extends Observable<MoveList> implements Clie
             out.reset();
             out.writeObject(message);
             out.flush();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            this.close();
         }
     }
 
     @Override
     public synchronized void closeConnection() {
-        send("Connection closed!");
         try {
             socket.close();
         } catch (IOException e) {
@@ -65,35 +65,44 @@ public class SocketClientConnection extends Observable<MoveList> implements Clie
         }).start();
     }
 
-    private String joinGame(Scanner in) {
+    private String joinGame(Scanner in) throws Exception {
         while (true) {
-            send("Which game do you want to join?");
-            String gameId = in.nextLine();
-            if (server.isGamePresent(gameId)) {
-                if (server.isGameNotFull(gameId)) {
-                    return gameId;
+            if (!this.socket.isClosed()) {
+                send("Which game do you want to join?");
+                String gameId = in.nextLine();
+                if (server.isGamePresent(gameId)) {
+                    if (server.isGameNotFull(gameId)) {
+                        return gameId;
+                    } else {
+                        send("The game is full. You can't join. Change game or create a new one.");
+                    }
                 } else {
-                    send("The game is full. You can't join. Change game or create a new one.");
+                    send("No Games are present with that id. Retry.");
                 }
             } else {
-                send("No Games are present with that id. Retry.");
+                throw new Exception("Client is disconnected");
             }
 
         }
     }
 
-    private String createGame(Scanner in) {
+    private String createGame(Scanner in) throws Exception {
         while (true) {
-            send("How many people do you want in your game? (max 4)");
-            try {
-                Integer playersNumber = in.nextInt();
-                if (playersNumber > 4) {
-                    throw new Exception();
+            if (!this.socket.isClosed()) {
+                send("How many people do you want in your game? (max 4)");
+                try {
+                    Integer playersNumber = in.nextInt();
+                    if (playersNumber > 4) {
+                        throw new Exception();
+                    }
+                    return server.createGame(playersNumber);
+                } catch (Exception e) {
+                    send("Insert a integer number less than equal 4.");
                 }
-                return server.createGame(playersNumber);
-            } catch (Exception e) {
-                send("Insert a integer number less than equal 4.");
+            } else {
+                throw new Exception("Client is disconnected");
             }
+
         }
     }
 
@@ -136,6 +145,9 @@ public class SocketClientConnection extends Observable<MoveList> implements Clie
             }
         } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
             System.err.println("Error!" + e.getMessage());
+        } catch (Exception e1) {
+            System.err.println(e1.getMessage());
+            e1.printStackTrace();
         } finally {
             close();
         }

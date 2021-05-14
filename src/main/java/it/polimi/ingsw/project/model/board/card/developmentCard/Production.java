@@ -2,9 +2,10 @@ package it.polimi.ingsw.project.model.board.card.developmentCard;
 
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Production {
+public class Production implements Serializable{
     private Map<ResourceType, Integer> requiredResources;
     private Map<ResourceType, Integer> manufacturedResources;
 

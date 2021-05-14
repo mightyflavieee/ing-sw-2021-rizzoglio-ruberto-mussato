@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.model.board.card.leaderCard;
 
 import java.util.Map;
+import java.io.Serializable;
 import java.util.List;
 
 import it.polimi.ingsw.project.model.board.card.Card;
@@ -10,7 +11,7 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 
-public class LeaderCard extends Card {
+public class LeaderCard extends Card{
   final private String id;
   final private Perk perk;
   final private Map<ResourceType, Integer> requiredResources;

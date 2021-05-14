@@ -1,9 +1,11 @@
 package it.polimi.ingsw.project.model.playermove;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.view.View;
-public class PlayerMove {
+public class PlayerMove implements Serializable {
     private final Player player;
     private final View view;
     private final MoveList moveList;

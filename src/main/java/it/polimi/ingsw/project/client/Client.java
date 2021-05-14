@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client;
 
+import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class Client {
                         Object inputObject = socketIn.readObject();
                         if (inputObject instanceof String) {
                             System.out.println((String) inputObject);
-                        } else if (inputObject instanceof Player) {
+                        } else if (inputObject instanceof Match) {
                             // ((Player)inputObject).print();
                         } else {
                             throw new IllegalArgumentException();

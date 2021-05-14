@@ -1,11 +1,12 @@
 package it.polimi.ingsw.project.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.observer.Observable;
 
-public class Model extends Observable<MoveMessage> {
+public class Model extends Observable<MoveMessage> implements Serializable{
     private Match match;
 
     public Model(List<Player> listOfPlayers) {

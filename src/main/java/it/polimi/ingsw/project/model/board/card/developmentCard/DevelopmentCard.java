@@ -7,6 +7,7 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
 import com.google.gson.Gson;
@@ -20,7 +21,8 @@ public class DevelopmentCard extends Card {
   final private String id;
   final private Map<ResourceType, Integer> cost;
 
-  public DevelopmentCard(CardColor color, CardLevel level, Production production, String id, int victoryPoints, Map<ResourceType, Integer> cost) {
+  public DevelopmentCard(CardColor color, CardLevel level, Production production, String id, int victoryPoints,
+      Map<ResourceType, Integer> cost) {
     super(victoryPoints);
     this.color = color;
     this.level = level;

@@ -2,11 +2,12 @@ package it.polimi.ingsw.project.model;
 
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LeaderCardContainer {
+public class LeaderCardContainer implements Serializable {
     private List<LeaderCard> leaderCards;
 
     public LeaderCardContainer() {

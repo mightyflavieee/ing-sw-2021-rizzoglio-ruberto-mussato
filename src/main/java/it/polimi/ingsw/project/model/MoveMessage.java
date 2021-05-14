@@ -1,7 +1,8 @@
 package it.polimi.ingsw.project.model;
 
+import java.io.Serializable;
 
-public class MoveMessage {  //messaggio che rimando al player che viene poi visualizzato
+public class MoveMessage implements Serializable{  //messaggio che rimando al player che viene poi visualizzato
     private final Match match;
 
 
