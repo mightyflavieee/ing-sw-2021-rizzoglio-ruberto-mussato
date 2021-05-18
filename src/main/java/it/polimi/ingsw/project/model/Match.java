@@ -278,4 +278,14 @@ public class Match implements Serializable, Cloneable {
         }
 
     }
+
+    public TurnPhase getTurnPhase(String nickname){
+
+        for(Player player : playerList){
+            if(player.getNickname().equals(nickname)){
+                return player.getTurnPhase();
+            }
+        }
+        return TurnPhase.WaitPhase;
+    }
 }

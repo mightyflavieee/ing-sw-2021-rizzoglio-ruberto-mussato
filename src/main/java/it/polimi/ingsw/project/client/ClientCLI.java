@@ -3,6 +3,7 @@ package it.polimi.ingsw.project.client;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.playermove.DiscardLeaderCardMove;
 import it.polimi.ingsw.project.model.playermove.Move;
+import it.polimi.ingsw.project.model.playermove.NoMove;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,6 +20,8 @@ public class ClientCLI {
     private int port;
     private boolean active = true;
     private Match match;
+    private Scanner stdin;
+    private String myNickname; //da inizializzare
 
     public ClientCLI(String ip, int port) {
         this.ip = ip;
@@ -67,7 +70,7 @@ public class ClientCLI {
         return t;
     }
 
-    public Thread asyncCli(final Scanner stdin, final ObjectOutputStream socketOut) {//sends to server and shows the match
+    public Thread asyncCli( final ObjectOutputStream socketOut) {//sends to server and shows the match
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -78,8 +81,10 @@ public class ClientCLI {
                             socketOut.writeObject(inputLine);
                         }
                         else {
-                            Move move = handleTurn(stdin);
-                            socketOut.writeObject(move);
+                            Move move = handleTurn();
+                            if(move!=null) {
+                                socketOut.writeObject(move);
+                            }
                         }
                         socketOut.flush();
                     }
@@ -92,15 +97,49 @@ public class ClientCLI {
         return t;
     }
 
-    public Move handleTurn(final Scanner stdin){
-        String inputLine;
-        //example
-        System.out.println("What do you want to do? \n 1-Discard a leader card");
-        inputLine = stdin.nextLine();
-        if(inputLine.equals("1")) {
-            return new DiscardLeaderCardMove("prova");
+    public Move handleTurn(){
+        switch (this.match.getTurnPhase(myNickname)) {
+            case WaitPhase:
+                //todo
+                break;
+            case InitialPhase:
+            case EndPhase:
+                return handleLeaderAction();
+            case MainPhase:
+                break;
+
         }
+
         return  null;
+    }
+    private Move handleLeaderAction(){
+        while(true) {
+            System.out.println("Do you want to perform a Leader Card Action?\n" +
+                    "0 - no\n" +
+                    "1 - Discard Leader Card\n" +
+                    "2 - Play Leader Card");
+            String answer = stdin.nextLine();
+            switch (answer) {
+                case "0":
+                    return new NoMove();
+                case "1":
+                    //todo
+                    System.out.println("Give the nickname");
+                    return new DiscardLeaderCardMove(stdin.nextLine());
+                case "2":
+                default:
+                    break;
+            }
+        }
+
+    }
+    private Move handleMainPhase(){
+        System.out.println("What do you want to do?\n" +
+                "1 - Take Resources from Market\n" +
+                "2 - Buy one Development Card\n" +
+                "Activate the Production");
+        String answer = stdin.nextLine();
+        return null;
     }
     public void run() throws IOException {
         Socket socket = new Socket(ip, port);
@@ -110,8 +149,7 @@ public class ClientCLI {
         Scanner stdin = new Scanner(System.in);
         try {
             Thread t0 = asyncReadFromSocket(socketIn);
-            Thread t1 = asyncCli(stdin,socketOut);
-            t1.start();
+            Thread t1 = asyncCli(socketOut);
             t0.join();
             t1.join();
         } catch (InterruptedException | NoSuchElementException e) {
