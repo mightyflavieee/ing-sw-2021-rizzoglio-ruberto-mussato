@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client;
 
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.playermove.DiscardLeaderCardMove;
 import it.polimi.ingsw.project.model.playermove.Move;
 
 import java.io.IOException;
@@ -77,7 +78,7 @@ public class ClientCLI {
                             socketOut.writeObject(inputLine);
                         }
                         else {
-                            Move move = handleTurn();
+                            Move move = handleTurn(stdin);
                             socketOut.writeObject(move);
                         }
                         socketOut.flush();
@@ -91,7 +92,14 @@ public class ClientCLI {
         return t;
     }
 
-    public Move handleTurn(){
+    public Move handleTurn(final Scanner stdin){
+        String inputLine;
+        //example
+        System.out.println("What do you want to do? \n 1-Discard a leader card");
+        inputLine = stdin.nextLine();
+        if(inputLine.equals("1")) {
+            return new DiscardLeaderCardMove("prova");
+        }
         return  null;
     }
     public void run() throws IOException {
