@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.model;
 
 import it.polimi.ingsw.project.model.actionTokens.ActionTokenContainer;
+import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.CardColor;
@@ -288,6 +289,7 @@ public class Match implements Serializable, Cloneable {
         }
         return TurnPhase.WaitPhase;
     }
+
     public int getVictoryPoints(String nickname){
         for(Player player : playerList){
             if(player.getNickname().equals(nickname)){
@@ -296,6 +298,7 @@ public class Match implements Serializable, Cloneable {
         }
         return 0;
     }
+
     public int getMarkerPosition(String nickname){
         for(Player player : playerList){
             if(player.getNickname().equals(nickname)){
@@ -304,6 +307,7 @@ public class Match implements Serializable, Cloneable {
         }
         return 0;
     }
+
     public void showLeaderCards(String nickname){
         for(Player player : playerList){
             if(player.getNickname().equals(nickname)){
@@ -313,6 +317,7 @@ public class Match implements Serializable, Cloneable {
         }
         return ;
     }
+
     public Warehouse getWarehouse(String nickname){
         for(Player player : playerList){
             if(player.getNickname().equals(nickname)){
@@ -320,5 +325,17 @@ public class Match implements Serializable, Cloneable {
             }
         }
         return null;
+    }
+
+    public Board getBoardByPlayerNickname(String nickname) {
+        int playerIndex = 0;
+        for (Player player : this.playerList) {
+            if (player.getNickname().equals(nickname)) {
+                break;
+            } else {
+                playerIndex++;
+            }
+        }
+        return this.playerList.get(playerIndex).getBoard();
     }
 }
