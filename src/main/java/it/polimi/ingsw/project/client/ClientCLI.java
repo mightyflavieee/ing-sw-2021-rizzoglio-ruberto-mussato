@@ -98,9 +98,11 @@ public class ClientCLI {
     }
 
     public Move handleTurn(){
+        //quando do come comando 0 entro SEMPRE in una funzione che mi permette di visualizzare le varie informazioni
+
         switch (this.match.getTurnPhase(myNickname)) {
             case WaitPhase:
-                //todo
+                viewer();
                 break;
             case InitialPhase:
             case EndPhase:
@@ -113,20 +115,25 @@ public class ClientCLI {
         return  null;
     }
     private Move handleLeaderAction(){
+        //quando do come comando 0 entro SEMPRE in una funzione che mi permette di visualizzare le varie informazioni
+
         while(true) {
             System.out.println("Do you want to perform a Leader Card Action?\n" +
-                    "0 - no\n" +
+                    "0 - see informations" +
                     "1 - Discard Leader Card\n" +
-                    "2 - Play Leader Card");
+                    "2 - Play Leader Card\n" +
+                    "3 - no\n");
             String answer = stdin.nextLine();
             switch (answer) {
                 case "0":
-                    return new NoMove();
+                    viewer();
                 case "1":
                     //todo
                     System.out.println("Give the nickname");
                     return new DiscardLeaderCardMove(stdin.nextLine());
                 case "2":
+                case "3":
+                    return new NoMove();
                 default:
                     break;
             }
@@ -134,12 +141,29 @@ public class ClientCLI {
 
     }
     private Move handleMainPhase(){
-        System.out.println("What do you want to do?\n" +
-                "1 - Take Resources from Market\n" +
-                "2 - Buy one Development Card\n" +
-                "Activate the Production");
-        String answer = stdin.nextLine();
-        return null;
+        //quando do come comando 0 entro SEMPRE in una funzione che mi permette di visualizzare le varie informazioni
+        while(true) {
+            System.out.println("What do you want to do?\n" +
+                    "0 - see informations" +
+                    "1 - Take Resources from Market\n" +
+                    "2 - Buy one Development Card\n" +
+                    "3 - Activate the Production");
+            String answer = stdin.nextLine();
+            switch (answer) {
+                case "0":
+                    viewer();
+                case "1":
+                case "2":
+                case "3":
+                default:
+                    break;
+            }
+        }
+    }
+
+    public void viewer() {
+        //todo
+
     }
     public void run() throws IOException {
         Socket socket = new Socket(ip, port);
