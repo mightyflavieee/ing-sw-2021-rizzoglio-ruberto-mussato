@@ -108,7 +108,7 @@ public class ClientCLI {
             case EndPhase:
                 return handleLeaderAction();
             case MainPhase:
-                break;
+                return handleMainPhase();
 
         }
 
@@ -128,8 +128,8 @@ public class ClientCLI {
                 case "0":
                     viewer();
                 case "1":
-                    //todo
-                    System.out.println("Give the nickname");
+                    this.match.showLeaderCards(this.myNickname);
+                    System.out.println("Give the LeaderCard id that you want to discard");
                     return new DiscardLeaderCardMove(stdin.nextLine());
                 case "2":
                 case "3":
@@ -163,6 +163,34 @@ public class ClientCLI {
 
     public void viewer() {
         //todo
+        System.out.println("0 - Go Back\n" +
+                "1 - show informations about the others players\n" +
+                "2 - show your Points\n" +
+                "3 - show your Resources\n" +
+                "4 - show your Leader Cards\n" +
+                "5 - show your Development Cards\n" +
+                "6 - show the Market");
+        String answer = stdin.nextLine();
+        switch (answer) {
+            case "0":
+                break;
+            case "1":
+                //todo
+            case "2":
+                System.out.println("Your points are: " + this.match.getVictoryPoints(myNickname));
+                break;
+            case "3":
+                System.out.println("Your marker position is: " + this.match.getMarkerPosition(myNickname));
+                break;
+            case "4":
+                this.match.showLeaderCards(myNickname);
+                break;
+            case "5":
+            case "6":
+            default:
+                return;
+        }
+        return;
 
     }
     public void run() throws IOException {
@@ -170,7 +198,7 @@ public class ClientCLI {
         System.out.println("Connection established");
         ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
-        Scanner stdin = new Scanner(System.in);
+        stdin = new Scanner(System.in);
         try {
             Thread t0 = asyncReadFromSocket(socketIn);
             Thread t1 = asyncCli(socketOut);

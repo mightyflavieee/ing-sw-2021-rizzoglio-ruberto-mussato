@@ -205,4 +205,12 @@ public class Player implements Serializable, Cloneable {
   public TurnPhase getTurnPhase() {
     return turnPhase;
   }
+
+  public int getMarkerPosition(){
+    return board.getMarkerPosition();
+  }
+
+  public void showLeaderCards(){
+    this.board.showLeaderCards();
+  }
 }

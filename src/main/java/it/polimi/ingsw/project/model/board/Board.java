@@ -663,4 +663,10 @@ public class Board implements Serializable, Cloneable {
     this.warehouse = warehouse;
     this.warehouse.discardResourcesInHand(discardedResources);
   }
+  public int getMarkerPosition(){
+    return this.faithMap.getMarkerPosition();
+  }
+  public void showLeaderCards(){
+    leaderCards.forEach(x -> System.out.println(x.toString()));
+  }
 }

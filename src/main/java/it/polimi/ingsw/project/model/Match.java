@@ -288,4 +288,29 @@ public class Match implements Serializable, Cloneable {
         }
         return TurnPhase.WaitPhase;
     }
+    public int getVictoryPoints(String nickname){
+        for(Player player : playerList){
+            if(player.getNickname().equals(nickname)){
+                return player.getVictoryPoints();
+            }
+        }
+        return 0;
+    }
+    public int getMarkerPosition(String nickname){
+        for(Player player : playerList){
+            if(player.getNickname().equals(nickname)){
+                return player.getMarkerPosition();
+            }
+        }
+        return 0;
+    }
+    public void showLeaderCards(String nickname){
+        for(Player player : playerList){
+            if(player.getNickname().equals(nickname)){
+                player.showLeaderCards();
+                return;
+            }
+        }
+        return ;
+    }
 }
