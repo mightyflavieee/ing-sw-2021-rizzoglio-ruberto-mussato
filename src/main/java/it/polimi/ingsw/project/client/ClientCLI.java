@@ -143,7 +143,7 @@ public class ClientCLI {
 
     }
 
-    private Move handleMainPhase(){
+    private Move handleMainPhase() {
         //quando do come comando 0 entro SEMPRE in una funzione che mi permette di visualizzare le varie informazioni
         Move playerMove = null;
         do {
@@ -157,7 +157,7 @@ public class ClientCLI {
                 case "0":
                     viewer();
                 case "1":
-                    // return handleTakeMarketResourcesMove();
+                    playerMove = handleTakeMarketResourcesMove();
                 case "2":
                     playerMove = constructBuyDevCardMove();
                     break;
