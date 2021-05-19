@@ -106,4 +106,15 @@ public class CardContainer implements Cloneable, Serializable {
     return boughtCard;
   }
 
+  public List<DevelopmentCard> getAvailableDevCards() {
+    List<DevelopmentCard> availableDevCards = new ArrayList<>();
+    for (CardLevel level : this.cardContainer.keySet()) {
+      for (CardColor color : this.cardContainer.get(level).keySet()) {
+        if (!this.cardContainer.get(level).get(color).isEmpty()) {
+          availableDevCards.add(this.cardContainer.get(level).get(color).get(this.cardContainer.get(level).get(color).size()-1));
+        }
+      }
+    }
+    return availableDevCards;
+  }
 }
