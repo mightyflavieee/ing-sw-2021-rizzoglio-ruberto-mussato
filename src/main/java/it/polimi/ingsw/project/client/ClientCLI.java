@@ -189,7 +189,7 @@ public class ClientCLI {
                         skipElimination = true;
                         break;
                     } else {
-                        System.out.println("Choose a correct option.");
+                        System.out.println("Choose a correct option.\n");
                     }
                 }
             }
@@ -206,14 +206,18 @@ public class ClientCLI {
                             skipElimination = true;
                             break;
                         } else {
-                            System.out.println("Choose a correct option.");
+                            System.out.println("Choose a correct option.\n");
                         }
                     }
                 }
                 if (!resourcesToEliminateChest.isEmpty() || skipElimination) {
-                    DevCardPosition position = selectPositionForDevCard(devCardToBuyID);
-                    if (position != null) {
-                        playerMove = new BuyDevCardMove(devCardToBuyID, position, resourcesToEliminateWarehouse, resourcesToEliminateChest);
+                    if (resourcesToEliminateWarehouse.isEmpty() && resourcesToEliminateChest.isEmpty()) {
+                        System.out.println("You did not select any resource to be eliminated. Move aborted.\n");
+                    } else {
+                        DevCardPosition position = selectPositionForDevCard(devCardToBuyID);
+                        if (position != null) {
+                            playerMove = new BuyDevCardMove(devCardToBuyID, position, resourcesToEliminateWarehouse, resourcesToEliminateChest);
+                        }
                     }
                 }
             }
