@@ -213,4 +213,8 @@ public class Player implements Serializable, Cloneable {
   public void showLeaderCards(){
     this.board.showLeaderCards();
   }
+
+    public Warehouse getWarehouse() {
+      return board.getWarehouse();
+    }
 }

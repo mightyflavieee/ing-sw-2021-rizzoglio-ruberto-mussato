@@ -251,4 +251,48 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     }
     return true;
   }
+  public boolean insertInShelves(ShelfFloor shelfFloor, List<Resource> resourceList){
+    switch (shelfFloor) {
+      case First:
+        if(shelves.get(ShelfFloor.First).size()>0)
+          return false;
+        break;
+      case Second:
+        if(shelves.get(ShelfFloor.Second).size() + resourceList.size() > 2) {
+          return false;
+        }
+        else {
+          if(shelves.get(ShelfFloor.Second).get(0).getType() != resourceList.get(0).getType()){
+            return false;
+          }
+        }
+        break;
+      case Third:
+        if(shelves.get(ShelfFloor.Third).size() + resourceList.size() > 3) {
+          return false;
+        }
+        else {
+          if(shelves.get(ShelfFloor.Third).get(0).getType() != resourceList.get(0).getType()){
+            return false;
+          }
+        }
+        break;
+      default:
+        return false;
+    }
+    shelves.put(shelfFloor,resourceList); //fa la merge delle liste?
+    return true;
+  }
+  public boolean insertInExtraDeposit(List<Resource> resourceList){
+    if(extraDeposit.size() + resourceList.size() > 2) {
+      return false;
+    }
+    else {
+      if(!extraDeposit.containsKey(resourceList.get(0).getType())){
+        return false;
+      }
+    }
+    extraDeposit.put(resourceList.get(0).getType(),extraDeposit.get(resourceList.get(0).getType()) + resourceList.size()) ;
+    return true;
+  }
 }

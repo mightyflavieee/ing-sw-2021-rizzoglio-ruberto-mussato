@@ -1,18 +1,22 @@
 package it.polimi.ingsw.project.client;
 
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.board.Warehouse;
+import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.playermove.DiscardLeaderCardMove;
 import it.polimi.ingsw.project.model.playermove.Move;
 import it.polimi.ingsw.project.model.playermove.NoMove;
+import it.polimi.ingsw.project.model.playermove.TakeMarketResourcesMove;
+import it.polimi.ingsw.project.model.resource.Resource;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 
+import java.awt.geom.RectangularShape;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 
 public class ClientCLI {
 
@@ -153,6 +157,7 @@ public class ClientCLI {
                 case "0":
                     viewer();
                 case "1":
+                    return handleTakeMarketResourcesMove();
                 case "2":
                 case "3":
                 default:
@@ -192,6 +197,32 @@ public class ClientCLI {
         }
         return;
 
+    }
+    private TakeMarketResourcesMove handleTakeMarketResourcesMove(){
+        //todo mostrare il market
+        Market market = this.match.getMarket();
+        //todo richieste di axis e position
+        int axis = 0, position = 0;
+        //todo transmutation perk
+        ResourceType transmutationPerk = null;
+        List<Resource> resourceList = market.insertMarble(axis,position,transmutationPerk);
+        Boolean hasRedMarble = false;
+        for(int i = 0; i < resourceList.size(); i++){
+            if(resourceList.get(i).getType() == ResourceType.Faith){
+                hasRedMarble = true;
+                resourceList.remove(i);
+                break;
+            }
+        }
+        Warehouse warehouse = match.getWarehouse(myNickname);
+        Map<ResourceType, Integer> resourcesInHand = warehouse.listToMapResources(resourceList);
+        while(resourcesInHand.size()>0){
+            //todo mostrare shelves
+            //todo chiedere quali risorse vuole inserire
+            warehouse.insertInShelves(null,null);
+            warehouse.insertInExtraDeposit(null);
+        }
+        return new TakeMarketResourcesMove(warehouse,null,market,hasRedMarble);
     }
     public void run() throws IOException {
         Socket socket = new Socket(ip, port);

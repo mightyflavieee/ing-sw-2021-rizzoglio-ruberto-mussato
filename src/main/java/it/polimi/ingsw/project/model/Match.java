@@ -313,4 +313,12 @@ public class Match implements Serializable, Cloneable {
         }
         return ;
     }
+    public Warehouse getWarehouse(String nickname){
+        for(Player player : playerList){
+            if(player.getNickname().equals(nickname)){
+                return player.getWarehouse();
+            }
+        }
+        return null;
+    }
 }
