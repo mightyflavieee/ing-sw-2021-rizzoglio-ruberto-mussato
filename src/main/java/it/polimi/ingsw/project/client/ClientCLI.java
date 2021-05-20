@@ -4,6 +4,7 @@ import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
+import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.playermove.*;
 import it.polimi.ingsw.project.model.resource.Resource;
@@ -190,10 +191,29 @@ public class ClientCLI {
     // constructs the ProductionMove according to the player choices
     private Move constructActivateLeaderCardMove() {
         Move playerMove = null;
-        this.match.showLeaderCards(this.myNickname);
-        System.out.println("Provide the ID of the LeaderCard you want to activate:\n" + "> ");
-
-        this.stdin.nextLine();
+        boolean isCorrectID = false;
+        String leaderCardID = null;
+        if (!this.match.getCurrentPlayer().getBoard().getLeaderCards().isEmpty()) {
+            this.match.getLeaderCards(this.myNickname);
+            do {
+                System.out.println("Provide the ID of the LeaderCard you want to activate: (Type 'quit' to go back)\n" + "> ");
+                String answer = this.stdin.nextLine();
+                for (LeaderCard leaderCard : this.match.getCurrentPlayer().getBoard().getLeaderCards()) {
+                    if (answer.equals(leaderCard.getId())) {
+                        isCorrectID = true;
+                        leaderCardID = answer;
+                        break;
+                    }
+                }
+                if (!isCorrectID) {
+                    System.out.println("Provide a correct ID");
+                }
+            } while (!isCorrectID);
+            //todo verify if the user can activate the card
+            playerMove = new ActivateLeaderCardMove(leaderCardID);
+        } else {
+            System.out.println("No Leader Cards present. Cannot execute move.");
+        }
         return playerMove;
     }
 
