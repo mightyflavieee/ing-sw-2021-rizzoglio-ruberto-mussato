@@ -135,7 +135,11 @@ public class ClientCLI {
                     return new DiscardLeaderCardMove(stdin.nextLine());
                 case "2":
                 case "3":
-                    return new NoMove();
+                    System.out.println("Are you sure? [y/n]");
+                    if(stdin.nextLine().equals("y")) {
+                        return new NoMove();
+                    }
+                    break;
                 default:
                     break;
             }
@@ -158,6 +162,7 @@ public class ClientCLI {
                     viewer();
                 case "1":
                     playerMove = handleTakeMarketResourcesMove();
+                    break;
                 case "2":
                     playerMove = constructBuyDevCardMove();
                     break;
@@ -410,13 +415,15 @@ public class ClientCLI {
                 System.out.println("Your points are: " + this.match.getVictoryPoints(myNickname));
                 break;
             case "3":
-                System.out.println("Your marker position is: " + this.match.getMarkerPosition(myNickname));
+                System.out.println("Your marker position is: " + this.match.getMarkerPosition(myNickname) +"/24");
                 break;
             case "4":
                 this.match.showLeaderCards(myNickname);
                 break;
             case "5":
             case "6":
+                System.out.println(this.match.getMarket());
+                break;
             default:
                 return;
         }
@@ -425,8 +432,8 @@ public class ClientCLI {
     }
 
     private TakeMarketResourcesMove handleTakeMarketResourcesMove(){
-        //todo mostrare il market
         Market market = this.match.getMarket();
+        System.out.println(market);
         //todo richieste di axis e position
         int axis = 0, position = 0;
         //todo transmutation perk

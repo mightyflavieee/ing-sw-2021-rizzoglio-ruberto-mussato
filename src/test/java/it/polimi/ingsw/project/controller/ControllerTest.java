@@ -125,6 +125,8 @@ class ControllerTest {
                 assertEquals(outsideMarble.getType(), model.getMatch().getMarket().getOutSideMarble().getType());
                 model.getMatch().getMarket().setTray(tray);
 
+               // System.out.println(model.getMatch().getMarket());
+
                 // beginning of the match
 
                 // turn 1 gianluca
