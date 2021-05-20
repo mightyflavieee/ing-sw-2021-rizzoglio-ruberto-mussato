@@ -192,6 +192,7 @@ public class ClientCLI {
     private Move constructActivateLeaderCardMove() {
         Move playerMove = null;
         boolean isCorrectID = false;
+        boolean isMovePossible = false;
         String leaderCardID = null;
         if (!this.match.getCurrentPlayer().getBoard().getLeaderCards().isEmpty()) {
             this.match.getLeaderCards(this.myNickname);
@@ -207,14 +208,25 @@ public class ClientCLI {
                 }
                 if (!isCorrectID) {
                     System.out.println("Provide a correct ID");
+                } else {
+                    if (isActivateLeaderCardMovePossible(leaderCardID)) {
+                        playerMove = new ActivateLeaderCardMove(leaderCardID);
+                        isMovePossible = true;
+                    } else {
+                        System.out.println("You cannot activate the Leader Card with ID=" + leaderCardID + " because you" +
+                                " don't have the requirements for the activation! Please choose another Leader Card or go back!");
+                    }
                 }
-            } while (!isCorrectID);
-            //todo verify if the user can activate the card
-            playerMove = new ActivateLeaderCardMove(leaderCardID);
+            } while (!isMovePossible);
         } else {
             System.out.println("No Leader Cards present. Cannot execute move.");
         }
         return playerMove;
+    }
+
+    private boolean isActivateLeaderCardMovePossible(String leaderCardID) {
+        //TODO
+        return false;
     }
 
     // constructs the BuyDevCardMove according to the player choices
