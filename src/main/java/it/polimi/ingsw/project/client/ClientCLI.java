@@ -116,15 +116,16 @@ public class ClientCLI {
         return  null;
     }
 
-    private Move handleLeaderAction(){
+    private Move handleLeaderAction() {
         //quando do come comando 0 entro SEMPRE in una funzione che mi permette di visualizzare le varie informazioni
 
         while(true) {
             System.out.println("Do you want to perform a Leader Card Action?\n" +
-                    "0 - see informations" +
-                    "1 - Discard Leader Card\n" +
-                    "2 - Play Leader Card\n" +
-                    "3 - no\n");
+                    "0 - See information;" +
+                    "1 - Discard Leader Card;\n" +
+                    "2 - Activate Leader Card;\n" +
+                    "3 - No.\n" +
+                    "> ");
             String answer = stdin.nextLine();
             switch (answer) {
                 case "0":
@@ -134,6 +135,7 @@ public class ClientCLI {
                     System.out.println("Give the LeaderCard id that you want to discard");
                     return new DiscardLeaderCardMove(stdin.nextLine());
                 case "2":
+                    return constructActivateLeaderCardMove();
                 case "3":
                     System.out.println("Are you sure? [y/n]");
                     if(stdin.nextLine().equals("y")) {
@@ -150,27 +152,48 @@ public class ClientCLI {
     private Move handleMainPhase() {
         //quando do come comando 0 entro SEMPRE in una funzione che mi permette di visualizzare le varie informazioni
         Move playerMove = null;
+        boolean isInputError = false;
         do {
             System.out.println("What do you want to do?\n" +
                     "0 - See informations" +
                     "1 - Take Resources from Market\n" +
                     "2 - Buy one Development Card\n" +
-                    "3 - Activate the Production");
-            String answer = stdin.nextLine();
-            switch (answer) {
-                case "0":
-                    viewer();
-                case "1":
-                    playerMove = handleTakeMarketResourcesMove();
-                    break;
-                case "2":
-                    playerMove = constructBuyDevCardMove();
-                    break;
-                case "3":
-                default:
-                    break;
-            }
+                    "3 - Activate Production.\n" +
+                    "> ");
+            do {
+                String answer = stdin.nextLine();
+                switch (answer) {
+                    case "0":
+                        viewer();
+                    case "1":
+                        isInputError = false;
+                        playerMove = handleTakeMarketResourcesMove();
+                        break;
+                    case "2":
+                        isInputError = false;
+                        playerMove = constructBuyDevCardMove();
+                        break;
+                    case "3":
+                        isInputError = false;
+                        playerMove = constructProductionMove();
+                        break;
+                    default:
+                        System.out.println("Please provide a correct number.\n" + "> ");
+                        isInputError = true;
+                        break;
+                }
+            } while (isInputError);
         } while (playerMove == null);
+        return playerMove;
+    }
+
+    // constructs the ProductionMove according to the player choices
+    private Move constructActivateLeaderCardMove() {
+        Move playerMove = null;
+        this.match.showLeaderCards(this.myNickname);
+        System.out.println("Provide the ID of the LeaderCard you want to activate:\n" + "> ");
+
+        this.stdin.nextLine();
         return playerMove;
     }
 
@@ -394,6 +417,13 @@ public class ClientCLI {
             }
         } while (chosenPosition == null || !goBack);
         return chosenPosition;
+    }
+
+    // constructs the ProductionMove according to the player choices
+    private Move constructProductionMove() {
+        Move playerMove = null;
+
+        return playerMove;
     }
 
     public void viewer() {
