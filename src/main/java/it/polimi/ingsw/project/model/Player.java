@@ -210,8 +210,8 @@ public class Player implements Serializable, Cloneable {
     return board.getMarkerPosition();
   }
 
-  public void showLeaderCards(){
-    this.board.showLeaderCards();
+  public String getLeaderCards(){
+    return this.board.getLeaderCardsToString();
   }
 
     public Warehouse getWarehouse() {

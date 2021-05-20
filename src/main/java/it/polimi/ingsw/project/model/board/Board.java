@@ -666,7 +666,11 @@ public class Board implements Serializable, Cloneable {
   public int getMarkerPosition(){
     return this.faithMap.getMarkerPosition();
   }
-  public void showLeaderCards(){
-    leaderCards.forEach(x -> System.out.println(x.toString()));
+  public String getLeaderCardsToString(){
+    String string = "";
+    for(int i = 0; i < this.leaderCards.size(); i++){
+      string = string + this.leaderCards.get(i).toString();
+    }
+    return string;
   }
 }

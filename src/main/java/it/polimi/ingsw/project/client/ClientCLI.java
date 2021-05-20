@@ -131,7 +131,7 @@ public class ClientCLI {
                 case "0":
                     viewer();
                 case "1":
-                    this.match.showLeaderCards(this.myNickname);
+                    this.match.getLeaderCards(this.myNickname);
                     System.out.println("Give the LeaderCard id that you want to discard");
                     return new DiscardLeaderCardMove(stdin.nextLine());
                 case "2":
@@ -431,7 +431,7 @@ public class ClientCLI {
         System.out.println("0 - Go Back\n" +
                 "1 - show informations about the others players\n" +
                 "2 - show your Points\n" +
-                "3 - show your Resources\n" +
+                "3 - show your Marker Position\n" +
                 "4 - show your Leader Cards\n" +
                 "5 - show your Development Cards\n" +
                 "6 - show the Market");
@@ -448,7 +448,7 @@ public class ClientCLI {
                 System.out.println("Your marker position is: " + this.match.getMarkerPosition(myNickname) +"/24");
                 break;
             case "4":
-                this.match.showLeaderCards(myNickname);
+                System.out.println("Your Leader Cards are: " + this.match.getLeaderCards(myNickname) );
                 break;
             case "5":
             case "6":

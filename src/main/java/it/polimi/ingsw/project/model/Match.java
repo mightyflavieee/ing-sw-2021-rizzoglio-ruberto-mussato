@@ -308,14 +308,13 @@ public class Match implements Serializable, Cloneable {
         return 0;
     }
 
-    public void showLeaderCards(String nickname){
+    public String getLeaderCards(String nickname){
         for(Player player : playerList){
             if(player.getNickname().equals(nickname)){
-                player.showLeaderCards();
-                return;
+                return player.getLeaderCards();
             }
         }
-        return ;
+        return "";
     }
 
     public Warehouse getWarehouse(String nickname){
