@@ -12,4 +12,8 @@ public class Marble implements Serializable {
   public MarbleType getType() {
     return this.marbleType;
   }
+
+  public String toString(){
+    return this.marbleType.toString();
+  }
 }

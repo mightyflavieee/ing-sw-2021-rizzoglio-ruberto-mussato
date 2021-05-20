@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Warehouse extends Observable<Warehouse> implements Serializable {
 
@@ -294,5 +295,28 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     }
     extraDeposit.put(resourceList.get(0).getType(),extraDeposit.get(resourceList.get(0).getType()) + resourceList.size()) ;
     return true;
+  }
+  public String toString(){
+    String string = "";
+    string = string + "Shelves:\n" + this.getShelvesToString() + "\nExtra Deposit: \n" +this.getExtraDepositToString();
+    return string;
+  }
+  public String getShelvesToString(){
+    return this.shelves
+            .entrySet()
+            .stream()
+            .map(x -> x.getKey().toString() + x.getValue().stream().map(y -> " " + y.toString()) + "\n")
+            .collect(Collectors.toList())
+            .toString();
+  }
+  public String getExtraDepositToString(){
+    if(this.extraDeposit == null){
+      return "no extra deposit";
+    }
+    return this.extraDeposit
+            .entrySet()
+            .stream()
+            .map(x -> x.getKey().toString() + " " + x.getValue().toString())
+            .toString();
   }
 }

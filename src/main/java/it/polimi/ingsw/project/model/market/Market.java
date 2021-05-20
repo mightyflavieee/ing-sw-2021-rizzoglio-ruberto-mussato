@@ -148,7 +148,7 @@ public class Market extends Observable<Market> implements Cloneable, Serializabl
         String string = "";
         for(int j = 2; j > -1; j--) {
             for (int i = 0; i < 4; i++) {
-                string = string + " " +this.tray[i][j].getType();
+                string = string + " " +this.tray[i][j];
             }
             string = string + "\n";
         }

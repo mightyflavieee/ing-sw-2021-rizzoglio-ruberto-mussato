@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.client;
 
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
+import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
@@ -9,6 +10,7 @@ import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.playermove.*;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
+import it.polimi.ingsw.project.utils.Pair;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -494,9 +496,11 @@ public class ClientCLI {
     }
 
     private TakeMarketResourcesMove handleTakeMarketResourcesMove(){
+        List <Resource> resourcesToDiscard = new ArrayList<>();
         Market market = this.match.getMarket();
         System.out.println(market);
         //todo richieste di axis e position
+        String answer = stdin.nextLine();
         int axis = 0, position = 0;
         //todo transmutation perk
         ResourceType transmutationPerk = null;
@@ -511,13 +515,154 @@ public class ClientCLI {
         }
         Warehouse warehouse = match.getWarehouse(myNickname);
         Map<ResourceType, Integer> resourcesInHand = warehouse.listToMapResources(resourceList);
+        System.out.println(warehouse);
+        System.out.println("Resources in hand :" + resourcesInHand.entrySet().stream().map(x -> x.getKey() + " " + x.getValue().toString()));
         while(resourcesInHand.size()>0){
-            //todo mostrare shelves
-            //todo chiedere quali risorse vuole inserire
-            warehouse.insertInShelves(null, null);
-            warehouse.insertInExtraDeposit(null);
+            System.out.println("0 - show Warehouse\n" +
+                    "1 - show resources in hand\n" +
+                    "2 - insert resources in the shelves\n" +
+                    "3 - insert resources in the extra deposit\n" +
+                    "4 - discard resources");
+            answer = stdin.nextLine();
+            switch (answer){
+                case "0":
+                    System.out.println(warehouse);
+                    break;
+                case "1":
+                    System.out.println("Resources in hand :" + resourcesInHand.entrySet().stream().map(x -> x.getKey() + " " + x.getValue().toString()));
+                    break;
+                case "2":
+                    this.insertInShelves(warehouse,resourcesInHand);
+                case "3":
+                    this.insertInExtraDeposit(warehouse,resourcesInHand);
+                case "4":
+                    resourcesToDiscard.addAll(this.discardResources(warehouse,resourcesInHand)) ;
+
+            }
         }
-        return new TakeMarketResourcesMove(warehouse,null,market,hasRedMarble);
+        return new TakeMarketResourcesMove(warehouse,resourcesToDiscard,market,hasRedMarble);
+    }
+    private void insertInShelves(Warehouse warehouse,Map<ResourceType, Integer> resourcesInHand){
+
+        System.out.println("Which Resource type do you want to put in the shelves?\n");
+        Pair<ResourceType,Integer> resourceSelected = resourceSelector(resourcesInHand);
+        ShelfFloor shelfFloor;
+        if(resourceSelected == null){
+            return;
+        }
+            System.out.println("1 - First floor\n" +
+                    "2 - second floor\n" +
+                    "3 - third floor");
+            switch (stdin.nextLine()){
+                case "1":
+                    shelfFloor = ShelfFloor.First;
+                    break;
+                case "2":
+                    shelfFloor = ShelfFloor.Second;
+                    break;
+                case "3":
+                    shelfFloor = ShelfFloor.Third;
+                    break;
+                default:
+                    System.out.println("wrong input");
+                    return;
+            }
+            List<Resource> resourceList = new ArrayList<>();
+            for(int i = 0; i < resourceSelected._2; i++){
+                resourceList.add(new Resource(resourceSelected._1));
+            }
+            if(!warehouse.insertInShelves(shelfFloor, resourceList)){
+                System.out.println("forbidden action");}
+            else{
+                int oldvalue = resourcesInHand.remove(resourceSelected._1);
+                oldvalue = oldvalue - resourceSelected._2;
+                if(oldvalue>0){
+                    resourcesInHand.put(resourceSelected._1, oldvalue);
+                }
+            }
+                return;
+
+
+
+
+    }
+    private Pair<ResourceType,Integer> resourceSelector(Map<ResourceType, Integer> resourcesInHand){
+        //returns a map if i have the resources, otherwise null
+        String resourceType;
+        ResourceType type;
+        int n;
+        System.out.println("1 - coin\n" +
+                "2 - stone\n" +
+                "3 - shield\n" +
+                "4 - servant");
+        resourceType = stdin.nextLine();
+        System.out.println("how many?");
+        n = Integer.parseInt(stdin.nextLine());
+        switch (resourceType){
+            case "1":
+                type = ResourceType.Coin;
+                break;
+            case "2":
+                type = ResourceType.Stone;
+                break;
+            case "3":
+                type = ResourceType.Shield;
+                break;
+            case "4":
+                type = ResourceType.Servant;
+                break;
+            default:
+                System.out.println("wrong input");
+                return null;
+        }
+        if(resourcesInHand.get(type) >= n){
+            return  new Pair<>(type,n);
+        }
+        else {
+            System.out.println("Not enough resources");
+            return null;
+        }
+    }
+    public void insertInExtraDeposit(Warehouse warehouse,Map<ResourceType, Integer> resourcesInHand){
+        System.out.println("Which Resource type do you want to put in the extra deposit?\n");
+        Pair<ResourceType,Integer> resourceSelected = resourceSelector(resourcesInHand);
+        if(resourceSelected == null){
+            return;
+        }
+        List<Resource> resourceList = new ArrayList<>();
+        for(int i = 0; i < resourceSelected._2; i++){
+            resourceList.add(new Resource(resourceSelected._1));
+        }
+        if(!warehouse.insertInExtraDeposit(resourceList)){
+            System.out.println("forbidden action");
+        }
+        else{
+            int oldvalue = resourcesInHand.remove(resourceSelected._1);
+            oldvalue = oldvalue - resourceSelected._2;
+            if(oldvalue>0){
+                resourcesInHand.put(resourceSelected._1, oldvalue);
+            }
+        }
+        return;
+
+    }
+    public List<Resource> discardResources(Warehouse warehouse,Map<ResourceType, Integer> resourcesInHand){
+        System.out.println("Which Resource type do you want to discard?\n");
+        Pair<ResourceType,Integer> resourceSelected = resourceSelector(resourcesInHand);
+        if(resourceSelected == null){
+            return new ArrayList<>();
+        }
+        int oldvalue = resourcesInHand.remove(resourceSelected._1);
+        oldvalue = oldvalue - resourceSelected._2;
+        if(oldvalue>0){
+            resourcesInHand.put(resourceSelected._1, oldvalue);
+        }
+        List<Resource> resources = new ArrayList<>();
+        for(int i = 0; i < resourceSelected._2; i++){
+            resources.add(new Resource(resourceSelected._1));
+        }
+        return resources;
+
     }
 
     public void run() throws IOException {
