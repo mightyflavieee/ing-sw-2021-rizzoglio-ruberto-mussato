@@ -345,4 +345,14 @@ public class Match implements Serializable, Cloneable {
         }
         return null;
     }
+
+    public String getOpponents(String nickname) {
+        String string = "";
+        for(Player player : playerList){
+            if(!player.getNickname().equals(nickname)){
+                string = string + player.getNickname() + " ";
+            }
+        }
+        return string;
+    }
 }

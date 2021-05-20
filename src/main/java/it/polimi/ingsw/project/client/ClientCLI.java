@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client;
 
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
@@ -461,7 +462,6 @@ public class ClientCLI {
     }
 
     public void viewer() {
-        //todo
         System.out.println("0 - Go Back\n" +
                 "1 - show informations about the others players\n" +
                 "2 - show your Points\n" +
@@ -474,7 +474,7 @@ public class ClientCLI {
             case "0":
                 break;
             case "1":
-                //todo
+                viewer(myNickname);
             case "2":
                 System.out.println("Your points are: " + this.match.getVictoryPoints(myNickname));
                 break;
@@ -485,6 +485,7 @@ public class ClientCLI {
                 System.out.println("Your Leader Cards are: " + this.match.getLeaderCards(myNickname) );
                 break;
             case "5":
+                break;
             case "6":
                 System.out.println(this.match.getMarket());
                 break;
@@ -492,6 +493,35 @@ public class ClientCLI {
                 return;
         }
         return;
+
+    }
+
+    private void viewer(String myNickname) {
+        //shows informations about other players
+        System.out.println("Your opponents are : " + this.match.getOpponents(myNickname) +
+                "\n tell the nickname");
+        String opponent = stdin.nextLine();
+        System.out.println("0 - Go Back\n" +
+                "1 - show " + opponent + " Points\n" +
+                "2 - show " + opponent + " Marker Position\n" +
+                "3 - show " + opponent + " Leader Cards\n" +
+                "4 - show " + opponent + " Development Cards\n");
+        String answer = stdin.nextLine();
+        switch (answer) {
+            case "0":
+                break;
+            case "1":
+                System.out.println(opponent + " points are: " + this.match.getVictoryPoints(opponent));
+            case "2":
+                System.out.println(opponent + " marker position is: " + this.match.getMarkerPosition(opponent) +"/24");
+                break;
+            case "3":
+                System.out.println(opponent + " Leader Cards are: " + this.match.getLeaderCards(opponent) );
+                break;
+            default:
+                return;
+        }
+
 
     }
 
