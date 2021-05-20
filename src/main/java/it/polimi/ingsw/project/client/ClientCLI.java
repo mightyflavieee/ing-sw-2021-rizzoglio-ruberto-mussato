@@ -499,11 +499,20 @@ public class ClientCLI {
         List <Resource> resourcesToDiscard = new ArrayList<>();
         Market market = this.match.getMarket();
         System.out.println(market);
-        //todo richieste di axis e position
-        String answer = stdin.nextLine();
-        int axis = 0, position = 0;
-        //todo transmutation perk
-        ResourceType transmutationPerk = null;
+        String answer;
+        System.out.println("do you want to insert the marble horizontally or vertically?\n" +
+                "0 - vertical\n" +
+                "1 - horizontal");
+        int axis = Integer.parseInt(stdin.nextLine());
+        if(axis == 0){
+            System.out.println("Which column?\n" +
+                    "from 0 to 3, from left to right");
+        }else{
+            System.out.println("Which line?\n" +
+                    "from 0 to 2, from bottom to up");
+        }
+        int position = Integer.parseInt(stdin.nextLine());
+        ResourceType transmutationPerk = match.getTransmutationPerk(myNickname);
         List<Resource> resourceList = market.insertMarble(axis,position,transmutationPerk);
         Boolean hasRedMarble = false;
         for(int i = 0; i < resourceList.size(); i++){
@@ -533,11 +542,16 @@ public class ClientCLI {
                     break;
                 case "2":
                     this.insertInShelves(warehouse,resourcesInHand);
+                    break;
                 case "3":
                     this.insertInExtraDeposit(warehouse,resourcesInHand);
+                    break;
                 case "4":
                     resourcesToDiscard.addAll(this.discardResources(warehouse,resourcesInHand)) ;
-
+                    break;
+                default:
+                    System.out.println("wrong input");
+                    break;
             }
         }
         return new TakeMarketResourcesMove(warehouse,resourcesToDiscard,market,hasRedMarble);
