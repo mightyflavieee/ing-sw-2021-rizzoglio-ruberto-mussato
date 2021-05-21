@@ -68,7 +68,7 @@ public class DevelopmentCard extends Card {
     converted = new StringBuilder("Id: " + this.id + "\n" + "Production: " + this.production + "\nLevel: " + this.level + "\nColor: " + this.color + "\n");
     converted.append("Cost:\n");
     for (ResourceType type : this.cost.keySet()) {
-      converted.append("\t").append(type).append(" = ").append(this.cost.get(type));
+      converted.append("\t").append(type).append(" = ").append(this.cost.get(type)).append("\n");
     }
     return converted.toString();
   }
