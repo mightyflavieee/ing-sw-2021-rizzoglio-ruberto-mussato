@@ -287,7 +287,9 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
       default:
         return false;
     }
-    shelves.put(shelfFloor,resourceList); //fa la merge delle liste?
+    List<Resource> temp = shelves.get(shelfFloor);
+    temp.addAll(resourceList);
+    shelves.put(shelfFloor,temp);
     return true;
   }
   public boolean insertInExtraDeposit(List<Resource> resourceList){
