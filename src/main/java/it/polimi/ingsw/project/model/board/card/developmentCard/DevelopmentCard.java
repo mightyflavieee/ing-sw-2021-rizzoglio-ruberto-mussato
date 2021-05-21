@@ -62,4 +62,14 @@ public class DevelopmentCard extends Card {
     mapToReturn.putAll(this.cost);
     return mapToReturn;
   }
+
+  public String toString() {
+    StringBuilder converted;
+    converted = new StringBuilder("Id: " + this.id + "\n" + "Production: " + this.production + "\nLevel: " + this.level + "\nColor: " + this.color + "\n");
+    converted.append("Cost:\n");
+    for (ResourceType type : this.cost.keySet()) {
+      converted.append("\t").append(type).append(" = ").append(this.cost.get(type));
+    }
+    return converted.toString();
+  }
 }
