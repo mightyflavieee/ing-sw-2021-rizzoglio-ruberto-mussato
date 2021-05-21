@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.view;
 
 import java.util.List;
 
+import it.polimi.ingsw.project.model.InitializeGameMessage;
 import it.polimi.ingsw.project.model.MoveMessage;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.playermove.Move;
@@ -32,10 +33,6 @@ public class RemoteView extends View {
         super(player);
         this.clientConnection = c;
         c.addObserver(new MessageReceiver());
-        c.asyncSend("Your opponents are:");
-        for (String nameOpponent : opponents) {
-            c.asyncSend(nameOpponent);
-        }
 
     }
 
