@@ -36,7 +36,6 @@ class WarehouseTest {
         Map<ResourceType, Integer> allResources = warehouse.mapAllContainedResources();
         for (ResourceType resourceType : allResources.keySet()) {
             Integer num = allResources.get(resourceType);
-            System.out.println(num);
             assertNotNull(num);
         }
     }

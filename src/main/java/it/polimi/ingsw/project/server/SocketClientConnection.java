@@ -162,9 +162,8 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
             if (server.tryToStartGame(gameId)) {
                 server.startGame(gameId);
             }
-            ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
             while (isActive()) {
-                Move moveMessage = (Move) socketIn.readObject();
+                Move moveMessage = (Move) in.readObject();
                 notify((Move) moveMessage);
             }
         } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
