@@ -356,4 +356,7 @@ public class Match implements Serializable, Cloneable {
         return string;
     }
 
+    public String getWarehouseToString(String myNickname) {
+       return this.getWarehouse(myNickname).getShelvesToString();
+    }
 }

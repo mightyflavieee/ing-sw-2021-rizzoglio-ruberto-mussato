@@ -187,7 +187,7 @@ public class ClientCLI {
         Move playerMove = null;
         boolean isInputError = false;
         do {
-            System.out.println("What do you want to do?\n"
+            System.out.print("What do you want to do?\n"
                     + "0 - See informations\n"
                     + "1 - Take Resources from Market\n"
                     + "2 - Buy one Development Card\n"
@@ -917,7 +917,8 @@ public class ClientCLI {
     public void viewer() {
         System.out.println("0 - Go Back\n" + "1 - show informations about the others players\n"
                 + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
-                + "5 - show your Development Cards\n" + "6 - show the Market");
+                + "5 - show your Development Cards\n" + "6 - show the Market\n" +
+                "7 - show your Warehouse");
         String answer = stdin.nextLine();
         switch (answer) {
             case "0":
@@ -939,6 +940,8 @@ public class ClientCLI {
             case "6":
                 System.out.println(this.match.getMarket());
                 break;
+            case "7":
+                System.out.println(this.match.getWarehouseToString(myNickname));
             default:
                 return;
         }
@@ -1011,8 +1014,10 @@ public class ClientCLI {
         Warehouse warehouse = match.getWarehouse(myNickname);
         Map<ResourceType, Integer> resourcesInHand = warehouse.listToMapResources(resourceList);
         System.out.println(warehouse);
-        System.out.println("Resources in hand :"
-                + resourcesInHand.entrySet().stream().map(x -> x.getKey() + " " + x.getValue().toString()));
+        System.out.println("Resources in hand:");
+        for (Map.Entry<ResourceType,Integer> entry : resourcesInHand.entrySet()){
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
         while (resourcesInHand.size() > 0) {
             System.out.println("0 - show Warehouse\n" + "1 - show resources in hand\n"
                     + "2 - insert resources in the shelves\n" + "3 - insert resources in the extra deposit\n"
@@ -1023,8 +1028,10 @@ public class ClientCLI {
                     System.out.println(warehouse);
                     break;
                 case "1":
-                    System.out.println("Resources in hand :"
-                            + resourcesInHand.entrySet().stream().map(x -> x.getKey() + " " + x.getValue().toString()));
+                    System.out.println("Resources in hand:");
+                    for (Map.Entry<ResourceType,Integer> entry : resourcesInHand.entrySet()){
+                        System.out.println(entry.getKey() + ": " + entry.getValue());
+                    }
                     break;
                 case "2":
                     this.insertInShelves(warehouse, resourcesInHand);
@@ -1091,6 +1098,10 @@ public class ClientCLI {
         String resourceType;
         ResourceType type;
         int n;
+        System.out.println("Resources in hand:");
+        for (Map.Entry<ResourceType,Integer> entry : resourcesInHand.entrySet()){
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
         System.out.println("1 - coin\n" + "2 - stone\n" + "3 - shield\n" + "4 - servant");
         resourceType = stdin.nextLine();
         System.out.println("how many?");
