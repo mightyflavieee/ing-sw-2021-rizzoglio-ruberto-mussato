@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client;
 
+import it.polimi.ingsw.project.model.InitializeGameMessage;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.Warehouse;
@@ -23,7 +24,7 @@ public class ClientCLI {
     private boolean active = true;
     private Match match;
     private Scanner stdin;
-    private String myNickname; //da inizializzare
+    private String myNickname; // da inizializzare
 
     public ClientCLI(String ip, int port) {
         this.ip = ip;
@@ -55,8 +56,9 @@ public class ClientCLI {
                 try {
                     while (isActive()) {
                         Object inputObject = socketIn.readObject();
-                        if (inputObject instanceof String) {
-                            System.out.println((String) inputObject);
+                        if (inputObject instanceof InitializeGameMessage) {
+                            InitializeGameMessage gameMessage = (InitializeGameMessage) inputObject;
+                            System.out.println(gameMessage.getMessage());
                         } else if (inputObject instanceof Match) {
                             setMatch((Match) inputObject);
                         } else {
@@ -72,19 +74,18 @@ public class ClientCLI {
         return t;
     }
 
-    public Thread asyncCli( final ObjectOutputStream socketOut) {//sends to server and shows the match
+    public Thread asyncCli(final ObjectOutputStream socketOut) {// sends to server and shows the match
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     while (isActive()) {
-                        if(getMatch().isEmpty()) {
+                        if (getMatch().isEmpty()) {
                             String inputLine = stdin.nextLine();
-                            socketOut.writeObject(inputLine);
-                        }
-                        else {
+                            socketOut.writeObject(new InitializeGameMessage(inputLine));
+                        } else {
                             Move move = handleTurn();
-                            if(move!=null) {
+                            if (move != null) {
                                 socketOut.writeObject(move);
                             }
                         }
@@ -99,8 +100,9 @@ public class ClientCLI {
         return t;
     }
 
-    public Move handleTurn(){
-        //quando do come comando 0 entro SEMPRE in una funzione che mi permette di visualizzare le varie informazioni
+    public Move handleTurn() {
+        // quando do come comando 0 entro SEMPRE in una funzione che mi permette di
+        // visualizzare le varie informazioni
 
         switch (this.match.getTurnPhase(myNickname)) {
             case WaitPhase:
@@ -114,19 +116,16 @@ public class ClientCLI {
 
         }
 
-        return  null;
+        return null;
     }
 
     private Move handleLeaderAction() {
-        //quando do come comando 0 entro SEMPRE in una funzione che mi permette di visualizzare le varie informazioni
+        // quando do come comando 0 entro SEMPRE in una funzione che mi permette di
+        // visualizzare le varie informazioni
 
-        while(true) {
-            System.out.println("Do you want to perform a Leader Card Action?\n" +
-                    "0 - See information;" +
-                    "1 - Discard Leader Card;\n" +
-                    "2 - Activate Leader Card;\n" +
-                    "3 - No.\n" +
-                    "> ");
+        while (true) {
+            System.out.println("Do you want to perform a Leader Card Action?\n" + "0 - See information;"
+                    + "1 - Discard Leader Card;\n" + "2 - Activate Leader Card;\n" + "3 - No.\n" + "> ");
             String answer = stdin.nextLine();
             switch (answer) {
                 case "0":
@@ -139,7 +138,7 @@ public class ClientCLI {
                     return constructActivateLeaderCardMove();
                 case "3":
                     System.out.println("Are you sure? [y/n]");
-                    if(stdin.nextLine().equals("y")) {
+                    if (stdin.nextLine().equals("y")) {
                         return new NoMove();
                     }
                     break;
@@ -151,16 +150,13 @@ public class ClientCLI {
     }
 
     private Move handleMainPhase() {
-        //quando do come comando 0 entro SEMPRE in una funzione che mi permette di visualizzare le varie informazioni
+        // quando do come comando 0 entro SEMPRE in una funzione che mi permette di
+        // visualizzare le varie informazioni
         Move playerMove = null;
         boolean isInputError = false;
         do {
-            System.out.println("What do you want to do?\n" +
-                    "0 - See informations" +
-                    "1 - Take Resources from Market\n" +
-                    "2 - Buy one Development Card\n" +
-                    "3 - Activate Production.\n" +
-                    "> ");
+            System.out.println("What do you want to do?\n" + "0 - See informations" + "1 - Take Resources from Market\n"
+                    + "2 - Buy one Development Card\n" + "3 - Activate Production.\n" + "> ");
             do {
                 String answer = stdin.nextLine();
                 switch (answer) {
@@ -197,7 +193,8 @@ public class ClientCLI {
         if (!this.match.getCurrentPlayer().getBoard().getLeaderCards().isEmpty()) {
             this.match.getLeaderCards(this.myNickname);
             do {
-                System.out.println("Provide the ID of the LeaderCard you want to activate: (Type 'quit' to go back)\n" + "> ");
+                System.out.println(
+                        "Provide the ID of the LeaderCard you want to activate: (Type 'quit' to go back)\n" + "> ");
                 String answer = this.stdin.nextLine();
                 for (LeaderCard leaderCard : this.match.getCurrentPlayer().getBoard().getLeaderCards()) {
                     if (answer.equals(leaderCard.getId())) {
@@ -213,8 +210,9 @@ public class ClientCLI {
                         playerMove = new ActivateLeaderCardMove(leaderCardID);
                         isMovePossible = true;
                     } else {
-                        System.out.println("You cannot activate the Leader Card with ID=" + leaderCardID + " because you" +
-                                " don't have the requirements for the activation! Please choose another Leader Card or go back!");
+                        System.out.println("You cannot activate the Leader Card with ID=" + leaderCardID
+                                + " because you"
+                                + " don't have the requirements for the activation! Please choose another Leader Card or go back!");
                     }
                 }
             } while (!isMovePossible);
@@ -225,7 +223,7 @@ public class ClientCLI {
     }
 
     private boolean isActivateLeaderCardMovePossible(String leaderCardID) {
-        //TODO
+        // TODO
         return false;
     }
 
@@ -276,7 +274,8 @@ public class ClientCLI {
                     } else {
                         DevCardPosition position = selectPositionForDevCard(devCardToBuyID);
                         if (position != null) {
-                            playerMove = new BuyDevCardMove(devCardToBuyID, position, resourcesToEliminateWarehouse, resourcesToEliminateChest);
+                            playerMove = new BuyDevCardMove(devCardToBuyID, position, resourcesToEliminateWarehouse,
+                                    resourcesToEliminateChest);
                         }
                     }
                 }
@@ -285,7 +284,8 @@ public class ClientCLI {
         return playerMove;
     }
 
-    // provides the id of the DevelopmentCard the player wants to buy. Returns null if the player
+    // provides the id of the DevelopmentCard the player wants to buy. Returns null
+    // if the player
     // wants to go back
     private String showAndSelectDevCardToBuy(List<DevelopmentCard> availableDevCards) {
         boolean isCardPresent = false;
@@ -295,8 +295,8 @@ public class ClientCLI {
             System.out.println(devCard.toString());
         }
         while (!isCardPresent) {
-            System.out.println("Which Development Card do you want to buy? (Provide the correct ID or type " +
-                    "'back' to go back): ");
+            System.out.println("Which Development Card do you want to buy? (Provide the correct ID or type "
+                    + "'back' to go back): ");
             answer = stdin.nextLine();
             if (!answer.equals("back")) {
                 for (DevelopmentCard devCard : availableDevCards) {
@@ -306,8 +306,8 @@ public class ClientCLI {
                     }
                 }
                 if (!isCardPresent) {
-                    System.out.println("A Development Card with that ID is not available. Please provide a correct ID " +
-                            "or go back.");
+                    System.out.println("A Development Card with that ID is not available. Please provide a correct ID "
+                            + "or go back.");
                 }
             } else {
                 answer = null;
@@ -317,11 +317,10 @@ public class ClientCLI {
         return answer;
     }
 
-    // helper for the selectResourcesToEliminate() function, asks the player to select how many
+    // helper for the selectResourcesToEliminate() function, asks the player to
+    // select how many
     // of each resource to eliminate
-    private void selectResourcesToEliminateHelper(
-            Map<ResourceType, Integer> resourcesToEliminate,
-            ResourceType type) {
+    private void selectResourcesToEliminateHelper(Map<ResourceType, Integer> resourcesToEliminate, ResourceType type) {
         String stringType = null;
         if (type.equals(ResourceType.Coin)) {
             stringType = "Coin";
@@ -348,21 +347,18 @@ public class ClientCLI {
         }
     }
 
-    // provides the resources to eliminate from the Warehouse or the Chest for the purchase of the
-    // DevelopmentCard the player wants to buy. Returns null if the player wants to go back.
+    // provides the resources to eliminate from the Warehouse or the Chest for the
+    // purchase of the
+    // DevelopmentCard the player wants to buy. Returns null if the player wants to
+    // go back.
     private Map<ResourceType, Integer> selectResourcesToEliminate(String devCardToBuyID, String location) {
         Map<ResourceType, Integer> resourcesToEliminate = new HashMap<>();
         String answer = null;
         boolean goBack = false;
         boolean isDone = false;
         do {
-            System.out.println("Select the resource type to eliminate from the " + location + " :" +
-                    "0 - Go Back;\n" +
-                    "1 - Coin;\n" +
-                    "2 - Servant;\n" +
-                    "3 - Shield;\n" +
-                    "4 - Stone;\n" +
-                    "Enter here your answer: ");
+            System.out.println("Select the resource type to eliminate from the " + location + " :" + "0 - Go Back;\n"
+                    + "1 - Coin;\n" + "2 - Servant;\n" + "3 - Shield;\n" + "4 - Stone;\n" + "Enter here your answer: ");
             answer = stdin.nextLine();
             switch (answer) {
                 case "0":
@@ -384,8 +380,8 @@ public class ClientCLI {
                     System.out.println("Choose a correct option.");
             }
             while (true) {
-                System.out.println("Do you want to keep choosing or do you want to go to the" +
-                        " next step? (Press 1 to keep choosing and 2 to go forward): ");
+                System.out.println("Do you want to keep choosing or do you want to go to the"
+                        + " next step? (Press 1 to keep choosing and 2 to go forward): ");
                 answer = this.stdin.nextLine();
                 if (answer.equals("1")) {
                     break;
@@ -405,7 +401,8 @@ public class ClientCLI {
         return resourcesToEliminate;
     }
 
-    // provides the position on the MapTray of the DevelopmentCard once it is bought. Returns null
+    // provides the position on the MapTray of the DevelopmentCard once it is
+    // bought. Returns null
     // if the player wants to go back.
     private DevCardPosition selectPositionForDevCard(String devCardToBuyID) {
         boolean goBack = false;
@@ -413,12 +410,8 @@ public class ClientCLI {
         DevCardPosition chosenPosition = null;
         String answer = null;
         do {
-            System.out.println("Choose an option:\n" +
-                    "0 - Go Back\n" +
-                    "1 - Left;\n" +
-                    "2 - Center;\n" +
-                    "3 - Right.\n" +
-                    "Enter here your answer: ");
+            System.out.println("Choose an option:\n" + "0 - Go Back\n" + "1 - Left;\n" + "2 - Center;\n"
+                    + "3 - Right.\n" + "Enter here your answer: ");
             answer = this.stdin.nextLine();
             switch (answer) {
                 case "0":
@@ -436,15 +429,19 @@ public class ClientCLI {
                 default:
                     System.out.println("Choose a correct option.");
             }
-            // verifies that the player can put the DevelopmentCard in the position he/she indicated
+            // verifies that the player can put the DevelopmentCard in the position he/she
+            // indicated
             if (!goBack) {
-                int lastPosition = this.match.getBoardByPlayerNickname(this.myNickname).getMapTray().get(chosenPosition).size();
-                DevelopmentCard devCardInLastPosition = this.match.getBoardByPlayerNickname(this.myNickname).getMapTray().get(chosenPosition).get(lastPosition);
+                int lastPosition = this.match.getBoardByPlayerNickname(this.myNickname).getMapTray().get(chosenPosition)
+                        .size();
+                DevelopmentCard devCardInLastPosition = this.match.getBoardByPlayerNickname(this.myNickname)
+                        .getMapTray().get(chosenPosition).get(lastPosition);
                 if (devCardInLastPosition.getLevel().compareTo(devCardToBuy.getLevel()) > 0) {
                     chosenPosition = null;
-                    System.out.println("The level of the upper Development Card present in the section you selected of the " +
-                            "Map Tray is higher than the one of the Card you want to buy. Please select another position " +
-                            "or go back.");
+                    System.out.println(
+                            "The level of the upper Development Card present in the section you selected of the "
+                                    + "Map Tray is higher than the one of the Card you want to buy. Please select another position "
+                                    + "or go back.");
                 }
             }
         } while (chosenPosition == null || !goBack);
@@ -459,28 +456,24 @@ public class ClientCLI {
     }
 
     public void viewer() {
-        //todo
-        System.out.println("0 - Go Back\n" +
-                "1 - show informations about the others players\n" +
-                "2 - show your Points\n" +
-                "3 - show your Marker Position\n" +
-                "4 - show your Leader Cards\n" +
-                "5 - show your Development Cards\n" +
-                "6 - show the Market");
+        // todo
+        System.out.println("0 - Go Back\n" + "1 - show informations about the others players\n"
+                + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
+                + "5 - show your Development Cards\n" + "6 - show the Market");
         String answer = stdin.nextLine();
         switch (answer) {
             case "0":
                 break;
             case "1":
-                //todo
+                // todo
             case "2":
                 System.out.println("Your points are: " + this.match.getVictoryPoints(myNickname));
                 break;
             case "3":
-                System.out.println("Your marker position is: " + this.match.getMarkerPosition(myNickname) +"/24");
+                System.out.println("Your marker position is: " + this.match.getMarkerPosition(myNickname) + "/24");
                 break;
             case "4":
-                System.out.println("Your Leader Cards are: " + this.match.getLeaderCards(myNickname) );
+                System.out.println("Your Leader Cards are: " + this.match.getLeaderCards(myNickname));
                 break;
             case "5":
             case "6":
@@ -493,17 +486,17 @@ public class ClientCLI {
 
     }
 
-    private TakeMarketResourcesMove handleTakeMarketResourcesMove(){
+    private TakeMarketResourcesMove handleTakeMarketResourcesMove() {
         Market market = this.match.getMarket();
         System.out.println(market);
-        //todo richieste di axis e position
+        // todo richieste di axis e position
         int axis = 0, position = 0;
-        //todo transmutation perk
+        // todo transmutation perk
         ResourceType transmutationPerk = null;
-        List<Resource> resourceList = market.insertMarble(axis,position,transmutationPerk);
+        List<Resource> resourceList = market.insertMarble(axis, position, transmutationPerk);
         Boolean hasRedMarble = false;
-        for(int i = 0; i < resourceList.size(); i++){
-            if(resourceList.get(i).getType() == ResourceType.Faith){
+        for (int i = 0; i < resourceList.size(); i++) {
+            if (resourceList.get(i).getType() == ResourceType.Faith) {
                 hasRedMarble = true;
                 resourceList.remove(i);
                 break;
@@ -511,13 +504,13 @@ public class ClientCLI {
         }
         Warehouse warehouse = match.getWarehouse(myNickname);
         Map<ResourceType, Integer> resourcesInHand = warehouse.listToMapResources(resourceList);
-        while(resourcesInHand.size()>0){
-            //todo mostrare shelves
-            //todo chiedere quali risorse vuole inserire
+        while (resourcesInHand.size() > 0) {
+            // todo mostrare shelves
+            // todo chiedere quali risorse vuole inserire
             warehouse.insertInShelves(null, null);
             warehouse.insertInExtraDeposit(null);
         }
-        return new TakeMarketResourcesMove(warehouse,null,market,hasRedMarble);
+        return new TakeMarketResourcesMove(warehouse, null, market, hasRedMarble);
     }
 
     public void run() throws IOException {

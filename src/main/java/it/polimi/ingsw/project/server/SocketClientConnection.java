@@ -1,5 +1,7 @@
 package it.polimi.ingsw.project.server;
 
+import it.polimi.ingsw.project.model.InitializeGameMessage;
+import it.polimi.ingsw.project.model.MoveMessage;
 import it.polimi.ingsw.project.model.playermove.Move;
 import it.polimi.ingsw.project.observer.*;
 
@@ -64,19 +66,27 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
         }).start();
     }
 
-    private String joinGame(Scanner in) throws Exception {
+    private String joinGame(ObjectInputStream in) throws Exception {
         while (true) {
             if (!this.socket.isClosed()) {
-                send("Which game do you want to join?");
-                String gameId = in.nextLine();
+                send(new InitializeGameMessage("Which game do you want to join?"));
+                String gameId;
+                try {
+                    InitializeGameMessage gameMessage = (InitializeGameMessage) in.readObject();
+                    gameId = gameMessage.getMessage();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new Exception("error in parsing input Object");
+                }
                 if (server.isGamePresent(gameId)) {
                     if (server.isGameNotFull(gameId)) {
                         return gameId;
                     } else {
-                        send("The game is full. You can't join. Change game or create a new one.");
+                        send(new InitializeGameMessage(
+                                "The game is full. You can't join. Change game or create a new one."));
                     }
                 } else {
-                    send("No Games are present with that id. Retry.");
+                    send(new InitializeGameMessage("No Games are present with that id. Retry."));
                 }
             } else {
                 throw new Exception("Client is disconnected");
@@ -85,18 +95,24 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
         }
     }
 
-    private String createGame(Scanner in) throws Exception {
+    private String createGame(ObjectInputStream in) throws Exception {
         while (true) {
             if (!this.socket.isClosed()) {
-                send("How many people do you want in your game? (max 4)");
+                send(new InitializeGameMessage("How many people do you want in your game? (max 4)"));
                 try {
-                    Integer playersNumber = in.nextInt();
+                    Integer playersNumber;
+                    try {
+                        InitializeGameMessage gameMessage = (InitializeGameMessage) in.readObject();
+                        playersNumber = Integer.parseInt(gameMessage.getMessage());
+                    } catch (Exception e) {
+                        throw new Exception(e.getMessage());
+                    }
                     if (playersNumber > 4) {
-                        throw new Exception();
+                        throw new Exception("Insert an integer number less than equal 4.");
                     }
                     return server.createGame(playersNumber);
                 } catch (Exception e) {
-                    send("Insert a integer number less than equal 4.");
+                    send(new InitializeGameMessage(e.getMessage()));
                 }
             } else {
                 throw new Exception("Client is disconnected");
@@ -108,15 +124,22 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
     @Override
     public void run() {
         try {
-            Scanner in = new Scanner(socket.getInputStream());
+            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             out = new ObjectOutputStream(socket.getOutputStream());
-            send("Welcome!\nWhat is your name?");
-            String name = in.nextLine();
-            send("Do you want to \'join\' or \'create\' a game?");
+            send(new InitializeGameMessage("Welcome!\nWhat is your name?"));
+            InitializeGameMessage gameMessage = (InitializeGameMessage) in.readObject();
+            String name = gameMessage.getMessage();
+            send(new InitializeGameMessage("Do you want to \'join\' or \'create\' a game?"));
             String decision;
             String gameId;
             while (true) {
-                decision = in.nextLine();
+                try {
+                    gameMessage = (InitializeGameMessage) in.readObject();
+                    decision = gameMessage.getMessage();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    throw new Exception(e.getMessage());
+                }
                 if (decision.equals("join") || decision.equals("create")) {
                     if (decision.equals("join")) {
                         gameId = this.joinGame(in);
@@ -127,25 +150,25 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
                         server.addToLobby(gameId, this, name);
                         break;
                     } catch (Exception e) {
-                        send(e.getMessage());
+                        send(new InitializeGameMessage(e.getMessage()));
                     }
                 } else {
-                    send("Operation not permitted! Type 'create' or 'join'.");
+                    send(new InitializeGameMessage("Operation not permitted! Type 'create' or 'join'."));
                 }
             }
-            send("Your game id is: " + gameId + ".\nWait for the other players.");
+            send(new InitializeGameMessage("Your game id is: " + gameId + ".\nWait for the other players."));
             if (server.tryToStartGame(gameId)) {
                 server.startGame(gameId);
             }
             ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
             while (isActive()) {
-                Object inputObject = socketIn.readObject();
-                notify((Move) inputObject);
+                Move moveMessage = (Move) socketIn.readObject();
+                notify((Move) moveMessage);
             }
         } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
             System.err.println("Error!" + e.getMessage());
         } catch (Exception e1) {
-            System.err.println(e1.getMessage());
+            System.out.println(e1.getMessage());
             e1.printStackTrace();
         } finally {
             close();

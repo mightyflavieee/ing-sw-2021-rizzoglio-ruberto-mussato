@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import it.polimi.ingsw.project.controller.Controller;
+import it.polimi.ingsw.project.model.InitializeGameMessage;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.utils.Utils;
@@ -58,6 +59,7 @@ public class Server {
             listOfViews.add(new RemoteView(listOfPlayer.get(i),
                     Utils.extractOpponentsName(listOfPlayer.get(i), listOfPlayer), listOfClientConnections.get(i)));
         }
+        Collections.shuffle(listOfPlayer);
         Model model = new Model(listOfPlayer);
         Controller controller = new Controller(model);
         for (View view : listOfViews) {
@@ -66,12 +68,6 @@ public class Server {
         }
         listOfClientConnections.forEach((ClientConnection connection) -> {
             connection.asyncSend(model.getMatchCopy());
-        });
-        Collections.shuffle(listOfClientConnections);
-        listOfClientConnections.get(0).asyncSend(gameMessage.moveMessage);
-        listOfClientConnections.remove(0);
-        listOfClientConnections.forEach((ClientConnection connection) -> {
-            connection.asyncSend(gameMessage.waitMessage);
         });
     }
 
