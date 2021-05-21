@@ -18,6 +18,7 @@ public class Player implements Serializable, Cloneable {
   private String nickname;
   private int victoryPoints;
   private TurnPhase turnPhase;
+  private List<String> history;
 
   public Player(String nickname) {
     this.board = new Board();
@@ -25,6 +26,7 @@ public class Player implements Serializable, Cloneable {
     this.nickname = nickname;
     this.victoryPoints = 0;
     this.turnPhase = TurnPhase.WaitPhase;
+    this.history = new ArrayList<>();
   }
 
   public Player() {
@@ -44,6 +46,7 @@ public class Player implements Serializable, Cloneable {
     result.nickname = nickname;
     result.victoryPoints = victoryPoints;
     result.turnPhase = turnPhase;
+    result.history = history;
     return result;
   }
 
@@ -220,5 +223,16 @@ public class Player implements Serializable, Cloneable {
 
   public ResourceType getTransmutationPerk() {
     return board.getTransmutation();
+  }
+
+  public void updateHistory(String stringMove) {
+    this.history.add(stringMove);
+  }
+  public String getHistoryToString(){
+    String string = "";
+    for(String move : history){
+      string = string + "\n" + move;
+    }
+    return string;
   }
 }

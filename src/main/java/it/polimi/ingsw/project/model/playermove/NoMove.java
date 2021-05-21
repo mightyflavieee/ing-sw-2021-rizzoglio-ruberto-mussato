@@ -15,7 +15,7 @@ public class NoMove extends Move{
 
     @Override
     public String toString() {
-        return "NoMove";
+        return "No Move";
     }
 
     @Override

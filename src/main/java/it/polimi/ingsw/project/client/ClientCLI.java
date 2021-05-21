@@ -918,7 +918,8 @@ public class ClientCLI {
         System.out.println("0 - Go Back\n" + "1 - show informations about the others players\n"
                 + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
                 + "5 - show your Development Cards\n" + "6 - show the Market\n" +
-                "7 - show your Warehouse");
+                "7 - show your Warehouse\n" +
+                "8 - show your history");
         String answer = stdin.nextLine();
         switch (answer) {
             case "0":
@@ -942,6 +943,10 @@ public class ClientCLI {
                 break;
             case "7":
                 System.out.println(this.match.getWarehouseToString(myNickname));
+                break;
+            case "8":
+                System.out.println(this.match.getHistoryToString(myNickname));
+                break;
             default:
                 return;
         }
@@ -1061,6 +1066,7 @@ public class ClientCLI {
         if (resourceSelected == null) {
             return;
         }
+        System.out.println(warehouse.getShelvesToString());
         System.out.println("1 - First floor\n" + "2 - second floor\n" + "3 - third floor");
         switch (stdin.nextLine()) {
             case "1":

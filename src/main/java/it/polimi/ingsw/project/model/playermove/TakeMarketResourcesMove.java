@@ -44,6 +44,6 @@ public class TakeMarketResourcesMove extends Move {
     @Override
     public String toString() {
         //TODO
-        return new String("Generic Move");
+        return new String("Take Market Resources Move");
     }
 }

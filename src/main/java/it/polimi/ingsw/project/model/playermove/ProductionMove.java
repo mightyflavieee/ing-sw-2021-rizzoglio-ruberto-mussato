@@ -46,6 +46,6 @@ public class ProductionMove extends Move{
     @Override
     public String toString(){
         //TODO
-        return new String("Generic Move");
+        return new String("Production Move, type: " + this.productionType);
     }
 }
