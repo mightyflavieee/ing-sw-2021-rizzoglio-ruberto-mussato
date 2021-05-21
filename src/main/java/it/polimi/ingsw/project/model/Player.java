@@ -210,7 +210,7 @@ public class Player implements Serializable, Cloneable {
     return board.getMarkerPosition();
   }
 
-  public String getLeaderCards(){
+  public String getLeaderCardsToString(){
     return this.board.getLeaderCardsToString();
   }
 
