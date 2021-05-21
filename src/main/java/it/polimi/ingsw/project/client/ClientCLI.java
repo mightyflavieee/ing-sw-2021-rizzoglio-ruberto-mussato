@@ -28,11 +28,12 @@ public class ClientCLI {
     private Match match;
     private Scanner stdin;
     private String myNickname; // da inizializzare
-
+    private boolean lock;
     public ClientCLI(String ip, int port) {
         this.ip = ip;
         this.port = port;
         this.match = null;
+        this.lock = true;
     }
 
     public void setMatch(Match match) {
@@ -55,6 +56,19 @@ public class ClientCLI {
         this.active = active;
     }
 
+    public synchronized void isLock() throws InterruptedException {
+        if(this.lock){
+            wait();
+        }
+    }
+    public synchronized void unLock(){
+        this.lock = false;
+        notifyAll();
+    }
+    public synchronized void setLock(){
+        this.lock = true;
+    }
+
     public Thread asyncReadFromSocket(final ObjectInputStream socketIn) {
         Thread t = new Thread(new Runnable() {
             @Override
@@ -74,6 +88,7 @@ public class ClientCLI {
                         } else {
                             throw new IllegalArgumentException();
                         }
+                        unLock();
                     }
                 } catch (Exception e) {
                     setActive(false);
@@ -90,6 +105,7 @@ public class ClientCLI {
             public void run() {
                 try {
                     while (isActive()) {
+                        isLock();
                         if (getMatch().isEmpty()) {
                             String inputLine = stdin.nextLine();
                             if (inputLine.equals("next")) {
@@ -103,8 +119,10 @@ public class ClientCLI {
                             }
                         }
                         socketOut.flush();
+                        setLock();
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     setActive(false);
                 }
             }
@@ -169,8 +187,11 @@ public class ClientCLI {
         Move playerMove = null;
         boolean isInputError = false;
         do {
-            System.out.println("What do you want to do?\n" + "0 - See informations" + "1 - Take Resources from Market\n"
-                    + "2 - Buy one Development Card\n" + "3 - Activate Production.\n" + "> ");
+            System.out.println("What do you want to do?\n"
+                    + "0 - See informations\n"
+                    + "1 - Take Resources from Market\n"
+                    + "2 - Buy one Development Card\n"
+                    + "3 - Activate Production.\n" + "> ");
             do {
                 String answer = stdin.nextLine();
                 switch (answer) {
