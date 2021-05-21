@@ -1122,7 +1122,7 @@ public class ClientCLI {
             return null;
         }
     }
-    public void insertInExtraDeposit(Warehouse warehouse,Map<ResourceType, Integer> resourcesInHand){
+    private void insertInExtraDeposit(Warehouse warehouse,Map<ResourceType, Integer> resourcesInHand){
         System.out.println("Which Resource type do you want to put in the extra deposit?\n");
         Pair<ResourceType,Integer> resourceSelected = resourceSelector(resourcesInHand);
         if(resourceSelected == null){
@@ -1145,7 +1145,7 @@ public class ClientCLI {
         return;
 
     }
-    public List<Resource> discardResources(Warehouse warehouse,Map<ResourceType, Integer> resourcesInHand){
+    private List<Resource> discardResources(Warehouse warehouse,Map<ResourceType, Integer> resourcesInHand){
         System.out.println("Which Resource type do you want to discard?\n");
         Pair<ResourceType,Integer> resourceSelected = resourceSelector(resourcesInHand);
         if(resourceSelected == null){
@@ -1163,7 +1163,7 @@ public class ClientCLI {
         return resources;
 
     }
-    public void swapShelves(Warehouse warehouse){
+    private void swapShelves(Warehouse warehouse){
         System.out.println("0 - show Warehouse\n" +
                 "1 - swap first and second floor\n" +
                 "2 - swap second and third floor\n" +
