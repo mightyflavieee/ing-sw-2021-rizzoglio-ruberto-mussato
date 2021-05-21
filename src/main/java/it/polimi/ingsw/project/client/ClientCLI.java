@@ -169,6 +169,7 @@ public class ClientCLI {
                 switch (answer) {
                     case "0":
                         viewer();
+                        break;
                     case "1":
                         isInputError = false;
                         playerMove = handleTakeMarketResourcesMove();
@@ -530,18 +531,31 @@ public class ClientCLI {
         Market market = this.match.getMarket();
         System.out.println(market);
         String answer;
-        System.out.println("do you want to insert the marble horizontally or vertically?\n" +
-                "0 - vertical\n" +
-                "1 - horizontal");
-        int axis = Integer.parseInt(stdin.nextLine());
-        if(axis == 0){
-            System.out.println("Which column?\n" +
-                    "from 0 to 3, from left to right");
-        }else{
-            System.out.println("Which line?\n" +
-                    "from 0 to 2, from bottom to up");
+        int axis, position;
+        do {
+            System.out.println("do you want to insert the marble horizontally or vertically?\n" +
+                    "0 - vertical\n" +
+                    "1 - horizontal\n" +
+                    "2 - go back and to an other move");
+            axis = Integer.parseInt(stdin.nextLine());
+        }while (axis<0 || axis > 2);
+        if(axis == 2 ){
+            return null;
         }
-        int position = Integer.parseInt(stdin.nextLine());
+        if(axis == 0){
+            do {
+                System.out.println("Which column?\n" +
+                        "from 0 to 3, from left to right");
+                position = Integer.parseInt(stdin.nextLine());
+            }while(position>3 || position<0);
+        }else{
+            do {
+                System.out.println("Which line?\n" +
+                        "from 0 to 2, from bottom to up");
+                position = Integer.parseInt(stdin.nextLine());
+            }while(position>2 || position<0);
+        }
+
         ResourceType transmutationPerk = match.getTransmutationPerk(myNickname);
         List<Resource> resourceList = market.insertMarble(axis,position,transmutationPerk);
         Boolean hasRedMarble = false;
@@ -561,7 +575,8 @@ public class ClientCLI {
                     "1 - show resources in hand\n" +
                     "2 - insert resources in the shelves\n" +
                     "3 - insert resources in the extra deposit\n" +
-                    "4 - discard resources");
+                    "4 - discard resources\n" +
+                    "5 - swap shelves");
             answer = stdin.nextLine();
             switch (answer){
                 case "0":
@@ -578,6 +593,9 @@ public class ClientCLI {
                     break;
                 case "4":
                     resourcesToDiscard.addAll(this.discardResources(warehouse,resourcesInHand)) ;
+                    break;
+                case "5":
+                    swapShelves(warehouse);
                     break;
                 default:
                     System.out.println("wrong input");
@@ -708,7 +726,47 @@ public class ClientCLI {
         return resources;
 
     }
-
+    public void swapShelves(Warehouse warehouse){
+        System.out.println("0 - show Warehouse\n" +
+                "1 - swap first and second floor\n" +
+                "2 - swap second and third floor\n" +
+                "3 - swap third e first floor\n" +
+                "4 - go back");
+        switch (stdin.nextLine()){
+            case "0":
+                System.out.println(warehouse);
+                break;
+            case "1":
+                if(warehouse.getShelves().get(ShelfFloor.Second).size()>1){
+                    System.out.println("forbidden action");
+                }else
+                {
+                    warehouse.swapShelves(ShelfFloor.First,ShelfFloor.Second);
+                }
+                break;
+            case "2":
+                if(warehouse.getShelves().get(ShelfFloor.Third).size()>2){
+                    System.out.println("forbidden action");
+                }else
+                {
+                    warehouse.swapShelves(ShelfFloor.Third,ShelfFloor.Second);
+                }
+                break;
+            case "3":
+                if(warehouse.getShelves().get(ShelfFloor.Third).size()>1){
+                    System.out.println("forbidden action");
+                }else
+                {
+                    warehouse.swapShelves(ShelfFloor.Third,ShelfFloor.First);
+                }
+                break;
+            case "4":
+                break;
+            default:
+                System.out.println("wrong input");
+                break;
+        }
+    }
     public void run() throws IOException {
         Socket socket = new Socket(ip, port);
         System.out.println("Connection established");
