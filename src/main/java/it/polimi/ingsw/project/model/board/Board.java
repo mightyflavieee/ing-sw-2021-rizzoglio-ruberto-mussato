@@ -94,6 +94,9 @@ public class Board implements Serializable, Cloneable {
 
   // it extracts the last DevelopmentCard in from the mapTray at that position
   private DevelopmentCard getLastFromPosition(DevCardPosition position) {
+    if (this.mapTray.get(position).size() == 0) {
+      return null;
+    }
     return mapTray.get(position).get(mapTray.get(position).size() - 1);
   }
 
