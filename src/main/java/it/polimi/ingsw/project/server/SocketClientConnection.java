@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.server;
 
 import it.polimi.ingsw.project.model.InitializeGameMessage;
 import it.polimi.ingsw.project.model.MoveMessage;
+import it.polimi.ingsw.project.model.NickNameMessage;
 import it.polimi.ingsw.project.model.playermove.Move;
 import it.polimi.ingsw.project.observer.*;
 
@@ -129,6 +130,7 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
             send(new InitializeGameMessage("Welcome!\nWhat is your name?"));
             InitializeGameMessage gameMessage = (InitializeGameMessage) in.readObject();
             String name = gameMessage.getMessage();
+            send(new NickNameMessage(name));
             send(new InitializeGameMessage("Do you want to \'join\' or \'create\' a game?"));
             String decision;
             String gameId;

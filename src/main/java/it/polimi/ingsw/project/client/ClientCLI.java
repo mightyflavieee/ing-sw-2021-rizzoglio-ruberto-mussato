@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.client;
 
 import it.polimi.ingsw.project.model.InitializeGameMessage;
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.NickNameMessage;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
@@ -39,6 +40,10 @@ public class ClientCLI {
         this.match = match;
     }
 
+    public void setNickname(String name){
+        this.myNickname = name;
+    }
+
     public Optional<Match> getMatch() {
         return Optional.ofNullable(match);
     }
@@ -62,6 +67,9 @@ public class ClientCLI {
                         if (inputObject instanceof InitializeGameMessage) {
                             InitializeGameMessage gameMessage = (InitializeGameMessage) inputObject;
                             System.out.println(gameMessage.getMessage());
+                        } else if (inputObject instanceof NickNameMessage) {
+                            NickNameMessage nickNameMessage = (NickNameMessage) inputObject;
+                            setNickname(nickNameMessage.getMessage());
                         } else if (inputObject instanceof Match) {
                             setMatch((Match) inputObject);
                         } else {
@@ -85,7 +93,7 @@ public class ClientCLI {
                     while (isActive()) {
                         if (getMatch().isEmpty()) {
                             String inputLine = stdin.nextLine();
-                            if(inputLine.equals("next")){
+                            if (inputLine.equals("next")) {
                                 continue;
                             }
                             socketOut.writeObject(new InitializeGameMessage(inputLine));
