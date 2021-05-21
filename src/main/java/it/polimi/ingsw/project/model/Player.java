@@ -217,4 +217,8 @@ public class Player implements Serializable, Cloneable {
     public Warehouse getWarehouse() {
       return board.getWarehouse();
     }
+
+  public ResourceType getTransmutationPerk() {
+    return board.getTransmutation();
+  }
 }

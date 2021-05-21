@@ -12,4 +12,7 @@ public class Resource implements Serializable { //TODO serve davvero o basta res
     public ResourceType getType() {
         return type;
     }
+    public String toString(){
+        return this.type.toString();
+    }
 }
