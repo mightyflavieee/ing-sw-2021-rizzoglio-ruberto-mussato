@@ -217,7 +217,7 @@ public class ClientCLI {
                         isMovePossible = true;
                     } else {
                         System.out.println("You cannot activate the Leader Card with ID=" + leaderCardID + " because you" +
-                                " don't have the requirements for the activation! Please choose another Leader Card or go back!");
+                                " don't have the requirements for the activation! Please choose another Leader Card or go back!\n");
                     }
                 }
             } while (!isMovePossible);
@@ -227,12 +227,14 @@ public class ClientCLI {
         return playerMove;
     }
 
+    //TODO
     private boolean isActivateLeaderCardMovePossible(String leaderCardID) {
-        //TODO
+
         return false;
     }
 
     // constructs the BuyDevCardMove according to the player choices
+    //TODO verify if the resources to eliminate chosen by the player are correct
     private Move constructBuyDevCardMove() {
         Move playerMove = null;
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
@@ -416,28 +418,31 @@ public class ClientCLI {
         DevCardPosition chosenPosition = null;
         String answer = null;
         do {
-            System.out.println("Choose an option:\n" +
-                    "0 - Go Back\n" +
-                    "1 - Left;\n" +
-                    "2 - Center;\n" +
-                    "3 - Right.\n" +
-                    "Enter here your answer: ");
-            answer = this.stdin.nextLine();
-            switch (answer) {
-                case "0":
-                    goBack = true;
-                    break;
-                case "1":
-                    chosenPosition = DevCardPosition.Left;
-                    break;
-                case "2":
-                    chosenPosition = DevCardPosition.Center;
-                    break;
-                case "3":
-                    chosenPosition = DevCardPosition.Right;
-                    break;
-                default:
-                    System.out.println("Choose a correct option.");
+            while (chosenPosition == null) {
+                System.out.println("Choose an option:\n" +
+                        "0 - Go Back\n" +
+                        "1 - Left;\n" +
+                        "2 - Center;\n" +
+                        "3 - Right.\n" +
+                        "Enter here your answer: ");
+                answer = this.stdin.nextLine();
+                switch (answer) {
+                    case "0":
+                        goBack = true;
+                        break;
+                    case "1":
+                        chosenPosition = DevCardPosition.Left;
+                        break;
+                    case "2":
+                        chosenPosition = DevCardPosition.Center;
+                        break;
+                    case "3":
+                        chosenPosition = DevCardPosition.Right;
+                        break;
+                    default:
+                        System.out.println("Choose a correct option.");
+                        break;
+                }
             }
             // verifies that the player can put the DevelopmentCard in the position he/she indicated
             if (!goBack) {
@@ -455,10 +460,442 @@ public class ClientCLI {
     }
 
     // constructs the ProductionMove according to the player choices
+    //TODO verify if the resources to eliminate chosen by the player are correct
     private Move constructProductionMove() {
         Move playerMove = null;
-
+        boolean goBack = false;
+        ProductionType productionType = null;
+        do {
+            System.out.println("Which type of production do you want to activate?\n" +
+                    "0 - Go Back;\n" +
+                    "1 - Board Production;\n" +
+                    "2 - Development Card Production;\n" +
+                    "3 - Leader Card Production.\n" +
+                    "4 - Board and Development Card Production;\n" +
+                    "5 - Board and Leader Card Production;\n" +
+                    "6 - Board, Development Card and Leader Card Production;\n" +
+                    "7 - Development Card and Leader Card Production;\n" +
+                    "> ");
+            String answer = this.stdin.nextLine();
+            switch (answer) {
+                case "0":
+                    goBack = true;
+                    break;
+                case "1":
+                    productionType = ProductionType.Board;
+                    break;
+                case "2":
+                    productionType = ProductionType.DevCard;
+                    break;
+                case "3":
+                    productionType = ProductionType.LeaderCard;
+                    break;
+                case "4":
+                    productionType = ProductionType.BoardAndDevCard;
+                    break;
+                case "5":
+                    productionType = ProductionType.BoardAndLeaderCard;
+                    break;
+                case "6":
+                    productionType = ProductionType.BoardAndDevCardAndLeaderCard;
+                    break;
+                case "7":
+                    productionType = ProductionType.DevCardAndLeader;
+                    break;
+                default:
+                    System.out.println("Choose a correct option.");
+                    break;
+            }
+        } while (productionType == null && !goBack);
+        if (!goBack) {
+            Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
+            Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
+            String devCardID = null;
+            String leaderCardID = null;
+            switch (productionType) {
+                case Board:
+                    // selects which resources to eliminate and from where
+                    selectResourcesToEliminateForBoardProduction(resourcesToEliminateWarehouse, resourcesToEliminateWarehouse);
+                    //TODO verify resources (if present and enough to satisfy production)
+                    //constructs the move
+                    playerMove = new ProductionMove(null, null, resourcesToEliminateWarehouse,
+                            resourcesToEliminateChest, productionType, selectBoardOrPerkManufacturedResource(productionType));
+                    break;
+                case DevCard:
+                    devCardID = getDevCardIDForProduction();
+                    if (devCardID.equals("quit")) {
+                        goBack = true;
+                    } else {
+                        resourcesToEliminateWarehouse = selectResourcesToEliminate(devCardID, "Warehouse");
+                        resourcesToEliminateChest = selectResourcesToEliminate(devCardID, "Chest");
+                        //TODO verify resources (if present and enough to satisfy production)
+                        playerMove = new ProductionMove(devCardID, null, resourcesToEliminateWarehouse,
+                                resourcesToEliminateChest, productionType, null);
+                    }
+                    break;
+                case LeaderCard:
+                case BoardAndLeaderCard:
+                    leaderCardID = getLeaderCardIDForProduction();
+                    if (leaderCardID.equals("quit")) {
+                        goBack = true;
+                    } else {
+                        resourcesToEliminateWarehouse = selectResourcesToEliminate(devCardID, "Warehouse");
+                        resourcesToEliminateChest = selectResourcesToEliminate(devCardID, "Chest");
+                        //TODO verify resources (if present and enough to satisfy production)
+                        playerMove = new ProductionMove(null, leaderCardID, resourcesToEliminateWarehouse,
+                                resourcesToEliminateChest, productionType, selectBoardOrPerkManufacturedResource(productionType));
+                    }
+                    break;
+                case BoardAndDevCard:
+                    devCardID = getDevCardIDForProduction();
+                    if (devCardID.equals("quit")) {
+                        goBack = true;
+                    } else {
+                        resourcesToEliminateWarehouse = selectResourcesToEliminate(devCardID, "Warehouse");
+                        resourcesToEliminateChest = selectResourcesToEliminate(devCardID, "Chest");
+                        //TODO verify resources (if present and enough to satisfy production)
+                        playerMove = new ProductionMove(devCardID, null, resourcesToEliminateWarehouse,
+                                resourcesToEliminateChest, productionType, selectBoardOrPerkManufacturedResource(productionType));
+                    }
+                    break;
+                case BoardAndDevCardAndLeaderCard:
+                case DevCardAndLeader:
+                    devCardID = getDevCardIDForProduction();
+                    leaderCardID = getLeaderCardIDForProduction();
+                    if (devCardID.equals("quit")) {
+                        goBack = true;
+                    } else {
+                        resourcesToEliminateWarehouse = selectResourcesToEliminate(devCardID, "Warehouse");
+                        resourcesToEliminateChest = selectResourcesToEliminate(devCardID, "Chest");
+                        //TODO verify resources (if present and enough to satisfy production)
+                        playerMove = new ProductionMove(devCardID, leaderCardID, resourcesToEliminateWarehouse,
+                                resourcesToEliminateChest, productionType, selectBoardOrPerkManufacturedResource(productionType));
+                    }
+                    break;
+                default:
+                    System.out.println("Choose a correct option.");
+                    break;
+            }
+        }
         return playerMove;
+    }
+
+    // handles the CLI aspect of choosing the LeaderCard for the ProductionMove
+    private String getLeaderCardIDForProduction() {
+        boolean isCorrectID = false;
+        boolean goBack = false;
+        String leaderCardID = null;
+        List<LeaderCard> leaderCards = this.match.getCurrentPlayer().getBoard().getLeaderCards();
+        System.out.println("Choose a Development Card:\n");
+        for (LeaderCard leaderCard : leaderCards) {
+            System.out.println(leaderCard + "\n");
+        }
+        do {
+            System.out.println("Provide the ID of the Leader Card for the production or type 'quit'" +
+                    " to go back:\n" +
+                    "> ");
+            String answer = this.stdin.nextLine();
+            if (answer.equals("quit")) {
+                goBack = true;
+            } else {
+                for (LeaderCard leaderCard : leaderCards) {
+                    if (leaderCard.getId().equals(answer)) {
+                        isCorrectID = true;
+                        leaderCardID = answer;
+                        break;
+                    }
+                }
+                if (!isCorrectID) { System.out.println("Choose a correct ID!"); }
+            }
+        } while (!isCorrectID);
+        if (goBack) {
+            return "quit";
+        }
+        return leaderCardID;
+    }
+
+    // handles the CLI aspect of choosing the DevelopmentCard for the ProductionMove
+    private String getDevCardIDForProduction() {
+        boolean isCorrectID = false;
+        boolean goBack = false;
+        String devCardID = null;
+        Map<DevCardPosition, DevelopmentCard> productionDevCards = this.match.getCurrentPlayer().getBoard().getCurrentProductionCards();
+        System.out.println("Choose a Development Card:\n");
+        for (DevCardPosition position : productionDevCards.keySet()) {
+            if (productionDevCards.get(position) != null) {
+                System.out.println(position + ":\n" + productionDevCards.get(position) + "\n");
+            }
+        }
+        do {
+            System.out.println("Provide the ID of the Development Card for the production or type 'quit'" +
+                    " to go back:\n" +
+                    "> ");
+            String answer = this.stdin.nextLine();
+            if (answer.equals("quit")) {
+                goBack = true;
+            } else {
+                for (DevCardPosition position : productionDevCards.keySet()) {
+                    if (productionDevCards.get(position) != null) {
+                        if (productionDevCards.get(position).getId().equals(answer)) {
+                            isCorrectID = true;
+                            devCardID = answer;
+                        }
+                    }
+                }
+                if (!isCorrectID) { System.out.println("Choose a correct ID!"); }
+            }
+        } while (!isCorrectID);
+        if (goBack) {
+            return "quit";
+        }
+        return devCardID;
+    }
+
+    // handles the CLI aspect of choosing which resources to eliminate for a Board production for the ProductionMove
+    private void selectResourcesToEliminateForBoardProduction(Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                                              Map<ResourceType, Integer> resourcesToEliminateChest) {
+        boolean eliminateFromWarehouse = false;
+        boolean eliminateFromChest = false;
+        int toBeEliminated = 2;
+        while (true) {
+            System.out.println("Do you want to eliminate resources from the Warehouse for the Board production? [y/n]:\n" +
+                    "> ");
+            String answer = this.stdin.nextLine();
+            if (answer.equals("y")) {
+                eliminateFromWarehouse = true;
+                while (toBeEliminated == 2) {
+                    System.out.println("How many types of resources do you want to eliminate from the Warehouse? [1/2]:\n" +
+                            "> ");
+                    answer = this.stdin.nextLine();
+                    if (answer.equals("1")) {
+                        toBeEliminated = 1;
+                        int count = 0;
+                        do {
+                            System.out.println("Choose the resource you want to eliminate from the Warehouse:\n" +
+                                    "1 - Coin;\n" +
+                                    "2 - Servant;\n" +
+                                    "3 - Shield;\n" +
+                                    "4 - Stone.\n" +
+                                    "> ");
+                            answer = this.stdin.nextLine();
+                            switch (answer) {
+                                case "1":
+                                    resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
+                                    count++;
+                                    break;
+                                case "2":
+                                    resourcesToEliminateWarehouse.put(ResourceType.Servant, 1);
+                                    count++;
+                                    break;
+                                case "3":
+                                    resourcesToEliminateWarehouse.put(ResourceType.Shield, 1);
+                                    count++;
+                                    break;
+                                case "4":
+                                    resourcesToEliminateWarehouse.put(ResourceType.Stone, 1);
+                                    count++;
+                                    break;
+                                default:
+                                    System.out.println("Choose a correct option.");
+                                    break;
+                            }
+                        } while (count < 1);
+                    } else {
+                        if (answer.equals("2")) {
+                            toBeEliminated = 0;
+                            int count = 0;
+                            do {
+                                System.out.println("Choose the resource you want to add to the list of resources to be eliminated " +
+                                        "from the Warehouse:\n" +
+                                        "1 - Coin;\n" +
+                                        "2 - Servant;\n" +
+                                        "3 - Shield;\n" +
+                                        "4 - Stone.\n" +
+                                        "> ");
+                                answer = this.stdin.nextLine();
+                                switch (answer) {
+                                    case "1":
+                                        if (resourcesToEliminateWarehouse.get(ResourceType.Coin) == 1) {
+                                            resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
+                                        } else {
+                                            resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
+                                        }
+                                        count++;
+                                        break;
+                                    case "2":
+                                        if (resourcesToEliminateWarehouse.get(ResourceType.Servant) == 1) {
+                                            resourcesToEliminateWarehouse.put(ResourceType.Servant, 2);
+                                        } else {
+                                            resourcesToEliminateWarehouse.put(ResourceType.Servant, 1);
+                                        }
+                                        count++;
+                                        break;
+                                    case "3":
+                                        if (resourcesToEliminateWarehouse.get(ResourceType.Shield) == 1) {
+                                            resourcesToEliminateWarehouse.put(ResourceType.Shield, 2);
+                                        } else {
+                                            resourcesToEliminateWarehouse.put(ResourceType.Shield, 1);
+                                        }
+                                        count++;
+                                        break;
+                                    case "4":
+                                        if (resourcesToEliminateWarehouse.get(ResourceType.Stone) == 1) {
+                                            resourcesToEliminateWarehouse.put(ResourceType.Stone, 2);
+                                        } else {
+                                            resourcesToEliminateWarehouse.put(ResourceType.Stone, 1);
+                                        }
+                                        count++;
+                                        break;
+                                    default:
+                                        System.out.println("Choose a correct option.");
+                                        break;
+                                }
+                            } while (count < 2);
+                        } else {
+                            System.out.println("Choose a correct number.");
+                        }
+                }
+
+                }
+                break;
+            } else {
+                if (answer.equals("no")) {
+                    break;
+                } else {
+                    System.out.println("Choose a correct option.");
+                }
+            }
+        }
+        if (toBeEliminated == 1) {
+            int count = 0;
+            do {
+                System.out.println("Choose the resource you want to eliminate from the Chest:\n" +
+                        "1 - Coin;\n" +
+                        "2 - Servant;\n" +
+                        "3 - Shield;\n" +
+                        "4 - Stone.\n" +
+                        "> ");
+                String answer = this.stdin.nextLine();
+                switch (answer) {
+                    case "1":
+                        resourcesToEliminateChest.put(ResourceType.Coin, 1);
+                        count++;
+                        break;
+                    case "2":
+                        resourcesToEliminateChest.put(ResourceType.Servant, 1);
+                        count++;
+                        break;
+                    case "3":
+                        resourcesToEliminateChest.put(ResourceType.Shield, 1);
+                        count++;
+                        break;
+                    case "4":
+                        resourcesToEliminateChest.put(ResourceType.Stone, 1);
+                        count++;
+                        break;
+                    default:
+                        System.out.println("Choose a correct option.");
+                        break;
+                }
+            } while (count < 1);
+        } else {
+            if (toBeEliminated == 2) {
+                int count = 0;
+                do {
+                    System.out.println("Choose the resource you want to add to the list of resources to be eliminated " +
+                            "from the Warehouse:\n" +
+                            "1 - Coin;\n" +
+                            "2 - Servant;\n" +
+                            "3 - Shield;\n" +
+                            "4 - Stone.\n" +
+                            "> ");
+                    String answer = this.stdin.nextLine();
+                    switch (answer) {
+                        case "1":
+                            if (resourcesToEliminateChest.get(ResourceType.Coin) == 1) {
+                                resourcesToEliminateChest.put(ResourceType.Coin, 2);
+                            } else {
+                                resourcesToEliminateChest.put(ResourceType.Coin, 1);
+                            }
+                            count++;
+                            break;
+                        case "2":
+                            if (resourcesToEliminateChest.get(ResourceType.Servant) == 1) {
+                                resourcesToEliminateChest.put(ResourceType.Servant, 2);
+                            } else {
+                                resourcesToEliminateChest.put(ResourceType.Servant, 1);
+                            }
+                            count++;
+                            break;
+                        case "3":
+                            if (resourcesToEliminateChest.get(ResourceType.Shield) == 1) {
+                                resourcesToEliminateChest.put(ResourceType.Shield, 2);
+                            } else {
+                                resourcesToEliminateChest.put(ResourceType.Shield, 1);
+                            }
+                            count++;
+                            break;
+                        case "4":
+                            if (resourcesToEliminateChest.get(ResourceType.Stone) == 1) {
+                                resourcesToEliminateChest.put(ResourceType.Stone, 2);
+                            } else {
+                                resourcesToEliminateChest.put(ResourceType.Stone, 1);
+                            }
+                            count++;
+                            break;
+                        default:
+                            System.out.println("Choose a correct option.");
+                            break;
+                    }
+                } while (count < 2);
+            }
+        }
+    }
+
+    // helper function for selectBoardOrPerkManufacturedResource(), handles the main CLI logic
+    private void selectBoardOrPerkManufacturedResourceHelper(ProductionType productionType,
+                                                             List<ResourceType> boardOrPerkManufacturedResource) {
+        do {
+            System.out.println("Choose the " + productionType + " production manufactured resource:\n" +
+                    "1 - Coin;\n" +
+                    "2 - Servant;\n" +
+                    "3 - Shield;\n" +
+                    "4 - Stone.\n" +
+                    "> ");
+            String answer = this.stdin.nextLine();
+            switch (answer) {
+                case "1":
+                    boardOrPerkManufacturedResource.add(ResourceType.Coin);
+                    break;
+                case "2":
+                    boardOrPerkManufacturedResource.add(ResourceType.Servant);
+                    break;
+                case "3":
+                    boardOrPerkManufacturedResource.add(ResourceType.Shield);
+                    break;
+                case "4":
+                    boardOrPerkManufacturedResource.add(ResourceType.Stone);
+                    break;
+                default:
+                    System.out.println("Choose a correct number.");
+                    break;
+            }
+        } while (boardOrPerkManufacturedResource.size() == 0);
+    }
+
+    // asks the player to choose which resource he/she wants to manufacture for the Board or LeaderCard production
+    // or both combined
+    private List<ResourceType> selectBoardOrPerkManufacturedResource(ProductionType productionType) {
+        List<ResourceType> boardOrPerkManufacturedResource = new ArrayList<>();
+        if (productionType.equals(ProductionType.Board) || productionType.equals(ProductionType.LeaderCard)) {
+            selectBoardOrPerkManufacturedResourceHelper(productionType, boardOrPerkManufacturedResource);
+        }
+        if (productionType.equals(ProductionType.BoardAndDevCardAndLeaderCard) ||
+                productionType.equals(ProductionType.BoardAndLeaderCard)) {
+            selectBoardOrPerkManufacturedResourceHelper(ProductionType.Board, boardOrPerkManufacturedResource);
+            selectBoardOrPerkManufacturedResourceHelper(ProductionType.LeaderCard, boardOrPerkManufacturedResource);
+        }
+        return boardOrPerkManufacturedResource;
     }
 
     public void viewer() {
