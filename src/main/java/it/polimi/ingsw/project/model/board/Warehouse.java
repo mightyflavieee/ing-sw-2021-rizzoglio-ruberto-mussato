@@ -263,12 +263,18 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
           return false;
         }
         else {
+          if(shelves.get(ShelfFloor.Second).size()==0){
+            break;
+          }
           if(shelves.get(ShelfFloor.Second).get(0).getType() != resourceList.get(0).getType()){
             return false;
           }
         }
         break;
       case Third:
+        if(shelves.get(ShelfFloor.Third).size()==0){
+          break;
+        }
         if(shelves.get(ShelfFloor.Third).size() + resourceList.size() > 3) {
           return false;
         }
@@ -281,7 +287,9 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
       default:
         return false;
     }
-    shelves.put(shelfFloor,resourceList); //fa la merge delle liste?
+    List<Resource> temp = shelves.get(shelfFloor);
+    temp.addAll(resourceList);
+    shelves.put(shelfFloor,temp);
     return true;
   }
   public boolean insertInExtraDeposit(List<Resource> resourceList){
@@ -302,12 +310,27 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     return string;
   }
   public String getShelvesToString(){
-    return this.shelves
-            .entrySet()
-            .stream()
-            .map(x -> x.getKey().toString() + x.getValue().stream().map(y -> " " + y.toString()) + "\n")
-            .collect(Collectors.toList())
-            .toString();
+    String string = "";
+    for (Map.Entry<ShelfFloor, List<Resource>> entry : shelves.entrySet()) {
+      ShelfFloor floor = entry.getKey();
+      List<Resource> listOfResources = entry.getValue();
+      string = string + floor.toString();
+      for(Resource resource : listOfResources){
+        string = string + " " + resource.toString();
+      }
+      string = string + "\n";
+    }
+    return string;
+    //    string =   this.shelves
+//            .entrySet()
+//            .stream()
+//            .map(x -> x.getKey().toString() + x.getValue().stream().map(y -> " " + y.toString()) + "\n")
+//            .collect(Collectors.toList())
+//            .stream()
+//            .reduce("", (a,b)-> a + b);
+
+    //.stream()
+            //.collect(Collectors.joining(" "));
   }
   public String getExtraDepositToString(){
     if(this.extraDeposit == null){

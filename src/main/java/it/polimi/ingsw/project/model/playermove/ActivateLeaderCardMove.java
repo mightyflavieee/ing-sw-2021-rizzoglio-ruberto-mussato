@@ -27,8 +27,7 @@ public class ActivateLeaderCardMove extends Move{
 
     @Override
     public String toString(){
-        //TODO
-        return new String("Generic Move");
+        return new String("Activate Leader Card Move, Leader Card ID: " + this.leaderCardID);
     }
 
     public boolean isMainMove(){

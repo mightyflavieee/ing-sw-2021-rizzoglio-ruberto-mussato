@@ -674,7 +674,7 @@ public class Board implements Serializable, Cloneable {
 //    for(int i = 0; i < this.leaderCards.size(); i++){
 //      string = string + this.leaderCards.get(i).toString();
 //    }
-    string = this.leaderCards.stream().toString();
+    string = this.leaderCards.stream().map(x -> x.toString()).toString();
     return string;
   }
 }

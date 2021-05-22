@@ -5,6 +5,10 @@ import it.polimi.ingsw.project.messages.CreateGameMessage;
 import it.polimi.ingsw.project.messages.ErrorJoinMessage;
 import it.polimi.ingsw.project.messages.JoinGameMessage;
 import it.polimi.ingsw.project.model.Match;
+<<<<<<< HEAD
+=======
+import it.polimi.ingsw.project.model.NickNameMessage;
+>>>>>>> 217787ecffd1e3c92f7d280ef1b1e60a6b96dabb
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
@@ -32,11 +36,12 @@ public class ClientCLI {
     private ObjectOutputStream socketOut;
     private ObjectInputStream socketIn;
     private String myNickname; // da inizializzare
-
+    private boolean lock;
     public ClientCLI(String ip, int port) {
         this.ip = ip;
         this.port = port;
         this.match = null;
+        this.lock = true;
     }
 
     public void setMatch(Match match) {
@@ -72,6 +77,7 @@ public class ClientCLI {
                         } else {
                             throw new IllegalArgumentException();
                         }
+                        unLock();
                     }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -192,9 +198,9 @@ public class ClientCLI {
                             }
                             socketOut.flush();
                         }
-
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                     setActive(false);
                 }
             }
@@ -227,14 +233,15 @@ public class ClientCLI {
         // visualizzare le varie informazioni
 
         while (true) {
-            System.out.println("Do you want to perform a Leader Card Action?\n" + "0 - See information;"
-                    + "1 - Discard Leader Card;\n" + "2 - Activate Leader Card;\n" + "3 - No.\n" + "> ");
+            System.out.println("Do you want to perform a Leader Card Action?\n" + "0 - See information;\n"
+                    + "1 - Discard Leader Card;\n" + "2 - Activate Leader Card;\n" + "3 - No");
             String answer = stdin.nextLine();
             switch (answer) {
                 case "0":
                     viewer();
+                    break;
                 case "1":
-                    this.match.getLeaderCards(this.myNickname);
+                    System.out.println(this.match.getLeaderCardsToString(this.myNickname));
                     System.out.println("Give the LeaderCard id that you want to discard");
                     return new DiscardLeaderCardMove(stdin.nextLine());
                 case "2":
@@ -258,8 +265,11 @@ public class ClientCLI {
         Move playerMove = null;
         boolean isInputError = false;
         do {
-            System.out.println("What do you want to do?\n" + "0 - See informations" + "1 - Take Resources from Market\n"
-                    + "2 - Buy one Development Card\n" + "3 - Activate Production.\n" + "> ");
+            System.out.print("What do you want to do?\n"
+                    + "0 - See informations\n"
+                    + "1 - Take Resources from Market\n"
+                    + "2 - Buy one Development Card\n"
+                    + "3 - Activate Production.\n" + "> ");
             do {
                 String answer = stdin.nextLine();
                 switch (answer) {
@@ -295,7 +305,7 @@ public class ClientCLI {
         boolean isMovePossible = false;
         String leaderCardID = null;
         if (!this.match.getCurrentPlayer().getBoard().getLeaderCards().isEmpty()) {
-            this.match.getLeaderCards(this.myNickname);
+            System.out.println(this.match.getLeaderCardsToString(this.myNickname));
             do {
                 System.out.println(
                         "Provide the ID of the LeaderCard you want to activate: (Type 'quit' to go back)\n" + "> ");
@@ -985,13 +995,16 @@ public class ClientCLI {
     public void viewer() {
         System.out.println("0 - Go Back\n" + "1 - show informations about the others players\n"
                 + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
-                + "5 - show your Development Cards\n" + "6 - show the Market");
+                + "5 - show your Development Cards\n" + "6 - show the Market\n" +
+                "7 - show your Warehouse\n" +
+                "8 - show your history");
         String answer = stdin.nextLine();
         switch (answer) {
             case "0":
                 break;
             case "1":
                 viewer(myNickname);
+                break;
             case "2":
                 System.out.println("Your points are: " + this.match.getVictoryPoints(myNickname));
                 break;
@@ -999,12 +1012,18 @@ public class ClientCLI {
                 System.out.println("Your marker position is: " + this.match.getMarkerPosition(myNickname) + "/24");
                 break;
             case "4":
-                System.out.println("Your Leader Cards are: " + this.match.getLeaderCards(myNickname));
+                System.out.println("Your Leader Cards are: " + this.match.getLeaderCardsToString(myNickname));
                 break;
             case "5":
                 break;
             case "6":
                 System.out.println(this.match.getMarket());
+                break;
+            case "7":
+                System.out.println(this.match.getWarehouseToString(myNickname));
+                break;
+            case "8":
+                System.out.println(this.match.getHistoryToString(myNickname));
                 break;
             default:
                 return;
@@ -1026,11 +1045,12 @@ public class ClientCLI {
                 break;
             case "1":
                 System.out.println(opponent + " points are: " + this.match.getVictoryPoints(opponent));
+                break;
             case "2":
                 System.out.println(opponent + " marker position is: " + this.match.getMarkerPosition(opponent) + "/24");
                 break;
             case "3":
-                System.out.println(opponent + " Leader Cards are: " + this.match.getLeaderCards(opponent));
+                System.out.println(opponent + " Leader Cards are: " + this.match.getLeaderCardsToString(opponent));
                 break;
             default:
                 return;
@@ -1077,8 +1097,10 @@ public class ClientCLI {
         Warehouse warehouse = match.getWarehouse(myNickname);
         Map<ResourceType, Integer> resourcesInHand = warehouse.listToMapResources(resourceList);
         System.out.println(warehouse);
-        System.out.println("Resources in hand :"
-                + resourcesInHand.entrySet().stream().map(x -> x.getKey() + " " + x.getValue().toString()));
+        System.out.println("Resources in hand:");
+        for (Map.Entry<ResourceType,Integer> entry : resourcesInHand.entrySet()){
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
         while (resourcesInHand.size() > 0) {
             System.out.println("0 - show Warehouse\n" + "1 - show resources in hand\n"
                     + "2 - insert resources in the shelves\n" + "3 - insert resources in the extra deposit\n"
@@ -1089,8 +1111,10 @@ public class ClientCLI {
                     System.out.println(warehouse);
                     break;
                 case "1":
-                    System.out.println("Resources in hand :"
-                            + resourcesInHand.entrySet().stream().map(x -> x.getKey() + " " + x.getValue().toString()));
+                    System.out.println("Resources in hand:");
+                    for (Map.Entry<ResourceType,Integer> entry : resourcesInHand.entrySet()){
+                        System.out.println(entry.getKey() + ": " + entry.getValue());
+                    }
                     break;
                 case "2":
                     this.insertInShelves(warehouse, resourcesInHand);
@@ -1120,6 +1144,7 @@ public class ClientCLI {
         if (resourceSelected == null) {
             return;
         }
+        System.out.println(warehouse.getShelvesToString());
         System.out.println("1 - First floor\n" + "2 - second floor\n" + "3 - third floor");
         switch (stdin.nextLine()) {
             case "1":
@@ -1157,6 +1182,10 @@ public class ClientCLI {
         String resourceType;
         ResourceType type;
         int n;
+        System.out.println("Resources in hand:");
+        for (Map.Entry<ResourceType,Integer> entry : resourcesInHand.entrySet()){
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
         System.out.println("1 - coin\n" + "2 - stone\n" + "3 - shield\n" + "4 - servant");
         resourceType = stdin.nextLine();
         System.out.println("how many?");

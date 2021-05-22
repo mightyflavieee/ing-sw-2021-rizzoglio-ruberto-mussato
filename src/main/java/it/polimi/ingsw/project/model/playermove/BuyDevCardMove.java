@@ -31,7 +31,6 @@ public class BuyDevCardMove extends Move{
 
     @Override
     public String toString(){
-        //TODO
-        return new String("Generic Move");
+        return new String("Buy Dev Card Move, Dev Card ID:" + this.devCardID);
     }
 }

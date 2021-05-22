@@ -25,11 +25,15 @@ public class PlayerMove implements Serializable {
 
     public void performMove(Match match){
         this.move.performMove(match);
+        this.updateHistory();
     }
     public boolean isFeasibleMove(Match match) {
             return this.move.isFeasibleMove(match);
     }
     public boolean isMainMove(){
         return this.move.isMainMove();
+    }
+    private void updateHistory(){
+        this.player.updateHistory(this.move.toString());
     }
 }

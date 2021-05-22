@@ -25,4 +25,17 @@ public class Production implements Serializable{
         mapToReturn.putAll(this.requiredResources);
         return mapToReturn;
     }
+
+    public String toString() {
+        StringBuilder converted;
+        converted = new StringBuilder("Required resources:\n");
+        for (ResourceType type : this.requiredResources.keySet()) {
+            converted.append("\t").append(type).append(" = ").append(this.requiredResources.get(type)).append("\n");
+        }
+        converted.append("\n" + "Manufactured resources:\n");
+        for (ResourceType type : this.manufacturedResources.keySet()) {
+            converted.append("\t").append(type).append(" = ").append(this.manufacturedResources.get(type)).append("\n");
+        }
+        return converted.toString();
+    }
 }

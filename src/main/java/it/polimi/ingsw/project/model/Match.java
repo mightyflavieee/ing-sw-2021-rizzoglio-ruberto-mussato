@@ -308,10 +308,10 @@ public class Match implements Serializable, Cloneable {
         return 0;
     }
 
-    public String getLeaderCards(String nickname){
+    public String getLeaderCardsToString(String nickname){
         for(Player player : playerList){
             if(player.getNickname().equals(nickname)){
-                return player.getLeaderCards();
+                return player.getLeaderCardsToString();
             }
         }
         return "";
@@ -354,5 +354,17 @@ public class Match implements Serializable, Cloneable {
             }
         }
         return string;
+    }
+
+    public String getWarehouseToString(String nickname) {
+       return this.getWarehouse(nickname).getShelvesToString();
+    }
+    public String getHistoryToString(String nickname){
+        for(Player player : playerList){
+            if(player.getNickname().equals(nickname)){
+                return player.getHistoryToString();
+            }
+        }
+        return "";
     }
 }

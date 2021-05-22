@@ -21,4 +21,10 @@ public class Perk implements Serializable {
   public PerkType getType() {
     return this.type;
   }
+
+  public String toString() {
+    StringBuilder converted;
+    converted = new StringBuilder("Perk type: " + this.type + "\nResource utilized: " + this.resource.getType() + "\n");
+    return converted.toString();
+  }
 }

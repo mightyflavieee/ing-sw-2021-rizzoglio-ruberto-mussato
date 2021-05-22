@@ -20,4 +20,5 @@ public class Move implements Serializable {
     public boolean isMainMove(){
         return true;
     }
+
 }

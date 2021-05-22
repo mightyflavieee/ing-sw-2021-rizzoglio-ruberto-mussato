@@ -21,7 +21,7 @@ public class DiscardLeaderCardMove extends Move{
     }
     @Override
     public String toString(){
-        return new String("DiscardLeaderCardMove, LeaderCardID: " + this.leaderCardID);
+        return new String("Discard Leader Card Move, Leader CardID: " + this.leaderCardID);
     }
 
 
