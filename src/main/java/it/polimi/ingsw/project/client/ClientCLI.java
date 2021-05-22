@@ -5,10 +5,6 @@ import it.polimi.ingsw.project.messages.CreateGameMessage;
 import it.polimi.ingsw.project.messages.ErrorJoinMessage;
 import it.polimi.ingsw.project.messages.JoinGameMessage;
 import it.polimi.ingsw.project.model.Match;
-<<<<<<< HEAD
-=======
-import it.polimi.ingsw.project.model.NickNameMessage;
->>>>>>> 217787ecffd1e3c92f7d280ef1b1e60a6b96dabb
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
@@ -36,7 +32,6 @@ public class ClientCLI {
     private ObjectOutputStream socketOut;
     private ObjectInputStream socketIn;
     private String myNickname; // da inizializzare
-    private boolean lock;
     public ClientCLI(String ip, int port) {
         this.ip = ip;
         this.port = port;
@@ -77,7 +72,6 @@ public class ClientCLI {
                         } else {
                             throw new IllegalArgumentException();
                         }
-                        unLock();
                     }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
