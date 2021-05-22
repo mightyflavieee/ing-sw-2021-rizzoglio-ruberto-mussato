@@ -1,8 +1,9 @@
 package it.polimi.ingsw.project.server;
 
-import it.polimi.ingsw.project.model.InitializeGameMessage;
-import it.polimi.ingsw.project.model.MoveMessage;
-import it.polimi.ingsw.project.model.NickNameMessage;
+import it.polimi.ingsw.project.messages.ConfirmJoinMessage;
+import it.polimi.ingsw.project.messages.CreateGameMessage;
+import it.polimi.ingsw.project.messages.ErrorJoinMessage;
+import it.polimi.ingsw.project.messages.JoinGameMessage;
 import it.polimi.ingsw.project.model.playermove.Move;
 import it.polimi.ingsw.project.observer.*;
 
@@ -11,7 +12,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 public class SocketClientConnection extends Observable<Move> implements ClientConnection, Runnable {
     private Socket socket;
@@ -67,105 +67,56 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
         }).start();
     }
 
-    private String joinGame(ObjectInputStream in) throws Exception {
-        while (true) {
-            if (!this.socket.isClosed()) {
-                send(new InitializeGameMessage("Which game do you want to join?"));
-                String gameId;
-                try {
-                    InitializeGameMessage gameMessage = (InitializeGameMessage) in.readObject();
-                    gameId = gameMessage.getMessage();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    throw new Exception("error in parsing input Object");
-                }
-                if (server.isGamePresent(gameId)) {
-                    if (server.isGameNotFull(gameId)) {
-                        return gameId;
-                    } else {
-                        send(new InitializeGameMessage(
-                                "The game is full. You can't join. Change game or create a new one."));
-                    }
-                } else {
-                    send(new InitializeGameMessage("No Games are present with that id. Retry."));
-                }
-            } else {
-                throw new Exception("Client is disconnected");
-            }
-
-        }
-    }
-
-    private String createGame(ObjectInputStream in) throws Exception {
-        while (true) {
-            if (!this.socket.isClosed()) {
-                send(new InitializeGameMessage("How many people do you want in your game? (max 4)"));
-                try {
-                    Integer playersNumber;
-                    try {
-                        InitializeGameMessage gameMessage = (InitializeGameMessage) in.readObject();
-                        playersNumber = Integer.parseInt(gameMessage.getMessage());
-                    } catch (Exception e) {
-                        throw new Exception(e.getMessage());
-                    }
-                    if (playersNumber > 4) {
-                        throw new Exception("Insert an integer number less than equal 4.");
-                    }
-                    return server.createGame(playersNumber);
-                } catch (Exception e) {
-                    send(new InitializeGameMessage(e.getMessage()));
-                }
-            } else {
-                throw new Exception("Client is disconnected");
-            }
-
-        }
-    }
-
     @Override
     public void run() {
         try {
-            ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
             out = new ObjectOutputStream(socket.getOutputStream());
-            send(new InitializeGameMessage("Welcome!\nWhat is your name?"));
-            InitializeGameMessage gameMessage = (InitializeGameMessage) in.readObject();
-            String name = gameMessage.getMessage();
-            send(new NickNameMessage(name));
-            send(new InitializeGameMessage("Do you want to \'join\' or \'create\' a game?"));
-            String decision;
-            String gameId;
-            while (true) {
-                try {
-                    gameMessage = (InitializeGameMessage) in.readObject();
-                    decision = gameMessage.getMessage();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    throw new Exception(e.getMessage());
-                }
-                if (decision.equals("join") || decision.equals("create")) {
-                    if (decision.equals("join")) {
-                        gameId = this.joinGame(in);
-                    } else {
-                        gameId = this.createGame(in);
-                    }
-                    try {
-                        server.addToLobby(gameId, this, name);
-                        break;
-                    } catch (Exception e) {
-                        send(new InitializeGameMessage(e.getMessage()));
-                    }
-                } else {
-                    send(new InitializeGameMessage("Operation not permitted! Type 'create' or 'join'."));
-                }
-            }
-            send(new InitializeGameMessage("Your game id is: " + gameId + ".\nWait for the other players."));
-            if (server.tryToStartGame(gameId)) {
-                server.startGame(gameId);
-            }
             ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
             while (isActive()) {
-                Move moveMessage = (Move) socketIn.readObject();
-                notify((Move) moveMessage);
+                Object receivedObject = socketIn.readObject();
+                if (receivedObject instanceof Move) {
+                    Move moveMessage = (Move) receivedObject;
+                    notify((Move) moveMessage);
+                } else if (receivedObject instanceof JoinGameMessage) {
+                    JoinGameMessage join = (JoinGameMessage) receivedObject;
+                    if (this.server.isGamePresent(join.getGameId())) {
+                        if (this.server.isGameNotFull(join.getGameId())) {
+                            try {
+                                this.server.addToLobby(join.getGameId(), this, join.getNickName());
+                                out.writeObject(new ConfirmJoinMessage(join.getGameId()));
+                                out.flush();
+                                if (this.server.tryToStartGame(join.getGameId())) {
+                                    this.server.startGame(join.getGameId());
+                                }
+                            } catch (Exception e) {
+                                out.writeObject(new ErrorJoinMessage(e.getMessage()));
+                                out.flush();
+                            }
+                        } else {
+                            out.writeObject(new ErrorJoinMessage(
+                                    "We are sorry but the game you are trying to join is full! Try a different one."));
+                            out.flush();
+                        }
+                    } else {
+                        out.writeObject(new ErrorJoinMessage(
+                                "We are sorry but we couldn't find the game you are trying to join. Check the id!"));
+                        out.flush();
+                    }
+
+                } else if (receivedObject instanceof CreateGameMessage) {
+                    CreateGameMessage create = (CreateGameMessage) receivedObject;
+                    String gameId = this.server.createGame(create.getNumberOfPlayers());
+                    try {
+                        this.server.addToLobby(gameId, this, create.getNickName());
+                        out.writeObject(new ConfirmJoinMessage(gameId));
+                        out.flush();
+                        if (this.server.tryToStartGame(gameId)) {
+                            this.server.startGame(gameId);
+                        }
+                    } catch (Exception e) {
+                        out.writeObject(new ErrorJoinMessage(e.getMessage()));
+                    }
+                }
             }
         } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
             System.err.println("Error!" + e.getMessage());

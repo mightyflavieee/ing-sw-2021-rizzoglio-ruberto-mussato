@@ -2,8 +2,7 @@ package it.polimi.ingsw.project.view;
 
 import java.util.List;
 
-import it.polimi.ingsw.project.model.InitializeGameMessage;
-import it.polimi.ingsw.project.model.MoveMessage;
+import it.polimi.ingsw.project.messages.MoveMessage;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.playermove.Move;
 import it.polimi.ingsw.project.observer.Observer;

@@ -3,6 +3,7 @@ package it.polimi.ingsw.project.model;
 import java.io.Serializable;
 import java.util.List;
 
+import it.polimi.ingsw.project.messages.MoveMessage;
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.observer.Observable;
 

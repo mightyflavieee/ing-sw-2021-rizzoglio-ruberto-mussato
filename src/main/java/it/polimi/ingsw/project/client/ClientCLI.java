@@ -1,9 +1,10 @@
 package it.polimi.ingsw.project.client;
 
-import it.polimi.ingsw.project.model.InitializeGameMessage;
+import it.polimi.ingsw.project.messages.ConfirmJoinMessage;
+import it.polimi.ingsw.project.messages.CreateGameMessage;
+import it.polimi.ingsw.project.messages.ErrorJoinMessage;
+import it.polimi.ingsw.project.messages.JoinGameMessage;
 import it.polimi.ingsw.project.model.Match;
-import it.polimi.ingsw.project.model.NickNameMessage;
-import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
@@ -28,6 +29,8 @@ public class ClientCLI {
     private boolean active = true;
     private Match match;
     private Scanner stdin;
+    private ObjectOutputStream socketOut;
+    private ObjectInputStream socketIn;
     private String myNickname; // da inizializzare
 
     public ClientCLI(String ip, int port) {
@@ -40,7 +43,7 @@ public class ClientCLI {
         this.match = match;
     }
 
-    public void setNickname(String name){
+    public void setNickname(String name) {
         this.myNickname = name;
     }
 
@@ -56,7 +59,7 @@ public class ClientCLI {
         this.active = active;
     }
 
-    public Thread asyncReadFromSocket(final ObjectInputStream socketIn) {
+    public Thread asyncReadFromSocket() {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -64,19 +67,14 @@ public class ClientCLI {
                 try {
                     while (isActive()) {
                         Object inputObject = socketIn.readObject();
-                        if (inputObject instanceof InitializeGameMessage) {
-                            InitializeGameMessage gameMessage = (InitializeGameMessage) inputObject;
-                            System.out.println(gameMessage.getMessage());
-                        } else if (inputObject instanceof NickNameMessage) {
-                            NickNameMessage nickNameMessage = (NickNameMessage) inputObject;
-                            setNickname(nickNameMessage.getMessage());
-                        } else if (inputObject instanceof Match) {
+                        if (inputObject instanceof Match) {
                             setMatch((Match) inputObject);
                         } else {
                             throw new IllegalArgumentException();
                         }
                     }
                 } catch (Exception e) {
+                    System.out.println(e.getMessage());
                     setActive(false);
                 }
             }
@@ -85,25 +83,116 @@ public class ClientCLI {
         return t;
     }
 
-    public Thread asyncCli(final ObjectOutputStream socketOut) {// sends to server and shows the match
+    public void buildGame() {
+        while (true) {
+            System.out.println("Hello what is your name?");
+            String tempNickName = stdin.nextLine();
+            System.out.println("Your nickname is " + tempNickName + ", do you confirm? 'yes' | 'no'");
+            String decision = stdin.nextLine();
+            if (decision.equals("yes")) {
+                this.myNickname = tempNickName;
+                break;
+            }
+        }
+        while (true) {
+            System.out.println("What do you want to 'join' or 'create' a game?");
+            String request = stdin.nextLine();
+            boolean wasValid = false;
+            while (true) {
+                if (request.equals("join")) {
+                    wasValid = joinGame();
+                } else if (request.equals("create")) {
+                    wasValid = createGame();
+                } else {
+                    System.out.println("Request not valid!");
+                }
+                if (wasValid) {
+                    break;
+                }
+            }
+            try {
+                Object responseFromServer = socketIn.readObject();
+                if (responseFromServer instanceof ConfirmJoinMessage) {
+                    ConfirmJoinMessage confirm = (ConfirmJoinMessage) responseFromServer;
+                    System.out.println("Your gameid is: " + confirm.getGameId());
+                    break;
+                } else if (responseFromServer instanceof ErrorJoinMessage) {
+                    ErrorJoinMessage error = (ErrorJoinMessage) responseFromServer;
+                    throw new Exception(error.getErrorMessage());
+                } else {
+                    throw new Exception("Object received is not type of ConfirmJoinMessage or ErrorJoinMessage");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+    }
+
+    private boolean joinGame() { // returns true if the joining request was created successfully
+        System.out.println("Which game do you want to join? Type 'exit' to leave.");
+        String gameId;
+        gameId = stdin.nextLine();
+        if (gameId.equals("exit")) {
+            return false;
+        }
+        try {
+            socketOut.writeObject(new JoinGameMessage(gameId, this.myNickname));
+            socketOut.flush();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            setActive(false);
+        }
+        return true;
+
+    }
+
+    private boolean createGame() { // returns true if the creation request was created successfully
+        Integer playersNumber;
+        while (true) {
+            System.out.println("How many people do you want in your game? (max 4) Type 'exit' to leave.");
+            try {
+                try {
+                    String request = stdin.nextLine();
+                    if (request.equals("exit")) {
+                        return false;
+                    }
+                    playersNumber = Integer.parseInt(request);
+                } catch (Exception e) {
+                    throw new Exception(e.getMessage());
+                }
+                if (playersNumber > 4) {
+                    throw new Exception("Insert an integer number less than equal 4.");
+                }
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        try {
+            socketOut.writeObject(new CreateGameMessage(playersNumber, this.myNickname));
+            socketOut.flush();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            setActive(false);
+        }
+        return true;
+    }
+
+    public Thread asyncCli() {// sends to server and shows the match
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     while (isActive()) {
-                        if (getMatch().isEmpty()) {
-                            String inputLine = stdin.nextLine();
-                            if (inputLine.equals("next")) {
-                                continue;
-                            }
-                            socketOut.writeObject(new InitializeGameMessage(inputLine));
-                        } else {
+                        if (!getMatch().isEmpty()) {
                             Move move = handleTurn();
                             if (move != null) {
                                 socketOut.writeObject(move);
                             }
+                            socketOut.flush();
                         }
-                        socketOut.flush();
+
                     }
                 } catch (Exception e) {
                     setActive(false);
@@ -1178,12 +1267,13 @@ public class ClientCLI {
     public void run() throws IOException {
         Socket socket = new Socket(ip, port);
         System.out.println("Connection established");
-        ObjectOutputStream socketOut = new ObjectOutputStream(socket.getOutputStream());
-        ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
+        socketOut = new ObjectOutputStream(socket.getOutputStream());
+        socketIn = new ObjectInputStream(socket.getInputStream());
         stdin = new Scanner(System.in);
         try {
-            Thread t0 = asyncReadFromSocket(socketIn);
-            Thread t1 = asyncCli(socketOut);
+            buildGame();
+            Thread t0 = asyncReadFromSocket();
+            Thread t1 = asyncCli();
             t0.join();
             t1.join();
         } catch (InterruptedException | NoSuchElementException e) {

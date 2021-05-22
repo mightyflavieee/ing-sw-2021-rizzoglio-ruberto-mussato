@@ -3,19 +3,16 @@ package it.polimi.ingsw.project.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketException;
 import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import it.polimi.ingsw.project.controller.Controller;
-import it.polimi.ingsw.project.model.InitializeGameMessage;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.utils.Utils;
 import it.polimi.ingsw.project.view.RemoteView;
 import it.polimi.ingsw.project.view.View;
-import it.polimi.ingsw.project.utils.gameMessage;
 
 public class Server {
     private static final int PORT = 12345;
@@ -37,7 +34,7 @@ public class Server {
 
     public synchronized boolean tryToStartGame(String matchId) {
         Lobby currentLobby = mapOfAvailableLobbies.get(matchId);
-        if (currentLobby.lenght() == currentLobby.getMaxNumberOfPlayers()) {
+        if (currentLobby.lenght().equals(currentLobby.getMaxNumberOfPlayers())) {
             mapOfUnavailableLobbies.put(matchId, mapOfAvailableLobbies.get(matchId));
             mapOfAvailableLobbies.remove(matchId);
             return true;

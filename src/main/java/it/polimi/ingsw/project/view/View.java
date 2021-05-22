@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.view;
 
+import it.polimi.ingsw.project.messages.MoveMessage;
 import it.polimi.ingsw.project.model.*;
 import it.polimi.ingsw.project.model.playermove.Move;
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
