@@ -36,7 +36,6 @@ public class ClientCLI {
         this.ip = ip;
         this.port = port;
         this.match = null;
-        this.lock = true;
     }
 
     public void setMatch(Match match) {
