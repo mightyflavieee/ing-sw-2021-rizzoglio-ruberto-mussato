@@ -32,6 +32,7 @@ public class ClientCLI {
     private ObjectOutputStream socketOut;
     private ObjectInputStream socketIn;
     private String myNickname; // da inizializzare
+
     public ClientCLI(String ip, int port) {
         this.ip = ip;
         this.port = port;
@@ -94,10 +95,10 @@ public class ClientCLI {
             }
         }
         while (true) {
-            System.out.println("What do you want to 'join' or 'create' a game?");
-            String request = stdin.nextLine();
-            boolean wasValid = false;
             while (true) {
+                System.out.println("What do you want to 'join' or 'create' a game?");
+                String request = stdin.nextLine();
+                boolean wasValid = false;
                 if (request.equals("join")) {
                     wasValid = joinGame();
                 } else if (request.equals("create")) {
@@ -258,11 +259,8 @@ public class ClientCLI {
         Move playerMove = null;
         boolean isInputError = false;
         do {
-            System.out.print("What do you want to do?\n"
-                    + "0 - See informations\n"
-                    + "1 - Take Resources from Market\n"
-                    + "2 - Buy one Development Card\n"
-                    + "3 - Activate Production.\n" + "> ");
+            System.out.print("What do you want to do?\n" + "0 - See informations\n" + "1 - Take Resources from Market\n"
+                    + "2 - Buy one Development Card\n" + "3 - Activate Production.\n" + "> ");
             do {
                 String answer = stdin.nextLine();
                 switch (answer) {
@@ -988,9 +986,8 @@ public class ClientCLI {
     public void viewer() {
         System.out.println("0 - Go Back\n" + "1 - show informations about the others players\n"
                 + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
-                + "5 - show your Development Cards\n" + "6 - show the Market\n" +
-                "7 - show your Warehouse\n" +
-                "8 - show your history");
+                + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Warehouse\n"
+                + "8 - show your history");
         String answer = stdin.nextLine();
         switch (answer) {
             case "0":
@@ -1091,7 +1088,7 @@ public class ClientCLI {
         Map<ResourceType, Integer> resourcesInHand = warehouse.listToMapResources(resourceList);
         System.out.println(warehouse);
         System.out.println("Resources in hand:");
-        for (Map.Entry<ResourceType,Integer> entry : resourcesInHand.entrySet()){
+        for (Map.Entry<ResourceType, Integer> entry : resourcesInHand.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
         while (resourcesInHand.size() > 0) {
@@ -1105,7 +1102,7 @@ public class ClientCLI {
                     break;
                 case "1":
                     System.out.println("Resources in hand:");
-                    for (Map.Entry<ResourceType,Integer> entry : resourcesInHand.entrySet()){
+                    for (Map.Entry<ResourceType, Integer> entry : resourcesInHand.entrySet()) {
                         System.out.println(entry.getKey() + ": " + entry.getValue());
                     }
                     break;
@@ -1176,7 +1173,7 @@ public class ClientCLI {
         ResourceType type;
         int n;
         System.out.println("Resources in hand:");
-        for (Map.Entry<ResourceType,Integer> entry : resourcesInHand.entrySet()){
+        for (Map.Entry<ResourceType, Integer> entry : resourcesInHand.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
         System.out.println("1 - coin\n" + "2 - stone\n" + "3 - shield\n" + "4 - servant");
