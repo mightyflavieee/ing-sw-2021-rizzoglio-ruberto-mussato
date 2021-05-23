@@ -32,10 +32,24 @@ public class ClientCLI {
     private ObjectOutputStream socketOut;
     private ObjectInputStream socketIn;
     private String myNickname; // da inizializzare
+    private boolean lock;
     public ClientCLI(String ip, int port) {
         this.ip = ip;
         this.port = port;
         this.match = null;
+        this.lock = true;
+    }
+    public synchronized void isLock() throws InterruptedException {
+        if(this.lock){
+            wait();
+        }
+    }
+    public synchronized void unLock(){
+        this.lock = false;
+        notifyAll();
+    }
+    public synchronized void setLock(){
+        this.lock = true;
     }
 
     public void setMatch(Match match) {
@@ -68,6 +82,7 @@ public class ClientCLI {
                         Object inputObject = socketIn.readObject();
                         if (inputObject instanceof Match) {
                             setMatch((Match) inputObject);
+                            unLock();
                         } else {
                             throw new IllegalArgumentException();
                         }
@@ -184,6 +199,7 @@ public class ClientCLI {
             public void run() {
                 try {
                     while (isActive()) {
+                        isLock();
                         if (!getMatch().isEmpty()) {
                             Move move = handleTurn();
                             if (move != null) {
@@ -191,6 +207,7 @@ public class ClientCLI {
                             }
                             socketOut.flush();
                         }
+                        setLock();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
