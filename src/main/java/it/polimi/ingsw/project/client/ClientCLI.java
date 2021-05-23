@@ -38,7 +38,7 @@ public class ClientCLI {
         this.port = port;
         this.match = null;
     }
-
+    
     public void setMatch(Match match) {
         this.match = match;
     }
