@@ -35,4 +35,18 @@ class LeaderCardContainerTest {
     void insertLeaderCardsAfterChoice() {
 
     }
+
+    @Test
+    void testGetLeaderCards() {
+        LeaderCardContainer leaderCardContainer = new LeaderCardContainer();
+        assertEquals(16,leaderCardContainer.getLeaderCards().size());
+    }
+
+    @Test
+    void testGetFourCardsForPlayer() {
+    }
+
+    @Test
+    void testInsertLeaderCardsAfterChoice() {
+    }
 }
