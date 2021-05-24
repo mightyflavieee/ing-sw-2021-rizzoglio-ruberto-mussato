@@ -7,7 +7,7 @@ import it.polimi.ingsw.project.model.Player;
 
 public class Utils {
     public static List<String> extractOpponentsName(Player currentPlayer, List<Player> listOfAllPlayers) {
-        List<String> listOfOpponentsName = new ArrayList<String>();
+        List<String> listOfOpponentsName = new ArrayList<>();
         listOfAllPlayers.forEach((Player opponentPlayer) -> {
             if(!opponentPlayer.getNickname().equals(currentPlayer.getNickname()))
             listOfOpponentsName.add(opponentPlayer.getNickname());

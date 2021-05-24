@@ -21,18 +21,8 @@ class LeaderCardContainerTest {
     }
 
     @Test
-    void getFourCardsForPlayer() {
-
-    }
-
-    @Test
     void setJsonLeaderCard() {
         Gson gson = new Gson();
-
-    }
-
-    @Test
-    void insertLeaderCardsAfterChoice() {
 
     }
 
@@ -42,11 +32,4 @@ class LeaderCardContainerTest {
         assertEquals(16,leaderCardContainer.getLeaderCards().size());
     }
 
-    @Test
-    void testGetFourCardsForPlayer() {
-    }
-
-    @Test
-    void testInsertLeaderCardsAfterChoice() {
-    }
 }

@@ -9,11 +9,6 @@ public class NoMove extends Move{
     }
 
     @Override
-    public void performMove(Match match) {
-        return;
-    }
-
-    @Override
     public String toString() {
         return "No Move";
     }

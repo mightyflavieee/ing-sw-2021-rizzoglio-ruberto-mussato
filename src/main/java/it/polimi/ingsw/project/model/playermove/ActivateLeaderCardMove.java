@@ -1,12 +1,6 @@
 package it.polimi.ingsw.project.model.playermove;
 
 import it.polimi.ingsw.project.model.Match;
-import it.polimi.ingsw.project.model.Player;
-import it.polimi.ingsw.project.model.resource.Resource;
-import it.polimi.ingsw.project.view.View;
-
-import java.util.Collections;
-import java.util.List;
 
 public class ActivateLeaderCardMove extends Move{
     private final String leaderCardID;

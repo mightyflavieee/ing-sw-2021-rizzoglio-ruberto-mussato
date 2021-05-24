@@ -30,11 +30,11 @@ public class CardContainer implements Cloneable, Serializable {
   }
 
   private Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> initMapCards() {
-    Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> tempCardContainer = new HashMap<CardLevel, Map<CardColor, List<DevelopmentCard>>>();
+    Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> tempCardContainer = new HashMap<>();
     for (CardLevel cardLevel : CardLevel.values()) {
-      final Map<CardColor, List<DevelopmentCard>> mapColorCard = new HashMap<CardColor, List<DevelopmentCard>>();
+      final Map<CardColor, List<DevelopmentCard>> mapColorCard = new HashMap<>();
       for (CardColor cardColor : CardColor.values()) {
-        mapColorCard.put(cardColor, new ArrayList<DevelopmentCard>());
+        mapColorCard.put(cardColor, new ArrayList<>());
       }
       tempCardContainer.put(cardLevel, mapColorCard);
     }
@@ -47,19 +47,18 @@ public class CardContainer implements Cloneable, Serializable {
 
   private boolean tryToDiscard(CardColor cardColor, CardLevel cardLevel) {
     if (cardContainer.get(cardLevel).get(cardColor).isEmpty()) {
-      return false;
+      return true;
     } else {
       cardContainer.get(cardLevel).get(cardColor).remove(0);
     }
-    return true &&
-            !(cardContainer.get(CardLevel.Three).get(cardColor).isEmpty());
+    return cardContainer.get(CardLevel.Three).get(cardColor).isEmpty();
   }
 
   public boolean discard(CardColor cardColor) {
     for (int i = 0; i < 2; i++)
-      if (!tryToDiscard(cardColor, CardLevel.One))
-        if (!tryToDiscard(cardColor, CardLevel.Two))
-          if (!tryToDiscard(cardColor, CardLevel.Three)) {
+      if (tryToDiscard(cardColor, CardLevel.One))
+        if (tryToDiscard(cardColor, CardLevel.Two))
+          if (tryToDiscard(cardColor, CardLevel.Three)) {
             return true; // if you finish the cards you loose
           }
     return false;

@@ -24,12 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
 
-        private Object ResouceType;
-
-        @Test
-        void update() {
-        }
-
         @Test
         void lorenzoTest() {
                 Player player = new Player("pinco pallino");
@@ -41,7 +35,7 @@ class ControllerTest {
                         model.getMatch().getActionTokenContainer().shuffle();
                 }
                 model.getMatch().performExtractActionTokenMove();
-                assertTrue(2 == player.getBoard().getFaithMap().getBlackMarkerPosition());
+                assertEquals(2, player.getBoard().getFaithMap().getBlackMarkerPosition());
 
         }
 
@@ -101,7 +95,7 @@ class ControllerTest {
 
                 // removing the random beginning of the match
                 Marble[][] tray = new Marble[4][3];
-                List<Marble> trayList = new ArrayList<Marble>();
+                List<Marble> trayList = new ArrayList<>();
                 trayList.add(new Marble(MarbleType.White));
                 trayList.add(new Marble(MarbleType.White));
                 trayList.add(new Marble(MarbleType.White));
@@ -133,12 +127,12 @@ class ControllerTest {
                 Market localMarket = new Market();
                 localMarket.setTray(tray);
                 localMarket.setOutsideMarble(outsideMarble);
-                List<Resource> resourceList1Gian = localMarket.insertMarble(0, 1, null);
+                localMarket.insertMarble(0, 1, null);
                 Warehouse warehouse1Gian = new Warehouse(model.getMatch());
                 warehouse1Gian.getShelves().get(ShelfFloor.First).add(new Resource(ResourceType.Coin));
                 warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
                 warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
-                Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, new ArrayList<Resource>(), localMarket,
+                Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, new ArrayList<>(), localMarket,
                                 false);
                 PlayerMove playerMove1Gian = new PlayerMove(gianluca, null, move1Gian);
                 assertEquals(TurnPhase.InitialPhase,gianluca.getTurnPhase());
@@ -165,7 +159,7 @@ class ControllerTest {
                 warehouse1Flavio.getShelves().get(ShelfFloor.Third).add(new Resource(ResourceType.Servant));
                 warehouse1Flavio.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Stone));
                 warehouse1Flavio.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Stone));
-                Move move1Flavio = new TakeMarketResourcesMove(warehouse1Flavio, new ArrayList<Resource>(), localMarket,
+                Move move1Flavio = new TakeMarketResourcesMove(warehouse1Flavio, new ArrayList<>(), localMarket,
                                 false);
                 PlayerMove playerMove1Flavio = new PlayerMove(flavio, null, move1Flavio);
                 assertEquals(TurnPhase.InitialPhase,flavio.getTurnPhase());
@@ -189,8 +183,8 @@ class ControllerTest {
                 warehouse1Leo.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Coin));
                 warehouse1Leo.getShelves().get(ShelfFloor.First).add(new Resource(ResourceType.Stone));
                 Boolean hasRedMarble = true;
-                Move move1Leo = new TakeMarketResourcesMove(warehouse1Leo, new ArrayList<Resource>(), localMarket,
-                                hasRedMarble);
+                Move move1Leo = new TakeMarketResourcesMove(warehouse1Leo, new ArrayList<>(), localMarket,
+                        true);
                 PlayerMove playerMove1Leo = new PlayerMove(leo, null, move1Leo);
                 model.updateTurn();
                 controller.update(playerMove1Leo);
@@ -220,7 +214,7 @@ class ControllerTest {
                 assertEquals(ResourceType.Coin,
                                 gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.First).get(0).getType());
                 assertEquals(2, gianluca.getBoard().getLeaderCards().size());
-                assertTrue(gianluca.getBoard().getMapTray().get(DevCardPosition.Right).get(0).getId().equals("id2"));
+                assertEquals("id2", gianluca.getBoard().getMapTray().get(DevCardPosition.Right).get(0).getId());
 
                 // turn 2 flavio
                 resourcesToEliminateWarehouse.clear();
@@ -242,7 +236,7 @@ class ControllerTest {
                 warehouse2Leo.getShelves().get(ShelfFloor.Third).add(new Resource(ResourceType.Shield));
                 warehouse2Leo.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Coin));
                 warehouse2Leo.getShelves().get(ShelfFloor.First).add(new Resource(ResourceType.Stone));
-                List<Resource> discardedResources = new ArrayList<Resource>();
+                List<Resource> discardedResources = new ArrayList<>();
                 discardedResources.add(new Resource(ResourceType.Shield));
                 discardedResources.add(new Resource(ResourceType.Servant));
                 discardedResources.add(new Resource(ResourceType.Servant));
@@ -304,9 +298,8 @@ class ControllerTest {
                                 flavio.getBoard().getFaithMap().getPapalFavourSlots().get(0).getStatus());
                 assertEquals(PapalSlotStatus.Taken,
                                 flavio.getBoard().getFaithMap().getPapalFavourSlots().get(1).getStatus());
-                assertEquals(PapalSlotStatus.Taken,
-                                flavio.getBoard().getFaithMap().getPapalFavourSlots().get(2).getStatus());
-
+                assertEquals(PapalSlotStatus.Taken, flavio.getBoard().getFaithMap().getPapalFavourSlots().get(2).getStatus());
+                assertEquals(79, flavio.getVictoryPoints());
 
 
 

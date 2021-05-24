@@ -15,15 +15,11 @@ public class Production implements Serializable{
     }
 
     public Map<ResourceType, Integer> getManufacturedResources() {
-        Map<ResourceType, Integer> mapToReturn = new HashMap<>();
-        mapToReturn.putAll(this.manufacturedResources);
-        return mapToReturn;
+        return new HashMap<>(this.manufacturedResources);
     }
 
     public Map<ResourceType, Integer> getRequiredResources() {
-        Map<ResourceType, Integer> mapToReturn = new HashMap<>();
-        mapToReturn.putAll(this.requiredResources);
-        return mapToReturn;
+        return new HashMap<>(this.requiredResources);
     }
 
     public String toString() {

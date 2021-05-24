@@ -1,13 +1,12 @@
 package it.polimi.ingsw.project.model.board.card.leaderCard.perk;
 
 import it.polimi.ingsw.project.model.resource.Resource;
-import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import java.io.Serializable;
 
 public class Perk implements Serializable {
-  Resource resource;
-  PerkType type;
+  final Resource resource;
+  final PerkType type;
 
   public Perk(Resource resource, PerkType type) {
     this.resource = resource;

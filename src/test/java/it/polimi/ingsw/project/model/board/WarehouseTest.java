@@ -58,36 +58,5 @@ class WarehouseTest {
       //  assertTrue(returnedResources.get(ResourceType.Stone)==0);
     }
 
-    @Test
-    void getShelfs() {
-    }
 
-    @Test
-    void getNumResourcesToDiscard() {
-    }
-
-
-    @Test
-    void swapShelves() {
-    }
-
-    @Test
-    void getExtraDeposit() {
-    }
-
-    @Test
-    void createExtraDeposit() {
-    }
-
-    @Test
-    void eliminateResourceForProductionPerk() {
-    }
-
-    @Test
-    void discardResourcesInHand() {
-    }
-
-    @Test
-    void eliminateResources() {
-    }
 }

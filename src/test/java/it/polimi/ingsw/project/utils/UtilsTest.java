@@ -16,14 +16,13 @@ class UtilsTest {
         Player player2 = new Player("bb");
         Player player3 = new Player("cc");
         Player player4 = new Player("dd");
-        List<Player> playerList = new ArrayList<Player>();
-        List<Player> playerListCopy = new ArrayList<Player>();
-        List<String> opponentsListNames = new ArrayList<String>();
+        List<Player> playerList = new ArrayList<>();
+        List<String> opponentsListNames;
         playerList.add(player1);
         playerList.add(player2);
         playerList.add(player3);
         playerList.add(player4);
-        playerListCopy.addAll(playerList);
+        List<Player> playerListCopy = new ArrayList<>(playerList);
         opponentsListNames = Utils.extractOpponentsName(player4,playerList);
         assertEquals(3,opponentsListNames.size());
         assertTrue(opponentsListNames.contains("aa"));

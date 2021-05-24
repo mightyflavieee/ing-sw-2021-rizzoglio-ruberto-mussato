@@ -14,28 +14,9 @@ class CardContainerTest {
         CardContainer cardContainer = new CardContainer();
         for (CardLevel cardLevel : CardLevel.values()) {
             for (CardColor cardColor : CardColor.values()) {
-                assertTrue(cardContainer.getCardContainer().get(cardLevel).get(cardColor).size() == 4);
+                assertEquals(4, cardContainer.getCardContainer().get(cardLevel).get(cardColor).size());
             }
         }
     }
 
-    @Test
-    void getCardContainer() {
-    }
-
-    @Test
-    void discard() {
-    }
-
-    @Test
-    void isCardPresent() {
-    }
-
-    @Test
-    void fetchCard() {
-    }
-
-    @Test
-    void removeBoughtCard() {
-    }
 }

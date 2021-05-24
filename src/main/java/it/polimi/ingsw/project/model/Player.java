@@ -4,7 +4,6 @@ import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
-import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
@@ -52,31 +51,6 @@ public class Player implements Serializable, Cloneable {
 
   public void updateTurnPhase() {
     this.turnPhase = turnPhase.next();
-  }
-
-  private boolean takeResourcesFromMarket(Market market) {
-    /*Map<String, Integer> chosenPosition = choosePosition();
-    List<Perk> activePerks = this.board.getActivePerks();
-    ResourceType transmutationResourceType = null;
-    for (Perk perk : activePerks) {
-      if (perk instanceof TransmutationPerk) {
-        transmutationResourceType = perk.getResource().getType();
-      }
-    }
-    boolean isTransmutationPresent = transmutationResourceType != null ? true : false;
-    List<Resource> acquiredResources = market.insertMarble(chosenPosition.get("axis"), chosenPosition.get("position"),
-        isTransmutationPresent, transmutationResourceType);
-    List<Resource> filteredResources = new ArrayList<>();
-    for (Resource resource : acquiredResources) {
-      if (resource.getType() == ResourceType.Faith) {
-        this.board.moveForward();
-      } else {
-        filteredResources.add(resource);
-      }
-    }
-    Warehouse warehouse = this.board.getWarehouse();
-    warehouse.insertResourcesInHand(filteredResources);*/
-    return true;
   }
 
   public Board getBoard() {
@@ -188,13 +162,11 @@ public class Player implements Serializable, Cloneable {
   }
 
   public boolean isFeasibleTakeMarketResourcesMove(
-    Warehouse warehouse,
-    List<Resource> discardedResources
+          Warehouse warehouse
   ) {
     return this.board.isFeasibleTakeMarketResourcesMove(
-        warehouse,
-        discardedResources
-      );
+        warehouse
+    );
   }
 
   public void performTakeMarketResourceMove(
@@ -229,10 +201,10 @@ public class Player implements Serializable, Cloneable {
     this.history.add(stringMove);
   }
   public String getHistoryToString(){
-    String string = "";
+    StringBuilder string = new StringBuilder();
     for(String move : history){
-      string = string + "\n" + move;
+      string.append("\n").append(move);
     }
-    return string;
+    return string.toString();
   }
 }

@@ -127,7 +127,6 @@ class ProductionMoveTest {
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
         Map<ResourceType, Integer> newCurrentChestResources = new HashMap<>();
-        Map<ResourceType, Integer> newCurrentWarehouseResources = new HashMap<>();
         newCurrentChestResources.put(ResourceType.Stone, 1);
         newCurrentChestResources.put(ResourceType.Shield, 1);
         newCurrentChestResources.put(ResourceType.Servant, 2);
@@ -277,7 +276,6 @@ class ProductionMoveTest {
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
         Map<ResourceType, Integer> newCurrentChestResources = new HashMap<>();
-        Map<ResourceType, Integer> newCurrentWarehouseResources = new HashMap<>();
         newCurrentChestResources.put(ResourceType.Shield, 2);
         newCurrentChestResources.put(ResourceType.Servant, 2);
         for (ResourceType type : newCurrentChestResources.keySet()) {

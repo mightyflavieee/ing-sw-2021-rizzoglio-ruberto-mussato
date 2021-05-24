@@ -5,14 +5,7 @@ import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Serializable;
 import java.util.*;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
 
 public class DevelopmentCard extends Card {
   final private CardColor color;
@@ -29,16 +22,6 @@ public class DevelopmentCard extends Card {
     this.production = production;
     this.id = id;
     this.cost = cost;
-  }
-
-  public void toJson() {
-    Gson gson = new GsonBuilder().serializeNulls().create();
-    try {
-      String proba = gson.toJson(this);
-      gson.toJson(this, new FileWriter("src/main/resources/developmentCards.json", true));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
 
   public CardColor getColor() {
@@ -58,9 +41,7 @@ public class DevelopmentCard extends Card {
   }
 
   public Map<ResourceType, Integer> getRequiredResources() {
-    Map<ResourceType, Integer> mapToReturn = new HashMap<>();
-    mapToReturn.putAll(this.cost);
-    return mapToReturn;
+      return new HashMap<>(this.cost);
   }
 
   public String toString() {

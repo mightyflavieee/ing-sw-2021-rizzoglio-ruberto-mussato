@@ -1,11 +1,7 @@
 package it.polimi.ingsw.project.model.actionTokens;
 
-import java.util.List;
-
 import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.observer.Observable;
-import it.polimi.ingsw.project.observer.Observer;
-import it.polimi.ingsw.project.observer.custom.DiscardActionTokenObserver;
 
 
 public class DiscardActionToken extends Observable<CardColor> implements ActionToken{
@@ -13,10 +9,6 @@ public class DiscardActionToken extends Observable<CardColor> implements ActionT
 
     public DiscardActionToken(CardColor cardColor) {
         this.cardColor = cardColor;
-    }
-
-    public CardColor getCardColor() {
-        return cardColor;
     }
 
     @Override

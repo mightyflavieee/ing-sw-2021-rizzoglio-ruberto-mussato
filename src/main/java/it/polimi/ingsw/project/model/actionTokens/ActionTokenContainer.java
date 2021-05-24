@@ -42,9 +42,7 @@ public class ActionTokenContainer implements Serializable {
     }
 
     public List<ActionToken> getActionTokens(){
-        List<ActionToken> listToReturn = new ArrayList<>();
-        listToReturn.addAll(this.actionTokens);
-        return  listToReturn;
+        return new ArrayList<>(this.actionTokens);
     }
 
     public void shuffle(){

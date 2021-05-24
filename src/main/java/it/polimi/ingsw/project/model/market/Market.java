@@ -17,7 +17,7 @@ public class Market extends Observable<Market> implements Cloneable, Serializabl
     // TODO costruttore
 
     public Market() {
-        List<Marble> trayList = new ArrayList<Marble>();
+        List<Marble> trayList = new ArrayList<>();
         trayList.add(new Marble(MarbleType.White));
         trayList.add(new Marble(MarbleType.White));
         trayList.add(new Marble(MarbleType.White));
@@ -75,7 +75,7 @@ public class Market extends Observable<Market> implements Cloneable, Serializabl
     }
 
     private List<Resource> getResourceInColumn(Integer columnIndex, ResourceType transmutationPerk) {
-        List<Resource> listOfObteinedResources = new ArrayList<Resource>();
+        List<Resource> listOfObteinedResources = new ArrayList<>();
         Marble[] marbleColumn = tray[columnIndex];
         for (Marble marble : marbleColumn) {
             ResourceType type = convertMarbleToResourceType(marble, transmutationPerk);
@@ -87,7 +87,7 @@ public class Market extends Observable<Market> implements Cloneable, Serializabl
     }
 
     private List<Resource> getResourceInRow(Integer rowIndex, ResourceType transmutationPerk) {
-        List<Resource> listOfObteinedResources = new ArrayList<Resource>();
+        List<Resource> listOfObteinedResources = new ArrayList<>();
         Marble[] oldArrayOfMarbles = new Marble[4];
         for (int i = 0; i < tray.length; i++) {
             oldArrayOfMarbles[i] = tray[i][rowIndex];
@@ -104,9 +104,8 @@ public class Market extends Observable<Market> implements Cloneable, Serializabl
     private void shiftMarblesInColumn(Integer position) {
         Marble[] oldArrayOfMarbles = tray[position].clone();
         tray[position][0] = outsideMarble;
-        for (int i = 1; i < tray[position].length; i++) {
-            tray[position][i] = oldArrayOfMarbles[i - 1];
-        }
+        if (tray[position].length - 1 >= 0)
+            System.arraycopy(oldArrayOfMarbles, 0, tray[position], 1, tray[position].length - 1);
         outsideMarble = oldArrayOfMarbles[oldArrayOfMarbles.length - 1];
     }
 
@@ -141,14 +140,14 @@ public class Market extends Observable<Market> implements Cloneable, Serializabl
         return listOfObteinResources;
     }
     public String toString(){
-        String string = "";
+        StringBuilder string = new StringBuilder();
         for(int j = 2; j > -1; j--) {
             for (int i = 0; i < 4; i++) {
-                string = string + " " +this.tray[i][j];
+                string.append(" ").append(this.tray[i][j]);
             }
-            string = string + "\n";
+            string.append("\n");
         }
-    return string;
+    return string.toString();
     }
 
 }

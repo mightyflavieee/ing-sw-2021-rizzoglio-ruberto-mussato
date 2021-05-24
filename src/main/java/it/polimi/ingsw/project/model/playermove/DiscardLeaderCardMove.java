@@ -1,9 +1,6 @@
 package it.polimi.ingsw.project.model.playermove;
 
 import it.polimi.ingsw.project.model.Match;
-import it.polimi.ingsw.project.model.Player;
-import it.polimi.ingsw.project.view.View;
-
 
 
 public class DiscardLeaderCardMove extends Move{

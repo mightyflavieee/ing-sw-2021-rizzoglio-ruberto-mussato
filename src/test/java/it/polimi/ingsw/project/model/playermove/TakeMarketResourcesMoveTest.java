@@ -1,15 +1,9 @@
 package it.polimi.ingsw.project.model.playermove;
 
-import it.polimi.ingsw.project.controller.Controller;
 import it.polimi.ingsw.project.model.Match;
-import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
-import it.polimi.ingsw.project.model.board.card.CardColor;
-import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
-import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
-import it.polimi.ingsw.project.model.board.card.leaderCard.perk.PerkType;
 import it.polimi.ingsw.project.model.market.Marble;
 import it.polimi.ingsw.project.model.market.MarbleType;
 import it.polimi.ingsw.project.model.market.Market;
@@ -36,7 +30,7 @@ class TakeMarketResourcesMoveTest {
 
         // removing the random beginning of the match
         Marble[][] tray = new Marble[4][3];
-        List<Marble> trayList = new ArrayList<Marble>();
+        List<Marble> trayList = new ArrayList<>();
         trayList.add(new Marble(MarbleType.White));
         trayList.add(new Marble(MarbleType.White));
         trayList.add(new Marble(MarbleType.White));
@@ -66,24 +60,16 @@ class TakeMarketResourcesMoveTest {
         Market localMarket = new Market();
         localMarket.setTray(tray);
         localMarket.setOutsideMarble(outsideMarble);
-        List<Resource> resourceList1Gian = new ArrayList<>();
+        //List<Resource> resourceList1Gian = new ArrayList<>();
         // inserisco in basso a destra una biglia rossa
-        resourceList1Gian = localMarket.insertMarble(0, 1, null);
+      //  resourceList1Gian = localMarket.insertMarble(0, 1, null);
         Warehouse warehouse1Gian = new Warehouse(null);
         warehouse1Gian.getShelves().get(ShelfFloor.First).add(new Resource(ResourceType.Coin));
         warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
         warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
-        Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, new ArrayList<Resource>(), localMarket, false);
-        PlayerMove playerMove1Gian = new PlayerMove(gianluca, null, move1Gian);
+        Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, new ArrayList<>(), localMarket, false);
         assertTrue(move1Gian.isFeasibleMove(match));
 
     }
 
-    @Test
-    void performMove() {
-    }
-
-    @Test
-    void testToString() {
-    }
 }

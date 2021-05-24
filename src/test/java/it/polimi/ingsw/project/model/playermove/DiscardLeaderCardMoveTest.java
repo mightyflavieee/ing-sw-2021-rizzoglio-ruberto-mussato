@@ -70,7 +70,4 @@ class DiscardLeaderCardMoveTest {
         assertTrue(match.getIsLastTurn());
     }
 
-    @Test
-    void testToString() {
-    }
 }

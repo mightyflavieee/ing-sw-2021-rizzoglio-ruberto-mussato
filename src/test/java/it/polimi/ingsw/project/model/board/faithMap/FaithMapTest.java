@@ -10,14 +10,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class FaithMapTest {
 
     @Test
-    void getMarkerPosition() {
-    }
-
-    @Test
-    void getBlackMarkerPosition() {
-    }
-
-    @Test
     void getFaithTiles() {
         FaithMap faithMap = new FaithMap(null,null);
         List<ActivableTile> returnedList;

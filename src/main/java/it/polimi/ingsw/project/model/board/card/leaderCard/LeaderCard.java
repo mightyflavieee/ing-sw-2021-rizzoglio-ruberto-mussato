@@ -1,8 +1,6 @@
 package it.polimi.ingsw.project.model.board.card.leaderCard;
 
 import java.util.Map;
-import java.io.Serializable;
-import java.util.List;
 
 import it.polimi.ingsw.project.model.board.card.Card;
 import it.polimi.ingsw.project.model.board.card.CardColor;
@@ -31,29 +29,7 @@ public class LeaderCard extends Card{
     this.status = Status.Inactive;
   }
 
-  /*// creates a LeaderCard activable with a requirement in development card levels
-  public LeaderCard(String id, Perk assignedPerk, int victoryPoints, CardLevel requiredDevCardLevel) {
-    super(victoryPoints);
-    this.id = id;
-    this.perk = assignedPerk;
-    this.requiredResources = null;
-    this.requiredDevCardLevel = requiredDevCardLevel;
-    this.requiredDevCards = null;
-    this.status = Status.Inactive;
-  }
-
-  // creates a LeaderCard activable with a requirement in development card levels
-  public LeaderCard(String id, Perk assignedPerk, int victoryPoints, List<CardColor> requiredDevCards) {
-    super(victoryPoints);
-    this.id = id;
-    this.perk = assignedPerk;
-    this.requiredResources = null;
-    this.requiredDevCardLevel = null;
-    this.requiredDevCards = requiredDevCards;
-    this.status = Status.Inactive;
-  }*/
-
-  public Perk getPerk() {
+    public Perk getPerk() {
     return perk;
   }
 
@@ -83,21 +59,22 @@ public class LeaderCard extends Card{
     if (this.requiredResources == null) {
       converted = converted + "Required DevelopmentCard level: " + this.requiredDevCardLevel + "\n";
     } else {
-      converted = converted + "Required resources:\n";
-      for (ResourceType type : this.requiredResources.keySet()) {
+        StringBuilder convertedBuilder = new StringBuilder(converted + "Required resources:\n");
+        for (ResourceType type : this.requiredResources.keySet()) {
         if (type == ResourceType.Coin) {
-          converted = converted + "Coin = " + this.requiredResources.get(type) + "\n";
+          convertedBuilder.append("Coin = ").append(this.requiredResources.get(type)).append("\n");
         }
         if (type == ResourceType.Servant) {
-          converted = converted + "Servant = " + this.requiredResources.get(type) + "\n";
+          convertedBuilder.append("Servant = ").append(this.requiredResources.get(type)).append("\n");
         }
         if (type == ResourceType.Shield) {
-          converted = converted + "Shield = " + this.requiredResources.get(type) + "\n";
+          convertedBuilder.append("Shield = ").append(this.requiredResources.get(type)).append("\n");
         }
         if (type == ResourceType.Stone) {
-          converted = converted + "Stone = " + this.requiredResources.get(type) + "\n";
+          convertedBuilder.append("Stone = ").append(this.requiredResources.get(type)).append("\n");
         }
       }
+        converted = convertedBuilder.toString();
     }
     return converted;
   }

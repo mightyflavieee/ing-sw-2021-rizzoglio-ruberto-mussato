@@ -83,10 +83,10 @@ class MarketTest {
 
     @Test
     void insertMarble() {
-        List<Resource> resourceList, returnedResourceList;
+        List<Resource>  returnedResourceList;
         Market market = new Market();
         Marble[][] tray = new Marble[4][3];
-        List<Marble> trayList = new ArrayList<Marble>();
+        List<Marble> trayList = new ArrayList<>();
         trayList.add(new Marble(MarbleType.White));
         trayList.add(new Marble(MarbleType.White));
         trayList.add(new Marble(MarbleType.White));
@@ -109,10 +109,10 @@ class MarketTest {
         market.setOutsideMarble(outsideMarble);
         market.setTray(tray);
         returnedResourceList = market.insertMarble(1, 2, null);
-        int grey = 0, blue = 0, purple = 0, red = 0, white = 0, yellow = 0;
+        int grey = 0, blue = 0, purple = 0, red = 0,  yellow = 0;
 
-        for (int j = 0; j < returnedResourceList.size(); j++) {
-            ResourceType type = returnedResourceList.get(j).getType();
+        for (Resource resource : returnedResourceList) {
+            ResourceType type = resource.getType();
             switch (type) {
                 case Shield:
                     blue++;

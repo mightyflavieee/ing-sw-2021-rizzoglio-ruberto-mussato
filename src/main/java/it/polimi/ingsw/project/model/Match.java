@@ -26,7 +26,7 @@ public class Match implements Serializable, Cloneable {
     private boolean isOver;
 
     public Match(List<Player> playerList) {
-        this.playerList = new ArrayList<Player>();
+        this.playerList = new ArrayList<>();
         this.playerList.addAll(playerList); //la lista mi arriva già shuffled
         this.playerList.forEach(x -> x.createFaithMap(this)); //serve per l'inizio partita
         this.market = new Market();
@@ -98,9 +98,6 @@ public class Match implements Serializable, Cloneable {
         }
     }
 
-    public void addVictoryPoints(int newVictoryPoints) {
-        currentPlayer.addVictoryPoints(newVictoryPoints);
-    }
 
     public void discardForActionToken(CardColor cardColor) {
         if (cardContainer.discard(cardColor)) this.youLost();
@@ -113,9 +110,8 @@ public class Match implements Serializable, Cloneable {
 
     public void end() {
         if (
-                this.isLastTurn == true &&
-                        this.currentPlayer.getNickname() ==
-                                this.playerList.get(this.playerList.size() - 1).getNickname()
+                this.isLastTurn &&
+                        this.currentPlayer.getNickname().equals(this.playerList.get(this.playerList.size() - 1).getNickname())
         ) {
             this.isOver = true;
         }
@@ -128,7 +124,7 @@ public class Match implements Serializable, Cloneable {
         }
         this.currentPlayer.updateTurnPhase();
     }
-
+    @Override
     public final Match clone() {
         final Match result = new Match();
         result.actionTokenContainer = actionTokenContainer;
@@ -222,13 +218,10 @@ public class Match implements Serializable, Cloneable {
     }
 
     public boolean isFeasibleTakeMarketResourcesMove(
-            Warehouse warehouse,
-            List<Resource> discardedResources,
-            Market market
+            Warehouse warehouse
     ) {
         return this.currentPlayer.isFeasibleTakeMarketResourcesMove(
-                warehouse,
-                discardedResources
+                warehouse
         );
 
     }
@@ -247,9 +240,6 @@ public class Match implements Serializable, Cloneable {
         this.market = market;
     }
 
-    public boolean isFeasibleExtractActionTokenMove() {
-        return this.playerList.size() == 1;
-    }
 
     public void performExtractActionTokenMove() {
         this.actionTokenContainer.drawToken();
@@ -347,13 +337,13 @@ public class Match implements Serializable, Cloneable {
     }
 
     public String getOpponents(String nickname) {
-        String string = "";
+        StringBuilder string = new StringBuilder();
         for(Player player : playerList){
             if(!player.getNickname().equals(nickname)){
-                string = string + player.getNickname() + " ";
+                string.append(player.getNickname()).append(" ");
             }
         }
-        return string;
+        return string.toString();
     }
 
     public String getWarehouseToString(String nickname) {

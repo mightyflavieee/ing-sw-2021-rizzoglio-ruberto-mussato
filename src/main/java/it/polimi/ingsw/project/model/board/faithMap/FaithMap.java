@@ -30,33 +30,8 @@ public class FaithMap implements Serializable {
     this.papalFavourSlots.add(new PapalFavourSlot(4));
   }
   private void generateMap(Match match, Player player){ //la faithmap è fissa
-//    this.faithTiles = new ArrayList<>();
-//    this.faithTiles.add(new NormalTile());//1
-//    this.faithTiles.add(new NormalTile());
-//    this.faithTiles.add(new VictoryPointsTile(1));//3
-//    this.faithTiles.add(new NormalTile());
-//    this.faithTiles.add(new NormalTile());
-//    this.faithTiles.add(new VictoryPointsTile(2));//6
-//    this.faithTiles.add(new NormalTile());
-//    this.faithTiles.add(new PapalCouncilTile(1));
-//    this.faithTiles.add(new VictoryPointsTile(4));//9
-//    this.faithTiles.add(new NormalTile());
-//    this.faithTiles.add(new NormalTile());
-//    this.faithTiles.add(new VictoryPointsTile(6));//12
-//    this.faithTiles.add(new NormalTile());
-//    this.faithTiles.add(new NormalTile());
-//    this.faithTiles.add(new VictoryPointsTile(9));//15
-//    this.faithTiles.add(new PapalCouncilTile(2));
-//    this.faithTiles.add(new NormalTile());
-//    this.faithTiles.add(new VictoryPointsTile(12));//18
-//    this.faithTiles.add(new NormalTile());
-//    this.faithTiles.add(new NormalTile());
-//    this.faithTiles.add(new VictoryPointsTile(16));//21
-//    this.faithTiles.add(new NormalTile());
-//    this.faithTiles.add(new NormalTile());
-//    this.faithTiles.add(new PapalCouncilTile(3));//è anche una it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile
 
-    this.faithTiles = new ArrayList<>();
+      this.faithTiles = new ArrayList<>();
     this.faithTiles.add(new NormalTile());//1
     this.faithTiles.add(new NormalTile());
     VictoryPointsTile victoryPointsTile = new VictoryPointsTile(1);
@@ -139,7 +114,7 @@ public class FaithMap implements Serializable {
         case 1:
           if (this.markerPosition > 4) {
             this.papalFavourSlots.get(numTile - 1).updateStatus(PapalSlotStatus.Taken);
-            return 2;
+            return this.papalFavourSlots.get(numTile - 1).getVictoryPoints();
           } else {
             this.papalFavourSlots.get(numTile - 1).updateStatus(PapalSlotStatus.Lost);
             return 0;
@@ -147,19 +122,20 @@ public class FaithMap implements Serializable {
         case 2:
           if (this.markerPosition > 11) {
             this.papalFavourSlots.get(numTile - 1).updateStatus(PapalSlotStatus.Taken);
-            return 3;
+            return this.papalFavourSlots.get(numTile - 1).getVictoryPoints();
           } else {
             this.papalFavourSlots.get(numTile - 1).updateStatus(PapalSlotStatus.Lost);
             return 0;
           }
         case 3:
-          if (this.markerPosition == 24){
+          if (this.markerPosition == 23){
+            this.papalFavourSlots.get(numTile - 1).updateStatus(PapalSlotStatus.Taken);
             //ossia se sono il giocatore che arriva alla fine
             return 24;
           }
           if (this.markerPosition > 18) {
             this.papalFavourSlots.get(numTile - 1).updateStatus(PapalSlotStatus.Taken);
-            return 4;
+            return this.papalFavourSlots.get(numTile - 1).getVictoryPoints();
           } else {
             this.papalFavourSlots.get(numTile - 1).updateStatus(PapalSlotStatus.Lost);
             return 0;

@@ -5,7 +5,6 @@ import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.resource.Resource;
 
-import java.util.Collections;
 import java.util.List;
 
 public class TakeMarketResourcesMove extends Move {
@@ -30,9 +29,7 @@ public class TakeMarketResourcesMove extends Move {
     @Override
     public boolean isFeasibleMove(Match match) {
         return match.isFeasibleTakeMarketResourcesMove(
-                warehouse,
-                discardedResources,
-                market
+                warehouse
         );
     }
 

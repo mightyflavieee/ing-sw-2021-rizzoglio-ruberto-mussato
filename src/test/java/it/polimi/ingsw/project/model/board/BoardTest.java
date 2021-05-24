@@ -22,34 +22,6 @@ class BoardTest {
     }
 
     @Test
-    void getMapTray() {
-    }
-
-    @Test
-    void getChest() {
-    }
-
-    @Test
-    void getWarehouse() {
-    }
-
-    @Test
-    void getActivePerks() {
-    }
-
-    @Test
-    void getLeaderCards() {
-    }
-
-    @Test
-    void mapAllResources() {
-    }
-
-    @Test
-    void getCurrentProductionCards() {
-    }
-
-    @Test
     void moveForward() {
         Player player = new Player("pinco pallino");
         List<Player> playerList = new ArrayList<>();
@@ -58,26 +30,6 @@ class BoardTest {
         board.createFaithMapAndWarehouse(new Match(playerList),null);
         board.moveForward();
         assertEquals(1, board.getFaithMap().getMarkerPosition());
-    }
-
-    @Test
-    void papalCouncil() {
-    }
-
-    @Test
-    void moveForwardBlack() {
-    }
-
-    @Test
-    void isFeasibleDiscardLeaderCardMove() {
-    }
-
-    @Test
-    void isFeasibleChangeShelvesMove() {
-    }
-
-    @Test
-    void performChangeShelvesMove() {
     }
 
     @Test
@@ -95,19 +47,4 @@ class BoardTest {
         assertEquals(1, board.getFaithMap().getMarkerPosition());
     }
 
-    @Test
-    void isFeasibleBuyDevCardMove() {
-    }
-
-    @Test
-    void performBuyDevCardMove() {
-    }
-
-    @Test
-    void isFeasibleDevCardProductionMove() {
-    }
-
-    @Test
-    void performDevCardProductionMove() {
-    }
 }

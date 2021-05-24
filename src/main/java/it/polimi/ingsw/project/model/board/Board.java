@@ -43,7 +43,7 @@ public class Board implements Serializable, Cloneable {
     this.faithMap = new FaithMap(match, player);
     this.warehouse = new Warehouse(match);
   }
-
+  @Override
   public final Board clone() {
     // TODO clone interne
     final Board result = new Board();
@@ -77,20 +77,11 @@ public class Board implements Serializable, Cloneable {
     return this.leaderCards;
   }
 
-  public List<ResourceType> getDiscounts() {
-    return this.discounts;
-  }
-
   public ResourceType getTransmutation() {
     return transmutation;
   }
 
-  // it serves the function mapAllResources to the CardContainer
-  public Map<ResourceType, Integer> mapAllResources() {
-    Map<ResourceType, Integer> currentResourcesMap = new HashMap<>();
-    currentResourcesMap = warehouse.mapAllContainedResources();
-    return currentResourcesMap;
-  }
+
 
   // it extracts the last DevelopmentCard in from the mapTray at that position
   private DevelopmentCard getLastFromPosition(DevCardPosition position) {
@@ -333,8 +324,8 @@ public class Board implements Serializable, Cloneable {
   }
 
   public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID) {
-    for (int i = 0; i < this.leaderCards.size(); i++) {
-      if (this.leaderCards.get(i).getId().equals(leaderCardID)) {
+    for (LeaderCard leaderCard : this.leaderCards) {
+      if (leaderCard.getId().equals(leaderCardID)) {
         return true;
       }
     }
@@ -357,8 +348,7 @@ public class Board implements Serializable, Cloneable {
       DevCardPosition position) {
     int intLevel = 0;
     boolean isOneLessCardLevelPresent = false;
-    boolean isDiscountPresent = false;
-    Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
+    boolean isDiscountPresent;
     // double checks if the resources indicated by the user are actually present
     if (!areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
       return false;
@@ -578,8 +568,6 @@ public class Board implements Serializable, Cloneable {
   // checks if the current player can activate a LeaderCard
   public boolean isFeasibleActivateLeaderCardMove(String leaderCardID) {
     LeaderCard card = fetchLeaderCardById(leaderCardID);
-    boolean isDevCardLevelCorrect = false;
-    CardLevel currentCardLevel = null;
     // checks if such a card is present in the player hand and if so checks if it is
     // not already active
     if (card != null) {
@@ -646,8 +634,8 @@ public class Board implements Serializable, Cloneable {
     }
   }
 
-  public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse, List<Resource> discardedResources) {
-    return this.warehouse.isFeasibleTakeMarketResourcesMove(warehouse, discardedResources);
+  public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse) {
+    return this.warehouse.isFeasibleTakeMarketResourcesMove(warehouse);
   }
 
   public void performTakeMarketResourceMove(Warehouse warehouse, List<Resource> discardedResources,
@@ -662,11 +650,11 @@ public class Board implements Serializable, Cloneable {
     return this.faithMap.getMarkerPosition();
   }
   public String getLeaderCardsToString(){
-    String string = "";
+    String string;
 //    for(int i = 0; i < this.leaderCards.size(); i++){
 //      string = string + this.leaderCards.get(i).toString();
 //    }
-    string = this.leaderCards.stream().map(x -> x.toString()).toString();
+    string = this.leaderCards.stream().map(LeaderCard::toString).toString();
     return string;
   }
 }

@@ -25,9 +25,7 @@ public class LeaderCardContainer implements Serializable {
         cardsToAssign.add(this.leaderCards.get(1));
         cardsToAssign.add(this.leaderCards.get(2));
         cardsToAssign.add(this.leaderCards.get(3));
-        for (int i = 0; i < 4; i++) {
-            this.leaderCards.remove(0);
-        }
+        this.leaderCards.subList(0, 4).clear();
         return cardsToAssign;
     }
 

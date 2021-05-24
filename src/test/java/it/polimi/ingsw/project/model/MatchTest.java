@@ -11,94 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class MatchTest {
 
     @Test
-    void getPlayerList() {
-    }
-
-    @Test
-    void getMarket() {
-    }
-
-    @Test
-    void getCardContainer() {
-    }
-
-    @Test
-    void getActionTokenContainer() {
-    }
-
-    @Test
-    void getCurrentPlayer() {
-    }
-
-    @Test
-    void getIsLastTurn() {
-    }
-
-    @Test
-    void notifyFaithMapsForCouncil() {
-    }
-
-    @Test
-    void notifyFaithMapsForDiscard() {
-    }
-
-    @Test
-    void addVictoryPoints() {
-    }
-
-    @Test
-    void discardForActionToken() {
-    }
-
-    @Test
-    void end() {
-    }
-
-    @Test
-    void updatePlayer() {
-    }
-
-    @Test
-    void testClone() {
-    }
-
-    @Test
-    void isFeasibleDiscardLeaderCardMove() {
-    }
-
-    @Test
-    void performDiscardLeaderCardMove() {
-    }
-
-    @Test
-    void isFeasibleChangeShelvesMove() {
-    }
-
-    @Test
-    void performChangeShelvesMove() {
-    }
-
-    @Test
-    void isFeasibleBuyDevCardMove() {
-    }
-
-    @Test
-    void performBuyDevCardMove() {
-    }
-
-    @Test
-    void isFeasibleDevCardProductionMove() {
-    }
-
-    @Test
-    void performDevCardProductionMove() {
-    }
-
-    @Test
-    void isFeasibleExtractActionTokenMove() {
-    }
-
-    @Test
     void performExtractActionTokenMove() {
         Player player = new Player("pinco pallino");
         List<Player> playerList = new ArrayList<>();
@@ -135,14 +47,6 @@ class MatchTest {
         assertEquals(24, player.getBoard().getFaithMap().getBlackMarkerPosition());
         assertTrue(match.getisOver());
 
-    }
-
-    @Test
-    void isFeasibleActivateLeaderCardMove() {
-    }
-
-    @Test
-    void performActivateLeaderCardMove() {
     }
 
 
