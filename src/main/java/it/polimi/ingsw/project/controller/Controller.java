@@ -16,11 +16,11 @@ public class Controller implements Observer<PlayerMove> {
     private synchronized void performMove(PlayerMove playerMove){
         //TODO tipi di messaggi
         if (!model.isPlayerTurn(playerMove.getPlayer())) {
-            playerMove.getView().reportError(gameMessage.wrongTurnMessage);
+            model.notifyPartialMove();
             return;
         }
         if(!model.isRightTurnPhase(playerMove)){
-            playerMove.getView().reportError(gameMessage.wrongPhaseMessage);
+            model.notifyPartialMove();
             return;
         }
         // it performs moves one by one
