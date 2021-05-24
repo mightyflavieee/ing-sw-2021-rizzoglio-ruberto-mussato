@@ -7,7 +7,7 @@ import it.polimi.ingsw.project.view.View;
 
 
 public class DiscardLeaderCardMove extends Move{
-    private String leaderCardID;
+    private final String leaderCardID;
     public DiscardLeaderCardMove (String leaderCardID) {
         this.leaderCardID = leaderCardID;
     }
@@ -21,7 +21,7 @@ public class DiscardLeaderCardMove extends Move{
     }
     @Override
     public String toString(){
-        return new String("Discard Leader Card Move, Leader CardID: " + this.leaderCardID);
+        return "Discard Leader Card Move, Leader CardID: " + this.leaderCardID;
     }
 
 

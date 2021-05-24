@@ -70,11 +70,7 @@ public class Market extends Observable<Market> implements Cloneable, Serializabl
             case Yellow:
                 return ResourceType.Coin;
             default:
-                if (transmutationPerk != null) {
-                    return transmutationPerk;
-                } else {
-                    return null;
-                }
+                return transmutationPerk;
         }
     }
 

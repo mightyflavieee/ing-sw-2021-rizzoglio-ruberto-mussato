@@ -3,7 +3,7 @@ package it.polimi.ingsw.project.model.board.faithMap;
 import java.io.Serializable;
 
 public class PapalFavourSlot implements Serializable {
-    private int victoryPoints;
+    private final int victoryPoints;
     private PapalSlotStatus status;
 
     public PapalFavourSlot(int victoryPoints) {

@@ -7,10 +7,10 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import java.util.Map;
 
 public class BuyDevCardMove extends Move{
-    private String devCardID;
-    private DevCardPosition position;
-    private Map<ResourceType, Integer> resourcesToEliminateWarehouse;
-    private Map<ResourceType, Integer> resourcesToEliminateChest;
+    private final String devCardID;
+    private final DevCardPosition position;
+    private final Map<ResourceType, Integer> resourcesToEliminateWarehouse;
+    private final Map<ResourceType, Integer> resourcesToEliminateChest;
 
     public BuyDevCardMove(String devCardID, DevCardPosition position, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
         this.devCardID = devCardID;
@@ -31,6 +31,6 @@ public class BuyDevCardMove extends Move{
 
     @Override
     public String toString(){
-        return new String("Buy Dev Card Move, Dev Card ID:" + this.devCardID);
+        return "Buy Dev Card Move, Dev Card ID:" + this.devCardID;
     }
 }

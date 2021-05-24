@@ -8,7 +8,7 @@ import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.observer.Observable;
 
 public class Model extends Observable<MoveMessage> implements Serializable{
-    private Match match;
+    private final Match match;
 
     public Model(List<Player> listOfPlayers) {
         this.match = new Match(listOfPlayers);

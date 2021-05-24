@@ -6,8 +6,8 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Production implements Serializable{
-    private Map<ResourceType, Integer> requiredResources;
-    private Map<ResourceType, Integer> manufacturedResources;
+    private final Map<ResourceType, Integer> requiredResources;
+    private final Map<ResourceType, Integer> manufacturedResources;
 
     public Production(Map<ResourceType, Integer> requiredResources, Map<ResourceType, Integer> manufacturedResources) {
         this.requiredResources = requiredResources;

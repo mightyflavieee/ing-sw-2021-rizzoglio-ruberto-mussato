@@ -26,7 +26,7 @@ public class RemoteView extends View {
 
 
 
-    private ClientConnection clientConnection;
+    private final ClientConnection clientConnection;
 
     public RemoteView(Player player, List<String> opponents, ClientConnection c) {
         super(player);

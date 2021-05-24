@@ -14,7 +14,7 @@ import java.util.List;
 // è un Singleton
 public class ActionTokenContainer implements Serializable {
     
-    private List<ActionToken> actionTokens;
+    private final List<ActionToken> actionTokens;
 
 
     // constructor of it.polimi.ingsw.project.model.ActionTokens.ActionTokenContainer, it adds all the different types of actionToken and then shuffles all actionToken

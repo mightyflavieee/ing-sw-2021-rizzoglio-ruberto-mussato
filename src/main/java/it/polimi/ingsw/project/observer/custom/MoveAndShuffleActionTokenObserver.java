@@ -7,8 +7,8 @@ import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
 import it.polimi.ingsw.project.observer.Observer;
 
 public class MoveAndShuffleActionTokenObserver implements Observer<MoveAndShuffleActionToken> {
-    private Match match;
-    private ActionTokenContainer actionTokenContainer;
+    private final Match match;
+    private final ActionTokenContainer actionTokenContainer;
 
     public MoveAndShuffleActionTokenObserver(Match match, ActionTokenContainer actionTokenContainer) {
         this.match = match;

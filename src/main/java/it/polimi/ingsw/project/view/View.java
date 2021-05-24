@@ -9,7 +9,7 @@ import it.polimi.ingsw.project.observer.Observer;
 
 public abstract class View extends Observable<PlayerMove> implements Observer<MoveMessage> {
 
-    private Player player;
+    private final Player player;
 
     protected View(Player player){
         this.player = player;

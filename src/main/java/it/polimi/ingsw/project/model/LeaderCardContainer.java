@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class LeaderCardContainer implements Serializable {
-    private List<LeaderCard> leaderCards;
+    private final List<LeaderCard> leaderCards;
 
     public LeaderCardContainer() {
         LeaderCardContainerBuilder leaderCardContainerBuilder = new LeaderCardContainerBuilder("src/main/resources/leadercards.json");

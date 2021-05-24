@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class CardContainer implements Cloneable, Serializable {
-  private Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> cardContainer;
+  private final Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> cardContainer;
 
   public Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> getCardContainer() {
     return cardContainer;

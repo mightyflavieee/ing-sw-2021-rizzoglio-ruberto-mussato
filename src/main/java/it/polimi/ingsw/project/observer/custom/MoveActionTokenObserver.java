@@ -6,7 +6,7 @@ import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
 import it.polimi.ingsw.project.observer.Observer;
 
 public class MoveActionTokenObserver implements Observer<MoveActionToken> {
-    private Match match;
+    private final Match match;
 
     public MoveActionTokenObserver(Match match) {
         this.match = match;

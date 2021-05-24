@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductionMove extends Move{
-    private String devCardID;
-    private String leaderCardId;
-    private Map<ResourceType, Integer> resourcesToEliminateWarehouse;
-    private Map<ResourceType, Integer> resourcesToEliminateChest;
-    private ProductionType productionType;
-    private List<ResourceType> boardOrPerkManufacturedResource;
+    private final String devCardID;
+    private final String leaderCardId;
+    private final Map<ResourceType, Integer> resourcesToEliminateWarehouse;
+    private final Map<ResourceType, Integer> resourcesToEliminateChest;
+    private final ProductionType productionType;
+    private final List<ResourceType> boardOrPerkManufacturedResource;
 
     // constructs the ProductionMove. If either devCardID or leaderCardId (or both) aren't required,
     // put null as a parameter
@@ -46,6 +46,6 @@ public class ProductionMove extends Move{
     @Override
     public String toString(){
         //TODO
-        return new String("Production Move, type: " + this.productionType);
+        return "Production Move, type: " + this.productionType;
     }
 }

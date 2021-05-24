@@ -453,10 +453,7 @@ public class Board implements Serializable, Cloneable {
       }
     }
     // if isOneLessCardLevelPresent is false, the function returns false
-    if (!isOneLessCardLevelPresent) {
-      return false;
-    }
-    return true;
+    return isOneLessCardLevelPresent;
   }
 
   // puts the bought DevelopmentCard in the mapTray and eliminates the required
@@ -500,10 +497,7 @@ public class Board implements Serializable, Cloneable {
       }
     }
     // double checks if the resources indicated by the user are actually present
-    if (!areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
-      return false;
-    }
-    return true;
+    return areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateChest);
   }
 
   // performs the production putting the resources manufactured in the strongbox
@@ -622,9 +616,7 @@ public class Board implements Serializable, Cloneable {
     // checks if there enough resources in the warehouse and the strongbox
     // if the LeaderCard requires resources to be activated
     if (card.getRequiredResources() != null) {
-      if (!areEnoughResourcesPresent(card.getRequiredResources())) {
-        return false;
-      }
+      return areEnoughResourcesPresent(card.getRequiredResources());
     }
     return true;
   }

@@ -5,7 +5,7 @@ import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.observer.Observer;
 
 public class DiscardActionTokenObserver implements Observer<CardColor> {
-    private Match match;
+    private final Match match;
 
     public DiscardActionTokenObserver(Match match) {
         this.match = match;

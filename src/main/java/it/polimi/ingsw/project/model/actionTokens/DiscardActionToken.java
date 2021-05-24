@@ -9,7 +9,7 @@ import it.polimi.ingsw.project.observer.custom.DiscardActionTokenObserver;
 
 
 public class DiscardActionToken extends Observable<CardColor> implements ActionToken{
-    private CardColor cardColor;
+    private final CardColor cardColor;
 
     public DiscardActionToken(CardColor cardColor) {
         this.cardColor = cardColor;

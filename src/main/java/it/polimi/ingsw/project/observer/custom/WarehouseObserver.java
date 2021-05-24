@@ -5,7 +5,7 @@ import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.observer.Observer;
 
 public class WarehouseObserver implements Observer<Warehouse> {
-    private Match match;
+    private final Match match;
 
     public WarehouseObserver(Match match) {
         this.match = match;

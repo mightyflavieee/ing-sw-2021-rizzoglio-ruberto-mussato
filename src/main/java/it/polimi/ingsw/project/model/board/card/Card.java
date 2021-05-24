@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public abstract class Card implements Serializable {
-  private int victoryPoints;
+  private final int victoryPoints;
 
   
   public int getPoints(){

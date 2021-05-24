@@ -7,7 +7,7 @@ import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.observer.custom.VictoryPointsObserver;
 
 public class VictoryPointsTile extends Observable<VictoryPointsTile> implements ActivableTile{
-    private int victoryPoints;
+    private final int victoryPoints;
 
     public VictoryPointsTile(int victoryPoints) {
         this.victoryPoints = victoryPoints;

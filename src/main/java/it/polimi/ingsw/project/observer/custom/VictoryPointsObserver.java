@@ -6,7 +6,7 @@ import it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile;
 import it.polimi.ingsw.project.observer.Observer;
 
 public class VictoryPointsObserver implements Observer<VictoryPointsTile> {
-    private Player myplayer;
+    private final Player myplayer;
 
     public VictoryPointsObserver(Player player) {
         this.myplayer = player;

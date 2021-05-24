@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class Warehouse extends Observable<Warehouse> implements Serializable {
 
-  private Map<ShelfFloor, List<Resource>> shelves;
+  private final Map<ShelfFloor, List<Resource>> shelves;
   private Map<ResourceType, Integer> extraDeposit; // da mettere nel costruttore
   private int numResourcesToDiscard;
 

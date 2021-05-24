@@ -14,7 +14,7 @@ public class Move implements Serializable {
         //TODO
     }
     public String toString(){
-        return new String("Generic Move");
+        return "Generic Move";
     }
 
     public boolean isMainMove(){

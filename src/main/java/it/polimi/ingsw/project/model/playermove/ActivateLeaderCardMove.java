@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ActivateLeaderCardMove extends Move{
-    private String leaderCardID;
+    private final String leaderCardID;
 
     public ActivateLeaderCardMove(String leaderCardID) {
         this.leaderCardID = leaderCardID;
@@ -27,7 +27,7 @@ public class ActivateLeaderCardMove extends Move{
 
     @Override
     public String toString(){
-        return new String("Activate Leader Card Move, Leader Card ID: " + this.leaderCardID);
+        return "Activate Leader Card Move, Leader Card ID: " + this.leaderCardID;
     }
 
     public boolean isMainMove(){
