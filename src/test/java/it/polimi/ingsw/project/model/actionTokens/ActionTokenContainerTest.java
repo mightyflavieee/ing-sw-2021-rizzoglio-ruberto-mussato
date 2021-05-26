@@ -1,7 +1,12 @@
 package it.polimi.ingsw.project.model.actionTokens;
 
+import it.polimi.ingsw.project.model.Model;
+import it.polimi.ingsw.project.model.Player;
+import it.polimi.ingsw.project.model.board.card.CardColor;
+import it.polimi.ingsw.project.model.board.card.CardLevel;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,5 +41,136 @@ class ActionTokenContainerTest {
                     && newList.get(5) == oldList.get(5));
 
     }
+    @Test
+    void lorenzoTest() {
+        Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Model model = new Model(playerList);
+        while (!(model.getMatch().getActionTokenContainer().getActionTokens()
+                .get(0) instanceof MoveActionToken)) {
+            model.getMatch().getActionTokenContainer().shuffle();
+        }
+        model.getMatch().performExtractActionTokenMove();
+        assertEquals(2, player.getBoard().getFaithMap().getBlackMarkerPosition());
 
+    }
+    @Test
+    void lostToBlackMarker(){
+        Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Model model = new Model(playerList);
+        for(int i = 1; i < 13; i++) {
+            while (!(model.getMatch().getActionTokenContainer().getActionTokens()
+                    .get(0) instanceof MoveActionToken)) {
+                model.getMatch().getActionTokenContainer().shuffle();
+            }
+            model.getMatch().performExtractActionTokenMove();
+            assertEquals(i * 2, player.getBoard().getFaithMap().getBlackMarkerPosition());
+        }
+        assertTrue(model.getMatch().getisOver());
+    }
+    @Test
+    void discardActionToken(){
+        Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Model model = new Model(playerList);
+        assertEquals(4, model.getMatch().getCardContainer().getCardContainer().get(CardLevel.One).get(CardColor.Gold).size());
+        do {
+            model.getMatch().getActionTokenContainer().shuffle();
+            while (!(model.getMatch().getActionTokenContainer().getActionTokens()
+                    .get(0) instanceof DiscardActionToken)) {
+                model.getMatch().getActionTokenContainer().shuffle();
+            }
+        }while (!(((DiscardActionToken) model.getMatch().getActionTokenContainer().getActionTokens().get(0)).getCardColor()==CardColor.Gold));
+        model.getMatch().performExtractActionTokenMove();
+        assertEquals(2, model.getMatch().getCardContainer().getCardContainer().get(CardLevel.One).get(CardColor.Gold).size());    }
+    @Test
+    void lostToDiscard(){
+        Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Model model = new Model(playerList);
+        assertEquals(4, model.getMatch().getCardContainer().getCardContainer().get(CardLevel.One).get(CardColor.Emerald).size());
+        do {
+            model.getMatch().getActionTokenContainer().shuffle();
+            while (!(model.getMatch().getActionTokenContainer().getActionTokens()
+                    .get(0) instanceof DiscardActionToken)) {
+                model.getMatch().getActionTokenContainer().shuffle();
+            }
+        }while (!(((DiscardActionToken) model.getMatch().getActionTokenContainer().getActionTokens().get(0)).getCardColor()==CardColor.Emerald));
+        model.getMatch().performExtractActionTokenMove();
+        assertEquals(2, model.getMatch().getCardContainer().getCardContainer().get(CardLevel.One).get(CardColor.Emerald).size());
+
+        do {
+            model.getMatch().getActionTokenContainer().shuffle();
+            while (!(model.getMatch().getActionTokenContainer().getActionTokens()
+                    .get(0) instanceof DiscardActionToken)) {
+                model.getMatch().getActionTokenContainer().shuffle();
+            }
+        }while (!(((DiscardActionToken) model.getMatch().getActionTokenContainer().getActionTokens().get(0)).getCardColor()==CardColor.Emerald));
+        model.getMatch().performExtractActionTokenMove();
+        assertEquals(0, model.getMatch().getCardContainer().getCardContainer().get(CardLevel.One).get(CardColor.Emerald).size());
+
+
+        do {
+            model.getMatch().getActionTokenContainer().shuffle();
+            while (!(model.getMatch().getActionTokenContainer().getActionTokens()
+                    .get(0) instanceof DiscardActionToken)) {
+                model.getMatch().getActionTokenContainer().shuffle();
+            }
+        }while (!(((DiscardActionToken) model.getMatch().getActionTokenContainer().getActionTokens().get(0)).getCardColor()==CardColor.Emerald));
+        model.getMatch().performExtractActionTokenMove();
+        assertEquals(2, model.getMatch().getCardContainer().getCardContainer().get(CardLevel.Two).get(CardColor.Emerald).size());
+
+        do {
+            model.getMatch().getActionTokenContainer().shuffle();
+            while (!(model.getMatch().getActionTokenContainer().getActionTokens()
+                    .get(0) instanceof DiscardActionToken)) {
+                model.getMatch().getActionTokenContainer().shuffle();
+            }
+        }while (!(((DiscardActionToken) model.getMatch().getActionTokenContainer().getActionTokens().get(0)).getCardColor()==CardColor.Emerald));
+        model.getMatch().performExtractActionTokenMove();
+        assertEquals(0, model.getMatch().getCardContainer().getCardContainer().get(CardLevel.Two).get(CardColor.Emerald).size());
+
+        do {
+            model.getMatch().getActionTokenContainer().shuffle();
+            while (!(model.getMatch().getActionTokenContainer().getActionTokens()
+                    .get(0) instanceof DiscardActionToken)) {
+                model.getMatch().getActionTokenContainer().shuffle();
+            }
+        }while (!(((DiscardActionToken) model.getMatch().getActionTokenContainer().getActionTokens().get(0)).getCardColor()==CardColor.Emerald));
+        model.getMatch().performExtractActionTokenMove();
+        assertEquals(2, model.getMatch().getCardContainer().getCardContainer().get(CardLevel.Three).get(CardColor.Emerald).size());
+
+        do {
+            model.getMatch().getActionTokenContainer().shuffle();
+            while (!(model.getMatch().getActionTokenContainer().getActionTokens()
+                    .get(0) instanceof DiscardActionToken)) {
+                model.getMatch().getActionTokenContainer().shuffle();
+            }
+        }while (!(((DiscardActionToken) model.getMatch().getActionTokenContainer().getActionTokens().get(0)).getCardColor()==CardColor.Emerald));
+        model.getMatch().performExtractActionTokenMove();
+        assertEquals(0, model.getMatch().getCardContainer().getCardContainer().get(CardLevel.Three).get(CardColor.Emerald).size());
+
+
+        assertTrue(model.getMatch().getisOver());
+
+    }
+    @Test
+    void moveAndShuffle() {
+        Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Model model = new Model(playerList);
+        while (!(model.getMatch().getActionTokenContainer().getActionTokens()
+                .get(0) instanceof MoveAndShuffleActionToken)) {
+            model.getMatch().getActionTokenContainer().shuffle();
+        }
+        model.getMatch().performExtractActionTokenMove();
+        assertEquals(1, player.getBoard().getFaithMap().getBlackMarkerPosition());
+
+    }
 }

@@ -24,20 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
 
-        @Test
-        void lorenzoTest() {
-                Player player = new Player("pinco pallino");
-                List<Player> playerList = new ArrayList<>();
-                playerList.add(player);
-                Model model = new Model(playerList);
-                while (!(model.getMatch().getActionTokenContainer().getActionTokens()
-                                .get(0) instanceof MoveActionToken)) {
-                        model.getMatch().getActionTokenContainer().shuffle();
-                }
-                model.getMatch().performExtractActionTokenMove();
-                assertEquals(2, player.getBoard().getFaithMap().getBlackMarkerPosition());
 
-        }
 
         @Test
         void completeTest() {
@@ -143,7 +130,7 @@ class ControllerTest {
                 model.updateTurn();
                 assertEquals(TurnPhase.WaitPhase,gianluca.getTurnPhase());
                 assertEquals(0, gianluca.getVictoryPoints());
-                assertEquals(0, gianluca.getBoard().getFaithMap().getMarkerPosition());
+                assertEquals(0, gianluca.getMarkerPosition());
                 assertEquals(1, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.First).size());
                 assertEquals(2, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.Second).size());
                 assertEquals(ResourceType.Coin,

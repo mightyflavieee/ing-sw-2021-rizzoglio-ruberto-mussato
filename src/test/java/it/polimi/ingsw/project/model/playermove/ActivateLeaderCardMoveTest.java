@@ -1,8 +1,13 @@
 package it.polimi.ingsw.project.model.playermove;
 
+import it.polimi.ingsw.project.model.CardContainer;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
+import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
+import it.polimi.ingsw.project.model.board.card.CardColor;
+import it.polimi.ingsw.project.model.board.card.CardLevel;
+import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.Status;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
@@ -125,4 +130,31 @@ class ActivateLeaderCardMoveTest {
         // tests the function
         assertEquals(Status.Active, player.getBoard().getLeaderCards().get(0).getStatus());
     }
+    @Test
+    void activateLeaderCardWithDevCard(){
+        Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Match match = new Match(playerList);
+        CardContainer cardContainer = new CardContainer();
+        Perk perk = new Perk(new Resource(ResourceType.Coin), PerkType.Warehouse);
+        DevelopmentCard developmentCard = cardContainer.getCardContainer().get(CardLevel.One).get(CardColor.Gold).get(0);
+        List<DevelopmentCard> developmentCardList = new ArrayList<>();
+        developmentCardList.add(developmentCard);
+        Map<CardColor, Integer> requiredDevCard = new HashMap<>();
+        requiredDevCard.put(CardColor.Gold,1);
+        Map<CardColor, CardLevel> requiredDevCardLevel = new HashMap<>();
+        requiredDevCardLevel.put(CardColor.Gold,CardLevel.One);
+        LeaderCard leaderCard = new LeaderCard("prova",perk,1,null,requiredDevCard,requiredDevCardLevel);
+        player.getBoard().getLeaderCards().add(leaderCard);
+        player.getBoard().getMapTray().put(DevCardPosition.Right,developmentCardList);
+
+
+
+        Move activateLeaderCard = new ActivateLeaderCardMove("prova");
+        activateLeaderCard.performMove(match);
+        assertEquals(Status.Active, player.getBoard().getLeaderCards().get(0).getStatus());
+
+    }
+
 }

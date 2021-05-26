@@ -46,5 +46,22 @@ class BoardTest {
         assertEquals(0,board.getLeaderCards().size());
         assertEquals(1, board.getFaithMap().getMarkerPosition());
     }
+    @Test
+    void getLeaderCardsToString() {
+        Board board = new Board();
+        assertFalse(board.getLeaderCardsToString().isEmpty());
+        assertFalse(board.getLeaderCardsToString().isBlank());
+    }
+    @Test
+    void getTrasmutation(){
+        Board board = new Board();
+        assertNull(board.getTransmutation());
+    }
+    @Test
+    void getCurrentProductionCard(){
+        Board board = new Board();
+        assertEquals(3, board.getCurrentProductionCards().size());
+
+    }
 
 }
