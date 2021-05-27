@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -166,5 +167,11 @@ class MarketTest {
             }
         }
     }
-
+    @Test
+    void testToString(){
+        Market market = new Market();
+        String string = market.toString();
+        assertFalse(string.isEmpty());
+        assertFalse(string.isBlank());
+    }
 }

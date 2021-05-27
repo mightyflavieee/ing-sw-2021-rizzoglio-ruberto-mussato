@@ -222,6 +222,9 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     return true;
   }
   public boolean insertInExtraDeposit(List<Resource> resourceList){
+    if(this.extraDeposit == null){
+      return false;
+    }
     if(extraDeposit.size() + resourceList.size() > 2) {
       return false;
     }

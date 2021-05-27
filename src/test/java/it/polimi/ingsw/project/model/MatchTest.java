@@ -49,5 +49,20 @@ class MatchTest {
 
     }
 
+    @Test
+    void getter(){
+        Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Match match = new Match(playerList);
+        assertNotNull(match.getLeaderCardsToString(player.getNickname()));
+        assertNotNull(match.getWarehouse(player.getNickname()));
+        assertNotNull(match.getBoardByPlayerNickname(player.getNickname()));
+        assertNotNull(match.getOpponents(player.getNickname()));
+        assertNull(match.getTransmutationPerk(player.getNickname()));
+        assertNotNull(match.getWarehouseToString(player.getNickname()));
+        assertNotNull(match.getHistoryToString(player.getNickname()));
+    }
+
 
 }

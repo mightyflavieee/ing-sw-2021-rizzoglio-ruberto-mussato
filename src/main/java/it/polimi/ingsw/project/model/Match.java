@@ -14,6 +14,7 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Match implements Serializable, Cloneable {
 
@@ -133,7 +134,7 @@ public class Match implements Serializable, Cloneable {
         result.isLastTurn = isLastTurn;
         result.isOver = isOver;
         result.market = market;
-        result.playerList = playerList;
+        result.playerList = playerList.stream().map(Player::clone).collect(Collectors.toList());
         return result;
     }
 

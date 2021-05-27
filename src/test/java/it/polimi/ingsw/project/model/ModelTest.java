@@ -41,4 +41,12 @@ class ModelTest {
         model.getMatch().performExtractActionTokenMove();
         assertEquals(2, player.getBoard().getFaithMap().getBlackMarkerPosition());
     }
+    @Test
+    void testclone(){
+        Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Model model = new Model(playerList);
+        assertNotEquals(model.getMatch(),model.getMatchCopy());
+    }
 }

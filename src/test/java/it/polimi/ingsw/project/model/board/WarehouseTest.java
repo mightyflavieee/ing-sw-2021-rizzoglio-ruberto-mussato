@@ -57,6 +57,47 @@ class WarehouseTest {
       //  assertTrue(returnedResources.get(ResourceType.Faith)==0);
       //  assertTrue(returnedResources.get(ResourceType.Stone)==0);
     }
+    @Test
+    void swapShelves(){
+        Warehouse warehouse = new Warehouse(null);
+        List<Resource> resourcesListFirstFloor = new ArrayList<>();
+        List<Resource> resourcesListSecondFloor = new ArrayList<>();
+        List<Resource> resourcesListThirdFloor = new ArrayList<>();
+        Resource resource0 = new Resource(ResourceType.Coin);
+        Resource resource1 = new Resource(ResourceType.Stone);
+        Resource resource3 = new Resource(ResourceType.Servant);
+        Resource resource4 = new Resource(ResourceType.Servant);
+        Resource resource5 = new Resource(ResourceType.Servant);
+        resourcesListFirstFloor.add(resource0);
+        resourcesListSecondFloor.add(resource1);
+        resourcesListThirdFloor.add(resource3);
+        resourcesListThirdFloor.add(resource4);
+        resourcesListThirdFloor.add(resource5);
+        warehouse.getShelves().put(ShelfFloor.First, resourcesListFirstFloor);
+        warehouse.getShelves().put(ShelfFloor.Second, resourcesListSecondFloor);
+        warehouse.getShelves().put(ShelfFloor.Third, resourcesListThirdFloor);
+        warehouse.swapShelves(ShelfFloor.First,ShelfFloor.Second);
+        assertEquals(ResourceType.Coin,warehouse.getShelves().get(ShelfFloor.Second).get(0).getType());
+        assertEquals(ResourceType.Stone,warehouse.getShelves().get(ShelfFloor.First).get(0).getType());
+        assertEquals(ResourceType.Servant,warehouse.getShelves().get(ShelfFloor.Third).get(0).getType());
 
+    }
+    @Test
+    void testtoString(){
+        Warehouse warehouse = new Warehouse(null);
+        String string = warehouse.toString();
+        assertFalse(string.isBlank());
+        assertFalse(string.isEmpty());
 
+    }
+    @Test
+    void insertFalse() {
+        Warehouse warehouse = new Warehouse(null);
+        List<Resource> resourceList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            resourceList.add(new Resource(ResourceType.Servant));
+        }
+        assertFalse(warehouse.insertInExtraDeposit(resourceList));
+        assertFalse(warehouse.insertInShelves(ShelfFloor.Second,resourceList));
+    }
 }

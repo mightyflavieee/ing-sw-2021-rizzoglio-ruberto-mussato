@@ -18,5 +18,10 @@ class CardContainerTest {
             }
         }
     }
+    @Test
+    void getAvailableDevCards(){
+        CardContainer cardContainer = new CardContainer();
+        assertEquals(12,cardContainer.getAvailableDevCards().size());
+    }
 
 }

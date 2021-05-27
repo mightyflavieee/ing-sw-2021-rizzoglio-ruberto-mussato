@@ -30,6 +30,9 @@ class LeaderCardContainerTest {
     void testGetLeaderCards() {
         LeaderCardContainer leaderCardContainer = new LeaderCardContainer();
         assertEquals(16,leaderCardContainer.getLeaderCards().size());
+        List<LeaderCard> leaderCardList = leaderCardContainer.getFourCardsForPlayer();
+        leaderCardContainer.insertLeaderCardsAfterChoice(leaderCardList);
+        assertEquals(16,leaderCardContainer.getLeaderCards().size());
     }
 
 }

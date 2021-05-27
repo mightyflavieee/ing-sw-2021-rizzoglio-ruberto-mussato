@@ -122,15 +122,15 @@ class ControllerTest {
                 Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, new ArrayList<>(), localMarket,
                                 false);
                 PlayerMove playerMove1Gian = new PlayerMove(gianluca, null, move1Gian);
-                assertEquals(TurnPhase.InitialPhase,gianluca.getTurnPhase());
+                assertEquals(TurnPhase.InitialPhase,model.getMatch().getTurnPhase(gianluca.getNickname()));
                 model.updateTurn(); //now i am in the main phase
                 assertEquals(TurnPhase.MainPhase,gianluca.getTurnPhase());
                 controller.update(playerMove1Gian);
                 assertEquals(TurnPhase.EndPhase,gianluca.getTurnPhase());
-                model.updateTurn();
+                controller.update(new PlayerMove(gianluca,null,new NoMove()));
                 assertEquals(TurnPhase.WaitPhase,gianluca.getTurnPhase());
-                assertEquals(0, gianluca.getVictoryPoints());
-                assertEquals(0, gianluca.getMarkerPosition());
+                assertEquals(0, model.getMatch().getVictoryPoints(gianluca.getNickname()));
+                assertEquals(0, model.getMatch().getMarkerPosition(gianluca.getNickname()));
                 assertEquals(1, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.First).size());
                 assertEquals(2, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.Second).size());
                 assertEquals(ResourceType.Coin,

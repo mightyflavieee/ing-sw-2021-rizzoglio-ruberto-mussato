@@ -12,4 +12,9 @@ class ResourceTest {
         Resource resource = new Resource(ResourceType.Coin);
         assertEquals(resourceType, resource.getType());
     }
+    @Test
+    void testToString(){
+        Resource resource = new Resource(ResourceType.Shield);
+        assertEquals(ResourceType.Shield.toString(),resource.toString());
+    }
 }

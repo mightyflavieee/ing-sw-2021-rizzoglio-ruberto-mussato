@@ -16,6 +16,7 @@ class PlayerTest {
         player.createFaithMap(new Match(playerList));
         player.moveForward();
         assertEquals(1, player.getBoard().getFaithMap().getMarkerPosition());
+        assertTrue(player.getStatus());
     }
 
     @Test

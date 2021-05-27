@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.model.playermove;
 
 import it.polimi.ingsw.project.model.CardContainer;
+import it.polimi.ingsw.project.model.LeaderCardContainer;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
@@ -156,5 +157,43 @@ class ActivateLeaderCardMoveTest {
         assertEquals(Status.Active, player.getBoard().getLeaderCards().get(0).getStatus());
 
     }
+    @Test
+    void notFeasibleLevel(){
+        Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Match match = new Match(playerList);
+        LeaderCardContainer leaderCardContainer = new LeaderCardContainer();
+        List<LeaderCard> leaderCardList = leaderCardContainer.getLeaderCards();
+        LeaderCard leader = null;
+        for (LeaderCard leadercard: leaderCardList) {
+        if(leadercard.getId().equals("id13")){
+            leader = leadercard;
+            break;
+        }
+        }
+        player.getBoard().getLeaderCards().add(leader);
+        Move move = new ActivateLeaderCardMove(leader.getId());
+        assertFalse(move.isFeasibleMove(match));
+    }
+    @Test
+    void notFeasible() {
+        Player player = new Player("pinco pallino");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(player);
+        Match match = new Match(playerList);
+        LeaderCardContainer leaderCardContainer = new LeaderCardContainer();
+        List<LeaderCard> leaderCardList = leaderCardContainer.getLeaderCards();
+        Move move;
+        CardContainer cardContainer = new CardContainer();
+        player.getBoard().getMapTray().put(DevCardPosition.Right, cardContainer.getCardContainer().get(CardLevel.One).get(CardColor.Gold));
+        for (LeaderCard leadercard : leaderCardList) {
+                player.getBoard().getLeaderCards().add(leadercard);
+                 move = new ActivateLeaderCardMove(leadercard.getId());
+                assertFalse(move.isFeasibleMove(match));
+
+        }
+    }
+
 
 }

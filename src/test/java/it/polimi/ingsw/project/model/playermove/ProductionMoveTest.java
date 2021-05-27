@@ -621,4 +621,11 @@ class ProductionMoveTest {
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
+    @Test
+    void testToString(){
+        Move move = new ProductionMove("as","sad",null,null,ProductionType.Board,null);
+        String string = move.toString();
+        assertFalse(string.isEmpty());
+        assertFalse(string.isBlank());
+    }
 }
