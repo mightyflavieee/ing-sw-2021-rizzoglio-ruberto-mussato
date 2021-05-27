@@ -8,12 +8,22 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BoardGUI {
-    private final JFrame frame = new JFrame("Board");
-    private JPanel panel = new JPanel();
-    private final Map<DevCardPosition, JPanel> cardSlots = new HashMap<>();
-    private final JPanel warehouse = new JPanel();
-    private final JPanel faithMap = new JPanel();
+public class BoardGUI extends JInternalFrame {
+    private JPanel panel;
+    private final Map<DevCardPosition, JPanel> cardSlots;
+    private final JPanel warehouse;
+    private final JPanel faithMap;
+
+    public BoardGUI() throws IOException {
+        this.setVisible(true);
+        this.setPreferredSize(new Dimension(1066, 762));
+        this.panel = new JPanel();
+        this.cardSlots= new HashMap<>();
+        this.warehouse = new JPanel();
+        this.faithMap = new JPanel();
+        createBoard();
+        this.add(this.panel);
+    }
 
     private void setBoardFrameBackGroundImage() throws IOException {
         this.panel = new JPanelWithBackground("src/main/resources/prova_board.PNG");
@@ -79,7 +89,6 @@ public class BoardGUI {
         devCardSlots.add(voidPanelCenterRight);
         devCardSlots.add(rightCardPanel);
         devCardSlots.add(voidPanelEnd);
-        devCardSlots.setBorder(BorderFactory.createLineBorder(Color.black));
         return devCardSlots;
     }
 
@@ -159,7 +168,6 @@ public class BoardGUI {
     private void createFaithMap() {
         this.faithMap.setOpaque(false);
         this.faithMap.setPreferredSize(new Dimension(1066, 240));
-        this.faithMap.setBorder(BorderFactory.createLineBorder(Color.black));
     }
 
     private JPanel createWarehouseAndDevCardSlotsRow() throws IOException {
@@ -179,21 +187,5 @@ public class BoardGUI {
         this.panel.setLayout(new BorderLayout());
         this.panel.add(this.faithMap, BorderLayout.NORTH);
         this.panel.add(warehouseAndDevCardSlotsRow, BorderLayout.SOUTH);
-    }
-
-    public void createAndStartGUI() throws IOException {
-        createBoard();
-        Dimension size = new Dimension(1066, 762);
-        this.frame.setSize(size);
-        this.frame.setLayout(new BorderLayout());
-        this.frame.add(this.panel, BorderLayout.CENTER);
-        this.frame.setVisible(true);
-        this.frame.setResizable(false);
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    public static void main(String[] args) throws IOException {
-        BoardGUI gui = new BoardGUI();
-        gui.createAndStartGUI();
     }
 }
