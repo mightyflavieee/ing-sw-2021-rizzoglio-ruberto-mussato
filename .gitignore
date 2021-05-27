@@ -1,7 +1,6 @@
 *.class
 .vscode
 ProjectIngSW/.project
-.idea
 .gitignore
 *.lst
 *.dumpstream
