@@ -9,20 +9,24 @@ public class GUIPROVA {
     private MarketGUI marketGUI;
     private MarketButton marketButton;
     private MarketButtonListener marketButtonListener;
+    private LeaderCardPlaceGUI leaderCardPlaceGui;
+    private JFrame jFrame;
 
     public GUIPROVA() {
         marketGUI = new MarketGUI("market");
 //        marketButton = new MarketButton("market button");
 //        marketButtonListener = new MarketButtonListener(marketGUI);
 //        marketButton.addActionListener(marketButtonListener);
-        JFrame jFrame = new JFrame();
-//        jFrame.setLayout(new GridLayout(2,2));
+        jFrame = new JFrame();
+        jFrame.setLayout(new GridLayout(1,2));
 //        jFrame.add(marketButton);
         jFrame.add(marketGUI);
        // jFrame.add(cardcontainerGUi);
 
        // jFrame.add(new MarketGUI("altro market ma potrebbe essere board"));
        // jFrame.add(new MarketGUI("altro market ma potrebbe essere warehouse"));
+        leaderCardPlaceGui = new LeaderCardPlaceGUI();
+        jFrame.add(leaderCardPlaceGui);
         jFrame.pack();
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

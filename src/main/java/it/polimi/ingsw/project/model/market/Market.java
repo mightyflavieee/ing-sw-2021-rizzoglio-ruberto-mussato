@@ -149,5 +149,13 @@ public class Market extends Observable<Market> implements Cloneable, Serializabl
         }
     return string.toString();
     }
-
+//    public List<MarbleType> toMarbleType(){
+//        List<MarbleType> list = new ArrayList<>();
+//        for(int j = 2; j > -1; j--) {
+//            for (int i = 0; i < 4; i++) {
+//                list.add(this.tray[i][j].getType());
+//            }
+//        }
+//        return list;
+//    }
 }
