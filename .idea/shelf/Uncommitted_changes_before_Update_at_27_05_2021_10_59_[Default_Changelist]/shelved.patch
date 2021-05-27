@@ -1,0 +1,13 @@
+Index: src/test/java/it/polimi/ingsw/project/client/ClientCLITest.java
+===================================================================
+diff --git a/src/test/java/it/polimi/ingsw/project/client/ClientCLITest.java b/src/test/java/it/polimi/ingsw/project/client/ClientCLITest.java
+deleted file mode 100644
+--- a/src/test/java/it/polimi/ingsw/project/client/ClientCLITest.java	(revision 6b76fe0f5702f9ba71c0130abaaa86398b5335bc)
++++ /dev/null	(revision 6b76fe0f5702f9ba71c0130abaaa86398b5335bc)
+@@ -1,5 +0,0 @@
+-package it.polimi.ingsw.project.client;
+-
+-class ClientCLITest {
+-
+-}
+\ No newline at end of file

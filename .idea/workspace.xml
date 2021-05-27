@@ -1,0 +1,860 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SHOW_STRUCTURE" value="true" />
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Updated GitIgnore">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketButton.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketButtonListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/calamaio.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/plancia portabiglie.png" afterDir="false" />
+    </list>
+    <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageOptionsProvider">
+    <option name="myAddOrReplace" value="0" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="OPEN_IN_BROWSER" value="true" />
+    <option name="OUTPUT_DIRECTORY" value="C:\Users\gianl\Desktop\test3" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Kotlin Class" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1qr6yOXo6JG8nHlrSUjH6bFrZI6" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/test1" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources" />
+      <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\deliverables" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="it.polimi.ingsw.project.utils" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="it.polimi.ingsw.project.model.playermove" />
+      <recent name="it.polimi.ingsw.project.model.board" />
+      <recent name="it.polimi.ingsw.project.model.board.card.leaderCard" />
+      <recent name="it.polimi.ingsw.project.model.board.card.leaderCard.perk" />
+      <recent name="it.polimi.ingsw.project.model" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.GUIPROVA">
+    <configuration name="BoardGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.BoardGUI" />
+      <module name="GC23" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.project.client.gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.ClientGUI" />
+      <module name="GC23" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.project.client.gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GUIPROVA" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.GUIPROVA" />
+      <module name="GC23" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.project.client.gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CardContainerTest.getAvailableDevCards" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GC23" />
+      <selectedOptions>
+        <option name="module.classpath" />
+      </selectedOptions>
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.project.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.project.model" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.model.CardContainerTest" />
+      <option name="METHOD_NAME" value="getAvailableDevCards" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MatchTest.getter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GC23" />
+      <selectedOptions>
+        <option name="module.classpath" />
+      </selectedOptions>
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.project.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.project.model" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.model.MatchTest" />
+      <option name="METHOD_NAME" value="getter" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <module name="GC23" />
+      <selectedOptions>
+        <option name="module.classpath" />
+      </selectedOptions>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="testCoverage" type="JUnit" factoryName="JUnit">
+      <module name="GC23" />
+      <selectedOptions>
+        <option name="module.classpath" />
+      </selectedOptions>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.ClientGUI" />
+      <item itemvalue="Application.BoardGUI" />
+      <item itemvalue="JUnit.testCoverage" />
+      <item itemvalue="JUnit.CardContainerTest.getAvailableDevCards" />
+      <item itemvalue="JUnit.MatchTest.getter" />
+      <item itemvalue="Application.GUIPROVA" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.GUIPROVA" />
+        <item itemvalue="Application.ClientGUI" />
+        <item itemvalue="Application.BoardGUI" />
+        <item itemvalue="JUnit.MatchTest.getter" />
+        <item itemvalue="JUnit.CardContainerTest.getAvailableDevCards" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="" />
+      <created>1617825617564</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1617825617564</updated>
+      <workItem from="1617825619104" duration="9088000" />
+      <workItem from="1617910649234" duration="346000" />
+      <workItem from="1617911034525" duration="4260000" />
+      <workItem from="1617915733011" duration="144000" />
+      <workItem from="1617949248051" duration="315000" />
+      <workItem from="1617949609528" duration="65000" />
+      <workItem from="1617956774417" duration="181000" />
+      <workItem from="1617957099275" duration="368000" />
+      <workItem from="1617968869935" duration="13000" />
+      <workItem from="1617970850319" duration="251000" />
+      <workItem from="1617973653975" duration="584000" />
+      <workItem from="1618430213255" duration="1105000" />
+      <workItem from="1618435125208" duration="3557000" />
+      <workItem from="1618471364147" duration="1838000" />
+      <workItem from="1618491097798" duration="61000" />
+      <workItem from="1618508796103" duration="66000" />
+      <workItem from="1618508926740" duration="3157000" />
+      <workItem from="1618568937455" duration="7310000" />
+      <workItem from="1618826998237" duration="9652000" />
+      <workItem from="1618905757843" duration="427000" />
+      <workItem from="1618991633155" duration="773000" />
+      <workItem from="1618996944635" duration="1219000" />
+      <workItem from="1619002363332" duration="148000" />
+      <workItem from="1619003488066" duration="10544000" />
+      <workItem from="1619106889878" duration="30000" />
+      <workItem from="1619162953128" duration="2307000" />
+      <workItem from="1619254550183" duration="4934000" />
+      <workItem from="1619269155469" duration="2008000" />
+      <workItem from="1619362794862" duration="277000" />
+      <workItem from="1619364047254" duration="3894000" />
+      <workItem from="1619370654766" duration="1771000" />
+      <workItem from="1619372484872" duration="2500000" />
+      <workItem from="1619421362332" duration="12328000" />
+      <workItem from="1619598209808" duration="4461000" />
+      <workItem from="1619602871094" duration="435000" />
+      <workItem from="1619716506498" duration="4139000" />
+      <workItem from="1619768242436" duration="154000" />
+      <workItem from="1619777439714" duration="1217000" />
+      <workItem from="1619779372171" duration="3000" />
+      <workItem from="1619779991436" duration="664000" />
+      <workItem from="1619787395506" duration="567000" />
+      <workItem from="1619788164784" duration="4297000" />
+      <workItem from="1619793002116" duration="7979000" />
+      <workItem from="1619883858281" duration="23000" />
+      <workItem from="1619883974496" duration="3095000" />
+      <workItem from="1619944549035" duration="2083000" />
+      <workItem from="1619947021074" duration="320000" />
+      <workItem from="1620060607668" duration="4000" />
+      <workItem from="1620142360791" duration="69000" />
+      <workItem from="1620148423945" duration="5798000" />
+      <workItem from="1620289639913" duration="177000" />
+      <workItem from="1620289860000" duration="5000" />
+      <workItem from="1620294537455" duration="1448000" />
+      <workItem from="1620319851999" duration="258000" />
+      <workItem from="1620369419831" duration="518000" />
+      <workItem from="1620370288241" duration="12000" />
+      <workItem from="1620370492838" duration="1109000" />
+      <workItem from="1620391642860" duration="155000" />
+      <workItem from="1620391891136" duration="112000" />
+      <workItem from="1620393026932" duration="80000" />
+      <workItem from="1620393466997" duration="29000" />
+      <workItem from="1620397434540" duration="48000" />
+      <workItem from="1620398437963" duration="9000" />
+      <workItem from="1620401802426" duration="899000" />
+      <workItem from="1620461489108" duration="1168000" />
+      <workItem from="1620470382421" duration="1456000" />
+      <workItem from="1620476475383" duration="199000" />
+      <workItem from="1620476850955" duration="558000" />
+      <workItem from="1620550506911" duration="302000" />
+      <workItem from="1620813446092" duration="467000" />
+      <workItem from="1620848844718" duration="1641000" />
+      <workItem from="1620901157349" duration="190000" />
+      <workItem from="1620922779688" duration="6406000" />
+      <workItem from="1620931685709" duration="15114000" />
+      <workItem from="1620974247811" duration="938000" />
+      <workItem from="1620975335409" duration="245000" />
+      <workItem from="1620975863001" duration="53000" />
+      <workItem from="1620977216915" duration="55000" />
+      <workItem from="1620980658946" duration="875000" />
+      <workItem from="1620983367192" duration="3334000" />
+      <workItem from="1620994663084" duration="6624000" />
+      <workItem from="1621266073486" duration="1127000" />
+      <workItem from="1621278838897" duration="4267000" />
+      <workItem from="1621359607344" duration="2244000" />
+      <workItem from="1621365251639" duration="1855000" />
+      <workItem from="1621406331063" duration="497000" />
+      <workItem from="1621413401054" duration="3212000" />
+      <workItem from="1621447168893" duration="3098000" />
+      <workItem from="1621494728583" duration="426000" />
+      <workItem from="1621505141966" duration="538000" />
+      <workItem from="1621505731643" duration="1272000" />
+      <workItem from="1621521226254" duration="14552000" />
+      <workItem from="1621538181941" duration="862000" />
+      <workItem from="1621578917675" duration="662000" />
+      <workItem from="1621580141264" duration="3753000" />
+      <workItem from="1621588772226" duration="236000" />
+      <workItem from="1621598424096" duration="518000" />
+      <workItem from="1621599730564" duration="16754000" />
+      <workItem from="1621621907756" duration="78000" />
+      <workItem from="1621624018444" duration="2303000" />
+      <workItem from="1621665897607" duration="14000" />
+      <workItem from="1621666098491" duration="3000" />
+      <workItem from="1621666406636" duration="300000" />
+      <workItem from="1621666809257" duration="77000" />
+      <workItem from="1621696108532" duration="1871000" />
+      <workItem from="1621760227625" duration="1146000" />
+      <workItem from="1621762046506" duration="246000" />
+      <workItem from="1621767524270" duration="127000" />
+      <workItem from="1621767953013" duration="92000" />
+      <workItem from="1621788819476" duration="194000" />
+      <workItem from="1621880317655" duration="47000" />
+      <workItem from="1621880405041" duration="8833000" />
+      <workItem from="1622020288241" duration="5011000" />
+      <workItem from="1622051959473" duration="7108000" />
+      <workItem from="1622104436627" duration="8384000" />
+      <workItem from="1622117560195" duration="6313000" />
+    </task>
+    <task id="LOCAL-00061" summary="Added Market.java initializer and its tests">
+      <created>1619792180774</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1619792180774</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Modified ActionTokenContainer.java constructor">
+      <created>1619801909336</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1619801909336</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Modified constructors of Board.java, DiscardActionTokenObserver.java, Match.java, MoveActionTokenObserver.java, MoveAndShuffleActionTokenObserver.java, MoveList.java">
+      <created>1619802107619</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1619802107619</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Added various tests">
+      <created>1619802135396</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1619802135396</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Corrected minor error in FaithMap.moveForwardBlack and added a test">
+      <created>1619802873867</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1619802873867</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Added some tests and updated constructors">
+      <created>1619887061188</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1619887061188</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Added a new Match constructor for the clone, Added Player.createFaithMap, Board.createFaithMap and modified FaithMap.generateMap for the initialization of the match and updated their tests">
+      <created>1619946395578</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1619946395579</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Added Gson support and a test about it">
+      <created>1620154234528</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1620154234528</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Corrected minor error in CardContainer.tryToDiscard, added DiscardActionToken.getCardColor and added some test">
+      <created>1620471802207</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1620471802208</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Added a test in ExtractActionTokenMoveTest.java">
+      <created>1620550806749</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1620550806749</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Changes by leonardo">
+      <created>1620929130589</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1620929130590</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Changes by flavi">
+      <created>1620929167746</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1620929167746</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Added a test">
+      <created>1620929188191</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1620929188191</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Changes by leonardo">
+      <created>1620945447545</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1620945447546</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Changes by leonardo">
+      <created>1620946740546</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1620946740546</updated>
+    </task>
+    <task id="LOCAL-00076" summary="Changes by flavi">
+      <created>1620946760982</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1620946760983</updated>
+    </task>
+    <task id="LOCAL-00077" summary="updated">
+      <created>1620946804009</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1620946804009</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Added a test">
+      <created>1620975562982</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1620975562983</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Updated Uml">
+      <created>1620981545883</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1620981545884</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Changes by leonardo">
+      <created>1621001139139</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1621001139139</updated>
+    </task>
+    <task id="LOCAL-00081" summary="Added turn phase logic">
+      <created>1621001165899</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1621001165899</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Added NoMove.java">
+      <created>1621001319224</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1621001319224</updated>
+    </task>
+    <task id="LOCAL-00083" summary="Added Cli">
+      <created>1621324381597</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1621324381597</updated>
+    </task>
+    <task id="LOCAL-00084" summary="updated ClientCLI.handleTurn">
+      <created>1621324826519</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1621324826519</updated>
+    </task>
+    <task id="LOCAL-00085" summary="updated ClientCLI.handleTurn&#10;added ClientCLI.handleLeaderAction&#10;added ClientCLI.handleMainPhase">
+      <created>1621367093034</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1621367093034</updated>
+    </task>
+    <task id="LOCAL-00086" summary="added ClientCLI.viewer">
+      <created>1621406822623</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1621406822624</updated>
+    </task>
+    <task id="LOCAL-00087" summary="updated Cli">
+      <created>1621416636413</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1621416636413</updated>
+    </task>
+    <task id="LOCAL-00088" summary="added ClientCLI.handleTakeMarketResourcesMove">
+      <created>1621450297126</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1621450297126</updated>
+    </task>
+    <task id="LOCAL-00089" summary="added Market.toString">
+      <created>1621506983038</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1621506983038</updated>
+    </task>
+    <task id="LOCAL-00090" summary="added Board.getLeaderCardsToString">
+      <created>1621521801326</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1621521801327</updated>
+    </task>
+    <task id="LOCAL-00091" summary="updated ClientCLI.handleTakeMarketResourcesMove">
+      <created>1621535455362</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1621535455362</updated>
+    </task>
+    <task id="LOCAL-00092" summary="updated ClientCLI.handleTakeMarketResourcesMove">
+      <created>1621536302672</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1621536302672</updated>
+    </task>
+    <task id="LOCAL-00093" summary="updated ClientCLI.viewer">
+      <created>1621537397780</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1621537397780</updated>
+    </task>
+    <task id="LOCAL-00094" summary="added ClientCLI.swapShelves">
+      <created>1621579548408</created>
+      <option name="number" value="00094" />
+      <option name="presentableId" value="LOCAL-00094" />
+      <option name="project" value="LOCAL" />
+      <updated>1621579548408</updated>
+    </task>
+    <task id="LOCAL-00095" summary="updated UML">
+      <created>1621598936550</created>
+      <option name="number" value="00095" />
+      <option name="presentableId" value="LOCAL-00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1621598936550</updated>
+    </task>
+    <task id="LOCAL-00096" summary="Corrected minor error in ClientCLI">
+      <created>1621608123464</created>
+      <option name="number" value="00096" />
+      <option name="presentableId" value="LOCAL-00096" />
+      <option name="project" value="LOCAL" />
+      <updated>1621608123465</updated>
+    </task>
+    <task id="LOCAL-00097" summary="Corrected minor error in SocketClientConnection.java">
+      <created>1621612848683</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
+      <option name="project" value="LOCAL" />
+      <updated>1621612848683</updated>
+    </task>
+    <task id="LOCAL-00098" summary="Corrected minor error in ClientCLI.java">
+      <created>1621614590382</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
+      <option name="project" value="LOCAL" />
+      <updated>1621614590382</updated>
+    </task>
+    <task id="LOCAL-00099" summary="Corrected minor error in ClientCLI.handleTakeMarketResourcesMove">
+      <created>1621618681544</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
+      <option name="project" value="LOCAL" />
+      <updated>1621618681544</updated>
+    </task>
+    <task id="LOCAL-00100" summary="Corrected minor error in Warehouse.insertInShelves">
+      <created>1621619518471</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
+      <option name="project" value="LOCAL" />
+      <updated>1621619518471</updated>
+    </task>
+    <task id="LOCAL-00101" summary="Added history logic">
+      <created>1621625892919</created>
+      <option name="number" value="00101" />
+      <option name="presentableId" value="LOCAL-00101" />
+      <option name="project" value="LOCAL" />
+      <updated>1621625892919</updated>
+    </task>
+    <task id="LOCAL-00102" summary="Added ClientCLI thread synchronization">
+      <created>1621762108441</created>
+      <option name="number" value="00102" />
+      <option name="presentableId" value="LOCAL-00102" />
+      <option name="project" value="LOCAL" />
+      <updated>1621762108441</updated>
+    </task>
+    <task id="LOCAL-00103" summary="Added a LeaderCardContainerTest">
+      <created>1621881772527</created>
+      <option name="number" value="00103" />
+      <option name="presentableId" value="LOCAL-00103" />
+      <option name="project" value="LOCAL" />
+      <updated>1621881772527</updated>
+    </task>
+    <task id="LOCAL-00104" summary="Code Optimization">
+      <created>1621881811747</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1621881811747</updated>
+    </task>
+    <task id="LOCAL-00105" summary="Code Optimization">
+      <created>1621888342519</created>
+      <option name="number" value="00105" />
+      <option name="presentableId" value="LOCAL-00105" />
+      <option name="project" value="LOCAL" />
+      <updated>1621888342519</updated>
+    </task>
+    <task id="LOCAL-00106" summary="Corrected minor error in Controller.performMove">
+      <created>1621889787915</created>
+      <option name="number" value="00106" />
+      <option name="presentableId" value="LOCAL-00106" />
+      <option name="project" value="LOCAL" />
+      <updated>1621889787915</updated>
+    </task>
+    <task id="LOCAL-00107" summary="Added tests">
+      <created>1622025330846</created>
+      <option name="number" value="00107" />
+      <option name="presentableId" value="LOCAL-00107" />
+      <option name="project" value="LOCAL" />
+      <updated>1622025330846</updated>
+    </task>
+    <task id="LOCAL-00108" summary="Added tests">
+      <created>1622100705364</created>
+      <option name="number" value="00108" />
+      <option name="presentableId" value="LOCAL-00108" />
+      <option name="project" value="LOCAL" />
+      <updated>1622100705364</updated>
+    </task>
+    <task id="LOCAL-00109" summary="Updated GitIgnore">
+      <created>1622106089199</created>
+      <option name="number" value="00109" />
+      <option name="presentableId" value="LOCAL-00109" />
+      <option name="project" value="LOCAL" />
+      <updated>1622106089199</updated>
+    </task>
+    <option name="localTasksCounter" value="110" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added NoMove.java" />
+    <MESSAGE value="Added Cli" />
+    <MESSAGE value="updated ClientCLI.handleTurn" />
+    <MESSAGE value="updated ClientCLI.handleTurn&#10;added ClientCLI.handleLeaderAction&#10;added ClientCLI.handleMainPhase" />
+    <MESSAGE value="added ClientCLI.viewer" />
+    <MESSAGE value="updated Cli" />
+    <MESSAGE value="added ClientCLI.handleTakeMarketResourcesMove" />
+    <MESSAGE value="added Market.toString" />
+    <MESSAGE value="added Board.getLeaderCardsToString" />
+    <MESSAGE value="updated ClientCLI.handleTakeMarketResourcesMove" />
+    <MESSAGE value="updated ClientCLI.viewer" />
+    <MESSAGE value="added ClientCLI.swapShelves" />
+    <MESSAGE value="updated UML" />
+    <MESSAGE value="Corrected minor error in ClientCLI" />
+    <MESSAGE value="Corrected minor error in SocketClientConnection.java" />
+    <MESSAGE value="Corrected minor error in ClientCLI.java" />
+    <MESSAGE value="Corrected minor error in ClientCLI.handleTakeMarketResourcesMove" />
+    <MESSAGE value="Corrected minor error in Warehouse.insertInShelves" />
+    <MESSAGE value="Added history logic" />
+    <MESSAGE value="Added ClientCLI thread synchronization" />
+    <MESSAGE value="Added a LeaderCardContainerTest" />
+    <MESSAGE value="Code Optimization" />
+    <MESSAGE value="Corrected minor error in Controller.performMove" />
+    <MESSAGE value="Added tests" />
+    <MESSAGE value="Updated GitIgnore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated GitIgnore" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.UnsupportedOperationException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
+          <line>165</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
+          <line>177</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
+          <line>140</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
+          <line>147</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
+          <line>154</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/observer/custom/DiscardActionTokenObserver.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/actionTokens/DiscardActionToken.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="it.polimi.ingsw.project.server.SocketClientConnection" memberName="out" />
+        <PinnedItemInfo parentTag="java.io.StreamCorruptedException" memberName="cause" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="JUnit">
+        <watch expression="market.outsideMarble" />
+        <watch expression="tray" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$DevelopmentCardTest_getMarkerPosition.ic" NAME="DevelopmentCardTest.getMarkerPosition Coverage Results" MODIFIED="1622023514128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.board.card.developmentCard.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$WarehouseTest_insertFalse.ic" NAME="WarehouseTest.insertFalse Coverage Results" MODIFIED="1622098347654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.board.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$BoardTest_getLeaderCardsToString.ic" NAME="BoardTest.getLeaderCardsToString Coverage Results" MODIFIED="1622023178507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.board.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ClientApp.ic" NAME="ClientApp Coverage Results" MODIFIED="1621788911338" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActionTokenContainerTest_lorenzoTest.ic" NAME="ActionTokenContainerTest.lorenzoTest Coverage Results" MODIFIED="1622021649550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.actionTokens.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ControllerTest_completeTest.ic" NAME="ControllerTest.completeTest Coverage Results" MODIFIED="1621609786466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActionTokenContainerTest_discardActionToken.ic" NAME="ActionTokenContainerTest.discardActionToken Coverage Results" MODIFIED="1622021586309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.actionTokens.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ResourceTest_testToString.ic" NAME="ResourceTest.testToString Coverage Results" MODIFIED="1622099321454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.resource.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$GUIPROVA.ic" NAME="GUIPROVA Coverage Results" MODIFIED="1622120686741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.client.gui.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActionTokenContainerTest_lostToDiscard.ic" NAME="ActionTokenContainerTest.lostToDiscard Coverage Results" MODIFIED="1622022104584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.actionTokens.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ServerApp.ic" NAME="ServerApp Coverage Results" MODIFIED="1621788907581" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActivateLeaderCardMoveTest_notFeasibleDevLeaderCard.ic" NAME="ActivateLeaderCardMoveTest.notFeasibleDevLeaderCard Coverage Results" MODIFIED="1622053334719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.playermove.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$testCoverage.ic" NAME="testCoverage Coverage Results" MODIFIED="1622100454569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>
