@@ -7,13 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated market gui and leadercards gui">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ArrowObserver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardPlaceGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardPlaceGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/TrayGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/TrayGui.java" afterDir="false" />
-    </list>
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated market gui and leadercards gui" />
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,10 +216,10 @@
     <list>
       <item itemvalue="Application.ClientGUI" />
       <item itemvalue="Application.BoardGUI" />
+      <item itemvalue="Application.GUIPROVA" />
       <item itemvalue="JUnit.testCoverage" />
       <item itemvalue="JUnit.CardContainerTest.getAvailableDevCards" />
       <item itemvalue="JUnit.MatchTest.getter" />
-      <item itemvalue="Application.GUIPROVA" />
     </list>
     <recent_temporary>
       <list>
@@ -360,14 +354,7 @@
       <workItem from="1622020288241" duration="5011000" />
       <workItem from="1622051959473" duration="7108000" />
       <workItem from="1622104436627" duration="8384000" />
-      <workItem from="1622117560195" duration="19766000" />
-    </task>
-    <task id="LOCAL-00065" summary="Corrected minor error in FaithMap.moveForwardBlack and added a test">
-      <created>1619802873867</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1619802873867</updated>
+      <workItem from="1622117560195" duration="20455000" />
     </task>
     <task id="LOCAL-00066" summary="Added some tests and updated constructors">
       <created>1619887061188</created>
@@ -705,7 +692,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622137809528</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary="updated market gui and leadercards gui">
+      <created>1622147580552</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1622147580552</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
