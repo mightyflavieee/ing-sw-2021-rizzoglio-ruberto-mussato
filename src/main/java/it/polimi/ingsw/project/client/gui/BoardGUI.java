@@ -14,14 +14,19 @@ public class BoardGUI extends JInternalFrame {
     private final JPanel warehouse;
     private final JPanel faithMap;
 
-    public BoardGUI() throws IOException {
+    public BoardGUI(String nickname) {
+        this.setTitle(nickname);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(1066, 762));
         this.panel = new JPanel();
         this.cardSlots= new HashMap<>();
         this.warehouse = new JPanel();
         this.faithMap = new JPanel();
-        createBoard();
+        try {
+            createBoard();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.add(this.panel);
     }
 
