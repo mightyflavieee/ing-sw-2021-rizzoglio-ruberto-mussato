@@ -4,14 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LeaderCardPlaceGUI extends JInternalFrame {
-    private LeaderCardGui leaderCardGui1, leaderCardGui2;
+    private LeaderCardGUI leaderCardGUI1, leaderCardGUI2;
     public LeaderCardPlaceGUI() {
-        leaderCardGui1 = new LeaderCardGui("id1");
-        leaderCardGui2 = new LeaderCardGui("id2");
+        leaderCardGUI1 = new LeaderCardGUI("id1");
+        leaderCardGUI2 = new LeaderCardGUI("id2");
         this.setTitle("My LeaderCards");
         this.setLayout(new GridLayout(1,2));
-        this.add(leaderCardGui1);
-        this.add(leaderCardGui2);
+        this.add(leaderCardGUI1);
+        this.add(leaderCardGUI2);
         this.setVisible(true);
     }
+
+
 }

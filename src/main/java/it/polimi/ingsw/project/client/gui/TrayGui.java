@@ -1,24 +1,27 @@
 package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.model.market.Marble;
-import it.polimi.ingsw.project.model.market.MarbleType;
 import it.polimi.ingsw.project.model.market.Market;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TrayGui extends JPanel {
     private Image backgroundImage;
     private Market market;
     private GridLayout gridLayout;
+    private List<JButton> verticalArrows; //da sinistra a destra
+    private List<JButton> horizontalArrows; //dall'alto verso il basso , è al contrario rispetto a quando faccio la move
+    private JLabel[][] trayJlabel = new JLabel[4][3];
+    private JLabel outsideMarbleJlabel;
     public TrayGui()  {
         this.market = new Market();
         gridLayout = new GridLayout(4,5);
         this.setLayout(gridLayout);
-        createTray();
+        this.createTray();
+        this.createObservers();
         //            try {
 //                this.backgroundImage = ImageIO.read(new File("src/main/resources/plancia portabiglie.png")).getScaledInstance(100, 200, Image.SCALE_SMOOTH);
 //            } catch (IOException e) {
@@ -27,7 +30,17 @@ public class TrayGui extends JPanel {
         this.setVisible(true);
         this.setPreferredSize(new Dimension(200,100));
     }
-//    public void paintComponent(Graphics g) {
+
+    private void createObservers() {
+        for(int i = 0; i < verticalArrows.size(); i++){
+            verticalArrows.get(i).addActionListener(new ArrowObserver(this,0,i));
+        }
+        for(int i = 0; i < horizontalArrows.size(); i++){ //dall'alto verso il basso , è al contrario rispetto a quando faccio la move
+            horizontalArrows.get(i).addActionListener(new ArrowObserver(this,1,horizontalArrows.size()-i-1));
+        }
+    }
+
+    //    public void paintComponent(Graphics g) {
 //        super.paintComponent(g);
 //        g.drawImage(this.backgroundImage, 0, 0, this);
 //    }
@@ -36,28 +49,50 @@ public class TrayGui extends JPanel {
 //            JLabel jLabel = new JLabel();
 //            jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + marbleType.toString()+ ".png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 //            this.add(jLabel); }
+        verticalArrows = new ArrayList<>();
+        horizontalArrows = new ArrayList<>();
         Marble[][] tray = market.getTray();
         JLabel jLabel;
+        JButton jButton;
         for(int j = 2; j > -1; j--) {
 
             for (int i = 0; i < 4; i++) {
                 jLabel = new JLabel();
                 jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + tray[i][j].toString()+ ".png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                 this.add(jLabel);
+                this.trayJlabel[i][j] = jLabel;
             }
-            jLabel = new JLabel();
-            jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia orizzontale.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-            this.add(jLabel);
+            jButton = new JButton();
+            jButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia orizzontale.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+            this.add(jButton);
+            horizontalArrows.add(jButton);
         }
         for(int i = 0; i < 4; i++){
-            jLabel = new JLabel();
-            jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia verticale.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
-            this.add(jLabel);
+            jButton = new JButton();
+            jButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia verticale.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+            this.add(jButton);
+            verticalArrows.add(jButton);
         }
         jLabel = new JLabel();
         jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + market.getOutSideMarble().toString()+ ".png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         this.add(jLabel);
-
+        this.outsideMarbleJlabel = jLabel;
     }
 
+    public void insertMarble(int axis, int position) {
+        this.market.insertMarble(axis,position,null); //TODO
+    }
+    public void refresh(){
+        Marble[][] tray = market.getTray();
+
+        for(int j = 2; j > -1; j--) {
+
+            for (int i = 0; i < 4; i++) {
+                this.trayJlabel[i][j].setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + tray[i][j].toString()+ ".png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+
+            }
+        }
+        this.outsideMarbleJlabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + market.getOutSideMarble().toString()+ ".png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+
+    }
 }

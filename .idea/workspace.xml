@@ -7,32 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Updated GUI">
-      <change afterPath="$PROJECT_DIR$/deliverables/Coverage Report _ Summary.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardGui.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardPlaceGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/TrayGui.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id1.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id10.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id11.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id12.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id13.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id14.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id15.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id16.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id2.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id3.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id4.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id5.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id6.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id7.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id8.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/leadercards/id9.pdf" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated market gui and leadercards gui">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ArrowObserver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/market/Market.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/market/Market.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plancia portabiglie.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plancia portabiglie.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardPlaceGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardPlaceGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/TrayGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/TrayGui.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -380,21 +360,7 @@
       <workItem from="1622020288241" duration="5011000" />
       <workItem from="1622051959473" duration="7108000" />
       <workItem from="1622104436627" duration="8384000" />
-      <workItem from="1622117560195" duration="14623000" />
-    </task>
-    <task id="LOCAL-00063" summary="Modified constructors of Board.java, DiscardActionTokenObserver.java, Match.java, MoveActionTokenObserver.java, MoveAndShuffleActionTokenObserver.java, MoveList.java">
-      <created>1619802107619</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1619802107619</updated>
-    </task>
-    <task id="LOCAL-00064" summary="Added various tests">
-      <created>1619802135396</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1619802135396</updated>
+      <workItem from="1622117560195" duration="19766000" />
     </task>
     <task id="LOCAL-00065" summary="Corrected minor error in FaithMap.moveForwardBlack and added a test">
       <created>1619802873867</created>
@@ -725,7 +691,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622129341206</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="Added Coverage Report _ Summary.pdf">
+      <created>1622137768152</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1622137768152</updated>
+    </task>
+    <task id="LOCAL-00113" summary="updated market gui and leadercards gui">
+      <created>1622137809528</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1622137809528</updated>
+    </task>
+    <option name="localTasksCounter" value="114" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -754,8 +734,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added Cli" />
-    <MESSAGE value="updated ClientCLI.handleTurn" />
     <MESSAGE value="updated ClientCLI.handleTurn&#10;added ClientCLI.handleLeaderAction&#10;added ClientCLI.handleMainPhase" />
     <MESSAGE value="added ClientCLI.viewer" />
     <MESSAGE value="updated Cli" />
@@ -779,7 +757,9 @@
     <MESSAGE value="Added tests" />
     <MESSAGE value="Updated GitIgnore" />
     <MESSAGE value="Updated GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated GUI" />
+    <MESSAGE value="Added Coverage Report _ Summary.pdf" />
+    <MESSAGE value="updated market gui and leadercards gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated market gui and leadercards gui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
