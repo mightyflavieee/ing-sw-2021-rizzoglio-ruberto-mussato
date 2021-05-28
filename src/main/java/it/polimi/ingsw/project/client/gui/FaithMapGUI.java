@@ -66,6 +66,38 @@ public class FaithMapGUI extends JInternalFrame {
                 MatteBorder border = new MatteBorder(2, 0, 2, 2, Color.red);
                 button.setBorder(border);
             }
+            if (this.tiles.indexOf(button) == 11) {
+                MatteBorder border = new MatteBorder(2, 2, 2, 0, Color.red);
+                button.setBorder(border);
+            }
+            if (this.tiles.indexOf(button) == 13) {
+                MatteBorder border = new MatteBorder(2, 0, 0, 0, Color.red);
+                button.setBorder(border);
+            }
+            if (this.tiles.indexOf(button) == 12 || this.tiles.indexOf(button) == 14) {
+                MatteBorder border = new MatteBorder(2, 0, 2, 0, Color.red);
+                button.setBorder(border);
+            }
+            if (this.tiles.indexOf(button) == 15) {
+                MatteBorder border = new MatteBorder(2, 0, 2, 2, Color.red);
+                button.setBorder(border);
+            }
+            if (this.tiles.indexOf(button) == 18) {
+                MatteBorder border = new MatteBorder(2, 2, 2, 0, Color.red);
+                button.setBorder(border);
+            }
+            if (this.tiles.indexOf(button) == 20) {
+                MatteBorder border = new MatteBorder(2, 0, 0, 0, Color.red);
+                button.setBorder(border);
+            }
+            if (this.tiles.indexOf(button) == 19 || this.tiles.indexOf(button) == 21 || this.tiles.indexOf(button) == 22) {
+                MatteBorder border = new MatteBorder(2, 0, 2, 0, Color.red);
+                button.setBorder(border);
+            }
+            if (this.tiles.indexOf(button) == 23) {
+                MatteBorder border = new MatteBorder(2, 0, 2, 2, Color.red);
+                button.setBorder(border);
+            }
         }
         for (JButton button : this.papalCuoncilTiles) {
             if (button.isVisible()) {
