@@ -7,11 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Added ResourceInHandGUI.java">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated ResourceInHandGUI.java">
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/TrayGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/TrayGui.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -360,13 +357,6 @@
       <workItem from="1622117560195" duration="21825000" />
       <workItem from="1622195527307" duration="3149000" />
     </task>
-    <task id="LOCAL-00071" summary="Changes by leonardo">
-      <created>1620929130589</created>
-      <option name="number" value="00071" />
-      <option name="presentableId" value="LOCAL-00071" />
-      <option name="project" value="LOCAL" />
-      <updated>1620929130590</updated>
-    </task>
     <task id="LOCAL-00072" summary="Changes by flavi">
       <created>1620929167746</created>
       <option name="number" value="00072" />
@@ -703,7 +693,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622210398121</updated>
     </task>
-    <option name="localTasksCounter" value="120" />
+    <task id="LOCAL-00120" summary="updated ResourceInHandGUI.java">
+      <created>1622212188923</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1622212188923</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -732,7 +729,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added Market.toString" />
     <MESSAGE value="added Board.getLeaderCardsToString" />
     <MESSAGE value="updated ClientCLI.handleTakeMarketResourcesMove" />
     <MESSAGE value="updated ClientCLI.viewer" />
@@ -757,7 +753,8 @@
     <MESSAGE value="Corrected minor error in MatchGUI.java" />
     <MESSAGE value="Updated MarketGUI.java" />
     <MESSAGE value="Added ResourceInHandGUI.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added ResourceInHandGUI.java" />
+    <MESSAGE value="updated ResourceInHandGUI.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated ResourceInHandGUI.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
