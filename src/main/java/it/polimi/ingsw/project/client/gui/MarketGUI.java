@@ -14,14 +14,18 @@ public class MarketGUI extends JInternalFrame {
         this.setTitle("Market");
         //this.constructorHelper();
       //  this.backgroundHelper();
+        this.setLayout(new FlowLayout());
         this.setVisible(true);
         this.setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
        // this.setLayout(new OverlayLayout());
       //  this.setSize(50,100);
-        trayGui = new TrayGui();
+
+        this.resourceInHandGUI = new ResourceInHandGUI();
+        this.trayGui = new TrayGui(this.resourceInHandGUI);
         this.add(trayGui);
-      //  this.pack();
-        this.setPreferredSize(new Dimension(200,500));
+        this.add(resourceInHandGUI);
+        this.pack();
+        //this.setPreferredSize(new Dimension(200,500));
 
     }
     private void constructorHelper(){
