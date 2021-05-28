@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.model.market.Marble;
 import it.polimi.ingsw.project.model.market.Market;
+import it.polimi.ingsw.project.model.resource.Resource;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,27 +17,27 @@ public class TrayGui extends JPanel {
     private List<JButton> horizontalArrows; //dall'alto verso il basso , è al contrario rispetto a quando faccio la move
     private JLabel[][] trayJlabel = new JLabel[4][3];
     private JLabel outsideMarbleJlabel;
-    public TrayGui()  {
+    public TrayGui(ResourceInHandGUI resourceInHandGUI)  {
         this.market = new Market();
         gridLayout = new GridLayout(4,5);
         this.setLayout(gridLayout);
         this.createTray();
-        this.createObservers();
+        this.createObservers(resourceInHandGUI);
         //            try {
 //                this.backgroundImage = ImageIO.read(new File("src/main/resources/plancia portabiglie.png")).getScaledInstance(100, 200, Image.SCALE_SMOOTH);
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(200,100));
+       // this.setPreferredSize(new Dimension(200,100));
     }
 
-    private void createObservers() {
+    private void createObservers(ResourceInHandGUI resourceInHandGUI) {
         for(int i = 0; i < verticalArrows.size(); i++){
-            verticalArrows.get(i).addActionListener(new ArrowObserver(this,0,i));
+            verticalArrows.get(i).addActionListener(new ArrowObserver(this,0,i,resourceInHandGUI));
         }
         for(int i = 0; i < horizontalArrows.size(); i++){ //dall'alto verso il basso , è al contrario rispetto a quando faccio la move
-            horizontalArrows.get(i).addActionListener(new ArrowObserver(this,1,horizontalArrows.size()-i-1));
+            horizontalArrows.get(i).addActionListener(new ArrowObserver(this,1,horizontalArrows.size()-i-1,resourceInHandGUI));
         }
     }
 
@@ -79,8 +80,9 @@ public class TrayGui extends JPanel {
         this.outsideMarbleJlabel = jLabel;
     }
 
-    public void insertMarble(int axis, int position) {
-        this.market.insertMarble(axis,position,null); //TODO
+    public List<Resource> insertMarble(int axis, int position) {
+
+        return this.market.insertMarble(axis,position,null); //TODO
     }
     public void refresh(){
         Marble[][] tray = market.getTray();

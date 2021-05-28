@@ -26,7 +26,7 @@ public class GUIPROVA {
         jFrame.setLayout(new GridLayout(2,2));
 //        jFrame.add(marketButton);
         jFrame.add(marketGUI);
-        jFrame.add(board);
+
        // jFrame.add(cardcontainerGUi);
         jFrame.add(cardContainerGUI);
        // jFrame.add(new MarketGUI("altro market ma potrebbe essere board"));
@@ -36,6 +36,8 @@ public class GUIPROVA {
         jFrame.pack();
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.add(board);
+        jFrame.pack();
     //    marketGUI.doubleSize();
     }
 
