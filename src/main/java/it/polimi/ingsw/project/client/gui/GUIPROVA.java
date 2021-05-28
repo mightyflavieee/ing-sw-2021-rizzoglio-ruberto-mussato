@@ -14,13 +14,15 @@ public class GUIPROVA {
 
     public GUIPROVA() {
         marketGUI = new MarketGUI("market");
+        board = new BoardGUI();
 //        marketButton = new MarketButton("market button");
 //        marketButtonListener = new MarketButtonListener(marketGUI);
 //        marketButton.addActionListener(marketButtonListener);
         jFrame = new JFrame();
-        jFrame.setLayout(new GridLayout(1,2));
+        jFrame.setLayout(new GridLayout(2,2));
 //        jFrame.add(marketButton);
         jFrame.add(marketGUI);
+        jFrame.add(board);
        // jFrame.add(cardcontainerGUi);
 
        // jFrame.add(new MarketGUI("altro market ma potrebbe essere board"));

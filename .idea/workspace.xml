@@ -7,7 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated market gui and leadercards gui" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardGUIListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandler.java" afterDir="false" />
+    </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,17 +139,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -354,14 +349,8 @@
       <workItem from="1622020288241" duration="5011000" />
       <workItem from="1622051959473" duration="7108000" />
       <workItem from="1622104436627" duration="8384000" />
-      <workItem from="1622117560195" duration="20455000" />
-    </task>
-    <task id="LOCAL-00066" summary="Added some tests and updated constructors">
-      <created>1619887061188</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1619887061188</updated>
+      <workItem from="1622117560195" duration="21825000" />
+      <workItem from="1622195527307" duration="479000" />
     </task>
     <task id="LOCAL-00067" summary="Added a new Match constructor for the clone, Added Player.createFaithMap, Board.createFaithMap and modified FaithMap.generateMap for the initialization of the match and updated their tests">
       <created>1619946395578</created>
@@ -699,7 +688,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622147580552</updated>
     </task>
-    <option name="localTasksCounter" value="115" />
+    <task id="LOCAL-00115" summary="updated">
+      <created>1622147753463</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1622147753463</updated>
+    </task>
+    <option name="localTasksCounter" value="116" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -728,7 +724,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated ClientCLI.handleTurn&#10;added ClientCLI.handleLeaderAction&#10;added ClientCLI.handleMainPhase" />
     <MESSAGE value="added ClientCLI.viewer" />
     <MESSAGE value="updated Cli" />
     <MESSAGE value="added ClientCLI.handleTakeMarketResourcesMove" />
@@ -753,7 +748,8 @@
     <MESSAGE value="Updated GUI" />
     <MESSAGE value="Added Coverage Report _ Summary.pdf" />
     <MESSAGE value="updated market gui and leadercards gui" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated market gui and leadercards gui" />
+    <MESSAGE value="updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
