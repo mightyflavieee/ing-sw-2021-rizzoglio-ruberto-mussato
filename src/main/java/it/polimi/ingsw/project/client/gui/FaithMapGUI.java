@@ -18,8 +18,8 @@ public class FaithMapGUI extends JInternalFrame {
         this.setLayout(new GridLayout(2, 24));
         this.tiles = new ArrayList<>();
         this.papalCuoncilTiles = new ArrayList<>();
-        for (int i = 0; i < 23; i++) {
-            this.tiles.add(new JButton());
+        for (int i = 0; i < 24; i++) {
+            this.tiles.add(new JButton(String.valueOf(i+1)));
         }
         for (int i = 0; i < 23; i++) {
             JButton button = new JButton();

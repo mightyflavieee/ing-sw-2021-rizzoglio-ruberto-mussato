@@ -7,7 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated FaithMapGUI">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added papal council images in FaithMapGUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/FaithMapGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/FaithMapGUI.java" afterDir="false" />
     </list>
@@ -350,13 +350,6 @@
       <workItem from="1622117560195" duration="21825000" />
       <workItem from="1622195527307" duration="3149000" />
     </task>
-    <task id="LOCAL-00074" summary="Changes by leonardo">
-      <created>1620945447545</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1620945447546</updated>
-    </task>
     <task id="LOCAL-00075" summary="Changes by leonardo">
       <created>1620946740546</created>
       <option name="number" value="00075" />
@@ -693,7 +686,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622216399375</updated>
     </task>
-    <option name="localTasksCounter" value="123" />
+    <task id="LOCAL-00123" summary="added papal council images in FaithMapGUI">
+      <created>1622217449157</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1622217449157</updated>
+    </task>
+    <option name="localTasksCounter" value="124" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -722,7 +722,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="updated ClientCLI.viewer" />
     <MESSAGE value="added ClientCLI.swapShelves" />
     <MESSAGE value="updated UML" />
     <MESSAGE value="Corrected minor error in ClientCLI" />
@@ -747,7 +746,8 @@
     <MESSAGE value="updated ResourceInHandGUI.java" />
     <MESSAGE value="added FaithMapGUI" />
     <MESSAGE value="updated FaithMapGUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated FaithMapGUI" />
+    <MESSAGE value="added papal council images in FaithMapGUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="added papal council images in FaithMapGUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
