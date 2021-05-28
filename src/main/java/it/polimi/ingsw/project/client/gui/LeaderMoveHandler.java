@@ -3,7 +3,7 @@ package it.polimi.ingsw.project.client.gui;
 import javax.swing.*;
 import java.awt.*;
 
-public class LeaderMoveHandler extends JFrame {
+public class LeaderMoveHandler extends JDialog {
     private LeaderCardGUI leaderCardGUI;
     private JButton discardButton, activateButton, exitButton;
     public LeaderMoveHandler(LeaderCardGUI leaderCardGUI)  {
