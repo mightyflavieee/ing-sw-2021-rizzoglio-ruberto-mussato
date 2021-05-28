@@ -7,12 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Corrected minor error in MatchGUI.java">
       <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardGUIListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MatchGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MatchGUI.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +101,7 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GUIPROVA">
+  <component name="RunManager" selected="Application.MatchGUI">
     <configuration name="BoardGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.BoardGUI" />
       <module name="GC23" />
@@ -143,21 +141,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CardContainerTest.getAvailableDevCards" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MatchGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.MatchGUI" />
       <module name="GC23" />
-      <selectedOptions>
-        <option name="module.classpath" />
-      </selectedOptions>
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.project.model.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.project.client.gui.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.project.model" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.model.CardContainerTest" />
-      <option name="METHOD_NAME" value="getAvailableDevCards" />
-      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -213,16 +218,16 @@
       <item itemvalue="Application.BoardGUI" />
       <item itemvalue="Application.GUIPROVA" />
       <item itemvalue="JUnit.testCoverage" />
-      <item itemvalue="JUnit.CardContainerTest.getAvailableDevCards" />
       <item itemvalue="JUnit.MatchTest.getter" />
+      <item itemvalue="Application.MatchGUI" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MatchGUI" />
         <item itemvalue="Application.GUIPROVA" />
         <item itemvalue="Application.BoardGUI" />
         <item itemvalue="Application.ClientGUI" />
         <item itemvalue="JUnit.MatchTest.getter" />
-        <item itemvalue="JUnit.CardContainerTest.getAvailableDevCards" />
       </list>
     </recent_temporary>
   </component>
@@ -350,14 +355,7 @@
       <workItem from="1622051959473" duration="7108000" />
       <workItem from="1622104436627" duration="8384000" />
       <workItem from="1622117560195" duration="21825000" />
-      <workItem from="1622195527307" duration="479000" />
-    </task>
-    <task id="LOCAL-00067" summary="Added a new Match constructor for the clone, Added Player.createFaithMap, Board.createFaithMap and modified FaithMap.generateMap for the initialization of the match and updated their tests">
-      <created>1619946395578</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1619946395579</updated>
+      <workItem from="1622195527307" duration="776000" />
     </task>
     <task id="LOCAL-00068" summary="Added Gson support and a test about it">
       <created>1620154234528</created>
@@ -695,7 +693,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622147753463</updated>
     </task>
-    <option name="localTasksCounter" value="116" />
+    <task id="LOCAL-00116" summary="Corrected minor error in MatchGUI.java">
+      <created>1622196206863</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1622196206864</updated>
+    </task>
+    <option name="localTasksCounter" value="117" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -724,7 +729,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added ClientCLI.viewer" />
     <MESSAGE value="updated Cli" />
     <MESSAGE value="added ClientCLI.handleTakeMarketResourcesMove" />
     <MESSAGE value="added Market.toString" />
@@ -749,7 +753,8 @@
     <MESSAGE value="Added Coverage Report _ Summary.pdf" />
     <MESSAGE value="updated market gui and leadercards gui" />
     <MESSAGE value="updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated" />
+    <MESSAGE value="Corrected minor error in MatchGUI.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected minor error in MatchGUI.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
