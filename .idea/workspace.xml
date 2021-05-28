@@ -7,14 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Updated GitIgnore">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketButton.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketButtonListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/calamaio.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/plancia portabiglie.png" afterDir="false" />
-    </list>
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated market gui and leadercards gui" />
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +64,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/test1" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/leadercards" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -81,6 +74,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources\leadercards" />
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources" />
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\deliverables" />
     </key>
@@ -88,6 +82,8 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources\marbles" />
+      <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\deliverables" />
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -220,16 +216,16 @@
     <list>
       <item itemvalue="Application.ClientGUI" />
       <item itemvalue="Application.BoardGUI" />
+      <item itemvalue="Application.GUIPROVA" />
       <item itemvalue="JUnit.testCoverage" />
       <item itemvalue="JUnit.CardContainerTest.getAvailableDevCards" />
       <item itemvalue="JUnit.MatchTest.getter" />
-      <item itemvalue="Application.GUIPROVA" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.GUIPROVA" />
-        <item itemvalue="Application.ClientGUI" />
         <item itemvalue="Application.BoardGUI" />
+        <item itemvalue="Application.ClientGUI" />
         <item itemvalue="JUnit.MatchTest.getter" />
         <item itemvalue="JUnit.CardContainerTest.getAvailableDevCards" />
       </list>
@@ -358,42 +354,7 @@
       <workItem from="1622020288241" duration="5011000" />
       <workItem from="1622051959473" duration="7108000" />
       <workItem from="1622104436627" duration="8384000" />
-      <workItem from="1622117560195" duration="6313000" />
-    </task>
-    <task id="LOCAL-00061" summary="Added Market.java initializer and its tests">
-      <created>1619792180774</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1619792180774</updated>
-    </task>
-    <task id="LOCAL-00062" summary="Modified ActionTokenContainer.java constructor">
-      <created>1619801909336</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1619801909336</updated>
-    </task>
-    <task id="LOCAL-00063" summary="Modified constructors of Board.java, DiscardActionTokenObserver.java, Match.java, MoveActionTokenObserver.java, MoveAndShuffleActionTokenObserver.java, MoveList.java">
-      <created>1619802107619</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1619802107619</updated>
-    </task>
-    <task id="LOCAL-00064" summary="Added various tests">
-      <created>1619802135396</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1619802135396</updated>
-    </task>
-    <task id="LOCAL-00065" summary="Corrected minor error in FaithMap.moveForwardBlack and added a test">
-      <created>1619802873867</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1619802873867</updated>
+      <workItem from="1622117560195" duration="20455000" />
     </task>
     <task id="LOCAL-00066" summary="Added some tests and updated constructors">
       <created>1619887061188</created>
@@ -703,7 +664,42 @@
       <option name="project" value="LOCAL" />
       <updated>1622106089199</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="Updated GUI">
+      <created>1622129188431</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1622129188432</updated>
+    </task>
+    <task id="LOCAL-00111" summary="Updated GUI">
+      <created>1622129341206</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1622129341206</updated>
+    </task>
+    <task id="LOCAL-00112" summary="Added Coverage Report _ Summary.pdf">
+      <created>1622137768152</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1622137768152</updated>
+    </task>
+    <task id="LOCAL-00113" summary="updated market gui and leadercards gui">
+      <created>1622137809528</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1622137809528</updated>
+    </task>
+    <task id="LOCAL-00114" summary="updated market gui and leadercards gui">
+      <created>1622147580552</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1622147580552</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -732,9 +728,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added NoMove.java" />
-    <MESSAGE value="Added Cli" />
-    <MESSAGE value="updated ClientCLI.handleTurn" />
     <MESSAGE value="updated ClientCLI.handleTurn&#10;added ClientCLI.handleLeaderAction&#10;added ClientCLI.handleMainPhase" />
     <MESSAGE value="added ClientCLI.viewer" />
     <MESSAGE value="updated Cli" />
@@ -757,7 +750,10 @@
     <MESSAGE value="Corrected minor error in Controller.performMove" />
     <MESSAGE value="Added tests" />
     <MESSAGE value="Updated GitIgnore" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated GitIgnore" />
+    <MESSAGE value="Updated GUI" />
+    <MESSAGE value="Added Coverage Report _ Summary.pdf" />
+    <MESSAGE value="updated market gui and leadercards gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated market gui and leadercards gui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -855,6 +851,6 @@
     <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActivateLeaderCardMoveTest_notFeasibleDevLeaderCard.ic" NAME="ActivateLeaderCardMoveTest.notFeasibleDevLeaderCard Coverage Results" MODIFIED="1622053334719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.project.model.playermove.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$testCoverage.ic" NAME="testCoverage Coverage Results" MODIFIED="1622100454569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$testCoverage.ic" NAME="testCoverage Coverage Results" MODIFIED="1622131435579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
