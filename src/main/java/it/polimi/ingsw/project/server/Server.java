@@ -10,7 +10,6 @@ import java.util.concurrent.Executors;
 import it.polimi.ingsw.project.controller.Controller;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
-import it.polimi.ingsw.project.observer.custom.CreateJoinGameObserver;
 import it.polimi.ingsw.project.utils.Utils;
 import it.polimi.ingsw.project.view.RemoteView;
 import it.polimi.ingsw.project.view.View;
@@ -43,6 +42,7 @@ public class Server {
             return false;
         }
     }
+
 
     public void startGame(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
@@ -87,7 +87,6 @@ public class Server {
             try {
                 Socket newSocket = serverSocket.accept();
                 SocketClientConnection socketConnection = new SocketClientConnection(newSocket, this);
-                socketConnection.addCreateJoinGameObserver(new CreateJoinGameObserver(this, socketConnection));
                 executor.submit(socketConnection);
             } catch (IOException e) {
                 System.out.println("Connection Error!");

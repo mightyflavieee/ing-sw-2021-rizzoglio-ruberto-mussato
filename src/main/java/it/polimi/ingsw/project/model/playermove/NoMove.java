@@ -1,6 +1,5 @@
 package it.polimi.ingsw.project.model.playermove;
 
-import it.polimi.ingsw.project.model.Match;
 
 public class NoMove extends Move{
 

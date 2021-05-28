@@ -2,7 +2,6 @@ package it.polimi.ingsw.project.model.playermove;
 
 import it.polimi.ingsw.project.messages.ConfirmJoinMessage;
 import it.polimi.ingsw.project.messages.ErrorJoinMessage;
-import it.polimi.ingsw.project.server.Server;
 import it.polimi.ingsw.project.server.SocketClientConnection;
 
 public class JoinRequestMove extends GameRequestMove {
@@ -15,14 +14,14 @@ public class JoinRequestMove extends GameRequestMove {
     }
 
     @Override
-    public void createGameOrJoin(Server server, SocketClientConnection connection) {
-        if (server.isGamePresent(this.gameId)) {
-            if (server.isGameNotFull(this.gameId)) {
+    public void action(SocketClientConnection connection) {
+        if (connection.getServer().isGamePresent(this.gameId)) {
+            if (connection.getServer().isGameNotFull(this.gameId)) {
                 try {
-                    server.addToLobby(this.gameId, connection, this.nickName);
+                    connection.getServer().addToLobby(this.gameId, connection, this.nickName);
                     connection.send(new ConfirmJoinMessage(this.gameId));
-                    if (server.tryToStartGame(this.gameId)) {
-                        server.startGame(this.gameId);
+                    if (connection.getServer().tryToStartGame(this.gameId)) {
+                        connection.getServer().startGame(this.gameId);
                     }
                 } catch (Exception e) {
                     connection.send(new ErrorJoinMessage(e.getMessage()));
