@@ -1,7 +1,6 @@
 package it.polimi.ingsw.project.client;
 
-import it.polimi.ingsw.project.messages.ConfirmJoinMessage;
-import it.polimi.ingsw.project.messages.ErrorJoinMessage;
+import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
@@ -23,6 +22,7 @@ import java.util.*;
 public class ClientCLI {
 
     private String ip;
+    private String gameId;
     private int port;
     private boolean active = true;
     private Match match;
@@ -43,6 +43,10 @@ public class ClientCLI {
         if (this.lock) {
             wait();
         }
+    }
+
+    public ClientCLI getInstance() {
+        return this;
     }
 
     public synchronized void unLock() {
@@ -74,20 +78,22 @@ public class ClientCLI {
         this.active = active;
     }
 
+    public void setGameId(String gameId) {
+        this.gameId = gameId;
+    }
+
+    public String getGameId() {
+        return this.gameId;
+    }
+
     public Thread asyncReadFromSocket() {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-
                 try {
                     while (isActive()) {
-                        Object inputObject = socketIn.readObject();
-                        if (inputObject instanceof Match) {
-                            setMatch((Match) inputObject);
-                            unLock();
-                        } else {
-                            throw new IllegalArgumentException();
-                        }
+                        ResponseMessage inputObject = (ResponseMessage) socketIn.readObject();
+                        inputObject.action(getInstance());
                     }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -97,52 +103,43 @@ public class ClientCLI {
         });
         t.start();
         return t;
+
     }
 
-    public void buildGame() {
-        while (true) {
-            System.out.println("Hello what is your name?");
-            String tempNickName = stdin.nextLine();
-            System.out.println("Your nickname is " + tempNickName + ", do you confirm? 'yes' | 'no'");
-            String decision = stdin.nextLine();
-            if (decision.equals("yes")) {
-                this.myNickname = tempNickName;
-                break;
-            }
-        }
-        while (true) {
-            while (true) {
-                System.out.println("What do you want to 'join' or 'create' a game?");
-                String request = stdin.nextLine();
-                boolean wasValid = false;
-                if (request.equals("join")) {
-                    wasValid = joinGame();
-                } else if (request.equals("create")) {
-                    wasValid = createGame();
-                } else {
-                    System.out.println("Request not valid!");
+    public Thread buildGame() {
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    System.out.println("Hello what is your name?");
+                    String tempNickName = stdin.nextLine();
+                    System.out.println("Your nickname is " + tempNickName + ", do you confirm? 'yes' | 'no'");
+                    String decision = stdin.nextLine();
+                    if (decision.equals("yes")) {
+                        setNickname(tempNickName);
+                        break;
+                    }
                 }
-                if (wasValid) {
-                    break;
+                while (true) {
+                    System.out.println("What do you want to 'join' or 'create' a game?");
+                    String request = stdin.nextLine();
+                    boolean wasValid = false;
+                    if (request.equals("join")) {
+                        wasValid = joinGame();
+                    } else if (request.equals("create")) {
+                        wasValid = createGame();
+                    } else {
+                        System.out.println("Request not valid!");
+                    }
+                    if (wasValid) {
+                        break;
+                    }
                 }
             }
-            try {
-                Object responseFromServer = socketIn.readObject();
-                if (responseFromServer instanceof ConfirmJoinMessage) {
-                    ConfirmJoinMessage confirm = (ConfirmJoinMessage) responseFromServer;
-                    System.out.println("Your gameid is: " + confirm.getGameId());
-                    break;
-                } else if (responseFromServer instanceof ErrorJoinMessage) {
-                    ErrorJoinMessage error = (ErrorJoinMessage) responseFromServer;
-                    throw new Exception(error.getErrorMessage());
-                } else {
-                    throw new Exception("Object received is not type of ConfirmJoinMessage or ErrorJoinMessage");
-                }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        });
 
+        t.start();
+        return t;
     }
 
     private boolean joinGame() { // returns true if the joining request was created successfully
@@ -203,7 +200,7 @@ public class ClientCLI {
                     while (isActive()) {
                         isLock();
                         if (!getMatch().isEmpty()) {
-                            Move move = handleTurn();
+                            Request move = handleTurn();
                             if (move != null) {
                                 socketOut.writeObject(move);
                             }
@@ -1308,11 +1305,12 @@ public class ClientCLI {
         socketIn = new ObjectInputStream(socket.getInputStream());
         stdin = new Scanner(System.in);
         try {
-            buildGame();
             Thread t0 = asyncReadFromSocket();
             Thread t1 = asyncCli();
+            Thread t2 = buildGame();
             t0.join();
             t1.join();
+            t2.join();
         } catch (InterruptedException | NoSuchElementException e) {
             System.out.println("Connection closed from the client side");
         } finally {

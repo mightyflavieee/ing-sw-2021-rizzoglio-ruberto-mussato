@@ -40,7 +40,7 @@ public class RemoteView extends View {
     @Override
     public void update(MoveMessage message) {
         // messaggio che mando al player
-        showMessage(message.getMatch());
+        showMessage(message);
     }
 
 }

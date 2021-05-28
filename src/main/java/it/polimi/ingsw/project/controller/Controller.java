@@ -2,7 +2,6 @@ package it.polimi.ingsw.project.controller;
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.observer.Observer;
-import it.polimi.ingsw.project.utils.gameMessage;
 
 public class Controller implements Observer<PlayerMove> {
 

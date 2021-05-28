@@ -35,6 +35,7 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
             out.reset();
             out.writeObject(message);
             out.flush();
+            out.reset();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             this.close();

@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import it.polimi.ingsw.project.controller.Controller;
+import it.polimi.ingsw.project.messages.MoveMessage;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.utils.Utils;
@@ -43,7 +44,6 @@ public class Server {
         }
     }
 
-
     public void startGame(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
         List<ClientConnection> listOfClientConnections = new ArrayList<ClientConnection>();
@@ -65,7 +65,7 @@ public class Server {
             view.addObserver(controller);
         }
         listOfClientConnections.forEach((ClientConnection connection) -> {
-            connection.asyncSend(model.getMatchCopy());
+            connection.asyncSend(new MoveMessage(model.getMatchCopy()));
         });
     }
 
