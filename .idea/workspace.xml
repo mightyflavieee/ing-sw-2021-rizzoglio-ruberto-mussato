@@ -8,9 +8,58 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Corrected minor error in MatchGUI.java">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardGUIListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/CardContainerGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id17.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id19.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id20.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id21.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id22.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id23.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id24.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id25.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id26.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id27.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id28.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id29.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id30.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id31.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id33.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id34.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id35.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id36.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id37.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id38.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id39.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id40.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id41.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id42.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id43.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id44.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id45.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id46.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id47.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id48.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/id9.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MatchGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MatchGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/developmentCards.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/developmentCards.json" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,6 +135,7 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources\developmentcards" />
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources\marbles" />
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\deliverables" />
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources" />
@@ -101,7 +151,7 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MatchGUI">
+  <component name="RunManager" selected="Application.GUIPROVA">
     <configuration name="BoardGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.BoardGUI" />
       <module name="GC23" />
@@ -223,8 +273,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MatchGUI" />
         <item itemvalue="Application.GUIPROVA" />
+        <item itemvalue="Application.MatchGUI" />
         <item itemvalue="Application.BoardGUI" />
         <item itemvalue="Application.ClientGUI" />
         <item itemvalue="JUnit.MatchTest.getter" />
@@ -355,14 +405,7 @@
       <workItem from="1622051959473" duration="7108000" />
       <workItem from="1622104436627" duration="8384000" />
       <workItem from="1622117560195" duration="21825000" />
-      <workItem from="1622195527307" duration="776000" />
-    </task>
-    <task id="LOCAL-00068" summary="Added Gson support and a test about it">
-      <created>1620154234528</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1620154234528</updated>
+      <workItem from="1622195527307" duration="3149000" />
     </task>
     <task id="LOCAL-00069" summary="Corrected minor error in CardContainer.tryToDiscard, added DiscardActionToken.getCardColor and added some test">
       <created>1620471802207</created>
@@ -700,7 +743,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622196206864</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="Corrected minor error in MatchGUI.java">
+      <created>1622196352625</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1622196352625</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

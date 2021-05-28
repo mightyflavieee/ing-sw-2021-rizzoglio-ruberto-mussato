@@ -7,7 +7,7 @@
         "requiredResources": { "Coin": 1 },
         "manufacturedResources": { "Faith": 1 }
       },
-      "id": "id",
+      "id": "id1",
       "cost": { "Shield": 2 },
       "victoryPoints": 1
     },

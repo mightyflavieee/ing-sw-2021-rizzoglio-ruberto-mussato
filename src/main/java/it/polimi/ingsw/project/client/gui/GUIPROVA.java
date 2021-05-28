@@ -1,5 +1,7 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.model.CardContainer;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,10 +13,12 @@ public class GUIPROVA {
     private MarketButtonListener marketButtonListener;
     private LeaderCardPlaceGUI leaderCardPlaceGui;
     private JFrame jFrame;
+    private CardContainerGUI cardContainerGUI;
 
     public GUIPROVA() {
         marketGUI = new MarketGUI("market");
         board = new BoardGUI();
+        cardContainerGUI = new CardContainerGUI();
 //        marketButton = new MarketButton("market button");
 //        marketButtonListener = new MarketButtonListener(marketGUI);
 //        marketButton.addActionListener(marketButtonListener);
@@ -24,7 +28,7 @@ public class GUIPROVA {
         jFrame.add(marketGUI);
         jFrame.add(board);
        // jFrame.add(cardcontainerGUi);
-
+        jFrame.add(cardContainerGUI);
        // jFrame.add(new MarketGUI("altro market ma potrebbe essere board"));
        // jFrame.add(new MarketGUI("altro market ma potrebbe essere warehouse"));
         leaderCardPlaceGui = new LeaderCardPlaceGUI();
