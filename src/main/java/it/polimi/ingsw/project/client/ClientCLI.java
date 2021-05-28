@@ -1,9 +1,7 @@
 package it.polimi.ingsw.project.client;
 
 import it.polimi.ingsw.project.messages.ConfirmJoinMessage;
-import it.polimi.ingsw.project.messages.CreateGameMessage;
 import it.polimi.ingsw.project.messages.ErrorJoinMessage;
-import it.polimi.ingsw.project.messages.JoinGameMessage;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
@@ -155,7 +153,7 @@ public class ClientCLI {
             return false;
         }
         try {
-            socketOut.writeObject(new JoinGameMessage(gameId, this.myNickname));
+            socketOut.writeObject(new JoinRequestMove(this.myNickname, gameId));
             socketOut.flush();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -188,7 +186,7 @@ public class ClientCLI {
             }
         }
         try {
-            socketOut.writeObject(new CreateGameMessage(playersNumber, this.myNickname));
+            socketOut.writeObject(new CreateRequestMove(playersNumber, this.myNickname));
             socketOut.flush();
         } catch (Exception e) {
             System.out.println(e.getMessage());

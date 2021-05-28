@@ -16,15 +16,12 @@ public class RemoteView extends View {
         public void update(Move message) {
             System.out.println("Received: " + message.toString());
             try {
-
                 handleMove(message);
             } catch (IllegalArgumentException e) {
                 clientConnection.asyncSend("Error!");
             }
         }
-        }
-
-
+    }
 
     private final ClientConnection clientConnection;
 
@@ -42,10 +39,8 @@ public class RemoteView extends View {
 
     @Override
     public void update(MoveMessage message) {
-        //messaggio che mando al player
+        // messaggio che mando al player
         showMessage(message.getMatch());
     }
-
-
 
 }

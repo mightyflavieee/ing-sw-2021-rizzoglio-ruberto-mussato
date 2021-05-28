@@ -14,7 +14,6 @@ public class DiscardActionTokenObserver implements Observer<CardColor> {
     @Override
     public void update(CardColor message) {
         match.discardForActionToken(message);
-        
+
     }
 }
-
