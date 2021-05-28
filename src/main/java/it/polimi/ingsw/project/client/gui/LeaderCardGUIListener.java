@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 public class LeaderCardGUIListener implements ActionListener {
     private LeaderCardGUI leaderCardGUI;
+    private LeaderMoveHandler leaderMoveHandler;
 
     public LeaderCardGUIListener(LeaderCardGUI leaderCardGUI) {
         this.leaderCardGUI = leaderCardGUI;
@@ -12,6 +13,12 @@ public class LeaderCardGUIListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.leaderCardGUI.setVisible(false);
+        //this.leaderCardGUI.setEnabled(false);
+        if(this.leaderMoveHandler == null){
+            this.leaderMoveHandler = new LeaderMoveHandler(this.leaderCardGUI);
+        }
+        if (!this.leaderMoveHandler.isShowing()) {
+            this.leaderMoveHandler = new LeaderMoveHandler(this.leaderCardGUI);
+        }
     }
 }

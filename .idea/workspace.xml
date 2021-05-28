@@ -7,10 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added papal council images in FaithMapGUI">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added FaithMapGUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/FaithMapGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/FaithMapGUI.java" afterDir="false" />
     </list>
+    <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,7 +103,7 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.FaithMapGUI">
+  <component name="RunManager" selected="Application.GUIPROVA">
     <configuration name="BoardGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.BoardGUI" />
       <module name="GC23" />
@@ -168,17 +169,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <module name="GC23" />
       <selectedOptions>
@@ -211,13 +201,13 @@
       <item itemvalue="Application.BoardGUI" />
       <item itemvalue="Application.GUIPROVA" />
       <item itemvalue="Application.MatchGUI" />
-      <item itemvalue="JUnit.testCoverage" />
       <item itemvalue="Application.FaithMapGUI" />
+      <item itemvalue="JUnit.testCoverage" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.FaithMapGUI" />
         <item itemvalue="Application.GUIPROVA" />
+        <item itemvalue="Application.FaithMapGUI" />
         <item itemvalue="Application.MatchGUI" />
         <item itemvalue="Application.BoardGUI" />
         <item itemvalue="Application.ClientGUI" />
@@ -349,6 +339,20 @@
       <workItem from="1622104436627" duration="8384000" />
       <workItem from="1622117560195" duration="21825000" />
       <workItem from="1622195527307" duration="3149000" />
+    </task>
+    <task id="LOCAL-00073" summary="Added a test">
+      <created>1620929188191</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1620929188191</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Changes by leonardo">
+      <created>1620945447545</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1620945447546</updated>
     </task>
     <task id="LOCAL-00075" summary="Changes by leonardo">
       <created>1620946740546</created>
@@ -679,21 +683,7 @@
       <option name="project" value="LOCAL" />
       <updated>1622215812022</updated>
     </task>
-    <task id="LOCAL-00122" summary="updated FaithMapGUI">
-      <created>1622216399375</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1622216399375</updated>
-    </task>
-    <task id="LOCAL-00123" summary="added papal council images in FaithMapGUI">
-      <created>1622217449157</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1622217449157</updated>
-    </task>
-    <option name="localTasksCounter" value="124" />
+    <option name="localTasksCounter" value="122" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -722,6 +712,8 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="updated ClientCLI.handleTakeMarketResourcesMove" />
+    <MESSAGE value="updated ClientCLI.viewer" />
     <MESSAGE value="added ClientCLI.swapShelves" />
     <MESSAGE value="updated UML" />
     <MESSAGE value="Corrected minor error in ClientCLI" />
@@ -745,9 +737,7 @@
     <MESSAGE value="Added ResourceInHandGUI.java" />
     <MESSAGE value="updated ResourceInHandGUI.java" />
     <MESSAGE value="added FaithMapGUI" />
-    <MESSAGE value="updated FaithMapGUI" />
-    <MESSAGE value="added papal council images in FaithMapGUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="added papal council images in FaithMapGUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="added FaithMapGUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

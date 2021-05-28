@@ -97,4 +97,13 @@ public class TrayGui extends JPanel {
         this.outsideMarbleJlabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + market.getOutSideMarble().toString()+ ".png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
 
     }
+
+    public void stopTray() {
+        for (JButton jButton : verticalArrows){
+            jButton.setEnabled(false);
+        }
+        for (JButton jButton : horizontalArrows){
+            jButton.setEnabled(false);
+        }
+    }
 }

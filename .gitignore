@@ -5,4 +5,5 @@ ProjectIngSW/.project
 *.lst
 *.dumpstream
 target
+.idea
 

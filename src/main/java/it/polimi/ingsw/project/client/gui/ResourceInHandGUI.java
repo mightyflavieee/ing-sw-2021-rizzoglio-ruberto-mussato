@@ -35,6 +35,10 @@ public class ResourceInHandGUI extends JInternalFrame {
         this.add(shieldLabel);
         this.servantLabel = new JLabel(String.valueOf(0));
         this.add(servantLabel);
+        this.coinInt = 0;
+        this.stoneInt = 0;
+        this.shieldInt = 0;
+        this.servantInt = 0;
         this.setVisible(true);
         this.pack();
     }
