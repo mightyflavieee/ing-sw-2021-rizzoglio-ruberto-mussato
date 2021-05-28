@@ -29,7 +29,7 @@ public class TrayGui extends JPanel {
 //                e.printStackTrace();
 //            }
         this.setVisible(true);
-        this.setPreferredSize(new Dimension(200,100));
+       // this.setPreferredSize(new Dimension(200,100));
     }
 
     private void createObservers(ResourceInHandGUI resourceInHandGUI) {

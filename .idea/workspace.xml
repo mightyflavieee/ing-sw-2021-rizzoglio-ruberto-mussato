@@ -7,10 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Updated MarketGUI.java">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Added ResourceInHandGUI.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ArrowObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ArrowObserver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/TrayGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/TrayGui.java" afterDir="false" />
     </list>
@@ -361,13 +360,6 @@
       <workItem from="1622117560195" duration="21825000" />
       <workItem from="1622195527307" duration="3149000" />
     </task>
-    <task id="LOCAL-00070" summary="Added a test in ExtractActionTokenMoveTest.java">
-      <created>1620550806749</created>
-      <option name="number" value="00070" />
-      <option name="presentableId" value="LOCAL-00070" />
-      <option name="project" value="LOCAL" />
-      <updated>1620550806749</updated>
-    </task>
     <task id="LOCAL-00071" summary="Changes by leonardo">
       <created>1620929130589</created>
       <option name="number" value="00071" />
@@ -704,7 +696,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622207886258</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="Added ResourceInHandGUI.java">
+      <created>1622210398121</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1622210398121</updated>
+    </task>
+    <option name="localTasksCounter" value="120" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -733,7 +732,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added ClientCLI.handleTakeMarketResourcesMove" />
     <MESSAGE value="added Market.toString" />
     <MESSAGE value="added Board.getLeaderCardsToString" />
     <MESSAGE value="updated ClientCLI.handleTakeMarketResourcesMove" />
@@ -758,7 +756,8 @@
     <MESSAGE value="updated" />
     <MESSAGE value="Corrected minor error in MatchGUI.java" />
     <MESSAGE value="Updated MarketGUI.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated MarketGUI.java" />
+    <MESSAGE value="Added ResourceInHandGUI.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added ResourceInHandGUI.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
