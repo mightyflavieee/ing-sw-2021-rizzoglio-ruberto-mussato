@@ -26,9 +26,17 @@ public class FaithMapGUI extends JInternalFrame {
             if (i != 5 && i != 13 && i != 20) {
                 button.setVisible(false);
             }
+            if (i == 5) {
+                button.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/tiles/quadrato giallo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+            }
+            if (i == 13) {
+                button.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/tiles/quadrato arancione.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+            }
+            if (i == 20) {
+                button.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/tiles/quadrato rosso.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+            }
             this.papalCuoncilTiles.add(button);
         }
-        setTilesImages();
         setBordersForCouncil();
         for (JButton button : this.tiles) {
             this.add(button);
@@ -36,16 +44,6 @@ public class FaithMapGUI extends JInternalFrame {
         for (JButton button : this.papalCuoncilTiles) {
             this.add(button);
         }
-    }
-
-    private void setTilesImages() {
-        setTileImage(this.papalCuoncilTiles.get(0), "src/main/resources/quadrato giallo.png");
-        setTileImage(this.papalCuoncilTiles.get(1), "src/main/resources/quadrato arancione.png");
-        setTileImage(this.papalCuoncilTiles.get(2), "src/main/resources/quadrato rosso.png");
-    }
-
-    private void setTileImage(JButton tile, String file) {
-        tile.setIcon(new ImageIcon(new javax.swing.ImageIcon(file).getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
     }
 
     private void setBordersForCouncil() {
