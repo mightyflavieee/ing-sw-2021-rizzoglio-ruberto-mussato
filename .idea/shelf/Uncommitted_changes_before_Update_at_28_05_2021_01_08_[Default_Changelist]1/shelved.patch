@@ -1,0 +1,164 @@
+Index: src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package it.polimi.ingsw.project.client.gui;\r\n\r\nimport it.polimi.ingsw.project.model.board.DevCardPosition;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.io.IOException;\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\n\r\npublic class BoardGUI extends JInternalFrame {\r\n    private JPanel panel;\r\n    private final Map<DevCardPosition, JPanel> cardSlots;\r\n    private final JPanel warehouse;\r\n    private final JPanel faithMap;\r\n\r\n    public BoardGUI() throws IOException {\r\n        this.setVisible(true);\r\n        this.setPreferredSize(new Dimension(1066, 762));\r\n        this.panel = new JPanel();\r\n        this.cardSlots= new HashMap<>();\r\n        this.warehouse = new JPanel();\r\n        this.faithMap = new JPanel();\r\n        createBoard();\r\n        this.add(this.panel);\r\n    }\r\n\r\n    private void setBoardFrameBackGroundImage() throws IOException {\r\n        this.panel = new JPanelWithBackground(\"src/main/resources/prova_board.PNG\");\r\n    }\r\n\r\n    private JPanel createDevCardSlots() throws IOException {\r\n        JPanel devCardSlots = new JPanel();\r\n        this.cardSlots.put(DevCardPosition.Left, new JPanelWithBackground(\"src/main/resources/prova_carte_resized.PNG\"));\r\n        this.cardSlots.put(DevCardPosition.Center, new JPanelWithBackground(\"src/main/resources/prova_carte_resized.PNG\"));\r\n        this.cardSlots.put(DevCardPosition.Right, new JPanelWithBackground(\"src/main/resources/prova_carte_resized.PNG\"));\r\n        this.cardSlots.get(DevCardPosition.Left).setPreferredSize(new Dimension(138, 209));\r\n        this.cardSlots.get(DevCardPosition.Center).setPreferredSize(new Dimension(138, 209));\r\n        this.cardSlots.get(DevCardPosition.Right).setPreferredSize(new Dimension(138, 209));\r\n        devCardSlots.setOpaque(false);\r\n        devCardSlots.setPreferredSize(new Dimension(750, 762-300));\r\n        devCardSlots.setLayout(new FlowLayout());\r\n        // creating the JPanel for the cards\r\n        JPanel voidPanelStart = new JPanel();\r\n        JPanel leftCardPanel = new JPanel();\r\n        JPanel voidPanelLeftCenter = new JPanel();\r\n        JPanel centerCardPanel = new JPanel();\r\n        JPanel voidPanelCenterRight = new JPanel();\r\n        JPanel rightCardPanel = new JPanel();\r\n        JPanel voidPanelEnd = new JPanel();\r\n        voidPanelStart.setPreferredSize(new Dimension(120, 762-300));\r\n        leftCardPanel.setPreferredSize(new Dimension(138, 762-300));\r\n        voidPanelLeftCenter.setPreferredSize(new Dimension(70, 762-300));\r\n        centerCardPanel.setPreferredSize(new Dimension(138, 762-300));\r\n        voidPanelCenterRight.setPreferredSize(new Dimension(70, 762-300));\r\n        rightCardPanel.setPreferredSize(new Dimension(138, 762-300));\r\n        voidPanelEnd.setPreferredSize(new Dimension(100, 762-300));\r\n        voidPanelStart.setOpaque(false);\r\n        leftCardPanel.setOpaque(false);\r\n        voidPanelLeftCenter.setOpaque(false);\r\n        centerCardPanel.setOpaque(false);\r\n        voidPanelCenterRight.setOpaque(false);\r\n        rightCardPanel.setOpaque(false);\r\n        voidPanelEnd.setOpaque(false);\r\n        leftCardPanel.setLayout(new FlowLayout());\r\n        centerCardPanel.setLayout(new FlowLayout());\r\n        rightCardPanel.setLayout(new FlowLayout());\r\n        // adding space above the dev cards in order to center them in the JPanel\r\n        JPanel spaceLeftSlot = new JPanel();\r\n        JPanel spaceCenterSlot = new JPanel();\r\n        JPanel spaceRightSlot = new JPanel();\r\n        spaceLeftSlot.setOpaque(false);\r\n        spaceCenterSlot.setOpaque(false);\r\n        spaceRightSlot.setOpaque(false);\r\n        spaceLeftSlot.setPreferredSize(new Dimension(138, 50));\r\n        spaceCenterSlot.setPreferredSize(new Dimension(138, 50));\r\n        spaceRightSlot.setPreferredSize(new Dimension(138, 50));\r\n        leftCardPanel.add(spaceLeftSlot);\r\n        centerCardPanel.add(spaceCenterSlot);\r\n        rightCardPanel.add(spaceRightSlot);\r\n        leftCardPanel.add(this.cardSlots.get(DevCardPosition.Left));\r\n        centerCardPanel.add(this.cardSlots.get(DevCardPosition.Center));\r\n        rightCardPanel.add(this.cardSlots.get(DevCardPosition.Right));\r\n        // adding the dev cards JPanels to the main panel for the cards\r\n        devCardSlots.add(voidPanelStart);\r\n        devCardSlots.add(leftCardPanel);\r\n        devCardSlots.add(voidPanelLeftCenter);\r\n        devCardSlots.add(centerCardPanel);\r\n        devCardSlots.add(voidPanelCenterRight);\r\n        devCardSlots.add(rightCardPanel);\r\n        devCardSlots.add(voidPanelEnd);\r\n        return devCardSlots;\r\n    }\r\n\r\n    private void createWarehouse() {\r\n        this.warehouse.setOpaque(false);\r\n        this.warehouse.setPreferredSize(new Dimension((1066-800), (762-300)));\r\n        this.warehouse.setLayout(new FlowLayout());\r\n        // creates the void JPanel to help with fit the content\r\n        JPanel voidPanelStart = new JPanel();\r\n        voidPanelStart.setOpaque(false);\r\n        voidPanelStart.setPreferredSize(new Dimension((1066-800), 55));\r\n        // creates the warehouse JPanel comprised of the resource buttons\r\n        JPanel warehouseSlot = new JPanel();\r\n        JPanel firstShelf = new JPanel();\r\n        JPanel secondShelf = new JPanel();\r\n        JPanel thirdShelf = new JPanel();\r\n        JPanel voidPanelFirstSecondShelf = new JPanel();\r\n        JPanel voidPanelSecondThirdShelf = new JPanel();\r\n        warehouseSlot.setOpaque(false);\r\n        firstShelf.setOpaque(false);\r\n        secondShelf.setOpaque(false);\r\n        thirdShelf.setOpaque(false);\r\n        voidPanelFirstSecondShelf.setOpaque(false);\r\n        voidPanelSecondThirdShelf.setOpaque(false);\r\n        warehouseSlot.setPreferredSize(new Dimension((1066-800), 210));\r\n        firstShelf.setPreferredSize(new Dimension((1066-800), 45));\r\n        secondShelf.setPreferredSize(new Dimension((1066-800), 45));\r\n        thirdShelf.setPreferredSize(new Dimension((1066-800), 45));\r\n        voidPanelFirstSecondShelf.setPreferredSize(new Dimension((1066-800), 10));\r\n        voidPanelSecondThirdShelf.setPreferredSize(new Dimension((1066-800), 11));\r\n        warehouseSlot.setLayout(new FlowLayout());\r\n        firstShelf.setLayout(new FlowLayout());\r\n        secondShelf.setLayout(new FlowLayout());\r\n        thirdShelf.setLayout(new FlowLayout());\r\n        JButton resourceButtonFirstShelf = new JButton();\r\n        JButton resourceButtonSecondShelf1 = new JButton();\r\n        JButton resourceButtonSecondShelf2 = new JButton();\r\n        JButton resourceButtonThirdShelf1 = new JButton();\r\n        JButton resourceButtonThirdShelf2 = new JButton();\r\n        JButton resourceButtonThirdShelf3 = new JButton();\r\n        resourceButtonFirstShelf.setPreferredSize(new Dimension(40, 40));\r\n        resourceButtonSecondShelf1.setPreferredSize(new Dimension(40, 40));\r\n        resourceButtonSecondShelf2.setPreferredSize(new Dimension(40, 40));\r\n        resourceButtonThirdShelf1.setPreferredSize(new Dimension(40, 40));\r\n        resourceButtonThirdShelf2.setPreferredSize(new Dimension(40, 40));\r\n        resourceButtonThirdShelf3.setPreferredSize(new Dimension(40, 40));\r\n        firstShelf.add(resourceButtonFirstShelf);\r\n        secondShelf.add(resourceButtonSecondShelf1);\r\n        secondShelf.add(resourceButtonSecondShelf2);\r\n        thirdShelf.add(resourceButtonThirdShelf1);\r\n        thirdShelf.add(resourceButtonThirdShelf2);\r\n        thirdShelf.add(resourceButtonThirdShelf3);\r\n        warehouseSlot.add(firstShelf);\r\n        warehouseSlot.add(voidPanelFirstSecondShelf);\r\n        warehouseSlot.add(secondShelf);\r\n        warehouseSlot.add(voidPanelSecondThirdShelf);\r\n        warehouseSlot.add(thirdShelf);\r\n        // creates the chest JPanel\r\n        JPanel chestSlot = new JPanel();\r\n        chestSlot.setOpaque(false);\r\n        chestSlot.setPreferredSize(new Dimension((1066-800), 200));\r\n        // adds every component to the parent JPanel\r\n        this.warehouse.add(voidPanelStart);\r\n        this.warehouse.add(warehouseSlot);\r\n        this.warehouse.add(chestSlot);\r\n\r\n        voidPanelStart.setBorder(BorderFactory.createLineBorder(Color.black));\r\n        warehouseSlot.setBorder(BorderFactory.createLineBorder(Color.black));\r\n        firstShelf.setBorder(BorderFactory.createLineBorder(Color.black));\r\n        secondShelf.setBorder(BorderFactory.createLineBorder(Color.black));\r\n        thirdShelf.setBorder(BorderFactory.createLineBorder(Color.black));\r\n        chestSlot.setBorder(BorderFactory.createLineBorder(Color.black));\r\n\r\n        this.warehouse.setBorder(BorderFactory.createLineBorder(Color.black));\r\n    }\r\n\r\n    private void createFaithMap() {\r\n        this.faithMap.setOpaque(false);\r\n        this.faithMap.setPreferredSize(new Dimension(1066, 240));\r\n    }\r\n\r\n    private JPanel createWarehouseAndDevCardSlotsRow() throws IOException {\r\n        JPanel warehouseAndDevCardSlotsRow = new JPanel();\r\n        warehouseAndDevCardSlotsRow.setOpaque(false);\r\n        warehouseAndDevCardSlotsRow.setLayout(new FlowLayout());\r\n        createWarehouse();\r\n        warehouseAndDevCardSlotsRow.add(this.warehouse);\r\n        warehouseAndDevCardSlotsRow.add(createDevCardSlots());\r\n        return warehouseAndDevCardSlotsRow;\r\n    }\r\n\r\n    private void createBoard() throws IOException {\r\n        setBoardFrameBackGroundImage();\r\n        createFaithMap();\r\n        JPanel warehouseAndDevCardSlotsRow = createWarehouseAndDevCardSlotsRow();\r\n        this.panel.setLayout(new BorderLayout());\r\n        this.panel.add(this.faithMap, BorderLayout.NORTH);\r\n        this.panel.add(warehouseAndDevCardSlotsRow, BorderLayout.SOUTH);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java b/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java
+--- a/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java	
++++ b/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java	
+@@ -14,14 +14,19 @@
+     private final JPanel warehouse;
+     private final JPanel faithMap;
+ 
+-    public BoardGUI() throws IOException {
++    public BoardGUI(String nickname) {
++        this.setTitle(nickname);
+         this.setVisible(true);
+         this.setPreferredSize(new Dimension(1066, 762));
+         this.panel = new JPanel();
+         this.cardSlots= new HashMap<>();
+         this.warehouse = new JPanel();
+         this.faithMap = new JPanel();
+-        createBoard();
++        try {
++            createBoard();
++        } catch (IOException e) {
++            e.printStackTrace();
++        }
+         this.add(this.panel);
+     }
+ 
+Index: src/main/java/it/polimi/ingsw/project/client/gui/MatchGUI.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package it.polimi.ingsw.project.client.gui;\r\n\r\npublic class MatchGUI {\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/it/polimi/ingsw/project/client/gui/MatchGUI.java b/src/main/java/it/polimi/ingsw/project/client/gui/MatchGUI.java
+--- a/src/main/java/it/polimi/ingsw/project/client/gui/MatchGUI.java	
++++ b/src/main/java/it/polimi/ingsw/project/client/gui/MatchGUI.java	
+@@ -1,5 +1,120 @@
+ package it.polimi.ingsw.project.client.gui;
+ 
+-public class MatchGUI {
++import javax.swing.*;
++import java.awt.*;
++import java.io.IOException;
++import java.util.ArrayList;
++import java.util.List;
++
++public class MatchGUI extends JInternalFrame {
++    private JPanel panel;
++    private final List<BoardGUI> boards;
++    private MarketGUI market;
++
++    public MatchGUI(String matchName, List<String> nicknames, int numberOfPlayers) {
++        this.setTitle(matchName);
++        this.setVisible(true);
++        this.setPreferredSize(new Dimension(1100, 850));
++        try {
++            this.panel = new JPanelWithBackground("src/main/resources/table.jpg");
++        } catch (IOException e) {
++            e.printStackTrace();
++        }
++        this.boards = new ArrayList<>();
++        for (int i = 0; i < numberOfPlayers; i++) {
++            this.boards.add(new BoardGUI(nicknames.get(i)));
++        }
++        this.market = new MarketGUI("Market");
++        createTable();
++        this.add(this.panel);
++    }
++
++    private void createTable() {
++        JPanel upperPanel = new JPanel();
++        JPanel middlePanel = new JPanel();
++        JPanel bottomPanel  = new JPanel();
++        List<JPanel> structurePanelList = new ArrayList<>();
++        structurePanelList.add(upperPanel);
++        structurePanelList.add(middlePanel);
++        structurePanelList.add(bottomPanel);
++        for (JPanel panel : structurePanelList) {
++            panel.setOpaque(false);
++            panel.setLayout(new FlowLayout());
++        }
++        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
++        upperPanel.setPreferredSize(new Dimension(screenSize.width, 100));
++        middlePanel.setPreferredSize(new Dimension(screenSize.width, screenSize.height-300));
++        bottomPanel.setPreferredSize(new Dimension(screenSize.width, 100));
++
++        BoardGUIButton buttonUpperPlayer = addBoardButton("PEPPE", 0);
++        BoardGUIButton buttonLeftPlayer = addBoardButton("GIALUCHINO", 1);
++        BoardGUIButton buttonRightPlayer = addBoardButton("BUBI", 2);
++        BoardGUIButton buttonBottomPlayer = addBoardButton("PAXXERELLO", 3);
++        buttonUpperPlayer.setPreferredSize(new Dimension(150, 20));
++        buttonLeftPlayer.setPreferredSize(new Dimension(150, 20));
++        buttonRightPlayer.setPreferredSize(new Dimension(150, 20));
++        buttonBottomPlayer.setPreferredSize(new Dimension(150, 20));
++        upperPanel.add(buttonUpperPlayer);
++        bottomPanel.add(buttonBottomPlayer);
++
++        JPanel middleLeftPanel = new JPanel();
++        JPanel middleCenterPanel = new JPanel();
++        JPanel middleRightPanel = new JPanel();
++        middleLeftPanel.setOpaque(false);
++        middleCenterPanel.setOpaque(false);
++        middleRightPanel.setOpaque(false);
++        middleLeftPanel.setPreferredSize(new Dimension(200, screenSize.height-300));
++        middleCenterPanel.setPreferredSize(new Dimension(screenSize.width-450, screenSize.height-300));
++        middleRightPanel.setPreferredSize(new Dimension(200, screenSize.height-300));
++        middleLeftPanel.setLayout(new FlowLayout());
++        middleCenterPanel.setLayout(new FlowLayout());
++        middleRightPanel.setLayout(new FlowLayout());
++        JPanel spaceLeftPanel = new JPanel();
++        JPanel spaceRightPanel = new JPanel();
++        spaceLeftPanel.setOpaque(false);
++        spaceRightPanel.setOpaque(false);
++        spaceLeftPanel.setPreferredSize(new Dimension(200, 240));
++        spaceRightPanel.setPreferredSize(new Dimension(200, 240));
++        middleLeftPanel.add(spaceLeftPanel);
++        middleLeftPanel.add(buttonLeftPlayer);
++        middleRightPanel.add(spaceRightPanel);
++        middleRightPanel.add(buttonRightPlayer);
++
++        middlePanel.add(middleLeftPanel);
++        middlePanel.add(middleCenterPanel);
++        middlePanel.add(middleRightPanel);
++
++        /*middleLeftPanel.setBorder(BorderFactory.createLineBorder(Color.red));
++        middleCenterPanel.setBorder(BorderFactory.createLineBorder(Color.red));
++        middleRightPanel.setBorder(BorderFactory.createLineBorder(Color.red));
++        upperPanel.setBorder(BorderFactory.createLineBorder(Color.red));
++        middlePanel.setBorder(BorderFactory.createLineBorder(Color.red));
++        bottomPanel.setBorder(BorderFactory.createLineBorder(Color.red));*/
++
++        this.panel.setLayout(new FlowLayout());
++        this.panel.add(upperPanel);
++        this.panel.add(middlePanel);
++        this.panel.add(bottomPanel);
++    }
++
++    private BoardGUIButton addBoardButton(String nickname, int playerNumber) {
++        BoardGUIButton button = new BoardGUIButton(nickname);
++        button.addActionListener(new BoardGUIButtonListener(this.boards.get(playerNumber)));
++        return button;
++    }
++
++    public static void main(String[] args) {
++        JFrame frame = new JFrame();
++        frame.setVisible(true);
++        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
++        frame.setBounds(0,0, screenSize.width, screenSize.height);
++        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
++        List<String> nicknames = new ArrayList<>();
++        nicknames.add("PEPPE");
++        nicknames.add("BOBBI");
++        nicknames.add("ERFAINA");
++        nicknames.add("SALVINI");
++        frame.add(new MatchGUI("Match di prova", nicknames,4));
++    }
+ 
+ }

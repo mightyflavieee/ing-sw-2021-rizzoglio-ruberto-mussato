@@ -22,15 +22,26 @@ public class MatchGUI extends JInternalFrame {
         }
         this.boards = new ArrayList<>();
         for (int i = 0; i < numberOfPlayers; i++) {
-            this.boards.add(new BoardGUI());
-            this.boards.get(i).setTitle(nicknames.get(i));
+            this.boards.add(new BoardGUI(nicknames.get(i)));
         }
         this.market = new MarketGUI("Market");
-        createTable();
-        this.add(this.panel);
+        createTable(nicknames);
+        for (int i = 0; i < numberOfPlayers; i++) {
+            this.add(this.boards.get(i), i);
+            this.boards.get(i).hide();
+        }
+        this.add(this.panel, 4);
     }
 
-    private void createTable() {
+    public List<BoardGUI> getBoards() {
+        return boards;
+    }
+
+    public JPanel getPanel() {
+        return panel;
+    }
+
+    private void createTable(List<String> nicknames) {
         JPanel upperPanel = new JPanel();
         JPanel middlePanel = new JPanel();
         JPanel bottomPanel  = new JPanel();
@@ -47,10 +58,10 @@ public class MatchGUI extends JInternalFrame {
         middlePanel.setPreferredSize(new Dimension(screenSize.width, screenSize.height-300));
         bottomPanel.setPreferredSize(new Dimension(screenSize.width, 100));
 
-        BoardGUIButton buttonUpperPlayer = addBoardButton("PEPPE", 0);
-        BoardGUIButton buttonLeftPlayer = addBoardButton("GIALUCHINO", 1);
-        BoardGUIButton buttonRightPlayer = addBoardButton("BUBI", 2);
-        BoardGUIButton buttonBottomPlayer = addBoardButton("PAXXERELLO", 3);
+        BoardGUIButton buttonUpperPlayer = addBoardButton(nicknames.get(0), 0);
+        BoardGUIButton buttonLeftPlayer = addBoardButton(nicknames.get(1), 1);
+        BoardGUIButton buttonRightPlayer = addBoardButton(nicknames.get(2), 2);
+        BoardGUIButton buttonBottomPlayer = addBoardButton(nicknames.get(3), 3);
         buttonUpperPlayer.setPreferredSize(new Dimension(150, 20));
         buttonLeftPlayer.setPreferredSize(new Dimension(150, 20));
         buttonRightPlayer.setPreferredSize(new Dimension(150, 20));
@@ -100,7 +111,7 @@ public class MatchGUI extends JInternalFrame {
 
     private BoardGUIButton addBoardButton(String nickname, int playerNumber) {
         BoardGUIButton button = new BoardGUIButton(nickname);
-        button.addActionListener(new BoardGUIButtonListener(this.boards.get(playerNumber)));
+        button.addActionListener(new BoardGUIButtonListener(this.boards.get(playerNumber), this));
         return button;
     }
 
@@ -115,7 +126,7 @@ public class MatchGUI extends JInternalFrame {
         nicknames.add("BOBBI");
         nicknames.add("ERFAINA");
         nicknames.add("SALVINI");
-        frame.add(new MatchGUI("Match di prova", nicknames,4));
+        frame.add(new MatchGUI("Match di prova", nicknames, 4));
     }
 
 }

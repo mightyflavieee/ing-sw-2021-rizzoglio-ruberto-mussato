@@ -14,7 +14,8 @@ public class BoardGUI extends JInternalFrame {
     private final JPanel warehouse;
     private final JPanel faithMap;
 
-    public BoardGUI(){
+    public BoardGUI(String nickname){
+        this.setTitle(nickname);
         this.setVisible(true);
         this.setPreferredSize(new Dimension(1066, 762));
         this.panel = new JPanel();

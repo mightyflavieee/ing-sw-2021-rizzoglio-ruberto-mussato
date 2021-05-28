@@ -17,7 +17,7 @@ public class GUIPROVA {
 
     public GUIPROVA() {
         marketGUI = new MarketGUI("market");
-        board = new BoardGUI();
+        board = new BoardGUI("Board");
         cardContainerGUI = new CardContainerGUI();
 //        marketButton = new MarketButton("market button");
 //        marketButtonListener = new MarketButtonListener(marketGUI);
