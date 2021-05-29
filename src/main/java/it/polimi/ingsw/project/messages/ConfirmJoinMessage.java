@@ -2,7 +2,7 @@ package it.polimi.ingsw.project.messages;
 
 import java.io.Serializable;
 
-import it.polimi.ingsw.project.client.ClientCLI;
+import it.polimi.ingsw.project.client.Client;
 
 public class ConfirmJoinMessage implements Serializable, ResponseMessage {
     private String gameId;
@@ -16,7 +16,7 @@ public class ConfirmJoinMessage implements Serializable, ResponseMessage {
     }
 
     @Override
-    public void action(ClientCLI client) {
+    public void action(Client client) {
         client.setGameId(gameId);
         System.out.println("Your gameid is: " + this.gameId);
         client.unLock();

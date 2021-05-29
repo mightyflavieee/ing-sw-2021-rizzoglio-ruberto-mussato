@@ -19,71 +19,19 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.*;
 
-public class ClientCLI {
+public class ClientCLI extends Client {
 
     private String ip;
-    private String gameId;
     private int port;
-    private boolean active = true;
     private Match match;
     private Scanner stdin;
     private ObjectOutputStream socketOut;
     private ObjectInputStream socketIn;
-    private String myNickname; // da inizializzare
-    private boolean lock;
 
     public ClientCLI(String ip, int port) {
         this.ip = ip;
         this.port = port;
         this.match = null;
-        this.lock = true;
-    }
-
-    public synchronized void isLock() throws InterruptedException {
-        if (this.lock) {
-            wait();
-        }
-    }
-
-    public ClientCLI getInstance() {
-        return this;
-    }
-
-    public synchronized void unLock() {
-        this.lock = false;
-        notifyAll();
-    }
-
-    public synchronized void setLock() {
-        this.lock = true;
-    }
-
-    public void setMatch(Match match) {
-        this.match = match;
-    }
-
-    public void setNickname(String name) {
-        this.myNickname = name;
-    }
-
-    public Optional<Match> getMatch() {
-        return Optional.ofNullable(match);
-    }
-
-    public synchronized boolean isActive() {
-        return active;
-    }
-
-    public synchronized void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public void setGameId(String gameId) {
-        this.gameId = gameId;
-    }
-
-    public String getGameId() {
-        return this.gameId;
     }
 
     public Thread asyncReadFromSocket() {
@@ -106,6 +54,7 @@ public class ClientCLI {
 
     }
 
+    @Override
     public Thread buildGame() {
         Thread t = new Thread(new Runnable() {
             @Override
@@ -150,7 +99,7 @@ public class ClientCLI {
             return false;
         }
         try {
-            socketOut.writeObject(new JoinRequestMove(this.myNickname, gameId));
+            socketOut.writeObject(new JoinRequestMove(getNickname(), gameId));
             socketOut.flush();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -183,7 +132,7 @@ public class ClientCLI {
             }
         }
         try {
-            socketOut.writeObject(new CreateRequestMove(playersNumber, this.myNickname));
+            socketOut.writeObject(new CreateRequestMove(playersNumber, getNickname()));
             socketOut.flush();
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -222,7 +171,7 @@ public class ClientCLI {
         // quando do come comando 0 entro SEMPRE in una funzione che mi permette di
         // visualizzare le varie informazioni
 
-        switch (this.match.getTurnPhase(myNickname)) {
+        switch (getMatch().get().getTurnPhase(getNickname())) {
             case WaitPhase:
                 viewer();
                 break;
@@ -250,7 +199,7 @@ public class ClientCLI {
                     viewer();
                     break;
                 case "1":
-                    System.out.println(this.match.getLeaderCardsToString(this.myNickname));
+                    System.out.println(this.match.getLeaderCardsToString(getNickname()));
                     System.out.println("Give the LeaderCard id that you want to discard");
                     return new DiscardLeaderCardMove(stdin.nextLine());
                 case "2":
@@ -311,7 +260,7 @@ public class ClientCLI {
         boolean isMovePossible = false;
         String leaderCardID = null;
         if (!this.match.getCurrentPlayer().getBoard().getLeaderCards().isEmpty()) {
-            System.out.println(this.match.getLeaderCardsToString(this.myNickname));
+            System.out.println(this.match.getLeaderCardsToString(getNickname()));
             do {
                 System.out.println(
                         "Provide the ID of the LeaderCard you want to activate: (Type 'quit' to go back)\n" + "> ");
@@ -556,10 +505,10 @@ public class ClientCLI {
             // verifies that the player can put the DevelopmentCard in the position he/she
             // indicated
             if (!goBack) {
-                int lastPosition = this.match.getBoardByPlayerNickname(this.myNickname).getMapTray().get(chosenPosition)
+                int lastPosition = this.match.getBoardByPlayerNickname(getNickname()).getMapTray().get(chosenPosition)
                         .size();
-                DevelopmentCard devCardInLastPosition = this.match.getBoardByPlayerNickname(this.myNickname)
-                        .getMapTray().get(chosenPosition).get(lastPosition);
+                DevelopmentCard devCardInLastPosition = this.match.getBoardByPlayerNickname(getNickname()).getMapTray()
+                        .get(chosenPosition).get(lastPosition);
                 if (devCardInLastPosition.getLevel().compareTo(devCardToBuy.getLevel()) > 0) {
                     chosenPosition = null;
                     System.out.println(
@@ -1008,16 +957,16 @@ public class ClientCLI {
             case "0":
                 break;
             case "1":
-                viewer(myNickname);
+                viewer(getNickname());
                 break;
             case "2":
-                System.out.println("Your points are: " + this.match.getVictoryPoints(myNickname));
+                System.out.println("Your points are: " + this.match.getVictoryPoints(getNickname()));
                 break;
             case "3":
-                System.out.println("Your marker position is: " + this.match.getMarkerPosition(myNickname) + "/24");
+                System.out.println("Your marker position is: " + this.match.getMarkerPosition(getNickname()) + "/24");
                 break;
             case "4":
-                System.out.println("Your Leader Cards are: " + this.match.getLeaderCardsToString(myNickname));
+                System.out.println("Your Leader Cards are: " + this.match.getLeaderCardsToString(getNickname()));
                 break;
             case "5":
                 break;
@@ -1025,10 +974,10 @@ public class ClientCLI {
                 System.out.println(this.match.getMarket());
                 break;
             case "7":
-                System.out.println(this.match.getWarehouseToString(myNickname));
+                System.out.println(this.match.getWarehouseToString(getNickname()));
                 break;
             case "8":
-                System.out.println(this.match.getHistoryToString(myNickname));
+                System.out.println(this.match.getHistoryToString(getNickname()));
                 break;
             default:
                 return;
@@ -1089,7 +1038,7 @@ public class ClientCLI {
             } while (position > 2 || position < 0);
         }
 
-        ResourceType transmutationPerk = match.getTransmutationPerk(myNickname);
+        ResourceType transmutationPerk = match.getTransmutationPerk(getNickname());
         List<Resource> resourceList = market.insertMarble(axis, position, transmutationPerk);
         Boolean hasRedMarble = false;
         for (int i = 0; i < resourceList.size(); i++) {
@@ -1099,7 +1048,7 @@ public class ClientCLI {
                 break;
             }
         }
-        Warehouse warehouse = match.getWarehouse(myNickname);
+        Warehouse warehouse = match.getWarehouse(getNickname());
         Map<ResourceType, Integer> resourcesInHand = warehouse.listToMapResources(resourceList);
         System.out.println(warehouse);
         System.out.println("Resources in hand:");

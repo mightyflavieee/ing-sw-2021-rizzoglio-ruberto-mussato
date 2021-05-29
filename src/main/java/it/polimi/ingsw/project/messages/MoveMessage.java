@@ -2,7 +2,7 @@ package it.polimi.ingsw.project.messages;
 
 import java.io.Serializable;
 
-import it.polimi.ingsw.project.client.ClientCLI;
+import it.polimi.ingsw.project.client.Client;
 import it.polimi.ingsw.project.model.Match;
 
 public class MoveMessage implements Serializable, ResponseMessage { // messaggio che rimando al player che viene poi
@@ -18,7 +18,7 @@ public class MoveMessage implements Serializable, ResponseMessage { // messaggio
     }
 
     @Override
-    public void action(ClientCLI client) {
+    public void action(Client client) {
         client.setMatch(this.match);
         client.unLock();
     }

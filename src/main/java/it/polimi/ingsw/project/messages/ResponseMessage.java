@@ -1,7 +1,7 @@
 package it.polimi.ingsw.project.messages;
 
-import it.polimi.ingsw.project.client.ClientCLI;
+import it.polimi.ingsw.project.client.Client;
 
 public interface ResponseMessage {
-    public void action(ClientCLI cli);
+    public void action(Client cli);
 }
