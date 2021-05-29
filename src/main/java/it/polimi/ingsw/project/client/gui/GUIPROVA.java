@@ -14,7 +14,7 @@ public class GUIPROVA {
     private LeaderCardPlaceGUI leaderCardPlaceGui;
     private JFrame jFrame;
     private CardContainerGUI cardContainerGUI;
-
+    private FaithMapGUI faithMapGUI;
     public GUIPROVA() {
         marketGUI = new MarketGUI();
         board = new BoardGUI("Board");
@@ -23,7 +23,7 @@ public class GUIPROVA {
 //        marketButtonListener = new MarketButtonListener(marketGUI);
 //        marketButton.addActionListener(marketButtonListener);
         jFrame = new JFrame();
-        jFrame.setLayout(new GridLayout(2,2));
+        jFrame.setLayout(new GridLayout(2,3));
 //        jFrame.add(marketButton);
         jFrame.add(marketGUI);
 
@@ -37,6 +37,8 @@ public class GUIPROVA {
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.add(board);
+        faithMapGUI = new FaithMapGUI();
+        jFrame.add(faithMapGUI);
         jFrame.pack();
     //    marketGUI.doubleSize();
     }

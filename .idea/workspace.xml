@@ -7,8 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated ResourceInHandGUI.java">
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandGUI.java" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Implemented login gui">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InsertMatchIdListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/JoinButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/JoinButtonListener.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -67,6 +70,7 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/leadercards" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -101,13 +105,13 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GUIPROVA">
-    <configuration name="BoardGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.BoardGUI" />
+  <component name="RunManager" selected="Application.ClientAppGUI">
+    <configuration name="ClientAppGUI" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ClientAppGUI" />
       <module name="GC23" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.project.client.gui.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.project.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -115,12 +119,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClientGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.ClientGUI" />
+    <configuration name="FaithMapGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.FaithMapGUI" />
       <module name="GC23" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.project.client.gui.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.project.client.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -133,7 +137,7 @@
       <module name="GC23" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.project.client.gui.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.project.client.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -146,7 +150,20 @@
       <module name="GC23" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.project.client.gui.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.project.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ServerApp" />
+      <module name="GC23" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.project.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -163,25 +180,6 @@
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="MatchTest.getter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="GC23" />
-      <selectedOptions>
-        <option name="module.classpath" />
-      </selectedOptions>
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.project.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.project.model" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.model.MatchTest" />
-      <option name="METHOD_NAME" value="getter" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -214,20 +212,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.ClientGUI" />
-      <item itemvalue="Application.BoardGUI" />
       <item itemvalue="Application.GUIPROVA" />
       <item itemvalue="Application.MatchGUI" />
+      <item itemvalue="Application.FaithMapGUI" />
+      <item itemvalue="Application.ClientAppGUI" />
+      <item itemvalue="Application.ServerApp" />
       <item itemvalue="JUnit.testCoverage" />
-      <item itemvalue="JUnit.MatchTest.getter" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ClientAppGUI" />
+        <item itemvalue="Application.ServerApp" />
         <item itemvalue="Application.GUIPROVA" />
+        <item itemvalue="Application.FaithMapGUI" />
         <item itemvalue="Application.MatchGUI" />
-        <item itemvalue="Application.BoardGUI" />
-        <item itemvalue="Application.ClientGUI" />
-        <item itemvalue="JUnit.MatchTest.getter" />
       </list>
     </recent_temporary>
   </component>
@@ -356,34 +354,6 @@
       <workItem from="1622104436627" duration="8384000" />
       <workItem from="1622117560195" duration="21825000" />
       <workItem from="1622195527307" duration="3149000" />
-    </task>
-    <task id="LOCAL-00072" summary="Changes by flavi">
-      <created>1620929167746</created>
-      <option name="number" value="00072" />
-      <option name="presentableId" value="LOCAL-00072" />
-      <option name="project" value="LOCAL" />
-      <updated>1620929167746</updated>
-    </task>
-    <task id="LOCAL-00073" summary="Added a test">
-      <created>1620929188191</created>
-      <option name="number" value="00073" />
-      <option name="presentableId" value="LOCAL-00073" />
-      <option name="project" value="LOCAL" />
-      <updated>1620929188191</updated>
-    </task>
-    <task id="LOCAL-00074" summary="Changes by leonardo">
-      <created>1620945447545</created>
-      <option name="number" value="00074" />
-      <option name="presentableId" value="LOCAL-00074" />
-      <option name="project" value="LOCAL" />
-      <updated>1620945447546</updated>
-    </task>
-    <task id="LOCAL-00075" summary="Changes by leonardo">
-      <created>1620946740546</created>
-      <option name="number" value="00075" />
-      <option name="presentableId" value="LOCAL-00075" />
-      <option name="project" value="LOCAL" />
-      <updated>1620946740546</updated>
     </task>
     <task id="LOCAL-00076" summary="Changes by flavi">
       <created>1620946760982</created>
@@ -700,7 +670,35 @@
       <option name="project" value="LOCAL" />
       <updated>1622212188923</updated>
     </task>
-    <option name="localTasksCounter" value="121" />
+    <task id="LOCAL-00121" summary="added FaithMapGUI">
+      <created>1622215812022</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1622215812022</updated>
+    </task>
+    <task id="LOCAL-00122" summary="added LeaderMoveHandler.java">
+      <created>1622218583765</created>
+      <option name="number" value="00122" />
+      <option name="presentableId" value="LOCAL-00122" />
+      <option name="project" value="LOCAL" />
+      <updated>1622218583765</updated>
+    </task>
+    <task id="LOCAL-00123" summary="added ClientAppGUI.java and InsertNameListener.java">
+      <created>1622221540890</created>
+      <option name="number" value="00123" />
+      <option name="presentableId" value="LOCAL-00123" />
+      <option name="project" value="LOCAL" />
+      <updated>1622221540890</updated>
+    </task>
+    <task id="LOCAL-00124" summary="Implemented login gui">
+      <created>1622278196523</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1622278196523</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -729,10 +727,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="added Board.getLeaderCardsToString" />
-    <MESSAGE value="updated ClientCLI.handleTakeMarketResourcesMove" />
-    <MESSAGE value="updated ClientCLI.viewer" />
-    <MESSAGE value="added ClientCLI.swapShelves" />
     <MESSAGE value="updated UML" />
     <MESSAGE value="Corrected minor error in ClientCLI" />
     <MESSAGE value="Corrected minor error in SocketClientConnection.java" />
@@ -754,7 +748,11 @@
     <MESSAGE value="Updated MarketGUI.java" />
     <MESSAGE value="Added ResourceInHandGUI.java" />
     <MESSAGE value="updated ResourceInHandGUI.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated ResourceInHandGUI.java" />
+    <MESSAGE value="added FaithMapGUI" />
+    <MESSAGE value="added LeaderMoveHandler.java" />
+    <MESSAGE value="added ClientAppGUI.java and InsertNameListener.java" />
+    <MESSAGE value="Implemented login gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented login gui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

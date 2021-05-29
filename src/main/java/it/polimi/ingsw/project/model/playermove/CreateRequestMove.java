@@ -26,4 +26,8 @@ public class CreateRequestMove extends GameRequestMove {
             connection.send(new ErrorJoinMessage(e.getMessage()));
         }
     }
+    @Override
+    public String toString(){
+        return "Create Request Move, Nickname: " + this.nickName;
+    }
 }

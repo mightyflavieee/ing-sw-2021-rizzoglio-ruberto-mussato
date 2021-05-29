@@ -23,5 +23,6 @@ public class ArrowObserver implements ActionListener {
         List<Resource> resourceList = this.trayGui.insertMarble(axis,position);
         this.trayGui.refresh();
         this.resourceInHandGUI.refresh(resourceList);
+        this.trayGui.stopTray();
     }
 }

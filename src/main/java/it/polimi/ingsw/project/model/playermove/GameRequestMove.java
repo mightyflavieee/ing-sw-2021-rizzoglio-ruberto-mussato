@@ -10,5 +10,9 @@ public class GameRequestMove implements Serializable, Request {
     public void action(SocketClientConnection connection) {
 
     }
+    @Override
+    public String toString(){
+        return "Generic Game Request Move";
+    }
 
 }
