@@ -1,4 +1,7 @@
-package it.polimi.ingsw.project.client.gui;
+package it.polimi.ingsw.project.client.gui.listeners;
+
+import it.polimi.ingsw.project.client.gui.LeaderCardGUI;
+import it.polimi.ingsw.project.client.gui.LeaderMoveHandler;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
