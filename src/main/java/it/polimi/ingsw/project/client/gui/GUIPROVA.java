@@ -22,7 +22,8 @@ public class GUIPROVA {
 
     public GUIPROVA() {
         jFrame = new JFrame();
-        jFrame.setLayout(new GridLayout(2,4));
+        //jFrame.setLayout(new GridLayout(2,2));
+        jFrame.setLayout(new BorderLayout());
         marketGUI = new MarketGUI();
         board = new BoardGUI("Board");
         cardContainerGUI = new CardContainerGUI();
@@ -40,14 +41,14 @@ public class GUIPROVA {
 //        jFrame.add(new MarketGUI("altro market ma potrebbe essere warehouse"));
 //        marketGUI.doubleSize();
 
-        jFrame.add(marketGUI);
-        jFrame.add(board);
-        jFrame.add(cardContainerGUI);
-        jFrame.add(leaderCardPlaceGui);
-        jFrame.add(faithMapGUI);
-        jFrame.add(warehouseGUI);
-        jFrame.add(chestGUI);
-        jFrame.add(mapTrayGUI);
+        jFrame.add(marketGUI, BorderLayout.EAST);
+        jFrame.add(board, BorderLayout.NORTH);
+        jFrame.add(cardContainerGUI, BorderLayout.CENTER);
+        jFrame.add(leaderCardPlaceGui, BorderLayout.WEST);
+        //jFrame.add(faithMapGUI);
+        //jFrame.add(warehouseGUI);
+        //jFrame.add(chestGUI);
+        //jFrame.add(mapTrayGUI);
         //jFrame.pack();
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

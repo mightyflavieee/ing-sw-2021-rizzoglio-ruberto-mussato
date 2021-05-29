@@ -1,12 +1,7 @@
 package it.polimi.ingsw.project.client.gui;
 
-import it.polimi.ingsw.project.model.board.DevCardPosition;
-
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class BoardGUI extends JInternalFrame {
     private FaithMapGUI faithMap;
@@ -36,7 +31,6 @@ public class BoardGUI extends JInternalFrame {
         constraints.gridy = 1;
         constraints.gridwidth = 1;
         constraints.gridheight = 1;
-        constraints.ipadx = 300;
         JInternalFrame depositsFrame = new JInternalFrame("Deposits");
         depositsFrame.setVisible(true);
         depositsFrame.setLayout(new BorderLayout());
@@ -48,7 +42,6 @@ public class BoardGUI extends JInternalFrame {
         constraints.gridy = 1;
         constraints.gridwidth = 2;
         constraints.gridheight = 1;
-        constraints.ipady = 300;
         this.add(this.mapTray, constraints);
     }
 

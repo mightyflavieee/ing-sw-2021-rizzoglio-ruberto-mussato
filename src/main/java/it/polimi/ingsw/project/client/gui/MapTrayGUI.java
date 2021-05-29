@@ -23,8 +23,26 @@ public class MapTrayGUI extends JInternalFrame {
 
     private void createButtons() {
         this.mapTrayButtons = new HashMap<>();
-        this.mapTrayButtons.put(DevCardPosition.Left, new JButton());
-        this.mapTrayButtons.put(DevCardPosition.Center, new JButton());
-        this.mapTrayButtons.put(DevCardPosition.Right, new JButton());
+        JButton leftButton = new JButton();
+        JButton centerButton = new JButton();
+        JButton rightButton = new JButton();
+        leftButton.setIcon(new ImageIcon(new javax.swing
+                .ImageIcon("src/main/resources/retro_devcard.png")
+                .getImage().getScaledInstance(100, 160, Image.SCALE_SMOOTH)));
+        centerButton.setIcon(new ImageIcon(new javax.swing
+                .ImageIcon("src/main/resources/retro_devcard.png")
+                .getImage().getScaledInstance(100, 160, Image.SCALE_SMOOTH)));
+        rightButton.setIcon(new ImageIcon(new javax.swing
+                .ImageIcon("src/main/resources/retro_devcard.png")
+                .getImage().getScaledInstance(100, 160, Image.SCALE_SMOOTH)));
+        this.mapTrayButtons.put(DevCardPosition.Left, leftButton);
+        this.mapTrayButtons.put(DevCardPosition.Center, centerButton);
+        this.mapTrayButtons.put(DevCardPosition.Right, rightButton);
+    }
+
+    public void setMapTrayImage(String id, DevCardPosition position) {
+        this.mapTrayButtons.get(position).setIcon(new ImageIcon(new javax.swing
+                .ImageIcon("src/main/resources/developmentcards/"+ id + ".png")
+                .getImage().getScaledInstance(100, 160, Image.SCALE_SMOOTH)));
     }
 }
