@@ -37,6 +37,7 @@ public class ClientGUI {
         this.lock = true;
         this.numPlayers = 0;
         this.myNickname = "";
+        this.gameId = "";
     }
 
     public synchronized void isLock() throws InterruptedException {
@@ -122,20 +123,11 @@ public class ClientGUI {
                 jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 JPanel jPanel;
                 jPanel = new JPanel();
-                jPanel.setLayout(new GridLayout(11,1));
+                jPanel.setLayout(new GridLayout(13,1));
                 jPanel.add(new JLabel("What is your name?"));
                 JTextField nicknameField = new JTextField();
                 nicknameField.addActionListener(new InsertNameListener(getInstance(),nicknameField));
                 jPanel.add(nicknameField);
-                jPanel.add(new JLabel("Do you want to join or to create a new game?"));
-                JRadioButton createRadioButton;
-                createRadioButton = new JRadioButton("Create Game");
-                jPanel.add(createRadioButton);
-                JRadioButton joinRadioButton;
-                joinRadioButton = new JRadioButton("Join Game");
-                jPanel.add(joinRadioButton);
-                createRadioButton.addActionListener(new CreateButtonListener(getInstance(),createRadioButton,joinRadioButton));
-                joinRadioButton.addActionListener(new CreateButtonListener(getInstance(),createRadioButton,joinRadioButton));
                 jPanel.add(new JLabel("How many players?"));
                 JRadioButton oneRadioButton, twoRadioButton, threeRadioButton, fourRadioButton;
                 oneRadioButton = new JRadioButton("1");
@@ -146,6 +138,24 @@ public class ClientGUI {
                 jPanel.add(twoRadioButton);
                 jPanel.add(threeRadioButton);
                 jPanel.add(fourRadioButton);
+                jPanel.add(new JLabel("Do you want to join or to create a new game?"));
+                JRadioButton createRadioButton;
+                createRadioButton = new JRadioButton("Create Game");
+                jPanel.add(createRadioButton);
+                JRadioButton joinRadioButton;
+                joinRadioButton = new JRadioButton("Join Game");
+                jPanel.add(joinRadioButton);
+                createRadioButton.addActionListener(new CreateButtonListener(getInstance(),createRadioButton,joinRadioButton));
+                JLabel matchIDLabel = new JLabel("ID:");
+                matchIDLabel.setVisible(false);
+                jPanel.add(matchIDLabel);
+                JTextField idMatchField = new JTextField();
+                idMatchField.setEnabled(false);
+                idMatchField.setVisible(false);
+                idMatchField.addActionListener(new InsertMatchIdListener(getInstance(),idMatchField));
+                jPanel.add(idMatchField);
+                joinRadioButton.addActionListener(new JoinButtonListener(getInstance(),createRadioButton,joinRadioButton,idMatchField, matchIDLabel ));
+
                 oneRadioButton.addActionListener(new OneRadioButtonListener(getInstance(),oneRadioButton,twoRadioButton,threeRadioButton,fourRadioButton));
                 twoRadioButton.addActionListener(new TwoRadioButtonListener(getInstance(),oneRadioButton,twoRadioButton,threeRadioButton,fourRadioButton));
                 threeRadioButton.addActionListener(new ThreeRadioButtonListener(getInstance(),oneRadioButton,twoRadioButton,threeRadioButton,fourRadioButton));
@@ -159,11 +169,13 @@ public class ClientGUI {
                 previousButtons.add(twoRadioButton);
                 previousButtons.add(threeRadioButton);
                 previousButtons.add(fourRadioButton);
+                previousButtons.add(idMatchField);
                 submitButton = new JButton("Submit");
                 jPanel.add(submitButton);
                 submitButton.addActionListener(new SubmitButtonListener(getInstance(),jFrame,previousButtons));
                 jFrame.add(jPanel);
                 jFrame.pack();
+                jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 //                while (true) {
 //                    System.out.println("What do you want to 'join' or 'create' a game?");
@@ -190,14 +202,9 @@ public class ClientGUI {
         }
     }
     private boolean joinGame() { // returns true if the joining request was created successfully
-        System.out.println("Which game do you want to join? Type 'exit' to leave.");
-        String gameId;
-        gameId = stdin.nextLine();
-        if (gameId.equals("exit")) {
-            return false;
-        }
+
         try {
-            socketOut.writeObject(new JoinRequestMove(this.myNickname, gameId));
+            socketOut.writeObject(new JoinRequestMove(this.myNickname, this.gameId));
             socketOut.flush();
         } catch (Exception e) {
             System.out.println(e.getMessage());
