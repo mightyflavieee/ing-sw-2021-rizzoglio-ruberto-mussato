@@ -63,7 +63,7 @@ public class Client {
         return this.gameId;
     }
 
-    public Thread buildGame() {
-        return new Thread();
+    public void buildGame() {
+
     }
 }

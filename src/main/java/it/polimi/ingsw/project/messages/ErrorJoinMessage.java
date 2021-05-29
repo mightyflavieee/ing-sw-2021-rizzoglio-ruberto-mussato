@@ -18,8 +18,8 @@ public class ErrorJoinMessage implements Serializable, ResponseMessage {
     @Override
     public void action(Client client) {
         System.out.println(this.errorMessage);
-        Thread t0 = client.buildGame();
-        t0.run();
+        client.buildGame();
+
     }
 
 }

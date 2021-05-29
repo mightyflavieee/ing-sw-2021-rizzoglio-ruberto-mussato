@@ -55,7 +55,7 @@ public class ClientCLI extends Client {
     }
 
     @Override
-    public Thread buildGame() {
+    public void buildGame() {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -88,7 +88,6 @@ public class ClientCLI extends Client {
         });
 
         t.start();
-        return t;
     }
 
     private boolean joinGame() { // returns true if the joining request was created successfully
@@ -1256,10 +1255,9 @@ public class ClientCLI extends Client {
         try {
             Thread t0 = asyncReadFromSocket();
             Thread t1 = asyncCli();
-            Thread t2 = buildGame();
+            buildGame();
             t0.join();
             t1.join();
-            t2.join();
         } catch (InterruptedException | NoSuchElementException e) {
             System.out.println("Connection closed from the client side");
         } finally {
