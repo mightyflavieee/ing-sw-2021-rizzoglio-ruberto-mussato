@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client;
 
 import it.polimi.ingsw.project.messages.ResponseMessage;
+import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
@@ -40,6 +41,19 @@ public class ClientCLI extends Client {
     }
 
     @Override
+    public void setMatch(Match match) {
+        super.setMatch(match);
+        unLock();
+    }
+
+    @Override
+    public void setGameId(String gameId) {
+        super.setGameId(gameId);
+        System.out.println("Your gameid is: " + gameId);
+        unLock();
+    }
+
+    @Override
     public synchronized void unLock() {
         this.lock = false;
         notifyAll();
@@ -68,6 +82,22 @@ public class ClientCLI extends Client {
         t.start();
         return t;
 
+    }
+
+    @Override
+    public void showErrorMessage(String error) {
+        System.out.println(error);
+    }
+
+    @Override
+    public void chooseLeaderCards() {
+
+    }
+
+    @Override
+    public void reBuildGame(String errorMessage) {
+        this.showErrorMessage(errorMessage);
+        this.buildGame();
     }
 
     @Override

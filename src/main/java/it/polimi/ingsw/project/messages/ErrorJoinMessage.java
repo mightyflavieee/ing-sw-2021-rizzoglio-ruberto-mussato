@@ -4,22 +4,15 @@ import java.io.Serializable;
 
 import it.polimi.ingsw.project.client.Client;
 
-public class ErrorJoinMessage implements Serializable, ResponseMessage {
-    private String errorMessage;
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
+public class ErrorJoinMessage extends ErrorMessage implements Serializable, ResponseMessage {
 
     public ErrorJoinMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+        setErrorMessage(errorMessage);
     }
 
     @Override
     public void action(Client client) {
-        System.out.println(this.errorMessage);
-        client.buildGame();
-
+        client.reBuildGame(getErrorMessage());
     }
 
 }

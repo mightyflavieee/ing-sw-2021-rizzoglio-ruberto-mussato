@@ -13,14 +13,9 @@ public class MoveMessage implements Serializable, ResponseMessage { // messaggio
         this.match = match;
     }
 
-    public Match getMatch() {
-        return this.match;
-    }
-
     @Override
     public void action(Client client) {
         client.setMatch(this.match);
-        client.unLock();
     }
 
 }

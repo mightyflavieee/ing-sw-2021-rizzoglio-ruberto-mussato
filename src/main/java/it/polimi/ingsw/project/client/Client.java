@@ -94,4 +94,17 @@ public class Client {
     public void buildGame() {
 
     }
+
+    public void reBuildGame(String errorMessage) {
+
+    }
+
+    public void showErrorMessage(String error) {
+    }
+
+    public void chooseLeaderCards() {
+    }
+
+    public void reChooseLeaderCards(String errorMessage) {
+    }
 }
