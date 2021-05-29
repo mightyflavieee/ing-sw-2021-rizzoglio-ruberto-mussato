@@ -35,4 +35,8 @@ public class JoinRequestMove extends GameRequestMove {
                     "We are sorry but we couldn't find the game you are trying to join. Check the id!"));
         }
     }
+    @Override
+    public String toString(){
+        return "Join Request Move, Nickname: " + this.nickName;
+    }
 }
