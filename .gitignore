@@ -5,4 +5,5 @@ ProjectIngSW/.project
 *.dumpstream
 target
 .idea
+workspace.xml
 

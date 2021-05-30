@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client;
 
+import it.polimi.ingsw.project.client.gui.LeaderCardChoserGUI;
 import it.polimi.ingsw.project.client.gui.listeners.*;
 import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.Match;
@@ -14,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClientGUI extends Client{
 
@@ -63,21 +65,19 @@ public class ClientGUI extends Client{
         jFrame = new JFrame();
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        JPanel jPanel;
-        jPanel = new JPanel();
-        jPanel.setLayout(new GridLayout(2,1));
+        jFrame.setLayout(new GridLayout(2,1));
         JLabel matchIDLabel = new JLabel("Wrong ID! Insert a right ID:");
-        jPanel.add(matchIDLabel);
+        jFrame.add(matchIDLabel);
         JTextField idMatchField = new JTextField();
         idMatchField.addActionListener(new ReInsertMatchIdListener(getInstance(),idMatchField,jFrame));
-        jPanel.add(idMatchField);
-        jFrame.add(jPanel);
+        jFrame.add(idMatchField);
         jFrame.pack();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     @Override
     public void chooseLeaderCards(List<LeaderCard> possibleLeaderCards) {
+        new LeaderCardChoserGUI(possibleLeaderCards.stream().map(LeaderCard::getId).collect(Collectors.toList()));
 
     }
 
@@ -112,39 +112,37 @@ public class ClientGUI extends Client{
                 jFrame = new JFrame();
                 jFrame.setVisible(true);
                 jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                JPanel jPanel;
-                jPanel = new JPanel();
-                jPanel.setLayout(new GridLayout(13,1));
-                jPanel.add(new JLabel("What is your name?"));
+                jFrame.setLayout(new GridLayout(13,1));
+                jFrame.add(new JLabel("What is your name?"));
                 JTextField nicknameField = new JTextField();
                 nicknameField.addActionListener(new InsertNameListener(getInstance(),nicknameField));
-                jPanel.add(nicknameField);
-                jPanel.add(new JLabel("How many players?"));
+                jFrame.add(nicknameField);
+                jFrame.add(new JLabel("How many players?"));
                 JRadioButton oneRadioButton, twoRadioButton, threeRadioButton, fourRadioButton;
                 oneRadioButton = new JRadioButton("1");
                 twoRadioButton = new JRadioButton("2");
                 threeRadioButton = new JRadioButton("3");
                 fourRadioButton = new JRadioButton("4");
-                jPanel.add(oneRadioButton);
-                jPanel.add(twoRadioButton);
-                jPanel.add(threeRadioButton);
-                jPanel.add(fourRadioButton);
-                jPanel.add(new JLabel("Do you want to join or to create a new game?"));
+                jFrame.add(oneRadioButton);
+                jFrame.add(twoRadioButton);
+                jFrame.add(threeRadioButton);
+                jFrame.add(fourRadioButton);
+                jFrame.add(new JLabel("Do you want to join or to create a new game?"));
                 JRadioButton createRadioButton;
                 createRadioButton = new JRadioButton("Create Game");
-                jPanel.add(createRadioButton);
+                jFrame.add(createRadioButton);
                 JRadioButton joinRadioButton;
                 joinRadioButton = new JRadioButton("Join Game");
-                jPanel.add(joinRadioButton);
+                jFrame.add(joinRadioButton);
                 createRadioButton.addActionListener(new CreateButtonListener(getInstance(),createRadioButton,joinRadioButton));
                 JLabel matchIDLabel = new JLabel("ID:");
                 matchIDLabel.setVisible(false);
-                jPanel.add(matchIDLabel);
+                jFrame.add(matchIDLabel);
                 JTextField idMatchField = new JTextField();
                 idMatchField.setEnabled(false);
                 idMatchField.setVisible(false);
                 idMatchField.addActionListener(new InsertMatchIdListener(getInstance(),idMatchField));
-                jPanel.add(idMatchField);
+                jFrame.add(idMatchField);
                 joinRadioButton.addActionListener(new JoinButtonListener(getInstance(),createRadioButton,joinRadioButton,idMatchField, matchIDLabel ));
 
                 oneRadioButton.addActionListener(new OneRadioButtonListener(getInstance(),oneRadioButton,twoRadioButton,threeRadioButton,fourRadioButton));
@@ -162,9 +160,8 @@ public class ClientGUI extends Client{
                 previousButtons.add(fourRadioButton);
                 previousButtons.add(idMatchField);
                 submitButton = new JButton("Submit");
-                jPanel.add(submitButton);
+                jFrame.add(submitButton);
                 submitButton.addActionListener(new SubmitButtonListener(getInstance(),jFrame,previousButtons));
-                jFrame.add(jPanel);
                 jFrame.pack();
                 jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
