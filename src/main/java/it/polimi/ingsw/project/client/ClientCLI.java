@@ -53,13 +53,11 @@ public class ClientCLI extends Client {
         unLock();
     }
 
-    @Override
     public synchronized void unLock() {
         this.lock = false;
         notifyAll();
     }
 
-    @Override
     public synchronized void setLock() {
         this.lock = true;
     }
@@ -84,7 +82,6 @@ public class ClientCLI extends Client {
 
     }
 
-    @Override
     public void showErrorMessage(String error) {
         System.out.println(error);
     }
@@ -105,8 +102,8 @@ public class ClientCLI extends Client {
         this.buildGame();
     }
 
-    @Override
-    public void buildGame() {
+
+    private void buildGame() {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {

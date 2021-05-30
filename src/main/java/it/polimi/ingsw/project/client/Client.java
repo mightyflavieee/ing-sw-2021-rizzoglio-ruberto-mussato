@@ -8,7 +8,7 @@ import java.util.Optional;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 
-public class Client {
+public abstract class Client {
 
     private String ip;
     private int port;
@@ -79,11 +79,7 @@ public class Client {
         this.active = active;
     }
 
-    public synchronized void unLock() {
-    }
 
-    public synchronized void setLock() {
-    }
 
     public void setGameId(String gameId) {
         this.gameId = gameId;
@@ -93,15 +89,8 @@ public class Client {
         return this.gameId;
     }
 
-    public void buildGame() {
-
-    }
-
     public void reBuildGame(String errorMessage) {
 
-    }
-
-    public void showErrorMessage(String error) {
     }
 
     public void chooseLeaderCards(List<LeaderCard> possibleLeaderCards) {

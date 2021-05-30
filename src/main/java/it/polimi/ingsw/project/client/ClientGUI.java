@@ -14,7 +14,7 @@ import java.net.Socket;
 import java.util.*;
 import java.util.List;
 
-public class ClientGUI {
+public class ClientGUI extends Client{
 
     private String ip;
     private String gameId;
@@ -201,7 +201,7 @@ public class ClientGUI {
             this.joinGame();
         }
     }
-    private boolean joinGame() { // returns true if the joining request was created successfully
+    private void joinGame() { // returns true if the joining request was created successfully
 
         try {
             socketOut.writeObject(new JoinRequestMove(this.myNickname, this.gameId));
@@ -210,11 +210,10 @@ public class ClientGUI {
             System.out.println(e.getMessage());
             setActive(false);
         }
-        return true;
 
     }
 
-    private boolean createGame() { // returns true if the creation request was created successfully
+    private void createGame() { // returns true if the creation request was created successfully
 
         try {
             socketOut.writeObject(new CreateRequestMove(this.numPlayers, this.myNickname));
@@ -224,7 +223,6 @@ public class ClientGUI {
             System.out.println(e.getMessage());
             setActive(false);
         }
-        return true;
     }
 
 //    public Thread asyncCli() {// sends to server and shows the match
