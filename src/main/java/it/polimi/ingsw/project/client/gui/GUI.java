@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.playermove.Move;
 
@@ -22,12 +23,14 @@ public class GUI {
     private MapTrayGUI mapTrayGUI;
     private Player mePlayer;
     private List<Player> opponentsPlayer;
+    private Match match; //potrebbe essere superfluo
     private InformationsGUI informationsGUI;
+    private HistoryGUI historyGUI;
 
 
     public GUI() {
         jFrame = new JFrame();
-        jFrame.setLayout(new GridLayout(4,2));
+        jFrame.setLayout(new GridLayout(4,3));
        // jFrame.setLayout(new BorderLayout());
         marketGUI = new MarketGUI();
       //  boardGUI = new BoardGUI("Board");
@@ -38,6 +41,7 @@ public class GUI {
         chestGUI = new ChestGUI();
         mapTrayGUI = new MapTrayGUI();
         informationsGUI = new InformationsGUI(this);
+        historyGUI = new HistoryGUI();
 
 //        marketButton = new MarketButton("market button");
 //        marketButtonListener = new MarketButtonListener(marketGUI);
@@ -59,6 +63,7 @@ public class GUI {
         jFrame.add(marketGUI);
         jFrame.add(cardContainerGUI);
         jFrame.add(leaderCardPlaceGui);
+        jFrame.add(historyGUI);
         //jFrame.pack();
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -73,7 +78,10 @@ public class GUI {
     public void lockAll(){
         //todo blocca tutte le cose che si possono fare es. quando devo aspettare una risposta dal server
     }
-
+    public void setMatch(Match match){
+        this.match = match;
+        //todo chiama i metodi set di tutti i jinternalframe e aggiorna tutto
+    }
     public static void main(String[] args){
         new GUI();
     }

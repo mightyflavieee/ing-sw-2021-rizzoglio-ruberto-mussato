@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client;
 
+import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.LeaderCardChoserGUI;
 import it.polimi.ingsw.project.client.gui.listeners.*;
 import it.polimi.ingsw.project.messages.ResponseMessage;
@@ -21,6 +22,7 @@ public class ClientGUI extends Client{
 
     private ObjectOutputStream socketOut;
     private ObjectInputStream socketIn;
+    private GUI gui;
 
     private boolean createGame; //true create, false join
     private int numPlayers;
@@ -40,7 +42,7 @@ public class ClientGUI extends Client{
 
     @Override
     public void setMatch(Match match) {
-        this.match = match;
+        gui.setMatch(match);
     }
 
     public void setCreateGame(boolean createGame) {

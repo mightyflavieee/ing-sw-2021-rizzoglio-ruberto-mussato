@@ -7,12 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Added InformationsGUI.java">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/NoMoveButtonListener.java" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Updated NoMoveHandlerGUI.java">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/HistoryGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/NoMoveHandlerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/NoMoveHandlerGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -358,13 +357,6 @@
       <workItem from="1622195527307" duration="3149000" />
       <workItem from="1622294010049" duration="928000" />
     </task>
-    <task id="LOCAL-00089" summary="added Market.toString">
-      <created>1621506983038</created>
-      <option name="number" value="00089" />
-      <option name="presentableId" value="LOCAL-00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1621506983038</updated>
-    </task>
     <task id="LOCAL-00090" summary="added Board.getLeaderCardsToString">
       <created>1621521801326</created>
       <option name="number" value="00090" />
@@ -701,7 +693,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622379831940</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="Updated NoMoveHandlerGUI.java">
+      <created>1622381511091</created>
+      <option name="number" value="00138" />
+      <option name="presentableId" value="LOCAL-00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1622381511092</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -731,7 +730,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated GUI" />
     <MESSAGE value="Added Coverage Report _ Summary.pdf" />
     <MESSAGE value="updated market gui and leadercards gui" />
     <MESSAGE value="updated" />
@@ -756,7 +754,8 @@
     <MESSAGE value="Added LeaderCardChoserGUI" />
     <MESSAGE value="Updated LeaderCardChoserGUI" />
     <MESSAGE value="Added InformationsGUI.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added InformationsGUI.java" />
+    <MESSAGE value="Updated NoMoveHandlerGUI.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated NoMoveHandlerGUI.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
