@@ -10,14 +10,23 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 
 public abstract class Client {
 
-    private String ip;
-    private int port;
-    private String gameId;
+    protected String ip;
+    protected int port;
+    protected String gameId;
     private boolean active = true;
-    private Match match;
-    private String myNickname;
+    protected Match match;
+    protected String myNickname;
     private ObjectOutputStream socketOut;
     private ObjectInputStream socketIn;
+
+    public Client(String ip, int port) {
+        this.ip = ip;
+        this.port = port;
+        this.match = null;
+        this.myNickname = "";
+
+        this.gameId = "";
+    }
 
     public void setSocketOut(ObjectOutputStream socketOut) {
         this.socketOut = socketOut;
@@ -55,9 +64,7 @@ public abstract class Client {
         return this;
     }
 
-    public void setMatch(Match match) {
-        this.match = match;
-    }
+    public abstract void setMatch(Match match);
 
     public void setNickname(String name) {
         this.myNickname = name;
@@ -79,19 +86,15 @@ public abstract class Client {
         this.active = active;
     }
 
-
-
-    public void setGameId(String gameId) {
-        this.gameId = gameId;
-    }
+    public abstract void setGameId(String gameId);
 
     public String getGameId() {
         return this.gameId;
     }
 
-    public abstract void reBuildGame(String errorMessage);
+    public abstract void reBuildGame(String errorMessage); //todo la stringa è sempre uguale?
 
     public abstract void chooseLeaderCards(List<LeaderCard> possibleLeaderCards);
 
-    public abstract void reChooseLeaderCards(String errorMessage);
+    public abstract void reChooseLeaderCards(String errorMessage); //todo la stringa è sempre uguale?
 }

@@ -7,7 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Corrected minor error in ErrorJoinMessage.action">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Added abstract methods in Client.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" afterDir="false" />
@@ -106,7 +106,7 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GUIPROVA">
+  <component name="RunManager" selected="Application.ClientApp">
     <configuration name="BoardGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.BoardGUI" />
       <module name="GC23" />
@@ -222,10 +222,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GUIPROVA" />
-        <item itemvalue="Application.BoardGUI" />
         <item itemvalue="Application.ClientApp" />
         <item itemvalue="Application.ServerApp" />
+        <item itemvalue="Application.GUIPROVA" />
+        <item itemvalue="Application.BoardGUI" />
         <item itemvalue="Application.ClientAppGUI" />
       </list>
     </recent_temporary>
@@ -356,20 +356,6 @@
       <workItem from="1622117560195" duration="21825000" />
       <workItem from="1622195527307" duration="3149000" />
       <workItem from="1622294010049" duration="928000" />
-    </task>
-    <task id="LOCAL-00082" summary="Added NoMove.java">
-      <created>1621001319224</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1621001319224</updated>
-    </task>
-    <task id="LOCAL-00083" summary="Added Cli">
-      <created>1621324381597</created>
-      <option name="number" value="00083" />
-      <option name="presentableId" value="LOCAL-00083" />
-      <option name="project" value="LOCAL" />
-      <updated>1621324381597</updated>
     </task>
     <task id="LOCAL-00084" summary="updated ClientCLI.handleTurn">
       <created>1621324826519</created>
@@ -700,7 +686,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622328214573</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="Removed not shared methods in Client.java">
+      <created>1622371132728</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1622371132728</updated>
+    </task>
+    <task id="LOCAL-00132" summary="Added abstract methods in Client.java">
+      <created>1622371280980</created>
+      <option name="number" value="00132" />
+      <option name="presentableId" value="LOCAL-00132" />
+      <option name="project" value="LOCAL" />
+      <updated>1622371280980</updated>
+    </task>
+    <option name="localTasksCounter" value="133" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -730,8 +730,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added history logic" />
-    <MESSAGE value="Added ClientCLI thread synchronization" />
     <MESSAGE value="Added a LeaderCardContainerTest" />
     <MESSAGE value="Code Optimization" />
     <MESSAGE value="Corrected minor error in Controller.performMove" />
@@ -755,7 +753,9 @@
     <MESSAGE value="added MapTrayGUI" />
     <MESSAGE value="added ChestGUI" />
     <MESSAGE value="updated BoardGUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated BoardGUI" />
+    <MESSAGE value="Removed not shared methods in Client.java" />
+    <MESSAGE value="Added abstract methods in Client.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added abstract methods in Client.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

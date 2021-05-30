@@ -3,6 +3,7 @@ package it.polimi.ingsw.project.client;
 import it.polimi.ingsw.project.client.gui.listeners.*;
 import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.*;
 
 import javax.swing.*;
@@ -16,55 +17,28 @@ import java.util.List;
 
 public class ClientGUI extends Client{
 
-    private String ip;
-    private String gameId;
-    private int port;
-    private boolean active = true;
-    private Match match;
-    private Scanner stdin;
     private ObjectOutputStream socketOut;
     private ObjectInputStream socketIn;
-    private String myNickname; // da inizializzare
-    private boolean lock ;
 
     private boolean createGame; //true create, false join
     private int numPlayers;
 
     public ClientGUI(String ip, int port) {
-        this.ip = ip;
-        this.port = port;
-        this.match = null;
-        this.lock = true;
-        this.numPlayers = 0;
-        this.myNickname = "";
-        this.gameId = "";
+       super(ip,port);
+       this.numPlayers = 0;
+
     }
 
-    public synchronized void isLock() throws InterruptedException {
-        if (this.lock) {
-            wait();
-        }
-    }
+
 
     public ClientGUI getInstance() {
         return this;
     }
 
-    public synchronized void unLock() {
-        this.lock = false;
-        notifyAll();
-    }
 
-    public synchronized void setLock() {
-        this.lock = true;
-    }
-
+    @Override
     public void setMatch(Match match) {
         this.match = match;
-    }
-
-    public void setNickname(String name) {
-        this.myNickname = name;
     }
 
     public void setCreateGame(boolean createGame) {
@@ -79,20 +53,23 @@ public class ClientGUI extends Client{
         return Optional.ofNullable(match);
     }
 
-    public synchronized boolean isActive() {
-        return active;
-    }
-
-    public synchronized void setActive(boolean active) {
-        this.active = active;
-    }
-
     public void setGameId(String gameId) {
         this.gameId = gameId;
     }
 
-    public String getGameId() {
-        return this.gameId;
+    @Override
+    public void reBuildGame(String errorMessage) {
+
+    }
+
+    @Override
+    public void chooseLeaderCards(List<LeaderCard> possibleLeaderCards) {
+
+    }
+
+    @Override
+    public void reChooseLeaderCards(String errorMessage) {
+
     }
 
     public Thread asyncReadFromSocket() {
@@ -115,7 +92,7 @@ public class ClientGUI extends Client{
 
     }
 
-    public void buildGame() {
+    private void buildGame() {
 
                 JFrame jFrame;
                 jFrame = new JFrame();
@@ -279,7 +256,6 @@ public class ClientGUI extends Client{
         Socket socket = new Socket(ip, port);
         socketOut = new ObjectOutputStream(socket.getOutputStream());
         socketIn = new ObjectInputStream(socket.getInputStream());
-        stdin = new Scanner(System.in);
 
         try {
             Thread t0 = asyncReadFromSocket();
@@ -291,7 +267,6 @@ public class ClientGUI extends Client{
         } catch (InterruptedException | NoSuchElementException e) {
             System.out.println("Connection closed from the client side");
         } finally {
-            stdin.close();
             socketIn.close();
             socketOut.close();
             socket.close();

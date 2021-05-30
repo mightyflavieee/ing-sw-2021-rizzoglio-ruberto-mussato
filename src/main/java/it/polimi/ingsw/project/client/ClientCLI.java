@@ -25,8 +25,8 @@ public class ClientCLI extends Client {
     private boolean lock = true;
 
     public ClientCLI(String ip, int port) {
-        setIp(ip);
-        setPort(port);
+        super(ip,port);
+        this.lock = true;
     }
 
     @Override
@@ -42,13 +42,13 @@ public class ClientCLI extends Client {
 
     @Override
     public void setMatch(Match match) {
-        super.setMatch(match);
+        this.match = match;
         unLock();
     }
 
     @Override
     public void setGameId(String gameId) {
-        super.setGameId(gameId);
+        this.gameId = gameId;
         System.out.println("Your gameid is: " + gameId);
         unLock();
     }
@@ -93,6 +93,11 @@ public class ClientCLI extends Client {
             System.out.println(leader.toString());
         }
         
+
+    }
+
+    @Override
+    public void reChooseLeaderCards(String errorMessage) {
 
     }
 
