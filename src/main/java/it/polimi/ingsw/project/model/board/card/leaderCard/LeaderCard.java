@@ -8,8 +8,7 @@ import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
-
-public class LeaderCard extends Card{
+public class LeaderCard extends Card {
   final private String id;
   final private Perk perk;
   final private Map<ResourceType, Integer> requiredResources;
@@ -19,7 +18,7 @@ public class LeaderCard extends Card{
 
   // creates a LeaderCard activable with a requirement in resources
   public LeaderCard(String id, Perk assignedPerk, int victoryPoints, Map<ResourceType, Integer> requiredResources,
-                    Map<CardColor, Integer> requiredDevCards, Map<CardColor, CardLevel> requiredDevCardLevel) {
+      Map<CardColor, Integer> requiredDevCards, Map<CardColor, CardLevel> requiredDevCardLevel) {
     super(victoryPoints);
     this.id = id;
     this.perk = assignedPerk;
@@ -29,7 +28,7 @@ public class LeaderCard extends Card{
     this.status = Status.Inactive;
   }
 
-    public Perk getPerk() {
+  public Perk getPerk() {
     return perk;
   }
 
@@ -41,11 +40,17 @@ public class LeaderCard extends Card{
     return id;
   }
 
-  public Map<ResourceType, Integer> getRequiredResources() { return requiredResources; }
+  public Map<ResourceType, Integer> getRequiredResources() {
+    return requiredResources;
+  }
 
-  public Map<CardColor, Integer> getRequiredDevCards() { return requiredDevCards; }
+  public Map<CardColor, Integer> getRequiredDevCards() {
+    return requiredDevCards;
+  }
 
-  public Map<CardColor, CardLevel> getRequiredDevCardLevel() { return requiredDevCardLevel; }
+  public Map<CardColor, CardLevel> getRequiredDevCardLevel() {
+    return requiredDevCardLevel;
+  }
 
   // changes the status of the LeaderCard to Active
   public void activateCard() {
@@ -55,12 +60,12 @@ public class LeaderCard extends Card{
   // converts the object to a printable string
   public String toString() {
     String converted;
-    converted = "Id: " + this.id + "\n" + "Perk: " + this.perk.toString() + "\n" + "Status: " + this.status.toString() + "\n";
-    if (this.requiredResources == null) {
+    converted = "Id: " + this.id + "\n" + "Perk: " + this.perk.toString() + "Status: " + this.status.toString() + "\n";
+    if (this.requiredDevCardLevel != null) {
       converted = converted + "Required DevelopmentCard level: " + this.requiredDevCardLevel + "\n";
-    } else {
-        StringBuilder convertedBuilder = new StringBuilder(converted + "Required resources:\n");
-        for (ResourceType type : this.requiredResources.keySet()) {
+    } else if (this.requiredResources != null) {
+      StringBuilder convertedBuilder = new StringBuilder(converted + "Required resources:\n");
+      for (ResourceType type : this.requiredResources.keySet()) {
         if (type == ResourceType.Coin) {
           convertedBuilder.append("Coin = ").append(this.requiredResources.get(type)).append("\n");
         }
@@ -74,9 +79,25 @@ public class LeaderCard extends Card{
           convertedBuilder.append("Stone = ").append(this.requiredResources.get(type)).append("\n");
         }
       }
-        converted = convertedBuilder.toString();
+      converted = convertedBuilder.toString();
+    } else {
+      StringBuilder convertedBuilder = new StringBuilder(converted + "Required Development Cards:\n");
+      for (CardColor cardColor : this.requiredDevCards.keySet()) {
+        if (cardColor == CardColor.Gold) {
+          convertedBuilder.append("Gold = ").append(this.requiredDevCards.get(cardColor)).append("\n");
+        }
+        if (cardColor == CardColor.Amethyst) {
+          convertedBuilder.append("Amethyst = ").append(this.requiredDevCards.get(cardColor)).append("\n");
+        }
+        if (cardColor == CardColor.Emerald) {
+          convertedBuilder.append("Emerald = ").append(this.requiredDevCards.get(cardColor)).append("\n");
+        }
+        if (cardColor == CardColor.Sapphire) {
+          convertedBuilder.append("Sapphire = ").append(this.requiredDevCards.get(cardColor)).append("\n");
+        }
+      }
+      converted = convertedBuilder.toString();
     }
     return converted;
   }
 }
-

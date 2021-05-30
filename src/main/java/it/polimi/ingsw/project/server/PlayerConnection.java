@@ -4,7 +4,7 @@ public class PlayerConnection {
   private String name;
   private ClientConnection connection;
 
-  public PlayerConnection(String name, ClientConnection connection){
+  public PlayerConnection(String name, ClientConnection connection) {
     this.name = name;
     this.connection = connection;
   }

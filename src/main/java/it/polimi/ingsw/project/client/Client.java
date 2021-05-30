@@ -2,9 +2,11 @@ package it.polimi.ingsw.project.client;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
 import java.util.Optional;
 
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 
 public class Client {
 
@@ -102,7 +104,7 @@ public class Client {
     public void showErrorMessage(String error) {
     }
 
-    public void chooseLeaderCards() {
+    public void chooseLeaderCards(List<LeaderCard> possibleLeaderCards) {
     }
 
     public void reChooseLeaderCards(String errorMessage) {

@@ -90,7 +90,12 @@ public class ClientCLI extends Client {
     }
 
     @Override
-    public void chooseLeaderCards() {
+    public void chooseLeaderCards(List<LeaderCard> possibLeaderCards) {
+        System.out.println("Choose two ids of the leader card you like the most:");
+        for (LeaderCard leader : possibLeaderCards) {
+            System.out.println(leader.toString());
+        }
+        
 
     }
 

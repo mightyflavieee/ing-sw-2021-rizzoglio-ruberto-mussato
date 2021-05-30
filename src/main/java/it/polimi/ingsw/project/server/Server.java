@@ -8,9 +8,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import it.polimi.ingsw.project.controller.Controller;
-import it.polimi.ingsw.project.messages.MoveMessage;
+import it.polimi.ingsw.project.messages.LeaderCardsToChooseMessage;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
+import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.utils.Utils;
 import it.polimi.ingsw.project.view.RemoteView;
 import it.polimi.ingsw.project.view.View;
@@ -64,8 +65,11 @@ public class Server {
             model.addObserver(view);
             view.addObserver(controller);
         }
-        listOfClientConnections.forEach((ClientConnection connection) -> {
-            connection.asyncSend(new MoveMessage(model.getMatchCopy()));
+
+        currentLobby.getListOfPlayerConnections().forEach((PlayerConnection playerConnection) -> {
+            List<LeaderCard> listToSend = model.getMatch().getLeaderCardContainer()
+                    .getFourCardsForPlayer(playerConnection.getName());
+            playerConnection.getConnection().asyncSend(new LeaderCardsToChooseMessage(listToSend));
         });
     }
 

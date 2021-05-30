@@ -76,7 +76,6 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
             ObjectInputStream socketIn = new ObjectInputStream(socket.getInputStream());
             while (isActive()) {
                 Request receivedObject = (Request) socketIn.readObject();
-                System.out.println(receivedObject);
                 receivedObject.action(this);
             }
         } catch (IOException | NoSuchElementException | ClassNotFoundException e) {

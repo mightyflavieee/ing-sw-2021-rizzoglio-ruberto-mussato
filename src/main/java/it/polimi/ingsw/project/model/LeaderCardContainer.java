@@ -5,27 +5,33 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LeaderCardContainer implements Serializable {
     private final List<LeaderCard> leaderCards;
+    private Map<String, List<LeaderCard>> mapOfExtractedCards;
 
     public LeaderCardContainer() {
-        LeaderCardContainerBuilder leaderCardContainerBuilder = new LeaderCardContainerBuilder("src/main/resources/leadercards.json");
+        LeaderCardContainerBuilder leaderCardContainerBuilder = new LeaderCardContainerBuilder(
+                "src/main/resources/leadercards.json");
         List<LeaderCard> leaderCards = leaderCardContainerBuilder.getLeaderCards();
         Collections.shuffle(leaderCards);
+        this.mapOfExtractedCards = new HashMap<String, List<LeaderCard>>();
         this.leaderCards = leaderCards;
     }
 
-    public List<LeaderCard> getLeaderCards() { return leaderCards; }
+    public List<LeaderCard> getLeaderCards() {
+        return leaderCards;
+    }
 
-    public List<LeaderCard> getFourCardsForPlayer() {
+    public List<LeaderCard> getFourCardsForPlayer(String nicknameForCards) {
         List<LeaderCard> cardsToAssign = new ArrayList<>();
-        cardsToAssign.add(this.leaderCards.get(0));
-        cardsToAssign.add(this.leaderCards.get(1));
-        cardsToAssign.add(this.leaderCards.get(2));
-        cardsToAssign.add(this.leaderCards.get(3));
-        this.leaderCards.subList(0, 4).clear();
+        for (int i = 0; i < 4; i++) {
+            cardsToAssign.add(this.leaderCards.remove(0));
+        }
+        mapOfExtractedCards.put(nicknameForCards, cardsToAssign);
         return cardsToAssign;
     }
 

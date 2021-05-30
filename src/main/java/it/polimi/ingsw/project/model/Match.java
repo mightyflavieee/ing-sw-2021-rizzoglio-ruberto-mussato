@@ -21,6 +21,7 @@ public class Match implements Serializable, Cloneable {
     private List<Player> playerList;
     private Market market;
     private CardContainer cardContainer;
+    private LeaderCardContainer leaderCardContainer;
     private ActionTokenContainer actionTokenContainer;
     private Player currentPlayer;
     private boolean isLastTurn;
@@ -28,8 +29,8 @@ public class Match implements Serializable, Cloneable {
 
     public Match(List<Player> playerList) {
         this.playerList = new ArrayList<>();
-        this.playerList.addAll(playerList); //la lista mi arriva già shuffled
-        this.playerList.forEach(x -> x.createFaithMap(this)); //serve per l'inizio partita
+        this.playerList.addAll(playerList); // la lista mi arriva già shuffled
+        this.playerList.forEach(x -> x.createFaithMap(this)); // serve per l'inizio partita
         this.market = new Market();
         this.cardContainer = new CardContainer();
         if (playerList.size() == 1) {
@@ -39,6 +40,7 @@ public class Match implements Serializable, Cloneable {
         this.currentPlayer.updateTurnPhase();
         this.isLastTurn = false;
         this.isOver = false;
+        this.leaderCardContainer = new LeaderCardContainer();
     }
 
     public Match() { // da usare nella clone
@@ -51,6 +53,10 @@ public class Match implements Serializable, Cloneable {
             playerIndex = 0;
         }
         return playerList.get(playerIndex);
+    }
+
+    public LeaderCardContainer getLeaderCardContainer() {
+        return this.leaderCardContainer;
     }
 
     public List<Player> getPlayerList() {
@@ -92,16 +98,14 @@ public class Match implements Serializable, Cloneable {
     public void notifyFaithMapsForDiscard(int numDiscardedResources) {
         // TODO devo far avanzare anche lorenzo?
         for (int i = 0; i < numDiscardedResources; i++) {
-            playerList
-                    .stream()
-                    .filter(x -> !x.getNickname().equals( currentPlayer.getNickname()))
+            playerList.stream().filter(x -> !x.getNickname().equals(currentPlayer.getNickname()))
                     .forEach(Player::moveForward);
         }
     }
 
-
     public void discardForActionToken(CardColor cardColor) {
-        if (cardContainer.discard(cardColor)) this.youLost();
+        if (cardContainer.discard(cardColor))
+            this.youLost();
     }
 
     private void youLost() {
@@ -110,21 +114,20 @@ public class Match implements Serializable, Cloneable {
     }
 
     public void end() {
-        if (
-                this.isLastTurn &&
-                        this.currentPlayer.getNickname().equals(this.playerList.get(this.playerList.size() - 1).getNickname())
-        ) {
+        if (this.isLastTurn && this.currentPlayer.getNickname()
+                .equals(this.playerList.get(this.playerList.size() - 1).getNickname())) {
             this.isOver = true;
         }
     }
 
     public void updatePlayer() {
-        if(this.currentPlayer.getTurnPhase() == TurnPhase.EndPhase) {
+        if (this.currentPlayer.getTurnPhase() == TurnPhase.EndPhase) {
             this.currentPlayer.updateTurnPhase();
             this.currentPlayer = this.nextPlayer();
         }
         this.currentPlayer.updateTurnPhase();
     }
+
     @Override
     public final Match clone() {
         final Match result = new Match();
@@ -146,101 +149,53 @@ public class Match implements Serializable, Cloneable {
         this.currentPlayer.performDiscardLeaderCardMove(leaderCardID);
     }
 
-
-    public boolean isFeasibleBuyDevCardMove(
-            String devCardID,
-            Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-            Map<ResourceType, Integer> resourcesToEliminateChest,
-            DevCardPosition position
-    ) {
+    public boolean isFeasibleBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+            Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
         if (!this.cardContainer.isCardPresent(devCardID)) {
             return false;
         } else {
             DevelopmentCard devCard = this.cardContainer.fetchCard(devCardID);
-            return this.currentPlayer.isFeasibleBuyDevCardMove(
-                    devCard,
-                    resourcesToEliminateWarehouse,
-                    resourcesToEliminateChest,
-                    position
-            );
+            return this.currentPlayer.isFeasibleBuyDevCardMove(devCard, resourcesToEliminateWarehouse,
+                    resourcesToEliminateChest, position);
         }
     }
 
-    public void performBuyDevCardMove(
-            String devCardID,
-            Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-            Map<ResourceType, Integer> resourcesToEliminateChest,
-            DevCardPosition position
-    ) {
+    public void performBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+            Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
         DevelopmentCard devCard = this.cardContainer.removeBoughtCard(devCardID);
-        this.currentPlayer.performBuyDevCardMove(
-                devCard,
-                resourcesToEliminateWarehouse,
-                resourcesToEliminateChest,
-                position
-        );
+        this.currentPlayer.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest,
+                position);
     }
 
-    public boolean isFeasibleProductionMove(
-            String devCardID,
-            String leaderCardId,
+    public boolean isFeasibleProductionMove(String devCardID, String leaderCardId,
             Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-            Map<ResourceType, Integer> resourcesToEliminateChest,
-            ProductionType productionType
-    ) {
+            Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType) {
         if (devCardID != null) {
             if (this.cardContainer.isCardPresent(devCardID)) {
                 return false;
             }
         }
-        return this.currentPlayer.isFeasibleProductionMove(
-                devCardID,
-                leaderCardId,
-                resourcesToEliminateWarehouse,
-                resourcesToEliminateChest,
-                productionType
-        );
+        return this.currentPlayer.isFeasibleProductionMove(devCardID, leaderCardId, resourcesToEliminateWarehouse,
+                resourcesToEliminateChest, productionType);
     }
 
-    public void performProductionMove(
-            String devCardID,
-            Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-            Map<ResourceType, Integer> resourcesToEliminateChest,
-            ProductionType productionType,
-            List<ResourceType> boardOrPerkManufacturedResource
-    ) {
-        this.currentPlayer.performProductionMove(
-                devCardID,
-                resourcesToEliminateWarehouse,
-                resourcesToEliminateChest,
-                productionType,
-                boardOrPerkManufacturedResource
-        );
+    public void performProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+            Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType,
+            List<ResourceType> boardOrPerkManufacturedResource) {
+        this.currentPlayer.performProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateChest,
+                productionType, boardOrPerkManufacturedResource);
     }
 
-    public boolean isFeasibleTakeMarketResourcesMove(
-            Warehouse warehouse
-    ) {
-        return this.currentPlayer.isFeasibleTakeMarketResourcesMove(
-                warehouse
-        );
+    public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse) {
+        return this.currentPlayer.isFeasibleTakeMarketResourcesMove(warehouse);
 
     }
 
-    public void performTakeMarketResourceMove(
-            Warehouse warehouse,
-            List<Resource> discardedResources,
-            Market market,
-            Boolean hasRedMarble
-    ) {
-        this.currentPlayer.performTakeMarketResourceMove(
-            warehouse,
-            discardedResources,
-            hasRedMarble
-        );
+    public void performTakeMarketResourceMove(Warehouse warehouse, List<Resource> discardedResources, Market market,
+            Boolean hasRedMarble) {
+        this.currentPlayer.performTakeMarketResourceMove(warehouse, discardedResources, hasRedMarble);
         this.market = market;
     }
-
 
     public void performExtractActionTokenMove() {
         this.actionTokenContainer.drawToken();
@@ -255,62 +210,62 @@ public class Match implements Serializable, Cloneable {
     }
 
     public void moveForwardBlack() {
-        if (24 == this.currentPlayer.moveForwardBlack()) this.youLost(); // cioè se lorenzo è arrivato alla fine
+        if (24 == this.currentPlayer.moveForwardBlack())
+            this.youLost(); // cioè se lorenzo è arrivato alla fine
     }
 
     public boolean isRightTurnPhase(PlayerMove playerMove) {
-        if(currentPlayer.getTurnPhase()==TurnPhase.WaitPhase){
+        if (currentPlayer.getTurnPhase() == TurnPhase.WaitPhase) {
             return false;
         }
-        if(playerMove.isMainMove()){
-           return (currentPlayer.getTurnPhase()==TurnPhase.MainPhase);
-        }else
-        {
-            return (currentPlayer.getTurnPhase()!=TurnPhase.MainPhase);
+        if (playerMove.isMainMove()) {
+            return (currentPlayer.getTurnPhase() == TurnPhase.MainPhase);
+        } else {
+            return (currentPlayer.getTurnPhase() != TurnPhase.MainPhase);
         }
 
     }
 
-    public TurnPhase getTurnPhase(String nickname){
+    public TurnPhase getTurnPhase(String nickname) {
 
-        for(Player player : playerList){
-            if(player.getNickname().equals(nickname)){
+        for (Player player : playerList) {
+            if (player.getNickname().equals(nickname)) {
                 return player.getTurnPhase();
             }
         }
         return TurnPhase.WaitPhase;
     }
 
-    public int getVictoryPoints(String nickname){
-        for(Player player : playerList){
-            if(player.getNickname().equals(nickname)){
+    public int getVictoryPoints(String nickname) {
+        for (Player player : playerList) {
+            if (player.getNickname().equals(nickname)) {
                 return player.getVictoryPoints();
             }
         }
         return 0;
     }
 
-    public int getMarkerPosition(String nickname){
-        for(Player player : playerList){
-            if(player.getNickname().equals(nickname)){
+    public int getMarkerPosition(String nickname) {
+        for (Player player : playerList) {
+            if (player.getNickname().equals(nickname)) {
                 return player.getMarkerPosition();
             }
         }
         return 0;
     }
 
-    public String getLeaderCardsToString(String nickname){
-        for(Player player : playerList){
-            if(player.getNickname().equals(nickname)){
+    public String getLeaderCardsToString(String nickname) {
+        for (Player player : playerList) {
+            if (player.getNickname().equals(nickname)) {
                 return player.getLeaderCardsToString();
             }
         }
         return "";
     }
 
-    public Warehouse getWarehouse(String nickname){
-        for(Player player : playerList){
-            if(player.getNickname().equals(nickname)){
+    public Warehouse getWarehouse(String nickname) {
+        for (Player player : playerList) {
+            if (player.getNickname().equals(nickname)) {
                 return player.getWarehouse();
             }
         }
@@ -328,9 +283,10 @@ public class Match implements Serializable, Cloneable {
         }
         return this.playerList.get(playerIndex).getBoard();
     }
-    public ResourceType getTransmutationPerk(String nickname){
-        for(Player player : playerList){
-            if(player.getNickname().equals(nickname)){
+
+    public ResourceType getTransmutationPerk(String nickname) {
+        for (Player player : playerList) {
+            if (player.getNickname().equals(nickname)) {
                 return player.getTransmutationPerk();
             }
         }
@@ -339,8 +295,8 @@ public class Match implements Serializable, Cloneable {
 
     public String getOpponents(String nickname) {
         StringBuilder string = new StringBuilder();
-        for(Player player : playerList){
-            if(!player.getNickname().equals(nickname)){
+        for (Player player : playerList) {
+            if (!player.getNickname().equals(nickname)) {
                 string.append(player.getNickname()).append(" ");
             }
         }
@@ -348,11 +304,12 @@ public class Match implements Serializable, Cloneable {
     }
 
     public String getWarehouseToString(String nickname) {
-       return this.getWarehouse(nickname).getShelvesToString();
+        return this.getWarehouse(nickname).getShelvesToString();
     }
-    public String getHistoryToString(String nickname){
-        for(Player player : playerList){
-            if(player.getNickname().equals(nickname)){
+
+    public String getHistoryToString(String nickname) {
+        for (Player player : playerList) {
+            if (player.getNickname().equals(nickname)) {
                 return player.getHistoryToString();
             }
         }
