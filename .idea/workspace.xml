@@ -7,11 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Added abstract methods in Client.java">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Added protected attributes in Client.java">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/ReInsertMatchIdListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/SocketClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/SocketClientConnection.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -106,7 +106,7 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientApp">
+  <component name="RunManager" selected="Application.ClientAppGUI">
     <configuration name="BoardGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.BoardGUI" />
       <module name="GC23" />
@@ -120,7 +120,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClientApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="ClientApp" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ClientApp" />
       <module name="GC23" />
       <extension name="coverage">
@@ -222,11 +222,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ClientAppGUI" />
         <item itemvalue="Application.ClientApp" />
         <item itemvalue="Application.ServerApp" />
         <item itemvalue="Application.GUIPROVA" />
         <item itemvalue="Application.BoardGUI" />
-        <item itemvalue="Application.ClientAppGUI" />
       </list>
     </recent_temporary>
   </component>
@@ -356,13 +356,6 @@
       <workItem from="1622117560195" duration="21825000" />
       <workItem from="1622195527307" duration="3149000" />
       <workItem from="1622294010049" duration="928000" />
-    </task>
-    <task id="LOCAL-00084" summary="updated ClientCLI.handleTurn">
-      <created>1621324826519</created>
-      <option name="number" value="00084" />
-      <option name="presentableId" value="LOCAL-00084" />
-      <option name="project" value="LOCAL" />
-      <updated>1621324826519</updated>
     </task>
     <task id="LOCAL-00085" summary="updated ClientCLI.handleTurn&#10;added ClientCLI.handleLeaderAction&#10;added ClientCLI.handleMainPhase">
       <created>1621367093034</created>
@@ -700,7 +693,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622371280980</updated>
     </task>
-    <option name="localTasksCounter" value="133" />
+    <task id="LOCAL-00133" summary="Added protected attributes in Client.java">
+      <created>1622372539283</created>
+      <option name="number" value="00133" />
+      <option name="presentableId" value="LOCAL-00133" />
+      <option name="project" value="LOCAL" />
+      <updated>1622372539283</updated>
+    </task>
+    <option name="localTasksCounter" value="134" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -730,7 +730,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added a LeaderCardContainerTest" />
     <MESSAGE value="Code Optimization" />
     <MESSAGE value="Corrected minor error in Controller.performMove" />
     <MESSAGE value="Added tests" />
@@ -755,7 +754,8 @@
     <MESSAGE value="updated BoardGUI" />
     <MESSAGE value="Removed not shared methods in Client.java" />
     <MESSAGE value="Added abstract methods in Client.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added abstract methods in Client.java" />
+    <MESSAGE value="Added protected attributes in Client.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added protected attributes in Client.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -59,7 +59,21 @@ public class ClientGUI extends Client{
 
     @Override
     public void reBuildGame(String errorMessage) {
-
+        JFrame jFrame;
+        jFrame = new JFrame();
+        jFrame.setVisible(true);
+        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        JPanel jPanel;
+        jPanel = new JPanel();
+        jPanel.setLayout(new GridLayout(2,1));
+        JLabel matchIDLabel = new JLabel("Wrong ID! Insert a right ID:");
+        jPanel.add(matchIDLabel);
+        JTextField idMatchField = new JTextField();
+        idMatchField.addActionListener(new ReInsertMatchIdListener(getInstance(),idMatchField,jFrame));
+        jPanel.add(idMatchField);
+        jFrame.add(jPanel);
+        jFrame.pack();
+        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     @Override
@@ -79,7 +93,7 @@ public class ClientGUI extends Client{
                 try {
                     while (isActive()) {
                         ResponseMessage inputObject = (ResponseMessage) socketIn.readObject();
-                      //  inputObject.action(getInstance());
+                        inputObject.action(getInstance());
                     }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
