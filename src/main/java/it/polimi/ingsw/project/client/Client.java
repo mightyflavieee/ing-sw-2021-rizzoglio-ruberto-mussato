@@ -89,13 +89,9 @@ public abstract class Client {
         return this.gameId;
     }
 
-    public void reBuildGame(String errorMessage) {
+    public abstract void reBuildGame(String errorMessage);
 
-    }
+    public abstract void chooseLeaderCards(List<LeaderCard> possibleLeaderCards);
 
-    public void chooseLeaderCards(List<LeaderCard> possibleLeaderCards) {
-    }
-
-    public void reChooseLeaderCards(String errorMessage) {
-    }
+    public abstract void reChooseLeaderCards(String errorMessage);
 }
