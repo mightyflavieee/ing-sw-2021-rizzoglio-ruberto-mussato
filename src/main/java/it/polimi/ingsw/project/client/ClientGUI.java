@@ -1,6 +1,6 @@
 package it.polimi.ingsw.project.client;
 
-import it.polimi.ingsw.project.client.gui.*;
+import it.polimi.ingsw.project.client.gui.listeners.*;
 import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.playermove.*;

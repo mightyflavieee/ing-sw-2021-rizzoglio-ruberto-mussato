@@ -1,5 +1,7 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.client.gui.listeners.LeaderCardGUIListener;
+
 import javax.swing.*;
 import java.awt.*;
 
