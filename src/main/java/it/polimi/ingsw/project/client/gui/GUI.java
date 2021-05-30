@@ -1,12 +1,13 @@
 package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.model.Player;
+import it.polimi.ingsw.project.model.playermove.Move;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class GUIPROVA {
+public class GUI {
     private BoardGUI boardGUI;
     private MatchGUI matchGUI;
     private MarketGUI marketGUI;
@@ -24,7 +25,7 @@ public class GUIPROVA {
     private InformationsGUI informationsGUI;
 
 
-    public GUIPROVA() {
+    public GUI() {
         jFrame = new JFrame();
         jFrame.setLayout(new GridLayout(4,2));
        // jFrame.setLayout(new BorderLayout());
@@ -36,7 +37,7 @@ public class GUIPROVA {
         warehouseGUI = new WarehouseGUI();
         chestGUI = new ChestGUI();
         mapTrayGUI = new MapTrayGUI();
-        informationsGUI = new InformationsGUI();
+        informationsGUI = new InformationsGUI(this);
 
 //        marketButton = new MarketButton("market button");
 //        marketButtonListener = new MarketButtonListener(marketGUI);
@@ -64,7 +65,16 @@ public class GUIPROVA {
         jFrame.pack();
     }
 
+    public void send(Move move){
+        this.lockAll(); //devo attendere una risposta dal server
+        //todo lo chiamo da un listener e mando la move al server
+
+    }
+    public void lockAll(){
+        //todo blocca tutte le cose che si possono fare es. quando devo aspettare una risposta dal server
+    }
+
     public static void main(String[] args){
-        new GUIPROVA();
+        new GUI();
     }
 }
