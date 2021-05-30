@@ -23,4 +23,8 @@ public class LeaderCardGUI extends JButton {
         this.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/leadercards/"+ this.id + ".png").getImage().getScaledInstance(230, 348, Image.SCALE_SMOOTH)));
         this.setVisible(true);
     }
+
+    public String getID() {
+        return this.id;
+    }
 }

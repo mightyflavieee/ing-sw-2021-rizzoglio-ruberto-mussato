@@ -77,7 +77,7 @@ public class ClientGUI extends Client{
 
     @Override
     public void chooseLeaderCards(List<LeaderCard> possibleLeaderCards) {
-        new LeaderCardChoserGUI(possibleLeaderCards.stream().map(LeaderCard::getId).collect(Collectors.toList()));
+        new LeaderCardChoserGUI(possibleLeaderCards.stream().map(LeaderCard::getId).collect(Collectors.toList()),this);
 
     }
 
