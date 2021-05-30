@@ -7,12 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated BoardGUI">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/retro_devcard.PNG" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added method setMapTrayImage() in MapTrayGUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUIPROVA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MapTrayGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MapTrayGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ChestGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ChestGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/LeaderCardContainerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/LeaderCardContainerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +69,8 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/leadercards" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -106,7 +106,7 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GUIPROVA">
+  <component name="RunManager" selected="JUnit.LeaderCardContainerTest.testGetLeaderCards">
     <configuration name="BoardGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.BoardGUI" />
       <module name="GC23" />
@@ -122,19 +122,6 @@
     </configuration>
     <configuration name="ClientApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ClientApp" />
-      <module name="GC23" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.project.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ClientAppGUI" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ClientAppGUI" />
       <module name="GC23" />
       <extension name="coverage">
         <pattern>
@@ -172,13 +159,34 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LeaderCardContainerTest.testGetLeaderCards" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GC23" />
+      <selectedOptions>
+        <option name="module.classpath" />
+      </selectedOptions>
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.project.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.project.model" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.model.LeaderCardContainerTest" />
+      <option name="METHOD_NAME" value="testGetLeaderCards" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -212,19 +220,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.GUIPROVA" />
-      <item itemvalue="Application.ClientAppGUI" />
       <item itemvalue="Application.ServerApp" />
       <item itemvalue="Application.ClientApp" />
-      <item itemvalue="JUnit.testCoverage" />
       <item itemvalue="Application.BoardGUI" />
+      <item itemvalue="JUnit.testCoverage" />
+      <item itemvalue="JUnit.LeaderCardContainerTest.testGetLeaderCards" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.LeaderCardContainerTest.testGetLeaderCards" />
         <item itemvalue="Application.GUIPROVA" />
         <item itemvalue="Application.BoardGUI" />
         <item itemvalue="Application.ClientApp" />
         <item itemvalue="Application.ServerApp" />
-        <item itemvalue="Application.ClientAppGUI" />
       </list>
     </recent_temporary>
   </component>
@@ -354,13 +362,7 @@
       <workItem from="1622117560195" duration="21825000" />
       <workItem from="1622195527307" duration="3149000" />
       <workItem from="1622294010049" duration="928000" />
-    </task>
-    <task id="LOCAL-00082" summary="Added NoMove.java">
-      <created>1621001319224</created>
-      <option name="number" value="00082" />
-      <option name="presentableId" value="LOCAL-00082" />
-      <option name="project" value="LOCAL" />
-      <updated>1621001319224</updated>
+      <workItem from="1622364593306" duration="2837000" />
     </task>
     <task id="LOCAL-00083" summary="Added Cli">
       <created>1621324381597</created>
@@ -698,7 +700,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622328214573</updated>
     </task>
-    <option name="localTasksCounter" value="131" />
+    <task id="LOCAL-00131" summary="added method setMapTrayImage() in MapTrayGUI">
+      <created>1622329561869</created>
+      <option name="number" value="00131" />
+      <option name="presentableId" value="LOCAL-00131" />
+      <option name="project" value="LOCAL" />
+      <updated>1622329561869</updated>
+    </task>
+    <option name="localTasksCounter" value="132" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -728,7 +737,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added history logic" />
     <MESSAGE value="Added ClientCLI thread synchronization" />
     <MESSAGE value="Added a LeaderCardContainerTest" />
     <MESSAGE value="Code Optimization" />
@@ -753,7 +761,8 @@
     <MESSAGE value="added MapTrayGUI" />
     <MESSAGE value="added ChestGUI" />
     <MESSAGE value="updated BoardGUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated BoardGUI" />
+    <MESSAGE value="added method setMapTrayImage() in MapTrayGUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="added method setMapTrayImage() in MapTrayGUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
