@@ -17,7 +17,7 @@ public class InformationsGUI extends JInternalFrame {
         jTextArea.setEditable(false);
         this.add(this.jTextArea);
         this.turnPhase = TurnPhase.WaitPhase;
-      //  this.turnPhase = TurnPhase.InitialPhase;
+      //  this.turnPhase = TurnPhase.MainPhase;
         this.refresh();
         this.setVisible(true);
         this.pack();
@@ -40,7 +40,10 @@ public class InformationsGUI extends JInternalFrame {
                     this.phaseFrame.dispose();
                 }
                 this.jTextArea.setVisible(true);
-                this.jTextArea.setText("You must choose and perform one of the following actions: \nTake Resources from the Market \nBuy one Development Card \n Activate the Production");
+                this.jTextArea.setText("You must choose and perform one of the following actions:" +
+                        "\nTake Resources from the Market" +
+                        "\nBuy one Development Card" +
+                        "\nActivate the Production");
                 break;
             case WaitPhase:
             default:
@@ -51,5 +54,12 @@ public class InformationsGUI extends JInternalFrame {
                 this.jTextArea.setText("It's not your turn");
                 break;
         }
+    }
+
+    public void showMarketInformations(){
+        this.jTextArea.setText("You collected some resources from the Market!\n" +
+                "You can see them in the Resources in Hand panel" +
+                "\nStore them in the Shelves");
+
     }
 }

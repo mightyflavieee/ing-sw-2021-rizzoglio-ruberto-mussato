@@ -26,7 +26,7 @@ public class MatchGUI extends JInternalFrame {
         for (int i = 0; i < numberOfPlayers; i++) {
             this.boards.add(new BoardGUI(nicknames.get(i)));
         }
-        this.market = new MarketGUI();
+      //  this.market = new MarketGUI();
         createTable(nicknames);
         for (int i = 0; i < numberOfPlayers; i++) {
             this.add(this.boards.get(i), i);

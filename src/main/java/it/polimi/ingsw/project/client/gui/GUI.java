@@ -32,7 +32,7 @@ public class GUI {
         jFrame = new JFrame();
         jFrame.setLayout(new GridLayout(4,3));
        // jFrame.setLayout(new BorderLayout());
-        marketGUI = new MarketGUI();
+
       //  boardGUI = new BoardGUI("Board");
         cardContainerGUI = new CardContainerGUI();
         leaderCardPlaceGui = new LeaderCardPlaceGUI();
@@ -42,6 +42,7 @@ public class GUI {
         mapTrayGUI = new MapTrayGUI();
         informationsGUI = new InformationsGUI(this);
         historyGUI = new HistoryGUI();
+        marketGUI = new MarketGUI(this);
 
 //        marketButton = new MarketButton("market button");
 //        marketButtonListener = new MarketButtonListener(marketGUI);
@@ -84,5 +85,9 @@ public class GUI {
     }
     public static void main(String[] args){
         new GUI();
+    }
+
+    public void showMarketInformations() {
+        this.informationsGUI.showMarketInformations();
     }
 }

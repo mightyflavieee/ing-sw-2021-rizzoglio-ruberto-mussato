@@ -9,7 +9,7 @@ public class MarketGUI extends JInternalFrame {
     private JLabel sfondo; //se lo metto in inglese mi da problemi
     private TrayGui trayGui;
     private ResourceInHandGUI resourceInHandGUI;
-    public MarketGUI() {
+    public MarketGUI(GUI gui) {
       //  this.jPanel = new JPanel();
         this.setTitle("Market");
         //this.constructorHelper();
@@ -21,7 +21,7 @@ public class MarketGUI extends JInternalFrame {
       //  this.setSize(50,100);
 
         this.resourceInHandGUI = new ResourceInHandGUI();
-        this.trayGui = new TrayGui(this.resourceInHandGUI);
+        this.trayGui = new TrayGui(this.resourceInHandGUI, gui);
         this.add(trayGui);
         this.add(resourceInHandGUI);
         this.pack();

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.client.gui.listeners.ArrowListener;
 import it.polimi.ingsw.project.model.market.Marble;
 import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.resource.Resource;
@@ -17,12 +18,12 @@ public class TrayGui extends JPanel {
     private List<JButton> horizontalArrows; //dall'alto verso il basso , è al contrario rispetto a quando faccio la move
     private JLabel[][] trayJlabel = new JLabel[4][3];
     private JLabel outsideMarbleJlabel;
-    public TrayGui(ResourceInHandGUI resourceInHandGUI)  {
+    public TrayGui(ResourceInHandGUI resourceInHandGUI, GUI gui)  {
         this.market = new Market();
         gridLayout = new GridLayout(4,5);
         this.setLayout(gridLayout);
         this.createTray();
-        this.createObservers(resourceInHandGUI);
+        this.createObservers(resourceInHandGUI,gui);
         //            try {
 //                this.backgroundImage = ImageIO.read(new File("src/main/resources/plancia portabiglie.png")).getScaledInstance(100, 200, Image.SCALE_SMOOTH);
 //            } catch (IOException e) {
@@ -32,12 +33,12 @@ public class TrayGui extends JPanel {
        // this.setPreferredSize(new Dimension(200,100));
     }
 
-    private void createObservers(ResourceInHandGUI resourceInHandGUI) {
+    private void createObservers(ResourceInHandGUI resourceInHandGUI, GUI gui) {
         for(int i = 0; i < verticalArrows.size(); i++){
-            verticalArrows.get(i).addActionListener(new ArrowObserver(this,0,i,resourceInHandGUI));
+            verticalArrows.get(i).addActionListener(new ArrowListener(this,0,i,resourceInHandGUI,gui));
         }
         for(int i = 0; i < horizontalArrows.size(); i++){ //dall'alto verso il basso , è al contrario rispetto a quando faccio la move
-            horizontalArrows.get(i).addActionListener(new ArrowObserver(this,1,horizontalArrows.size()-i-1,resourceInHandGUI));
+            horizontalArrows.get(i).addActionListener(new ArrowListener(this,1,horizontalArrows.size()-i-1,resourceInHandGUI, gui));
         }
     }
 
