@@ -85,6 +85,7 @@ public class TrayGui extends JPanel {
 
         return this.market.insertMarble(axis,position,null); //TODO
     }
+
     public void refresh(){
         Marble[][] tray = market.getTray();
 
@@ -106,5 +107,10 @@ public class TrayGui extends JPanel {
         for (JButton jButton : horizontalArrows){
             jButton.setEnabled(false);
         }
+    }
+
+    public void setMarket(Market market) {
+        this.market = market;
+        this.refresh();
     }
 }

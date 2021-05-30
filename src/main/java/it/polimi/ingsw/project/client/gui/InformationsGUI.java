@@ -62,4 +62,9 @@ public class InformationsGUI extends JInternalFrame {
                 "\nStore them in the Shelves");
 
     }
+
+    public void setTurnPhase(TurnPhase turnPhase) {
+        this.turnPhase = turnPhase;
+        this.refresh();
+    }
 }

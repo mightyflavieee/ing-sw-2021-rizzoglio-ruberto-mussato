@@ -42,7 +42,7 @@ public class ClientGUI extends Client{
 
     @Override
     public void setMatch(Match match) {
-        gui.setMatch(match);
+        gui.setMatch(match, this.myNickname);
     }
 
     public void setCreateGame(boolean createGame) {

@@ -293,7 +293,7 @@ public class Match implements Serializable, Cloneable {
         return null;
     }
 
-    public String getOpponents(String nickname) {
+    public String getOpponentsToString(String nickname) {
         StringBuilder string = new StringBuilder();
         for (Player player : playerList) {
             if (!player.getNickname().equals(nickname)) {

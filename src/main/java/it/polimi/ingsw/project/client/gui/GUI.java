@@ -3,6 +3,8 @@ package it.polimi.ingsw.project.client.gui;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.playermove.Move;
+import it.polimi.ingsw.project.utils.Pair;
+import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +25,6 @@ public class GUI {
     private MapTrayGUI mapTrayGUI;
     private Player mePlayer;
     private List<Player> opponentsPlayer;
-    private Match match; //potrebbe essere superfluo
     private InformationsGUI informationsGUI;
     private HistoryGUI historyGUI;
 
@@ -79,9 +80,15 @@ public class GUI {
     public void lockAll(){
         //todo blocca tutte le cose che si possono fare es. quando devo aspettare una risposta dal server
     }
-    public void setMatch(Match match){
-        this.match = match;
-        //todo chiama i metodi set di tutti i jinternalframe e aggiorna tutto
+    public void setMatch(Match match, String myNickname){//todo chiama i metodi set di tutti i jinternalframe e aggiorna tutto
+        Pair<Player, List<Player>> pair = Utils.splitPlayers(match,myNickname);
+        this.mePlayer = pair._1;
+        this.opponentsPlayer = pair._2;
+        this.marketGUI.setMarket(match.getMarket());
+        this.historyGUI.setHistory(this.mePlayer.getHistoryToString());
+        this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
+        this.cardContainerGUI.setCardContainer(match.getCardContainer());
+        this.leaderCardPlaceGui.setLeaderCards(this.mePlayer.getLeaderCards());
     }
     public static void main(String[] args){
         new GUI();

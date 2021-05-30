@@ -4,6 +4,7 @@ import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
+import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
@@ -206,5 +207,9 @@ public class Player implements Serializable, Cloneable {
       string.append("\n").append(move);
     }
     return string.toString();
+  }
+
+  public List<LeaderCard> getLeaderCards(){
+    return this.board.getLeaderCards();
   }
 }

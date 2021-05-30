@@ -7,4 +7,5 @@ target
 .idea
 workspace.xml
 .workspace.xml
+*.workspace.xml
 

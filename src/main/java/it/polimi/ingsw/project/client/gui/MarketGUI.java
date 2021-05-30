@@ -1,5 +1,7 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.model.market.Market;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -68,7 +70,9 @@ public class MarketGUI extends JInternalFrame {
 //    public void doubleSize() {
 //        jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/plancia portabiglie.png").getImage().getScaledInstance(jLabel.getWidth() * 2, jLabel.getHeight() * 2, Image.SCALE_SMOOTH)));
 //    }
-
+    public void setMarket(Market market){
+        this.trayGui.setMarket(market);
+    }
 
 
 }

@@ -58,7 +58,7 @@ class MatchTest {
         assertNotNull(match.getLeaderCardsToString(player.getNickname()));
         assertNotNull(match.getWarehouse(player.getNickname()));
         assertNotNull(match.getBoardByPlayerNickname(player.getNickname()));
-        assertNotNull(match.getOpponents(player.getNickname()));
+        assertNotNull(match.getOpponentsToString(player.getNickname()));
         assertNull(match.getTransmutationPerk(player.getNickname()));
         assertNotNull(match.getWarehouseToString(player.getNickname()));
         assertNotNull(match.getHistoryToString(player.getNickname()));

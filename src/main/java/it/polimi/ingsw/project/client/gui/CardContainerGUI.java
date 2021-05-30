@@ -36,11 +36,16 @@ public class CardContainerGUI extends JInternalFrame {
         }
     }
 
-    private void refresh() {
+    public void refresh() {
         this.cardsToShow = cardContainer.getAvailableDevCards().stream().map(DevelopmentCard::toString).collect(Collectors.toList());
         for (int i = 0; i < cardsToShow.size(); i++){
             this.showedCards.get(i).setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png").getImage().getScaledInstance(100, 160, Image.SCALE_SMOOTH)));
 
         }
+    }
+
+    public void setCardContainer(CardContainer cardContainer) {
+        this.cardContainer = cardContainer;
+        this.refresh();
     }
 }

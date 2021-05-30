@@ -1,7 +1,10 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class LeaderCardPlaceGUI extends JInternalFrame {
     private LeaderCardGUI leaderCardGUI1, leaderCardGUI2;
@@ -16,4 +19,12 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
     }
 
 
+    public void setLeaderCards(List<LeaderCard> leaderCards) {
+        if(leaderCards.size() > 0){
+            leaderCardGUI1.setID(leaderCards.get(0).getId());
+            if(leaderCards.size() == 2){
+                leaderCardGUI2.setID(leaderCards.get(1).getId());
+            }
+        }
+    }
 }

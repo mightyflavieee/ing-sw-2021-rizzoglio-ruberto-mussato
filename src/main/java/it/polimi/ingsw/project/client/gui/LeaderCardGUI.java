@@ -20,11 +20,22 @@ public class LeaderCardGUI extends JButton {
     public LeaderCardGUI(String id, LeaderCardChoserGUI leaderCardChoserGUI) { //used at the beginning of the game when you chose 2 leadercards
         this.id = id;
         this.leaderCardChoserGUI = leaderCardChoserGUI;
-        this.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/leadercards/"+ this.id + ".png").getImage().getScaledInstance(230, 348, Image.SCALE_SMOOTH)));
         this.setVisible(true);
+        this.refresh();
     }
 
     public String getID() {
         return this.id;
     }
+
+    public void setID(String id) {
+        this.id = id;
+        this.refresh();
+    }
+
+    private void refresh() {
+        this.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/leadercards/"+ this.id + ".png").getImage().getScaledInstance(230, 348, Image.SCALE_SMOOTH)));
+
+    }
+
 }
