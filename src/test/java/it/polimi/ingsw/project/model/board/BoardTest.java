@@ -50,7 +50,6 @@ class BoardTest {
     void getLeaderCardsToString() {
         Board board = new Board();
         assertFalse(board.getLeaderCardsToString().isEmpty());
-        assertFalse(board.getLeaderCardsToString().isBlank());
     }
     @Test
     void getTrasmutation(){
