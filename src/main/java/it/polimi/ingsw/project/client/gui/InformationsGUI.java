@@ -3,6 +3,7 @@ package it.polimi.ingsw.project.client.gui;
 import it.polimi.ingsw.project.model.TurnPhase;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class InformationsGUI extends JInternalFrame {
     private TurnPhase turnPhase;
@@ -13,6 +14,7 @@ public class InformationsGUI extends JInternalFrame {
     public InformationsGUI(GUI gui, TurnPhase turnPhase) {
         this.gui = gui;
         this.setTitle("Informations");
+        this.setLayout(new FlowLayout());
         this.jTextArea = new JTextArea();
         jTextArea.setEditable(false);
         this.add(this.jTextArea);

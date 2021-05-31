@@ -7,6 +7,7 @@ import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.*;
+import it.polimi.ingsw.project.observer.Observer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +19,7 @@ import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ClientGUI extends Client {
+public class ClientGUI extends Client implements Observer<Move> {
 
     private GUI gui;
 
@@ -39,6 +40,7 @@ public class ClientGUI extends Client {
     public void setMatch(Match match) {
         if(this.getGui().isEmpty()){
             this.gui = new GUI(match, this.myNickname);
+            this.gui.addObserver(this);
         }else {
             gui.setMatch(match);
         }
@@ -308,4 +310,8 @@ public class ClientGUI extends Client {
         }
     }
 
+    @Override
+    public void update(Move message) {
+        this.send(message);
+    }
 }

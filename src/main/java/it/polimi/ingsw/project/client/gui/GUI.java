@@ -3,6 +3,7 @@ package it.polimi.ingsw.project.client.gui;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.playermove.Move;
+import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.utils.Pair;
 import it.polimi.ingsw.project.utils.Utils;
 
@@ -10,7 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class GUI extends JFrame{
+public class GUI extends Observable<Move> {
+    private JFrame jFrame;
     private BoardGUI boardGUI;
     private MatchGUI matchGUI;
     private MarketGUI marketGUI;
@@ -29,8 +31,9 @@ public class GUI extends JFrame{
 
 
     public GUI(Match match, String myNickname) {
-        this.setTitle("Master of Renaissance");
-        this.setLayout(new GridLayout(4,3));
+        this.jFrame = new JFrame();
+        this.jFrame.setTitle("Master of Renaissance");
+        this.jFrame.setLayout(new GridLayout(4,3));
        // jFrame.setLayout(new BorderLayout());
 
       //  boardGUI = new BoardGUI("Board");
@@ -67,18 +70,19 @@ public class GUI extends JFrame{
 //        jFrame.add(warehouseGUI);
 //        jFrame.add(chestGUI);
 //        jFrame.add(mapTrayGUI);
-        this.add(informationsGUI);
-        this.add(marketGUI);
-        this.add(cardContainerGUI);
-        this.add(leaderCardPlaceGui);
-        this.add(historyGUI);
+        this.jFrame.add(informationsGUI);
+        this.jFrame.add(marketGUI);
+        this.jFrame.add(cardContainerGUI);
+        this.jFrame.add(leaderCardPlaceGui);
+        this.jFrame.add(historyGUI);
         //jFrame.pack();
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.pack();
+        this.jFrame.setVisible(true);
+        this.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.jFrame.pack();
     }
 
     public void send(Move move){
+        super.notify(move);
         this.lockAll(); //devo attendere una risposta dal server
         //todo lo chiamo da un listener e mando la move al server
 
