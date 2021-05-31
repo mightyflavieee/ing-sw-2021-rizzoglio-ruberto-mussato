@@ -10,7 +10,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrayGui extends JPanel {
+public class TrayGUI extends JPanel {
     private Image backgroundImage;
     private Market market;
     private GridLayout gridLayout;
@@ -18,8 +18,8 @@ public class TrayGui extends JPanel {
     private List<JButton> horizontalArrows; //dall'alto verso il basso , è al contrario rispetto a quando faccio la move
     private JLabel[][] trayJlabel = new JLabel[4][3];
     private JLabel outsideMarbleJlabel;
-    public TrayGui(ResourceInHandGUI resourceInHandGUI, GUI gui)  {
-        this.market = new Market();
+    public TrayGUI(ResourceInHandGUI resourceInHandGUI, GUI gui, Market market)  {
+        this.market = market;
         gridLayout = new GridLayout(4,5);
         this.setLayout(gridLayout);
         this.createTray();

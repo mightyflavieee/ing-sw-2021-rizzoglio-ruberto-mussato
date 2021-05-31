@@ -8,9 +8,9 @@ import java.util.List;
 
 public class LeaderCardPlaceGUI extends JInternalFrame {
     private LeaderCardGUI leaderCardGUI1, leaderCardGUI2;
-    public LeaderCardPlaceGUI() {
-        leaderCardGUI1 = new LeaderCardGUI("id1");
-        leaderCardGUI2 = new LeaderCardGUI("id2");
+    public LeaderCardPlaceGUI(List<LeaderCard> leaderCards) {
+        leaderCardGUI1 = new LeaderCardGUI(leaderCards.get(0).getId());
+        leaderCardGUI2 = new LeaderCardGUI(leaderCards.get(1).getId());
         this.setTitle("My LeaderCards");
         this.setLayout(new GridLayout(1,2));
         this.add(leaderCardGUI1);

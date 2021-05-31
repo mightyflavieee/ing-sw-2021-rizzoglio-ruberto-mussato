@@ -8,4 +8,4 @@ target
 workspace.xml
 .workspace.xml
 *.workspace.xml
-
+\.idea

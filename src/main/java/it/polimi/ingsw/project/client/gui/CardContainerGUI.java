@@ -14,8 +14,8 @@ public class CardContainerGUI extends JInternalFrame {
     List<String> cardsToShow;
     List<JButton> showedCards;
 
-    public CardContainerGUI() {
-        this.cardContainer = new CardContainer();
+    public CardContainerGUI(CardContainer cardContainer) {
+        this.cardContainer = cardContainer;
         this.setTitle("CardContainer");
         this.setLayout(new GridLayout(3,4));
         this.constructorHelper();

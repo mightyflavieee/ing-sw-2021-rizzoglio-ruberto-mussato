@@ -20,8 +20,6 @@ import java.util.stream.Collectors;
 
 public class ClientGUI extends Client {
 
-    private ObjectOutputStream socketOut;
-    private ObjectInputStream socketIn;
     private GUI gui;
 
     private boolean createGame; // true create, false join
@@ -39,7 +37,15 @@ public class ClientGUI extends Client {
 
     @Override
     public void setMatch(Match match) {
-        gui.setMatch(match, this.myNickname);
+        if(this.getGui().isEmpty()){
+            this.gui = new GUI(match, this.myNickname);
+        }else {
+            gui.setMatch(match);
+        }
+    }
+
+    public Optional<GUI> getGui() {
+        return Optional.ofNullable(gui);
     }
 
     public void setCreateGame(boolean createGame) {
@@ -76,17 +82,29 @@ public class ClientGUI extends Client {
 
     @Override
     public void chooseLeaderCards(List<LeaderCard> possibleLeaderCards) {
-        new LeaderCardChoserGUI(possibleLeaderCards.stream().map(LeaderCard::getId).collect(Collectors.toList()), this);
+        new LeaderCardChoserGUI(possibleLeaderCards, this);
 
     }
 
     @Override
     public void reChooseLeaderCards(String errorMessage, List<LeaderCard> possibleLeaderCards) {
-
+        //todo
+        this.chooseLeaderCards(possibleLeaderCards);
     }
 
     @Override
     public void showWaitMessageForOtherPlayers() {
+    }
+
+    public void send(Request request){
+        try {
+            this.socketOut.writeObject(request);
+            this.socketOut.flush();
+            this.socketOut.reset();
+        } catch (IOException e) {
+            e.printStackTrace();
+            setActive(false);
+        }
     }
 
     public Thread asyncReadFromSocket() {

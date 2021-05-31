@@ -16,8 +16,8 @@ public abstract class Client {
     private boolean active = true;
     protected Match match;
     protected String myNickname;
-    private ObjectOutputStream socketOut;
-    private ObjectInputStream socketIn;
+    protected ObjectOutputStream socketOut;
+    protected ObjectInputStream socketIn;
 
     public Client(String ip, int port) {
         this.ip = ip;

@@ -10,14 +10,13 @@ public class InformationsGUI extends JInternalFrame {
     private JInternalFrame phaseFrame;
     private GUI gui;
 
-    public InformationsGUI(GUI gui) {
+    public InformationsGUI(GUI gui, TurnPhase turnPhase) {
         this.gui = gui;
         this.setTitle("Informations");
         this.jTextArea = new JTextArea();
         jTextArea.setEditable(false);
         this.add(this.jTextArea);
-        this.turnPhase = TurnPhase.WaitPhase;
-      //  this.turnPhase = TurnPhase.MainPhase;
+        this.turnPhase = turnPhase;
         this.refresh();
         this.setVisible(true);
         this.pack();

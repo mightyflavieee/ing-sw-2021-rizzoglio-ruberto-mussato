@@ -12,10 +12,15 @@ public class HistoryGUI extends JInternalFrame {
   //  private String history;
     private JTextArea jTextArea;
 
-    public HistoryGUI() {
+    public HistoryGUI(String history) {
         this.setTitle("History");
       //  this.history = "";
-        this.jTextArea = new JTextArea("No History");
+        if(history.equals("")) {
+            this.jTextArea = new JTextArea("No History");
+        }else
+        {
+            this.jTextArea = new JTextArea(history);
+        }
         this.jTextArea.setEditable(false);
         this.jTextArea.setVisible(true);
         JScrollPane jScrollPane = new JScrollPane(jTextArea);
