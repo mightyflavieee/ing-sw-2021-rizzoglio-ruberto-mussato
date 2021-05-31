@@ -6,6 +6,7 @@ import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
+import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
@@ -21,7 +22,6 @@ public class Match implements Serializable, Cloneable {
     private List<Player> playerList;
     private Market market;
     private CardContainer cardContainer;
-    private LeaderCardContainer leaderCardContainer;
     private ActionTokenContainer actionTokenContainer;
     private Player currentPlayer;
     private boolean isLastTurn;
@@ -40,7 +40,6 @@ public class Match implements Serializable, Cloneable {
         this.currentPlayer.updateTurnPhase();
         this.isLastTurn = false;
         this.isOver = false;
-        this.leaderCardContainer = new LeaderCardContainer();
     }
 
     public Match() { // da usare nella clone
@@ -53,10 +52,6 @@ public class Match implements Serializable, Cloneable {
             playerIndex = 0;
         }
         return playerList.get(playerIndex);
-    }
-
-    public LeaderCardContainer getLeaderCardContainer() {
-        return this.leaderCardContainer;
     }
 
     public List<Player> getPlayerList() {
@@ -314,5 +309,15 @@ public class Match implements Serializable, Cloneable {
             }
         }
         return "";
+    }
+
+    public void setLeaderCardsForPlayers(Map<String, List<LeaderCard>> chosenLeaderCardsMap) {
+        for (String nickname : chosenLeaderCardsMap.keySet()) {
+            for (Player player : this.playerList) {
+                if (player.getNickname().equals(nickname)) {
+                    player.setLeaderCards(chosenLeaderCardsMap.get(nickname));
+                }
+            }
+        }
     }
 }

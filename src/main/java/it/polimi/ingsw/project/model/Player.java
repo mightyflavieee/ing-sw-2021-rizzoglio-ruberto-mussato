@@ -34,7 +34,8 @@ public class Player implements Serializable, Cloneable {
     this.isConnected = true; // Da gestire stato della connessione del player (con funzione apposita)
     this.victoryPoints = 0;
   }
-  public void createFaithMap(Match match){
+
+  public void createFaithMap(Match match) {
     this.board.createFaithMapAndWarehouse(match, this);
   }
 
@@ -94,64 +95,30 @@ public class Player implements Serializable, Cloneable {
     this.board.performDiscardLeaderCardMove(leaderCardID);
   }
 
-  public boolean isFeasibleBuyDevCardMove(
-    DevelopmentCard devCard,
-    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-    Map<ResourceType, Integer> resourcesToEliminateChest,
-    DevCardPosition position
-  ) {
-    return this.board.isFeasibleBuyDevCardMove(
-        devCard,
-        resourcesToEliminateWarehouse,
-        resourcesToEliminateChest,
-        position
-      );
+  public boolean isFeasibleBuyDevCardMove(DevelopmentCard devCard,
+      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
+      DevCardPosition position) {
+    return this.board.isFeasibleBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest,
+        position);
   }
 
-  public void performBuyDevCardMove(
-    DevelopmentCard devCard,
-    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-    Map<ResourceType, Integer> resourcesToEliminateChest,
-    DevCardPosition position
-  ) {
-    this.board.performBuyDevCardMove(
-        devCard,
-        resourcesToEliminateWarehouse,
-        resourcesToEliminateChest,
-        position
-      );
+  public void performBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+      Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+    this.board.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
   }
 
-  public boolean isFeasibleProductionMove(
-    String devCardID,
-    String leaderCardId,
-    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-    Map<ResourceType, Integer> resourcesToEliminateChest,
-    ProductionType productionType
-  ) {
-    return this.board.isFeasibleProductionMove(
-        devCardID,
-        leaderCardId,
-        resourcesToEliminateWarehouse,
-        resourcesToEliminateChest,
-        productionType
-      );
+  public boolean isFeasibleProductionMove(String devCardID, String leaderCardId,
+      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
+      ProductionType productionType) {
+    return this.board.isFeasibleProductionMove(devCardID, leaderCardId, resourcesToEliminateWarehouse,
+        resourcesToEliminateChest, productionType);
   }
 
-  public void performProductionMove(
-    String devCardID,
-    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-    Map<ResourceType, Integer> resourcesToEliminateChest,
-    ProductionType productionType,
-    List<ResourceType> boardOrPerkManufacturedResource
-  ) {
-    this.board.performProductionMove(
-        devCardID,
-        resourcesToEliminateWarehouse,
-        resourcesToEliminateChest,
-        productionType,
-        boardOrPerkManufacturedResource
-      );
+  public void performProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+      Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType,
+      List<ResourceType> boardOrPerkManufacturedResource) {
+    this.board.performProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateChest,
+        productionType, boardOrPerkManufacturedResource);
   }
 
   public boolean isFeasibleActivateLeaderCardMove(String leaderCardID) {
@@ -162,19 +129,12 @@ public class Player implements Serializable, Cloneable {
     this.board.performActivateLeaderCardMove(leaderCardID);
   }
 
-  public boolean isFeasibleTakeMarketResourcesMove(
-          Warehouse warehouse
-  ) {
-    return this.board.isFeasibleTakeMarketResourcesMove(
-        warehouse
-    );
+  public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse) {
+    return this.board.isFeasibleTakeMarketResourcesMove(warehouse);
   }
 
-  public void performTakeMarketResourceMove(
-    Warehouse warehouse,
-    List<Resource> discardedResources,
-    Boolean hasRedMarble
-  ) {
+  public void performTakeMarketResourceMove(Warehouse warehouse, List<Resource> discardedResources,
+      Boolean hasRedMarble) {
     this.board.performTakeMarketResourceMove(warehouse, discardedResources, hasRedMarble);
   }
 
@@ -182,17 +142,17 @@ public class Player implements Serializable, Cloneable {
     return turnPhase;
   }
 
-  public int getMarkerPosition(){
+  public int getMarkerPosition() {
     return board.getMarkerPosition();
   }
 
-  public String getLeaderCardsToString(){
+  public String getLeaderCardsToString() {
     return this.board.getLeaderCardsToString();
   }
 
-    public Warehouse getWarehouse() {
-      return board.getWarehouse();
-    }
+  public Warehouse getWarehouse() {
+    return board.getWarehouse();
+  }
 
   public ResourceType getTransmutationPerk() {
     return board.getTransmutation();
@@ -201,15 +161,20 @@ public class Player implements Serializable, Cloneable {
   public void updateHistory(String stringMove) {
     this.history.add(stringMove);
   }
-  public String getHistoryToString(){
+
+  public String getHistoryToString() {
     StringBuilder string = new StringBuilder();
-    for(String move : history){
+    for (String move : history) {
       string.append("\n").append(move);
     }
     return string.toString();
   }
 
-  public List<LeaderCard> getLeaderCards(){
+  public void setLeaderCards(List<LeaderCard> selectedLeaderCards) {
+    this.board.setLeaderCards(selectedLeaderCards);
+  }
+
+  public List<LeaderCard> getLeaderCards() {
     return this.board.getLeaderCards();
   }
 }

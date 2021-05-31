@@ -2,13 +2,11 @@ package it.polimi.ingsw.project.messages;
 
 public class ErrorMessage {
 
-    private String errorMessage;
+    protected String errorMessage = "Generic Error";
 
     public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    public String getErrorMessage() {
-        return this.errorMessage;
+        if (errorMessage != null) {
+            this.errorMessage = errorMessage;
+        }
     }
 }

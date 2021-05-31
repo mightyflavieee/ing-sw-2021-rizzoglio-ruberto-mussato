@@ -46,7 +46,7 @@
       },
       "requiredDevCards": { "Gold": 1, "Amethyst": 1 },
       "status": "Inactive",
-      "victory-points": 2
+      "victoryPoints": 2
     },
     {
       "id": "id5",
@@ -58,7 +58,7 @@
       },
       "requiredResources": { "Coin": 5 },
       "status": "Inactive",
-      "victory-points": 3
+      "victoryPoints": 3
     },
     {
       "id": "id6",
@@ -70,7 +70,7 @@
       },
       "requiredResources": { "Stone": 5 },
       "status": "Inactive",
-      "victory-points": 3
+      "victoryPoints": 3
     },
     {
       "id": "id7",
@@ -82,7 +82,7 @@
       },
       "requiredResources": { "Servant": 5 },
       "status": "Inactive",
-      "victory-points": 3
+      "victoryPoints": 3
     },
     {
       "id": "id8",
@@ -94,7 +94,7 @@
       },
       "requiredResources": { "Shield": 5 },
       "status": "Inactive",
-      "victory-points": 3
+      "victoryPoints": 3
     },
     {
       "id": "id9",
@@ -106,7 +106,7 @@
       },
       "requiredDevCards": { "Gold": 2, "Sapphire": 1 },
       "status": "Inactive",
-      "victory-points": 5
+      "victoryPoints": 5
     },
     {
       "id": "id10",
@@ -118,7 +118,7 @@
       },
       "requiredDevCards": { "Emerald": 2, "Amethyst": 1 },
       "status": "Inactive",
-      "victory-points": 5
+      "victoryPoints": 5
     },
     {
       "id": "id11",
@@ -130,7 +130,7 @@
       },
       "requiredDevCards": { "Sapphire": 2, "Gold": 1 },
       "status": "Inactive",
-      "victory-points": 5
+      "victoryPoints": 5
     },
     {
       "id": "id12",
@@ -142,7 +142,7 @@
       },
       "requiredDevCards": { "Amethyst": 2, "Emerald": 1 },
       "status": "Inactive",
-      "victory-points": 5
+      "victoryPoints": 5
     },
     {
       "id": "id13",
@@ -154,7 +154,7 @@
       },
       "requiredDevCardLevel": { "Gold": "Two" },
       "status": "Inactive",
-      "victory-points": 4
+      "victoryPoints": 4
     },
     {
       "id": "id14",
@@ -166,7 +166,7 @@
       },
       "requiredDevCardLevel": { "Sapphire": "Two" },
       "status": "Inactive",
-      "victory-points": 4
+      "victoryPoints": 4
     },
     {
       "id": "id15",
@@ -178,7 +178,7 @@
       },
       "requiredDevCardLevel": { "Amethyst": "Two" },
       "status": "Inactive",
-      "victory-points": 4
+      "victoryPoints": 4
     },
     {
       "id": "id16",
@@ -190,7 +190,7 @@
       },
       "requiredDevCardLevel": { "Emerald": "Two" },
       "status": "Inactive",
-      "victory-points": 4
+      "victoryPoints": 4
     }
   ]
 }

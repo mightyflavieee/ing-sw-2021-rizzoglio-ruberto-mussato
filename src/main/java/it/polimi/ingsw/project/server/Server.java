@@ -8,7 +8,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import it.polimi.ingsw.project.controller.Controller;
+import it.polimi.ingsw.project.messages.ErrorChosenLeaderCards;
 import it.polimi.ingsw.project.messages.LeaderCardsToChooseMessage;
+import it.polimi.ingsw.project.messages.MoveMessage;
+import it.polimi.ingsw.project.messages.WaitForLeaderCardsMessage;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
@@ -45,7 +48,62 @@ public class Server {
         }
     }
 
-    public void startGame(String matchId) {
+    public void resendCardsToPlayer(String matchId, String nickname) {
+        Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
+        List<LeaderCard> possibleCardsToChoose = currentLobby.getLeaderCardContainer().getMapOfExtractedCards()
+                .get(nickname);
+        for (PlayerConnection playerConnection : currentLobby.getListOfPlayerConnections()) {
+            if (playerConnection.getName().equals(nickname)) {
+                playerConnection.getConnection().asyncSend(new ErrorChosenLeaderCards(
+                        "There was a problem handling your choose, retry.", possibleCardsToChoose));
+            }
+        }
+    }
+
+    public void sendChooseLeaderCards(String matchId) {
+        Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
+        currentLobby.getListOfPlayerConnections().forEach((PlayerConnection playerConnection) -> {
+            List<LeaderCard> listToSend = currentLobby.getLeaderCardContainer()
+                    .getFourCardsForPlayer(playerConnection.getName());
+            playerConnection.getConnection().asyncSend(new LeaderCardsToChooseMessage(listToSend));
+        });
+    }
+
+    public synchronized boolean allPlayersHasChosenCards(String matchId) {
+        Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
+        if (currentLobby.getchosenLeaderCardsByPlayer().size() == currentLobby.getMaxNumberOfPlayers()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void sendWaitMessageToPlayer(String matchId, String nickname) {
+        Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
+        for (PlayerConnection playerConnection : currentLobby.getListOfPlayerConnections()) {
+            if (playerConnection.getName().equals(nickname)) {
+                playerConnection.getConnection().asyncSend(new WaitForLeaderCardsMessage());
+            }
+        }
+    }
+
+    public synchronized void addChosenCardsToPlayer(String matchId, String nickname,
+            List<LeaderCard> chosenLeaderCards) {
+        Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
+        if (currentLobby.leaderCardsChosenWereRight(nickname, chosenLeaderCards)) {
+            currentLobby.addChosenLeaderCardsToPlayer(nickname, chosenLeaderCards);
+            if (allPlayersHasChosenCards(matchId)) {
+                initModel(matchId);
+            } else {
+                sendWaitMessageToPlayer(matchId, nickname);
+            }
+        } else {
+            resendCardsToPlayer(matchId, nickname);
+        }
+
+    }
+
+    public void initModel(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
         List<ClientConnection> listOfClientConnections = new ArrayList<ClientConnection>();
         List<Player> listOfPlayer = new ArrayList<Player>();
@@ -59,17 +117,17 @@ public class Server {
                     Utils.extractOpponentsName(listOfPlayer.get(i), listOfPlayer), listOfClientConnections.get(i)));
         }
         Collections.shuffle(listOfPlayer);
+        for (Player player : listOfPlayer) {
+            player.setLeaderCards(currentLobby.getchosenLeaderCardsByPlayer().get(player.getNickname()));
+        }
         Model model = new Model(listOfPlayer);
         Controller controller = new Controller(model);
         for (View view : listOfViews) {
             model.addObserver(view);
             view.addObserver(controller);
         }
-
         currentLobby.getListOfPlayerConnections().forEach((PlayerConnection playerConnection) -> {
-            List<LeaderCard> listToSend = model.getMatch().getLeaderCardContainer()
-                    .getFourCardsForPlayer(playerConnection.getName());
-            playerConnection.getConnection().asyncSend(new LeaderCardsToChooseMessage(listToSend));
+            playerConnection.getConnection().asyncSend(new MoveMessage(model.getMatchCopy()));
         });
     }
 

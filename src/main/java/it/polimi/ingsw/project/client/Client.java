@@ -92,9 +92,14 @@ public abstract class Client {
         return this.gameId;
     }
 
-    public abstract void reBuildGame(String errorMessage); //todo la stringa è sempre uguale?
+    public abstract void reBuildGame(String errorMessage); // todo la stringa è sempre uguale?
 
     public abstract void chooseLeaderCards(List<LeaderCard> possibleLeaderCards);
 
-    public abstract void reChooseLeaderCards(String errorMessage); //todo la stringa è sempre uguale?
+    public abstract void reChooseLeaderCards(String errorMessage, List<LeaderCard> possibleLeaderCards); // todo la
+                                                                                                         // stringa è
+                                                                                                         // sempre
+                                                                                                         // uguale?
+
+    public abstract void showWaitMessageForOtherPlayers();
 }

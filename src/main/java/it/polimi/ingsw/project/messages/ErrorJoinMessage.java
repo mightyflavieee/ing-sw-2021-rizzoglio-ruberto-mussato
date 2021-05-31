@@ -12,7 +12,7 @@ public class ErrorJoinMessage extends ErrorMessage implements Serializable, Resp
 
     @Override
     public void action(Client client) {
-        client.reBuildGame(getErrorMessage());
+        client.reBuildGame(super.errorMessage);
     }
 
 }

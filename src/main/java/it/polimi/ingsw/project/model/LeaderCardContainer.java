@@ -26,6 +26,10 @@ public class LeaderCardContainer implements Serializable {
         return leaderCards;
     }
 
+    public Map<String, List<LeaderCard>> getMapOfExtractedCards() {
+        return mapOfExtractedCards;
+    }
+
     public List<LeaderCard> getFourCardsForPlayer(String nicknameForCards) {
         List<LeaderCard> cardsToAssign = new ArrayList<>();
         for (int i = 0; i < 4; i++) {

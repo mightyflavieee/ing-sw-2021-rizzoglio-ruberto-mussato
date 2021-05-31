@@ -21,7 +21,7 @@ public class JoinRequestMove extends GameRequestMove {
                     connection.getServer().addToLobby(this.gameId, connection, this.nickName);
                     connection.send(new ConfirmJoinMessage(this.gameId));
                     if (connection.getServer().tryToStartGame(this.gameId)) {
-                        connection.getServer().startGame(this.gameId);
+                        connection.getServer().sendChooseLeaderCards(this.gameId);
                     }
                 } catch (Exception e) {
                     connection.send(new ErrorJoinMessage(e.getMessage()));

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client;
 
+import it.polimi.ingsw.project.messages.LeaderCardsToChooseMessage;
 import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
@@ -12,12 +13,14 @@ import it.polimi.ingsw.project.model.playermove.*;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.utils.Pair;
+import it.polimi.ingsw.project.utils.Utils;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ClientCLI extends Client {
 
@@ -25,7 +28,7 @@ public class ClientCLI extends Client {
     private boolean lock = true;
 
     public ClientCLI(String ip, int port) {
-        super(ip,port);
+        super(ip, port);
         this.lock = true;
     }
 
@@ -87,18 +90,54 @@ public class ClientCLI extends Client {
     }
 
     @Override
-    public void chooseLeaderCards(List<LeaderCard> possibLeaderCards) {
-        System.out.println("Choose two ids of the leader card you like the most:");
-        for (LeaderCard leader : possibLeaderCards) {
-            System.out.println(leader.toString());
-        }
-        
-
+    public void showWaitMessageForOtherPlayers() {
+        System.out.println("Wait for the other players.");
     }
 
     @Override
-    public void reChooseLeaderCards(String errorMessage) {
+    public void chooseLeaderCards(List<LeaderCard> possibleLeaderCards) {
+        final List<LeaderCard> allLeaderCard = possibleLeaderCards;
+        System.out.println("Possible Leader Cards:");
+        for (LeaderCard leader : possibleLeaderCards) {
+            System.out.println(leader.toString());
+        }
+        System.out.println("Choose two ids of the leader cards you like the most:");
+        for (LeaderCard leader : possibleLeaderCards) {
+            System.out.println(leader.getId());
+        }
+        List<String> chosenIds = new ArrayList<String>();
+        while (true) {
+            String chosenId = this.stdin.nextLine();
+            if (Utils.isIdPresent(possibleLeaderCards, chosenId)) {
+                chosenIds.add(chosenId);
+                if (chosenIds.size() == 2) {
+                    break;
+                }
+                possibleLeaderCards = possibleLeaderCards.stream()
+                        .filter((LeaderCard leaderCard) -> !leaderCard.getId().equals(chosenId))
+                        .collect(Collectors.toList());
+                System.out.println("Great! Choose another one from:");
+            } else {
+                System.out.println("The id you are trying to add doesn't exists. Try a different one!");
+            }
+            for (LeaderCard leader : possibleLeaderCards) {
+                System.out.println(leader.getId());
+            }
+        }
+        try {
+            getSocketOut().writeObject(new ChooseLeaderCardMove(getNickname(), super.gameId,
+                    Utils.extractSelectedLeaderCards(allLeaderCard, chosenIds)));
+            getSocketOut().flush();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            setActive(false);
+        }
+    }
 
+    @Override
+    public void reChooseLeaderCards(String errorMessage, List<LeaderCard> possibleLeaderCards) {
+        System.out.println(errorMessage);
+        chooseLeaderCards(possibleLeaderCards);
     }
 
     @Override
@@ -106,7 +145,6 @@ public class ClientCLI extends Client {
         this.showErrorMessage(errorMessage);
         this.buildGame();
     }
-
 
     private void buildGame() {
         Thread t = new Thread(new Runnable() {
@@ -1041,8 +1079,8 @@ public class ClientCLI extends Client {
 
     private void viewer(String myNickname) {
         // shows informations about other players
-        System.out
-                .println("Your opponents are : " + getMatch().get().getOpponentsToString(myNickname) + "\n tell the nickname");
+        System.out.println(
+                "Your opponents are : " + getMatch().get().getOpponentsToString(myNickname) + "\n tell the nickname");
         String opponent = stdin.nextLine();
         System.out.println(
                 "0 - Go Back\n" + "1 - show " + opponent + " Points\n" + "2 - show " + opponent + " Marker Position\n"

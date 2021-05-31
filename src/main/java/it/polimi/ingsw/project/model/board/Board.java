@@ -43,6 +43,7 @@ public class Board implements Serializable, Cloneable {
     this.faithMap = new FaithMap(match, player);
     this.warehouse = new Warehouse(match);
   }
+
   @Override
   public final Board clone() {
     // TODO clone interne
@@ -80,8 +81,6 @@ public class Board implements Serializable, Cloneable {
   public ResourceType getTransmutation() {
     return transmutation;
   }
-
-
 
   // it extracts the last DevelopmentCard in from the mapTray at that position
   private DevelopmentCard getLastFromPosition(DevCardPosition position) {
@@ -646,15 +645,20 @@ public class Board implements Serializable, Cloneable {
     this.warehouse = warehouse;
     this.warehouse.discardResourcesInHand(discardedResources);
   }
-  public int getMarkerPosition(){
+
+  public int getMarkerPosition() {
     return this.faithMap.getMarkerPosition();
   }
-  public String getLeaderCardsToString(){
-    String string;
-//    for(int i = 0; i < this.leaderCards.size(); i++){
-//      string = string + this.leaderCards.get(i).toString();
-//    }
-    string = this.leaderCards.stream().map(LeaderCard::toString).toString();
+
+  public String getLeaderCardsToString() {
+    String string = "\n";
+    for (int i = 0; i < this.leaderCards.size(); i++) {
+      string = string + this.leaderCards.get(i).toString();
+    }
     return string;
+  }
+
+  public void setLeaderCards(List<LeaderCard> selectedLeaderCards) {
+    this.leaderCards = selectedLeaderCards;
   }
 }

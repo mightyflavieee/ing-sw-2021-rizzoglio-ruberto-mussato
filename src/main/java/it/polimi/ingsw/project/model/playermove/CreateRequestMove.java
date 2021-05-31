@@ -20,7 +20,7 @@ public class CreateRequestMove extends GameRequestMove {
             connection.getServer().addToLobby(gameId, connection, this.nickName);
             connection.send(new ConfirmJoinMessage(gameId));
             if (connection.getServer().tryToStartGame(gameId)) {
-                connection.getServer().startGame(gameId);
+                connection.getServer().sendChooseLeaderCards(gameId);
             }
         } catch (Exception e) {
             connection.send(new ErrorJoinMessage(e.getMessage()));
