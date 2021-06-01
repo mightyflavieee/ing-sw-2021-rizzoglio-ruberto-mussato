@@ -10,6 +10,7 @@ import it.polimi.ingsw.project.utils.Utils;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GUI extends Observable<Move> {
     private JFrame jFrame;
@@ -28,6 +29,7 @@ public class GUI extends Observable<Move> {
     private List<Player> opponentsPlayer;
     private InformationsGUI informationsGUI;
     private HistoryGUI historyGUI;
+    private PlayersBarGUI playersBarGUI;
 
 
     public GUI(Match match, String myNickname) {
@@ -40,11 +42,12 @@ public class GUI extends Observable<Move> {
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,myNickname);
         this.mePlayer = pair._1;
         this.opponentsPlayer = pair._2;
-        marketGUI = new MarketGUI(this,match.getMarket());
-        historyGUI = new HistoryGUI(this.mePlayer.getHistoryToString());
-        informationsGUI = new InformationsGUI(this,this.mePlayer.getTurnPhase());
-        cardContainerGUI = new CardContainerGUI(match.getCardContainer());
-        leaderCardPlaceGui = new LeaderCardPlaceGUI(this.mePlayer.getLeaderCards(),this);
+        this.marketGUI = new MarketGUI(this,match.getMarket());
+        this.historyGUI = new HistoryGUI(this.mePlayer.getHistoryToString());
+        this.informationsGUI = new InformationsGUI(this,this.mePlayer.getTurnPhase());
+        this.cardContainerGUI = new CardContainerGUI(match.getCardContainer());
+        this.leaderCardPlaceGui = new LeaderCardPlaceGUI(this.mePlayer.getLeaderCards(),this);
+        this.playersBarGUI = new PlayersBarGUI(this.opponentsPlayer.stream().map(Player::getNickname).collect(Collectors.toList()), myNickname);
         //todo inizializzatori di altre cose
         //faithMapGUI = new FaithMapGUI();
         //warehouseGUI = new WarehouseGUI();
@@ -75,6 +78,7 @@ public class GUI extends Observable<Move> {
         this.jFrame.add(cardContainerGUI);
         this.jFrame.add(leaderCardPlaceGui);
         this.jFrame.add(historyGUI);
+        this.jFrame.add(playersBarGUI);
         //jFrame.pack();
         this.jFrame.setVisible(true);
         this.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

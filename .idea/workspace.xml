@@ -7,13 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Updated LeaderCardPlaceGUI.java">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/LeaderCardActivateButtonListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/LeaderCardDiscardButtonListener.java" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Implemented Leader Card Action Logic using the GUI">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/PlayersBarGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardPlaceGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardPlaceGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderMovePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderMovePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/InsertMatchIdListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/InsertMatchIdListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/ReInsertMatchIdListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/ReInsertMatchIdListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/JoinRequestMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/JoinRequestMove.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -108,7 +109,7 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ServerApp">
+  <component name="RunManager" selected="Application.ClientAppGUI">
     <configuration name="BoardGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.BoardGUI" />
       <module name="GC23" />
@@ -226,8 +227,8 @@
       <list>
         <item itemvalue="Application.ClientAppGUI" />
         <item itemvalue="Application.ServerApp" />
-        <item itemvalue="Application.GUI" />
         <item itemvalue="Application.ClientApp" />
+        <item itemvalue="Application.GUI" />
         <item itemvalue="Application.BoardGUI" />
       </list>
     </recent_temporary>
@@ -361,14 +362,7 @@
       <workItem from="1622482235055" duration="363000" />
       <workItem from="1622494203824" duration="3104000" />
       <workItem from="1622497466114" duration="1039000" />
-      <workItem from="1622536394698" duration="1438000" />
-    </task>
-    <task id="LOCAL-00094" summary="added ClientCLI.swapShelves">
-      <created>1621579548408</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
-      <option name="project" value="LOCAL" />
-      <updated>1621579548408</updated>
+      <workItem from="1622536394698" duration="4486000" />
     </task>
     <task id="LOCAL-00095" summary="updated UML">
       <created>1621598936550</created>
@@ -706,7 +700,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622534294180</updated>
     </task>
-    <option name="localTasksCounter" value="143" />
+    <task id="LOCAL-00143" summary="Implemented Leader Card Action Logic using the GUI">
+      <created>1622538162743</created>
+      <option name="number" value="00143" />
+      <option name="presentableId" value="LOCAL-00143" />
+      <option name="project" value="LOCAL" />
+      <updated>1622538162743</updated>
+    </task>
+    <option name="localTasksCounter" value="144" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -736,7 +737,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated MarketGUI.java" />
     <MESSAGE value="Added ResourceInHandGUI.java" />
     <MESSAGE value="updated ResourceInHandGUI.java" />
     <MESSAGE value="added FaithMapGUI" />
@@ -761,7 +761,8 @@
     <MESSAGE value="Updated InformationsGUI interaction with the market" />
     <MESSAGE value="Added updated LeaderCardChoserGUI and implemented the beginning of the match using GUI interface" />
     <MESSAGE value="Updated LeaderCardPlaceGUI.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated LeaderCardPlaceGUI.java" />
+    <MESSAGE value="Implemented Leader Card Action Logic using the GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented Leader Card Action Logic using the GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

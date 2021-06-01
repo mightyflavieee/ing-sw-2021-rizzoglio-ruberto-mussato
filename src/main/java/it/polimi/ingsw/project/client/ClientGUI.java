@@ -17,12 +17,11 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ClientGUI extends Client implements Observer<Move> {
 
     private GUI gui;
-
+    private JFrame tempJFrame;
     private boolean createGame; // true create, false join
     private int numPlayers;
 
@@ -39,6 +38,7 @@ public class ClientGUI extends Client implements Observer<Move> {
     @Override
     public void setMatch(Match match) {
         if(this.getGui().isEmpty()){
+            this.tempJFrame.dispose();
             this.gui = new GUI(match, this.myNickname);
             this.gui.addObserver(this);
         }else {
@@ -62,10 +62,22 @@ public class ClientGUI extends Client implements Observer<Move> {
         return Optional.ofNullable(match);
     }
 
+    @Override
     public void setGameId(String gameId) {
         this.gameId = gameId;
-    }
+        this.tempJFrame = new JFrame("Waiting room");
+        JTextArea jTextArea = new JTextArea("Wait for the other players\nYour game ID is: " + gameId);
+        jTextArea.setEditable(false);
+        jTextArea.setVisible(true);
+        this.tempJFrame.add(jTextArea);
+        this.tempJFrame.setVisible(true);
+        this.tempJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.tempJFrame.pack();
 
+    }
+    public void setLocalGameID(String gameId){
+        this.gameId = gameId;
+    }
     @Override
     public void reBuildGame(String errorMessage) {
         JFrame jFrame;
@@ -85,6 +97,7 @@ public class ClientGUI extends Client implements Observer<Move> {
     @Override
     public void chooseLeaderCards(List<LeaderCard> possibleLeaderCards) {
         new LeaderCardChoserGUI(possibleLeaderCards, this);
+        this.tempJFrame.dispose();
 
     }
 
@@ -96,6 +109,14 @@ public class ClientGUI extends Client implements Observer<Move> {
 
     @Override
     public void showWaitMessageForOtherPlayers() {
+        this.tempJFrame = new JFrame();
+        JTextArea jTextArea = new JTextArea("Wait for the other players");
+        jTextArea.setEditable(false);
+        jTextArea.setVisible(true);
+        this.tempJFrame.add(jTextArea);
+        this.tempJFrame.setVisible(true);
+        this.tempJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.tempJFrame.pack();
     }
 
     public void send(Request request){
@@ -222,26 +243,15 @@ public class ClientGUI extends Client implements Observer<Move> {
 
     private void joinGame() { // returns true if the joining request was created successfully
 
-        try {
-            socketOut.writeObject(new JoinRequestMove(this.myNickname, this.gameId));
-            socketOut.flush();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            setActive(false);
-        }
+            this.send(new JoinRequestMove(this.myNickname, this.gameId));
+
 
     }
 
     private void createGame() { // returns true if the creation request was created successfully
 
-        try {
-            socketOut.writeObject(new CreateRequestMove(this.numPlayers, this.myNickname));
-            socketOut.flush();
-            socketOut.reset();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            setActive(false);
-        }
+            this.send(new CreateRequestMove(this.numPlayers, this.myNickname));
+
     }
 
     // public Thread asyncCli() {// sends to server and shows the match

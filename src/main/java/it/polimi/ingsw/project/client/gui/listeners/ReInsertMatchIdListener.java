@@ -20,7 +20,7 @@ public class ReInsertMatchIdListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.idField.setEnabled(false);
-        this.clientGUI.setGameId(this.idField.getText());
+        this.clientGUI.setLocalGameID(this.idField.getText());
         menuFrame.dispose();
         this.clientGUI.createOrJoinGame();
     }

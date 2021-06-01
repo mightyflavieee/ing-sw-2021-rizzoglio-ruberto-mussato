@@ -37,6 +37,6 @@ public class JoinRequestMove extends GameRequestMove {
     }
     @Override
     public String toString(){
-        return "Join Request Move, Nickname: " + this.nickName;
+        return "Join Request Move, Nickname: " + this.nickName + ", Game ID: " + this.gameId;
     }
 }
