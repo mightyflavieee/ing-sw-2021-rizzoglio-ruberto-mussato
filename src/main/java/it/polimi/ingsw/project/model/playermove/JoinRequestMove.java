@@ -30,13 +30,22 @@ public class JoinRequestMove extends GameRequestMove {
                 connection.send(new ErrorJoinMessage(
                         "We are sorry but the game you are trying to join is full! Try a different one."));
             }
+        } else if (connection.getServer().isGameStarted(this.gameId)) {
+            if (connection.getServer().isPlayerPresentAndDisconnected(this.gameId, this.nickName)) {
+                connection.getServer().rejoinGame(this.gameId, connection, this.nickName);
+                connection.getServer().sendWaitMessageToPlayer(this.gameId, this.nickName);
+            } else {
+                connection.send(new ErrorJoinMessage(
+                        "We are sorry but this game is already started and you are not a player of this game or there is already a player with this name but it is connected! Try another nickname."));
+            }
         } else {
             connection.send(new ErrorJoinMessage(
                     "We are sorry but we couldn't find the game you are trying to join. Check the id!"));
         }
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return "Join Request Move, Nickname: " + this.nickName + ", Game ID: " + this.gameId;
     }
 }

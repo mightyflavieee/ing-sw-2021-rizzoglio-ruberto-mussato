@@ -2,9 +2,9 @@ package it.polimi.ingsw.project.server;
 
 public class PlayerConnection {
   private String name;
-  private ClientConnection connection;
+  private SocketClientConnection connection;
 
-  public PlayerConnection(String name, ClientConnection connection) {
+  public PlayerConnection(String name, SocketClientConnection connection) {
     this.name = name;
     this.connection = connection;
   }
@@ -13,7 +13,7 @@ public class PlayerConnection {
     return name;
   }
 
-  public ClientConnection getConnection() {
+  public SocketClientConnection getConnection() {
     return connection;
   }
 }

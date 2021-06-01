@@ -25,7 +25,6 @@ public class Server {
     private ExecutorService executor = Executors.newFixedThreadPool(128);
     private Map<String, Lobby> mapOfAvailableLobbies = new HashMap<String, Lobby>();
     private Map<String, Lobby> mapOfUnavailableLobbies = new HashMap<String, Lobby>();
-    private Map<ClientConnection, ClientConnection> playingConnection = new HashMap<ClientConnection, ClientConnection>();
 
     public synchronized void addToLobby(String matchId, SocketClientConnection connection, String name)
             throws Exception {
@@ -48,24 +47,27 @@ public class Server {
         }
     }
 
+    public void rejoinGame(String matchId, SocketClientConnection connection, String nickName) {
+        Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
+        currentLobby.insertPlayer(nickName, connection);
+
+    }
+
     public void resendCardsToPlayer(String matchId, String nickname) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
         List<LeaderCard> possibleCardsToChoose = currentLobby.getLeaderCardContainer().getMapOfExtractedCards()
                 .get(nickname);
-        for (PlayerConnection playerConnection : currentLobby.getListOfPlayerConnections()) {
-            if (playerConnection.getName().equals(nickname)) {
-                playerConnection.getConnection().asyncSend(new ErrorChosenLeaderCards(
-                        "There was a problem handling your choose, retry.", possibleCardsToChoose));
-            }
+        if (currentLobby.getMapOfSocketClientConnections().containsKey(nickname)) {
+            currentLobby.getMapOfSocketClientConnections().get(nickname).asyncSend(new ErrorChosenLeaderCards(
+                    "There was a problem handling your choose, retry.", possibleCardsToChoose));
         }
     }
 
     public void sendChooseLeaderCards(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
-        currentLobby.getListOfPlayerConnections().forEach((PlayerConnection playerConnection) -> {
-            List<LeaderCard> listToSend = currentLobby.getLeaderCardContainer()
-                    .getFourCardsForPlayer(playerConnection.getName());
-            playerConnection.getConnection().asyncSend(new LeaderCardsToChooseMessage(listToSend));
+        currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
+            List<LeaderCard> listToSend = currentLobby.getLeaderCardContainer().getFourCardsForPlayer(nickname);
+            connection.asyncSend(new LeaderCardsToChooseMessage(listToSend));
         });
     }
 
@@ -80,11 +82,7 @@ public class Server {
 
     public void sendWaitMessageToPlayer(String matchId, String nickname) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
-        for (PlayerConnection playerConnection : currentLobby.getListOfPlayerConnections()) {
-            if (playerConnection.getName().equals(nickname)) {
-                playerConnection.getConnection().asyncSend(new WaitForLeaderCardsMessage());
-            }
-        }
+        currentLobby.getMapOfSocketClientConnections().get(nickname).asyncSend(new WaitForLeaderCardsMessage());
     }
 
     public synchronized void addChosenCardsToPlayer(String matchId, String nickname,
@@ -107,12 +105,12 @@ public class Server {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
         List<ClientConnection> listOfClientConnections = new ArrayList<ClientConnection>();
         List<Player> listOfPlayer = new ArrayList<Player>();
-        currentLobby.getListOfPlayerConnections().forEach((playerConnection) -> {
-            listOfPlayer.add(new Player(playerConnection.getName()));
-            listOfClientConnections.add(playerConnection.getConnection());
+        currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
+            listOfPlayer.add(new Player(nickname));
+            listOfClientConnections.add(connection);
         });
         List<View> listOfViews = new ArrayList<View>();
-        for (int i = 0; i < currentLobby.getListOfPlayerConnections().size(); i++) {
+        for (int i = 0; i < currentLobby.getMapOfSocketClientConnections().size(); i++) {
             listOfViews.add(new RemoteView(listOfPlayer.get(i),
                     Utils.extractOpponentsName(listOfPlayer.get(i), listOfPlayer), listOfClientConnections.get(i)));
         }
@@ -126,18 +124,28 @@ public class Server {
             model.addObserver(view);
             view.addObserver(controller);
         }
-        currentLobby.getListOfPlayerConnections().forEach((PlayerConnection playerConnection) -> {
-            playerConnection.getConnection().asyncSend(new MoveMessage(model.getMatchCopy()));
+        currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
+            connection.asyncSend(new MoveMessage(model.getMatchCopy()));
         });
     }
 
     public synchronized boolean isGamePresent(String id) {
         if (this.mapOfAvailableLobbies.keySet().contains(id)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
+    }
 
+    public boolean isGameStarted(String id) {
+        if (this.mapOfUnavailableLobbies.keySet().contains(id)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isPlayerPresentAndDisconnected(String gameId, String nickName) {
+        Lobby currentLobby = this.mapOfUnavailableLobbies.get(gameId);
+        return currentLobby.isPlayerPresentAndDisconnected(nickName);
     }
 
     public Server() throws IOException {
@@ -149,20 +157,12 @@ public class Server {
             try {
                 Socket newSocket = serverSocket.accept();
                 SocketClientConnection socketConnection = new SocketClientConnection(newSocket, this);
-                executor.submit(socketConnection);
+                Thread threadSocket = new Thread(socketConnection);
+                threadSocket.start();;
             } catch (IOException e) {
                 System.out.println("Connection Error!");
             }
         }
-    }
-
-    public synchronized void deregisterConnection(SocketClientConnection socketClientConnection) {
-        ClientConnection opponent = playingConnection.get(socketClientConnection);
-        if (opponent != null) {
-            opponent.closeConnection();
-        }
-        playingConnection.remove(socketClientConnection);
-        playingConnection.remove(opponent);
     }
 
     public String createGame(Integer playersNumber) {
@@ -170,8 +170,7 @@ public class Server {
             UUID uuid = UUID.randomUUID();
             String gameId = uuid.toString().substring(0, 5);
             if (!this.mapOfAvailableLobbies.containsKey(gameId)) {
-                List<PlayerConnection> listPlayerConnections = new ArrayList<PlayerConnection>();
-                this.mapOfAvailableLobbies.put(gameId, new Lobby(gameId, playersNumber, listPlayerConnections));
+                this.mapOfAvailableLobbies.put(gameId, new Lobby(gameId, playersNumber));
                 return gameId;
             }
         }
@@ -185,4 +184,5 @@ public class Server {
             return true;
         }
     }
+
 }

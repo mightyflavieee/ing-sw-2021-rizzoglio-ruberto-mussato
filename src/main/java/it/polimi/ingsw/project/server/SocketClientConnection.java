@@ -26,6 +26,10 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
         return active;
     }
 
+    public Socket getSocket() {
+        return socket;
+    }
+
     public Server getServer() {
         return server;
     }
@@ -55,7 +59,6 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
     private void close() {
         closeConnection();
         System.out.println("Deregistering client...");
-        server.deregisterConnection(this);
         System.out.println("Done!");
     }
 

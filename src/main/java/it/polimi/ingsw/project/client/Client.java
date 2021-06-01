@@ -24,7 +24,6 @@ public abstract class Client {
         this.port = port;
         this.match = null;
         this.myNickname = "";
-
         this.gameId = "";
     }
 

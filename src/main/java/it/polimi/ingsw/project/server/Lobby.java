@@ -10,20 +10,28 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 public class Lobby {
     private String id;
     private Integer maxNumberOfPlayers;
-    private List<PlayerConnection> listOfPlayerConnections;
+    private Map<String, SocketClientConnection> mapOfSocketClientConnections;
     private LeaderCardContainer leaderCardContainer;
     private Map<String, List<LeaderCard>> chosenLeaderCardsByPlayer;
 
-    public Lobby(String id, Integer maxNumberOfPlayers, List<PlayerConnection> listOfPlayerConnections) {
+    public Lobby(String id, Integer maxNumberOfPlayers) {
         this.id = id;
         this.maxNumberOfPlayers = maxNumberOfPlayers;
-        this.listOfPlayerConnections = listOfPlayerConnections;
+        this.mapOfSocketClientConnections = new HashMap<>();
         this.leaderCardContainer = new LeaderCardContainer();
         this.chosenLeaderCardsByPlayer = new HashMap<String, List<LeaderCard>>();
     }
 
     public String getId() {
         return this.id;
+    }
+
+    public boolean isPlayerPresentAndDisconnected(String nickName) {
+        if (this.mapOfSocketClientConnections.containsKey(nickName)
+                && this.mapOfSocketClientConnections.get(nickName).getSocket().isClosed()) {
+            return true;
+        }
+        return false;
     }
 
     public boolean leaderCardsChosenWereRight(String nickname, List<LeaderCard> chosenLeaderCards) {
@@ -58,20 +66,20 @@ public class Lobby {
         return this.maxNumberOfPlayers;
     }
 
-    public List<PlayerConnection> getListOfPlayerConnections() {
-        return listOfPlayerConnections;
+    public Map<String, SocketClientConnection> getMapOfSocketClientConnections() {
+        return this.mapOfSocketClientConnections;
     }
 
     public Integer lenght() {
-        return listOfPlayerConnections.size();
+        return this.mapOfSocketClientConnections.size();
     }
 
     public LeaderCardContainer getLeaderCardContainer() {
         return leaderCardContainer;
     }
 
-    public void insertPlayer(String name, ClientConnection connection) {
-        PlayerConnection newPlayerConnection = new PlayerConnection(name, connection);
-        this.listOfPlayerConnections.add(newPlayerConnection);
+    public void insertPlayer(String name, SocketClientConnection connection) {
+        this.mapOfSocketClientConnections.put(name, connection);
     }
+
 }
