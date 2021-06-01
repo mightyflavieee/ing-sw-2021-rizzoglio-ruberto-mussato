@@ -17,7 +17,7 @@ public class GUI extends Observable<Move> {
     private BoardGUI boardGUI;
     private MatchGUI matchGUI;
     private MarketGUI marketGUI;
-//    private MarketButton marketButton;
+    //    private MarketButton marketButton;
 //    private MarketButtonListener marketButtonListener;
     private LeaderCardPlaceGUI leaderCardPlaceGui;
     private CardContainerGUI cardContainerGUI;
@@ -36,9 +36,9 @@ public class GUI extends Observable<Move> {
         this.jFrame = new JFrame();
         this.jFrame.setTitle("Master of Renaissance");
         this.jFrame.setLayout(new GridLayout(3,3));
-       // jFrame.setLayout(new BorderLayout());
+        // jFrame.setLayout(new BorderLayout());
 
-      //  boardGUI = new BoardGUI("Board");
+        //  boardGUI = new BoardGUI("Board");
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,myNickname);
         this.mePlayer = pair._1;
         this.opponentsPlayer = pair._2;
@@ -110,3 +110,4 @@ public class GUI extends Observable<Move> {
         this.informationsGUI.showMarketInformations();
     }
 }
+

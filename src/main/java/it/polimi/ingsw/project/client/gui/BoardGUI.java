@@ -1,5 +1,7 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.model.Match;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,14 +10,16 @@ public class BoardGUI extends JInternalFrame {
     private WarehouseGUI warehouse;
     private MapTrayGUI mapTray;
     private ChestGUI chest;
+    private InformationsGUI informationsGUI;
 
-    public BoardGUI(String nickname){
+    public BoardGUI(String nickname, InformationsGUI informationsGUI){
         this.setTitle(nickname);
         this.setVisible(true);
         this.setLayout(new GridBagLayout());
 
+        this.informationsGUI = informationsGUI;
         this.faithMap = new FaithMapGUI();
-        this.warehouse = new WarehouseGUI();
+        this.warehouse = new WarehouseGUI(this.informationsGUI);
         this.mapTray = new MapTrayGUI();
         this.chest = new ChestGUI();
 
@@ -44,15 +48,4 @@ public class BoardGUI extends JInternalFrame {
         constraints.gridheight = 1;
         this.add(this.mapTray, constraints);
     }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setVisible(true);
-        frame.setResizable(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new BoardGUI("GIGGINO"));
-        frame.pack();
-    }
-
-
 }
