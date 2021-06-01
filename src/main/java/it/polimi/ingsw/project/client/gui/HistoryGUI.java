@@ -13,7 +13,7 @@ public class HistoryGUI extends JInternalFrame {
     private JTextArea jTextArea;
 
     public HistoryGUI(String history) {
-        this.setTitle("History");
+        this.setTitle("My History");
       //  this.history = "";
         if(history.equals("")) {
             this.jTextArea = new JTextArea("No History");
@@ -33,8 +33,22 @@ public class HistoryGUI extends JInternalFrame {
         this.setVisible(true);
     }
 
-    public void setHistory(String history) {
-      //  this.history = history;
-        this.jTextArea.setText(history);
+    public void setHistory(String history,String opponentNickName) {
+        this.setTitle(opponentNickName + "'s History");
+        if(history.equals("")) {
+            this.jTextArea = new JTextArea("No History");
+        }else
+        {
+            this.jTextArea = new JTextArea(history);
+        }
+    }
+    public void setMyHistory(String history){
+        this.setTitle("My history");
+        if(history.equals("")) {
+            this.jTextArea = new JTextArea("No History");
+        }else
+        {
+            this.jTextArea = new JTextArea(history);
+        }
     }
 }

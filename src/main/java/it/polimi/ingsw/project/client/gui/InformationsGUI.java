@@ -76,4 +76,9 @@ public class InformationsGUI extends JInternalFrame {
         this.turnPhase = turnPhase;
         this.refresh();
     }
+
+    public void showOpponentView(String nickname) {
+        this.jTextArea.setText("Your are watching "+ nickname +" view");
+        this.jTextArea.setVisible(true);
+    }
 }

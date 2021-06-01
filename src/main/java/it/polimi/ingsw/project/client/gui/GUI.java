@@ -47,7 +47,7 @@ public class GUI extends Observable<Move> {
         this.informationsGUI = new InformationsGUI(this,this.mePlayer.getTurnPhase());
         this.cardContainerGUI = new CardContainerGUI(match.getCardContainer());
         this.leaderCardPlaceGui = new LeaderCardPlaceGUI(this.mePlayer.getLeaderCards(),this);
-        this.playersBarGUI = new PlayersBarGUI(this.opponentsPlayer.stream().map(Player::getNickname).collect(Collectors.toList()), myNickname);
+        this.playersBarGUI = new PlayersBarGUI(this.opponentsPlayer.stream().map(Player::getNickname).collect(Collectors.toList()), myNickname,this);
         //todo inizializzatori di altre cose
         //faithMapGUI = new FaithMapGUI();
         //warehouseGUI = new WarehouseGUI();
@@ -99,15 +99,34 @@ public class GUI extends Observable<Move> {
         this.mePlayer = pair._1;
         this.opponentsPlayer = pair._2;
         this.marketGUI.setMarket(match.getMarket());
-        this.historyGUI.setHistory(this.mePlayer.getHistoryToString());
+        this.historyGUI.setMyHistory(this.mePlayer.getHistoryToString());
         this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
         this.cardContainerGUI.setCardContainer(match.getCardContainer());
-        this.leaderCardPlaceGui.setLeaderCards(this.mePlayer.getLeaderCards());
+        this.leaderCardPlaceGui.setMyLeaderCards(this.mePlayer.getLeaderCards());
         //todo setter di altre cose
     }
 
     public void showMarketInformations() {
         this.informationsGUI.showMarketInformations();
+    }
+
+    public void showMyView() {
+        //shows your view
+        this.historyGUI.setMyHistory(this.mePlayer.getHistoryToString());
+        this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
+        this.leaderCardPlaceGui.setMyLeaderCards(this.mePlayer.getLeaderCards());
+        //todo setter di altre cose
+    }
+
+    public void showOpponentView(int index) {
+        //show the view of the opponent opponentPLayers(index)
+        this.historyGUI.setHistory(this.opponentsPlayer.get(index).getHistoryToString(),this.opponentsPlayer.get(index).getNickname());
+        this.informationsGUI.showOpponentView(this.opponentsPlayer.get(index).getNickname());
+        this.leaderCardPlaceGui.setLeaderCards(this.opponentsPlayer.get(index).getLeaderCards(),this.opponentsPlayer.get(index).getNickname());
+        //todo setter di altre cose
+
+
+        this.disableAllButtons();
     }
 }
 
