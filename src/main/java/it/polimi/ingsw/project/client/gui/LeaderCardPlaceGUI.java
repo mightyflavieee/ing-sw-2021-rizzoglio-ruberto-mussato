@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
+import it.polimi.ingsw.project.model.board.card.leaderCard.Status;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,20 +11,27 @@ import java.util.List;
 public class LeaderCardPlaceGUI extends JInternalFrame {
     private List<LeaderCardJlabelGUI> leaderCardJlabelGUIList;
     private List<LeaderMovePanel> leaderMovePanelList;
-    public LeaderCardPlaceGUI(List<LeaderCard> leaderCards) {
+    public LeaderCardPlaceGUI(List<LeaderCard> leaderCards, GUI gui) {
         this.setTitle("My LeaderCards");
-        this.setLayout(new GridLayout(2,2));
+        this.setLayout(new GridLayout(2,1));
+        JPanel imagesPanel = new JPanel();
+        imagesPanel.setLayout(new GridLayout(1,2));
+        this.add(imagesPanel);
+        JPanel buttonsPanel = new JPanel();
+        buttonsPanel.setLayout(new GridLayout(1,2));
+        this.add(buttonsPanel);
         this.leaderCardJlabelGUIList = new ArrayList<>();
         this.leaderMovePanelList = new ArrayList<>();
         for(int i = 0; i < leaderCards.size(); i++) {
-            leaderCardJlabelGUIList.add(new LeaderCardJlabelGUI(leaderCards.get(i).getId()));
-            this.leaderMovePanelList.add(new LeaderMovePanel(leaderCards.get(i).getId()));
+            this.leaderCardJlabelGUIList.add(new LeaderCardJlabelGUI(leaderCards.get(i).getId()));
+            this.leaderMovePanelList.add(new LeaderMovePanel(leaderCards.get(i).getId(),gui));
         }
+
         for(int i = 0; i < leaderCardJlabelGUIList.size(); i++){
-            this.add(leaderCardJlabelGUIList.get(i));
+            imagesPanel.add(leaderCardJlabelGUIList.get(i));
         }
         for(int i = 0; i < leaderMovePanelList.size(); i++){
-            this.add(leaderMovePanelList.get(i));
+            buttonsPanel.add(leaderMovePanelList.get(i));
         }
 
         this.setVisible(true);
@@ -31,8 +39,15 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
 
 
     public void setLeaderCards(List<LeaderCard> leaderCards) {
-        for(int i = 0; i < leaderCards.size(); i++){
+        int i;
+        for(i = 0; i < leaderCards.size(); i++){
             leaderCardJlabelGUIList.get(i).setID(leaderCards.get(i).getId());
+            this.leaderMovePanelList.get(i).setActivationPossible(leaderCards.get(i).getStatus()== Status.Inactive);
+        }
+        for(int j = i; j < 2; j++){
+            this.leaderCardJlabelGUIList.get(j).setVisible(false);
+            this.leaderMovePanelList.get(j).setVisible(false);
+            this.leaderMovePanelList.get(j).setEnabled(false);
         }
 //        if(leaderCards.size() > 0){
 //            leaderCardGUI1.setID(leaderCards.get(0).getId());

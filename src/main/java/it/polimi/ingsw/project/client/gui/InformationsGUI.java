@@ -27,11 +27,17 @@ public class InformationsGUI extends JInternalFrame {
     public void refresh() {
         switch (turnPhase) {
             case InitialPhase:
+                if(this.phaseFrame!=null){
+                    this.phaseFrame.dispose();
+                }
                 this.jTextArea.setVisible(false);
                 this.phaseFrame = new NoMoveHandlerGUI("to go on",this.gui);
                 this.add(this.phaseFrame);
                 break;
             case EndPhase:
+                if(this.phaseFrame!=null){
+                    this.phaseFrame.dispose();
+                }
                 this.jTextArea.setVisible(false);
                 this.phaseFrame = new NoMoveHandlerGUI("to end the turn", this.gui);
                 this.add(this.phaseFrame);

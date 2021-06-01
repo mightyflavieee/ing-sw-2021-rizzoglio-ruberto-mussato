@@ -33,7 +33,7 @@ public class GUI extends Observable<Move> {
     public GUI(Match match, String myNickname) {
         this.jFrame = new JFrame();
         this.jFrame.setTitle("Master of Renaissance");
-        this.jFrame.setLayout(new GridLayout(4,3));
+        this.jFrame.setLayout(new GridLayout(3,3));
        // jFrame.setLayout(new BorderLayout());
 
       //  boardGUI = new BoardGUI("Board");
@@ -44,7 +44,7 @@ public class GUI extends Observable<Move> {
         historyGUI = new HistoryGUI(this.mePlayer.getHistoryToString());
         informationsGUI = new InformationsGUI(this,this.mePlayer.getTurnPhase());
         cardContainerGUI = new CardContainerGUI(match.getCardContainer());
-        leaderCardPlaceGui = new LeaderCardPlaceGUI(this.mePlayer.getLeaderCards());
+        leaderCardPlaceGui = new LeaderCardPlaceGUI(this.mePlayer.getLeaderCards(),this);
         //todo inizializzatori di altre cose
         //faithMapGUI = new FaithMapGUI();
         //warehouseGUI = new WarehouseGUI();
@@ -83,11 +83,11 @@ public class GUI extends Observable<Move> {
 
     public void send(Move move){
         super.notify(move);
-        this.lockAll(); //devo attendere una risposta dal server
+        this.disableAllButtons(); //devo attendere una risposta dal server
         //todo lo chiamo da un listener e mando la move al server
 
     }
-    public void lockAll(){
+    public void disableAllButtons(){
         //todo blocca tutte le cose che si possono fare es. quando devo aspettare una risposta dal server
     }
     public void setMatch(Match match){//todo chiama i metodi set di tutti i jinternalframe e aggiorna tutto
