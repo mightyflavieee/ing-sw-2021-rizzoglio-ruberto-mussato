@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.client.gui.listeners.warehouse.ResourceButtonListener;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
@@ -14,12 +15,20 @@ public class WarehouseGUI extends JInternalFrame {
     private Map<ShelfFloor, List<JButton>> shelvesButtons;
     private Map<ShelfFloor, Integer> numberOfResoucesPerShelf;
     private Map<ShelfFloor, ResourceType> resourceTypePerShelf;
+    private boolean canChangeShelves;
+    private ShelfFloor floorToChange;
+    private InformationsGUI informationsGUI;
 
-    public WarehouseGUI() {
+    public WarehouseGUI(InformationsGUI informationsGUI) {
         this.setTitle("Warehouse");
         this.setVisible(true);
-        this.setLayout(new GridLayout(3, 1));
-        createButtons();
+        this.setLayout(new GridLayout(1, 2));
+        JPanel resourcesColumns = new JPanel();
+        JPanel arrowColumns = new JPanel();
+        resourcesColumns.setLayout(new GridLayout(3, 1));
+        arrowColumns.setLayout(new GridLayout(2, 1));
+        createResourceButtons();
+        List<JButton> arrowButtons = createArrowButtons();
         JPanel firstFloor = new JPanel();
         JPanel secondFloor = new JPanel();
         JPanel thirdFloor = new JPanel();
@@ -39,16 +48,53 @@ public class WarehouseGUI extends JInternalFrame {
                 }
             }
         }
-        this.add(firstFloor);
-        this.add(secondFloor);
-        this.add(thirdFloor);
+        resourcesColumns.add(firstFloor);
+        resourcesColumns.add(secondFloor);
+        resourcesColumns.add(thirdFloor);
+        for (JButton button: arrowButtons) {
+            arrowColumns.add(button);
+        }
+        this.add(resourcesColumns);
+        this.add(arrowColumns);
         this.pack();
+        this.numberOfResoucesPerShelf = new HashMap<>();
         this.numberOfResoucesPerShelf.put(ShelfFloor.First, 0);
         this.numberOfResoucesPerShelf.put(ShelfFloor.Second, 0);
         this.numberOfResoucesPerShelf.put(ShelfFloor.Third, 0);
     }
 
-    private void createButtons() {
+    public InformationsGUI getInformationsGUI() { return this.informationsGUI; }
+
+    // returns this.canChangeShelves
+    public boolean getCanChangeShelves() { return this.canChangeShelves; }
+
+    // returns this.floorToChange
+    public ShelfFloor getFloorToChange() { return this.floorToChange; }
+
+    // sets this.canChangeShelves to true or false
+    public void setCanChangeShelves(boolean value) { this.canChangeShelves = value; }
+
+    // sets floor to change for change shelf move
+    public void setFloorToChange(ShelfFloor floor) { this.floorToChange = floor; }
+
+    // creates the arrow buttons on the left of the warehouse
+    private List<JButton> createArrowButtons() {
+        List<JButton> arrowButtons = new ArrayList<>();
+        JButton arrowUp = new JButton();
+        JButton arrowDown = new JButton();
+        arrowUp.setIcon(new ImageIcon(new javax.swing
+                .ImageIcon("src/main/resources/warehouse/arrow_up.png")
+                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+        arrowDown.setIcon(new ImageIcon(new javax.swing
+                .ImageIcon("src/main/resources/warehouse/arrow_down.png")
+                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+        arrowButtons.add(arrowUp);
+        arrowButtons.add(arrowDown);
+        return arrowButtons;
+    }
+
+    // creates the resources buttons that are part of the shelves
+    private void createResourceButtons() {
         this.shelvesButtons = new HashMap<>();
         List<JButton> firstFloor = new ArrayList<>();
         List<JButton> secondFloor = new ArrayList<>();
@@ -60,23 +106,29 @@ public class WarehouseGUI extends JInternalFrame {
         JButton button2ThirdFloor = new JButton();
         JButton button3ThirdFloor = new JButton();
         button1FirstFloor.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/warehouse_no_resource.png")
+                .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
         button1SecondFloor.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/warehouse_no_resource.png")
+                .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
         button2SecondFloor.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/warehouse_no_resource.png")
+                .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
         button1ThirdFloor.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/warehouse_no_resource.png")
+                .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
         button2ThirdFloor.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/warehouse_no_resource.png")
+                .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
         button3ThirdFloor.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/warehouse_no_resource.png")
+                .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+        button1FirstFloor.addActionListener(new ResourceButtonListener(this, ShelfFloor.First));
+        button1SecondFloor.addActionListener(new ResourceButtonListener(this, ShelfFloor.Second));
+        button2SecondFloor.addActionListener(new ResourceButtonListener(this, ShelfFloor.Second));
+        button1ThirdFloor.addActionListener(new ResourceButtonListener(this, ShelfFloor.Third));
+        button2ThirdFloor.addActionListener(new ResourceButtonListener(this, ShelfFloor.Third));
+        button3ThirdFloor.addActionListener(new ResourceButtonListener(this, ShelfFloor.Third));
         firstFloor.add(button1FirstFloor);
         secondFloor.add(button1SecondFloor);
         secondFloor.add(button2SecondFloor);
@@ -96,7 +148,7 @@ public class WarehouseGUI extends JInternalFrame {
                 for (int i = 0; i < numOfResourcesToChange; i++) {
                     if (newResourceType == null) {
                         this.shelvesButtons.get(shelfFloor).get(numOfResourcesToChange-i-1).setIcon(new ImageIcon(
-                                new ImageIcon("src/main/resources/warehouse_no_resource.png")
+                                new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                                         .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
                     } else {
                         this.shelvesButtons.get(shelfFloor).get(i).setIcon(new ImageIcon(
@@ -112,7 +164,7 @@ public class WarehouseGUI extends JInternalFrame {
                 if (numOfResourcesToChange < this.shelvesButtons.get(shelfFloor).size()) {
                     for (int i = 0; i < (this.shelvesButtons.get(shelfFloor).size()-numOfResourcesToChange); i++) {
                         this.shelvesButtons.get(shelfFloor).get(i).setIcon(new ImageIcon(
-                                new ImageIcon("src/main/resources/warehouse_no_resource.png")
+                                new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
                     }
                 }
@@ -120,6 +172,8 @@ public class WarehouseGUI extends JInternalFrame {
         }
     }
 
+    // swaps resources from floorA to floorB. Outputs an error message on the information section (in GUI)
+    // if this operation cannot be done
     public void changeShelf(ShelfFloor floorA, ShelfFloor floorB) {
         if ((floorA == ShelfFloor.First && floorB == ShelfFloor.Second) ||
                 (floorB == ShelfFloor.First && floorA == ShelfFloor.Second)) {
