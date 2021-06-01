@@ -143,6 +143,14 @@ public class Server {
         return false;
     }
 
+    public boolean isNicknameUnique(String gameId, String nickName) {
+        Lobby currentLobby = this.mapOfAvailableLobbies.get(gameId);
+        if (currentLobby.getMapOfSocketClientConnections().containsKey(nickName)) {
+            return false;
+        }
+        return true;
+    }
+
     public boolean isPlayerPresentAndDisconnected(String gameId, String nickName) {
         Lobby currentLobby = this.mapOfUnavailableLobbies.get(gameId);
         return currentLobby.isPlayerPresentAndDisconnected(nickName);
@@ -158,7 +166,8 @@ public class Server {
                 Socket newSocket = serverSocket.accept();
                 SocketClientConnection socketConnection = new SocketClientConnection(newSocket, this);
                 Thread threadSocket = new Thread(socketConnection);
-                threadSocket.start();;
+                threadSocket.start();
+                ;
             } catch (IOException e) {
                 System.out.println("Connection Error!");
             }

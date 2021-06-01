@@ -17,14 +17,19 @@ public class JoinRequestMove extends GameRequestMove {
     public void action(SocketClientConnection connection) {
         if (connection.getServer().isGamePresent(this.gameId)) {
             if (connection.getServer().isGameNotFull(this.gameId)) {
-                try {
-                    connection.getServer().addToLobby(this.gameId, connection, this.nickName);
-                    connection.send(new ConfirmJoinMessage(this.gameId));
-                    if (connection.getServer().tryToStartGame(this.gameId)) {
-                        connection.getServer().sendChooseLeaderCards(this.gameId);
+                if (connection.getServer().isNicknameUnique(this.gameId, this.nickName)) {
+                    try {
+                        connection.getServer().addToLobby(this.gameId, connection, this.nickName);
+                        connection.send(new ConfirmJoinMessage(this.gameId));
+                        if (connection.getServer().tryToStartGame(this.gameId)) {
+                            connection.getServer().sendChooseLeaderCards(this.gameId);
+                        }
+                    } catch (Exception e) {
+                        connection.send(new ErrorJoinMessage(e.getMessage()));
                     }
-                } catch (Exception e) {
-                    connection.send(new ErrorJoinMessage(e.getMessage()));
+                } else {
+                    connection.send(new ErrorJoinMessage(
+                            "We are sorry but there is already a player with this nickname! Try a different one."));
                 }
             } else {
                 connection.send(new ErrorJoinMessage(
