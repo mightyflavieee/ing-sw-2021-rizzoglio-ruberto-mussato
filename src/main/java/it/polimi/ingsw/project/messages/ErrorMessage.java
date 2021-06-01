@@ -1,12 +1,14 @@
 package it.polimi.ingsw.project.messages;
 
-public class ErrorMessage {
+import java.io.Serializable;
 
-    protected String errorMessage = "Generic Error";
+public class ErrorMessage implements Serializable {
+
+    protected String messageError = "Generic Error";
 
     public void setErrorMessage(String errorMessage) {
         if (errorMessage != null) {
-            this.errorMessage = errorMessage;
+            this.messageError = errorMessage;
         }
     }
 }

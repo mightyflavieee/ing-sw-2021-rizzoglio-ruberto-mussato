@@ -1,10 +1,9 @@
 package it.polimi.ingsw.project.messages;
 
-import java.io.Serializable;
 
 import it.polimi.ingsw.project.client.Client;
 
-public class ErrorJoinMessage extends ErrorMessage implements Serializable, ResponseMessage {
+public class ErrorJoinMessage extends ErrorMessage implements ResponseMessage {
 
     public ErrorJoinMessage(String errorMessage) {
         setErrorMessage(errorMessage);
@@ -12,7 +11,7 @@ public class ErrorJoinMessage extends ErrorMessage implements Serializable, Resp
 
     @Override
     public void action(Client client) {
-        client.reBuildGame(super.errorMessage);
+        client.reBuildGame(super.messageError);
     }
 
 }

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import it.polimi.ingsw.project.controller.Controller;
 import it.polimi.ingsw.project.messages.ErrorChosenLeaderCards;
@@ -22,7 +20,6 @@ import it.polimi.ingsw.project.view.View;
 public class Server {
     private static final int PORT = 12345;
     private ServerSocket serverSocket;
-    private ExecutorService executor = Executors.newFixedThreadPool(128);
     private Map<String, Lobby> mapOfAvailableLobbies = new HashMap<String, Lobby>();
     private Map<String, Lobby> mapOfUnavailableLobbies = new HashMap<String, Lobby>();
 
