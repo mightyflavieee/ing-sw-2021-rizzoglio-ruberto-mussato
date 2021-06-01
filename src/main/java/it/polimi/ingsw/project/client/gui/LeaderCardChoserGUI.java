@@ -4,7 +4,6 @@ import it.polimi.ingsw.project.client.ClientGUI;
 import it.polimi.ingsw.project.client.gui.listeners.LeaderCardChoserListener;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.ChooseLeaderCardMove;
-import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LeaderCardChoserGUI extends JFrame {
-    private List<LeaderCardGUI> leaderCardGUIList;
+    private List<LeaderCardButtonGUI> leaderCardButtonGUIList;
     private List<String> chosedIDs;
     private List <LeaderCard> leadercards;
     private ClientGUI clientGUI;
@@ -22,13 +21,13 @@ public class LeaderCardChoserGUI extends JFrame {
         this.clientGUI = clientGUI;
         this.leadercards = leadercards;
         this.chosedIDs = new ArrayList<>();
-        this.leaderCardGUIList = new ArrayList<>();
+        this.leaderCardButtonGUIList = new ArrayList<>();
         this.setLayout(new GridLayout(2,2));
         for(String id : this.leadercards.stream().map(LeaderCard::getId).collect(Collectors.toList())){
-            LeaderCardGUI leaderCardGUI = new LeaderCardGUI(id, this);
-            leaderCardGUI.addActionListener(new LeaderCardChoserListener(leaderCardGUI,this));
-            this.leaderCardGUIList.add(leaderCardGUI);
-            this.add(leaderCardGUI);
+            LeaderCardButtonGUI leaderCardButtonGUI = new LeaderCardButtonGUI(id, this);
+            leaderCardButtonGUI.addActionListener(new LeaderCardChoserListener(leaderCardButtonGUI,this));
+            this.leaderCardButtonGUIList.add(leaderCardButtonGUI);
+            this.add(leaderCardButtonGUI);
         }
         this.setVisible(true);
         this.pack();
