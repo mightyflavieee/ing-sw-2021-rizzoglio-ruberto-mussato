@@ -24,6 +24,8 @@ public class InformationsGUI extends JInternalFrame {
         this.pack();
     }
 
+    public JTextArea getjTextArea() { return this.jTextArea; }
+
     public void refresh() {
         switch (turnPhase) {
             case InitialPhase:
