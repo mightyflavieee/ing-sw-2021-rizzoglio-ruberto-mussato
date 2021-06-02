@@ -25,7 +25,7 @@ public class InsertFirstShelfButtonListener implements ActionListener {
         for(int i = 0; i< resourceInHandlerGUI.getResourceNum(); i++) {
             resourceList.add(new Resource(resourceInHandlerGUI.getResourceType()));
         }
-        this.resourceInHandlerGUI.removeResource();
         this.warehouseGUI.insertInShelf(ShelfFloor.First,resourceList);
+        this.resourceInHandlerGUI.removeResource();
     }
 }

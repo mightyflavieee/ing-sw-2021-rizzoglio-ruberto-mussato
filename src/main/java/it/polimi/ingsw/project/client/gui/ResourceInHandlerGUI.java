@@ -3,10 +3,12 @@ package it.polimi.ingsw.project.client.gui;
 import it.polimi.ingsw.project.client.gui.listeners.InsertFirstShelfButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.InsertSecondShelfButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.InsertThirdShelfButtonListener;
+import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Map;
 
 public class ResourceInHandlerGUI extends JInternalFrame {
     private ResourceType resourceType;
@@ -39,14 +41,11 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         this.thirdShelfButton.addActionListener(new InsertThirdShelfButtonListener(this,warehouseGUI));
     }
     public void refresh(){
-//        if(this.resourceNum == 0){
-//            this.setVisible(false);
-//        }else{
-//            this.setVisible(true);
-//        }
+        Map<ShelfFloor,Integer> numOfResourcesPerShelves = this.warehouseGUI.getNumberOfResoucesPerShelf();
+        Map<ShelfFloor,ResourceType> resourceTypePerShelf = this.warehouseGUI.getResourceTypePerShelf();
+
         this.imageLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/resourcetype/" + this.resourceType.toString() + ".png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         this.numLabel.setText(String.valueOf(this.resourceNum));
-        //todo fare controlli con un attributo warehouse
         switch (this.resourceNum){
             case 0:
                 this.firstShelfButton.setEnabled(false);
@@ -55,24 +54,58 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 this.discardButton.setEnabled(false);
                 break;
             case 1:
-                this.firstShelfButton.setEnabled(true);
-                this.secondShelfButton.setEnabled(true);
-                this.thirdShelfButton.setEnabled(true);
+                if(numOfResourcesPerShelves.get(ShelfFloor.First)==0) {
+                    this.firstShelfButton.setEnabled(true);
+                }else{
+                    this.firstShelfButton.setEnabled(false);
+                }
+                if(resourceTypePerShelf.get(ShelfFloor.Second)==this.resourceType
+                && numOfResourcesPerShelves.get(ShelfFloor.Second) < 2) {
+                    this.secondShelfButton.setEnabled(true);
+                }else{
+                    this.secondShelfButton.setEnabled(false);
+                }
+                if(resourceTypePerShelf.get(ShelfFloor.Third)==this.resourceType
+                        && numOfResourcesPerShelves.get(ShelfFloor.Third) < 3) {
+                    this.thirdShelfButton.setEnabled(true);
+                }else{
+                    this.thirdShelfButton.setEnabled(false);
+                }
                 this.discardButton.setEnabled(true);
                 break;
             case 2:
                 this.firstShelfButton.setEnabled(false);
-                this.secondShelfButton.setEnabled(true);
-                this.thirdShelfButton.setEnabled(true);
+                if(numOfResourcesPerShelves.get(ShelfFloor.Second)==0) {
+                    this.secondShelfButton.setEnabled(true);
+                }else{
+                    this.secondShelfButton.setEnabled(false);
+                }
+                if(resourceTypePerShelf.get(ShelfFloor.Third)==this.resourceType
+                        && numOfResourcesPerShelves.get(ShelfFloor.Third) < 2) {
+                    this.thirdShelfButton.setEnabled(true);
+                }else{
+                    this.thirdShelfButton.setEnabled(false);
+                }
                 this.discardButton.setEnabled(true);
                 break;
             case 3:
+                this.firstShelfButton.setEnabled(false);
+                this.secondShelfButton.setEnabled(false);
+                if(numOfResourcesPerShelves.get(ShelfFloor.Third) == 0) {
+                    this.thirdShelfButton.setEnabled(true);
+                }else{
+                    this.thirdShelfButton.setEnabled(false);
+                }
+                this.discardButton.setEnabled(true);
+                break;
+            default:
                 this.firstShelfButton.setEnabled(false);
                 this.secondShelfButton.setEnabled(false);
                 this.thirdShelfButton.setEnabled(false);
                 this.discardButton.setEnabled(true);
                 break;
         }
+
     }
     public void addCoin(){
         this.resourceType = ResourceType.Coin;
