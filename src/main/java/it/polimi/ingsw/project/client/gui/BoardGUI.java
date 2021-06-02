@@ -22,7 +22,7 @@ public class BoardGUI extends JInternalFrame {
 
         this.informationsGUI = informationsGUI;
         this.boardModel = board;
-        this.faithMap = new FaithMapGUI();
+        this.faithMap = new FaithMapGUI(board.getFaithMap());
         this.warehouse = new WarehouseGUI(this.informationsGUI, this.boardModel.getWarehouse());
         this.mapTray = new MapTrayGUI();
         this.chest = new ChestGUI();

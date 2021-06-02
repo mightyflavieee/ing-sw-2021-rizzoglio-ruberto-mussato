@@ -7,9 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added boardModel attribute in BoardGUI">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added changeShelf function in WarehouseGUI">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/FaithMapGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/FaithMapGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/WarehouseGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/WarehouseGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -358,13 +361,6 @@
       <workItem from="1622617470679" duration="61000" />
       <workItem from="1622618208589" duration="8400000" />
     </task>
-    <task id="LOCAL-00099" summary="Corrected minor error in ClientCLI.handleTakeMarketResourcesMove">
-      <created>1621618681544</created>
-      <option name="number" value="00099" />
-      <option name="presentableId" value="LOCAL-00099" />
-      <option name="project" value="LOCAL" />
-      <updated>1621618681544</updated>
-    </task>
     <task id="LOCAL-00100" summary="Corrected minor error in Warehouse.insertInShelves">
       <created>1621619518471</created>
       <option name="number" value="00100" />
@@ -701,7 +697,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622628260066</updated>
     </task>
-    <option name="localTasksCounter" value="148" />
+    <task id="LOCAL-00148" summary="added changeShelf function in WarehouseGUI">
+      <created>1622630617405</created>
+      <option name="number" value="00148" />
+      <option name="presentableId" value="LOCAL-00148" />
+      <option name="project" value="LOCAL" />
+      <updated>1622630617405</updated>
+    </task>
+    <option name="localTasksCounter" value="149" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -731,7 +734,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added ClientAppGUI.java and InsertNameListener.java" />
     <MESSAGE value="Implemented login gui" />
     <MESSAGE value="Implemented join login gui" />
     <MESSAGE value="added listeners package" />
@@ -756,7 +758,8 @@
     <MESSAGE value="Added ResourceInHandGUI.java" />
     <MESSAGE value="added insertInShelf function in WarehouseGUI" />
     <MESSAGE value="added boardModel attribute in BoardGUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="added boardModel attribute in BoardGUI" />
+    <MESSAGE value="added changeShelf function in WarehouseGUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="added changeShelf function in WarehouseGUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
