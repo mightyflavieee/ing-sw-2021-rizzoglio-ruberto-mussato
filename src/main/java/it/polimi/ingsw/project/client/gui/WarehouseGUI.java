@@ -61,6 +61,7 @@ public class WarehouseGUI extends JInternalFrame {
         this.add(arrowColumns);
         this.pack();
         this.numberOfResoucesPerShelf = new HashMap<>();
+        this.resourceTypePerShelf = new HashMap<>();
         this.numberOfResoucesPerShelf.put(ShelfFloor.First, 0);
         this.numberOfResoucesPerShelf.put(ShelfFloor.Second, 0);
         this.numberOfResoucesPerShelf.put(ShelfFloor.Third, 0);
@@ -169,7 +170,18 @@ public class WarehouseGUI extends JInternalFrame {
         }
     }
 
-    /*
+    // inserts the resources indicated in the chosen shelf
+    public void insertInShelf(ShelfFloor floor, List<Resource> resourcesToInsert) {
+        this.warehouseModel.insertInShelves(floor, resourcesToInsert);
+        refresh();
+    }
+
+    public void changeShelf(ShelfFloor floorA, ShelfFloor floorB) {
+        this.warehouseModel.swapShelves(floorA, floorB);
+        refresh();
+    }
+
+        /*
     // updates the ShelfFloor
     public void updateShelfFloor(ShelfFloor floor, ResourceType newResourceType, int numOfResourcesToChange) {
         for (ShelfFloor shelfFloor : this.shelvesButtons.keySet()) {
@@ -229,15 +241,4 @@ public class WarehouseGUI extends JInternalFrame {
             }
         }
     }*/
-
-    // inserts the resources indicated in the chosen shelf
-    public void insertInShelf(ShelfFloor floor, List<Resource> resourcesToInsert) {
-        this.warehouseModel.insertInShelves(floor, resourcesToInsert);
-        refresh();
-    }
-
-    public void changeShelf(ShelfFloor floorA, ShelfFloor floorB) {
-        this.warehouseModel.swapShelves(floorA, floorB);
-        refresh();
-    }
 }
