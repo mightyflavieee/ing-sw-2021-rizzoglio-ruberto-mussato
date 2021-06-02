@@ -41,9 +41,12 @@ public class BoardGUI extends JInternalFrame {
         constraints.gridheight = 1;
         JInternalFrame depositsFrame = new JInternalFrame("Deposits");
         depositsFrame.setVisible(true);
-        depositsFrame.setLayout(new BorderLayout());
+        /*depositsFrame.setLayout(new BorderLayout());
         depositsFrame.add(this.warehouse, BorderLayout.NORTH);
-        depositsFrame.add(this.chest, BorderLayout.SOUTH);
+        depositsFrame.add(this.chest, BorderLayout.SOUTH);*/
+        depositsFrame.setLayout(new GridLayout(1, 2));
+        depositsFrame.add(this.warehouse);
+        depositsFrame.add(this.chest);
         this.add(depositsFrame, constraints);
 
         constraints.gridx = 1;

@@ -15,17 +15,24 @@ import java.util.Map;
 
 public class WarehouseGUI extends JInternalFrame {
     private Map<ShelfFloor, List<JButton>> shelvesButtons;
+    private Map<ResourceType, List<JButton>> extraDepositsButtons;
     private Map<ShelfFloor, Integer> numberOfResoucesPerShelf;
     private Map<ShelfFloor, ResourceType> resourceTypePerShelf;
     private boolean canChangeShelves;
     private ShelfFloor floorToChange;
     private InformationsGUI informationsGUI;
     private Warehouse warehouseModel;
+    private ExtraDepositsGUI extraDepositsGUI;
 
     public WarehouseGUI(InformationsGUI informationsGUI, Warehouse warehouse) {
         this.setTitle("Warehouse");
         this.setVisible(true);
-        this.setLayout(new GridLayout(1, 2));
+        //this.setLayout(new GridLayout(1, 2));
+        this.setLayout(new GridLayout(2, 1));
+
+        JPanel mainWarehouse = new JPanel();
+        mainWarehouse.setLayout(new GridLayout(1, 2));
+
         JPanel resourcesColumns = new JPanel();
         JPanel arrowColumns = new JPanel();
         resourcesColumns.setLayout(new GridLayout(3, 1));
@@ -57,9 +64,17 @@ public class WarehouseGUI extends JInternalFrame {
         for (JButton button: arrowButtons) {
             arrowColumns.add(button);
         }
-        this.add(resourcesColumns);
-        this.add(arrowColumns);
+        //this.add(resourcesColumns);
+        //this.add(arrowColumns);
+        mainWarehouse.add(resourcesColumns);
+        mainWarehouse.add(arrowColumns);
+
+        this.extraDepositsGUI = new ExtraDepositsGUI(warehouse);
+        this.add(mainWarehouse);
+        this.add(this.extraDepositsGUI);
+
         this.pack();
+
         this.numberOfResoucesPerShelf = new HashMap<>();
         this.resourceTypePerShelf = new HashMap<>();
         this.numberOfResoucesPerShelf.put(ShelfFloor.First, 0);
@@ -145,6 +160,10 @@ public class WarehouseGUI extends JInternalFrame {
         this.shelvesButtons.put(ShelfFloor.First, firstFloor);
         this.shelvesButtons.put(ShelfFloor.Second, secondFloor);
         this.shelvesButtons.put(ShelfFloor.Third, thirdFloor);
+    }
+
+    private void createExtraDepositsButtons() {
+
     }
 
     private void refresh() {
