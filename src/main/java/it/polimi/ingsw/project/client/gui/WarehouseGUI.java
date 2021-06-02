@@ -169,6 +169,7 @@ public class WarehouseGUI extends JInternalFrame {
         }
     }
 
+    /*
     // updates the ShelfFloor
     public void updateShelfFloor(ShelfFloor floor, ResourceType newResourceType, int numOfResourcesToChange) {
         for (ShelfFloor shelfFloor : this.shelvesButtons.keySet()) {
@@ -227,11 +228,16 @@ public class WarehouseGUI extends JInternalFrame {
                 //TODO ALERT, CANNOT DO THIS CHANGE
             }
         }
-    }
+    }*/
 
     // inserts the resources indicated in the chosen shelf
     public void insertInShelf(ShelfFloor floor, List<Resource> resourcesToInsert) {
         this.warehouseModel.insertInShelves(floor, resourcesToInsert);
+        refresh();
+    }
+
+    public void changeShelf(ShelfFloor floorA, ShelfFloor floorB) {
+        this.warehouseModel.swapShelves(floorA, floorB);
         refresh();
     }
 }

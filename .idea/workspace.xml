@@ -7,18 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Added ResourceInHandGUI.java">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandlerGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/CoinHandListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/CoinHandListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/ResourceInHandlerGUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/ServantHandListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/ServantHandListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/ShieldHandListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/ShieldHandListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/StoneHandListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/StoneHandListener.java" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added boardModel attribute in BoardGUI">
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/FaithMapGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/FaithMapGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
     </list>
-    <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -366,20 +358,6 @@
       <workItem from="1622617470679" duration="61000" />
       <workItem from="1622618208589" duration="8400000" />
     </task>
-    <task id="LOCAL-00097" summary="Corrected minor error in SocketClientConnection.java">
-      <created>1621612848683</created>
-      <option name="number" value="00097" />
-      <option name="presentableId" value="LOCAL-00097" />
-      <option name="project" value="LOCAL" />
-      <updated>1621612848683</updated>
-    </task>
-    <task id="LOCAL-00098" summary="Corrected minor error in ClientCLI.java">
-      <created>1621614590382</created>
-      <option name="number" value="00098" />
-      <option name="presentableId" value="LOCAL-00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1621614590382</updated>
-    </task>
     <task id="LOCAL-00099" summary="Corrected minor error in ClientCLI.handleTakeMarketResourcesMove">
       <created>1621618681544</created>
       <option name="number" value="00099" />
@@ -709,7 +687,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622625161497</updated>
     </task>
-    <option name="localTasksCounter" value="146" />
+    <task id="LOCAL-00146" summary="added insertInShelf function in WarehouseGUI">
+      <created>1622628224209</created>
+      <option name="number" value="00146" />
+      <option name="presentableId" value="LOCAL-00146" />
+      <option name="project" value="LOCAL" />
+      <updated>1622628224209</updated>
+    </task>
+    <task id="LOCAL-00147" summary="added boardModel attribute in BoardGUI">
+      <created>1622628260066</created>
+      <option name="number" value="00147" />
+      <option name="presentableId" value="LOCAL-00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1622628260066</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -739,8 +731,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added FaithMapGUI" />
-    <MESSAGE value="added LeaderMoveHandler.java" />
     <MESSAGE value="added ClientAppGUI.java and InsertNameListener.java" />
     <MESSAGE value="Implemented login gui" />
     <MESSAGE value="Implemented join login gui" />
@@ -764,7 +754,9 @@
     <MESSAGE value="Implemented Leader Card Action Logic using the GUI" />
     <MESSAGE value="Updated login logic" />
     <MESSAGE value="Added ResourceInHandGUI.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added ResourceInHandGUI.java" />
+    <MESSAGE value="added insertInShelf function in WarehouseGUI" />
+    <MESSAGE value="added boardModel attribute in BoardGUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="added boardModel attribute in BoardGUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -833,40 +825,40 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$DevelopmentCardTest_getMarkerPosition.ic" NAME="DevelopmentCardTest.getMarkerPosition Coverage Results" MODIFIED="1622023514128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.model.board.card.developmentCard.*</FILTER>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ResourceTest_testToString.ic" NAME="ResourceTest.testToString Coverage Results" MODIFIED="1622099321454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.resource.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$testCoverage.ic" NAME="testCoverage Coverage Results" MODIFIED="1622131435579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ControllerTest_completeTest.ic" NAME="ControllerTest.completeTest Coverage Results" MODIFIED="1621609786466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$WarehouseTest_insertFalse.ic" NAME="WarehouseTest.insertFalse Coverage Results" MODIFIED="1622098347654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.model.board.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$BoardTest_getLeaderCardsToString.ic" NAME="BoardTest.getLeaderCardsToString Coverage Results" MODIFIED="1622023178507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.project.model.board.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ClientApp.ic" NAME="ClientApp Coverage Results" MODIFIED="1621788911338" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.project.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActionTokenContainerTest_lorenzoTest.ic" NAME="ActionTokenContainerTest.lorenzoTest Coverage Results" MODIFIED="1622021649550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.model.actionTokens.*</FILTER>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActivateLeaderCardMoveTest_notFeasibleDevLeaderCard.ic" NAME="ActivateLeaderCardMoveTest.notFeasibleDevLeaderCard Coverage Results" MODIFIED="1622053334719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.playermove.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ControllerTest_completeTest.ic" NAME="ControllerTest.completeTest Coverage Results" MODIFIED="1621609786466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActionTokenContainerTest_discardActionToken.ic" NAME="ActionTokenContainerTest.discardActionToken Coverage Results" MODIFIED="1622021586309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.model.actionTokens.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ResourceTest_testToString.ic" NAME="ResourceTest.testToString Coverage Results" MODIFIED="1622099321454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.model.resource.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$GUIPROVA.ic" NAME="GUIPROVA Coverage Results" MODIFIED="1622120686741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.client.gui.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActionTokenContainerTest_lostToDiscard.ic" NAME="ActionTokenContainerTest.lostToDiscard Coverage Results" MODIFIED="1622022104584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.project.model.actionTokens.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ServerApp.ic" NAME="ServerApp Coverage Results" MODIFIED="1621788907581" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.project.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActivateLeaderCardMoveTest_notFeasibleDevLeaderCard.ic" NAME="ActivateLeaderCardMoveTest.notFeasibleDevLeaderCard Coverage Results" MODIFIED="1622053334719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.model.playermove.*</FILTER>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$DevelopmentCardTest_getMarkerPosition.ic" NAME="DevelopmentCardTest.getMarkerPosition Coverage Results" MODIFIED="1622023514128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.board.card.developmentCard.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$testCoverage.ic" NAME="testCoverage Coverage Results" MODIFIED="1622131435579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$BoardTest_getLeaderCardsToString.ic" NAME="BoardTest.getLeaderCardsToString Coverage Results" MODIFIED="1622023178507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.board.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActionTokenContainerTest_lorenzoTest.ic" NAME="ActionTokenContainerTest.lorenzoTest Coverage Results" MODIFIED="1622021649550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.actionTokens.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActionTokenContainerTest_lostToDiscard.ic" NAME="ActionTokenContainerTest.lostToDiscard Coverage Results" MODIFIED="1622022104584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.actionTokens.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$GUIPROVA.ic" NAME="GUIPROVA Coverage Results" MODIFIED="1622120686741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.client.gui.*</FILTER>
+    </SUITE>
   </component>
 </project>
