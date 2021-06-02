@@ -52,4 +52,8 @@ public class BoardGUI extends JInternalFrame {
         constraints.gridheight = 1;
         this.add(this.mapTray, constraints);
     }
+
+    public WarehouseGUI getWarehouseGUI() {
+        return warehouse;
+    }
 }

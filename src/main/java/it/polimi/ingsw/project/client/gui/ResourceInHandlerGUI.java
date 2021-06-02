@@ -1,5 +1,8 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.client.gui.listeners.InsertFirstShelfButtonListener;
+import it.polimi.ingsw.project.client.gui.listeners.InsertSecondShelfButtonListener;
+import it.polimi.ingsw.project.client.gui.listeners.InsertThirdShelfButtonListener;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import javax.swing.*;
@@ -10,7 +13,9 @@ public class ResourceInHandlerGUI extends JInternalFrame {
     private JButton firstShelfButton, secondShelfButton, thirdShelfButton, discardButton;
     private int resourceNum;
     private JLabel imageLabel, numLabel;
-    public ResourceInHandlerGUI() {
+    private WarehouseGUI warehouseGUI;
+    public ResourceInHandlerGUI(WarehouseGUI warehouseGUI) {
+        this.warehouseGUI = warehouseGUI;
         this.setTitle("Resource Selected:");
         this.setVisible(false);
         this.setLayout(new GridLayout(5,1));
@@ -29,6 +34,9 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         this.add(secondShelfButton);
         this.add(thirdShelfButton);
         this.add(discardButton);
+        this.firstShelfButton.addActionListener(new InsertFirstShelfButtonListener(this,warehouseGUI));
+        this.secondShelfButton.addActionListener(new InsertSecondShelfButtonListener(this,warehouseGUI));
+        this.thirdShelfButton.addActionListener(new InsertThirdShelfButtonListener(this,warehouseGUI));
     }
     public void refresh(){
 //        if(this.resourceNum == 0){
@@ -38,26 +46,65 @@ public class ResourceInHandlerGUI extends JInternalFrame {
 //        }
         this.imageLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/resourcetype/" + this.resourceType.toString() + ".png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         this.numLabel.setText(String.valueOf(this.resourceNum));
+        //todo fare controlli con un attributo warehouse
+        switch (this.resourceNum){
+            case 0:
+                this.firstShelfButton.setEnabled(false);
+                this.secondShelfButton.setEnabled(false);
+                this.thirdShelfButton.setEnabled(false);
+                this.discardButton.setEnabled(false);
+                break;
+            case 1:
+                this.firstShelfButton.setEnabled(true);
+                this.secondShelfButton.setEnabled(true);
+                this.thirdShelfButton.setEnabled(true);
+                this.discardButton.setEnabled(true);
+                break;
+            case 2:
+                this.firstShelfButton.setEnabled(false);
+                this.secondShelfButton.setEnabled(true);
+                this.thirdShelfButton.setEnabled(true);
+                this.discardButton.setEnabled(true);
+                break;
+            case 3:
+                this.firstShelfButton.setEnabled(false);
+                this.secondShelfButton.setEnabled(false);
+                this.thirdShelfButton.setEnabled(false);
+                this.discardButton.setEnabled(true);
+                break;
+        }
     }
     public void addCoin(){
         this.resourceType = ResourceType.Coin;
-        this.resourceNum = this.resourceNum + 1;
+        this.resourceNum ++;
         this.refresh();
     }
 
     public void addStone() {
         this.resourceType = ResourceType.Stone;
-        this.resourceNum = this.resourceNum + 1;
+        this.resourceNum ++;
         this.refresh();
     }
     public void addShield() {
         this.resourceType = ResourceType.Shield;
-        this.resourceNum = this.resourceNum + 1;
+        this.resourceNum ++;
         this.refresh();
     }
     public void addServant() {
         this.resourceType = ResourceType.Servant;
-        this.resourceNum = this.resourceNum + 1;
+        this.resourceNum ++;
         this.refresh();
+    }
+    public void removeResource(){
+        this.resourceNum = 0;
+        this.refresh();
+    }
+
+    public ResourceType getResourceType() {
+        return this.resourceType;
+    }
+
+    public int getResourceNum() {
+        return this.resourceNum;
     }
 }

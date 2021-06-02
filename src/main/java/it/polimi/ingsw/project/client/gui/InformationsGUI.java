@@ -20,7 +20,7 @@ public class InformationsGUI extends JInternalFrame {
         jTextArea.setEditable(false);
         this.add(this.jTextArea);
         this.turnPhase = turnPhase;
-        this.resourceInHandler = new ResourceInHandlerGUI();
+        //this.resourceInHandler = new ResourceInHandlerGUI();
         this.refresh();
         this.setVisible(true);
         this.pack();
@@ -77,6 +77,10 @@ public class InformationsGUI extends JInternalFrame {
             this.jTextArea.setText("You collected some resources from the Market!\n" +
                 "You can see them in the Resources in Hand panel" +
                 "\nStore them in the Shelves");}
+        //todo creare resourceinHandler se serve
+        if(this.resourceInHandler==null){
+            this.resourceInHandler = new ResourceInHandlerGUI(gui.getWarehouseGUI());
+        }
         this.resourceInHandler.setVisible(true);
         this.add(resourceInHandler);
 
@@ -95,7 +99,6 @@ public class InformationsGUI extends JInternalFrame {
     public void addCoin() {
         this.resourceInHandler.addCoin();
     }
-
     public void addStone() {
         this.resourceInHandler.addStone();
     }

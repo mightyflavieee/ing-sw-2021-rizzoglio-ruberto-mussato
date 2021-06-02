@@ -241,4 +241,13 @@ public class WarehouseGUI extends JInternalFrame {
             }
         }
     }*/
+
+
+    public Map<ShelfFloor, Integer> getNumberOfResoucesPerShelf() {
+        return numberOfResoucesPerShelf;
+    }
+
+    public Map<ShelfFloor, ResourceType> getResourceTypePerShelf() {
+        return resourceTypePerShelf;
+    }
 }
