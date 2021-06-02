@@ -74,6 +74,8 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     return shelves;
   }
 
+  public Map<ResourceType, Integer> getExtraDeposit() { return extraDeposit; }
+
   public int getNumResourcesToDiscard() {
     return this.numResourcesToDiscard;
   }
