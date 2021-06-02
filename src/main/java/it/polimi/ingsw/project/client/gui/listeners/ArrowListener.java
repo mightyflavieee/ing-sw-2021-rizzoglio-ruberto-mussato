@@ -4,6 +4,7 @@ import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.ResourceInHandGUI;
 import it.polimi.ingsw.project.client.gui.TrayGUI;
 import it.polimi.ingsw.project.model.resource.Resource;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,10 +25,17 @@ public class ArrowListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        boolean hasFaith = false;
         List<Resource> resourceList = this.trayGui.insertMarble(axis,position);
         this.trayGui.refresh();
         this.resourceInHandGUI.refresh(resourceList);
         this.trayGui.stopTray();
-        this.gui.showMarketInformations();
+        for(int i = 0; i < resourceList.size(); i++){
+            if(resourceList.get(i).getType() == ResourceType.Faith){
+                hasFaith = true;
+                break;
+            }
+        }
+        this.gui.showMarketInformations(hasFaith);
     }
 }

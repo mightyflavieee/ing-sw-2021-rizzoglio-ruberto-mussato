@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.client.gui.listeners.ResourceInHandlerGUI;
 import it.polimi.ingsw.project.model.TurnPhase;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ public class InformationsGUI extends JInternalFrame {
     private TurnPhase turnPhase;
     private JTextArea jTextArea;
     private JInternalFrame phaseFrame;
+    private JInternalFrame resourceInHandler;
     private GUI gui;
 
     public InformationsGUI(GUI gui, TurnPhase turnPhase) {
@@ -19,6 +21,7 @@ public class InformationsGUI extends JInternalFrame {
         jTextArea.setEditable(false);
         this.add(this.jTextArea);
         this.turnPhase = turnPhase;
+        this.resourceInHandler = new ResourceInHandlerGUI();
         this.refresh();
         this.setVisible(true);
         this.pack();
@@ -65,10 +68,18 @@ public class InformationsGUI extends JInternalFrame {
         }
     }
 
-    public void showMarketInformations(){
-        this.jTextArea.setText("You collected some resources from the Market!\n" +
+    public void showMarketInformations(Boolean hasfaith){
+        if(hasfaith){
+            this.jTextArea.setText("You collected some resources from the Market!\n" +
+                    "You can see them in the Resources in Hand panel" +
+                    "\nStore them in the Shelves" +
+                    "\nYou collected also a faith point!");
+        }else{
+            this.jTextArea.setText("You collected some resources from the Market!\n" +
                 "You can see them in the Resources in Hand panel" +
-                "\nStore them in the Shelves");
+                "\nStore them in the Shelves");}
+        this.resourceInHandler.setVisible(true);
+        this.add(resourceInHandler);
 
     }
 

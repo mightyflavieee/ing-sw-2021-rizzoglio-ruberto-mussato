@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.client.gui.listeners.ResourceInHandlerGUI;
 import it.polimi.ingsw.project.model.market.Market;
 
 import javax.swing.*;
@@ -11,7 +12,7 @@ public class MarketGUI extends JInternalFrame {
     private JLabel sfondo; //se lo metto in inglese mi da problemi
     private TrayGUI trayGui;
     private ResourceInHandGUI resourceInHandGUI;
-    public MarketGUI(GUI gui, Market market) {
+    public MarketGUI(GUI gui, Market market, InformationsGUI informationsGUI) {
       //  this.jPanel = new JPanel();
         this.setTitle("Market");
         //this.constructorHelper();
@@ -22,7 +23,7 @@ public class MarketGUI extends JInternalFrame {
        // this.setLayout(new OverlayLayout());
       //  this.setSize(50,100);
 
-        this.resourceInHandGUI = new ResourceInHandGUI();
+        this.resourceInHandGUI = new ResourceInHandGUI(informationsGUI);
         this.trayGui = new TrayGUI(this.resourceInHandGUI, gui, market);
         this.add(trayGui);
         this.add(resourceInHandGUI);

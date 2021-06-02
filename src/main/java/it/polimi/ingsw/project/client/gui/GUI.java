@@ -42,9 +42,9 @@ public class GUI extends Observable<Move> {
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,myNickname);
         this.mePlayer = pair._1;
         this.opponentsPlayer = pair._2;
-        this.marketGUI = new MarketGUI(this,match.getMarket());
-        this.historyGUI = new HistoryGUI(this.mePlayer.getHistoryToString());
         this.informationsGUI = new InformationsGUI(this,this.mePlayer.getTurnPhase());
+        this.marketGUI = new MarketGUI(this,match.getMarket(),informationsGUI);
+        this.historyGUI = new HistoryGUI(this.mePlayer.getHistoryToString());
         this.cardContainerGUI = new CardContainerGUI(match.getCardContainer());
         this.leaderCardPlaceGui = new LeaderCardPlaceGUI(this.mePlayer.getLeaderCards(),this);
         this.playersBarGUI = new PlayersBarGUI(this.opponentsPlayer.stream().map(Player::getNickname).collect(Collectors.toList()), myNickname,this);
@@ -106,8 +106,8 @@ public class GUI extends Observable<Move> {
         //todo setter di altre cose
     }
 
-    public void showMarketInformations() {
-        this.informationsGUI.showMarketInformations();
+    public void showMarketInformations(boolean hasFaith) {
+        this.informationsGUI.showMarketInformations(hasFaith);
     }
 
     public void showMyView() {
