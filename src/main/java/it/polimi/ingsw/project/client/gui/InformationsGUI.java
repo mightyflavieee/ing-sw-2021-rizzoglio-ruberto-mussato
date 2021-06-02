@@ -1,6 +1,5 @@
 package it.polimi.ingsw.project.client.gui;
 
-import it.polimi.ingsw.project.client.gui.listeners.ResourceInHandlerGUI;
 import it.polimi.ingsw.project.model.TurnPhase;
 
 import javax.swing.*;
@@ -10,7 +9,7 @@ public class InformationsGUI extends JInternalFrame {
     private TurnPhase turnPhase;
     private JTextArea jTextArea;
     private JInternalFrame phaseFrame;
-    private JInternalFrame resourceInHandler;
+    private ResourceInHandlerGUI resourceInHandler;
     private GUI gui;
 
     public InformationsGUI(GUI gui, TurnPhase turnPhase) {
@@ -91,5 +90,19 @@ public class InformationsGUI extends JInternalFrame {
     public void showOpponentView(String nickname) {
         this.jTextArea.setText("Your are watching "+ nickname +" view");
         this.jTextArea.setVisible(true);
+    }
+
+    public void addCoin() {
+        this.resourceInHandler.addCoin();
+    }
+
+    public void addStone() {
+        this.resourceInHandler.addStone();
+    }
+    public void addShield() {
+        this.resourceInHandler.addShield();
+    }
+    public void addServant() {
+        this.resourceInHandler.addServant();
     }
 }

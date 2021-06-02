@@ -1,6 +1,5 @@
 package it.polimi.ingsw.project.client.gui;
 
-import it.polimi.ingsw.project.client.gui.listeners.ResourceInHandlerGUI;
 import it.polimi.ingsw.project.model.market.Market;
 
 import javax.swing.*;

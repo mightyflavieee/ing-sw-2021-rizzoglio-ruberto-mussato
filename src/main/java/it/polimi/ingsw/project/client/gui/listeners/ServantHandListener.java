@@ -19,6 +19,7 @@ public class ServantHandListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         resourceInHandGUI.decreaseServant();
+        this.informationsGUI.addServant();
 
     }
 }

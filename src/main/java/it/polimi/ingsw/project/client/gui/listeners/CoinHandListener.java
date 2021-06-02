@@ -17,7 +17,7 @@ public class CoinHandListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        resourceInHandGUI.decreaseCoin();
-
+        this.resourceInHandGUI.decreaseCoin();
+        this.informationsGUI.addCoin();
     }
 }

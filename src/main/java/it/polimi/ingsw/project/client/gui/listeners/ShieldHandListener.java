@@ -18,6 +18,7 @@ public class ShieldHandListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         resourceInHandGUI.decreaseShield();
+        this.informationsGUI.addShield();
 
     }
 }

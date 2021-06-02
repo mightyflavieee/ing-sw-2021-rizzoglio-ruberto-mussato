@@ -17,6 +17,7 @@ public class StoneHandListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         resourceInHandGUI.decreaseStone();
+        this.informationsGUI.addStone();
 
     }
 }
