@@ -7,7 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Added shelves button listener">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Updated ResourceInHandlerGUI.refresh">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MarketGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandlerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ResourceInHandlerGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/InsertFirstShelfButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/InsertFirstShelfButtonListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/InsertSecondShelfButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/InsertSecondShelfButtonListener.java" afterDir="false" />
@@ -363,13 +368,6 @@
       <workItem from="1622617470679" duration="61000" />
       <workItem from="1622618208589" duration="8400000" />
     </task>
-    <task id="LOCAL-00101" summary="Added history logic">
-      <created>1621625892919</created>
-      <option name="number" value="00101" />
-      <option name="presentableId" value="LOCAL-00101" />
-      <option name="project" value="LOCAL" />
-      <updated>1621625892919</updated>
-    </task>
     <task id="LOCAL-00102" summary="Added ClientCLI thread synchronization">
       <created>1621762108441</created>
       <option name="number" value="00102" />
@@ -706,7 +704,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622651182300</updated>
     </task>
-    <option name="localTasksCounter" value="150" />
+    <task id="LOCAL-00150" summary="Updated ResourceInHandlerGUI.refresh">
+      <created>1622652388224</created>
+      <option name="number" value="00150" />
+      <option name="presentableId" value="LOCAL-00150" />
+      <option name="project" value="LOCAL" />
+      <updated>1622652388224</updated>
+    </task>
+    <option name="localTasksCounter" value="151" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -736,7 +741,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Implemented join login gui" />
     <MESSAGE value="added listeners package" />
     <MESSAGE value="added WarehouseGUI" />
     <MESSAGE value="added MapTrayGUI" />
@@ -761,7 +765,8 @@
     <MESSAGE value="added boardModel attribute in BoardGUI" />
     <MESSAGE value="added changeShelf function in WarehouseGUI" />
     <MESSAGE value="Added shelves button listener" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added shelves button listener" />
+    <MESSAGE value="Updated ResourceInHandlerGUI.refresh" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated ResourceInHandlerGUI.refresh" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

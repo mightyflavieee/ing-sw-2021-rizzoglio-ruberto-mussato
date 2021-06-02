@@ -79,7 +79,7 @@ public class InformationsGUI extends JInternalFrame {
                 "\nStore them in the Shelves");}
         //todo creare resourceinHandler se serve
         if(this.resourceInHandler==null){
-            this.resourceInHandler = new ResourceInHandlerGUI(gui.getWarehouseGUI());
+            this.resourceInHandler = new ResourceInHandlerGUI(gui.getWarehouseGUI(),gui.getResourceInHandGUI());
         }
         this.resourceInHandler.setVisible(true);
         this.add(resourceInHandler);

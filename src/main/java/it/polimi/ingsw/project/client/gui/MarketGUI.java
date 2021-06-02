@@ -75,4 +75,7 @@ public class MarketGUI extends JInternalFrame {
     }
 
 
+    public ResourceInHandGUI getResourceInHandGUI() {
+        return this.resourceInHandGUI;
+    }
 }

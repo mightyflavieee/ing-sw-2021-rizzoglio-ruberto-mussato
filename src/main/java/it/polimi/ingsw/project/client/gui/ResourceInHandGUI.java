@@ -9,7 +9,6 @@ import java.awt.*;
 import java.util.List;
 
 public class ResourceInHandGUI extends JInternalFrame {
-    //todo gestisce le risorse che ricevo dal market
     private JButton coinButton, stoneButton, shieldButton, servantButton;
     private JLabel coinLabel, stoneLabel, shieldLabel, servantLabel;
     private int coinInt, stoneInt, shieldInt, servantInt;

@@ -16,7 +16,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
     private int resourceNum;
     private JLabel imageLabel, numLabel;
     private WarehouseGUI warehouseGUI;
-    public ResourceInHandlerGUI(WarehouseGUI warehouseGUI) {
+    public ResourceInHandlerGUI(WarehouseGUI warehouseGUI, ResourceInHandGUI resourceInHandGUI) {
         this.warehouseGUI = warehouseGUI;
         this.setTitle("Resource Selected:");
         this.setVisible(false);
@@ -36,9 +36,13 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         this.add(secondShelfButton);
         this.add(thirdShelfButton);
         this.add(discardButton);
-        this.firstShelfButton.addActionListener(new InsertFirstShelfButtonListener(this,warehouseGUI));
-        this.secondShelfButton.addActionListener(new InsertSecondShelfButtonListener(this,warehouseGUI));
-        this.thirdShelfButton.addActionListener(new InsertThirdShelfButtonListener(this,warehouseGUI));
+        this.firstShelfButton.setEnabled(false);
+        this.secondShelfButton.setEnabled(false);
+        this.thirdShelfButton.setEnabled(false);
+        this.discardButton.setEnabled(false);
+        this.firstShelfButton.addActionListener(new InsertFirstShelfButtonListener(this,warehouseGUI,resourceInHandGUI));
+        this.secondShelfButton.addActionListener(new InsertSecondShelfButtonListener(this,warehouseGUI,resourceInHandGUI));
+        this.thirdShelfButton.addActionListener(new InsertThirdShelfButtonListener(this,warehouseGUI,resourceInHandGUI));
     }
     public void refresh(){
         Map<ShelfFloor,Integer> numOfResourcesPerShelves = this.warehouseGUI.getNumberOfResoucesPerShelf();
@@ -59,14 +63,16 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 }else{
                     this.firstShelfButton.setEnabled(false);
                 }
-                if(resourceTypePerShelf.get(ShelfFloor.Second)==this.resourceType
-                && numOfResourcesPerShelves.get(ShelfFloor.Second) < 2) {
+                if((resourceTypePerShelf.get(ShelfFloor.Second)==this.resourceType
+                && numOfResourcesPerShelves.get(ShelfFloor.Second) < 2)
+                        || numOfResourcesPerShelves.get(ShelfFloor.Second)==0) {
                     this.secondShelfButton.setEnabled(true);
                 }else{
                     this.secondShelfButton.setEnabled(false);
                 }
-                if(resourceTypePerShelf.get(ShelfFloor.Third)==this.resourceType
-                        && numOfResourcesPerShelves.get(ShelfFloor.Third) < 3) {
+                if((resourceTypePerShelf.get(ShelfFloor.Third)==this.resourceType
+                        && numOfResourcesPerShelves.get(ShelfFloor.Third) < 3)
+                        || numOfResourcesPerShelves.get(ShelfFloor.Third)==0) {
                     this.thirdShelfButton.setEnabled(true);
                 }else{
                     this.thirdShelfButton.setEnabled(false);
@@ -80,8 +86,9 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 }else{
                     this.secondShelfButton.setEnabled(false);
                 }
-                if(resourceTypePerShelf.get(ShelfFloor.Third)==this.resourceType
-                        && numOfResourcesPerShelves.get(ShelfFloor.Third) < 2) {
+                if((resourceTypePerShelf.get(ShelfFloor.Third)==this.resourceType
+                        && numOfResourcesPerShelves.get(ShelfFloor.Third) < 2)
+                        || numOfResourcesPerShelves.get(ShelfFloor.Third)==0) {
                     this.thirdShelfButton.setEnabled(true);
                 }else{
                     this.thirdShelfButton.setEnabled(false);

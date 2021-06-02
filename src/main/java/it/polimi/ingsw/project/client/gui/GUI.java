@@ -35,8 +35,7 @@ public class GUI extends Observable<Move> {
     public GUI(Match match, String myNickname) {
         this.jFrame = new JFrame();
         this.jFrame.setTitle("Master of Renaissance");
-       // this.jFrame.setLayout(new GridLayout(3,3));
-        jFrame.setLayout(new BorderLayout());
+
 
         //  boardGUI = new BoardGUI("Board");
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,myNickname);
@@ -58,23 +57,48 @@ public class GUI extends Observable<Move> {
 
 
 
+//        this.jFrame.setLayout(new BorderLayout());
+//        JPanel southPanel = new JPanel();
+//        southPanel.setLayout(new GridLayout(1,2));
+//        southPanel.add(marketGUI);
+//        southPanel.add(cardContainerGUI);
+//        southPanel.setVisible(true);
+//        JPanel eastPanel = new JPanel();
+//        eastPanel.setLayout(new GridLayout(2,1));
+//        eastPanel.add(historyGUI);
+//        eastPanel.add(playersBarGUI);
+//        eastPanel.setVisible(true);
+//        jFrame.add(eastPanel,BorderLayout.EAST);
+//        jFrame.add(southPanel, BorderLayout.SOUTH);
+//        jFrame.add(boardGUI, BorderLayout.NORTH);
+//        jFrame.add(leaderCardPlaceGui, BorderLayout.WEST);
+//        jFrame.add(informationsGUI,BorderLayout.CENTER);
 
-        JPanel southPanel = new JPanel();
-        southPanel.setLayout(new GridLayout(1,2));
-        southPanel.add(marketGUI);
-        southPanel.add(cardContainerGUI);
-        southPanel.setVisible(true);
-        JPanel eastPanel = new JPanel();
-        eastPanel.setLayout(new GridLayout(2,1));
-        eastPanel.add(historyGUI);
-        eastPanel.add(playersBarGUI);
-        eastPanel.setVisible(true);
-        jFrame.add(eastPanel,BorderLayout.EAST);
-        jFrame.add(southPanel, BorderLayout.SOUTH);
-        jFrame.add(boardGUI, BorderLayout.NORTH);
-        jFrame.add(leaderCardPlaceGui, BorderLayout.WEST);
-        jFrame.add(informationsGUI,BorderLayout.CENTER);
 
+
+        this.jFrame.setLayout(new GridLayout(3,1));
+        JPanel upperPanel, centerPanel, bottomPanel;
+        upperPanel = new JPanel();
+        upperPanel.add(boardGUI);
+        centerPanel = new JPanel();
+        centerPanel.setLayout(new GridLayout(1,4));
+        centerPanel.add(informationsGUI);
+        centerPanel.add(leaderCardPlaceGui);
+        centerPanel.add(historyGUI);
+        centerPanel.add(playersBarGUI);
+        bottomPanel = new JPanel();
+        bottomPanel.setLayout(new GridLayout(1,2));
+        bottomPanel.add(marketGUI);
+        bottomPanel.add(cardContainerGUI);
+        this.jFrame.add(upperPanel);
+        this.jFrame.add(centerPanel);
+        this.jFrame.add(bottomPanel);
+
+
+
+
+
+        // this.jFrame.setLayout(new GridLayout(3,3));
 //        this.jFrame.add(informationsGUI);
 //        this.jFrame.add(marketGUI);
 //        this.jFrame.add(cardContainerGUI);
@@ -170,6 +194,10 @@ public class GUI extends Observable<Move> {
 
     public WarehouseGUI getWarehouseGUI() {
         return this.boardGUI.getWarehouseGUI();
+    }
+
+    public ResourceInHandGUI getResourceInHandGUI() {
+        return this.marketGUI.getResourceInHandGUI();
     }
 }
 
