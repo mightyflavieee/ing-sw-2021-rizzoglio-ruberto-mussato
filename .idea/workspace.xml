@@ -7,15 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Handled nullpointer exception in ClientCLI.resourceSelector">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Added show black marker position in ClientCLI.viewer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/actionTokens/ActionTokenContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/actionTokens/ActionTokenContainer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/actionTokens/DiscardActionToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/actionTokens/DiscardActionToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/actionTokens/MoveActionToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/actionTokens/MoveActionToken.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/actionTokens/MoveAndShuffleActionToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/actionTokens/MoveAndShuffleActionToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/controller/Controller.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -214,8 +209,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.ClientApp" />
-        <item itemvalue="Application.ServerApp" />
         <item itemvalue="Application.ClientAppGUI" />
+        <item itemvalue="Application.ServerApp" />
         <item itemvalue="Application.GUI" />
         <item itemvalue="Application.BoardGUI" />
       </list>
@@ -354,14 +349,7 @@
       <workItem from="1622617470679" duration="61000" />
       <workItem from="1622618208589" duration="8400000" />
       <workItem from="1622664540024" duration="640000" />
-      <workItem from="1622666459866" duration="889000" />
-    </task>
-    <task id="LOCAL-00105" summary="Code Optimization">
-      <created>1621888342519</created>
-      <option name="number" value="00105" />
-      <option name="presentableId" value="LOCAL-00105" />
-      <option name="project" value="LOCAL" />
-      <updated>1621888342519</updated>
+      <workItem from="1622666459866" duration="1873000" />
     </task>
     <task id="LOCAL-00106" summary="Corrected minor error in Controller.performMove">
       <created>1621889787915</created>
@@ -699,7 +687,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622665082745</updated>
     </task>
-    <option name="localTasksCounter" value="154" />
+    <task id="LOCAL-00154" summary="Added show black marker position in ClientCLI.viewer">
+      <created>1622667405005</created>
+      <option name="number" value="00154" />
+      <option name="presentableId" value="LOCAL-00154" />
+      <option name="project" value="LOCAL" />
+      <updated>1622667405005</updated>
+    </task>
+    <option name="localTasksCounter" value="155" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -729,7 +724,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added MapTrayGUI" />
     <MESSAGE value="added ChestGUI" />
     <MESSAGE value="updated BoardGUI" />
     <MESSAGE value="Removed not shared methods in Client.java" />
@@ -754,7 +748,8 @@
     <MESSAGE value="Updated ResourceInHandlerGUI.refresh" />
     <MESSAGE value="Implemented Take market resource move using gui" />
     <MESSAGE value="Handled nullpointer exception in ClientCLI.resourceSelector" />
-    <option name="LAST_COMMIT_MESSAGE" value="Handled nullpointer exception in ClientCLI.resourceSelector" />
+    <MESSAGE value="Added show black marker position in ClientCLI.viewer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added show black marker position in ClientCLI.viewer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -797,6 +792,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/LeaderCardChoserGUI.java</url>
           <line>19</line>
           <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/controller/Controller.java</url>
+          <line>15</line>
+          <option name="timeStamp" value="48" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
