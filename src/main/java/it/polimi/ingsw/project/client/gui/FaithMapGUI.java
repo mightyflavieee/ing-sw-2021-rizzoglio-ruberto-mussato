@@ -1,5 +1,7 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
+
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
@@ -11,11 +13,15 @@ import java.util.PrimitiveIterator;
 public class FaithMapGUI extends JInternalFrame {
     private final List<JButton> tiles;
     private final List<JButton> papalCuoncilTiles;
+    private int markerPosition;
+    private FaithMap faithMapModel;
 
-    public FaithMapGUI() {
+    public FaithMapGUI(FaithMap faithMap) {
         this.setTitle("FaithMap");
         this.setVisible(true);
         this.setLayout(new GridLayout(2, 24));
+        this.markerPosition = 0;
+        this.faithMapModel = faithMap;
         this.tiles = new ArrayList<>();
         this.papalCuoncilTiles = new ArrayList<>();
         for (int i = 0; i < 24; i++) {
@@ -23,17 +29,24 @@ public class FaithMapGUI extends JInternalFrame {
         }
         for (int i = 0; i < 23; i++) {
             JButton button = new JButton();
+            button.setBackground(new Color(255, 255, 255));
             if (i != 5 && i != 13 && i != 20) {
                 button.setVisible(false);
             }
             if (i == 5) {
-                button.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/tiles/quadrato giallo.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+                button.setIcon(new ImageIcon(
+                        new javax.swing.ImageIcon("src/main/resources/tiles/quadrato giallo.png")
+                        .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
             }
             if (i == 13) {
-                button.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/tiles/quadrato arancione.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+                button.setIcon(new ImageIcon(
+                        new javax.swing.ImageIcon("src/main/resources/tiles/quadrato arancione.png")
+                        .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
             }
             if (i == 20) {
-                button.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/tiles/quadrato rosso.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+                button.setIcon(new ImageIcon(
+                        new javax.swing.ImageIcon("src/main/resources/tiles/quadrato rosso.png")
+                        .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
             }
             this.papalCuoncilTiles.add(button);
         }
@@ -41,6 +54,7 @@ public class FaithMapGUI extends JInternalFrame {
         for (JButton button : this.tiles) {
             this.add(button);
         }
+        this.tiles.get(0).setBackground(new Color(105, 105, 105));
         for (JButton button : this.papalCuoncilTiles) {
             this.add(button);
         }
@@ -105,12 +119,10 @@ public class FaithMapGUI extends JInternalFrame {
         }
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setVisible(true);
-        frame.setResizable(true);
-        frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new FaithMapGUI());
+    public void moveForward() {
+        this.faithMapModel.moveForward();
+        this.tiles.get(this.markerPosition).setBackground(new Color(255, 255, 255));
+        this.markerPosition++;
+        this.tiles.get(this.markerPosition).setBackground(new Color(105, 105, 105));
     }
 }

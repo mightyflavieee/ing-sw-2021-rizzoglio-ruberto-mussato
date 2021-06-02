@@ -56,4 +56,12 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         this.setMyLeaderCards(leaderCards);
         this.setTitle(opponentNickName + "'s Leader Cards");
     }
+
+    public void disableButtons() {
+        this.leaderMovePanelList.forEach(LeaderMovePanel::disableButtons);
+    }
+
+    public void enableButtons() {
+        this.leaderMovePanelList.forEach(LeaderMovePanel::enableButtons);
+    }
 }

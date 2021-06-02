@@ -19,7 +19,6 @@ public class Controller implements Observer<PlayerMove> {
     }
 
     private synchronized void performMove(PlayerMove playerMove) {
-        // TODO tipi di messaggi
         if (!model.isPlayerTurn(playerMove.getPlayer())) {
             model.notifyPartialMove();
             return;

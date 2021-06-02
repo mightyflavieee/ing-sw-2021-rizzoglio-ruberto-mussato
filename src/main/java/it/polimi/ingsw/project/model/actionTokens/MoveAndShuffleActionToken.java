@@ -7,4 +7,7 @@ public class MoveAndShuffleActionToken extends Observable<MoveAndShuffleActionTo
     public void Action() {
         super.notify(this);
     }
+    public String toString(){
+        return "Move and Shuffle Action Token";
+    }
 }

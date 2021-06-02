@@ -1037,16 +1037,28 @@ public class ClientCLI extends Client {
     }
 
     public void viewer() {
-        System.out.println("0 - Go Back\n" + "1 - show informations about the others players\n"
-                + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
-                + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Warehouse\n"
-                + "8 - show your history");
+        int gameSize = this.match.getPlayerList().size();
+        if(gameSize == 1){
+            System.out.println("0 - Go Back\n" + "1 - Show the Black Marker Position\n"
+                    + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
+                    + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Warehouse\n"
+                    + "8 - show your history and the Action Token that have been extracted");
+        }else {
+            System.out.println("0 - Go Back\n" + "1 - show informations about the others players\n"
+                    + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
+                    + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Warehouse\n"
+                    + "8 - show your history");
+        }
         String answer = stdin.nextLine();
         switch (answer) {
             case "0":
                 break;
             case "1":
-                viewer(getNickname());
+                if(gameSize == 1){
+                    System.out.println("The Black Marker position is: " + this.match.getBlackMarkerPosition() +"/24");
+                }else {
+                    viewer(getNickname());
+                }
                 break;
             case "2":
                 System.out.println("Your points are: " + getMatch().get().getVictoryPoints(getNickname()));
@@ -1254,10 +1266,15 @@ public class ClientCLI extends Client {
                 System.out.println("wrong input");
                 return null;
         }
-        if (resourcesInHand.get(type) >= n) {
-            return new Pair<>(type, n);
-        } else {
-            System.out.println("Not enough resources");
+        try {
+            if (resourcesInHand.get(type) >= n) {
+                return new Pair<>(type, n);
+            } else {
+                System.out.println("Not enough resources");
+                return null;
+            }
+        }catch (NullPointerException e){
+            System.out.println("Selected resources not present");
             return null;
         }
     }

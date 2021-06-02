@@ -20,5 +20,8 @@ public class DiscardActionToken extends Observable<CardColor> implements ActionT
         super.notify(this.cardColor);
     }
 
+    public String toString(){
+        return "Discard Action Token, cardcolor: " + this.cardColor;
+    }
 
 }

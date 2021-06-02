@@ -159,9 +159,9 @@ public class ClientGUI extends Client implements Observer<Move> {
         jFrame.setLayout(new GridLayout(13, 1));
         jFrame.add(new JLabel("What is your name?"));
         JTextField nicknameField = new JTextField();
-        nicknameField.addActionListener(new InsertNameListener(getInstance(), nicknameField));
         jFrame.add(nicknameField);
-        jFrame.add(new JLabel("How many players?"));
+        JLabel numPlayerLabel = new JLabel("How many players?");
+        jFrame.add(numPlayerLabel);
         JRadioButton oneRadioButton, twoRadioButton, threeRadioButton, fourRadioButton;
         oneRadioButton = new JRadioButton("1");
         twoRadioButton = new JRadioButton("2");
@@ -171,22 +171,20 @@ public class ClientGUI extends Client implements Observer<Move> {
         jFrame.add(twoRadioButton);
         jFrame.add(threeRadioButton);
         jFrame.add(fourRadioButton);
-        jFrame.add(new JLabel("Do you want to join or to create a new game?"));
+        JLabel createJoinLabel = new JLabel("Do you want to join or to create a new game?");
+        jFrame.add(createJoinLabel);
         JRadioButton createRadioButton;
         createRadioButton = new JRadioButton("Create Game");
         jFrame.add(createRadioButton);
         JRadioButton joinRadioButton;
         joinRadioButton = new JRadioButton("Join Game");
         jFrame.add(joinRadioButton);
-        createRadioButton
-                .addActionListener(new CreateButtonListener(getInstance(), createRadioButton, joinRadioButton));
         JLabel matchIDLabel = new JLabel("ID:");
         matchIDLabel.setVisible(false);
         jFrame.add(matchIDLabel);
         JTextField idMatchField = new JTextField();
         idMatchField.setEnabled(false);
         idMatchField.setVisible(false);
-        idMatchField.addActionListener(new InsertMatchIdListener(getInstance(), idMatchField));
         jFrame.add(idMatchField);
         joinRadioButton.addActionListener(
                 new JoinButtonListener(getInstance(), createRadioButton, joinRadioButton, idMatchField, matchIDLabel));
@@ -200,7 +198,7 @@ public class ClientGUI extends Client implements Observer<Move> {
         fourRadioButton.addActionListener(new FourRadioButtonListener(getInstance(), oneRadioButton, twoRadioButton,
                 threeRadioButton, fourRadioButton));
         JButton submitButton;
-        List<JComponent> previousButtons = new ArrayList<>();
+        List<JComponent> previousButtons = new ArrayList<>(); //all the buttons before the submit
         previousButtons.add(nicknameField);
         previousButtons.add(createRadioButton);
         previousButtons.add(joinRadioButton);
@@ -209,9 +207,24 @@ public class ClientGUI extends Client implements Observer<Move> {
         previousButtons.add(threeRadioButton);
         previousButtons.add(fourRadioButton);
         previousButtons.add(idMatchField);
+        List<JComponent> successiveButtons = new ArrayList<>();//buttons after the nicknameField
+        successiveButtons.add(createRadioButton);
+        successiveButtons.add(joinRadioButton);
+        successiveButtons.add(oneRadioButton);
+        successiveButtons.add(twoRadioButton);
+        successiveButtons.add(threeRadioButton);
+        successiveButtons.add(fourRadioButton);
+        successiveButtons.add(numPlayerLabel);
+        successiveButtons.add(createJoinLabel);
+        successiveButtons.forEach(x -> x.setVisible(false));
         submitButton = new JButton("Submit");
+        submitButton.setVisible(false);
         jFrame.add(submitButton);
         submitButton.addActionListener(new SubmitButtonListener(getInstance(), jFrame, previousButtons));
+        nicknameField.addActionListener(new InsertNameListener(getInstance(), nicknameField, successiveButtons));
+        createRadioButton
+                .addActionListener(new CreateButtonListener(getInstance(), createRadioButton, joinRadioButton,submitButton));
+        idMatchField.addActionListener(new InsertMatchIdListener(getInstance(), idMatchField,submitButton));
         jFrame.pack();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
