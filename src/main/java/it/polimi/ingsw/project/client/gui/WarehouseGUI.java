@@ -162,7 +162,7 @@ public class WarehouseGUI extends JInternalFrame {
             this.resourceTypePerShelf.put(floor, resourceTypeInShelf);
             if (this.shelvesButtons.get(floor).size() > this.warehouseModel.getShelves().get(floor).size()) {
                 for (int i = this.shelvesButtons.get(floor).size(); i > this.warehouseModel.getShelves().get(floor).size(); i--) {
-                    this.shelvesButtons.get(floor).get(i).setIcon(new ImageIcon(
+                    this.shelvesButtons.get(floor).get(i-1).setIcon(new ImageIcon(
                             new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                             .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
                 }
