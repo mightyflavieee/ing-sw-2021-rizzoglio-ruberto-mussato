@@ -26,7 +26,8 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
   public Map<ResourceType, Integer> mapAllContainedResources() {
     Map<ResourceType, Integer> currentResourcesMap = new HashMap<>();
     // getting resources from the entire warehouse
-    shelves.forEach((ShelfFloor floor, List<Resource> listOfResources) -> mapResourcesHelper(currentResourcesMap, listOfResources));
+    shelves.forEach(
+        (ShelfFloor floor, List<Resource> listOfResources) -> mapResourcesHelper(currentResourcesMap, listOfResources));
     // getting resources from extradeposit
     if (extraDeposit != null) {
       extraDeposit.forEach((ResourceType resourceType, Integer numberOfResources) -> {
@@ -158,8 +159,8 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
         }
       }
     }
-    Resource oldResourceOnFloor;
-    List<Resource> oldResourceOnPreviousFloor = new ArrayList<>();
+    Resource oldResourceOnFloor = null;
+    List<Resource> oldResourceOnPreviousFloor = new ArrayList<Resource>();
     for (ShelfFloor shelfFloor : shelfs.keySet()) {
       oldResourceOnFloor = null;
       for (Resource resource : shelfs.get(shelfFloor)) {
@@ -174,8 +175,9 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     }
     for (int i = 0; i < oldResourceOnPreviousFloor.size(); i++) {
       final Resource resourceToAnalyze = oldResourceOnPreviousFloor.get(i);
-      oldResourceOnPreviousFloor.remove(i);
-      for (Resource resource : oldResourceOnPreviousFloor) {
+      final List<Resource> allResourcesOnFloors = oldResourceOnPreviousFloor;
+      allResourcesOnFloors.remove(i);
+      for (Resource resource : allResourcesOnFloors) {
         if (resourceToAnalyze == resource) {
           return false;
         }
@@ -183,34 +185,33 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     }
     return true;
   }
-  public boolean insertInShelves(ShelfFloor shelfFloor, List<Resource> resourceList){
+
+  public boolean insertInShelves(ShelfFloor shelfFloor, List<Resource> resourceList) {
     switch (shelfFloor) {
       case First:
-        if(shelves.get(ShelfFloor.First).size()>0)
+        if (shelves.get(ShelfFloor.First).size() > 0)
           return false;
         break;
       case Second:
-        if(shelves.get(ShelfFloor.Second).size() + resourceList.size() > 2) {
+        if (shelves.get(ShelfFloor.Second).size() + resourceList.size() > 2) {
           return false;
-        }
-        else {
-          if(shelves.get(ShelfFloor.Second).size()==0){
+        } else {
+          if (shelves.get(ShelfFloor.Second).size() == 0) {
             break;
           }
-          if(shelves.get(ShelfFloor.Second).get(0).getType() != resourceList.get(0).getType()){
+          if (shelves.get(ShelfFloor.Second).get(0).getType() != resourceList.get(0).getType()) {
             return false;
           }
         }
         break;
       case Third:
-        if(shelves.get(ShelfFloor.Third).size()==0){
+        if (shelves.get(ShelfFloor.Third).size() == 0) {
           break;
         }
-        if(shelves.get(ShelfFloor.Third).size() + resourceList.size() > 3) {
+        if (shelves.get(ShelfFloor.Third).size() + resourceList.size() > 3) {
           return false;
-        }
-        else {
-          if(shelves.get(ShelfFloor.Third).get(0).getType() != resourceList.get(0).getType()){
+        } else {
+          if (shelves.get(ShelfFloor.Third).get(0).getType() != resourceList.get(0).getType()) {
             return false;
           }
         }
@@ -220,60 +221,62 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     }
     List<Resource> temp = shelves.get(shelfFloor);
     temp.addAll(resourceList);
-    shelves.put(shelfFloor,temp);
+    shelves.put(shelfFloor, temp);
     return true;
   }
-  public boolean insertInExtraDeposit(List<Resource> resourceList){
-    if(this.extraDeposit == null){
+
+  public boolean insertInExtraDeposit(List<Resource> resourceList) {
+    if (this.extraDeposit == null) {
       return false;
     }
-    if(extraDeposit.size() + resourceList.size() > 2) {
+    if (extraDeposit.size() + resourceList.size() > 2) {
       return false;
-    }
-    else {
-      if(!extraDeposit.containsKey(resourceList.get(0).getType())){
+    } else {
+      if (!extraDeposit.containsKey(resourceList.get(0).getType())) {
         return false;
       }
     }
-    extraDeposit.put(resourceList.get(0).getType(),extraDeposit.get(resourceList.get(0).getType()) + resourceList.size()) ;
+    extraDeposit.put(resourceList.get(0).getType(),
+        extraDeposit.get(resourceList.get(0).getType()) + resourceList.size());
     return true;
   }
-  public String toString(){
+
+  public String toString() {
     String string = "";
-    string = string + "Shelves:\n" + this.getShelvesToString() + "\nExtra Deposit: \n" +this.getExtraDepositToString();
+    string = string + "Shelves:\n" + this.getShelvesToString() + "\nExtra Deposit: \n" + this.getExtraDepositToString();
     return string;
   }
-  public String getShelvesToString(){
+
+  public String getShelvesToString() {
     StringBuilder string = new StringBuilder();
     for (Map.Entry<ShelfFloor, List<Resource>> entry : shelves.entrySet()) {
       ShelfFloor floor = entry.getKey();
       List<Resource> listOfResources = entry.getValue();
       string.append(floor.toString());
-      for(Resource resource : listOfResources){
+      for (Resource resource : listOfResources) {
         string.append(" ").append(resource.toString());
       }
       string.append("\n");
     }
     return string.toString();
-    //    string =   this.shelves
-//            .entrySet()
-//            .stream()
-//            .map(x -> x.getKey().toString() + x.getValue().stream().map(y -> " " + y.toString()) + "\n")
-//            .collect(Collectors.toList())
-//            .stream()
-//            .reduce("", (a,b)-> a + b);
+    // string = this.shelves
+    // .entrySet()
+    // .stream()
+    // .map(x -> x.getKey().toString() + x.getValue().stream().map(y -> " " +
+    // y.toString()) + "\n")
+    // .collect(Collectors.toList())
+    // .stream()
+    // .reduce("", (a,b)-> a + b);
 
-    //.stream()
-            //.collect(Collectors.joining(" "));
+    // .stream()
+    // .collect(Collectors.joining(" "));
   }
-  public String getExtraDepositToString(){
-    if(this.extraDeposit == null){
+
+  public String getExtraDepositToString() {
+    if (this.extraDeposit == null) {
       return "no extra deposit";
     }
-    return this.extraDeposit
-            .entrySet()
-            .stream()
-            .map(x -> x.getKey().toString() + " " + x.getValue().toString())
-            .toString();
+    return this.extraDeposit.entrySet().stream().map(x -> x.getKey().toString() + " " + x.getValue().toString())
+        .toString();
   }
 }
