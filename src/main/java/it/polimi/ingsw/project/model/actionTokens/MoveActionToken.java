@@ -7,5 +7,7 @@ public class MoveActionToken extends Observable<MoveActionToken> implements Acti
     public void Action() {
         super.notify(this);
     }
-
+    public String toString(){
+        return "Move Action Token";
+    }
 }

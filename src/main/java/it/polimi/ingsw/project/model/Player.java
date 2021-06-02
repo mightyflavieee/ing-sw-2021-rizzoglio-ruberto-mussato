@@ -177,4 +177,8 @@ public class Player implements Serializable, Cloneable {
   public List<LeaderCard> getLeaderCards() {
     return this.board.getLeaderCards();
   }
+
+  public int getBlackMarkerPosition() {
+    return this.board.getMarkerPosition();
+  }
 }

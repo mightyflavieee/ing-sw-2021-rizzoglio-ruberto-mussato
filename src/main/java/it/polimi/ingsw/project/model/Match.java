@@ -193,7 +193,7 @@ public class Match implements Serializable, Cloneable {
     }
 
     public void performExtractActionTokenMove() {
-        this.actionTokenContainer.drawToken();
+        this.currentPlayer.updateHistory(this.actionTokenContainer.drawToken());
     }
 
     public boolean isFeasibleActivateLeaderCardMove(String leaderCardID) {
@@ -319,5 +319,9 @@ public class Match implements Serializable, Cloneable {
                 }
             }
         }
+    }
+
+    public int getBlackMarkerPosition() {
+        return this.currentPlayer.getBlackMarkerPosition();
     }
 }
