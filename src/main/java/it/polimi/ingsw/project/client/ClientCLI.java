@@ -1254,10 +1254,15 @@ public class ClientCLI extends Client {
                 System.out.println("wrong input");
                 return null;
         }
-        if (resourcesInHand.get(type) >= n) {
-            return new Pair<>(type, n);
-        } else {
-            System.out.println("Not enough resources");
+        try {
+            if (resourcesInHand.get(type) >= n) {
+                return new Pair<>(type, n);
+            } else {
+                System.out.println("Not enough resources");
+                return null;
+            }
+        }catch (NullPointerException e){
+            System.out.println("Selected resources not present");
             return null;
         }
     }
