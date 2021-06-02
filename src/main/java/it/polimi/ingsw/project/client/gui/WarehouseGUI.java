@@ -250,4 +250,8 @@ public class WarehouseGUI extends JInternalFrame {
     public Map<ShelfFloor, ResourceType> getResourceTypePerShelf() {
         return resourceTypePerShelf;
     }
+
+    public Warehouse getWarehouseModel() {
+        return warehouseModel;
+    }
 }

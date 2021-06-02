@@ -22,7 +22,7 @@ public class MarketGUI extends JInternalFrame {
        // this.setLayout(new OverlayLayout());
       //  this.setSize(50,100);
 
-        this.resourceInHandGUI = new ResourceInHandGUI(informationsGUI);
+        this.resourceInHandGUI = new ResourceInHandGUI(informationsGUI, gui.getTakeMarketResourceBuilder());
         this.trayGui = new TrayGUI(this.resourceInHandGUI, gui, market);
         this.add(trayGui);
         this.add(resourceInHandGUI);
@@ -77,5 +77,9 @@ public class MarketGUI extends JInternalFrame {
 
     public ResourceInHandGUI getResourceInHandGUI() {
         return this.resourceInHandGUI;
+    }
+
+    public Market getMarket() {
+        return  this.trayGui.getMarket();
     }
 }

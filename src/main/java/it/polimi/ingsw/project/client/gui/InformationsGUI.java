@@ -42,6 +42,9 @@ public class InformationsGUI extends JInternalFrame {
                 if(this.phaseFrame!=null){
                     this.phaseFrame.dispose();
                 }
+                if(this.resourceInHandler!=null){
+                    this.resourceInHandler.dispose();
+                }
                 this.jTextArea.setVisible(false);
                 this.phaseFrame = new NoMoveHandlerGUI("to end the turn", this.gui);
                 this.add(this.phaseFrame);
@@ -79,7 +82,7 @@ public class InformationsGUI extends JInternalFrame {
                 "\nStore them in the Shelves");}
         //todo creare resourceinHandler se serve
         if(this.resourceInHandler==null){
-            this.resourceInHandler = new ResourceInHandlerGUI(gui.getWarehouseGUI(),gui.getResourceInHandGUI());
+            this.resourceInHandler = new ResourceInHandlerGUI(gui.getWarehouseGUI(),gui.getResourceInHandGUI(),gui);
         }
         this.resourceInHandler.setVisible(true);
         this.add(resourceInHandler);

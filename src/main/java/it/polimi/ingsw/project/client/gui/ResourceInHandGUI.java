@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.listeners.*;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
@@ -12,7 +13,8 @@ public class ResourceInHandGUI extends JInternalFrame {
     private JButton coinButton, stoneButton, shieldButton, servantButton;
     private JLabel coinLabel, stoneLabel, shieldLabel, servantLabel;
     private int coinInt, stoneInt, shieldInt, servantInt;
-    public ResourceInHandGUI(InformationsGUI informationsGUI) {
+    private TakeMarketResourceBuilder takeMarketResourceBuilder;
+    public ResourceInHandGUI(InformationsGUI informationsGUI, TakeMarketResourceBuilder takeMarketResourceBuilder) {
         this.setTitle("Resources in Hand");
         this.setLayout(new GridLayout(2,4));
         this.coinButton = new JButton();
@@ -49,6 +51,7 @@ public class ResourceInHandGUI extends JInternalFrame {
         this.servantButton.setEnabled(false);
         this.setVisible(true);
         this.pack();
+        this.takeMarketResourceBuilder = takeMarketResourceBuilder;
     }
 
     public void refresh(List<Resource> resourceList) {
@@ -105,6 +108,11 @@ public class ResourceInHandGUI extends JInternalFrame {
             this.servantButton.setEnabled(false);
         }else{
             this.servantButton.setEnabled(true);
+        }
+        if(coinInt + stoneInt + servantInt + shieldInt == 0){
+            takeMarketResourceBuilder.setMarketClear(true);
+        }else{
+            takeMarketResourceBuilder.setMarketClear(false);
         }
     }
     public void decreaseCoin(){

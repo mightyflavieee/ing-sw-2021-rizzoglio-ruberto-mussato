@@ -56,4 +56,8 @@ public class BoardGUI extends JInternalFrame {
     public WarehouseGUI getWarehouseGUI() {
         return warehouse;
     }
+
+    public Warehouse getWarehouseModel() {
+      return   this.warehouse.getWarehouseModel();
+    }
 }

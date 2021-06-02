@@ -1,9 +1,11 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.TurnPhase;
 import it.polimi.ingsw.project.model.playermove.Move;
+import it.polimi.ingsw.project.model.playermove.TakeMarketResourcesMove;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.utils.Pair;
 import it.polimi.ingsw.project.utils.Utils;
@@ -17,22 +19,18 @@ public class GUI extends Observable<Move> {
     private JFrame jFrame;
     private BoardGUI boardGUI;
     private MarketGUI marketGUI;
-    //    private MarketButton marketButton;
-//    private MarketButtonListener marketButtonListener;
     private LeaderCardPlaceGUI leaderCardPlaceGui;
     private CardContainerGUI cardContainerGUI;
-    private FaithMapGUI faithMapGUI;
-    private WarehouseGUI warehouseGUI;
-    private ChestGUI chestGUI;
-    private MapTrayGUI mapTrayGUI;
     private Player mePlayer;
     private List<Player> opponentsPlayer;
     private InformationsGUI informationsGUI;
     private HistoryGUI historyGUI;
     private PlayersBarGUI playersBarGUI;
+    private TakeMarketResourceBuilder takeMarketResourceBuilder;
 
 
     public GUI(Match match, String myNickname) {
+        this.takeMarketResourceBuilder = new TakeMarketResourceBuilder();
         this.jFrame = new JFrame();
         this.jFrame.setTitle("Master of Renaissance");
 
@@ -198,6 +196,17 @@ public class GUI extends Observable<Move> {
 
     public ResourceInHandGUI getResourceInHandGUI() {
         return this.marketGUI.getResourceInHandGUI();
+    }
+
+    public TakeMarketResourceBuilder getTakeMarketResourceBuilder() {
+        return takeMarketResourceBuilder;
+    }
+
+    public void sendMarketMove() {
+        this.takeMarketResourceBuilder.setWarehouse(this.boardGUI.getWarehouseModel());
+        this.takeMarketResourceBuilder.setMarket(this.marketGUI.getMarket());
+        this.send(takeMarketResourceBuilder.getMove());
+        this.takeMarketResourceBuilder.reset();
     }
 }
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.client.gui.listeners.DiscardButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.InsertFirstShelfButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.InsertSecondShelfButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.InsertThirdShelfButtonListener;
@@ -16,7 +17,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
     private int resourceNum;
     private JLabel imageLabel, numLabel;
     private WarehouseGUI warehouseGUI;
-    public ResourceInHandlerGUI(WarehouseGUI warehouseGUI, ResourceInHandGUI resourceInHandGUI) {
+    public ResourceInHandlerGUI(WarehouseGUI warehouseGUI, ResourceInHandGUI resourceInHandGUI,GUI gui) {
         this.warehouseGUI = warehouseGUI;
         this.setTitle("Resource Selected:");
         this.setVisible(false);
@@ -40,9 +41,10 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         this.secondShelfButton.setEnabled(false);
         this.thirdShelfButton.setEnabled(false);
         this.discardButton.setEnabled(false);
-        this.firstShelfButton.addActionListener(new InsertFirstShelfButtonListener(this,warehouseGUI,resourceInHandGUI));
-        this.secondShelfButton.addActionListener(new InsertSecondShelfButtonListener(this,warehouseGUI,resourceInHandGUI));
-        this.thirdShelfButton.addActionListener(new InsertThirdShelfButtonListener(this,warehouseGUI,resourceInHandGUI));
+        this.firstShelfButton.addActionListener(new InsertFirstShelfButtonListener(this,warehouseGUI,resourceInHandGUI,gui));
+        this.secondShelfButton.addActionListener(new InsertSecondShelfButtonListener(this,warehouseGUI,resourceInHandGUI,gui));
+        this.thirdShelfButton.addActionListener(new InsertThirdShelfButtonListener(this,warehouseGUI,resourceInHandGUI,gui));
+        this.discardButton.addActionListener(new DiscardButtonListener(this,resourceInHandGUI,gui));
     }
     public void refresh(){
         Map<ShelfFloor,Integer> numOfResourcesPerShelves = this.warehouseGUI.getNumberOfResoucesPerShelf();

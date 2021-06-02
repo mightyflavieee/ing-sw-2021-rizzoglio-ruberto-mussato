@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui.listeners;
 
+import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.ResourceInHandGUI;
 import it.polimi.ingsw.project.client.gui.ResourceInHandlerGUI;
@@ -12,17 +13,16 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InsertSecondShelfButtonListener implements ActionListener {
+public class DiscardButtonListener implements ActionListener {
     private ResourceInHandlerGUI resourceInHandlerGUI;
-    private WarehouseGUI warehouseGUI;
     private ResourceInHandGUI resourceInHandGUI;
+    private TakeMarketResourceBuilder takeMarketResourceBuilder;
     private GUI gui;
 
-
-    public InsertSecondShelfButtonListener(ResourceInHandlerGUI resourceInHandlerGUI, WarehouseGUI warehouseGUI,ResourceInHandGUI resourceInHandGUI, GUI gui) {
+    public DiscardButtonListener(ResourceInHandlerGUI resourceInHandlerGUI, ResourceInHandGUI resourceInHandGUI, GUI gui) {
         this.resourceInHandlerGUI = resourceInHandlerGUI;
-        this.warehouseGUI = warehouseGUI;
         this.resourceInHandGUI = resourceInHandGUI;
+        this.takeMarketResourceBuilder = gui.getTakeMarketResourceBuilder();
         this.gui = gui;
     }
 
@@ -32,10 +32,10 @@ public class InsertSecondShelfButtonListener implements ActionListener {
         for(int i = 0; i< resourceInHandlerGUI.getResourceNum(); i++) {
             resourceList.add(new Resource(resourceInHandlerGUI.getResourceType()));
         }
-        this.warehouseGUI.insertInShelf(ShelfFloor.Second,resourceList);
+        this.takeMarketResourceBuilder.addResourcesToDiscard(resourceList);
         this.resourceInHandlerGUI.removeResource();
         this.resourceInHandGUI.refresh();
-        if(this.gui.getTakeMarketResourceBuilder().setHandClear()){
+        if(this.takeMarketResourceBuilder.setHandClear()){
             this.gui.sendMarketMove();
         }
     }

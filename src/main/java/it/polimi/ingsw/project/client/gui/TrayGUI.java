@@ -113,4 +113,8 @@ public class TrayGUI extends JPanel {
         this.market = market;
         this.refresh();
     }
+
+    public Market getMarket() {
+        return this.market;
+    }
 }

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui.listeners;
 
+import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.ResourceInHandGUI;
 import it.polimi.ingsw.project.client.gui.ResourceInHandlerGUI;
 import it.polimi.ingsw.project.client.gui.WarehouseGUI;
@@ -15,11 +16,13 @@ public class InsertFirstShelfButtonListener implements ActionListener {
     private ResourceInHandlerGUI resourceInHandlerGUI;
     private WarehouseGUI warehouseGUI;
     private ResourceInHandGUI resourceInHandGUI;
+    private GUI gui;
 
-    public InsertFirstShelfButtonListener(ResourceInHandlerGUI resourceInHandlerGUI, WarehouseGUI warehouseGUI, ResourceInHandGUI resourceInHandGUI) {
+    public InsertFirstShelfButtonListener(ResourceInHandlerGUI resourceInHandlerGUI, WarehouseGUI warehouseGUI, ResourceInHandGUI resourceInHandGUI, GUI gui) {
         this.resourceInHandlerGUI = resourceInHandlerGUI;
         this.warehouseGUI = warehouseGUI;
         this.resourceInHandGUI = resourceInHandGUI;
+        this.gui = gui;
     }
 
     @Override
@@ -31,5 +34,8 @@ public class InsertFirstShelfButtonListener implements ActionListener {
         this.warehouseGUI.insertInShelf(ShelfFloor.First,resourceList);
         this.resourceInHandlerGUI.removeResource();
         this.resourceInHandGUI.refresh();
+        if(this.gui.getTakeMarketResourceBuilder().setHandClear()){
+            this.gui.sendMarketMove();
+        }
     }
 }
