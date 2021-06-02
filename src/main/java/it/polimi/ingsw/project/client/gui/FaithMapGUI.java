@@ -25,11 +25,12 @@ public class FaithMapGUI extends JInternalFrame {
         this.tiles = new ArrayList<>();
         this.papalCuoncilTiles = new ArrayList<>();
         for (int i = 0; i < 24; i++) {
-            this.tiles.add(new JButton(String.valueOf(i+1)));
+            JButton button = new JButton(String.valueOf(i+1));
+            button.setBackground(new Color(255, 255, 255));
+            this.tiles.add(button);
         }
         for (int i = 0; i < 23; i++) {
             JButton button = new JButton();
-            button.setBackground(new Color(255, 255, 255));
             if (i != 5 && i != 13 && i != 20) {
                 button.setVisible(false);
             }
