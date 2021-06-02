@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import it.polimi.ingsw.project.controller.Controller;
 import it.polimi.ingsw.project.model.LeaderCardContainer;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
+import it.polimi.ingsw.project.view.RemoteView;
 
 public class Lobby {
     private String id;
@@ -13,6 +15,8 @@ public class Lobby {
     private Map<String, SocketClientConnection> mapOfSocketClientConnections;
     private LeaderCardContainer leaderCardContainer;
     private Map<String, List<LeaderCard>> chosenLeaderCardsByPlayer;
+    private Map<String, RemoteView> mapOfViews;
+    private Controller controller;
 
     public Lobby(String id, Integer maxNumberOfPlayers) {
         this.id = id;
@@ -20,6 +24,22 @@ public class Lobby {
         this.mapOfSocketClientConnections = new HashMap<>();
         this.leaderCardContainer = new LeaderCardContainer();
         this.chosenLeaderCardsByPlayer = new HashMap<String, List<LeaderCard>>();
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+
+    public Controller getController() {
+        return this.controller;
+    }
+
+    public void setMapOfViews(Map<String, RemoteView> mapOfViews) {
+        this.mapOfViews = mapOfViews;
+    }
+
+    public Map<String, RemoteView> getMapOfViews() {
+        return this.mapOfViews;
     }
 
     public String getId() {

@@ -13,9 +13,7 @@ import it.polimi.ingsw.project.messages.WaitForLeaderCardsMessage;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
-import it.polimi.ingsw.project.utils.Utils;
 import it.polimi.ingsw.project.view.RemoteView;
-import it.polimi.ingsw.project.view.View;
 
 public class Server {
     private static final int PORT = 12345;
@@ -47,7 +45,7 @@ public class Server {
     public void rejoinGame(String matchId, SocketClientConnection connection, String nickName) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
         currentLobby.insertPlayer(nickName, connection);
-
+        currentLobby.getMapOfViews().get(nickName).setClientConnection(connection);
     }
 
     public void resendCardsToPlayer(String matchId, String nickname) {
@@ -106,20 +104,21 @@ public class Server {
             listOfPlayer.add(new Player(nickname));
             listOfClientConnections.add(connection);
         });
-        List<View> listOfViews = new ArrayList<View>();
+        Map<String, RemoteView> mapOfViews = new HashMap<>();
         for (int i = 0; i < currentLobby.getMapOfSocketClientConnections().size(); i++) {
-            listOfViews.add(new RemoteView(listOfPlayer.get(i),
-                    Utils.extractOpponentsName(listOfPlayer.get(i), listOfPlayer), listOfClientConnections.get(i)));
+            mapOfViews.put(listOfPlayer.get(i).getNickname(),
+                    new RemoteView(listOfPlayer.get(i), listOfClientConnections.get(i)));
         }
+        currentLobby.setMapOfViews(mapOfViews);
         Collections.shuffle(listOfPlayer);
         for (Player player : listOfPlayer) {
             player.setLeaderCards(currentLobby.getchosenLeaderCardsByPlayer().get(player.getNickname()));
         }
         Model model = new Model(listOfPlayer);
-        Controller controller = new Controller(model);
-        for (View view : listOfViews) {
-            model.addObserver(view);
-            view.addObserver(controller);
+        currentLobby.setController(new Controller(model));
+        for (String nickname : currentLobby.getMapOfViews().keySet()) {
+            model.addObserver(currentLobby.getMapOfViews().get(nickname));
+            currentLobby.getMapOfViews().get(nickname).addObserver(currentLobby.getController());
         }
         currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
             connection.asyncSend(new MoveMessage(model.getMatchCopy()));
