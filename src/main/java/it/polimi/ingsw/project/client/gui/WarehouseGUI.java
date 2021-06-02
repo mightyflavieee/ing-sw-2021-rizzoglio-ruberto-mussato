@@ -2,6 +2,8 @@ package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.client.gui.listeners.warehouse.ResourceButtonListener;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
+import it.polimi.ingsw.project.model.board.Warehouse;
+import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import javax.swing.*;
@@ -18,8 +20,9 @@ public class WarehouseGUI extends JInternalFrame {
     private boolean canChangeShelves;
     private ShelfFloor floorToChange;
     private InformationsGUI informationsGUI;
+    private Warehouse warehouseModel;
 
-    public WarehouseGUI(InformationsGUI informationsGUI) {
+    public WarehouseGUI(InformationsGUI informationsGUI, Warehouse warehouse) {
         this.setTitle("Warehouse");
         this.setVisible(true);
         this.setLayout(new GridLayout(1, 2));
@@ -61,6 +64,9 @@ public class WarehouseGUI extends JInternalFrame {
         this.numberOfResoucesPerShelf.put(ShelfFloor.First, 0);
         this.numberOfResoucesPerShelf.put(ShelfFloor.Second, 0);
         this.numberOfResoucesPerShelf.put(ShelfFloor.Third, 0);
+        this.informationsGUI = informationsGUI;
+        this.warehouseModel = warehouse;
+        refresh();
     }
 
     public InformationsGUI getInformationsGUI() { return this.informationsGUI; }
@@ -140,29 +146,44 @@ public class WarehouseGUI extends JInternalFrame {
         this.shelvesButtons.put(ShelfFloor.Third, thirdFloor);
     }
 
-    // updates the ShelfFloor. If newResourceType is null, then it eliminates numOfResourcesToChange
-    // from that ShelfFloor.
+    private void refresh() {
+        for (ShelfFloor floor : this.warehouseModel.getShelves().keySet()) {
+            int count = 0;
+            ResourceType resourceTypeInShelf = null;
+            for (Resource resource : this.warehouseModel.getShelves().get(floor)) {
+                this.shelvesButtons.get(floor).get(count).setIcon(new ImageIcon(
+                        new ImageIcon("src/main/resources/resourcetype/" + resource.getType() + ".png")
+                        .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+                count++;
+                resourceTypeInShelf = resource.getType();
+            }
+            this.numberOfResoucesPerShelf.put(floor, count);
+            this.resourceTypePerShelf.put(floor, resourceTypeInShelf);
+            if (this.shelvesButtons.get(floor).size() > this.warehouseModel.getShelves().get(floor).size()) {
+                for (int i = this.shelvesButtons.get(floor).size(); i > this.warehouseModel.getShelves().get(floor).size(); i--) {
+                    this.shelvesButtons.get(floor).get(i).setIcon(new ImageIcon(
+                            new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
+                            .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+                }
+            }
+        }
+    }
+
+    // updates the ShelfFloor
     public void updateShelfFloor(ShelfFloor floor, ResourceType newResourceType, int numOfResourcesToChange) {
         for (ShelfFloor shelfFloor : this.shelvesButtons.keySet()) {
             if (shelfFloor == floor) {
                 for (int i = 0; i < numOfResourcesToChange; i++) {
-                    if (newResourceType == null) {
-                        this.shelvesButtons.get(shelfFloor).get(numOfResourcesToChange-i-1).setIcon(new ImageIcon(
-                                new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-                                        .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-                    } else {
-                        this.shelvesButtons.get(shelfFloor).get(i).setIcon(new ImageIcon(
-                                new ImageIcon("src/main/resources/resourcetype/" + newResourceType + ".png")
-                                        .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-
-                    }
+                    this.shelvesButtons.get(shelfFloor).get(i).setIcon(new ImageIcon(
+                            new ImageIcon("src/main/resources/resourcetype/" + newResourceType + ".png")
+                            .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
                 }
                 this.numberOfResoucesPerShelf.put(shelfFloor, numOfResourcesToChange);
                 this.resourceTypePerShelf.put(shelfFloor, newResourceType);
                 // if the numOfResourcesToChange is less than the total number of resources present in that shelf,
-                // puts them to void image
+                // puts in the other buttons the void image
                 if (numOfResourcesToChange < this.shelvesButtons.get(shelfFloor).size()) {
-                    for (int i = 0; i < (this.shelvesButtons.get(shelfFloor).size()-numOfResourcesToChange); i++) {
+                    for (int i = this.shelvesButtons.get(shelfFloor).size(); i > numOfResourcesToChange; i--) {
                         this.shelvesButtons.get(shelfFloor).get(i).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
@@ -177,8 +198,10 @@ public class WarehouseGUI extends JInternalFrame {
     public void changeShelf(ShelfFloor floorA, ShelfFloor floorB) {
         if ((floorA == ShelfFloor.First && floorB == ShelfFloor.Second) ||
                 (floorB == ShelfFloor.First && floorA == ShelfFloor.Second)) {
-            if (this.numberOfResoucesPerShelf.get(ShelfFloor.Second) != 2) {
+            if (this.numberOfResoucesPerShelf.get(ShelfFloor.Second) < 2) {
+                ResourceType resourceTypeFloorA = this.resourceTypePerShelf.get(floorA);
                 updateShelfFloor(floorA, this.resourceTypePerShelf.get(floorB), 1);
+                updateShelfFloor(floorB, resourceTypeFloorA, 1);
             } else {
                 //TODO ALERT, CANNOT DO THIS CHANGE
             }
@@ -186,7 +209,9 @@ public class WarehouseGUI extends JInternalFrame {
         if ((floorA == ShelfFloor.First && floorB == ShelfFloor.Third) ||
                 (floorB == ShelfFloor.First && floorA == ShelfFloor.Third)) {
             if (this.numberOfResoucesPerShelf.get(ShelfFloor.Third) < 2) {
+                ResourceType resourceTypeFloorA = this.resourceTypePerShelf.get(floorA);
                 updateShelfFloor(floorA, this.resourceTypePerShelf.get(floorB), 1);
+                updateShelfFloor(floorB, resourceTypeFloorA, 1);
             } else {
                 //TODO ALERT, CANNOT DO THIS CHANGE
             }
@@ -194,11 +219,19 @@ public class WarehouseGUI extends JInternalFrame {
         if ((floorA == ShelfFloor.Second && floorB == ShelfFloor.Third) ||
                 (floorB == ShelfFloor.Second && floorA == ShelfFloor.Third)) {
             if (this.numberOfResoucesPerShelf.get(ShelfFloor.Third) != 3) {
-                updateShelfFloor(floorA, this.resourceTypePerShelf.get(floorB),
-                        Math.max(this.numberOfResoucesPerShelf.get(floorA), this.numberOfResoucesPerShelf.get(floorB)));
+                ResourceType resourceTypeFloorA = this.resourceTypePerShelf.get(floorA);
+                int numberOfResourcesFloorA = this.numberOfResoucesPerShelf.get(floorA);
+                updateShelfFloor(floorA, this.resourceTypePerShelf.get(floorB), this.numberOfResoucesPerShelf.get(floorB));
+                updateShelfFloor(floorB, resourceTypeFloorA, numberOfResourcesFloorA);
             } else {
                 //TODO ALERT, CANNOT DO THIS CHANGE
             }
         }
+    }
+
+    // inserts the resources indicated in the chosen shelf
+    public void insertInShelf(ShelfFloor floor, List<Resource> resourcesToInsert) {
+        this.warehouseModel.insertInShelves(floor, resourcesToInsert);
+        refresh();
     }
 }
