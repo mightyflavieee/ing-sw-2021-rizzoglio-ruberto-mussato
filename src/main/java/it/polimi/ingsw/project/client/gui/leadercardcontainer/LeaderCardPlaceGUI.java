@@ -1,4 +1,4 @@
-package it.polimi.ingsw.project.client.gui.market;
+package it.polimi.ingsw.project.client.gui.leadercardcontainer;
 
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;

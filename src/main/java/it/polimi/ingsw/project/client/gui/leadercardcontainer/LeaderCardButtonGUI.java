@@ -1,4 +1,4 @@
-package it.polimi.ingsw.project.client.gui.market;
+package it.polimi.ingsw.project.client.gui.leadercardcontainer;
 
 import javax.swing.*;
 import java.awt.*;
