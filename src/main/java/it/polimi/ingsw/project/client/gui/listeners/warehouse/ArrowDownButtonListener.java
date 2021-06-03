@@ -1,6 +1,6 @@
 package it.polimi.ingsw.project.client.gui.listeners.warehouse;
 
-import it.polimi.ingsw.project.client.gui.WarehouseGUI;
+import it.polimi.ingsw.project.client.gui.board.WarehouseGUI;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 
 import java.awt.event.ActionEvent;

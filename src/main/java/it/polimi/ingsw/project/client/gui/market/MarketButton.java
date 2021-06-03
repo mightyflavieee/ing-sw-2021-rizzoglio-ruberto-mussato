@@ -1,4 +1,4 @@
-package it.polimi.ingsw.project.client.gui;
+package it.polimi.ingsw.project.client.gui.market;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

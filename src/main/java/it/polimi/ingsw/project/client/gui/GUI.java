@@ -1,11 +1,14 @@
 package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
+import it.polimi.ingsw.project.client.gui.board.*;
+import it.polimi.ingsw.project.client.gui.market.LeaderCardPlaceGUI;
+import it.polimi.ingsw.project.client.gui.market.MarketGUI;
+import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.TurnPhase;
 import it.polimi.ingsw.project.model.playermove.Move;
-import it.polimi.ingsw.project.model.playermove.TakeMarketResourcesMove;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.utils.Pair;
 import it.polimi.ingsw.project.utils.Utils;
@@ -19,8 +22,14 @@ public class GUI extends Observable<Move> {
     private JFrame jFrame;
     private BoardGUI boardGUI;
     private MarketGUI marketGUI;
+    //    private MarketButton marketButton;
+//    private MarketButtonListener marketButtonListener;
     private LeaderCardPlaceGUI leaderCardPlaceGui;
     private CardContainerGUI cardContainerGUI;
+    private FaithMapGUI faithMapGUI;
+    private WarehouseGUI warehouseGUI;
+    private ChestGUI chestGUI;
+    private MapTrayGUI mapTrayGUI;
     private Player mePlayer;
     private List<Player> opponentsPlayer;
     private InformationsGUI informationsGUI;
@@ -30,81 +39,52 @@ public class GUI extends Observable<Move> {
 
 
     public GUI(Match match, String myNickname) {
-        this.takeMarketResourceBuilder = new TakeMarketResourceBuilder();
         this.jFrame = new JFrame();
         this.jFrame.setTitle("Master of Renaissance");
-
+        //this.jFrame.setLayout(new GridLayout(3,3));
+        jFrame.setLayout(new BorderLayout());
 
         //  boardGUI = new BoardGUI("Board");
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,myNickname);
         this.mePlayer = pair._1;
         this.opponentsPlayer = pair._2;
         this.informationsGUI = new InformationsGUI(this,this.mePlayer.getTurnPhase());
+        this.boardGUI = new BoardGUI(myNickname, this.informationsGUI, this.mePlayer.getBoard());
         this.marketGUI = new MarketGUI(this,match.getMarket(),informationsGUI);
         this.historyGUI = new HistoryGUI(this.mePlayer.getHistoryToString());
         this.cardContainerGUI = new CardContainerGUI(match.getCardContainer());
         this.leaderCardPlaceGui = new LeaderCardPlaceGUI(this.mePlayer.getLeaderCards(),this);
         this.playersBarGUI = new PlayersBarGUI(this.opponentsPlayer.stream().map(Player::getNickname).collect(Collectors.toList()), myNickname,this);
-        this.boardGUI = new BoardGUI(myNickname,this.informationsGUI,this.mePlayer.getBoard());
         //todo inizializzatori di altre cose
+
         //faithMapGUI = new FaithMapGUI();
         //warehouseGUI = new WarehouseGUI();
         //chestGUI = new ChestGUI();
         //mapTrayGUI = new MapTrayGUI();
-        this.disableButtonsHandler(this.mePlayer.getTurnPhase());
+//        marketButton = new MarketButton("market button");
+//        marketButtonListener = new MarketButtonListener(marketGUI);
+//        marketButton.addActionListener(marketButtonListener);
+//        jFrame.add(marketButton);
+//        jFrame.add(new MarketGUI("altro market ma potrebbe essere board"));
+//        jFrame.add(new MarketGUI("altro market ma potrebbe essere warehouse"));
+//        marketGUI.doubleSize();
 
-
-
-//        this.jFrame.setLayout(new BorderLayout());
-//        JPanel southPanel = new JPanel();
-//        southPanel.setLayout(new GridLayout(1,2));
-//        southPanel.add(marketGUI);
-//        southPanel.add(cardContainerGUI);
-//        southPanel.setVisible(true);
-//        JPanel eastPanel = new JPanel();
-//        eastPanel.setLayout(new GridLayout(2,1));
-//        eastPanel.add(historyGUI);
-//        eastPanel.add(playersBarGUI);
-//        eastPanel.setVisible(true);
-//        jFrame.add(eastPanel,BorderLayout.EAST);
-//        jFrame.add(southPanel, BorderLayout.SOUTH);
+//        jFrame.add(marketGUI, BorderLayout.EAST);
 //        jFrame.add(boardGUI, BorderLayout.NORTH);
+//        jFrame.add(cardContainerGUI, BorderLayout.CENTER);
 //        jFrame.add(leaderCardPlaceGui, BorderLayout.WEST);
-//        jFrame.add(informationsGUI,BorderLayout.CENTER);
+//        jFrame.add(faithMapGUI);
+//        jFrame.add(warehouseGUI);
+//        jFrame.add(chestGUI);
+//        jFrame.add(mapTrayGUI);
 
-
-
-        this.jFrame.setLayout(new GridLayout(3,1));
-        JPanel upperPanel, centerPanel, bottomPanel;
-        upperPanel = new JPanel();
-        upperPanel.add(boardGUI);
-        centerPanel = new JPanel();
-        centerPanel.setLayout(new GridLayout(1,4));
-        centerPanel.add(informationsGUI);
-        centerPanel.add(leaderCardPlaceGui);
-        centerPanel.add(historyGUI);
-        centerPanel.add(playersBarGUI);
-        bottomPanel = new JPanel();
-        bottomPanel.setLayout(new GridLayout(1,2));
-        bottomPanel.add(marketGUI);
-        bottomPanel.add(cardContainerGUI);
-        this.jFrame.add(upperPanel);
-        this.jFrame.add(centerPanel);
-        this.jFrame.add(bottomPanel);
-
-
-
-
-
-        // this.jFrame.setLayout(new GridLayout(3,3));
-//        this.jFrame.add(informationsGUI);
-//        this.jFrame.add(marketGUI);
-//        this.jFrame.add(cardContainerGUI);
-//        this.jFrame.add(leaderCardPlaceGui);
-//        this.jFrame.add(historyGUI);
-//        this.jFrame.add(playersBarGUI);
-//        this.jFrame.add(boardGUI);
-        //jFrame.pack();
+        this.jFrame.add(boardGUI, BorderLayout.NORTH);
+        //this.jFrame.add(informationsGUI, BorderLayout.NORTH);
+        //this.jFrame.add(historyGUI, BorderLayout.NORTH);
+        this.jFrame.add(marketGUI, BorderLayout.CENTER);
+        this.jFrame.add(cardContainerGUI, BorderLayout.WEST);
+        this.jFrame.add(leaderCardPlaceGui, BorderLayout.EAST);
+        //this.jFrame.add(playersBarGUI, BorderLayout.SOUTH);
         this.jFrame.setVisible(true);
         this.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.jFrame.pack();
@@ -156,6 +136,7 @@ public class GUI extends Observable<Move> {
         this.disableForMainPhase();
         this.disableForLeaderCardPhase();
     }
+
     public void setMatch(Match match){//todo chiama i metodi set di tutti i jinternalframe e aggiorna tutto
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,this.mePlayer.getNickname());
         this.mePlayer = pair._1;

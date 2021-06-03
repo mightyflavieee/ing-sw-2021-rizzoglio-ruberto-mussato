@@ -1,7 +1,7 @@
 package it.polimi.ingsw.project.client.gui.listeners;
 
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
-import it.polimi.ingsw.project.client.gui.ResourceInHandGUI;
+import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

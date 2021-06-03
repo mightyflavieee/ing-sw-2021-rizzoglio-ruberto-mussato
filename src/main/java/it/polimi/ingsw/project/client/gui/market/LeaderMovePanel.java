@@ -1,5 +1,6 @@
-package it.polimi.ingsw.project.client.gui;
+package it.polimi.ingsw.project.client.gui.market;
 
+import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.listeners.LeaderCardActivateButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.LeaderCardDiscardButtonListener;
 

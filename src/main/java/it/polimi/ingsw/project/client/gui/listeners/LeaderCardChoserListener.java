@@ -1,7 +1,7 @@
 package it.polimi.ingsw.project.client.gui.listeners;
 
-import it.polimi.ingsw.project.client.gui.LeaderCardChoserGUI;
-import it.polimi.ingsw.project.client.gui.LeaderCardButtonGUI;
+import it.polimi.ingsw.project.client.gui.market.LeaderCardChoserGUI;
+import it.polimi.ingsw.project.client.gui.market.LeaderCardButtonGUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

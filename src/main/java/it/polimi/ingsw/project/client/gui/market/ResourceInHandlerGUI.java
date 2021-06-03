@@ -1,6 +1,9 @@
-package it.polimi.ingsw.project.client.gui;
+package it.polimi.ingsw.project.client.gui.market;
 
+import it.polimi.ingsw.project.client.gui.GUI;
+import it.polimi.ingsw.project.client.gui.board.WarehouseGUI;
 import it.polimi.ingsw.project.client.gui.listeners.*;
+import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
@@ -14,7 +17,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
     private int resourceNum;
     private JLabel imageLabel, numLabel;
     private WarehouseGUI warehouseGUI;
-    public ResourceInHandlerGUI(WarehouseGUI warehouseGUI, ResourceInHandGUI resourceInHandGUI,GUI gui) {
+    public ResourceInHandlerGUI(WarehouseGUI warehouseGUI, ResourceInHandGUI resourceInHandGUI, GUI gui) {
         this.warehouseGUI = warehouseGUI;
         this.setTitle("Resource Selected:");
         this.setVisible(false);

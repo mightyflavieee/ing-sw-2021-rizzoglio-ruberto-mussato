@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.client.gui.market.ResourceInHandlerGUI;
 import it.polimi.ingsw.project.model.TurnPhase;
 
 import javax.swing.*;

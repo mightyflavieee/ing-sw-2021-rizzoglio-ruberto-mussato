@@ -2,8 +2,8 @@ package it.polimi.ingsw.project.client.gui.listeners;
 
 import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.GUI;
-import it.polimi.ingsw.project.client.gui.ResourceInHandGUI;
-import it.polimi.ingsw.project.client.gui.TrayGUI;
+import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
+import it.polimi.ingsw.project.client.gui.market.TrayGUI;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 

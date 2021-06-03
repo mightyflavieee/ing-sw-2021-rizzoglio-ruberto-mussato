@@ -2,10 +2,8 @@ package it.polimi.ingsw.project.client.gui.listeners;
 
 import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.GUI;
-import it.polimi.ingsw.project.client.gui.ResourceInHandGUI;
-import it.polimi.ingsw.project.client.gui.ResourceInHandlerGUI;
-import it.polimi.ingsw.project.client.gui.WarehouseGUI;
-import it.polimi.ingsw.project.model.board.ShelfFloor;
+import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
+import it.polimi.ingsw.project.client.gui.market.ResourceInHandlerGUI;
 import it.polimi.ingsw.project.model.resource.Resource;
 
 import java.awt.event.ActionEvent;

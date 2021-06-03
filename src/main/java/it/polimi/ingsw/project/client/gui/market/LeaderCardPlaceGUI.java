@@ -1,5 +1,6 @@
-package it.polimi.ingsw.project.client.gui;
+package it.polimi.ingsw.project.client.gui.market;
 
+import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.Status;
 

@@ -1,6 +1,8 @@
-package it.polimi.ingsw.project.client.gui;
+package it.polimi.ingsw.project.client.gui.market;
 
+import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.listeners.ArrowListener;
+import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
 import it.polimi.ingsw.project.model.market.Marble;
 import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.resource.Resource;

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.project.client;
 
 import it.polimi.ingsw.project.client.gui.GUI;
-import it.polimi.ingsw.project.client.gui.LeaderCardChoserGUI;
+import it.polimi.ingsw.project.client.gui.market.LeaderCardChoserGUI;
 import it.polimi.ingsw.project.client.gui.listeners.*;
 import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.Match;

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.project.client.gui.listeners;
 
-import it.polimi.ingsw.project.client.gui.MarketGUI;
+import it.polimi.ingsw.project.client.gui.market.MarketGUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

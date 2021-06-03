@@ -1,5 +1,6 @@
-package it.polimi.ingsw.project.client.gui;
+package it.polimi.ingsw.project.client.gui.board;
 
+import it.polimi.ingsw.project.client.gui.InformationsGUI;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
