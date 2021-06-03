@@ -1,9 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
-import it.polimi.ingsw.project.client.gui.listeners.DiscardButtonListener;
-import it.polimi.ingsw.project.client.gui.listeners.InsertFirstShelfButtonListener;
-import it.polimi.ingsw.project.client.gui.listeners.InsertSecondShelfButtonListener;
-import it.polimi.ingsw.project.client.gui.listeners.InsertThirdShelfButtonListener;
+import it.polimi.ingsw.project.client.gui.listeners.*;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
@@ -13,7 +10,7 @@ import java.util.Map;
 
 public class ResourceInHandlerGUI extends JInternalFrame {
     private ResourceType resourceType;
-    private JButton firstShelfButton, secondShelfButton, thirdShelfButton, discardButton;
+    private JButton firstShelfButton, secondShelfButton, thirdShelfButton, extraDepositButton, discardButton;
     private int resourceNum;
     private JLabel imageLabel, numLabel;
     private WarehouseGUI warehouseGUI;
@@ -21,12 +18,13 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         this.warehouseGUI = warehouseGUI;
         this.setTitle("Resource Selected:");
         this.setVisible(false);
-        this.setLayout(new GridLayout(5,1));
+        this.setLayout(new GridLayout(6,1));
         this.imageLabel = new JLabel();
         this.numLabel = new JLabel();
         this.firstShelfButton = new JButton("Insert in the First Shelf");
         this.secondShelfButton = new JButton("Insert in the Second Shelf");
         this.thirdShelfButton = new JButton("Insert in the Third Shelf");
+        this.extraDepositButton = new JButton("Insert in the Extra Deposit");
         this.discardButton = new JButton("Discard");
         JPanel resourcePanel = new JPanel();
         resourcePanel.setLayout(new GridLayout(1,2));
@@ -36,14 +34,17 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         this.add(firstShelfButton);
         this.add(secondShelfButton);
         this.add(thirdShelfButton);
+        this.add(extraDepositButton);
         this.add(discardButton);
         this.firstShelfButton.setEnabled(false);
         this.secondShelfButton.setEnabled(false);
         this.thirdShelfButton.setEnabled(false);
+        this.extraDepositButton.setEnabled(false);
         this.discardButton.setEnabled(false);
         this.firstShelfButton.addActionListener(new InsertFirstShelfButtonListener(this,warehouseGUI,resourceInHandGUI,gui));
         this.secondShelfButton.addActionListener(new InsertSecondShelfButtonListener(this,warehouseGUI,resourceInHandGUI,gui));
         this.thirdShelfButton.addActionListener(new InsertThirdShelfButtonListener(this,warehouseGUI,resourceInHandGUI,gui));
+        this.extraDepositButton.addActionListener(new InsertExtraDepositButtonListener(this,warehouseGUI,resourceInHandGUI,gui));
         this.discardButton.addActionListener(new DiscardButtonListener(this,resourceInHandGUI,gui));
     }
     public void refresh(){
@@ -57,6 +58,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 this.firstShelfButton.setEnabled(false);
                 this.secondShelfButton.setEnabled(false);
                 this.thirdShelfButton.setEnabled(false);
+                this.extraDepositButton.setEnabled(false);
                 this.discardButton.setEnabled(false);
                 break;
             case 1:
@@ -79,6 +81,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 }else{
                     this.thirdShelfButton.setEnabled(false);
                 }
+                //todo attivare disattivare extradeposit button
                 this.discardButton.setEnabled(true);
                 break;
             case 2:
@@ -95,6 +98,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 }else{
                     this.thirdShelfButton.setEnabled(false);
                 }
+                //todo attivare disattivare extradeposit button
                 this.discardButton.setEnabled(true);
                 break;
             case 3:
@@ -105,12 +109,14 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 }else{
                     this.thirdShelfButton.setEnabled(false);
                 }
+                this.extraDepositButton.setEnabled(false);
                 this.discardButton.setEnabled(true);
                 break;
             default:
                 this.firstShelfButton.setEnabled(false);
                 this.secondShelfButton.setEnabled(false);
                 this.thirdShelfButton.setEnabled(false);
+                this.extraDepositButton.setEnabled(false);
                 this.discardButton.setEnabled(true);
                 break;
         }
