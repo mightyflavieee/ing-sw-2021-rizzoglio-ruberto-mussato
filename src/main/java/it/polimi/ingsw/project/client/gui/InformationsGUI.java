@@ -2,6 +2,8 @@ package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandlerGUI;
 import it.polimi.ingsw.project.model.TurnPhase;
+import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +13,9 @@ public class InformationsGUI extends JInternalFrame {
     private JTextArea jTextArea;
     private JInternalFrame phaseFrame;
     private ResourceInHandlerGUI resourceInHandler;
+    private SelectResourcesHandler selectResourcesHandler;
+    private BuyDevCardMoveHandler buyDevCardMoveHandler;
+    private ProductionMoveBuilder productionMoveHandler;
     private GUI gui;
 
     public InformationsGUI(GUI gui, TurnPhase turnPhase) {
@@ -100,9 +105,59 @@ public class InformationsGUI extends JInternalFrame {
         this.jTextArea.setVisible(true);
     }
 
-    public void addCoin() {
-        this.resourceInHandler.addCoin();
+    //todo da finire
+    public void createSelectResourcesHandlerForProduction(String devCardID, String leaderCardID) {
+        this.productionMoveHandler = new ProductionMoveBuilder();
+        if (devCardID != null) {
+            this.productionMoveHandler.setDevCardID(devCardID);
+            if (leaderCardID != null) {
+                this.productionMoveHandler.setLeaderCardID(leaderCardID);
+            }
+        }
+
+        this.selectResourcesHandler = new SelectResourcesHandler();
+
+        // mostrare risorse richieste produzione
     }
+
+    public void createSelectResourcesHandlerForPurchase(DevelopmentCard developmentCard) {
+        this.buyDevCardMoveHandler = new BuyDevCardMoveHandler();
+        this.buyDevCardMoveHandler.setDevelopmentCard(developmentCard);
+        this.selectResourcesHandler = new SelectResourcesHandler();
+        showDevCardPurchaseInfo();
+    }
+
+    public void showDevCardPurchaseInfo() {
+        StringBuilder selectedResourcesFromWarehouse = new StringBuilder();
+        StringBuilder selectedResourcesFromChest = new StringBuilder();
+        for (ResourceType type : this.selectResourcesHandler.getResourcesFromWarehouse().keySet()) {
+            selectedResourcesFromWarehouse.append(type).append(": ")
+                    .append(this.selectResourcesHandler.getResourcesFromWarehouse().get(type)).append("\n");
+        }
+        for (ResourceType type : this.selectResourcesHandler.getResourcesFromChest().keySet()) {
+            selectedResourcesFromChest.append(type).append(": ")
+                    .append(this.selectResourcesHandler.getResourcesFromWarehouse().get(type)).append("\n");
+        }
+        //todo controlli se ho tutte le risorse, se si invio il builder a GUI.java (e faccio reset della select builder),
+        // se no printo info carta
+
+        /*this.jTextArea.setText(this.buyDevCardMoveHandler.getDevelopmentCard().toString() + "\n"
+                + "Select the resources required from the Warehouse and/or the chest.");*/
+    }
+
+    public void updateSelectResourcesHandler(ResourceType resourceType, boolean isFromWarehouse) {
+        if (isFromWarehouse) {
+            this.selectResourcesHandler.incrementResourcesFromWarehouse(resourceType);
+        } else {
+            this.selectResourcesHandler.incrementResourcesFromChest(resourceType);
+        }
+    }
+
+    public void resetSelectResourcesHandler() {
+        this.selectResourcesHandler = null;
+    }
+
+    public void addCoin() { this.resourceInHandler.addCoin(); }
     public void addStone() {
         this.resourceInHandler.addStone();
     }
