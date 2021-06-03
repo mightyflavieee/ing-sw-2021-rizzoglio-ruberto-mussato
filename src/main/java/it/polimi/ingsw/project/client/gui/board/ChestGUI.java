@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui.board;
 
+import it.polimi.ingsw.project.client.gui.InformationsGUI;
 import it.polimi.ingsw.project.client.gui.listeners.selectresources.ChestGUISelectResourceListener;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
@@ -15,9 +16,10 @@ import java.util.List;
 public class ChestGUI extends JInternalFrame {
     private Map<ResourceType, JButton> resourcesButtons;
     private Map<ResourceType, JLabel> numberOfResouces;
+    private InformationsGUI informationsGUI;
     private Board boardModel;
 
-    public ChestGUI(Board boardModel) {
+    public ChestGUI(InformationsGUI informationsGUI, Board boardModel) {
         this.setTitle("Chest");
         this.setVisible(true);
         this.setLayout(new GridLayout(4, 1));
@@ -26,6 +28,7 @@ public class ChestGUI extends JInternalFrame {
             this.add(this.resourcesButtons.get(type));
         }
         this.pack();
+        this.informationsGUI = informationsGUI;
         this.boardModel = boardModel;
         refresh();
     }
@@ -69,6 +72,10 @@ public class ChestGUI extends JInternalFrame {
         this.resourcesButtons.put(ResourceType.Servant, servantButton);
         this.resourcesButtons.put(ResourceType.Shield, shieldButton);
         this.resourcesButtons.put(ResourceType.Stone, stoneButton);
+        for (ResourceType type : this.resourcesButtons.keySet()) {
+            this.resourcesButtons.get(type).addActionListener(new ChestGUISelectResourceListener(this,
+                    this.informationsGUI, type));
+        }
     }
 
     private List<JLabel> createResourcesIcons() {
