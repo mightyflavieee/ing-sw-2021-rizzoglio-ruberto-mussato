@@ -36,6 +36,7 @@ public class GUI extends Observable<Move> {
     private HistoryGUI historyGUI;
     private PlayersBarGUI playersBarGUI;
     private TakeMarketResourceBuilder takeMarketResourceBuilder;
+    private BuyDevCardMoveHandler buyDevCardMoveHandler;
 
 
     public GUI(Match match, String myNickname) {
@@ -78,10 +79,16 @@ public class GUI extends Observable<Move> {
 //        jFrame.add(chestGUI);
 //        jFrame.add(mapTrayGUI);
 
+        /*JPanel northPanel = new JPanel();
+        northPanel.setLayout(new FlowLayout());
+        northPanel.add(marketGUI);
+        northPanel.add(boardGUI);
+        this.jFrame.add(northPanel, BorderLayout.NORTH);*/
+
         this.jFrame.add(boardGUI, BorderLayout.NORTH);
-        //this.jFrame.add(informationsGUI, BorderLayout.NORTH);
+        this.jFrame.add(informationsGUI, BorderLayout.CENTER);
         //this.jFrame.add(historyGUI, BorderLayout.NORTH);
-        this.jFrame.add(marketGUI, BorderLayout.CENTER);
+        //this.jFrame.add(marketGUI, BorderLayout.CENTER);
         this.jFrame.add(cardContainerGUI, BorderLayout.WEST);
         this.jFrame.add(leaderCardPlaceGui, BorderLayout.EAST);
         //this.jFrame.add(playersBarGUI, BorderLayout.SOUTH);
@@ -183,6 +190,14 @@ public class GUI extends Observable<Move> {
 
     public TakeMarketResourceBuilder getTakeMarketResourceBuilder() {
         return takeMarketResourceBuilder;
+    }
+
+    public BuyDevCardMoveHandler getBuyDevCardMoveHandler() {
+        return buyDevCardMoveHandler;
+    }
+
+    public void setBuyDevCardMoveHandler(BuyDevCardMoveHandler buyDevCardMoveHandler) {
+        this.buyDevCardMoveHandler = buyDevCardMoveHandler;
     }
 
     public void sendMarketMove() {

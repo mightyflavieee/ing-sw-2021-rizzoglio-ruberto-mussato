@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
 
 public class MapTrayGUI extends JInternalFrame {
     private Map<DevCardPosition, JButton> mapTrayButtons;
