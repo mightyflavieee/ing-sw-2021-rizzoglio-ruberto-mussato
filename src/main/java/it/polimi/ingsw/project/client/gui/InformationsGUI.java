@@ -124,15 +124,20 @@ public class InformationsGUI extends JInternalFrame {
         // mostrare risorse richieste produzione
     }
 
+    // creates the BuyDevCardMoveHandler and the SelectResourcesHandler and updates
+    // the informationsGUI
     public void createSelectResourcesHandlerForPurchase(DevelopmentCard developmentCard) {
         this.buyDevCardMoveHandler = new BuyDevCardMoveHandler();
-        this.buyDevCardMoveHandler.setDevelopmentCard(developmentCard);
         this.selectResourcesHandler = new SelectResourcesHandler();
+        this.buyDevCardMoveHandler.setDevelopmentCard(developmentCard);
+        this.buyDevCardMoveHandler.setSelectResourcesHandler(this.selectResourcesHandler);
         showDevCardPurchaseInfo();
     }
 
+    // Shows on the informationsGUI the necessary information for the BuyDevCardMove
     public void showDevCardPurchaseInfo() {
-        // creates the string for the informationsGUI
+        // creates the string for the informationsGUI for the selected resources from warehouse
+        // and selected resources from the chest
         StringBuilder selectedResourcesFromWarehouse = new StringBuilder();
         StringBuilder selectedResourcesFromChest = new StringBuilder();
         for (ResourceType type : this.selectResourcesHandler.getResourcesFromWarehouse().keySet()) {
@@ -143,9 +148,12 @@ public class InformationsGUI extends JInternalFrame {
             selectedResourcesFromChest.append(type).append(": ")
                     .append(this.selectResourcesHandler.getResourcesFromWarehouse().get(type)).append("\n");
         }
+        // counts the inserted resources, if they are enough, cunstructs the BuyDevCardMove, otherwise
+        // prints in the informationsGUI the necessary information
         Map<ResourceType, Integer> insertedResources = countResources(this.selectResourcesHandler);
         if (verifyResourcesTargetReached(insertedResources,
                 this.buyDevCardMoveHandler.getDevelopmentCard().getRequiredResources())) {
+            BuyDevCardMoveHandler handlerToSend = new BuyDevCardMoveHandler();
             this.gui.sendBuyDevCardMove(this.buyDevCardMoveHandler);
         } else {
             Map<ResourceType, Integer> missingResources = calculateMissingResources(insertedResources,
@@ -162,6 +170,7 @@ public class InformationsGUI extends JInternalFrame {
         }
     }
 
+    // verifies if yourResources has reached the target of resources
     private boolean verifyResourcesTargetReached(Map<ResourceType, Integer> yourResources, Map<ResourceType, Integer> target) {
         for (ResourceType type : target.keySet()) {
             if (yourResources.containsKey(type)) {
@@ -175,6 +184,7 @@ public class InformationsGUI extends JInternalFrame {
         return true;
     }
 
+    // calculates the missing resources from target
     private Map<ResourceType, Integer> calculateMissingResources(Map<ResourceType, Integer> yourResources, Map<ResourceType, Integer> target) {
         Map<ResourceType, Integer> missingResources = new HashMap<>();
         for (ResourceType type : target.keySet()) {
@@ -189,6 +199,7 @@ public class InformationsGUI extends JInternalFrame {
         return missingResources;
     }
 
+    // counts the current resources selected
     public Map<ResourceType, Integer> countResources(SelectResourcesHandler selectResourcesHandler) {
         Map<ResourceType, Integer> insertedResources = new HashMap<>();
         List<ResourceType> resourceTypeList = new ArrayList<>();
@@ -214,6 +225,7 @@ public class InformationsGUI extends JInternalFrame {
         return insertedResources;
     }
 
+    // updates the SelectResourcesHandler incrementing the current resources chosen
     public void updateSelectResourcesHandler(ResourceType resourceType, boolean isFromWarehouse) {
         if (isFromWarehouse) {
             this.selectResourcesHandler.incrementResourcesFromWarehouse(resourceType);
