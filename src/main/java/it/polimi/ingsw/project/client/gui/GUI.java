@@ -40,6 +40,7 @@ public class GUI extends Observable<Move> {
 
 
     public GUI(Match match, String myNickname) {
+        this.takeMarketResourceBuilder = new TakeMarketResourceBuilder();
         this.jFrame = new JFrame();
         this.jFrame.setTitle("Master of Renaissance");
         //this.jFrame.setLayout(new GridLayout(3,3));
