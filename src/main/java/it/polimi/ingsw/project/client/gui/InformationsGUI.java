@@ -7,6 +7,10 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class InformationsGUI extends JInternalFrame {
     private TurnPhase turnPhase;
@@ -128,6 +132,7 @@ public class InformationsGUI extends JInternalFrame {
     }
 
     public void showDevCardPurchaseInfo() {
+        // creates the string for the informationsGUI
         StringBuilder selectedResourcesFromWarehouse = new StringBuilder();
         StringBuilder selectedResourcesFromChest = new StringBuilder();
         for (ResourceType type : this.selectResourcesHandler.getResourcesFromWarehouse().keySet()) {
@@ -138,11 +143,75 @@ public class InformationsGUI extends JInternalFrame {
             selectedResourcesFromChest.append(type).append(": ")
                     .append(this.selectResourcesHandler.getResourcesFromWarehouse().get(type)).append("\n");
         }
-        //todo controlli se ho tutte le risorse, se si invio il builder a GUI.java (e faccio reset della select builder),
-        // se no printo info carta
+        Map<ResourceType, Integer> insertedResources = countResources(this.selectResourcesHandler);
+        if (verifyResourcesTargetReached(insertedResources,
+                this.buyDevCardMoveHandler.getDevelopmentCard().getRequiredResources())) {
+            this.gui.sendBuyDevCardMove(this.buyDevCardMoveHandler);
+        } else {
+            Map<ResourceType, Integer> missingResources = calculateMissingResources(insertedResources,
+                    this.buyDevCardMoveHandler.getDevelopmentCard().getRequiredResources());
+            StringBuilder missingResourceString = new StringBuilder();
+            for (ResourceType type : missingResources.keySet()) {
+                missingResourceString.append(type).append(": ")
+                        .append(missingResources.get(type)).append("\n");
+            }
+            this.jTextArea.setText("You selected this resources:\n"
+                + "From Warehouse:\n" + selectedResourcesFromWarehouse + "From Chest:\n" + selectedResourcesFromChest
+                + "You stll need this resources:\n" + missingResourceString
+                + "Select the resources required from the Warehouse and/or the chest.");
+        }
+    }
 
-        /*this.jTextArea.setText(this.buyDevCardMoveHandler.getDevelopmentCard().toString() + "\n"
-                + "Select the resources required from the Warehouse and/or the chest.");*/
+    private boolean verifyResourcesTargetReached(Map<ResourceType, Integer> yourResources, Map<ResourceType, Integer> target) {
+        for (ResourceType type : target.keySet()) {
+            if (yourResources.containsKey(type)) {
+                if (!yourResources.get(type).equals(target.get(type))) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Map<ResourceType, Integer> calculateMissingResources(Map<ResourceType, Integer> yourResources, Map<ResourceType, Integer> target) {
+        Map<ResourceType, Integer> missingResources = new HashMap<>();
+        for (ResourceType type : target.keySet()) {
+            if (!yourResources.containsKey(type)) {
+                missingResources.put(type, target.get(type));
+            } else {
+                if (!yourResources.get(type).equals(target.get(type))) {
+                    missingResources.put(type, target.get(type) - yourResources.get(type));
+                }
+            }
+        }
+        return missingResources;
+    }
+
+    public Map<ResourceType, Integer> countResources(SelectResourcesHandler selectResourcesHandler) {
+        Map<ResourceType, Integer> insertedResources = new HashMap<>();
+        List<ResourceType> resourceTypeList = new ArrayList<>();
+        resourceTypeList.add(ResourceType.Coin);
+        resourceTypeList.add(ResourceType.Servant);
+        resourceTypeList.add(ResourceType.Shield);
+        resourceTypeList.add(ResourceType.Stone);
+        for (ResourceType type : resourceTypeList) {
+            if (selectResourcesHandler.getResourcesFromWarehouse().containsKey(type)) {
+                if (selectResourcesHandler.getResourcesFromChest().containsKey(type)) {
+                    insertedResources.put(type,
+                            selectResourcesHandler.getResourcesFromWarehouse().get(type) +
+                                    selectResourcesHandler.getResourcesFromChest().get(type));
+                } else {
+                    insertedResources.put(type, selectResourcesHandler.getResourcesFromWarehouse().get(type));
+                }
+            } else {
+                if (selectResourcesHandler.getResourcesFromChest().containsKey(type)) {
+                    insertedResources.put(type, selectResourcesHandler.getResourcesFromChest().get(type));
+                }
+            }
+        }
+        return insertedResources;
     }
 
     public void updateSelectResourcesHandler(ResourceType resourceType, boolean isFromWarehouse) {
@@ -155,6 +224,14 @@ public class InformationsGUI extends JInternalFrame {
 
     public void resetSelectResourcesHandler() {
         this.selectResourcesHandler = null;
+    }
+
+    public void resetBuyDevCardMoveHandler() {
+        this.buyDevCardMoveHandler = null;
+    }
+
+    public void resetProductionMoveHandler() {
+        this.productionMoveHandler = null;
     }
 
     public void addCoin() { this.resourceInHandler.addCoin(); }

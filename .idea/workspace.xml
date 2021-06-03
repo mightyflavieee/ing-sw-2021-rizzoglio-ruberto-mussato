@@ -7,22 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="corrected error in previous refactor">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BuyDevCardMoveHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/ProductionMoveBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/SelectResourcesHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/selectresources/ChestGUISelectResourceListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/selectresources/ExtraDepositGUISelectResourceListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/selectresources/WarehouseGUISelectResourceListener.java" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added builder for ProductionMove">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BuyDevCardMoveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BuyDevCardMoveHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/BoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/BoardGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/ChestGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/ChestGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/ExtraDepositsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/ExtraDepositsGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/FaithMapGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/FaithMapGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/MapTrayGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/MapTrayGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/market/ResourceInHandlerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/market/ResourceInHandlerGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +70,8 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/leadercards" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -152,19 +143,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -387,41 +365,7 @@
       <workItem from="1622664540024" duration="640000" />
       <workItem from="1622666459866" duration="1873000" />
       <workItem from="1622705503841" duration="6050000" />
-    </task>
-    <task id="LOCAL-00111" summary="Updated GUI">
-      <created>1622129341206</created>
-      <option name="number" value="00111" />
-      <option name="presentableId" value="LOCAL-00111" />
-      <option name="project" value="LOCAL" />
-      <updated>1622129341206</updated>
-    </task>
-    <task id="LOCAL-00112" summary="Added Coverage Report _ Summary.pdf">
-      <created>1622137768152</created>
-      <option name="number" value="00112" />
-      <option name="presentableId" value="LOCAL-00112" />
-      <option name="project" value="LOCAL" />
-      <updated>1622137768152</updated>
-    </task>
-    <task id="LOCAL-00113" summary="updated market gui and leadercards gui">
-      <created>1622137809528</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1622137809528</updated>
-    </task>
-    <task id="LOCAL-00114" summary="updated market gui and leadercards gui">
-      <created>1622147580552</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1622147580552</updated>
-    </task>
-    <task id="LOCAL-00115" summary="updated">
-      <created>1622147753463</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1622147753463</updated>
+      <workItem from="1622755561554" duration="4960000" />
     </task>
     <task id="LOCAL-00116" summary="Corrected minor error in MatchGUI.java">
       <created>1622196206863</created>
@@ -731,7 +675,42 @@
       <option name="project" value="LOCAL" />
       <updated>1622718734912</updated>
     </task>
-    <option name="localTasksCounter" value="160" />
+    <task id="LOCAL-00160" summary="added refresh functon in ChestGUI">
+      <created>1622740387342</created>
+      <option name="number" value="00160" />
+      <option name="presentableId" value="LOCAL-00160" />
+      <option name="project" value="LOCAL" />
+      <updated>1622740387342</updated>
+    </task>
+    <task id="LOCAL-00161" summary="added SelectResourcesHandler">
+      <created>1622740482031</created>
+      <option name="number" value="00161" />
+      <option name="presentableId" value="LOCAL-00161" />
+      <option name="project" value="LOCAL" />
+      <updated>1622740482031</updated>
+    </task>
+    <task id="LOCAL-00162" summary="added listeners for GUI selection of resources">
+      <created>1622740511374</created>
+      <option name="number" value="00162" />
+      <option name="presentableId" value="LOCAL-00162" />
+      <option name="project" value="LOCAL" />
+      <updated>1622740511374</updated>
+    </task>
+    <task id="LOCAL-00163" summary="updated InformationsGUI">
+      <created>1622740530080</created>
+      <option name="number" value="00163" />
+      <option name="presentableId" value="LOCAL-00163" />
+      <option name="project" value="LOCAL" />
+      <updated>1622740530080</updated>
+    </task>
+    <task id="LOCAL-00164" summary="added builder for ProductionMove">
+      <created>1622740558605</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1622740558605</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -761,11 +740,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Implemented ClientGUI.reBuildGame" />
-    <MESSAGE value="Added LeaderCardChoserGUI" />
-    <MESSAGE value="Updated LeaderCardChoserGUI" />
-    <MESSAGE value="Added InformationsGUI.java" />
-    <MESSAGE value="Updated NoMoveHandlerGUI.java" />
     <MESSAGE value="Added HistoryGUI.java" />
     <MESSAGE value="Updated InformationsGUI interaction with the market" />
     <MESSAGE value="Added updated LeaderCardChoserGUI and implemented the beginning of the match using GUI interface" />
@@ -786,7 +760,12 @@
     <MESSAGE value="added refresh() function in MapTrayGUI" />
     <MESSAGE value="refactored gui package" />
     <MESSAGE value="corrected error in previous refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="corrected error in previous refactor" />
+    <MESSAGE value="added refresh functon in ChestGUI" />
+    <MESSAGE value="added SelectResourcesHandler" />
+    <MESSAGE value="added listeners for GUI selection of resources" />
+    <MESSAGE value="updated InformationsGUI" />
+    <MESSAGE value="added builder for ProductionMove" />
+    <option name="LAST_COMMIT_MESSAGE" value="added builder for ProductionMove" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
