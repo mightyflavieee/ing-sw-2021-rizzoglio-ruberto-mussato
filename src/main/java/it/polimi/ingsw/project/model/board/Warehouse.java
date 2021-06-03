@@ -74,7 +74,9 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     return shelves;
   }
 
-  public Map<ResourceType, Integer> getExtraDeposit() { return extraDeposit; }
+  public Map<ResourceType, Integer> getExtraDeposit() {
+    return extraDeposit;
+  }
 
   public int getNumResourcesToDiscard() {
     return this.numResourcesToDiscard;
@@ -135,53 +137,80 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     }
   }
 
-  public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse) {
-    final Map<ShelfFloor, List<Resource>> shelfs = warehouse.getShelves();
+  private boolean hasMoreResourcesThanFloor(Map<ShelfFloor, List<Resource>> shelfs) {
     for (ShelfFloor shelfFloor : shelfs.keySet()) {
       final List<Resource> resourcesOnFloor = shelfs.get(shelfFloor);
       if (shelfFloor == ShelfFloor.First) {
         if (resourcesOnFloor.size() > 1) {
-          return false;
+          return true;
         } else {
           continue;
         }
       }
       if (shelfFloor == ShelfFloor.Second) {
         if (resourcesOnFloor.size() > 2) {
-          return false;
+          return true;
         } else {
           continue;
         }
       }
       if (shelfFloor == ShelfFloor.Third) {
         if (resourcesOnFloor.size() > 3) {
-          return false;
+          return true;
         }
       }
     }
-    Resource oldResourceOnFloor = null;
-    List<Resource> oldResourceOnPreviousFloor = new ArrayList<Resource>();
+    return false;
+  }
+
+  private boolean oneFloorHasDifferentTypesOfResources(Map<ShelfFloor, List<Resource>> shelfs) {
     for (ShelfFloor shelfFloor : shelfs.keySet()) {
-      oldResourceOnFloor = null;
+      Resource oldResourceOnFloor = null;
       for (Resource resource : shelfs.get(shelfFloor)) {
-        if (oldResourceOnFloor != null) {
+        if (oldResourceOnFloor != null && resource != null) {
           if (oldResourceOnFloor.getType() != resource.getType()) {
-            return false;
+            return true;
+          }
+          oldResourceOnFloor = resource;
+        }
+      }
+    }
+    return false;
+  }
+
+  private boolean floorsHaveSameTypeOfResource(Map<ShelfFloor, List<Resource>> shelfs) {
+    for (ShelfFloor shelfFloor : shelfs.keySet()) {
+      if (!shelfs.get(shelfFloor).isEmpty()) {
+        Resource resourceOfThisFloor = shelfs.get(shelfFloor).get(0);
+        for (ShelfFloor shelfFloor2 : shelfs.keySet()) {
+          if (shelfFloor2 != shelfFloor) {
+            if (!shelfs.get(shelfFloor2).isEmpty()) {
+              Resource resourceOnOtherFloor = shelfs.get(shelfFloor2).get(0);
+              if (resourceOnOtherFloor != null && resourceOfThisFloor != null) {
+                if (resourceOnOtherFloor.getType() == resourceOfThisFloor.getType()) {
+                  return true;
+                }
+              }
+            }
           }
         }
-        oldResourceOnFloor = resource;
       }
-      oldResourceOnPreviousFloor.add(oldResourceOnFloor);
     }
-    for (int i = 0; i < oldResourceOnPreviousFloor.size(); i++) {
-      final Resource resourceToAnalyze = oldResourceOnPreviousFloor.get(i);
-      final List<Resource> allResourcesOnFloors = oldResourceOnPreviousFloor;
-      allResourcesOnFloors.remove(i);
-      for (Resource resource : allResourcesOnFloors) {
-        if (resourceToAnalyze == resource) {
-          return false;
-        }
-      }
+    return false;
+  }
+
+  public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse) {
+    final Map<ShelfFloor, List<Resource>> shelvesToCheck = warehouse.getShelves();
+    if (hasMoreResourcesThanFloor(shelvesToCheck)) {
+      return false;
+    }
+
+    if (oneFloorHasDifferentTypesOfResources(shelvesToCheck)) {
+      return false;
+    }
+
+    if (floorsHaveSameTypeOfResource(shelvesToCheck)) {
+      return false;
     }
     return true;
   }
