@@ -86,6 +86,8 @@ public class WarehouseGUI extends JInternalFrame {
         refresh();
     }
 
+    public Map<ShelfFloor, List<JButton>> getShelvesButtons() { return shelvesButtons; }
+
     public InformationsGUI getInformationsGUI() { return this.informationsGUI; }
 
     // returns this.canChangeShelves
