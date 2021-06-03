@@ -104,6 +104,14 @@ public class ExtraDepositsGUI extends JInternalFrame {
         this.secondExtraDepositButtons.add(button2SecondExtraDepo);
     }
 
+    public List<JButton> getFirstExtraDepositButtons() {
+        return firstExtraDepositButtons;
+    }
+
+    public List<JButton> getSecondExtraDepositButtons() {
+        return secondExtraDepositButtons;
+    }
+
     public void insertInExtraDeposit(List<Resource> resourcesToInsert) {
         this.warehouseModel.insertInExtraDeposit(resourcesToInsert);
         refresh();
@@ -113,6 +121,8 @@ public class ExtraDepositsGUI extends JInternalFrame {
         //todo this.warehouseModel.eliminateResourcesExtraDeposit(resourcesToEliminate);
         refresh();
     }
+
+
 
     public void enableExtraDeposit(ResourceType type) {
         if (this.firstExtraDepositButtons.get(0).isEnabled()) {

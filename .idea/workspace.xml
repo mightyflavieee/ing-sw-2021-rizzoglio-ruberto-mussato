@@ -7,11 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added builder for ProductionMove">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated BuyDevCardMoveHandler">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BuyDevCardMoveHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BuyDevCardMoveHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/ExtraDepositsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/ExtraDepositsGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/WarehouseGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/WarehouseGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/selectresources/ExtraDepositGUISelectResourceListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/selectresources/ExtraDepositGUISelectResourceListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/selectresources/WarehouseGUISelectResourceListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/selectresources/WarehouseGUISelectResourceListener.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -365,28 +367,7 @@
       <workItem from="1622664540024" duration="640000" />
       <workItem from="1622666459866" duration="1873000" />
       <workItem from="1622705503841" duration="6050000" />
-      <workItem from="1622755561554" duration="4960000" />
-    </task>
-    <task id="LOCAL-00116" summary="Corrected minor error in MatchGUI.java">
-      <created>1622196206863</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1622196206864</updated>
-    </task>
-    <task id="LOCAL-00117" summary="Corrected minor error in MatchGUI.java">
-      <created>1622196352625</created>
-      <option name="number" value="00117" />
-      <option name="presentableId" value="LOCAL-00117" />
-      <option name="project" value="LOCAL" />
-      <updated>1622196352625</updated>
-    </task>
-    <task id="LOCAL-00118" summary="Updated MarketGUI.java">
-      <created>1622207886258</created>
-      <option name="number" value="00118" />
-      <option name="presentableId" value="LOCAL-00118" />
-      <option name="project" value="LOCAL" />
-      <updated>1622207886258</updated>
+      <workItem from="1622755561554" duration="6636000" />
     </task>
     <task id="LOCAL-00119" summary="Added ResourceInHandGUI.java">
       <created>1622210398121</created>
@@ -710,7 +691,28 @@
       <option name="project" value="LOCAL" />
       <updated>1622740558605</updated>
     </task>
-    <option name="localTasksCounter" value="165" />
+    <task id="LOCAL-00165" summary="added sendBuyDevCardMove() in GUI.java">
+      <created>1622761375044</created>
+      <option name="number" value="00165" />
+      <option name="presentableId" value="LOCAL-00165" />
+      <option name="project" value="LOCAL" />
+      <updated>1622761375045</updated>
+    </task>
+    <task id="LOCAL-00166" summary="updated InformationsGUI">
+      <created>1622761407423</created>
+      <option name="number" value="00166" />
+      <option name="presentableId" value="LOCAL-00166" />
+      <option name="project" value="LOCAL" />
+      <updated>1622761407424</updated>
+    </task>
+    <task id="LOCAL-00167" summary="updated BuyDevCardMoveHandler">
+      <created>1622761429275</created>
+      <option name="number" value="00167" />
+      <option name="presentableId" value="LOCAL-00167" />
+      <option name="project" value="LOCAL" />
+      <updated>1622761429275</updated>
+    </task>
+    <option name="localTasksCounter" value="168" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -740,8 +742,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added HistoryGUI.java" />
-    <MESSAGE value="Updated InformationsGUI interaction with the market" />
     <MESSAGE value="Added updated LeaderCardChoserGUI and implemented the beginning of the match using GUI interface" />
     <MESSAGE value="Updated LeaderCardPlaceGUI.java" />
     <MESSAGE value="Implemented Leader Card Action Logic using the GUI" />
@@ -763,9 +763,11 @@
     <MESSAGE value="added refresh functon in ChestGUI" />
     <MESSAGE value="added SelectResourcesHandler" />
     <MESSAGE value="added listeners for GUI selection of resources" />
-    <MESSAGE value="updated InformationsGUI" />
     <MESSAGE value="added builder for ProductionMove" />
-    <option name="LAST_COMMIT_MESSAGE" value="added builder for ProductionMove" />
+    <MESSAGE value="added sendBuyDevCardMove() in GUI.java" />
+    <MESSAGE value="updated InformationsGUI" />
+    <MESSAGE value="updated BuyDevCardMoveHandler" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated BuyDevCardMoveHandler" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
