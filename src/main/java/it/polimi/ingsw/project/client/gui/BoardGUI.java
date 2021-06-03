@@ -2,7 +2,9 @@ package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.Board;
+import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.Warehouse;
+import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +26,7 @@ public class BoardGUI extends JInternalFrame {
         this.boardModel = board;
         this.faithMap = new FaithMapGUI(board.getFaithMap());
         this.warehouse = new WarehouseGUI(this.informationsGUI, this.boardModel.getWarehouse());
-        this.mapTray = new MapTrayGUI();
+        this.mapTray = new MapTrayGUI(this.informationsGUI, this.boardModel);
         this.chest = new ChestGUI();
 
         GridBagConstraints constraints = new GridBagConstraints();
