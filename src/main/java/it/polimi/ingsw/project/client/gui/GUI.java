@@ -193,19 +193,19 @@ public class GUI extends Observable<Move> {
         return takeMarketResourceBuilder;
     }
 
-    public BuyDevCardMoveHandler getBuyDevCardMoveHandler() {
-        return buyDevCardMoveHandler;
-    }
-
-    public void setBuyDevCardMoveHandler(BuyDevCardMoveHandler buyDevCardMoveHandler) {
-        this.buyDevCardMoveHandler = buyDevCardMoveHandler;
-    }
+    public BuyDevCardMoveHandler getBuyDevCardMoveHandler() { return buyDevCardMoveHandler; }
 
     public void sendMarketMove() {
         this.takeMarketResourceBuilder.setWarehouse(this.boardGUI.getWarehouseModel());
         this.takeMarketResourceBuilder.setMarket(this.marketGUI.getMarket());
         this.send(takeMarketResourceBuilder.getMove());
         this.takeMarketResourceBuilder.reset();
+    }
+
+    public void sendBuyDevCardMove(BuyDevCardMoveHandler buyDevCardMoveHandler) {
+        this.buyDevCardMoveHandler = buyDevCardMoveHandler;
+        this.send(this.buyDevCardMoveHandler.getMove());
+        this.buyDevCardMoveHandler.reset();
     }
 }
 
