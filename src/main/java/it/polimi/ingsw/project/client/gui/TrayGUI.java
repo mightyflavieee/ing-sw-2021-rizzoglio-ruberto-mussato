@@ -117,4 +117,14 @@ public class TrayGUI extends JPanel {
     public Market getMarket() {
         return this.market;
     }
+
+    public void disableButtons() {
+        this.verticalArrows.forEach(x -> x.setEnabled(false));
+        this.horizontalArrows.forEach(x -> x.setEnabled(false));
+    }
+
+    public void enableButtons() {
+        this.verticalArrows.forEach(x -> x.setEnabled(true));
+        this.horizontalArrows.forEach(x -> x.setEnabled(true));
+    }
 }

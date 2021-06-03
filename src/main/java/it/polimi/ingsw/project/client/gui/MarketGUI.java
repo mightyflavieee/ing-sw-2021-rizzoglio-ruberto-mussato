@@ -82,4 +82,12 @@ public class MarketGUI extends JInternalFrame {
     public Market getMarket() {
         return  this.trayGui.getMarket();
     }
+
+    public void disableButtons() {
+        this.trayGui.disableButtons();
+    }
+
+    public void enableButtons() {
+        this.trayGui.enableButtons();
+    }
 }

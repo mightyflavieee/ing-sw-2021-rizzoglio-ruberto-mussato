@@ -139,6 +139,7 @@ public class GUI extends Observable<Move> {
 
     private void enableForMainPhase() {
         //todo attiva i bottoni delle azioni principali
+        this.marketGUI.enableButtons();
     }
 
     private void disableForMainPhase() {
@@ -147,6 +148,7 @@ public class GUI extends Observable<Move> {
 
     private void disableForLeaderCardPhase() {
         //todo blocca tutto apparte le azioni leader
+        this.marketGUI.disableButtons();
     }
 
     public void disableAllButtons(){
