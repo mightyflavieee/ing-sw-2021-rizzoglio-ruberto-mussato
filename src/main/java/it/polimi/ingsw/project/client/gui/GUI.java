@@ -2,7 +2,7 @@ package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.board.*;
-import it.polimi.ingsw.project.client.gui.market.LeaderCardPlaceGUI;
+import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardPlaceGUI;
 import it.polimi.ingsw.project.client.gui.market.MarketGUI;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
 import it.polimi.ingsw.project.model.Match;

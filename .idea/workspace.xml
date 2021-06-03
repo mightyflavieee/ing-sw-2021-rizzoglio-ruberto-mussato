@@ -7,14 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Added a test">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/BoardGUI.java" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="corrected error in previous refactor">
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MapTrayGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/MapTrayGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/retro_devcard.PNG" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/developmentcards/retro_devcard.PNG" afterDir="false" />
     </list>
-    <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -143,6 +138,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -365,27 +373,6 @@
       <workItem from="1622664540024" duration="640000" />
       <workItem from="1622666459866" duration="1873000" />
       <workItem from="1622705503841" duration="6050000" />
-    </task>
-    <task id="LOCAL-00108" summary="Added tests">
-      <created>1622100705364</created>
-      <option name="number" value="00108" />
-      <option name="presentableId" value="LOCAL-00108" />
-      <option name="project" value="LOCAL" />
-      <updated>1622100705364</updated>
-    </task>
-    <task id="LOCAL-00109" summary="Updated GitIgnore">
-      <created>1622106089199</created>
-      <option name="number" value="00109" />
-      <option name="presentableId" value="LOCAL-00109" />
-      <option name="project" value="LOCAL" />
-      <updated>1622106089199</updated>
-    </task>
-    <task id="LOCAL-00110" summary="Updated GUI">
-      <created>1622129188431</created>
-      <option name="number" value="00110" />
-      <option name="presentableId" value="LOCAL-00110" />
-      <option name="project" value="LOCAL" />
-      <updated>1622129188432</updated>
     </task>
     <task id="LOCAL-00111" summary="Updated GUI">
       <created>1622129341206</created>
@@ -709,7 +696,28 @@
       <option name="project" value="LOCAL" />
       <updated>1622710965876</updated>
     </task>
-    <option name="localTasksCounter" value="157" />
+    <task id="LOCAL-00157" summary="added refresh() function in MapTrayGUI">
+      <created>1622718290205</created>
+      <option name="number" value="00157" />
+      <option name="presentableId" value="LOCAL-00157" />
+      <option name="project" value="LOCAL" />
+      <updated>1622718290205</updated>
+    </task>
+    <task id="LOCAL-00158" summary="refactored gui package">
+      <created>1622718577833</created>
+      <option name="number" value="00158" />
+      <option name="presentableId" value="LOCAL-00158" />
+      <option name="project" value="LOCAL" />
+      <updated>1622718577833</updated>
+    </task>
+    <task id="LOCAL-00159" summary="corrected error in previous refactor">
+      <created>1622718734912</created>
+      <option name="number" value="00159" />
+      <option name="presentableId" value="LOCAL-00159" />
+      <option name="project" value="LOCAL" />
+      <updated>1622718734912</updated>
+    </task>
+    <option name="localTasksCounter" value="160" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -739,9 +747,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Removed not shared methods in Client.java" />
-    <MESSAGE value="Added abstract methods in Client.java" />
-    <MESSAGE value="Added protected attributes in Client.java" />
     <MESSAGE value="Implemented ClientGUI.reBuildGame" />
     <MESSAGE value="Added LeaderCardChoserGUI" />
     <MESSAGE value="Updated LeaderCardChoserGUI" />
@@ -764,7 +769,10 @@
     <MESSAGE value="Added show black marker position in ClientCLI.viewer" />
     <MESSAGE value="Added ExtraDeposit Button" />
     <MESSAGE value="Added a test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added a test" />
+    <MESSAGE value="added refresh() function in MapTrayGUI" />
+    <MESSAGE value="refactored gui package" />
+    <MESSAGE value="corrected error in previous refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="corrected error in previous refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -807,11 +815,6 @@
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/controller/Controller.java</url>
           <line>21</line>
           <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java</url>
-          <line>164</line>
-          <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
