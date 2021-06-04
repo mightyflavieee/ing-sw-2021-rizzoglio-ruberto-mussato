@@ -96,6 +96,7 @@ public class GUI extends Observable<Move> {
         this.jFrame.setVisible(true);
         this.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.jFrame.pack();
+        this.disableButtonsHandler(this.mePlayer.getTurnPhase());
     }
 
     public void send(Move move){
