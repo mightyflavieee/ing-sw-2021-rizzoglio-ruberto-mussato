@@ -1280,6 +1280,10 @@ public class ClientCLI extends Client {
     }
 
     private void insertInExtraDeposit(Warehouse warehouse, Map<ResourceType, Integer> resourcesInHand) {
+        if(warehouse.getExtraDeposit()== null){
+            System.out.println("You have not an Extra Depostit");
+            return;
+        }
         System.out.println("Which Resource type do you want to put in the extra deposit?\n");
         Pair<ResourceType, Integer> resourceSelected = resourceSelector(resourcesInHand);
         if (resourceSelected == null) {
