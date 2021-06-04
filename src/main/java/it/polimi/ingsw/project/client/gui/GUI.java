@@ -96,6 +96,7 @@ public class GUI extends Observable<Move> {
         this.jFrame.setVisible(true);
         this.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.jFrame.pack();
+        this.disableButtonsHandler(this.mePlayer.getTurnPhase());
     }
 
     public void send(Move move){
@@ -153,7 +154,7 @@ public class GUI extends Observable<Move> {
         this.historyGUI.setMyHistory(this.mePlayer.getHistoryToString());
         this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
         this.cardContainerGUI.setCardContainer(match.getCardContainer());
-        this.leaderCardPlaceGui.setMyLeaderCards(this.mePlayer.getLeaderCards());
+        this.leaderCardPlaceGui.setMyLeaderCards(this.mePlayer);
         this.disableButtonsHandler(this.mePlayer.getTurnPhase());
         //todo setter di altre cose
     }
@@ -166,7 +167,7 @@ public class GUI extends Observable<Move> {
         //shows your view
         this.historyGUI.setMyHistory(this.mePlayer.getHistoryToString());
         this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
-        this.leaderCardPlaceGui.setMyLeaderCards(this.mePlayer.getLeaderCards());
+        this.leaderCardPlaceGui.setMyLeaderCards(this.mePlayer);
         //todo setter di altre cose
     }
 
@@ -174,7 +175,7 @@ public class GUI extends Observable<Move> {
         //show the view of the opponent opponentPLayers(index)
         this.historyGUI.setHistory(this.opponentsPlayer.get(index).getHistoryToString(),this.opponentsPlayer.get(index).getNickname());
         this.informationsGUI.showOpponentView(this.opponentsPlayer.get(index).getNickname());
-        this.leaderCardPlaceGui.setLeaderCards(this.opponentsPlayer.get(index).getLeaderCards(),this.opponentsPlayer.get(index).getNickname());
+        this.leaderCardPlaceGui.setOpponentLeaderCards(this.opponentsPlayer.get(index).getLeaderCards(),this.opponentsPlayer.get(index).getNickname());
         //todo setter di altre cose
 
 

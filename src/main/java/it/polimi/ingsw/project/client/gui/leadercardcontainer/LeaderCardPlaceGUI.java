@@ -1,6 +1,8 @@
 package it.polimi.ingsw.project.client.gui.leadercardcontainer;
 
 import it.polimi.ingsw.project.client.gui.GUI;
+import it.polimi.ingsw.project.model.Player;
+import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.Status;
 
@@ -34,17 +36,21 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         for(int i = 0; i < leaderMovePanelList.size(); i++){
             buttonsPanel.add(leaderMovePanelList.get(i));
         }
-
+        for(int i = 0; i < leaderCards.size(); i++){
+            leaderMovePanelList.get(i).setActivationPossible(false);
+        }
         this.setVisible(true);
     }
 
 
-    public void setMyLeaderCards(List<LeaderCard> leaderCards) {
+    public void setMyLeaderCards(Player mePlayer) {
+        List<LeaderCard> leaderCards = mePlayer.getLeaderCards();
         this.setTitle("My Leader Cards");
         int i;
         for(i = 0; i < leaderCards.size(); i++){
             leaderCardJlabelGUIList.get(i).setID(leaderCards.get(i).getId());
-            this.leaderMovePanelList.get(i).setActivationPossible(leaderCards.get(i).getStatus()== Status.Inactive);
+            this.leaderMovePanelList.get(i).setActivationPossible(leaderCards.get(i).getStatus()== Status.Inactive
+            && mePlayer.isFeasibleActivateLeaderCardMove(leaderCards.get(i).getId()));
         }
         for(int j = i; j < 2; j++){
             this.leaderCardJlabelGUIList.get(j).setVisible(false);
@@ -53,9 +59,11 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         }
 
     }
-    public void setLeaderCards(List<LeaderCard> leaderCards, String opponentNickName){
-        this.setMyLeaderCards(leaderCards);
-        this.setTitle(opponentNickName + "'s Leader Cards");
+    public void setOpponentLeaderCards(List<LeaderCard> leaderCards, String opponentNickName){
+        for(int i = 0; i < leaderCards.size(); i++){
+            leaderCardJlabelGUIList.get(i).setID(leaderCards.get(i).getId());
+        }        this.setTitle(opponentNickName + "'s Leader Cards");
+        this.disableButtons();
     }
 
     public void disableButtons() {

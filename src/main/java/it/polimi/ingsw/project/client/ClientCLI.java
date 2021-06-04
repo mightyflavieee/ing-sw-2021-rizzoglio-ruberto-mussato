@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.client;
 
 import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.TurnPhase;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
@@ -26,6 +27,7 @@ public class ClientCLI extends Client {
     private Scanner stdin;
     private boolean lock = true;
 
+
     public ClientCLI(String ip, int port) {
         super(ip, port);
         this.lock = true;
@@ -44,7 +46,14 @@ public class ClientCLI extends Client {
 
     @Override
     public void setMatch(Match match) {
+        TurnPhase oldTurnPhase= TurnPhase.MainPhase;
+        if(this.match != null)
+            oldTurnPhase =getMatch().get().getTurnPhase(getNickname());
         this.match = match;
+        if(oldTurnPhase == TurnPhase.WaitPhase && getMatch().get().getTurnPhase(getNickname()) == TurnPhase.InitialPhase)
+        {
+            System.out.println("It's your Turn!\nPress 0 to start");
+        }
         unLock();
     }
 
@@ -64,6 +73,8 @@ public class ClientCLI extends Client {
         this.lock = true;
     }
 
+
+
     public Thread asyncReadFromSocket() {
         Thread t = new Thread(new Runnable() {
             @Override
@@ -78,6 +89,7 @@ public class ClientCLI extends Client {
                     setActive(false);
                 }
             }
+
         });
         t.start();
         return t;
@@ -260,19 +272,20 @@ public class ClientCLI extends Client {
         // quando do come comando 0 entro SEMPRE in una funzione che mi permette di
         // visualizzare le varie informazioni
 
-        switch (getMatch().get().getTurnPhase(getNickname())) {
-            case WaitPhase:
-                viewer();
-                break;
-            case InitialPhase:
-            case EndPhase:
-                return handleLeaderAction();
-            case MainPhase:
-                return handleMainPhase();
+        while (true){
+            switch (getMatch().get().getTurnPhase(getNickname())) {
+                case WaitPhase:
+                    viewer();
+                    break;
+                case InitialPhase:
+                case EndPhase:
+                    return handleLeaderAction();
+                case MainPhase:
+                    return handleMainPhase();
 
+            }
         }
-
-        return null;
+        //return null;
     }
 
     private Move handleLeaderAction() {
@@ -282,6 +295,7 @@ public class ClientCLI extends Client {
         while (true) {
             System.out.println("Do you want to perform a Leader Card Action?\n" + "0 - See information;\n"
                     + "1 - Discard Leader Card;\n" + "2 - Activate Leader Card;\n" + "3 - No");
+
             String answer = stdin.nextLine();
             switch (answer) {
                 case "0":
@@ -1038,12 +1052,12 @@ public class ClientCLI extends Client {
 
     public void viewer() {
         int gameSize = this.match.getPlayerList().size();
-        if(gameSize == 1){
-            System.out.println("0 - Go Back\n" + "1 - Show the Black Marker Position\n"
-                    + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
+        if (gameSize == 1) {
+            System.out.println("0 - Go Back\n" + "1 - Show the Black Marker Position\n" + "2 - show your Points\n"
+                    + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
                     + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Warehouse\n"
                     + "8 - show your history and the Action Token that have been extracted");
-        }else {
+        } else {
             System.out.println("0 - Go Back\n" + "1 - show informations about the others players\n"
                     + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
                     + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Warehouse\n"
@@ -1054,9 +1068,9 @@ public class ClientCLI extends Client {
             case "0":
                 break;
             case "1":
-                if(gameSize == 1){
-                    System.out.println("The Black Marker position is: " + this.match.getBlackMarkerPosition() +"/24");
-                }else {
+                if (gameSize == 1) {
+                    System.out.println("The Black Marker position is: " + this.match.getBlackMarkerPosition() + "/24");
+                } else {
                     viewer(getNickname());
                 }
                 break;
@@ -1092,10 +1106,12 @@ public class ClientCLI extends Client {
         // shows informations about other players
         System.out.println(
                 "Your opponents are : " + getMatch().get().getOpponentsToString(myNickname) + "\n tell the nickname");
+
         String opponent = stdin.nextLine();
         System.out.println(
                 "0 - Go Back\n" + "1 - show " + opponent + " Points\n" + "2 - show " + opponent + " Marker Position\n"
                         + "3 - show " + opponent + " Leader Cards\n" + "4 - show " + opponent + " Development Cards\n");
+
         String answer = stdin.nextLine();
         switch (answer) {
             case "0":
@@ -1114,7 +1130,6 @@ public class ClientCLI extends Client {
             default:
                 return;
         }
-
     }
 
     private TakeMarketResourcesMove handleTakeMarketResourcesMove() {
@@ -1273,13 +1288,17 @@ public class ClientCLI extends Client {
                 System.out.println("Not enough resources");
                 return null;
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("Selected resources not present");
             return null;
         }
     }
 
     private void insertInExtraDeposit(Warehouse warehouse, Map<ResourceType, Integer> resourcesInHand) {
+        if(warehouse.getExtraDeposit()== null){
+            System.out.println("You have not an Extra Depostit");
+            return;
+        }
         System.out.println("Which Resource type do you want to put in the extra deposit?\n");
         Pair<ResourceType, Integer> resourceSelected = resourceSelector(resourcesInHand);
         if (resourceSelected == null) {

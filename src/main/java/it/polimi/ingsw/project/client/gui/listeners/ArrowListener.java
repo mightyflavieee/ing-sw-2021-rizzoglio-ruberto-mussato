@@ -32,7 +32,7 @@ public class ArrowListener implements ActionListener {
         List<Resource> resourceList = this.trayGui.insertMarble(axis,position);
         this.trayGui.refresh();
         this.resourceInHandGUI.refresh(resourceList);
-        this.trayGui.stopTray();
+        this.trayGui.disableButtons();
         for(int i = 0; i < resourceList.size(); i++){
             if(resourceList.get(i).getType() == ResourceType.Faith){
                 hasFaith = true;
