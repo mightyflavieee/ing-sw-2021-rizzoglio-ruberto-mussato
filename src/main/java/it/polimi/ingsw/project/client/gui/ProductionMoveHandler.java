@@ -3,9 +3,10 @@ package it.polimi.ingsw.project.client.gui;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ProductionMoveBuilder {
+public class ProductionMoveHandler {
     private String devCardID;
     private String leaderCardID;
     private SelectResourcesHandler selectResourcesHandler;
@@ -48,7 +49,12 @@ public class ProductionMoveBuilder {
         this.productionType = productionType;
     }
 
-    public void setBoardOrPerkManufacturedResource(List<ResourceType> boardOrPerkManufacturedResource) {
-        this.boardOrPerkManufacturedResource = boardOrPerkManufacturedResource;
+    public void setBoardOrPerkManufacturedResource(ResourceType resourceType) {
+        if (this.boardOrPerkManufacturedResource == null) {
+            this.boardOrPerkManufacturedResource = new ArrayList<>();
+            this.boardOrPerkManufacturedResource.add(resourceType);
+        } else {
+            this.boardOrPerkManufacturedResource.add(resourceType);
+        }
     }
 }
