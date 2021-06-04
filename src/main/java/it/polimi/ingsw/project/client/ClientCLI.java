@@ -25,6 +25,7 @@ public class ClientCLI extends Client {
 
     private Scanner stdin;
     private boolean lock = true;
+    private Thread waitingForYourTurnThread;
 
     public ClientCLI(String ip, int port) {
         super(ip, port);
@@ -44,6 +45,9 @@ public class ClientCLI extends Client {
 
     @Override
     public void setMatch(Match match) {
+        if (this.waitingForYourTurnThread != null) {
+            this.waitingForYourTurnThread.interrupt();
+        }
         this.match = match;
         unLock();
     }
@@ -64,6 +68,31 @@ public class ClientCLI extends Client {
         this.lock = true;
     }
 
+    public class waitThread extends Thread {
+        private Scanner waitStdin = new Scanner(System.in);
+
+        @Override
+        public void interrupt() {
+            super.interrupt();
+            waitStdin.close();
+        }
+    }
+
+    private Thread waitForYourTurnThread() {
+        return new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        viewer();
+                    } catch (Exception e) {
+                        break;
+                    }
+                }
+            }
+        });
+    }
+
     public Thread asyncReadFromSocket() {
         Thread t = new Thread(new Runnable() {
             @Override
@@ -78,6 +107,7 @@ public class ClientCLI extends Client {
                     setActive(false);
                 }
             }
+
         });
         t.start();
         return t;
@@ -256,13 +286,25 @@ public class ClientCLI extends Client {
         return t;
     }
 
+    private void createNewViewerThread() {
+        if (this.waitingForYourTurnThread != null) {
+            if (this.waitingForYourTurnThread.isInterrupted()) {
+                this.waitingForYourTurnThread = waitForYourTurnThread();
+                this.waitingForYourTurnThread.start();
+            }
+        } else {
+            this.waitingForYourTurnThread = waitForYourTurnThread();
+            this.waitingForYourTurnThread.start();
+        }
+    }
+
     public Move handleTurn() {
         // quando do come comando 0 entro SEMPRE in una funzione che mi permette di
         // visualizzare le varie informazioni
 
         switch (getMatch().get().getTurnPhase(getNickname())) {
             case WaitPhase:
-                viewer();
+                createNewViewerThread();
                 break;
             case InitialPhase:
             case EndPhase:
@@ -282,6 +324,7 @@ public class ClientCLI extends Client {
         while (true) {
             System.out.println("Do you want to perform a Leader Card Action?\n" + "0 - See information;\n"
                     + "1 - Discard Leader Card;\n" + "2 - Activate Leader Card;\n" + "3 - No");
+
             String answer = stdin.nextLine();
             switch (answer) {
                 case "0":
@@ -1038,12 +1081,12 @@ public class ClientCLI extends Client {
 
     public void viewer() {
         int gameSize = this.match.getPlayerList().size();
-        if(gameSize == 1){
-            System.out.println("0 - Go Back\n" + "1 - Show the Black Marker Position\n"
-                    + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
+        if (gameSize == 1) {
+            System.out.println("0 - Go Back\n" + "1 - Show the Black Marker Position\n" + "2 - show your Points\n"
+                    + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
                     + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Warehouse\n"
                     + "8 - show your history and the Action Token that have been extracted");
-        }else {
+        } else {
             System.out.println("0 - Go Back\n" + "1 - show informations about the others players\n"
                     + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
                     + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Warehouse\n"
@@ -1054,9 +1097,9 @@ public class ClientCLI extends Client {
             case "0":
                 break;
             case "1":
-                if(gameSize == 1){
-                    System.out.println("The Black Marker position is: " + this.match.getBlackMarkerPosition() +"/24");
-                }else {
+                if (gameSize == 1) {
+                    System.out.println("The Black Marker position is: " + this.match.getBlackMarkerPosition() + "/24");
+                } else {
                     viewer(getNickname());
                 }
                 break;
@@ -1092,10 +1135,12 @@ public class ClientCLI extends Client {
         // shows informations about other players
         System.out.println(
                 "Your opponents are : " + getMatch().get().getOpponentsToString(myNickname) + "\n tell the nickname");
+
         String opponent = stdin.nextLine();
         System.out.println(
                 "0 - Go Back\n" + "1 - show " + opponent + " Points\n" + "2 - show " + opponent + " Marker Position\n"
                         + "3 - show " + opponent + " Leader Cards\n" + "4 - show " + opponent + " Development Cards\n");
+
         String answer = stdin.nextLine();
         switch (answer) {
             case "0":
@@ -1114,7 +1159,6 @@ public class ClientCLI extends Client {
             default:
                 return;
         }
-
     }
 
     private TakeMarketResourcesMove handleTakeMarketResourcesMove() {
@@ -1273,7 +1317,7 @@ public class ClientCLI extends Client {
                 System.out.println("Not enough resources");
                 return null;
             }
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println("Selected resources not present");
             return null;
         }
