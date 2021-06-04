@@ -7,8 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Corrected Minor error in extradeposit">
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/market/ResourceInHandlerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/market/ResourceInHandlerGUI.java" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Updated ResourceInHandlerGUI.refresh">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/leadercardcontainer/LeaderCardPlaceGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/leadercardcontainer/LeaderCardPlaceGUI.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
