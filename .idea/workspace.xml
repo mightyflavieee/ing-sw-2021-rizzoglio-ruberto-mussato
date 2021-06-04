@@ -7,10 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Corrected Minor error in GUI.disableButtonsHandler">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Corrected Minor error in extradeposit">
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/market/ResourceInHandlerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/market/ResourceInHandlerGUI.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +103,7 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ActivateLeaderCardMoveTest.performMove">
+  <component name="RunManager" selected="Application.ClientAppGUI">
     <configuration name="ClientAppGUI" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ClientAppGUI" />
       <module name="GC23" />
@@ -237,10 +235,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ActivateLeaderCardMoveTest.performMove" />
-        <item itemvalue="JUnit.ActivateLeaderCardMoveTest" />
         <item itemvalue="Application.ClientAppGUI" />
         <item itemvalue="Application.ServerApp" />
+        <item itemvalue="JUnit.ActivateLeaderCardMoveTest.performMove" />
+        <item itemvalue="JUnit.ActivateLeaderCardMoveTest" />
         <item itemvalue="JUnit.TakeMarketResourcesMoveTest.twoResourcesInShef2" />
       </list>
     </recent_temporary>
@@ -382,14 +380,7 @@
       <workItem from="1622705503841" duration="6050000" />
       <workItem from="1622801251535" duration="19000" />
       <workItem from="1622803119809" duration="165000" />
-      <workItem from="1622809577288" duration="3269000" />
-    </task>
-    <task id="LOCAL-00113" summary="updated market gui and leadercards gui">
-      <created>1622137809528</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1622137809528</updated>
+      <workItem from="1622809577288" duration="3719000" />
     </task>
     <task id="LOCAL-00114" summary="updated market gui and leadercards gui">
       <created>1622147580552</created>
@@ -727,7 +718,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622811055696</updated>
     </task>
-    <option name="localTasksCounter" value="162" />
+    <task id="LOCAL-00162" summary="Corrected Minor error in extradeposit">
+      <created>1622813151578</created>
+      <option name="number" value="00162" />
+      <option name="presentableId" value="LOCAL-00162" />
+      <option name="project" value="LOCAL" />
+      <updated>1622813151578</updated>
+    </task>
+    <option name="localTasksCounter" value="163" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -757,7 +755,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated LeaderCardChoserGUI" />
     <MESSAGE value="Added InformationsGUI.java" />
     <MESSAGE value="Updated NoMoveHandlerGUI.java" />
     <MESSAGE value="Added HistoryGUI.java" />
@@ -782,7 +779,8 @@
     <MESSAGE value="corrected error in previous refactor" />
     <MESSAGE value="Updated InsertExtraDepositButtonListener.java" />
     <MESSAGE value="Corrected Minor error in GUI.disableButtonsHandler" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected Minor error in GUI.disableButtonsHandler" />
+    <MESSAGE value="Corrected Minor error in extradeposit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected Minor error in extradeposit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
