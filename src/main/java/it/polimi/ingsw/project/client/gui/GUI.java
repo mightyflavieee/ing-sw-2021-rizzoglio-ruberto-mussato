@@ -22,8 +22,6 @@ public class GUI extends Observable<Move> {
     private JFrame jFrame;
     private BoardGUI boardGUI;
     private MarketGUI marketGUI;
-    //    private MarketButton marketButton;
-//    private MarketButtonListener marketButtonListener;
     private LeaderCardPlaceGUI leaderCardPlaceGui;
     private CardContainerGUI cardContainerGUI;
     private FaithMapGUI faithMapGUI;
@@ -37,6 +35,7 @@ public class GUI extends Observable<Move> {
     private PlayersBarGUI playersBarGUI;
     private TakeMarketResourceBuilder takeMarketResourceBuilder;
     private BuyDevCardMoveHandler buyDevCardMoveHandler;
+    private ProductionMoveHandler productionMoveHandler;
 
 
     public GUI(Match match, String myNickname) {
@@ -207,6 +206,11 @@ public class GUI extends Observable<Move> {
         this.buyDevCardMoveHandler = buyDevCardMoveHandler;
         this.send(this.buyDevCardMoveHandler.getMove());
         this.buyDevCardMoveHandler.reset();
+    }
+
+    public void sendProductionMove(ProductionMoveHandler productionMoveHandler) {
+        this.productionMoveHandler = productionMoveHandler;
+        this.send(this.productionMoveHandler.getMove());
     }
 }
 
