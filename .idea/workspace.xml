@@ -7,10 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Updated ResourceInHandlerGUI.refresh">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Added control on active button in GUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/leadercardcontainer/LeaderCardPlaceGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/leadercardcontainer/LeaderCardPlaceGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +104,7 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ClientAppGUI">
+  <component name="RunManager" selected="Application.ServerApp">
     <configuration name="ClientAppGUI" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ClientAppGUI" />
       <module name="GC23" />
@@ -237,8 +236,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ClientAppGUI" />
         <item itemvalue="Application.ServerApp" />
+        <item itemvalue="Application.ClientAppGUI" />
         <item itemvalue="JUnit.ActivateLeaderCardMoveTest.performMove" />
         <item itemvalue="JUnit.ActivateLeaderCardMoveTest" />
         <item itemvalue="JUnit.TakeMarketResourcesMoveTest.twoResourcesInShef2" />

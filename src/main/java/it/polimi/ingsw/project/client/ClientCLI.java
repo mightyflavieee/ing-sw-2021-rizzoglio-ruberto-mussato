@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.client;
 
 import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.TurnPhase;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
@@ -25,7 +26,7 @@ public class ClientCLI extends Client {
 
     private Scanner stdin;
     private boolean lock = true;
-    private Thread waitingForYourTurnThread;
+
 
     public ClientCLI(String ip, int port) {
         super(ip, port);
@@ -45,10 +46,14 @@ public class ClientCLI extends Client {
 
     @Override
     public void setMatch(Match match) {
-        if (this.waitingForYourTurnThread != null) {
-            this.waitingForYourTurnThread.interrupt();
-        }
+        TurnPhase oldTurnPhase= TurnPhase.MainPhase;
+        if(this.match != null)
+            oldTurnPhase =getMatch().get().getTurnPhase(getNickname());
         this.match = match;
+        if(oldTurnPhase == TurnPhase.WaitPhase && getMatch().get().getTurnPhase(getNickname()) == TurnPhase.InitialPhase)
+        {
+            System.out.println("It's your Turn!\nPress 0 to start");
+        }
         unLock();
     }
 
@@ -68,30 +73,7 @@ public class ClientCLI extends Client {
         this.lock = true;
     }
 
-    public class waitThread extends Thread {
-        private Scanner waitStdin = new Scanner(System.in);
 
-        @Override
-        public void interrupt() {
-            super.interrupt();
-            waitStdin.close();
-        }
-    }
-
-    private Thread waitForYourTurnThread() {
-        return new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        viewer();
-                    } catch (Exception e) {
-                        break;
-                    }
-                }
-            }
-        });
-    }
 
     public Thread asyncReadFromSocket() {
         Thread t = new Thread(new Runnable() {
@@ -286,35 +268,24 @@ public class ClientCLI extends Client {
         return t;
     }
 
-    private void createNewViewerThread() {
-        if (this.waitingForYourTurnThread != null) {
-            if (this.waitingForYourTurnThread.isInterrupted()) {
-                this.waitingForYourTurnThread = waitForYourTurnThread();
-                this.waitingForYourTurnThread.start();
-            }
-        } else {
-            this.waitingForYourTurnThread = waitForYourTurnThread();
-            this.waitingForYourTurnThread.start();
-        }
-    }
-
     public Move handleTurn() {
         // quando do come comando 0 entro SEMPRE in una funzione che mi permette di
         // visualizzare le varie informazioni
 
-        switch (getMatch().get().getTurnPhase(getNickname())) {
-            case WaitPhase:
-                createNewViewerThread();
-                break;
-            case InitialPhase:
-            case EndPhase:
-                return handleLeaderAction();
-            case MainPhase:
-                return handleMainPhase();
+        while (true){
+            switch (getMatch().get().getTurnPhase(getNickname())) {
+                case WaitPhase:
+                    viewer();
+                    break;
+                case InitialPhase:
+                case EndPhase:
+                    return handleLeaderAction();
+                case MainPhase:
+                    return handleMainPhase();
 
+            }
         }
-
-        return null;
+        //return null;
     }
 
     private Move handleLeaderAction() {
