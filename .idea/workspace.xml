@@ -7,12 +7,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated listeners for resource selection">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Re added takeMarketResourceBuilder declaration in GUI constructor">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_19_17__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_19_17__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_01_08_[Default_Changelist]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_01_08_[Default_Changelist]1/table.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_01_08__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_01_08__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_01_08__Default_Changelist_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_11_52__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_11_52__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_13_41__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_13_41__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_13_41__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_13_41__Default_Changelist_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_15_09__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_15_09__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_16_07__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_16_07__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_16_07__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_16_07__Default_Changelist_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_17_27__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_17_27__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_17_27__Default_Changelist_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_17_27__Default_Changelist_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/BoardGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/BoardGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/ChestGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/ChestGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/WarehouseGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/WarehouseGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/InsertExtraDepositButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/InsertExtraDepositButtonListener.java" afterDir="false" />
     </list>
+    <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,8 +85,6 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/leadercards" />
-    <property name="node.js.detected.package.eslint" value="true" />
-    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -143,6 +156,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -365,7 +391,83 @@
       <workItem from="1622664540024" duration="640000" />
       <workItem from="1622666459866" duration="1873000" />
       <workItem from="1622705503841" duration="6050000" />
-      <workItem from="1622755561554" duration="7272000" />
+    </task>
+    <task id="LOCAL-00111" summary="Updated GUI">
+      <created>1622129341206</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1622129341206</updated>
+    </task>
+    <task id="LOCAL-00112" summary="Added Coverage Report _ Summary.pdf">
+      <created>1622137768152</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1622137768152</updated>
+    </task>
+    <task id="LOCAL-00113" summary="updated market gui and leadercards gui">
+      <created>1622137809528</created>
+      <option name="number" value="00113" />
+      <option name="presentableId" value="LOCAL-00113" />
+      <option name="project" value="LOCAL" />
+      <updated>1622137809528</updated>
+    </task>
+    <task id="LOCAL-00114" summary="updated market gui and leadercards gui">
+      <created>1622147580552</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1622147580552</updated>
+    </task>
+    <task id="LOCAL-00115" summary="updated">
+      <created>1622147753463</created>
+      <option name="number" value="00115" />
+      <option name="presentableId" value="LOCAL-00115" />
+      <option name="project" value="LOCAL" />
+      <updated>1622147753463</updated>
+    </task>
+    <task id="LOCAL-00116" summary="Corrected minor error in MatchGUI.java">
+      <created>1622196206863</created>
+      <option name="number" value="00116" />
+      <option name="presentableId" value="LOCAL-00116" />
+      <option name="project" value="LOCAL" />
+      <updated>1622196206864</updated>
+    </task>
+    <task id="LOCAL-00117" summary="Corrected minor error in MatchGUI.java">
+      <created>1622196352625</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1622196352625</updated>
+    </task>
+    <task id="LOCAL-00118" summary="Updated MarketGUI.java">
+      <created>1622207886258</created>
+      <option name="number" value="00118" />
+      <option name="presentableId" value="LOCAL-00118" />
+      <option name="project" value="LOCAL" />
+      <updated>1622207886258</updated>
+    </task>
+    <task id="LOCAL-00119" summary="Added ResourceInHandGUI.java">
+      <created>1622210398121</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1622210398121</updated>
+    </task>
+    <task id="LOCAL-00120" summary="updated ResourceInHandGUI.java">
+      <created>1622212188923</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1622212188923</updated>
+    </task>
+    <task id="LOCAL-00121" summary="added FaithMapGUI">
+      <created>1622215812022</created>
+      <option name="number" value="00121" />
+      <option name="presentableId" value="LOCAL-00121" />
+      <option name="project" value="LOCAL" />
+      <updated>1622215812022</updated>
     </task>
     <task id="LOCAL-00122" summary="added LeaderMoveHandler.java">
       <created>1622218583765</created>
@@ -633,84 +735,7 @@
       <option name="project" value="LOCAL" />
       <updated>1622718734912</updated>
     </task>
-    <task id="LOCAL-00160" summary="added refresh functon in ChestGUI">
-      <created>1622740387342</created>
-      <option name="number" value="00160" />
-      <option name="presentableId" value="LOCAL-00160" />
-      <option name="project" value="LOCAL" />
-      <updated>1622740387342</updated>
-    </task>
-    <task id="LOCAL-00161" summary="added SelectResourcesHandler">
-      <created>1622740482031</created>
-      <option name="number" value="00161" />
-      <option name="presentableId" value="LOCAL-00161" />
-      <option name="project" value="LOCAL" />
-      <updated>1622740482031</updated>
-    </task>
-    <task id="LOCAL-00162" summary="added listeners for GUI selection of resources">
-      <created>1622740511374</created>
-      <option name="number" value="00162" />
-      <option name="presentableId" value="LOCAL-00162" />
-      <option name="project" value="LOCAL" />
-      <updated>1622740511374</updated>
-    </task>
-    <task id="LOCAL-00163" summary="updated InformationsGUI">
-      <created>1622740530080</created>
-      <option name="number" value="00163" />
-      <option name="presentableId" value="LOCAL-00163" />
-      <option name="project" value="LOCAL" />
-      <updated>1622740530080</updated>
-    </task>
-    <task id="LOCAL-00164" summary="added builder for ProductionMove">
-      <created>1622740558605</created>
-      <option name="number" value="00164" />
-      <option name="presentableId" value="LOCAL-00164" />
-      <option name="project" value="LOCAL" />
-      <updated>1622740558605</updated>
-    </task>
-    <task id="LOCAL-00165" summary="added sendBuyDevCardMove() in GUI.java">
-      <created>1622761375044</created>
-      <option name="number" value="00165" />
-      <option name="presentableId" value="LOCAL-00165" />
-      <option name="project" value="LOCAL" />
-      <updated>1622761375045</updated>
-    </task>
-    <task id="LOCAL-00166" summary="updated InformationsGUI">
-      <created>1622761407423</created>
-      <option name="number" value="00166" />
-      <option name="presentableId" value="LOCAL-00166" />
-      <option name="project" value="LOCAL" />
-      <updated>1622761407424</updated>
-    </task>
-    <task id="LOCAL-00167" summary="updated BuyDevCardMoveHandler">
-      <created>1622761429275</created>
-      <option name="number" value="00167" />
-      <option name="presentableId" value="LOCAL-00167" />
-      <option name="project" value="LOCAL" />
-      <updated>1622761429275</updated>
-    </task>
-    <task id="LOCAL-00168" summary="added getters for ExtraDepositsGUI">
-      <created>1622763078798</created>
-      <option name="number" value="00168" />
-      <option name="presentableId" value="LOCAL-00168" />
-      <option name="project" value="LOCAL" />
-      <updated>1622763078798</updated>
-    </task>
-    <task id="LOCAL-00169" summary="added getter for WarehouseGUI">
-      <created>1622763101689</created>
-      <option name="number" value="00169" />
-      <option name="presentableId" value="LOCAL-00169" />
-      <option name="project" value="LOCAL" />
-      <updated>1622763101689</updated>
-    </task>
-    <task id="LOCAL-00170" summary="updated listeners for resource selection">
-      <created>1622763131117</created>
-      <option name="number" value="00170" />
-      <option name="presentableId" value="LOCAL-00170" />
-      <option name="project" value="LOCAL" />
-      <updated>1622763131117</updated>
-    </task>
-    <option name="localTasksCounter" value="171" />
+    <option name="localTasksCounter" value="160" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -740,6 +765,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Implemented ClientGUI.reBuildGame" />
+    <MESSAGE value="Added LeaderCardChoserGUI" />
+    <MESSAGE value="Updated LeaderCardChoserGUI" />
+    <MESSAGE value="Added InformationsGUI.java" />
+    <MESSAGE value="Updated NoMoveHandlerGUI.java" />
+    <MESSAGE value="Added HistoryGUI.java" />
+    <MESSAGE value="Updated InformationsGUI interaction with the market" />
+    <MESSAGE value="Added updated LeaderCardChoserGUI and implemented the beginning of the match using GUI interface" />
+    <MESSAGE value="Updated LeaderCardPlaceGUI.java" />
+    <MESSAGE value="Implemented Leader Card Action Logic using the GUI" />
     <MESSAGE value="Updated login logic" />
     <MESSAGE value="Added ResourceInHandGUI.java" />
     <MESSAGE value="added insertInShelf function in WarehouseGUI" />
@@ -755,17 +790,7 @@
     <MESSAGE value="added refresh() function in MapTrayGUI" />
     <MESSAGE value="refactored gui package" />
     <MESSAGE value="corrected error in previous refactor" />
-    <MESSAGE value="added refresh functon in ChestGUI" />
-    <MESSAGE value="added SelectResourcesHandler" />
-    <MESSAGE value="added listeners for GUI selection of resources" />
-    <MESSAGE value="added builder for ProductionMove" />
-    <MESSAGE value="added sendBuyDevCardMove() in GUI.java" />
-    <MESSAGE value="updated InformationsGUI" />
-    <MESSAGE value="updated BuyDevCardMoveHandler" />
-    <MESSAGE value="added getters for ExtraDepositsGUI" />
-    <MESSAGE value="added getter for WarehouseGUI" />
-    <MESSAGE value="updated listeners for resource selection" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated listeners for resource selection" />
+    <option name="LAST_COMMIT_MESSAGE" value="corrected error in previous refactor" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -829,40 +854,40 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ResourceTest_testToString.ic" NAME="ResourceTest.testToString Coverage Results" MODIFIED="1622099321454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.model.resource.*</FILTER>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$DevelopmentCardTest_getMarkerPosition.ic" NAME="DevelopmentCardTest.getMarkerPosition Coverage Results" MODIFIED="1622023514128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.board.card.developmentCard.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$testCoverage.ic" NAME="testCoverage Coverage Results" MODIFIED="1622131435579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ControllerTest_completeTest.ic" NAME="ControllerTest.completeTest Coverage Results" MODIFIED="1621609786466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$WarehouseTest_insertFalse.ic" NAME="WarehouseTest.insertFalse Coverage Results" MODIFIED="1622098347654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.board.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$BoardTest_getLeaderCardsToString.ic" NAME="BoardTest.getLeaderCardsToString Coverage Results" MODIFIED="1622023178507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.project.model.board.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ClientApp.ic" NAME="ClientApp Coverage Results" MODIFIED="1621788911338" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.project.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActivateLeaderCardMoveTest_notFeasibleDevLeaderCard.ic" NAME="ActivateLeaderCardMoveTest.notFeasibleDevLeaderCard Coverage Results" MODIFIED="1622053334719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.model.playermove.*</FILTER>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActionTokenContainerTest_lorenzoTest.ic" NAME="ActionTokenContainerTest.lorenzoTest Coverage Results" MODIFIED="1622021649550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.actionTokens.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ControllerTest_completeTest.ic" NAME="ControllerTest.completeTest Coverage Results" MODIFIED="1621609786466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActionTokenContainerTest_discardActionToken.ic" NAME="ActionTokenContainerTest.discardActionToken Coverage Results" MODIFIED="1622021586309" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.actionTokens.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ResourceTest_testToString.ic" NAME="ResourceTest.testToString Coverage Results" MODIFIED="1622099321454" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.resource.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$GUIPROVA.ic" NAME="GUIPROVA Coverage Results" MODIFIED="1622120686741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.client.gui.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActionTokenContainerTest_lostToDiscard.ic" NAME="ActionTokenContainerTest.lostToDiscard Coverage Results" MODIFIED="1622022104584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.project.model.actionTokens.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ServerApp.ic" NAME="ServerApp Coverage Results" MODIFIED="1621788907581" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.project.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$DevelopmentCardTest_getMarkerPosition.ic" NAME="DevelopmentCardTest.getMarkerPosition Coverage Results" MODIFIED="1622023514128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.model.board.card.developmentCard.*</FILTER>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActivateLeaderCardMoveTest_notFeasibleDevLeaderCard.ic" NAME="ActivateLeaderCardMoveTest.notFeasibleDevLeaderCard Coverage Results" MODIFIED="1622053334719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.project.model.playermove.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$BoardTest_getLeaderCardsToString.ic" NAME="BoardTest.getLeaderCardsToString Coverage Results" MODIFIED="1622023178507" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.model.board.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActionTokenContainerTest_lorenzoTest.ic" NAME="ActionTokenContainerTest.lorenzoTest Coverage Results" MODIFIED="1622021649550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.model.actionTokens.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActionTokenContainerTest_lostToDiscard.ic" NAME="ActionTokenContainerTest.lostToDiscard Coverage Results" MODIFIED="1622022104584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.model.actionTokens.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$GUIPROVA.ic" NAME="GUIPROVA Coverage Results" MODIFIED="1622120686741" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.project.client.gui.*</FILTER>
-    </SUITE>
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$testCoverage.ic" NAME="testCoverage Coverage Results" MODIFIED="1622131435579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

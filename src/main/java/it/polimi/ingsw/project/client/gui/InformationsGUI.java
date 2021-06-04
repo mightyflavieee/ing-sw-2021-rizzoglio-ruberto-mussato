@@ -183,7 +183,7 @@ public class InformationsGUI extends JInternalFrame {
         }
         return true;
     }
-
+    //todo non va bene qua! mettilo in utils
     // calculates the missing resources from target
     private Map<ResourceType, Integer> calculateMissingResources(Map<ResourceType, Integer> yourResources, Map<ResourceType, Integer> target) {
         Map<ResourceType, Integer> missingResources = new HashMap<>();

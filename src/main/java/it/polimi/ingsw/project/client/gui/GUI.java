@@ -89,7 +89,7 @@ public class GUI extends Observable<Move> {
         this.jFrame.add(boardGUI, BorderLayout.NORTH);
         this.jFrame.add(informationsGUI, BorderLayout.CENTER);
         //this.jFrame.add(historyGUI, BorderLayout.NORTH);
-        //this.jFrame.add(marketGUI, BorderLayout.CENTER);
+        this.jFrame.add(marketGUI, BorderLayout.SOUTH);
         this.jFrame.add(cardContainerGUI, BorderLayout.WEST);
         this.jFrame.add(leaderCardPlaceGui, BorderLayout.EAST);
         //this.jFrame.add(playersBarGUI, BorderLayout.SOUTH);

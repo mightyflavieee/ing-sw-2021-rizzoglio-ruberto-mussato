@@ -279,4 +279,8 @@ public class WarehouseGUI extends JInternalFrame {
     public Warehouse getWarehouseModel() {
         return warehouseModel;
     }
+
+    public ExtraDepositsGUI getExtraDepositsGUI() {
+        return extraDepositsGUI;
+    }
 }
