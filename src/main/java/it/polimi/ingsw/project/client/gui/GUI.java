@@ -36,9 +36,11 @@ public class GUI extends Observable<Move> {
     private HistoryGUI historyGUI;
     private PlayersBarGUI playersBarGUI;
     private TakeMarketResourceBuilder takeMarketResourceBuilder;
+    private BuyDevCardMoveHandler buyDevCardMoveHandler;
 
 
     public GUI(Match match, String myNickname) {
+        this.takeMarketResourceBuilder = new TakeMarketResourceBuilder();
         this.jFrame = new JFrame();
         this.jFrame.setTitle("Master of Renaissance");
         //this.jFrame.setLayout(new GridLayout(3,3));
@@ -78,16 +80,23 @@ public class GUI extends Observable<Move> {
 //        jFrame.add(chestGUI);
 //        jFrame.add(mapTrayGUI);
 
+        /*JPanel northPanel = new JPanel();
+        northPanel.setLayout(new FlowLayout());
+        northPanel.add(marketGUI);
+        northPanel.add(boardGUI);
+        this.jFrame.add(northPanel, BorderLayout.NORTH);*/
+
         this.jFrame.add(boardGUI, BorderLayout.NORTH);
-        //this.jFrame.add(informationsGUI, BorderLayout.NORTH);
+        this.jFrame.add(informationsGUI, BorderLayout.CENTER);
         //this.jFrame.add(historyGUI, BorderLayout.NORTH);
-        this.jFrame.add(marketGUI, BorderLayout.CENTER);
+        this.jFrame.add(marketGUI, BorderLayout.SOUTH);
         this.jFrame.add(cardContainerGUI, BorderLayout.WEST);
         this.jFrame.add(leaderCardPlaceGui, BorderLayout.EAST);
         //this.jFrame.add(playersBarGUI, BorderLayout.SOUTH);
         this.jFrame.setVisible(true);
         this.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.jFrame.pack();
+        this.disableButtonsHandler(this.mePlayer.getTurnPhase());
     }
 
     public void send(Move move){
@@ -185,11 +194,19 @@ public class GUI extends Observable<Move> {
         return takeMarketResourceBuilder;
     }
 
+    public BuyDevCardMoveHandler getBuyDevCardMoveHandler() { return buyDevCardMoveHandler; }
+
     public void sendMarketMove() {
         this.takeMarketResourceBuilder.setWarehouse(this.boardGUI.getWarehouseModel());
         this.takeMarketResourceBuilder.setMarket(this.marketGUI.getMarket());
         this.send(takeMarketResourceBuilder.getMove());
         this.takeMarketResourceBuilder.reset();
+    }
+
+    public void sendBuyDevCardMove(BuyDevCardMoveHandler buyDevCardMoveHandler) {
+        this.buyDevCardMoveHandler = buyDevCardMoveHandler;
+        this.send(this.buyDevCardMoveHandler.getMove());
+        this.buyDevCardMoveHandler.reset();
     }
 }
 

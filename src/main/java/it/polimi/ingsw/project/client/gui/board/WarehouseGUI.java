@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client.gui.board;
 
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
+import it.polimi.ingsw.project.client.gui.listeners.selectresources.WarehouseGUISelectResourceListener;
 import it.polimi.ingsw.project.client.gui.listeners.warehouse.ResourceButtonListener;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
@@ -70,7 +71,7 @@ public class WarehouseGUI extends JInternalFrame {
         mainWarehouse.add(resourcesColumns);
         mainWarehouse.add(arrowColumns);
 
-        this.extraDepositsGUI = new ExtraDepositsGUI(warehouse);
+        this.extraDepositsGUI = new ExtraDepositsGUI(this.informationsGUI, warehouse);
         this.add(mainWarehouse);
         this.add(this.extraDepositsGUI);
 
@@ -85,6 +86,8 @@ public class WarehouseGUI extends JInternalFrame {
         this.warehouseModel = warehouse;
         refresh();
     }
+
+    public Map<ShelfFloor, List<JButton>> getShelvesButtons() { return shelvesButtons; }
 
     public InformationsGUI getInformationsGUI() { return this.informationsGUI; }
 
@@ -175,6 +178,8 @@ public class WarehouseGUI extends JInternalFrame {
                 this.shelvesButtons.get(floor).get(count).setIcon(new ImageIcon(
                         new ImageIcon("src/main/resources/resourcetype/" + resource.getType() + ".png")
                         .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+                this.shelvesButtons.get(floor).get(count).addActionListener(new WarehouseGUISelectResourceListener(this,
+                        this.informationsGUI, resource.getType(), floor, count+1));
                 count++;
                 resourceTypeInShelf = resource.getType();
             }
@@ -273,5 +278,9 @@ public class WarehouseGUI extends JInternalFrame {
 
     public Warehouse getWarehouseModel() {
         return warehouseModel;
+    }
+
+    public ExtraDepositsGUI getExtraDepositsGUI() {
+        return extraDepositsGUI;
     }
 }

@@ -102,7 +102,7 @@ public class TrayGUI extends JPanel {
 
     }
 
-    public void stopTray() {
+    public void disableButtons() {
         for (JButton jButton : verticalArrows){
             jButton.setEnabled(false);
         }
@@ -120,10 +120,6 @@ public class TrayGUI extends JPanel {
         return this.market;
     }
 
-    public void disableButtons() {
-        this.verticalArrows.forEach(x -> x.setEnabled(false));
-        this.horizontalArrows.forEach(x -> x.setEnabled(false));
-    }
 
     public void enableButtons() {
         this.verticalArrows.forEach(x -> x.setEnabled(true));

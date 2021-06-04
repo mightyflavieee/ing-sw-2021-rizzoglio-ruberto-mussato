@@ -3,8 +3,8 @@ package it.polimi.ingsw.project.client.gui.market;
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.board.WarehouseGUI;
 import it.polimi.ingsw.project.client.gui.listeners.*;
-import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
+import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import javax.swing.*;
@@ -53,6 +53,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
     public void refresh(){
         Map<ShelfFloor,Integer> numOfResourcesPerShelves = this.warehouseGUI.getNumberOfResoucesPerShelf();
         Map<ShelfFloor,ResourceType> resourceTypePerShelf = this.warehouseGUI.getResourceTypePerShelf();
+        Map<ResourceType, Integer> extraDeposit = this.warehouseGUI.getWarehouseModel().getExtraDeposit();
 
         this.imageLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/resourcetype/" + this.resourceType.toString() + ".png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         this.numLabel.setText(String.valueOf(this.resourceNum));
@@ -84,7 +85,19 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 }else{
                     this.thirdShelfButton.setEnabled(false);
                 }
-                //todo attivare disattivare extradeposit button
+                if(extraDeposit == null){
+                    this.extraDepositButton.setEnabled(false);
+                }else{
+                    if(!extraDeposit.containsKey(this.resourceType)){
+                        this.extraDepositButton.setEnabled(false);
+                    }else{
+                        if(extraDeposit.get(this.resourceType) < 2){
+                            this.extraDepositButton.setEnabled(true);
+                        }else{
+                            this.extraDepositButton.setEnabled(false);
+                        }
+                    }
+                }
                 this.discardButton.setEnabled(true);
                 break;
             case 2:
@@ -101,7 +114,19 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 }else{
                     this.thirdShelfButton.setEnabled(false);
                 }
-                //todo attivare disattivare extradeposit button
+                if(extraDeposit == null){
+                    this.extraDepositButton.setEnabled(false);
+                }else{
+                    if(!extraDeposit.containsKey(this.resourceType)){
+                        this.extraDepositButton.setEnabled(false);
+                    }else{
+                        if(extraDeposit.get(this.resourceType) ==0){
+                            this.extraDepositButton.setEnabled(true);
+                        }else{
+                            this.extraDepositButton.setEnabled(false);
+                        }
+                    }
+                }
                 this.discardButton.setEnabled(true);
                 break;
             case 3:

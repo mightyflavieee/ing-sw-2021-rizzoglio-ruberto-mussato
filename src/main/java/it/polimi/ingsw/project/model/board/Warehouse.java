@@ -95,10 +95,12 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
 
   // creates the extra deposit
   public void createExtraDeposit(Resource resource) {
-    if (this.extraDeposit != null) {
+    if (this.extraDeposit == null) {
       Map<ResourceType, Integer> newExtraDeposit = new HashMap<>();
       newExtraDeposit.put(resource.getType(), 0);
       this.extraDeposit = newExtraDeposit;
+    }else{
+      this.extraDeposit.put(resource.getType(),0);
     }
   }
 
@@ -258,12 +260,11 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     if (this.extraDeposit == null) {
       return false;
     }
-    if (extraDeposit.size() + resourceList.size() > 2) {
+    if (!extraDeposit.containsKey(resourceList.get(0).getType())) {
       return false;
-    } else {
-      if (!extraDeposit.containsKey(resourceList.get(0).getType())) {
-        return false;
-      }
+    }
+    if (extraDeposit.get(resourceList.get(0).getType()) + resourceList.size() > 2) {
+      return false;
     }
     extraDeposit.put(resourceList.get(0).getType(),
         extraDeposit.get(resourceList.get(0).getType()) + resourceList.size());

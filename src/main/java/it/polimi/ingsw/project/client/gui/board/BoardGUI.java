@@ -25,7 +25,7 @@ public class BoardGUI extends JInternalFrame {
         this.faithMap = new FaithMapGUI(board.getFaithMap());
         this.warehouse = new WarehouseGUI(this.informationsGUI, this.boardModel.getWarehouse());
         this.mapTray = new MapTrayGUI(this.informationsGUI, this.boardModel);
-        this.chest = new ChestGUI();
+        this.chest = new ChestGUI(this.informationsGUI, this.boardModel);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.HORIZONTAL;

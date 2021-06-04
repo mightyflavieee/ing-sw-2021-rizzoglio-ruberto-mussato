@@ -5,10 +5,8 @@ import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PrimitiveIterator;
 
 public class FaithMapGUI extends JInternalFrame {
     private final List<JButton> tiles;

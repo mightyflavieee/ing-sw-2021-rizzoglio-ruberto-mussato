@@ -1,5 +1,7 @@
 package it.polimi.ingsw.project.client.gui.board;
 
+import it.polimi.ingsw.project.client.gui.InformationsGUI;
+import it.polimi.ingsw.project.client.gui.listeners.selectresources.ExtraDepositGUISelectResourceListener;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
@@ -7,17 +9,17 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ExtraDepositsGUI extends JInternalFrame {
     private List<JButton> firstExtraDepositButtons;
     private List<JButton> secondExtraDepositButtons;
+    private InformationsGUI informationsGUI;
     private Map<ResourceType, Integer> resourcesInExtraDeposits;
     private Warehouse warehouseModel;
 
-    public ExtraDepositsGUI(Warehouse warehouseModel) {
+    public ExtraDepositsGUI(InformationsGUI informationsGUI, Warehouse warehouseModel) {
         this.setTitle("Extra Deposits");
         this.setVisible(true);
         this.setLayout(new GridLayout(2, 1));
@@ -35,6 +37,7 @@ public class ExtraDepositsGUI extends JInternalFrame {
         this.add(firstExtraDepo);
         this.add(secondExtraDepo);
         this.pack();
+        this.informationsGUI = informationsGUI;
         this.warehouseModel = warehouseModel;
         refresh();
     }
@@ -105,6 +108,14 @@ public class ExtraDepositsGUI extends JInternalFrame {
         this.secondExtraDepositButtons.add(button2SecondExtraDepo);
     }
 
+    public List<JButton> getFirstExtraDepositButtons() {
+        return firstExtraDepositButtons;
+    }
+
+    public List<JButton> getSecondExtraDepositButtons() {
+        return secondExtraDepositButtons;
+    }
+
     public void insertInExtraDeposit(List<Resource> resourcesToInsert) {
         this.warehouseModel.insertInExtraDeposit(resourcesToInsert);
         refresh();
@@ -115,13 +126,23 @@ public class ExtraDepositsGUI extends JInternalFrame {
         refresh();
     }
 
+
+
     public void enableExtraDeposit(ResourceType type) {
         if (this.firstExtraDepositButtons.get(0).isEnabled()) {
             this.secondExtraDepositButtons.get(0).setEnabled(true);
             this.secondExtraDepositButtons.get(1).setEnabled(true);
+            this.secondExtraDepositButtons.get(0).addActionListener(new ExtraDepositGUISelectResourceListener(this,
+                    this.informationsGUI, type, 2, 1));
+            this.secondExtraDepositButtons.get(1).addActionListener(new ExtraDepositGUISelectResourceListener(this,
+                    this.informationsGUI, type, 1, 1));
         } else {
             this.firstExtraDepositButtons.get(0).setEnabled(true);
             this.firstExtraDepositButtons.get(1).setEnabled(true);
+            this.firstExtraDepositButtons.get(0).addActionListener(new ExtraDepositGUISelectResourceListener(this,
+                    this.informationsGUI, type, 1, 1));
+            this.secondExtraDepositButtons.get(1).addActionListener(new ExtraDepositGUISelectResourceListener(this,
+                    this.informationsGUI, type, 1, 2));
         }
     }
 
