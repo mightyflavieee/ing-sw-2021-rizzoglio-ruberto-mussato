@@ -9,10 +9,8 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class ExtraDepositsGUI extends JInternalFrame {
     private List<JButton> firstExtraDepositButtons;
@@ -46,6 +44,11 @@ public class ExtraDepositsGUI extends JInternalFrame {
         this.informationsGUI = informationsGUI;
         this.warehouseModel = warehouseModel;
         this.clickable = false;
+        List<ActionListener> listenersFirstExtraDeposit = new ArrayList<>();
+        List<ActionListener> listenersSecondExtraDeposit = new ArrayList<>();
+        this.actionListenersPerExtraDeposit = new HashMap<>();
+        this.actionListenersPerExtraDeposit.put(1, listenersFirstExtraDeposit);
+        this.actionListenersPerExtraDeposit.put(2, listenersSecondExtraDeposit);
         refresh();
     }
 
@@ -55,45 +58,65 @@ public class ExtraDepositsGUI extends JInternalFrame {
             for (ResourceType type : this.warehouseModel.getExtraDeposit().keySet()) {
                 if (this.warehouseModel.getExtraDeposit().get(type) == 1) {
                     if (count == 1) {
+                        // adds updated images
                         this.firstExtraDepositButtons.get(0).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
                                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
                         this.firstExtraDepositButtons.get(1).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-                        // adds listener
+                        // adds listener and checks if there aren't already other listeners on the object
                         if (Arrays.stream(this.firstExtraDepositButtons.get(0).getActionListeners()).count() == 0) {
-                            this.firstExtraDepositButtons.get(0).addActionListener(
-                                    new ExtraDepositGUISelectResourceListener(this,
-                                            this.informationsGUI, type, 1, 0));
+                            ActionListener actionListener = new ExtraDepositGUISelectResourceListener(this,
+                                    this.informationsGUI, type, 1, 0);
+                            this.firstExtraDepositButtons.get(0).addActionListener(actionListener);
+                            addListenerToList(1, actionListener);
+                        }
+                        if (this.actionListenersPerExtraDeposit.get(1).size() == 2) {
+                            removeListenerFromList(1, this.actionListenersPerExtraDeposit.get(1).get(1));
                         }
                     } else {
+                        // adds updated images
                         this.secondExtraDepositButtons.get(0).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
                                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
                         this.secondExtraDepositButtons.get(1).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-                        // adds listener
+                        // adds listener and checks if there aren't already other listeners on the object
                         if (Arrays.stream(this.firstExtraDepositButtons.get(0).getActionListeners()).count() == 0) {
-                            this.firstExtraDepositButtons.get(0).addActionListener(
-                                    new ExtraDepositGUISelectResourceListener(this,
-                                            this.informationsGUI, type, 1, 0));
+                            ActionListener actionListener = new ExtraDepositGUISelectResourceListener(this,
+                                    this.informationsGUI, type, 1, 0);
+                            this.secondExtraDepositButtons.get(0).addActionListener(actionListener);
+                            addListenerToList(2, actionListener);
+                        }
+                        if (this.actionListenersPerExtraDeposit.get(2).size() == 2) {
+                            removeListenerFromList(2, this.actionListenersPerExtraDeposit.get(2).get(1));
                         }
                     }
                 }
                 if (this.warehouseModel.getExtraDeposit().get(type) == 2) {
                     if (count == 1) {
+                        // adds updated images
                         this.firstExtraDepositButtons.get(0).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
                                         .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
                         this.firstExtraDepositButtons.get(1).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
                                         .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-                        this.firstExtraDepositButtons.get(0).addActionListener(new ExtraDepositGUISelectResourceListener(this,
-                                this.informationsGUI, type, 1, 0));
-                        this.firstExtraDepositButtons.get(1).addActionListener(new ExtraDepositGUISelectResourceListener(this,
-                                this.informationsGUI, type, 1, 1));
+                        // adds listener and checks if there aren't already other listeners on the objects
+                        if (Arrays.stream(this.firstExtraDepositButtons.get(0).getActionListeners()).count() == 0) {
+                            ActionListener actionListener = new ExtraDepositGUISelectResourceListener(this,
+                                    this.informationsGUI, type, 1, 0);
+                            this.firstExtraDepositButtons.get(0).addActionListener(actionListener);
+                            addListenerToList(1, actionListener);
+                        }
+                        if (Arrays.stream(this.firstExtraDepositButtons.get(1).getActionListeners()).count() == 0) {
+                            ActionListener actionListener = new ExtraDepositGUISelectResourceListener(this,
+                                    this.informationsGUI, type, 1, 1);
+                            this.firstExtraDepositButtons.get(1).addActionListener(actionListener);
+                            addListenerToList(1, actionListener);
+                        }
                     } else {
                         this.secondExtraDepositButtons.get(0).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
@@ -101,15 +124,32 @@ public class ExtraDepositsGUI extends JInternalFrame {
                         this.secondExtraDepositButtons.get(1).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
                                         .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-                        this.secondExtraDepositButtons.get(0).addActionListener(new ExtraDepositGUISelectResourceListener(this,
-                                this.informationsGUI, type, 2, 0));
-                        this.secondExtraDepositButtons.get(1).addActionListener(new ExtraDepositGUISelectResourceListener(this,
-                                this.informationsGUI, type, 2, 1));
+                        // adds listener and checks if there aren't already other listeners on the object
+                        if (Arrays.stream(this.firstExtraDepositButtons.get(0).getActionListeners()).count() == 0) {
+                            ActionListener actionListener = new ExtraDepositGUISelectResourceListener(this,
+                                    this.informationsGUI, type, 2, 0);
+                            this.firstExtraDepositButtons.get(0).addActionListener(actionListener);
+                            addListenerToList(2, actionListener);
+                        }
+                        if (Arrays.stream(this.secondExtraDepositButtons.get(1).getActionListeners()).count() == 0) {
+                            ActionListener actionListener = new ExtraDepositGUISelectResourceListener(this,
+                                    this.informationsGUI, type, 2, 1);
+                            this.secondExtraDepositButtons.get(1).addActionListener(actionListener);
+                            addListenerToList(2, actionListener);
+                        }
                     }
                 }
                 count++;
             }
         }
+    }
+
+    private void addListenerToList(int extraDepositNumber, ActionListener actionListener) {
+        this.actionListenersPerExtraDeposit.get(extraDepositNumber).add(actionListener);
+    }
+
+    private void removeListenerFromList(int extraDepositNumber, ActionListener actionListener) {
+        this.actionListenersPerExtraDeposit.get(extraDepositNumber).remove(actionListener);
     }
 
     private void createButtons() {
