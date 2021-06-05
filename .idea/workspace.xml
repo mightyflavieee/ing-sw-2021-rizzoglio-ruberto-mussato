@@ -7,9 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Added control on active button in GUI">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Updated GUI design">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -104,13 +104,26 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ServerApp">
+  <component name="RunManager" selected="Application.GUI">
     <configuration name="ClientAppGUI" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ClientAppGUI" />
       <module name="GC23" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.polimi.ingsw.project.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.client.gui.GUI" />
+      <module name="GC23" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.project.client.gui.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -131,13 +144,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -180,25 +195,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TakeMarketResourcesMoveTest.twoResourcesInShef2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="GC23" />
-      <selectedOptions>
-        <option name="module.classpath" />
-      </selectedOptions>
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.project.model.playermove.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.project.model.playermove" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.model.playermove.TakeMarketResourcesMoveTest" />
-      <option name="METHOD_NAME" value="twoResourcesInShef2" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <module name="GC23" />
       <selectedOptions>
@@ -230,17 +226,17 @@
       <item itemvalue="Application.ClientAppGUI" />
       <item itemvalue="Application.ServerApp" />
       <item itemvalue="JUnit.testCoverage" />
-      <item itemvalue="JUnit.TakeMarketResourcesMoveTest.twoResourcesInShef2" />
       <item itemvalue="JUnit.ActivateLeaderCardMoveTest" />
       <item itemvalue="JUnit.ActivateLeaderCardMoveTest.performMove" />
+      <item itemvalue="Application.GUI" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ServerApp" />
+        <item itemvalue="Application.GUI" />
         <item itemvalue="Application.ClientAppGUI" />
+        <item itemvalue="Application.ServerApp" />
         <item itemvalue="JUnit.ActivateLeaderCardMoveTest.performMove" />
         <item itemvalue="JUnit.ActivateLeaderCardMoveTest" />
-        <item itemvalue="JUnit.TakeMarketResourcesMoveTest.twoResourcesInShef2" />
       </list>
     </recent_temporary>
   </component>

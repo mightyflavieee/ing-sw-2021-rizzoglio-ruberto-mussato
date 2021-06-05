@@ -45,8 +45,7 @@ public class GUI extends Observable<Move> {
         this.takeMarketResourceBuilder = new TakeMarketResourceBuilder();
         this.jFrame = new JFrame();
         this.jFrame.setTitle("Master of Renaissance");
-        //this.jFrame.setLayout(new GridLayout(3,3));
-        jFrame.setLayout(new BorderLayout());
+        jFrame.setLayout(new GridLayout(2,1));
 
         //  boardGUI = new BoardGUI("Board");
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,myNickname);
@@ -85,6 +84,7 @@ public class GUI extends Observable<Move> {
         topPanel.setLayout(new BorderLayout());
         topPanel.add(boardGUI,BorderLayout.EAST);
         topPanel.add(leaderCardPlaceGui,BorderLayout.CENTER);
+
         this.jFrame.add(topPanel);
         this.jFrame.add(bottomPanel);
         this.jFrame.setVisible(true);
@@ -202,10 +202,25 @@ public class GUI extends Observable<Move> {
         this.send(this.buyDevCardMoveHandler.getMove());
         this.buyDevCardMoveHandler.reset();
     }
-
     public void sendProductionMove(ProductionMoveHandler productionMoveHandler) {
         this.productionMoveHandler = productionMoveHandler;
         this.send(this.productionMoveHandler.getMove());
     }
+    public static void main(String[] args){
+        Player gianluca = new Player("Gianluca");
+        LeaderCardContainer leaderCardContainer = new LeaderCardContainer();
+        List<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(leaderCardContainer.getLeaderCards().get(0));
+        leaderCards.add(leaderCardContainer.getLeaderCards().get(0));
+        gianluca.setLeaderCards(leaderCards);
+        Player flavio = new Player("Flavio");
+        Player leo = new Player("Leo");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(gianluca);
+        playerList.add(flavio);
+        playerList.add(leo);
+        new GUI(new Match(playerList),"Gianluca");
+    }
+
 }
 
