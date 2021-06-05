@@ -7,7 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated listeners in ExtraDepositsGUI">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated gui listeners in WarehouseGUI">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/WarehouseGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/WarehouseGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -377,13 +378,6 @@
       <workItem from="1622803119809" duration="165000" />
       <workItem from="1622809577288" duration="3719000" />
     </task>
-    <task id="LOCAL-00120" summary="updated ResourceInHandGUI.java">
-      <created>1622212188923</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1622212188923</updated>
-    </task>
     <task id="LOCAL-00121" summary="added FaithMapGUI">
       <created>1622215812022</created>
       <option name="number" value="00121" />
@@ -720,7 +714,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622907697736</updated>
     </task>
-    <option name="localTasksCounter" value="169" />
+    <task id="LOCAL-00169" summary="updated gui listeners in WarehouseGUI">
+      <created>1622908244376</created>
+      <option name="number" value="00169" />
+      <option name="presentableId" value="LOCAL-00169" />
+      <option name="project" value="LOCAL" />
+      <updated>1622908244376</updated>
+    </task>
+    <option name="localTasksCounter" value="170" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -750,7 +751,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated LeaderCardPlaceGUI.java" />
     <MESSAGE value="Implemented Leader Card Action Logic using the GUI" />
     <MESSAGE value="Updated login logic" />
     <MESSAGE value="Added ResourceInHandGUI.java" />
@@ -775,7 +775,8 @@
     <MESSAGE value="added clickable attribute to enable/disable BoardGUI or one of its elements" />
     <MESSAGE value="added initial Main Phase logic to GUI" />
     <MESSAGE value="updated listeners in ExtraDepositsGUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated listeners in ExtraDepositsGUI" />
+    <MESSAGE value="updated gui listeners in WarehouseGUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated gui listeners in WarehouseGUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

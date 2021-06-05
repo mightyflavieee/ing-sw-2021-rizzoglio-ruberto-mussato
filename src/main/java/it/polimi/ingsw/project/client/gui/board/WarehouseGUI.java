@@ -199,8 +199,10 @@ public class WarehouseGUI extends JInternalFrame {
                     this.shelvesButtons.get(floor).get(i-1).setIcon(new ImageIcon(
                             new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                             .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-                    ActionListener actionListener = this.shelvesButtons.get(floor).get(count).getActionListeners()[0];
-                    this.shelvesButtons.get(floor).get(count).removeActionListener(actionListener);
+                    if (this.shelvesButtons.get(floor).get(i-1).getActionListeners().length > 0) {
+                        ActionListener actionListener = this.shelvesButtons.get(floor).get(i-1).getActionListeners()[0];
+                        this.shelvesButtons.get(floor).get(i-1).removeActionListener(actionListener);
+                    }
                 }
             }
         }
