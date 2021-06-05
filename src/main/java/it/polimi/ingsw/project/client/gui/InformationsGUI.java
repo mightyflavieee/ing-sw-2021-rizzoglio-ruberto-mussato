@@ -212,9 +212,7 @@ public class InformationsGUI extends JInternalFrame {
         Map<ResourceType, Integer> insertedResources = countResources(this.selectResourcesHandler);
         if (verifyResourcesTargetReached(insertedResources,
                 this.buyDevCardMoveHandler.getDevelopmentCard().getRequiredResources())) {
-            //BuyDevCardMoveHandler handlerToSend = new BuyDevCardMoveHandler();
             this.gui.sendBuyDevCardMove(this.buyDevCardMoveHandler);
-            this.buyDevCardMoveHandler.reset();
         } else {
             Map<ResourceType, Integer> missingResources = calculateMissingResources(insertedResources,
                     this.buyDevCardMoveHandler.getDevelopmentCard().getRequiredResources());

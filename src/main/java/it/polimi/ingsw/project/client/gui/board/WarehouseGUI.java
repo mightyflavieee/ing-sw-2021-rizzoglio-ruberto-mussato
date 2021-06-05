@@ -179,7 +179,7 @@ public class WarehouseGUI extends JInternalFrame {
                         new ImageIcon("src/main/resources/resourcetype/" + resource.getType() + ".png")
                         .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
                 this.shelvesButtons.get(floor).get(count).addActionListener(new WarehouseGUISelectResourceListener(this,
-                        this.informationsGUI, resource.getType(), floor, count+1));
+                        this.informationsGUI, resource.getType(), floor, count));
                 count++;
                 resourceTypeInShelf = resource.getType();
             }
