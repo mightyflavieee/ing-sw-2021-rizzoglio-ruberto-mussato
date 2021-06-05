@@ -5,11 +5,9 @@ import it.polimi.ingsw.project.client.gui.board.*;
 import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardPlaceGUI;
 import it.polimi.ingsw.project.client.gui.market.MarketGUI;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
-import it.polimi.ingsw.project.model.LeaderCardContainer;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.TurnPhase;
-import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.Move;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.utils.Pair;
@@ -17,7 +15,6 @@ import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,12 +22,8 @@ public class GUI extends Observable<Move> {
     private JFrame jFrame;
     private BoardGUI boardGUI;
     private MarketGUI marketGUI;
-    private LeaderCardPlaceGUI leaderCardPlaceGui;
+    private LeaderCardPlaceGUI leaderCardPlaceGUI;
     private CardContainerGUI cardContainerGUI;
-    private FaithMapGUI faithMapGUI;
-    private WarehouseGUI warehouseGUI;
-    private ChestGUI chestGUI;
-    private MapTrayGUI mapTrayGUI;
     private Player mePlayer;
     private List<Player> opponentsPlayer;
     private InformationsGUI informationsGUI;
@@ -55,8 +48,8 @@ public class GUI extends Observable<Move> {
         this.boardGUI = new BoardGUI(myNickname, this.informationsGUI, this.mePlayer.getBoard());
         this.marketGUI = new MarketGUI(this,match.getMarket(),informationsGUI);
         this.historyGUI = new HistoryGUI(this.mePlayer.getHistoryToString());
-        this.cardContainerGUI = new CardContainerGUI(match.getCardContainer());
-        this.leaderCardPlaceGui = new LeaderCardPlaceGUI(this.mePlayer.getLeaderCards(),this);
+        this.cardContainerGUI = new CardContainerGUI(this.informationsGUI, match.getCardContainer());
+        this.leaderCardPlaceGUI = new LeaderCardPlaceGUI(this.mePlayer.getLeaderCards(),this);
         this.playersBarGUI = new PlayersBarGUI(this.opponentsPlayer.stream().map(Player::getNickname).collect(Collectors.toList()), myNickname,this);
         //todo inizializzatori di altre cose
 
@@ -83,7 +76,7 @@ public class GUI extends Observable<Move> {
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
         topPanel.add(boardGUI,BorderLayout.EAST);
-        topPanel.add(leaderCardPlaceGui,BorderLayout.CENTER);
+        topPanel.add(leaderCardPlaceGUI,BorderLayout.CENTER);
 
         this.jFrame.add(topPanel);
         this.jFrame.add(bottomPanel);
@@ -117,7 +110,7 @@ public class GUI extends Observable<Move> {
     }
 
     private void enableForLeaderCardPhase() {
-        this.leaderCardPlaceGui.enableButtons();
+        this.leaderCardPlaceGUI.enableButtons();
     }
 
     private void enableForMainPhase() {
@@ -126,7 +119,7 @@ public class GUI extends Observable<Move> {
     }
 
     private void disableForMainPhase() {
-        this.leaderCardPlaceGui.disableButtons();
+        this.leaderCardPlaceGUI.disableButtons();
     }
 
     private void disableForLeaderCardPhase() {
@@ -148,7 +141,7 @@ public class GUI extends Observable<Move> {
         this.historyGUI.setMyHistory(this.mePlayer.getHistoryToString());
         this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
         this.cardContainerGUI.setCardContainer(match.getCardContainer());
-        this.leaderCardPlaceGui.setMyLeaderCards(this.mePlayer);
+        this.leaderCardPlaceGUI.setMyLeaderCards(this.mePlayer);
         this.disableButtonsHandler(this.mePlayer.getTurnPhase());
         //todo setter di altre cose
     }
@@ -161,7 +154,7 @@ public class GUI extends Observable<Move> {
         //shows your view
         this.historyGUI.setMyHistory(this.mePlayer.getHistoryToString());
         this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
-        this.leaderCardPlaceGui.setMyLeaderCards(this.mePlayer);
+        this.leaderCardPlaceGUI.setMyLeaderCards(this.mePlayer);
         //todo setter di altre cose
     }
 
@@ -169,7 +162,7 @@ public class GUI extends Observable<Move> {
         //show the view of the opponent opponentPLayers(index)
         this.historyGUI.setHistory(this.opponentsPlayer.get(index).getHistoryToString(),this.opponentsPlayer.get(index).getNickname());
         this.informationsGUI.showOpponentView(this.opponentsPlayer.get(index).getNickname());
-        this.leaderCardPlaceGui.setOpponentLeaderCards(this.opponentsPlayer.get(index).getLeaderCards(),this.opponentsPlayer.get(index).getNickname());
+        this.leaderCardPlaceGUI.setOpponentLeaderCards(this.opponentsPlayer.get(index).getLeaderCards(),this.opponentsPlayer.get(index).getNickname());
         //todo setter di altre cose
 
 
@@ -202,11 +195,11 @@ public class GUI extends Observable<Move> {
         this.send(this.buyDevCardMoveHandler.getMove());
         this.buyDevCardMoveHandler.reset();
     }
+
     public void sendProductionMove(ProductionMoveHandler productionMoveHandler) {
         this.productionMoveHandler = productionMoveHandler;
         this.send(this.productionMoveHandler.getMove());
         this.productionMoveHandler.reset();
     }
-
 }
 

@@ -138,7 +138,7 @@ public class InformationsGUI extends JInternalFrame {
         showProductionInfo();
     }
 
-    //todo da finire
+    // Shows on the informationsGUI the necessary information for the BuyDevCardMove
     private void showProductionInfo() {
         String selectedResourcesFromWarehouse = convertResourcesToString(this.selectResourcesHandler.getResourcesFromWarehouse());
         String selectedResourcesFromChest = convertResourcesToString(this.selectResourcesHandler.getResourcesFromChest());
@@ -146,7 +146,7 @@ public class InformationsGUI extends JInternalFrame {
         Map<ResourceType, Integer> resourcesRequired = this.productionMoveHandler.calculateResourcesRequired(
                 this.productionMoveHandler.getDevCard(),
                 this.productionMoveHandler.getLeaderCard(),
-                this.productionMoveHandler.getBoardRequireResources(),
+                this.productionMoveHandler.getBoardRequiredResources(),
                 this.productionMoveHandler.getProductionType());
         if (verifyResourcesTargetReached(insertedResources, this.productionMoveHandler.getResourcesRequired())) {
             this.gui.sendProductionMove(this.productionMoveHandler);
@@ -299,26 +299,11 @@ public class InformationsGUI extends JInternalFrame {
         }
     }
 
-    public void resetSelectResourcesHandler() {
-        this.selectResourcesHandler = null;
-    }
-
-    public void resetBuyDevCardMoveHandler() {
-        this.buyDevCardMoveHandler = null;
-    }
-
-    public void resetProductionMoveHandler() {
-        this.productionMoveHandler = null;
-    }
-
     public void addCoin() { this.resourceInHandler.addCoin(); }
-    public void addStone() {
-        this.resourceInHandler.addStone();
-    }
-    public void addShield() {
-        this.resourceInHandler.addShield();
-    }
-    public void addServant() {
-        this.resourceInHandler.addServant();
-    }
+
+    public void addStone() { this.resourceInHandler.addStone(); }
+
+    public void addShield() { this.resourceInHandler.addShield(); }
+
+    public void addServant() { this.resourceInHandler.addServant(); }
 }
