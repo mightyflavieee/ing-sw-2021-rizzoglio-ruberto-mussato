@@ -206,21 +206,6 @@ public class GUI extends Observable<Move> {
         this.productionMoveHandler = productionMoveHandler;
         this.send(this.productionMoveHandler.getMove());
     }
-    public static void main(String[] args){
-        Player gianluca = new Player("Gianluca");
-        LeaderCardContainer leaderCardContainer = new LeaderCardContainer();
-        List<LeaderCard> leaderCards = new ArrayList<>();
-        leaderCards.add(leaderCardContainer.getLeaderCards().get(0));
-        leaderCards.add(leaderCardContainer.getLeaderCards().get(0));
-        gianluca.setLeaderCards(leaderCards);
-        Player flavio = new Player("Flavio");
-        Player leo = new Player("Leo");
-        List<Player> playerList = new ArrayList<>();
-        playerList.add(gianluca);
-        playerList.add(flavio);
-        playerList.add(leo);
-        new GUI(new Match(playerList),"Gianluca");
-    }
 
 }
 

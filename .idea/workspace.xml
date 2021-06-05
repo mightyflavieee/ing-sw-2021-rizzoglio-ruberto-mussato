@@ -8,8 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Updated GUI design">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/ExtraDepositsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/ExtraDepositsGUI.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -379,13 +378,6 @@
       <workItem from="1622803119809" duration="165000" />
       <workItem from="1622809577288" duration="3719000" />
     </task>
-    <task id="LOCAL-00114" summary="updated market gui and leadercards gui">
-      <created>1622147580552</created>
-      <option name="number" value="00114" />
-      <option name="presentableId" value="LOCAL-00114" />
-      <option name="project" value="LOCAL" />
-      <updated>1622147580552</updated>
-    </task>
     <task id="LOCAL-00115" summary="updated">
       <created>1622147753463</created>
       <option name="number" value="00115" />
@@ -722,7 +714,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622813151578</updated>
     </task>
-    <option name="localTasksCounter" value="163" />
+    <task id="LOCAL-00163" summary="Updated GUI design">
+      <created>1622877676305</created>
+      <option name="number" value="00163" />
+      <option name="presentableId" value="LOCAL-00163" />
+      <option name="project" value="LOCAL" />
+      <updated>1622877676305</updated>
+    </task>
+    <option name="localTasksCounter" value="164" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -752,7 +751,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added InformationsGUI.java" />
     <MESSAGE value="Updated NoMoveHandlerGUI.java" />
     <MESSAGE value="Added HistoryGUI.java" />
     <MESSAGE value="Updated InformationsGUI interaction with the market" />
@@ -777,7 +775,8 @@
     <MESSAGE value="Updated InsertExtraDepositButtonListener.java" />
     <MESSAGE value="Corrected Minor error in GUI.disableButtonsHandler" />
     <MESSAGE value="Corrected Minor error in extradeposit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected Minor error in extradeposit" />
+    <MESSAGE value="Updated GUI design" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated GUI design" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -23,8 +23,10 @@ public class ExtraDepositsGUI extends JInternalFrame {
         this.setTitle("Extra Deposits");
         this.setVisible(true);
         this.setLayout(new GridLayout(2, 1));
-        JInternalFrame firstExtraDepo = new JInternalFrame("First extra deposit");
-        JInternalFrame secondExtraDepo = new JInternalFrame("Second extra deposit");
+//        JInternalFrame firstExtraDepo = new JInternalFrame("First extra deposit");
+//        JInternalFrame secondExtraDepo = new JInternalFrame("Second extra deposit");
+        JPanel firstExtraDepo = new JPanel();
+        JPanel secondExtraDepo = new JPanel();
         firstExtraDepo.setVisible(true);
         secondExtraDepo.setVisible(true);
         firstExtraDepo.setLayout(new GridLayout(1, 2));
