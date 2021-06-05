@@ -19,7 +19,7 @@ public class ProductionMoveHandler {
     private ProductionType productionType;
     private List<ResourceType> boardOrPerkManufacturedResource;
     private Map<ResourceType, Integer> resourcesRequired;
-    private Map<ResourceType, Integer> boardRequireResources;
+    private Map<ResourceType, Integer> boardRequiredResources;
 
     public DevelopmentCard getDevCard() {
         return developmentCard;
@@ -43,7 +43,7 @@ public class ProductionMoveHandler {
 
     public Map<ResourceType, Integer> getResourcesRequired() { return resourcesRequired; }
 
-    public Map<ResourceType, Integer> getBoardRequireResources() { return boardRequireResources; }
+    public Map<ResourceType, Integer> getBoardRequiredResources() { return boardRequiredResources; }
 
     public void setDevCard(DevelopmentCard developmentCard) {
         this.developmentCard = developmentCard;
@@ -71,7 +71,7 @@ public class ProductionMoveHandler {
     }
 
     public void setBoardRequireResources(Map<ResourceType, Integer> boardRequireResources) {
-        this.boardRequireResources = boardRequireResources;
+        this.boardRequiredResources = boardRequireResources;
     }
 
     // calculates the combined required resources for the production
