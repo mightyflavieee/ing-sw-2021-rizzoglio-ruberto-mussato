@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.client.gui.informations.MainPhaseHandler;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandlerGUI;
 import it.polimi.ingsw.project.model.TurnPhase;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
@@ -19,6 +20,7 @@ public class InformationsGUI extends JInternalFrame {
     private JTextArea jTextArea;
     private JInternalFrame phaseFrame;
     private ResourceInHandlerGUI resourceInHandler;
+    private MainPhaseHandler mainPhaseHandler;
     private SelectResourcesHandler selectResourcesHandler;
     private BuyDevCardMoveHandler buyDevCardMoveHandler;
     private ProductionMoveHandler productionMoveHandler;
@@ -41,9 +43,16 @@ public class InformationsGUI extends JInternalFrame {
 
     public JTextArea getjTextArea() { return this.jTextArea; }
 
+    public MainPhaseHandler getMainPhaseHandler() { return mainPhaseHandler; }
+
     public void refresh() {
         switch (turnPhase) {
             case InitialPhase:
+
+                if (this.mainPhaseHandler != null) {
+                    this.mainPhaseHandler.setVisible(false);
+                }
+
                 if(this.phaseFrame!=null){
                     this.phaseFrame.dispose();
                 }
@@ -52,6 +61,11 @@ public class InformationsGUI extends JInternalFrame {
                 this.add(this.phaseFrame);
                 break;
             case EndPhase:
+
+                this.mainPhaseHandler.setVisible(false);
+                this.remove(this.mainPhaseHandler);
+                this.mainPhaseHandler = null;
+
                 if(this.phaseFrame!=null){
                     this.phaseFrame.dispose();
                 }
@@ -67,13 +81,24 @@ public class InformationsGUI extends JInternalFrame {
                     this.phaseFrame.dispose();
                 }
                 this.jTextArea.setVisible(true);
-                this.jTextArea.setText("You must choose and perform one of the following actions:" +
+                /*this.jTextArea.setText("You must choose and perform one of the following actions:" +
                         "\nTake Resources from the Market" +
                         "\nBuy one Development Card" +
-                        "\nActivate the Production");
+                        "\nActivate the Production");*/
+
+                this.jTextArea.setText("You must choose and perform one of the following actions:");
+                if (this.mainPhaseHandler == null) {
+                    this.mainPhaseHandler = new MainPhaseHandler(this.gui);
+                    this.add(this.mainPhaseHandler);
+                }
+                this.mainPhaseHandler.setVisible(true);
+
                 break;
             case WaitPhase:
             default:
+
+                this.mainPhaseHandler.setVisible(false);
+
                 if(this.phaseFrame != null){
                     this.phaseFrame.dispose();
                 }
@@ -84,6 +109,9 @@ public class InformationsGUI extends JInternalFrame {
     }
 
     public void showMarketInformations(Boolean hasfaith){
+
+        this.mainPhaseHandler.setVisible(false);
+
         if(hasfaith){
             this.jTextArea.setText("You collected some resources from the Market!\n" +
                     "You can see them in the Resources in Hand panel" +

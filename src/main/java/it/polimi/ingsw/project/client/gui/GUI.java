@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.board.*;
+import it.polimi.ingsw.project.client.gui.informations.MainPhaseHandler;
 import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardPlaceGUI;
 import it.polimi.ingsw.project.client.gui.market.MarketGUI;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
@@ -133,6 +134,14 @@ public class GUI extends Observable<Move> {
         this.disableForLeaderCardPhase();
     }
 
+    public void disableForTakeFromMarket() {
+
+    }
+
+    public void enableForTakeFromMarket() {
+
+    }
+
     public void setMatch(Match match){//todo chiama i metodi set di tutti i jinternalframe e aggiorna tutto
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,this.mePlayer.getNickname());
         this.mePlayer = pair._1;
@@ -168,6 +177,8 @@ public class GUI extends Observable<Move> {
 
         this.disableAllButtons();
     }
+
+    public InformationsGUI getInformationsGUI() { return informationsGUI; }
 
     public WarehouseGUI getWarehouseGUI() {
         return this.boardGUI.getWarehouseGUI();
