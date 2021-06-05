@@ -16,13 +16,13 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
     private List<LeaderMovePanel> leaderMovePanelList;
     public LeaderCardPlaceGUI(List<LeaderCard> leaderCards, GUI gui) {
         this.setTitle("My Leader Cards");
-        this.setLayout(new GridLayout(2,1));
+        this.setLayout(new BorderLayout());
         JPanel imagesPanel = new JPanel();
         imagesPanel.setLayout(new GridLayout(1,2));
-        this.add(imagesPanel);
+        this.add(imagesPanel,BorderLayout.NORTH);
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(1,2));
-        this.add(buttonsPanel);
+        this.add(buttonsPanel,BorderLayout.CENTER);
         this.leaderCardJlabelGUIList = new ArrayList<>();
         this.leaderMovePanelList = new ArrayList<>();
         for(int i = 0; i < leaderCards.size(); i++) {

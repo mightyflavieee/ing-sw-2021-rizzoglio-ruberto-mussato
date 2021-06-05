@@ -25,7 +25,7 @@ public class InformationsGUI extends JInternalFrame {
     public InformationsGUI(GUI gui, TurnPhase turnPhase) {
         this.gui = gui;
         this.setTitle("Informations");
-        this.setLayout(new FlowLayout());
+        //this.setLayout(new GridLayout(2,1));
         this.jTextArea = new JTextArea();
         jTextArea.setEditable(false);
         this.add(this.jTextArea);

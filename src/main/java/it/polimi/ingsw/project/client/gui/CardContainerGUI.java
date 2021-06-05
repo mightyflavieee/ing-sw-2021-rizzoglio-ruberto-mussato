@@ -31,7 +31,7 @@ public class CardContainerGUI extends JInternalFrame {
             this.add(jButton);
             this.showedCards.add(jButton);
 
-            jButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png").getImage().getScaledInstance(100,160, Image.SCALE_SMOOTH)));
+            jButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png").getImage().getScaledInstance(80,150, Image.SCALE_SMOOTH)));
             jButton.setVisible(true);
         }
     }
@@ -39,7 +39,7 @@ public class CardContainerGUI extends JInternalFrame {
     public void refresh() {
         this.cardsToShow = cardContainer.getAvailableDevCards().stream().map(DevelopmentCard::getId).collect(Collectors.toList());
         for (int i = 0; i < cardsToShow.size(); i++){
-            this.showedCards.get(i).setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png").getImage().getScaledInstance(100, 160, Image.SCALE_SMOOTH)));
+            this.showedCards.get(i).setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png").getImage().getScaledInstance(80, 150, Image.SCALE_SMOOTH)));
 
         }
     }

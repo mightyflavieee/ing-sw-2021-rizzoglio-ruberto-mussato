@@ -18,7 +18,9 @@ public class BoardGUI extends JInternalFrame {
     public BoardGUI(String nickname, InformationsGUI informationsGUI, Board board){
         this.setTitle(nickname);
         this.setVisible(true);
-        this.setLayout(new GridBagLayout());
+       // this.setLayout(new GridBagLayout());
+
+
 
         this.informationsGUI = informationsGUI;
         this.boardModel = board;
@@ -27,18 +29,17 @@ public class BoardGUI extends JInternalFrame {
         this.mapTray = new MapTrayGUI(this.informationsGUI, this.boardModel);
         this.chest = new ChestGUI(this.informationsGUI, this.boardModel);
 
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.gridwidth = 3;
-        constraints.gridheight = 1;
-        this.add(this.faithMap, constraints);
+//        constraints.fill = GridBagConstraints.HORIZONTAL;
+//        constraints.gridx = 0;
+//        constraints.gridy = 0;
+//        constraints.gridwidth = 3;
+//        constraints.gridheight = 1;
+//        this.add(this.faithMap, constraints);
 
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        constraints.gridwidth = 1;
-        constraints.gridheight = 1;
+//        constraints.gridx = 0;
+//        constraints.gridy = 1;
+//        constraints.gridwidth = 1;
+//        constraints.gridheight = 1;
         JInternalFrame depositsFrame = new JInternalFrame("Deposits");
         depositsFrame.setVisible(true);
         /*depositsFrame.setLayout(new BorderLayout());
@@ -47,13 +48,22 @@ public class BoardGUI extends JInternalFrame {
         depositsFrame.setLayout(new GridLayout(1, 2));
         depositsFrame.add(this.warehouse);
         depositsFrame.add(this.chest);
-        this.add(depositsFrame, constraints);
+//        this.add(depositsFrame, constraints);
 
-        constraints.gridx = 1;
-        constraints.gridy = 1;
-        constraints.gridwidth = 2;
-        constraints.gridheight = 1;
-        this.add(this.mapTray, constraints);
+//        constraints.gridx = 1;
+//        constraints.gridy = 1;
+//        constraints.gridwidth = 2;
+//        constraints.gridheight = 1;
+//        this.add(this.mapTray, constraints);
+
+
+    this.setLayout(new BorderLayout());
+    this.add(faithMap, BorderLayout.SOUTH);
+    JPanel centerPanel = new JPanel();
+    centerPanel.setLayout(new GridLayout(1,2));
+    centerPanel.add(depositsFrame);
+    centerPanel.add(mapTray);
+    this.add(centerPanel,BorderLayout.CENTER);
     }
 
     public WarehouseGUI getWarehouseGUI() {

@@ -5,9 +5,11 @@ import it.polimi.ingsw.project.client.gui.board.*;
 import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardPlaceGUI;
 import it.polimi.ingsw.project.client.gui.market.MarketGUI;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
+import it.polimi.ingsw.project.model.LeaderCardContainer;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.TurnPhase;
+import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.Move;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.utils.Pair;
@@ -15,6 +17,7 @@ import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,10 +46,8 @@ public class GUI extends Observable<Move> {
         this.takeMarketResourceBuilder = new TakeMarketResourceBuilder();
         this.jFrame = new JFrame();
         this.jFrame.setTitle("Master of Renaissance");
-        //this.jFrame.setLayout(new GridLayout(3,3));
-        jFrame.setLayout(new BorderLayout());
+        jFrame.setLayout(new GridLayout(2,1));
 
-        //  boardGUI = new BoardGUI("Board");
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,myNickname);
         this.mePlayer = pair._1;
         this.opponentsPlayer = pair._2;
@@ -59,40 +60,32 @@ public class GUI extends Observable<Move> {
         this.playersBarGUI = new PlayersBarGUI(this.opponentsPlayer.stream().map(Player::getNickname).collect(Collectors.toList()), myNickname,this);
         //todo inizializzatori di altre cose
 
-        //faithMapGUI = new FaithMapGUI();
-        //warehouseGUI = new WarehouseGUI();
-        //chestGUI = new ChestGUI();
-        //mapTrayGUI = new MapTrayGUI();
-//        marketButton = new MarketButton("market button");
-//        marketButtonListener = new MarketButtonListener(marketGUI);
-//        marketButton.addActionListener(marketButtonListener);
-//        jFrame.add(marketButton);
-//        jFrame.add(new MarketGUI("altro market ma potrebbe essere board"));
-//        jFrame.add(new MarketGUI("altro market ma potrebbe essere warehouse"));
-//        marketGUI.doubleSize();
 
-//        jFrame.add(marketGUI, BorderLayout.EAST);
-//        jFrame.add(boardGUI, BorderLayout.NORTH);
-//        jFrame.add(cardContainerGUI, BorderLayout.CENTER);
-//        jFrame.add(leaderCardPlaceGui, BorderLayout.WEST);
-//        jFrame.add(faithMapGUI);
-//        jFrame.add(warehouseGUI);
-//        jFrame.add(chestGUI);
-//        jFrame.add(mapTrayGUI);
-
-        /*JPanel northPanel = new JPanel();
-        northPanel.setLayout(new FlowLayout());
-        northPanel.add(marketGUI);
-        northPanel.add(boardGUI);
-        this.jFrame.add(northPanel, BorderLayout.NORTH);*/
-
-        this.jFrame.add(boardGUI, BorderLayout.NORTH);
-        this.jFrame.add(informationsGUI, BorderLayout.CENTER);
-        //this.jFrame.add(historyGUI, BorderLayout.NORTH);
-        this.jFrame.add(marketGUI, BorderLayout.SOUTH);
-        this.jFrame.add(cardContainerGUI, BorderLayout.WEST);
-        this.jFrame.add(leaderCardPlaceGui, BorderLayout.EAST);
+//        this.jFrame.add(boardGUI, BorderLayout.NORTH);
+//        this.jFrame.add(informationsGUI, BorderLayout.CENTER);
+//        //this.jFrame.add(historyGUI, BorderLayout.NORTH);
+//        this.jFrame.add(marketGUI, BorderLayout.SOUTH);
+//        this.jFrame.add(cardContainerGUI, BorderLayout.WEST);
+//        this.jFrame.add(leaderCardPlaceGui, BorderLayout.EAST);
         //this.jFrame.add(playersBarGUI, BorderLayout.SOUTH);
+        JPanel bottomPanel = new JPanel();
+        bottomPanel.setLayout(new BorderLayout());
+        JPanel top2Panel = new JPanel();
+        top2Panel.setLayout(new GridLayout(1,4));
+        top2Panel.add(marketGUI);
+        top2Panel.add(cardContainerGUI);
+        top2Panel.add(informationsGUI);
+        top2Panel.add(historyGUI);
+        bottomPanel.add(top2Panel,BorderLayout.CENTER);
+
+
+        bottomPanel.add(playersBarGUI,BorderLayout.SOUTH);
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BorderLayout());
+        topPanel.add(boardGUI,BorderLayout.EAST);
+        topPanel.add(leaderCardPlaceGui,BorderLayout.CENTER);
+        this.jFrame.add(topPanel);
+        this.jFrame.add(bottomPanel);
         this.jFrame.setVisible(true);
         this.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.jFrame.pack();
@@ -207,6 +200,22 @@ public class GUI extends Observable<Move> {
         this.buyDevCardMoveHandler = buyDevCardMoveHandler;
         this.send(this.buyDevCardMoveHandler.getMove());
         this.buyDevCardMoveHandler.reset();
+    }
+
+    public static void main(String[] args){
+        Player gianluca = new Player("Gianluca");
+        LeaderCardContainer leaderCardContainer = new LeaderCardContainer();
+        List<LeaderCard> leaderCards = new ArrayList<>();
+        leaderCards.add(leaderCardContainer.getLeaderCards().get(0));
+        leaderCards.add(leaderCardContainer.getLeaderCards().get(0));
+        gianluca.setLeaderCards(leaderCards);
+        Player flavio = new Player("Flavio");
+        Player leo = new Player("Leo");
+        List<Player> playerList = new ArrayList<>();
+        playerList.add(gianluca);
+        playerList.add(flavio);
+        playerList.add(leo);
+        new GUI(new Match(playerList),"Gianluca");
     }
 }
 
