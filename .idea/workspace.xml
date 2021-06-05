@@ -8,7 +8,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Updated GUI design">
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/ExtraDepositsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/ExtraDepositsGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/HistoryGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/HistoryGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" afterDir="false" />
     </list>
     <list id="2d4648c0-32e5-4f3b-ad56-8897be951edc" name="Changes by leonardo" comment="Changes by leonardo" />
     <option name="SHOW_DIALOG" value="false" />
@@ -103,7 +105,7 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GUI">
+  <component name="RunManager" selected="Application.ClientAppGUI">
     <configuration name="ClientAppGUI" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ClientAppGUI" />
       <module name="GC23" />
@@ -231,9 +233,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GUI" />
         <item itemvalue="Application.ClientAppGUI" />
         <item itemvalue="Application.ServerApp" />
+        <item itemvalue="Application.GUI" />
         <item itemvalue="JUnit.ActivateLeaderCardMoveTest.performMove" />
         <item itemvalue="JUnit.ActivateLeaderCardMoveTest" />
       </list>
@@ -377,13 +379,6 @@
       <workItem from="1622801251535" duration="19000" />
       <workItem from="1622803119809" duration="165000" />
       <workItem from="1622809577288" duration="3719000" />
-    </task>
-    <task id="LOCAL-00115" summary="updated">
-      <created>1622147753463</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1622147753463</updated>
     </task>
     <task id="LOCAL-00116" summary="Corrected minor error in MatchGUI.java">
       <created>1622196206863</created>
@@ -721,7 +716,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622877676305</updated>
     </task>
-    <option name="localTasksCounter" value="164" />
+    <task id="LOCAL-00164" summary="Updated GUI design">
+      <created>1622877981685</created>
+      <option name="number" value="00164" />
+      <option name="presentableId" value="LOCAL-00164" />
+      <option name="project" value="LOCAL" />
+      <updated>1622877981685</updated>
+    </task>
+    <option name="localTasksCounter" value="165" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -819,6 +821,11 @@
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/controller/Controller.java</url>
           <line>26</line>
           <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/HistoryGUI.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -28,9 +28,10 @@ public class InformationsGUI extends JInternalFrame {
         this.gui = gui;
         this.setTitle("Informations");
         //this.setLayout(new GridLayout(2,1));
+        this.setLayout(new BorderLayout());
         this.jTextArea = new JTextArea();
         jTextArea.setEditable(false);
-        this.add(this.jTextArea);
+        this.add(this.jTextArea,BorderLayout.NORTH);
         this.turnPhase = turnPhase;
         //this.resourceInHandler = new ResourceInHandlerGUI();
         this.refresh();

@@ -48,7 +48,7 @@ public class HistoryGUI extends JInternalFrame {
             this.jTextArea = new JTextArea("No History");
         }else
         {
-            this.jTextArea = new JTextArea(history);
+            this.jTextArea.setText(history);
         }
     }
 }
