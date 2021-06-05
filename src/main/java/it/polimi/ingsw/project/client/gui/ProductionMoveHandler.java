@@ -196,4 +196,14 @@ public class ProductionMoveHandler {
                 this.productionType,
                 this.boardOrPerkManufacturedResource);
     }
+
+    public void reset() {
+        this.developmentCard = null;
+        this.leaderCard = null;
+        this.selectResourcesHandler = null;
+        this.productionType = null;
+        this.boardOrPerkManufacturedResource = null;
+        this.resourcesRequired.clear();
+        this.boardRequiredResources.clear();
+    }
 }

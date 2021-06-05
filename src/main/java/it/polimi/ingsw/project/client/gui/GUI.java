@@ -205,6 +205,7 @@ public class GUI extends Observable<Move> {
     public void sendProductionMove(ProductionMoveHandler productionMoveHandler) {
         this.productionMoveHandler = productionMoveHandler;
         this.send(this.productionMoveHandler.getMove());
+        this.productionMoveHandler.reset();
     }
 
 }
