@@ -14,6 +14,7 @@ public class MapTrayGUI extends JInternalFrame {
     private Map<DevCardPosition, JButton> mapTrayButtons;
     private InformationsGUI informationsGUI;
     private Board boardModel;
+    private boolean clickable;
 
     public MapTrayGUI(InformationsGUI informationsGUI, Board boardModel) {
         this.setTitle("Map Tray");
@@ -26,6 +27,7 @@ public class MapTrayGUI extends JInternalFrame {
         this.pack();
         this.informationsGUI = informationsGUI;
         this.boardModel = boardModel;
+        this.clickable = false;
         refresh();
     }
 
@@ -62,5 +64,17 @@ public class MapTrayGUI extends JInternalFrame {
         this.mapTrayButtons.put(DevCardPosition.Left, leftButton);
         this.mapTrayButtons.put(DevCardPosition.Center, centerButton);
         this.mapTrayButtons.put(DevCardPosition.Right, rightButton);
+    }
+
+    public void disableAllButtons() {
+        this.clickable = false;
+    }
+
+    public void enableAllButtons() {
+        this.clickable = true;
+    }
+
+    public boolean isClickable() {
+        return this.clickable;
     }
 }

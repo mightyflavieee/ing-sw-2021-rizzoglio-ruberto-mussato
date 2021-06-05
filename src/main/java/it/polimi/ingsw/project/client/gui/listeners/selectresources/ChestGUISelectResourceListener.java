@@ -22,11 +22,13 @@ public class ChestGUISelectResourceListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        int previousValue = Integer.parseInt(this.chestGUI.getNumberOfResouces().get(this.resourceType).getText());
-        if (previousValue != 0) {
-            this.chestGUI.getNumberOfResouces().get(this.resourceType).setText(String.valueOf(previousValue-1));
-            this.informationsGUI.updateSelectResourcesHandler(this.resourceType, false);
-            this.informationsGUI.showDevCardPurchaseInfo();
+        if (this.chestGUI.isClickable()) {
+            int previousValue = Integer.parseInt(this.chestGUI.getNumberOfResouces().get(this.resourceType).getText());
+            if (previousValue != 0) {
+                this.chestGUI.getNumberOfResouces().get(this.resourceType).setText(String.valueOf(previousValue-1));
+                this.informationsGUI.updateSelectResourcesHandler(this.resourceType, false);
+                this.informationsGUI.showDevCardPurchaseInfo();
+            }
         }
     }
 }

@@ -25,6 +25,7 @@ public class WarehouseGUI extends JInternalFrame {
     private InformationsGUI informationsGUI;
     private Warehouse warehouseModel;
     private ExtraDepositsGUI extraDepositsGUI;
+    private boolean clickable;
 
     public WarehouseGUI(InformationsGUI informationsGUI, Warehouse warehouse) {
         this.setTitle("Warehouse");
@@ -84,6 +85,7 @@ public class WarehouseGUI extends JInternalFrame {
         this.numberOfResoucesPerShelf.put(ShelfFloor.Third, 0);
         this.informationsGUI = informationsGUI;
         this.warehouseModel = warehouse;
+        this.clickable = false;
         refresh();
     }
 
@@ -206,68 +208,6 @@ public class WarehouseGUI extends JInternalFrame {
         refresh();
     }
 
-        /*
-    // updates the ShelfFloor
-    public void updateShelfFloor(ShelfFloor floor, ResourceType newResourceType, int numOfResourcesToChange) {
-        for (ShelfFloor shelfFloor : this.shelvesButtons.keySet()) {
-            if (shelfFloor == floor) {
-                for (int i = 0; i < numOfResourcesToChange; i++) {
-                    this.shelvesButtons.get(shelfFloor).get(i).setIcon(new ImageIcon(
-                            new ImageIcon("src/main/resources/resourcetype/" + newResourceType + ".png")
-                            .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-                }
-                this.numberOfResoucesPerShelf.put(shelfFloor, numOfResourcesToChange);
-                this.resourceTypePerShelf.put(shelfFloor, newResourceType);
-                // if the numOfResourcesToChange is less than the total number of resources present in that shelf,
-                // puts in the other buttons the void image
-                if (numOfResourcesToChange < this.shelvesButtons.get(shelfFloor).size()) {
-                    for (int i = this.shelvesButtons.get(shelfFloor).size(); i > numOfResourcesToChange; i--) {
-                        this.shelvesButtons.get(shelfFloor).get(i).setIcon(new ImageIcon(
-                                new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-                                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-                    }
-                }
-            }
-        }
-    }
-
-    // swaps resources from floorA to floorB. Outputs an error message on the information section (in GUI)
-    // if this operation cannot be done
-    public void changeShelf(ShelfFloor floorA, ShelfFloor floorB) {
-        if ((floorA == ShelfFloor.First && floorB == ShelfFloor.Second) ||
-                (floorB == ShelfFloor.First && floorA == ShelfFloor.Second)) {
-            if (this.numberOfResoucesPerShelf.get(ShelfFloor.Second) < 2) {
-                ResourceType resourceTypeFloorA = this.resourceTypePerShelf.get(floorA);
-                updateShelfFloor(floorA, this.resourceTypePerShelf.get(floorB), 1);
-                updateShelfFloor(floorB, resourceTypeFloorA, 1);
-            } else {
-                //TODO ALERT, CANNOT DO THIS CHANGE
-            }
-        }
-        if ((floorA == ShelfFloor.First && floorB == ShelfFloor.Third) ||
-                (floorB == ShelfFloor.First && floorA == ShelfFloor.Third)) {
-            if (this.numberOfResoucesPerShelf.get(ShelfFloor.Third) < 2) {
-                ResourceType resourceTypeFloorA = this.resourceTypePerShelf.get(floorA);
-                updateShelfFloor(floorA, this.resourceTypePerShelf.get(floorB), 1);
-                updateShelfFloor(floorB, resourceTypeFloorA, 1);
-            } else {
-                //TODO ALERT, CANNOT DO THIS CHANGE
-            }
-        }
-        if ((floorA == ShelfFloor.Second && floorB == ShelfFloor.Third) ||
-                (floorB == ShelfFloor.Second && floorA == ShelfFloor.Third)) {
-            if (this.numberOfResoucesPerShelf.get(ShelfFloor.Third) != 3) {
-                ResourceType resourceTypeFloorA = this.resourceTypePerShelf.get(floorA);
-                int numberOfResourcesFloorA = this.numberOfResoucesPerShelf.get(floorA);
-                updateShelfFloor(floorA, this.resourceTypePerShelf.get(floorB), this.numberOfResoucesPerShelf.get(floorB));
-                updateShelfFloor(floorB, resourceTypeFloorA, numberOfResourcesFloorA);
-            } else {
-                //TODO ALERT, CANNOT DO THIS CHANGE
-            }
-        }
-    }*/
-
-
     public Map<ShelfFloor, Integer> getNumberOfResoucesPerShelf() {
         return numberOfResoucesPerShelf;
     }
@@ -282,5 +222,19 @@ public class WarehouseGUI extends JInternalFrame {
 
     public ExtraDepositsGUI getExtraDepositsGUI() {
         return extraDepositsGUI;
+    }
+
+    public void disableAllButtons() {
+        this.clickable = false;
+        this.extraDepositsGUI.disableAllButtons();
+    }
+
+    public void enableAllButtons() {
+        this.clickable = true;
+        this.extraDepositsGUI.enableAllButtons();
+    }
+
+    public boolean isClickable() {
+        return this.clickable;
     }
 }

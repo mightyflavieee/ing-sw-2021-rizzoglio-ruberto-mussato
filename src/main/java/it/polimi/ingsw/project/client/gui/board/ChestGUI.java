@@ -18,6 +18,7 @@ public class ChestGUI extends JInternalFrame {
     private Map<ResourceType, JLabel> numberOfResouces;
     private InformationsGUI informationsGUI;
     private Board boardModel;
+    private boolean clickable;
 
     public ChestGUI(InformationsGUI informationsGUI, Board boardModel) {
         this.setTitle("Chest");
@@ -30,6 +31,7 @@ public class ChestGUI extends JInternalFrame {
         this.pack();
         this.informationsGUI = informationsGUI;
         this.boardModel = boardModel;
+        this.clickable = false;
         refresh();
     }
 
@@ -126,4 +128,12 @@ public class ChestGUI extends JInternalFrame {
             }
         }
     }
+
+    public void disableAllButtons() {
+        this.clickable = false;
+    }
+
+    public void enableAllButtons() { this.clickable = true; }
+
+    public boolean isClickable() { return this.clickable; }
 }

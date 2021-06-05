@@ -8,7 +8,9 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +20,8 @@ public class ExtraDepositsGUI extends JInternalFrame {
     private InformationsGUI informationsGUI;
     private Map<ResourceType, Integer> resourcesInExtraDeposits;
     private Warehouse warehouseModel;
+    private Map<Integer, List<ActionListener>> actionListenersPerExtraDeposit;
+    private boolean clickable;
 
     public ExtraDepositsGUI(InformationsGUI informationsGUI, Warehouse warehouseModel) {
         this.setTitle("Extra Deposits");
@@ -41,6 +45,7 @@ public class ExtraDepositsGUI extends JInternalFrame {
         this.pack();
         this.informationsGUI = informationsGUI;
         this.warehouseModel = warehouseModel;
+        this.clickable = false;
         refresh();
     }
 
@@ -52,11 +57,29 @@ public class ExtraDepositsGUI extends JInternalFrame {
                     if (count == 1) {
                         this.firstExtraDepositButtons.get(0).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
-                                        .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+                                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+                        this.firstExtraDepositButtons.get(1).setIcon(new ImageIcon(
+                                new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
+                                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+                        // adds listener
+                        if (Arrays.stream(this.firstExtraDepositButtons.get(0).getActionListeners()).count() == 0) {
+                            this.firstExtraDepositButtons.get(0).addActionListener(
+                                    new ExtraDepositGUISelectResourceListener(this,
+                                            this.informationsGUI, type, 1, 0));
+                        }
                     } else {
                         this.secondExtraDepositButtons.get(0).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
-                                        .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+                                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+                        this.secondExtraDepositButtons.get(1).setIcon(new ImageIcon(
+                                new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
+                                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+                        // adds listener
+                        if (Arrays.stream(this.firstExtraDepositButtons.get(0).getActionListeners()).count() == 0) {
+                            this.firstExtraDepositButtons.get(0).addActionListener(
+                                    new ExtraDepositGUISelectResourceListener(this,
+                                            this.informationsGUI, type, 1, 0));
+                        }
                     }
                 }
                 if (this.warehouseModel.getExtraDeposit().get(type) == 2) {
@@ -67,6 +90,10 @@ public class ExtraDepositsGUI extends JInternalFrame {
                         this.firstExtraDepositButtons.get(1).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
                                         .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+                        this.firstExtraDepositButtons.get(0).addActionListener(new ExtraDepositGUISelectResourceListener(this,
+                                this.informationsGUI, type, 1, 0));
+                        this.firstExtraDepositButtons.get(1).addActionListener(new ExtraDepositGUISelectResourceListener(this,
+                                this.informationsGUI, type, 1, 1));
                     } else {
                         this.secondExtraDepositButtons.get(0).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
@@ -74,6 +101,10 @@ public class ExtraDepositsGUI extends JInternalFrame {
                         this.secondExtraDepositButtons.get(1).setIcon(new ImageIcon(
                                 new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
                                         .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+                        this.secondExtraDepositButtons.get(0).addActionListener(new ExtraDepositGUISelectResourceListener(this,
+                                this.informationsGUI, type, 2, 0));
+                        this.secondExtraDepositButtons.get(1).addActionListener(new ExtraDepositGUISelectResourceListener(this,
+                                this.informationsGUI, type, 2, 1));
                     }
                 }
                 count++;
@@ -128,8 +159,6 @@ public class ExtraDepositsGUI extends JInternalFrame {
         refresh();
     }
 
-
-
     public void enableExtraDeposit(ResourceType type) {
         if (this.firstExtraDepositButtons.get(0).isEnabled()) {
             this.secondExtraDepositButtons.get(0).setEnabled(true);
@@ -148,5 +177,14 @@ public class ExtraDepositsGUI extends JInternalFrame {
         }
     }
 
+    public void disableAllButtons() { this.clickable = false; }
+
+    public void enableAllButtons() {
+        this.clickable = true;
+    }
+
+    public boolean isClickable() {
+        return this.clickable;
+    }
 }
 

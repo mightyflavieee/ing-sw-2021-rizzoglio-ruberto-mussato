@@ -31,16 +31,18 @@ public class ExtraDepositGUISelectResourceListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (this.numOfExtraDeposit == 1) {
-            this.extraDepositsGUI.getFirstExtraDepositButtons().get(buttonNumber-1).setIcon(new ImageIcon(
-                    new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-                    .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+        if (this.extraDepositsGUI.isClickable()) {
+            if (this.numOfExtraDeposit == 1) {
+                this.extraDepositsGUI.getFirstExtraDepositButtons().get(buttonNumber).setIcon(new ImageIcon(
+                        new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
+                                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+            }
+            if (this.numOfExtraDeposit == 2) {
+                this.extraDepositsGUI.getSecondExtraDepositButtons().get(buttonNumber).setIcon(new ImageIcon(
+                        new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
+                                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+            }
+            this.informationsGUI.updateSelectResourcesHandler(this.resourceType, true);
         }
-        if (this.numOfExtraDeposit == 2) {
-            this.extraDepositsGUI.getSecondExtraDepositButtons().get(buttonNumber-1).setIcon(new ImageIcon(
-                    new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-                    .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-        }
-        this.informationsGUI.updateSelectResourcesHandler(this.resourceType, true);
     }
 }

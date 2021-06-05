@@ -32,10 +32,12 @@ public class WarehouseGUISelectResourceListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.warehouseGUI.getShelvesButtons().get(this.floor).get(this.buttonNumber).setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-        this.informationsGUI.updateSelectResourcesHandler(this.resourceType, true);
-        this.informationsGUI.showDevCardPurchaseInfo();
+        if (this.warehouseGUI.isClickable()) {
+            this.warehouseGUI.getShelvesButtons().get(this.floor).get(this.buttonNumber).setIcon(new ImageIcon(new javax.swing
+                    .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
+                    .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+            this.informationsGUI.updateSelectResourcesHandler(this.resourceType, true);
+            this.informationsGUI.showDevCardPurchaseInfo();
+        }
     }
 }

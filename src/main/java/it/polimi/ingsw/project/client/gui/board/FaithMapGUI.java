@@ -13,6 +13,7 @@ public class FaithMapGUI extends JInternalFrame {
     private final List<JButton> papalCuoncilTiles;
     private int markerPosition;
     private FaithMap faithMapModel;
+    private boolean clickable;
 
     public FaithMapGUI(FaithMap faithMap) {
         this.setTitle("FaithMap");
@@ -123,5 +124,13 @@ public class FaithMapGUI extends JInternalFrame {
         this.tiles.get(this.markerPosition).setBackground(new Color(255, 255, 255));
         this.markerPosition++;
         this.tiles.get(this.markerPosition).setBackground(new Color(105, 105, 105));
+    }
+
+    public void disableAllButtons() {
+        this.clickable = false;
+    }
+
+    public void enableAllButtons() {
+        this.clickable = true;
     }
 }
