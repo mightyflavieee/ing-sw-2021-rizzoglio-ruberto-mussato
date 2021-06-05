@@ -25,8 +25,6 @@ public class GUI extends Observable<Move> {
     private JFrame jFrame;
     private BoardGUI boardGUI;
     private MarketGUI marketGUI;
-    //    private MarketButton marketButton;
-//    private MarketButtonListener marketButtonListener;
     private LeaderCardPlaceGUI leaderCardPlaceGui;
     private CardContainerGUI cardContainerGUI;
     private FaithMapGUI faithMapGUI;
@@ -40,14 +38,17 @@ public class GUI extends Observable<Move> {
     private PlayersBarGUI playersBarGUI;
     private TakeMarketResourceBuilder takeMarketResourceBuilder;
     private BuyDevCardMoveHandler buyDevCardMoveHandler;
+    private ProductionMoveHandler productionMoveHandler;
 
 
     public GUI(Match match, String myNickname) {
         this.takeMarketResourceBuilder = new TakeMarketResourceBuilder();
         this.jFrame = new JFrame();
         this.jFrame.setTitle("Master of Renaissance");
-        jFrame.setLayout(new GridLayout(2,1));
+        //this.jFrame.setLayout(new GridLayout(3,3));
+        jFrame.setLayout(new BorderLayout());
 
+        //  boardGUI = new BoardGUI("Board");
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,myNickname);
         this.mePlayer = pair._1;
         this.opponentsPlayer = pair._2;
@@ -202,20 +203,9 @@ public class GUI extends Observable<Move> {
         this.buyDevCardMoveHandler.reset();
     }
 
-    public static void main(String[] args){
-        Player gianluca = new Player("Gianluca");
-        LeaderCardContainer leaderCardContainer = new LeaderCardContainer();
-        List<LeaderCard> leaderCards = new ArrayList<>();
-        leaderCards.add(leaderCardContainer.getLeaderCards().get(0));
-        leaderCards.add(leaderCardContainer.getLeaderCards().get(0));
-        gianluca.setLeaderCards(leaderCards);
-        Player flavio = new Player("Flavio");
-        Player leo = new Player("Leo");
-        List<Player> playerList = new ArrayList<>();
-        playerList.add(gianluca);
-        playerList.add(flavio);
-        playerList.add(leo);
-        new GUI(new Match(playerList),"Gianluca");
+    public void sendProductionMove(ProductionMoveHandler productionMoveHandler) {
+        this.productionMoveHandler = productionMoveHandler;
+        this.send(this.productionMoveHandler.getMove());
     }
 }
 
