@@ -72,7 +72,6 @@ public class GUI extends Observable<Move> {
         top2Panel.add(historyGUI);
         bottomPanel.add(top2Panel,BorderLayout.CENTER);
 
-
         bottomPanel.add(playersBarGUI,BorderLayout.SOUTH);
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
@@ -147,6 +146,11 @@ public class GUI extends Observable<Move> {
         this.marketGUI.disableButtons();
     }
 
+    public void disableForProduction() {
+        this.cardContainerGUI.disableAllButtos();
+        this.marketGUI.disableButtons();
+    }
+
     public void enableAfterTakeFromMarket() {
         this.boardGUI.enableAllButtons();
         this.leaderCardPlaceGUI.enableButtons();
@@ -155,6 +159,11 @@ public class GUI extends Observable<Move> {
 
     public void enableAfterBuyDevCard() {
         this.leaderCardPlaceGUI.enableButtons();
+        this.marketGUI.enableButtons();
+    }
+
+    private void enableAfterProduction() {
+        this.cardContainerGUI.enableAllButtons();
         this.marketGUI.enableButtons();
     }
 
@@ -211,6 +220,7 @@ public class GUI extends Observable<Move> {
     public BuyDevCardMoveHandler getBuyDevCardMoveHandler() { return buyDevCardMoveHandler; }
 
     public void sendMarketMove() {
+        this.informationsGUI.getMainPhaseHandler().enableAllButtons();
         enableAfterTakeFromMarket();
         this.takeMarketResourceBuilder.setWarehouse(this.boardGUI.getWarehouseModel());
         this.takeMarketResourceBuilder.setMarket(this.marketGUI.getMarket());
@@ -219,6 +229,7 @@ public class GUI extends Observable<Move> {
     }
 
     public void sendBuyDevCardMove(BuyDevCardMoveHandler buyDevCardMoveHandler) {
+        this.informationsGUI.getMainPhaseHandler().enableAllButtons();
         enableAfterBuyDevCard();
         this.buyDevCardMoveHandler = buyDevCardMoveHandler;
         this.send(this.buyDevCardMoveHandler.getMove());
@@ -226,6 +237,8 @@ public class GUI extends Observable<Move> {
     }
 
     public void sendProductionMove(ProductionMoveHandler productionMoveHandler) {
+        this.informationsGUI.getMainPhaseHandler().enableAllButtons();
+        enableAfterProduction();
         this.productionMoveHandler = productionMoveHandler;
         this.send(this.productionMoveHandler.getMove());
         this.productionMoveHandler.reset();

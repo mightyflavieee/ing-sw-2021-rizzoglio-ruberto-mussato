@@ -19,15 +19,19 @@ public class MainPhaseHandler extends JInternalFrame {
     private static final String MAINPHASESPANEL = "Main Phase";
     private static final String PRODUCTIONPANEL = "Production Move";
     private static final String BUYDEVCARDMOVE = "Buy Dev Card Move";
+    private static final String BOARDMANUFACTURINGPANEL = "Board Manufacturing";
     private List<JButton> mainPhasesButtons;
     private List<JButton> buyDevCardButtons;
     private List<JButton> productionButtons;
+    private List<JButton> boardManufacturingButtons;
     private JPanel mainPanel;
     private CardLayout mainPanelLayout;
     private JPanel mainPhasesPanel;
     private JPanel buyDevCardPanel;
     private JPanel productionPanel;
+    private JPanel boardManufacturingPanel;
     private GUI gui;
+
 
     public MainPhaseHandler(GUI gui) {
         this.gui = gui;
@@ -40,6 +44,7 @@ public class MainPhaseHandler extends JInternalFrame {
         this.mainPanel.add(MAINPHASESPANEL, this.mainPhasesPanel);
         this.mainPanel.add(BUYDEVCARDMOVE, this.buyDevCardPanel);
         this.mainPanel.add(PRODUCTIONPANEL, this.productionPanel);
+        this.mainPanel.add(BOARDMANUFACTURINGPANEL, this.boardManufacturingPanel);
         this.mainPanelLayout.show(this.mainPanel, MAINPHASESPANEL);
         this.add(this.mainPanel);
     }
@@ -49,12 +54,15 @@ public class MainPhaseHandler extends JInternalFrame {
         this.mainPhasesPanel = new JPanel();
         this.buyDevCardPanel = new JPanel();
         this.productionPanel = new JPanel();
+        this.boardManufacturingPanel = new JPanel();
         this.mainPhasesPanel.setVisible(true);
         this.buyDevCardPanel.setVisible(true);
         this.productionPanel.setVisible(true);
+        this.boardManufacturingPanel.setVisible(true);
         this.mainPhasesPanel.setLayout(new GridLayout(3, 1));
         this.buyDevCardPanel.setLayout(new GridLayout(4, 1));
         this.productionPanel.setLayout(new GridLayout(8, 1));
+        this.boardManufacturingPanel.setLayout(new GridLayout(5, 1));
         for (JButton button : this.mainPhasesButtons) {
             this.mainPhasesPanel.add(button);
         }
@@ -64,12 +72,16 @@ public class MainPhaseHandler extends JInternalFrame {
         for (JButton button : this.productionButtons) {
             this.productionPanel.add(button);
         }
+        for (JButton button : this.boardManufacturingButtons) {
+            this.boardManufacturingPanel.add(button);
+        }
     }
 
     private void createButtons() {
         this.mainPhasesButtons = new ArrayList<>();
         this.buyDevCardButtons = new ArrayList<>();
         this.productionButtons = new ArrayList<>();
+        this.boardManufacturingButtons = new ArrayList<>();
         // creates main buttons
         JButton buttonMarket = new JButton("Take Resources From Market");
         JButton buttonPurchase = new JButton("Buy Development Card");
@@ -124,6 +136,33 @@ public class MainPhaseHandler extends JInternalFrame {
         this.productionButtons.add(buttonDevCardAndLeaderCardProduction);
         this.productionButtons.add(buttonBoardAndDevCardAndLeaderCardProduction);
         this.productionButtons.add(buttonGoBackProduction);
+        // creates Board manufacturing buttons
+        JButton buttonCoin = new JButton();
+        JButton buttonServant = new JButton();
+        JButton buttonShield = new JButton();
+        JButton buttonStone = new JButton();
+        JButton buttonGoBackBoardManufacturing = new JButton("Go Back");
+        // sets resources icons
+        buttonCoin.setIcon(new ImageIcon(
+                new ImageIcon("src/main/resources/resourcetype/Coin.png")
+                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        buttonServant.setIcon(new ImageIcon(
+                new ImageIcon("src/main/resources/resourcetype/Servant.png")
+                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        buttonShield.setIcon(new ImageIcon(
+                new ImageIcon("src/main/resources/resourcetype/Shield.png")
+                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        buttonStone.setIcon(new ImageIcon(
+                new ImageIcon("src/main/resources/resourcetype/Stone.png")
+                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        // adds listeners
+
+        // add JButtons to attribute
+        this.boardManufacturingButtons.add(buttonCoin);
+        this.boardManufacturingButtons.add(buttonServant);
+        this.boardManufacturingButtons.add(buttonShield);
+        this.boardManufacturingButtons.add(buttonStone);
+        this.boardManufacturingButtons.add(buttonGoBackBoardManufacturing);
     }
 
     public void goToMainButtons() {
@@ -136,5 +175,33 @@ public class MainPhaseHandler extends JInternalFrame {
 
     public void goToProductionButtons() {
         this.mainPanelLayout.show(this.mainPanel, PRODUCTIONPANEL);
+    }
+
+    public void goToBoardProductionButtons() {
+        this.mainPanelLayout.show(this.mainPanel, BOARDMANUFACTURINGPANEL);
+    }
+
+    public void disableAllButtons() {
+        for (JButton button : this.mainPhasesButtons) {
+            button.setEnabled(false);
+        }
+        for (JButton button : this.buyDevCardButtons) {
+            button.setEnabled(false);
+        }
+        for (JButton button : this.productionButtons) {
+            button.setEnabled(false);
+        }
+    }
+
+    public void enableAllButtons() {
+        for (JButton button : this.mainPhasesButtons) {
+            button.setEnabled(true);
+        }
+        for (JButton button : this.buyDevCardButtons) {
+            button.setEnabled(true);
+        }
+        for (JButton button : this.productionButtons) {
+            button.setEnabled(true);
+        }
     }
 }

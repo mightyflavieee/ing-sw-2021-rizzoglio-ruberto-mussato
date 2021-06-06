@@ -7,11 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated some gui listeners">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated gui MainPhase listeners">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/informations/MainPhaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/informations/MainPhaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/TakeResourcesFromMarketButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/TakeResourcesFromMarketButtonListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/BoardProductionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/BoardProductionListener.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -380,13 +380,6 @@
       <workItem from="1622803119809" duration="165000" />
       <workItem from="1622809577288" duration="3719000" />
     </task>
-    <task id="LOCAL-00126" summary="added listeners package">
-      <created>1622328110672</created>
-      <option name="number" value="00126" />
-      <option name="presentableId" value="LOCAL-00126" />
-      <option name="project" value="LOCAL" />
-      <updated>1622328110672</updated>
-    </task>
     <task id="LOCAL-00127" summary="added WarehouseGUI">
       <created>1622328139169</created>
       <option name="number" value="00127" />
@@ -723,7 +716,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623000524673</updated>
     </task>
-    <option name="localTasksCounter" value="175" />
+    <task id="LOCAL-00175" summary="updated gui MainPhase listeners">
+      <created>1623001443754</created>
+      <option name="number" value="00175" />
+      <option name="presentableId" value="LOCAL-00175" />
+      <option name="project" value="LOCAL" />
+      <updated>1623001443754</updated>
+    </task>
+    <option name="localTasksCounter" value="176" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -753,7 +753,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="added changeShelf function in WarehouseGUI" />
     <MESSAGE value="Added shelves button listener" />
     <MESSAGE value="Updated ResourceInHandlerGUI.refresh" />
     <MESSAGE value="Implemented Take market resource move using gui" />
@@ -778,7 +777,8 @@
     <MESSAGE value="added gui listeners for BuyDevCardMove" />
     <MESSAGE value="added disable/enable buttons functions in CardContainerGUI" />
     <MESSAGE value="updated some gui listeners" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated some gui listeners" />
+    <MESSAGE value="updated gui MainPhase listeners" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated gui MainPhase listeners" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
