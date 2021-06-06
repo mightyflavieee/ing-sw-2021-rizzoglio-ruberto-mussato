@@ -7,18 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="fixed minor error in gui listeners in WarehouseGUI">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/CenterPositionPurchaseListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/GoBackFromPurchaseListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/LeftPositionPurchaseListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/RightPositionPurchaseListener.java" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated some gui listeners">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/CardContainerGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/CardContainerGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/informations/MainPhaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/informations/MainPhaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/BuyDevCardButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/BuyDevCardButtonListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/TakeResourcesFromMarketButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/TakeResourcesFromMarketButtonListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/GoBackFromProductionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/GoBackFromProductionListener.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -387,34 +380,6 @@
       <workItem from="1622803119809" duration="165000" />
       <workItem from="1622809577288" duration="3719000" />
     </task>
-    <task id="LOCAL-00122" summary="added LeaderMoveHandler.java">
-      <created>1622218583765</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1622218583765</updated>
-    </task>
-    <task id="LOCAL-00123" summary="added ClientAppGUI.java and InsertNameListener.java">
-      <created>1622221540890</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1622221540890</updated>
-    </task>
-    <task id="LOCAL-00124" summary="Implemented login gui">
-      <created>1622278196523</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
-      <option name="project" value="LOCAL" />
-      <updated>1622278196523</updated>
-    </task>
-    <task id="LOCAL-00125" summary="Implemented join login gui">
-      <created>1622279404332</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1622279404332</updated>
-    </task>
     <task id="LOCAL-00126" summary="added listeners package">
       <created>1622328110672</created>
       <option name="number" value="00126" />
@@ -730,7 +695,35 @@
       <option name="project" value="LOCAL" />
       <updated>1622908959747</updated>
     </task>
-    <option name="localTasksCounter" value="171" />
+    <task id="LOCAL-00171" summary="fixed MainPhaseHandler">
+      <created>1623000420922</created>
+      <option name="number" value="00171" />
+      <option name="presentableId" value="LOCAL-00171" />
+      <option name="project" value="LOCAL" />
+      <updated>1623000420922</updated>
+    </task>
+    <task id="LOCAL-00172" summary="added gui listeners for BuyDevCardMove">
+      <created>1623000450368</created>
+      <option name="number" value="00172" />
+      <option name="presentableId" value="LOCAL-00172" />
+      <option name="project" value="LOCAL" />
+      <updated>1623000450368</updated>
+    </task>
+    <task id="LOCAL-00173" summary="added disable/enable buttons functions in CardContainerGUI">
+      <created>1623000490191</created>
+      <option name="number" value="00173" />
+      <option name="presentableId" value="LOCAL-00173" />
+      <option name="project" value="LOCAL" />
+      <updated>1623000490191</updated>
+    </task>
+    <task id="LOCAL-00174" summary="updated some gui listeners">
+      <created>1623000524673</created>
+      <option name="number" value="00174" />
+      <option name="presentableId" value="LOCAL-00174" />
+      <option name="project" value="LOCAL" />
+      <updated>1623000524673</updated>
+    </task>
+    <option name="localTasksCounter" value="175" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -760,10 +753,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated login logic" />
-    <MESSAGE value="Added ResourceInHandGUI.java" />
-    <MESSAGE value="added insertInShelf function in WarehouseGUI" />
-    <MESSAGE value="added boardModel attribute in BoardGUI" />
     <MESSAGE value="added changeShelf function in WarehouseGUI" />
     <MESSAGE value="Added shelves button listener" />
     <MESSAGE value="Updated ResourceInHandlerGUI.refresh" />
@@ -785,7 +774,11 @@
     <MESSAGE value="updated listeners in ExtraDepositsGUI" />
     <MESSAGE value="updated gui listeners in WarehouseGUI" />
     <MESSAGE value="fixed minor error in gui listeners in WarehouseGUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed minor error in gui listeners in WarehouseGUI" />
+    <MESSAGE value="fixed MainPhaseHandler" />
+    <MESSAGE value="added gui listeners for BuyDevCardMove" />
+    <MESSAGE value="added disable/enable buttons functions in CardContainerGUI" />
+    <MESSAGE value="updated some gui listeners" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated some gui listeners" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
