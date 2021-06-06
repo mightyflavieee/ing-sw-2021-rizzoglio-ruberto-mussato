@@ -4,6 +4,10 @@ import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.listeners.informations.ActivateProductionButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.BuyDevCardButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.TakeResourcesFromMarketButtonListener;
+import it.polimi.ingsw.project.client.gui.listeners.informations.buydevcardmove.CenterPositionPurchaseListener;
+import it.polimi.ingsw.project.client.gui.listeners.informations.buydevcardmove.GoBackFromPurchaseListener;
+import it.polimi.ingsw.project.client.gui.listeners.informations.buydevcardmove.LeftPositionPurchaseListener;
+import it.polimi.ingsw.project.client.gui.listeners.informations.buydevcardmove.RightPositionPurchaseListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.*;
 
 import javax.swing.*;
@@ -12,9 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainPhaseHandler extends JInternalFrame {
-    private List<JButton> mainButtons;
+    private static final String MAINPHASESPANEL = "Main Phase";
+    private static final String PRODUCTIONPANEL = "Production Move";
+    private static final String BUYDEVCARDMOVE = "Buy Dev Card Move";
+    private List<JButton> mainPhasesButtons;
+    private List<JButton> buyDevCardButtons;
     private List<JButton> productionButtons;
     private JPanel mainPanel;
+    private CardLayout mainPanelLayout;
+    private JPanel mainPhasesPanel;
+    private JPanel buyDevCardPanel;
     private JPanel productionPanel;
     private GUI gui;
 
@@ -23,21 +34,32 @@ public class MainPhaseHandler extends JInternalFrame {
         this.setVisible(true);
         this.setLayout(new GridLayout(1, 1));
         createPanels();
+        this.mainPanelLayout = new CardLayout();
+        this.mainPanel = new JPanel();
+        this.mainPanel.setLayout(this.mainPanelLayout);
+        this.mainPanel.add(MAINPHASESPANEL, this.mainPhasesPanel);
+        this.mainPanel.add(BUYDEVCARDMOVE, this.buyDevCardPanel);
+        this.mainPanel.add(PRODUCTIONPANEL, this.productionPanel);
+        this.mainPanelLayout.show(this.mainPanel, MAINPHASESPANEL);
         this.add(this.mainPanel);
-        //this.add(this.productionPanel);
-        //goToMainButtons();
     }
 
     private void createPanels() {
         createButtons();
-        this.mainPanel = new JPanel();
+        this.mainPhasesPanel = new JPanel();
+        this.buyDevCardPanel = new JPanel();
         this.productionPanel = new JPanel();
-        this.mainPanel.setVisible(true);
+        this.mainPhasesPanel.setVisible(true);
+        this.buyDevCardPanel.setVisible(true);
         this.productionPanel.setVisible(true);
-        this.mainPanel.setLayout(new GridLayout(3, 1));
+        this.mainPhasesPanel.setLayout(new GridLayout(3, 1));
+        this.buyDevCardPanel.setLayout(new GridLayout(4, 1));
         this.productionPanel.setLayout(new GridLayout(8, 1));
-        for (JButton button : this.mainButtons) {
-            this.mainPanel.add(button);
+        for (JButton button : this.mainPhasesButtons) {
+            this.mainPhasesPanel.add(button);
+        }
+        for (JButton button : this.buyDevCardButtons) {
+            this.buyDevCardPanel.add(button);
         }
         for (JButton button : this.productionButtons) {
             this.productionPanel.add(button);
@@ -45,7 +67,8 @@ public class MainPhaseHandler extends JInternalFrame {
     }
 
     private void createButtons() {
-        this.mainButtons = new ArrayList<>();
+        this.mainPhasesButtons = new ArrayList<>();
+        this.buyDevCardButtons = new ArrayList<>();
         this.productionButtons = new ArrayList<>();
         // creates main buttons
         JButton buttonMarket = new JButton("Take Resources From Market");
@@ -56,9 +79,24 @@ public class MainPhaseHandler extends JInternalFrame {
         buttonPurchase.addActionListener(new BuyDevCardButtonListener(this.gui));
         buttonProduction.addActionListener(new ActivateProductionButtonListener(this.gui));
         // adds JButtons to attribute
-        this.mainButtons.add(buttonMarket);
-        this.mainButtons.add(buttonPurchase);
-        this.mainButtons.add(buttonProduction);
+        this.mainPhasesButtons.add(buttonMarket);
+        this.mainPhasesButtons.add(buttonPurchase);
+        this.mainPhasesButtons.add(buttonProduction);
+        // creates buy dev card buttons
+        JButton buttonLeftPosition = new JButton("Left Position");
+        JButton buttonCenterPosition = new JButton("Center Position");
+        JButton buttonRightPosition = new JButton("Right Position");
+        JButton buttonGoBackBuyDevCard = new JButton("Go Back");
+        // adds listeners
+        buttonLeftPosition.addActionListener(new LeftPositionPurchaseListener(this.gui));
+        buttonCenterPosition.addActionListener(new CenterPositionPurchaseListener(this.gui));
+        buttonRightPosition.addActionListener(new RightPositionPurchaseListener(this.gui));
+        buttonGoBackBuyDevCard.addActionListener(new GoBackFromPurchaseListener(this.gui));
+        // adds JButtons to attribute
+        this.buyDevCardButtons.add(buttonLeftPosition);
+        this.buyDevCardButtons.add(buttonCenterPosition);
+        this.buyDevCardButtons.add(buttonRightPosition);
+        this.buyDevCardButtons.add(buttonGoBackBuyDevCard);
         // creates production buttons
         JButton buttonBoardProduction = new JButton("Board Production");
         JButton buttonDevCardProduction = new JButton("Dev Card Production");
@@ -67,7 +105,7 @@ public class MainPhaseHandler extends JInternalFrame {
         JButton buttonBoardAndLeaderCardProduction = new JButton("Board, Leader Card Production");
         JButton buttonDevCardAndLeaderCardProduction = new JButton("Dev Card, Leader Card Production");
         JButton buttonBoardAndDevCardAndLeaderCardProduction = new JButton("Board, Dev Card, Leader Card Production");
-        JButton buttonGoBack = new JButton("Go Back");
+        JButton buttonGoBackProduction = new JButton("Go Back");
         // adds listeners
         buttonBoardProduction.addActionListener(new BoardProductionListener(this.gui));
         buttonDevCardProduction.addActionListener(new DevCardProductionListener(this.gui));
@@ -76,7 +114,7 @@ public class MainPhaseHandler extends JInternalFrame {
         buttonBoardAndLeaderCardProduction.addActionListener(new BoardLeaderCardProductionListener(this.gui));
         buttonDevCardAndLeaderCardProduction.addActionListener(new DevLeaderCardsProductionListener(this.gui));
         buttonBoardAndDevCardAndLeaderCardProduction.addActionListener(new BoardDevLeaderCardsProductionListener(this.gui));
-        buttonGoBack.addActionListener(new GoBackFromProductionListener(this.gui));
+        buttonGoBackProduction.addActionListener(new GoBackFromProductionListener(this.gui));
         // add JButtons to attribute
         this.productionButtons.add(buttonBoardProduction);
         this.productionButtons.add(buttonDevCardProduction);
@@ -85,30 +123,18 @@ public class MainPhaseHandler extends JInternalFrame {
         this.productionButtons.add(buttonBoardAndLeaderCardProduction);
         this.productionButtons.add(buttonDevCardAndLeaderCardProduction);
         this.productionButtons.add(buttonBoardAndDevCardAndLeaderCardProduction);
-        this.productionButtons.add(buttonGoBack);
+        this.productionButtons.add(buttonGoBackProduction);
     }
 
     public void goToMainButtons() {
-        this.add(this.mainPanel);
-        this.remove(this.productionPanel);
+        this.mainPanelLayout.show(this.mainPanel, MAINPHASESPANEL);
+    }
 
-        //this.productionPanel.setVisible(false);
-        //this.mainPanel.setVisible(true);
-
-        /*for (JButton button : this.productionButtons) {
-            this.remove(button);
-        }
-        for (JButton button : this.mainButtons) {
-            this.setLayout(new GridLayout(3, 1));
-            this.add(button);
-        }*/
+    public void goToBuyDevCardButtons() {
+        this.mainPanelLayout.show(this.mainPanel, BUYDEVCARDMOVE);
     }
 
     public void goToProductionButtons() {
-        this.add(this.productionPanel);
-        this.remove(this.mainPanel);
-
-        //this.mainPanel.setVisible(false);
-        //this.productionPanel.setVisible(true);
+        this.mainPanelLayout.show(this.mainPanel, PRODUCTIONPANEL);
     }
 }
