@@ -135,11 +135,27 @@ public class GUI extends Observable<Move> {
     }
 
     public void disableForTakeFromMarket() {
-
+        this.boardGUI.disableAllButtons();
+        this.leaderCardPlaceGUI.disableButtons();
+        this.cardContainerGUI.disableAllButtos();
     }
 
-    public void enableForTakeFromMarket() {
+    public void disableForBuyDevCard() {
+        this.cardContainerGUI.enableAllButtons();
+        this.boardGUI.enableAllButtons();
+        this.leaderCardPlaceGUI.disableButtons();
+        this.marketGUI.disableButtons();
+    }
 
+    public void enableAfterTakeFromMarket() {
+        this.boardGUI.enableAllButtons();
+        this.leaderCardPlaceGUI.enableButtons();
+        this.cardContainerGUI.enableAllButtons();
+    }
+
+    public void enableAfterBuyDevCard() {
+        this.leaderCardPlaceGUI.enableButtons();
+        this.marketGUI.enableButtons();
     }
 
     public void setMatch(Match match){//todo chiama i metodi set di tutti i jinternalframe e aggiorna tutto
@@ -195,6 +211,7 @@ public class GUI extends Observable<Move> {
     public BuyDevCardMoveHandler getBuyDevCardMoveHandler() { return buyDevCardMoveHandler; }
 
     public void sendMarketMove() {
+        enableAfterTakeFromMarket();
         this.takeMarketResourceBuilder.setWarehouse(this.boardGUI.getWarehouseModel());
         this.takeMarketResourceBuilder.setMarket(this.marketGUI.getMarket());
         this.send(takeMarketResourceBuilder.getMove());
@@ -202,6 +219,7 @@ public class GUI extends Observable<Move> {
     }
 
     public void sendBuyDevCardMove(BuyDevCardMoveHandler buyDevCardMoveHandler) {
+        enableAfterBuyDevCard();
         this.buyDevCardMoveHandler = buyDevCardMoveHandler;
         this.send(this.buyDevCardMoveHandler.getMove());
         this.buyDevCardMoveHandler.reset();

@@ -14,6 +14,7 @@ public class BuyDevCardButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        //this.gui.disableForBuyDevCard();
+        this.gui.getInformationsGUI().getMainPhaseHandler().goToBuyDevCardButtons();
     }
 }
