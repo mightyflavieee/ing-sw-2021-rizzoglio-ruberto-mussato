@@ -22,9 +22,9 @@ public class RemoteView extends View {
         }
     }
 
-    private ClientConnection clientConnection;
+    private SocketClientConnection clientConnection;
 
-    public RemoteView(Player player, ClientConnection c) {
+    public RemoteView(Player player, SocketClientConnection c) {
         super(player);
         this.clientConnection = c;
         this.clientConnection.addObserver(new MessageReceiver());
@@ -37,7 +37,9 @@ public class RemoteView extends View {
 
     @Override
     protected void showMessage(Object message) {
-        this.clientConnection.asyncSend(message);
+        if (!this.clientConnection.getSocket().isClosed()) {
+            this.clientConnection.asyncSend(message);
+        }
     }
 
     @Override
