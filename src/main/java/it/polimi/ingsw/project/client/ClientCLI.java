@@ -26,7 +26,7 @@ public class ClientCLI extends Client {
 
     private Scanner stdin;
     private boolean lock = true;
-
+    private Socket socket;
 
     public ClientCLI(String ip, int port) {
         super(ip, port);
@@ -46,12 +46,12 @@ public class ClientCLI extends Client {
 
     @Override
     public void setMatch(Match match) {
-        TurnPhase oldTurnPhase= TurnPhase.MainPhase;
-        if(this.match != null)
-            oldTurnPhase =getMatch().get().getTurnPhase(getNickname());
+        TurnPhase oldTurnPhase = TurnPhase.MainPhase;
+        if (this.match != null)
+            oldTurnPhase = getMatch().get().getTurnPhase(getNickname());
         this.match = match;
-        if(oldTurnPhase == TurnPhase.WaitPhase && getMatch().get().getTurnPhase(getNickname()) == TurnPhase.InitialPhase)
-        {
+        if (oldTurnPhase == TurnPhase.WaitPhase
+                && getMatch().get().getTurnPhase(getNickname()) == TurnPhase.InitialPhase) {
             System.out.println("It's your Turn!\nPress 0 to start");
         }
         unLock();
@@ -73,8 +73,6 @@ public class ClientCLI extends Client {
         this.lock = true;
     }
 
-
-
     public Thread asyncReadFromSocket() {
         Thread t = new Thread(new Runnable() {
             @Override
@@ -85,7 +83,6 @@ public class ClientCLI extends Client {
                         inputObject.action(getInstance());
                     }
                 } catch (Exception e) {
-                    System.out.println(e.getMessage());
                     setActive(false);
                 }
             }
@@ -272,7 +269,7 @@ public class ClientCLI extends Client {
         // quando do come comando 0 entro SEMPRE in una funzione che mi permette di
         // visualizzare le varie informazioni
 
-        while (true){
+        while (true) {
             switch (getMatch().get().getTurnPhase(getNickname())) {
                 case WaitPhase:
                     viewer();
@@ -285,7 +282,7 @@ public class ClientCLI extends Client {
 
             }
         }
-        //return null;
+        // return null;
     }
 
     private Move handleLeaderAction() {
@@ -1295,7 +1292,7 @@ public class ClientCLI extends Client {
     }
 
     private void insertInExtraDeposit(Warehouse warehouse, Map<ResourceType, Integer> resourcesInHand) {
-        if(warehouse.getExtraDeposit()== null){
+        if (warehouse.getExtraDeposit() == null) {
             System.out.println("You have not an Extra Depostit");
             return;
         }
@@ -1377,11 +1374,11 @@ public class ClientCLI extends Client {
     }
 
     public void run() throws IOException {
-        Socket socket = new Socket(getIp(), getPort());
+        this.socket = new Socket(getIp(), getPort());
         System.out.println("Connection established");
-        setSocketOut(new ObjectOutputStream(socket.getOutputStream()));
-        setSocketIn(new ObjectInputStream(socket.getInputStream()));
-        stdin = new Scanner(System.in);
+        setSocketOut(new ObjectOutputStream(this.socket.getOutputStream()));
+        setSocketIn(new ObjectInputStream(this.socket.getInputStream()));
+        this.stdin = new Scanner(System.in);
         try {
             Thread t0 = asyncReadFromSocket();
             Thread t1 = asyncCli();
@@ -1391,10 +1388,10 @@ public class ClientCLI extends Client {
         } catch (InterruptedException | NoSuchElementException e) {
             System.out.println("Connection closed from the client side");
         } finally {
-            stdin.close();
+            this.stdin.close();
             getSocketIn().close();
             getSocketOut().close();
-            socket.close();
+            this.socket.close();
         }
     }
 }
