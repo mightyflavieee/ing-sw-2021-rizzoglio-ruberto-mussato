@@ -98,7 +98,7 @@ public class Server {
 
     public void initModel(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
-        List<ClientConnection> listOfClientConnections = new ArrayList<ClientConnection>();
+        List<SocketClientConnection> listOfClientConnections = new ArrayList<SocketClientConnection>();
         List<Player> listOfPlayer = new ArrayList<Player>();
         currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
             listOfPlayer.add(new Player(nickname));
