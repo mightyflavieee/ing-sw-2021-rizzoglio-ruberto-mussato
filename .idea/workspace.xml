@@ -7,11 +7,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated gui MainPhase listeners">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added Board manufacturing panel in MainPhaseHandler">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/boardproduction/CoinBoardProductionListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/boardproduction/GoBackFromBoardProduction.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/boardproduction/ServantBoardProductionListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/boardproduction/ShieldBoardProductionListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/boardproduction/StoneBoardProductionListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/informations/MainPhaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/informations/MainPhaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/BoardProductionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/BoardProductionListener.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -380,13 +383,6 @@
       <workItem from="1622803119809" duration="165000" />
       <workItem from="1622809577288" duration="3719000" />
     </task>
-    <task id="LOCAL-00127" summary="added WarehouseGUI">
-      <created>1622328139169</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1622328139169</updated>
-    </task>
     <task id="LOCAL-00128" summary="added MapTrayGUI">
       <created>1622328156501</created>
       <option name="number" value="00128" />
@@ -723,7 +719,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623001443754</updated>
     </task>
-    <option name="localTasksCounter" value="176" />
+    <task id="LOCAL-00176" summary="added Board manufacturing panel in MainPhaseHandler">
+      <created>1623002757423</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1623002757423</updated>
+    </task>
+    <option name="localTasksCounter" value="177" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -753,7 +756,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Added shelves button listener" />
     <MESSAGE value="Updated ResourceInHandlerGUI.refresh" />
     <MESSAGE value="Implemented Take market resource move using gui" />
     <MESSAGE value="Handled nullpointer exception in ClientCLI.resourceSelector" />
@@ -778,7 +780,8 @@
     <MESSAGE value="added disable/enable buttons functions in CardContainerGUI" />
     <MESSAGE value="updated some gui listeners" />
     <MESSAGE value="updated gui MainPhase listeners" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated gui MainPhase listeners" />
+    <MESSAGE value="added Board manufacturing panel in MainPhaseHandler" />
+    <option name="LAST_COMMIT_MESSAGE" value="added Board manufacturing panel in MainPhaseHandler" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

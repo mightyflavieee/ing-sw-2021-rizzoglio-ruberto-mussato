@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client.gui.informations;
 
 import it.polimi.ingsw.project.client.gui.GUI;
+import it.polimi.ingsw.project.client.gui.listeners.ServantHandListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.ActivateProductionButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.BuyDevCardButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.TakeResourcesFromMarketButtonListener;
@@ -9,6 +10,7 @@ import it.polimi.ingsw.project.client.gui.listeners.informations.buydevcardmove.
 import it.polimi.ingsw.project.client.gui.listeners.informations.buydevcardmove.LeftPositionPurchaseListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.buydevcardmove.RightPositionPurchaseListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.*;
+import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.boardproduction.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -156,7 +158,11 @@ public class MainPhaseHandler extends JInternalFrame {
                 new ImageIcon("src/main/resources/resourcetype/Stone.png")
                 .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         // adds listeners
-
+        buttonCoin.addActionListener(new CoinBoardProductionListener(this.gui));
+        buttonServant.addActionListener(new ServantBoardProductionListener(this.gui));
+        buttonShield.addActionListener(new ShieldBoardProductionListener(this.gui));
+        buttonStone.addActionListener(new StoneBoardProductionListener(this.gui));
+        buttonGoBackBoardManufacturing.addActionListener(new GoBackFromBoardProduction(this.gui));
         // add JButtons to attribute
         this.boardManufacturingButtons.add(buttonCoin);
         this.boardManufacturingButtons.add(buttonServant);
