@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client.gui.board;
 
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
+import it.polimi.ingsw.project.client.gui.listeners.selectresources.ExtraDepositGUISelectResourceListener;
 import it.polimi.ingsw.project.client.gui.listeners.selectresources.WarehouseGUISelectResourceListener;
 import it.polimi.ingsw.project.client.gui.listeners.warehouse.ResourceButtonListener;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
@@ -10,10 +11,9 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.awt.event.ActionListener;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class WarehouseGUI extends JInternalFrame {
     private Map<ShelfFloor, List<JButton>> shelvesButtons;
@@ -180,8 +180,15 @@ public class WarehouseGUI extends JInternalFrame {
                 this.shelvesButtons.get(floor).get(count).setIcon(new ImageIcon(
                         new ImageIcon("src/main/resources/resourcetype/" + resource.getType() + ".png")
                         .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-                this.shelvesButtons.get(floor).get(count).addActionListener(new WarehouseGUISelectResourceListener(this,
-                        this.informationsGUI, resource.getType(), floor, count));
+                if (Arrays.stream(this.shelvesButtons.get(floor).get(count).getActionListeners()).count() == 0) {
+                    this.shelvesButtons.get(floor).get(count).addActionListener(new WarehouseGUISelectResourceListener(this,
+                            this.informationsGUI, resource.getType(), floor, count));
+                } else {
+                    ActionListener actionListener = this.shelvesButtons.get(floor).get(count).getActionListeners()[0];
+                    this.shelvesButtons.get(floor).get(count).removeActionListener(actionListener);
+                    this.shelvesButtons.get(floor).get(count).addActionListener(new WarehouseGUISelectResourceListener(this,
+                            this.informationsGUI, resource.getType(), floor, count));
+                }
                 count++;
                 resourceTypeInShelf = resource.getType();
             }
@@ -192,6 +199,10 @@ public class WarehouseGUI extends JInternalFrame {
                     this.shelvesButtons.get(floor).get(i-1).setIcon(new ImageIcon(
                             new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                             .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+                    if (this.shelvesButtons.get(floor).get(i-1).getActionListeners().length > 0) {
+                        ActionListener actionListener = this.shelvesButtons.get(floor).get(i-1).getActionListeners()[0];
+                        this.shelvesButtons.get(floor).get(i-1).removeActionListener(actionListener);
+                    }
                 }
             }
         }
