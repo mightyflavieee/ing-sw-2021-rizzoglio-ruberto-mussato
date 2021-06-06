@@ -78,7 +78,7 @@ public abstract class Client {
     }
 
     public synchronized boolean isActive() {
-        return active;
+        return this.active;
     }
 
     public synchronized void setActive(boolean active) {
