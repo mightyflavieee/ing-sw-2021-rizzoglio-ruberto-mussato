@@ -14,6 +14,6 @@ public class GoBackFromBoardProduction implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        this.gui.getInformationsGUI().getMainPhaseHandler().goToProductionButtons();
     }
 }

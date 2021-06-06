@@ -7,15 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added Board manufacturing panel in MainPhaseHandler">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/boardproduction/CoinBoardProductionListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/boardproduction/GoBackFromBoardProduction.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/boardproduction/ServantBoardProductionListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/boardproduction/ShieldBoardProductionListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/productionmove/boardproduction/StoneBoardProductionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/informations/MainPhaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/informations/MainPhaseHandler.java" afterDir="false" />
-    </list>
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added listeners for Board production panel in MainPhaseHandler" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -383,13 +375,6 @@
       <workItem from="1622803119809" duration="165000" />
       <workItem from="1622809577288" duration="3719000" />
     </task>
-    <task id="LOCAL-00128" summary="added MapTrayGUI">
-      <created>1622328156501</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1622328156501</updated>
-    </task>
     <task id="LOCAL-00129" summary="added ChestGUI">
       <created>1622328191745</created>
       <option name="number" value="00129" />
@@ -726,7 +711,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623002757423</updated>
     </task>
-    <option name="localTasksCounter" value="177" />
+    <task id="LOCAL-00177" summary="added listeners for Board production panel in MainPhaseHandler">
+      <created>1623010098304</created>
+      <option name="number" value="00177" />
+      <option name="presentableId" value="LOCAL-00177" />
+      <option name="project" value="LOCAL" />
+      <updated>1623010098304</updated>
+    </task>
+    <option name="localTasksCounter" value="178" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -756,7 +748,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated ResourceInHandlerGUI.refresh" />
     <MESSAGE value="Implemented Take market resource move using gui" />
     <MESSAGE value="Handled nullpointer exception in ClientCLI.resourceSelector" />
     <MESSAGE value="Added show black marker position in ClientCLI.viewer" />
@@ -781,7 +772,8 @@
     <MESSAGE value="updated some gui listeners" />
     <MESSAGE value="updated gui MainPhase listeners" />
     <MESSAGE value="added Board manufacturing panel in MainPhaseHandler" />
-    <option name="LAST_COMMIT_MESSAGE" value="added Board manufacturing panel in MainPhaseHandler" />
+    <MESSAGE value="added listeners for Board production panel in MainPhaseHandler" />
+    <option name="LAST_COMMIT_MESSAGE" value="added listeners for Board production panel in MainPhaseHandler" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
