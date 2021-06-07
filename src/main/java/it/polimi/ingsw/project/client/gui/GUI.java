@@ -182,6 +182,9 @@ public class GUI extends Observable<Move> {
 
     public void showMarketInformations(boolean hasFaith) {
         this.informationsGUI.showMarketInformations(hasFaith);
+        if(hasFaith){
+            this.boardGUI.moveForward();
+        }
     }
 
     public void showMyView() {

@@ -89,4 +89,8 @@ public class BoardGUI extends JInternalFrame {
         this.mapTray.enableAllButtons();
         this.chest.enableAllButtons();
     }
+
+    public void moveForward() {
+        this.faithMap.moveForward();
+    }
 }
