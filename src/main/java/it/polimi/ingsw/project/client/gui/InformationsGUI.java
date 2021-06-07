@@ -46,6 +46,8 @@ public class InformationsGUI extends JInternalFrame {
 
     public MainPhaseHandler getMainPhaseHandler() { return mainPhaseHandler; }
 
+    public GUI getGUI() { return gui; }
+
     public void refresh() {
         switch (turnPhase) {
             case InitialPhase:
@@ -124,7 +126,8 @@ public class InformationsGUI extends JInternalFrame {
                 "\nStore them in the Shelves");}
         //todo creare resourceinHandler se serve
         if(this.resourceInHandler==null){
-            this.resourceInHandler = new ResourceInHandlerGUI(gui.getWarehouseGUI(),gui.getResourceInHandGUI(),gui);
+            this.resourceInHandler = new ResourceInHandlerGUI(this.gui.getBoardGUI().getWarehouseGUI(),
+                    this.gui.getResourceInHandGUI(),gui);
         }
         this.resourceInHandler.setVisible(true);
         this.add(resourceInHandler);

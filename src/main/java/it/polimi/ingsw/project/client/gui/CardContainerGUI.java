@@ -58,7 +58,7 @@ public class CardContainerGUI extends JInternalFrame {
         this.refresh();
     }
 
-    public void disableAllButtos() {
+    public void disableAllButtons() {
         for (JButton button : this.showedCards) {
             button.setEnabled(false);
         }

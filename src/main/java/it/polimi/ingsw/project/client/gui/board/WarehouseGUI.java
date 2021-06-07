@@ -4,6 +4,7 @@ import it.polimi.ingsw.project.client.gui.InformationsGUI;
 import it.polimi.ingsw.project.client.gui.listeners.selectresources.ExtraDepositGUISelectResourceListener;
 import it.polimi.ingsw.project.client.gui.listeners.selectresources.WarehouseGUISelectResourceListener;
 import it.polimi.ingsw.project.client.gui.listeners.warehouse.ResourceButtonListener;
+import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.resource.Resource;
@@ -247,5 +248,10 @@ public class WarehouseGUI extends JInternalFrame {
 
     public boolean isClickable() {
         return this.clickable;
+    }
+
+    public void setWarehouseByPlayer(Player mePlayer) {
+        this.warehouseModel = mePlayer.getWarehouse();
+        refresh();
     }
 }

@@ -199,28 +199,4 @@ public class MainPhaseHandler extends JInternalFrame {
     public void goToBoardProductionButtons() { this.mainPanelLayout.show(this.mainPanel, BOARDMANUFACTURINGPANEL); }
 
     public void goToAbortMovePanel() { this.mainPanelLayout.show(this.mainPanel, ABORTMOVEPANEL); }
-
-    public void disableAllButtons() {
-        for (JButton button : this.mainPhasesButtons) {
-            button.setEnabled(false);
-        }
-        for (JButton button : this.buyDevCardButtons) {
-            button.setEnabled(false);
-        }
-        for (JButton button : this.productionButtons) {
-            button.setEnabled(false);
-        }
-    }
-
-    public void enableAllButtons() {
-        for (JButton button : this.mainPhasesButtons) {
-            button.setEnabled(true);
-        }
-        for (JButton button : this.buyDevCardButtons) {
-            button.setEnabled(true);
-        }
-        for (JButton button : this.productionButtons) {
-            button.setEnabled(true);
-        }
-    }
 }

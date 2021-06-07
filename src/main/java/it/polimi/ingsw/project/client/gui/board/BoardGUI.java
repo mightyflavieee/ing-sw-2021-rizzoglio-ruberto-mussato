@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client.gui.board;
 
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
+import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.Warehouse;
 
@@ -72,6 +73,10 @@ public class BoardGUI extends JInternalFrame {
         return warehouse;
     }
 
+    public ChestGUI getChestGUI() {
+        return chest;
+    }
+
     public Warehouse getWarehouseModel() {
       return   this.warehouse.getWarehouseModel();
     }
@@ -92,6 +97,14 @@ public class BoardGUI extends JInternalFrame {
 
     public void moveForward() {
         this.faithMap.moveForward();
+    }
+
+    public void setBoardByPlayer(Player mePlayer) {
+        this.setTitle(mePlayer.getNickname());
+        this.warehouse.setWarehouseByPlayer(mePlayer);
+        this.chest.setChestByPlayer(mePlayer);
+        this.mapTray.setMapTrayByPlayer(mePlayer);
+        this.faithMap.setMyFaithMapByPlayer(mePlayer);
     }
 
     public void refreshSize(int width, int height) {

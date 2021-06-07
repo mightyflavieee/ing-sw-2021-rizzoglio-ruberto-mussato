@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.client.gui.board;
 
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
 import it.polimi.ingsw.project.client.gui.listeners.selectresources.ChestGUISelectResourceListener;
+import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.resource.ResourceType;
@@ -136,4 +137,12 @@ public class ChestGUI extends JInternalFrame {
     public void enableAllButtons() { this.clickable = true; }
 
     public boolean isClickable() { return this.clickable; }
+
+    public void setMyChest(Player mePlayer) {
+    }
+
+    public void setChestByPlayer(Player mePlayer) {
+        this.boardModel = mePlayer.getBoard();
+        refresh();
+    }
 }

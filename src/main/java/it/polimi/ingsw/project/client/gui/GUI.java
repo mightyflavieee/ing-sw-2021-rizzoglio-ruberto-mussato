@@ -2,7 +2,6 @@ package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.board.*;
-import it.polimi.ingsw.project.client.gui.informations.MainPhaseHandler;
 import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardPlaceGUI;
 import it.polimi.ingsw.project.client.gui.listeners.ResizeListener;
 import it.polimi.ingsw.project.client.gui.market.MarketGUI;
@@ -94,80 +93,34 @@ public class GUI extends Observable<Move> {
         super.notify(move);
         this.disableAllButtons(); //devo attendere una risposta dal server
         //todo lo chiamo da un listener e mando la move al server
-
     }
+
     public void disableButtonsHandler(TurnPhase turnPhase){
         switch (turnPhase) {
             case WaitPhase:
-                this.disableAllButtons();
-                break;
             case MainPhase:
-                this.disableForMainPhase();
-                this.enableForMainPhase();
+                disableAllButtons();
                 break;
             case InitialPhase:
             case EndPhase:
-                this.disableForLeaderCardPhase();
-                this.enableForLeaderCardPhase();
+                disableAllButtons();
+                enableForLeaderCardPhase();
                 break;
         }
+    }
+
+    private void disableAllButtons() {
+        this.leaderCardPlaceGUI.disableButtons();
+        this.boardGUI.disableAllButtons();
+        this.cardContainerGUI.disableAllButtons();
+        this.marketGUI.disableButtons();
     }
 
     private void enableForLeaderCardPhase() {
         this.leaderCardPlaceGUI.enableButtons();
     }
 
-    private void enableForMainPhase() {
-        //todo attiva i bottoni delle azioni principali
-        this.marketGUI.enableButtons();
-    }
-
-    private void disableForMainPhase() {
-        this.leaderCardPlaceGUI.disableButtons();
-    }
-
-    private void disableForLeaderCardPhase() {
-        //todo blocca tutto apparte le azioni leader
-        this.marketGUI.disableButtons();
-    }
-
-    public void disableAllButtons(){
-        //disables all the buttons
-        this.disableForMainPhase();
-        this.disableForLeaderCardPhase();
-    }
-
-    public void disableForTakeFromMarket() {
-        this.boardGUI.disableAllButtons();
-        this.leaderCardPlaceGUI.disableButtons();
-        this.cardContainerGUI.disableAllButtos();
-    }
-
-    public void disableForBuyDevCard() {
-        this.cardContainerGUI.enableAllButtons();
-        this.boardGUI.enableAllButtons();
-        this.leaderCardPlaceGUI.disableButtons();
-        this.marketGUI.disableButtons();
-    }
-
-    public void disableForProduction() {
-        this.cardContainerGUI.disableAllButtos();
-        this.marketGUI.disableButtons();
-    }
-
-    public void enableAfterTakeFromMarket() {
-        this.boardGUI.enableAllButtons();
-        this.leaderCardPlaceGUI.enableButtons();
-        this.cardContainerGUI.enableAllButtons();
-    }
-
-    public void enableAfterBuyDevCard() {
-        this.leaderCardPlaceGUI.enableButtons();
-        this.marketGUI.enableButtons();
-    }
-
-    private void enableAfterProduction() {
-        this.cardContainerGUI.enableAllButtons();
+    public void enableForTakeFromMarket() {
         this.marketGUI.enableButtons();
     }
 
@@ -191,32 +144,32 @@ public class GUI extends Observable<Move> {
         }
     }
 
+    // shows your view
     public void showMyView() {
-        //shows your view
         this.historyGUI.setMyHistory(this.mePlayer.getHistoryToString());
         this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
         this.leaderCardPlaceGUI.setMyLeaderCards(this.mePlayer);
-        //todo setter di altre cose
+        this.boardGUI.setBoardByPlayer(this.mePlayer);
     }
 
+    // show the view of the opponent opponentPLayers(index)
     public void showOpponentView(int index) {
-        //show the view of the opponent opponentPLayers(index)
         this.historyGUI.setHistory(this.opponentsPlayer.get(index).getHistoryToString(),this.opponentsPlayer.get(index).getNickname());
         this.informationsGUI.showOpponentView(this.opponentsPlayer.get(index).getNickname());
         this.leaderCardPlaceGUI.setOpponentLeaderCards(this.opponentsPlayer.get(index).getLeaderCards(),this.opponentsPlayer.get(index).getNickname());
-        //todo setter di altre cose
-
-
+        this.boardGUI.setBoardByPlayer(this.mePlayer);
         this.disableAllButtons();
     }
 
     public InformationsGUI getInformationsGUI() { return informationsGUI; }
 
-    public WarehouseGUI getWarehouseGUI() {
-        return this.boardGUI.getWarehouseGUI();
+    public BoardGUI getBoardGUI() {
+        return this.boardGUI;
     }
 
     public CardContainerGUI getCardContainerGUI() { return this.cardContainerGUI; }
+
+    public MarketGUI getMarketGUI() { return marketGUI; }
 
     public ResourceInHandGUI getResourceInHandGUI() {
         return this.marketGUI.getResourceInHandGUI();
@@ -229,8 +182,7 @@ public class GUI extends Observable<Move> {
     public BuyDevCardMoveHandler getBuyDevCardMoveHandler() { return buyDevCardMoveHandler; }
 
     public void sendMarketMove() {
-        this.informationsGUI.getMainPhaseHandler().enableAllButtons();
-        enableAfterTakeFromMarket();
+        disableAllButtons();
         this.takeMarketResourceBuilder.setWarehouse(this.boardGUI.getWarehouseModel());
         this.takeMarketResourceBuilder.setMarket(this.marketGUI.getMarket());
         this.send(takeMarketResourceBuilder.getMove());
@@ -238,17 +190,15 @@ public class GUI extends Observable<Move> {
     }
 
     public void sendBuyDevCardMove(BuyDevCardMoveHandler buyDevCardMoveHandler) {
-        this.informationsGUI.getMainPhaseHandler().enableAllButtons();
+        disableAllButtons();
         this.informationsGUI.refresh();
-        enableAfterBuyDevCard();
         this.buyDevCardMoveHandler = buyDevCardMoveHandler;
         this.send(this.buyDevCardMoveHandler.getMove());
         this.buyDevCardMoveHandler.reset();
     }
 
     public void sendProductionMove(ProductionMoveHandler productionMoveHandler) {
-        this.informationsGUI.getMainPhaseHandler().enableAllButtons();
-        enableAfterProduction();
+        disableAllButtons();
         this.productionMoveHandler = productionMoveHandler;
         this.send(this.productionMoveHandler.getMove());
         this.productionMoveHandler.reset();

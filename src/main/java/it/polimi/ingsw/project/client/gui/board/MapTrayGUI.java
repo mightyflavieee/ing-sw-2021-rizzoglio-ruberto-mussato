@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client.gui.board;
 
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
+import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
@@ -77,6 +78,11 @@ public class MapTrayGUI extends JInternalFrame {
 
     public boolean isClickable() {
         return this.clickable;
+    }
+
+    public void setMapTrayByPlayer(Player mePlayer) {
+        this.boardModel = mePlayer.getBoard();
+        refresh();
     }
 
     public void refreshSize(int width, int height) {
