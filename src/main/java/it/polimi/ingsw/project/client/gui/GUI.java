@@ -171,7 +171,7 @@ public class GUI extends Observable<Move> {
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,this.mePlayer.getNickname());
         this.mePlayer = pair._1;
         this.opponentsPlayer = pair._2;
-        this.marketGUI.setMarket(match.getMarket());
+        this.marketGUI.setMarket(match.getMarket(),this.mePlayer);
         this.historyGUI.setMyHistory(this.mePlayer.getHistoryToString());
         this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
         this.cardContainerGUI.setCardContainer(match.getCardContainer());
