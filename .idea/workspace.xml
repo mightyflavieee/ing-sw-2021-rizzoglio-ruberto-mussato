@@ -7,25 +7,6 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated gui listeners in WarehouseGUI">
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/GameRequestMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/GameRequestMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/Move.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/Move.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/PlayerMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/PlayerMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/Request.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/ClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/ClientConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/SocketClientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/SocketClientConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/view/RemoteView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/view/RemoteView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/view/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/controller/ControllerTest.java" afterDir="false" />
-=======
     <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added AbortMove logic during Main Phase in gui">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
@@ -33,7 +14,6 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/CenterPositionPurchaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/CenterPositionPurchaseListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/LeftPositionPurchaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/LeftPositionPurchaseListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/RightPositionPurchaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/RightPositionPurchaseListener.java" afterDir="false" />
->>>>>>> 2b3988da8ba3cb509bcf03268fecdb42e379e443
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,8 +162,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-<<<<<<< HEAD
-=======
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
@@ -195,7 +173,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
->>>>>>> 2b3988da8ba3cb509bcf03268fecdb42e379e443
     <configuration name="ActivateLeaderCardMoveTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="GC23" />
       <selectedOptions>
