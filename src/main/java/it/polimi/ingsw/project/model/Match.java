@@ -65,7 +65,10 @@ public class Match implements Serializable, Cloneable {
     }
 
     public void playerSkipTurn() {
+        // sets old player to wait phase
+        this.currentPlayer.setToWaitPhase();
         this.nextPlayer();
+        // sets new player to initialPhase
         this.currentPlayer.setToInitialPhase();
     }
 
@@ -344,6 +347,15 @@ public class Match implements Serializable, Cloneable {
         for (Player player : this.playerList) {
             if (player.getNickname().equals(disconnectedPlayer.getNickname())) {
                 player.setIsConnected(false);
+                break;
+            }
+        }
+    }
+
+    public void setPlayerConnectionToTrue(String disconnectedPlayerNickname) {
+        for (Player player : this.playerList) {
+            if (player.getNickname().equals(disconnectedPlayerNickname)) {
+                player.setIsConnected(true);
                 break;
             }
         }

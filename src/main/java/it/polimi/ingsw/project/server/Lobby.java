@@ -6,11 +6,13 @@ import java.util.Map;
 
 import it.polimi.ingsw.project.controller.Controller;
 import it.polimi.ingsw.project.model.LeaderCardContainer;
+import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.view.RemoteView;
 
 public class Lobby {
     private String id;
+    private Model model;
     private Integer maxNumberOfPlayers;
     private Map<String, SocketClientConnection> mapOfSocketClientConnections;
     private LeaderCardContainer leaderCardContainer;
@@ -44,6 +46,14 @@ public class Lobby {
 
     public String getId() {
         return this.id;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public Model getModel() {
+        return model;
     }
 
     public boolean isPlayerPresentAndDisconnected(String nickName) {

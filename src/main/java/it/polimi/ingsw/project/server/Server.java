@@ -46,6 +46,7 @@ public class Server {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
         currentLobby.insertPlayer(nickName, connection);
         currentLobby.getMapOfViews().get(nickName).setClientConnection(connection);
+        currentLobby.getModel().setPlayerConnectionToTrue(nickName);
     }
 
     public void resendCardsToPlayer(String matchId, String nickname) {
@@ -73,6 +74,12 @@ public class Server {
         } else {
             return false;
         }
+    }
+
+    public void sendModelBackToPlayer(String matchId, String nickname) {
+        Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
+        currentLobby.getMapOfSocketClientConnections().get(nickname)
+                .asyncSend(new MoveMessage(currentLobby.getModel().getMatchCopy()));
     }
 
     public void sendWaitMessageToPlayer(String matchId, String nickname) {
@@ -114,14 +121,14 @@ public class Server {
         for (Player player : listOfPlayer) {
             player.setLeaderCards(currentLobby.getchosenLeaderCardsByPlayer().get(player.getNickname()));
         }
-        Model model = new Model(listOfPlayer);
-        currentLobby.setController(new Controller(model));
+        currentLobby.setModel(new Model(listOfPlayer));
+        currentLobby.setController(new Controller(currentLobby.getModel()));
         for (String nickname : currentLobby.getMapOfViews().keySet()) {
-            model.addObserver(currentLobby.getMapOfViews().get(nickname));
+            currentLobby.getModel().addObserver(currentLobby.getMapOfViews().get(nickname));
             currentLobby.getMapOfViews().get(nickname).addObserver(currentLobby.getController());
         }
         currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
-            connection.asyncSend(new MoveMessage(model.getMatchCopy()));
+            connection.asyncSend(new MoveMessage(currentLobby.getModel().getMatchCopy()));
         });
     }
 

@@ -38,7 +38,7 @@ public class JoinRequestMove extends GameRequestMove {
         } else if (connection.getServer().isGameStarted(this.gameId)) {
             if (connection.getServer().isPlayerPresentAndDisconnected(this.gameId, this.nickName)) {
                 connection.getServer().rejoinGame(this.gameId, connection, this.nickName);
-                connection.getServer().sendWaitMessageToPlayer(this.gameId, this.nickName);
+                connection.getServer().sendModelBackToPlayer(this.gameId, this.nickName);
             } else {
                 connection.send(new ErrorJoinMessage(
                         "We are sorry but this game is already started and you are not a player of this game or there is already a player with this name but it is connected! Try another nickname."));

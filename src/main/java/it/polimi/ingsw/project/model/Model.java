@@ -51,6 +51,10 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         match.setPlayerConnectionToFalse(disconnectedPlayer);
     }
 
+    public void setPlayerConnectionToTrue(String disconnectedPlayerNickname) {
+        match.setPlayerConnectionToTrue(disconnectedPlayerNickname);
+    }
+
     public void notifyPartialMove() {
         notify(new MoveMessage(this.match.clone())); // è il messaggio che verrà inviato a l player
     }
