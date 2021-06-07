@@ -87,6 +87,8 @@ public class BoardGUI extends JInternalFrame {
         this.warehouse.refresh();
         this.chest.setBoardModel(boardModel);
         this.chest.refresh();
+        this.mapTray.setBoardModel(boardModel);
+        this.mapTray.refresh();
         this.faithMap.setBoardModel(boardModel);
         this.faithMap.refresh();
     }

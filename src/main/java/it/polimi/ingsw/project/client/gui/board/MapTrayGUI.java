@@ -68,6 +68,8 @@ public class MapTrayGUI extends JInternalFrame {
         this.mapTrayButtons.put(DevCardPosition.Right, rightButton);
     }
 
+    public void setBoardModel(Board boardModel) { this.boardModel = boardModel; }
+
     public void disableAllButtons() {
         this.clickable = false;
     }
