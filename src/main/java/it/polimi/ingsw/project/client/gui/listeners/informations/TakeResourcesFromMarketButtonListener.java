@@ -15,8 +15,7 @@ public class TakeResourcesFromMarketButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.gui.getInformationsGUI().getjTextArea().setText("Select row or column in the Market!");
-        this.gui.getInformationsGUI().getMainPhaseHandler().disableAllButtons();
-        this.gui.disableForTakeFromMarket();
+        this.gui.getMarketGUI().enableButtons();
         this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
     }
 }

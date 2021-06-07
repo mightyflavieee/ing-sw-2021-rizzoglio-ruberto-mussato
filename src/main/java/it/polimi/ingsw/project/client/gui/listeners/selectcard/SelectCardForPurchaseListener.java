@@ -18,5 +18,7 @@ public class SelectCardForPurchaseListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.informationsGUI.createSelectResourcesHandlerForPurchase(this.developmentCard);
+        this.informationsGUI.getGUI().getBoardGUI().getWarehouseGUI().enableAllButtons();
+        this.informationsGUI.getGUI().getBoardGUI().getChestGUI().enableAllButtons();
     }
 }

@@ -14,6 +14,8 @@ public class BoardLeaderCardProductionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // todo this.gui.getInformationsGUI().createProductionMoveHandler();
 
+        this.gui.getInformationsGUI().getMainPhaseHandler().goToBoardProductionButtons();
     }
 }
