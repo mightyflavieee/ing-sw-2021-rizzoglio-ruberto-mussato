@@ -56,7 +56,6 @@ public class Match implements Serializable, Cloneable {
             }
             this.currentPlayer = playerList.get(playerIndex);
             if (this.currentPlayer.getIsConnected()) {
-                this.currentPlayer.setToInitialPhase();
                 break;
             } else {
                 loopCounter++;
@@ -67,6 +66,7 @@ public class Match implements Serializable, Cloneable {
 
     public void playerSkipTurn() {
         this.nextPlayer();
+        this.currentPlayer.setToInitialPhase();
     }
 
     public List<Player> getPlayerList() {

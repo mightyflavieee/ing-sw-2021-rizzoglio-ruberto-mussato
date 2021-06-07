@@ -1,7 +1,6 @@
 package it.polimi.ingsw.project.model.playermove;
 
 import it.polimi.ingsw.project.model.Match;
-import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.playermove.interfaces.Controllable;
 import it.polimi.ingsw.project.model.playermove.interfaces.Request;

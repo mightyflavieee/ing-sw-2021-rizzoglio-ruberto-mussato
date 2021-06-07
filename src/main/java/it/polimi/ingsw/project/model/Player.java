@@ -64,7 +64,6 @@ public class Player implements Serializable, Cloneable {
   }
 
   public void updateTurnPhase() {
-
     this.turnPhase = turnPhase.next();
   }
 
@@ -72,16 +71,12 @@ public class Player implements Serializable, Cloneable {
     return board;
   }
 
-  public boolean getStatus() {
-    return isConnected;
-  }
-
   public String getNickname() {
     return this.nickname;
   }
 
   public int getVictoryPoints() {
-    return victoryPoints;
+    return this.victoryPoints;
   }
 
   public void addVictoryPoints(int newVictoryPoints) {
@@ -89,7 +84,7 @@ public class Player implements Serializable, Cloneable {
   }
 
   public void moveForward() {
-    board.moveForward();
+    this.board.moveForward();
   }
 
   public int moveForwardBlack() {
@@ -97,7 +92,7 @@ public class Player implements Serializable, Cloneable {
   }
 
   public void papalCouncil(int numTile) {
-    this.victoryPoints += board.papalCouncil(numTile);
+    this.victoryPoints += this.board.papalCouncil(numTile);
   }
 
   public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID) {
@@ -152,11 +147,11 @@ public class Player implements Serializable, Cloneable {
   }
 
   public TurnPhase getTurnPhase() {
-    return turnPhase;
+    return this.turnPhase;
   }
 
   public int getMarkerPosition() {
-    return board.getMarkerPosition();
+    return this.board.getMarkerPosition();
   }
 
   public String getLeaderCardsToString() {
@@ -164,11 +159,11 @@ public class Player implements Serializable, Cloneable {
   }
 
   public Warehouse getWarehouse() {
-    return board.getWarehouse();
+    return this.board.getWarehouse();
   }
 
   public ResourceType getTransmutationPerk() {
-    return board.getTransmutation();
+    return this.board.getTransmutation();
   }
 
   public void updateHistory(String stringMove) {
