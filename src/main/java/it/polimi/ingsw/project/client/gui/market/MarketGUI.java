@@ -95,4 +95,8 @@ public class MarketGUI extends JInternalFrame {
     public void enableButtons() {
         this.trayGui.enableButtons();
     }
+
+    public void refreshSize(int width, int height) {
+        this.trayGui.refreshSize(width,height);
+    }
 }

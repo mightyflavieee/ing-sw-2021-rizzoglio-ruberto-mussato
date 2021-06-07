@@ -15,6 +15,7 @@ public class CardContainerGUI extends JInternalFrame {
     private List<String> cardsToShow;
     private List<JButton> showedCards;
     private InformationsGUI informationsGUI;
+    private int width = 70, height = 140;
 
     public CardContainerGUI(InformationsGUI informationsGUI, CardContainer cardContainer) {
         this.informationsGUI = informationsGUI;
@@ -36,7 +37,7 @@ public class CardContainerGUI extends JInternalFrame {
 
             jButton.setIcon(new ImageIcon(
                     new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png")
-                    .getImage().getScaledInstance(80,150, Image.SCALE_SMOOTH)));
+                    .getImage().getScaledInstance(this.width,this.height, Image.SCALE_SMOOTH)));
             jButton.setVisible(true);
         }
     }
@@ -46,7 +47,7 @@ public class CardContainerGUI extends JInternalFrame {
         for (int i = 0; i < cardsToShow.size(); i++){
             this.showedCards.get(i).setIcon(new ImageIcon(
                     new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png")
-                    .getImage().getScaledInstance(80, 150, Image.SCALE_SMOOTH)));
+                    .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
             this.showedCards.get(i).addActionListener(new SelectCardForPurchaseListener(this.informationsGUI,
                     this.cardContainer.fetchCard(this.cardsToShow.get(i))));
         }
@@ -67,5 +68,11 @@ public class CardContainerGUI extends JInternalFrame {
         for (JButton button : this.showedCards) {
             button.setEnabled(true);
         }
+    }
+
+    public void refreshSize(int width, int height) {
+        this.width = width/4;
+        this.height = height/3;
+        this.refresh();
     }
 }

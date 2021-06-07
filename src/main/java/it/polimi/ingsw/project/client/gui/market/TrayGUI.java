@@ -22,6 +22,7 @@ public class TrayGUI extends JPanel {
     private List<JButton> horizontalArrows; //dall'alto verso il basso , è al contrario rispetto a quando faccio la move
     private JLabel[][] trayJlabel = new JLabel[4][3];
     private JLabel outsideMarbleJlabel;
+    private int width = 60;
     public TrayGUI(ResourceInHandGUI resourceInHandGUI, GUI gui, Market market)  {
         this.market = market;
         gridLayout = new GridLayout(4,5);
@@ -51,23 +52,23 @@ public class TrayGUI extends JPanel {
 
             for (int i = 0; i < 4; i++) {
                 jLabel = new JLabel();
-                jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + tray[i][j].toString()+ ".png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+                jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + tray[i][j].toString()+ ".png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
                 this.add(jLabel);
                 this.trayJlabel[i][j] = jLabel;
             }
             jButton = new JButton();
-            jButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia orizzontale.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+            jButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia orizzontale.png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
             this.add(jButton);
             horizontalArrows.add(jButton);
         }
         for(int i = 0; i < 4; i++){
             jButton = new JButton();
-            jButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia verticale.png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+            jButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia verticale.png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
             this.add(jButton);
             verticalArrows.add(jButton);
         }
         jLabel = new JLabel();
-        jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + market.getOutSideMarble().toString()+ ".png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+        jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + market.getOutSideMarble().toString()+ ".png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
         this.add(jLabel);
         this.outsideMarbleJlabel = jLabel;
     }
@@ -83,11 +84,19 @@ public class TrayGUI extends JPanel {
         for(int j = 2; j > -1; j--) {
 
             for (int i = 0; i < 4; i++) {
-                this.trayJlabel[i][j].setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + tray[i][j].toString()+ ".png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+                this.trayJlabel[i][j].setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + tray[i][j].toString()+ ".png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
 
             }
         }
-        this.outsideMarbleJlabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + market.getOutSideMarble().toString()+ ".png").getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+        this.outsideMarbleJlabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + market.getOutSideMarble().toString()+ ".png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
+
+        for(int i = 0; i < this.horizontalArrows.size(); i++)
+        {this.horizontalArrows.get(i).setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia orizzontale.png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
+        }
+        for (int i = 0; i < this.verticalArrows.size(); i++){
+            this.verticalArrows.get(i).setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia verticale.png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
+
+        }
 
     }
 
@@ -114,5 +123,14 @@ public class TrayGUI extends JPanel {
     public void enableButtons() {
         this.verticalArrows.forEach(x -> x.setEnabled(true));
         this.horizontalArrows.forEach(x -> x.setEnabled(true));
+    }
+
+    public void refreshSize(int width, int height) {
+        if(width>height){
+            this.width = height;
+        }else {
+            this.width = width;
+        }
+        this.refresh();
     }
 }

@@ -73,4 +73,10 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
     public void enableButtons() {
         this.leaderMovePanelList.forEach(LeaderMovePanel::enableButtons);
     }
+
+    public void refreshSize(int width, int height) {
+        for(int j = 0; j < this.leaderCardJlabelGUIList.size(); j++){
+            this.leaderCardJlabelGUIList.get(j).refreshSize(width/2,height);
+        }
+    }
 }

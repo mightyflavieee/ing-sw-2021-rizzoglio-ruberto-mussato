@@ -4,6 +4,7 @@ import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.board.*;
 import it.polimi.ingsw.project.client.gui.informations.MainPhaseHandler;
 import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardPlaceGUI;
+import it.polimi.ingsw.project.client.gui.listeners.ResizeListener;
 import it.polimi.ingsw.project.client.gui.market.MarketGUI;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
 import it.polimi.ingsw.project.model.Match;
@@ -84,6 +85,9 @@ public class GUI extends Observable<Move> {
         this.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.jFrame.pack();
         this.disableButtonsHandler(this.mePlayer.getTurnPhase());
+
+
+        this.jFrame.addComponentListener(new ResizeListener(this));
     }
 
     public void send(Move move){
@@ -248,6 +252,14 @@ public class GUI extends Observable<Move> {
         this.productionMoveHandler = productionMoveHandler;
         this.send(this.productionMoveHandler.getMove());
         this.productionMoveHandler.reset();
+    }
+
+    public void refreshSize(){
+        Dimension d = this.jFrame.getSize();
+        this.leaderCardPlaceGUI.refreshSize((int) (d.width*0.25), (int) (d.height*0.4));
+        this.boardGUI.refreshSize((int) (d.width*0.25), (int) (d.height*0.3));
+        this.marketGUI.refreshSize((int) (d.width*0.05), (int) (d.height*0.09));
+        this.cardContainerGUI.refreshSize(d.width/4, (int) (d.height*0.45));
     }
 }
 

@@ -93,4 +93,8 @@ public class BoardGUI extends JInternalFrame {
     public void moveForward() {
         this.faithMap.moveForward();
     }
+
+    public void refreshSize(int width, int height) {
+        this.mapTray.refreshSize(width,height);
+    }
 }
