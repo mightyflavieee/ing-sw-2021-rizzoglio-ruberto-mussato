@@ -47,6 +47,8 @@ public class ChestGUI extends JInternalFrame {
 
     public Map<ResourceType, JLabel> getNumberOfResouces() { return numberOfResouces; }
 
+    public void setBoardModel(Board boardModel) { this.boardModel = boardModel; }
+
     private void createButtons() {
         this.resourcesButtons = new HashMap<>();
         JButton coinButton = new JButton();

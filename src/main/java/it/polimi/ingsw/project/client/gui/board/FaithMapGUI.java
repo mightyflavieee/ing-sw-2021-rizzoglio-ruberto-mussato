@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client.gui.board;
 
 import it.polimi.ingsw.project.model.Player;
+import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
 
 import javax.swing.*;
@@ -120,6 +121,8 @@ public class FaithMapGUI extends JInternalFrame {
         }
     }
 
+    public void setBoardModel(Board boardModel) { this.faithMapModel = boardModel.getFaithMap(); }
+
     public void refresh() {
         this.markerPosition = this.faithMapModel.getMarkerPosition();
         for (JButton button : this.tiles) {
@@ -143,7 +146,7 @@ public class FaithMapGUI extends JInternalFrame {
         this.clickable = true;
     }
 
-    public void setMyFaithMapByPlayer(Player mePlayer) {
+    public void setFaithMapByPlayer(Player mePlayer) {
         this.faithMapModel = mePlayer.getBoard().getFaithMap();
         refresh();
     }

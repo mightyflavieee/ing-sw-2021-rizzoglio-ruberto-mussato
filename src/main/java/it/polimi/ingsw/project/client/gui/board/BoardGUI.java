@@ -9,10 +9,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BoardGUI extends JInternalFrame {
-    private FaithMapGUI faithMap;
-    private WarehouseGUI warehouse;
-    private MapTrayGUI mapTray;
-    private ChestGUI chest;
+    private final FaithMapGUI faithMap;
+    private final WarehouseGUI warehouse;
+    private final MapTrayGUI mapTray;
+    private final ChestGUI chest;
     private InformationsGUI informationsGUI;
     private Board boardModel;
 
@@ -81,6 +81,16 @@ public class BoardGUI extends JInternalFrame {
       return   this.warehouse.getWarehouseModel();
     }
 
+    public void refresh(Board boardModel) {
+        this.boardModel = boardModel;
+        this.warehouse.setWarehouseModel(boardModel.getWarehouse());
+        this.warehouse.refresh();
+        this.chest.setBoardModel(boardModel);
+        this.chest.refresh();
+        this.faithMap.setBoardModel(boardModel);
+        this.faithMap.refresh();
+    }
+
     public void disableAllButtons() {
         this.faithMap.disableAllButtons();
         this.warehouse.disableAllButtons();
@@ -104,7 +114,7 @@ public class BoardGUI extends JInternalFrame {
         this.warehouse.setWarehouseByPlayer(mePlayer);
         this.chest.setChestByPlayer(mePlayer);
         this.mapTray.setMapTrayByPlayer(mePlayer);
-        this.faithMap.setMyFaithMapByPlayer(mePlayer);
+        this.faithMap.setFaithMapByPlayer(mePlayer);
     }
 
     public void refreshSize(int width, int height) {

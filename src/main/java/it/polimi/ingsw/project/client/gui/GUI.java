@@ -133,6 +133,7 @@ public class GUI extends Observable<Move> {
         this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
         this.cardContainerGUI.setCardContainer(match.getCardContainer());
         this.leaderCardPlaceGUI.setMyLeaderCards(this.mePlayer);
+        this.boardGUI.refresh(this.mePlayer.getBoard());
         this.disableButtonsHandler(this.mePlayer.getTurnPhase());
         //todo setter di altre cose
     }

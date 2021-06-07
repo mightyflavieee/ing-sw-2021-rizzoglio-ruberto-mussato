@@ -100,6 +100,8 @@ public class WarehouseGUI extends JInternalFrame {
     // returns this.floorToChange
     public ShelfFloor getFloorToChange() { return this.floorToChange; }
 
+    public void setWarehouseModel(Warehouse warehouseModel) { this.warehouseModel = warehouseModel; }
+
     // sets this.canChangeShelves to true or false
     public void setCanChangeShelves(boolean value) { this.canChangeShelves = value; }
 
@@ -173,7 +175,7 @@ public class WarehouseGUI extends JInternalFrame {
 
     }
 
-    private void refresh() {
+    public void refresh() {
         for (ShelfFloor floor : this.warehouseModel.getShelves().keySet()) {
             int count = 0;
             ResourceType resourceTypeInShelf = null;
