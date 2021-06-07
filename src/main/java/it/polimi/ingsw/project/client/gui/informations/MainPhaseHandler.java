@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.client.gui.informations;
 
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.listeners.ServantHandListener;
+import it.polimi.ingsw.project.client.gui.listeners.informations.AbortMoveListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.ActivateProductionButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.BuyDevCardButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.TakeResourcesFromMarketButtonListener;
@@ -22,16 +23,19 @@ public class MainPhaseHandler extends JInternalFrame {
     private static final String PRODUCTIONPANEL = "Production Move";
     private static final String BUYDEVCARDMOVE = "Buy Dev Card Move";
     private static final String BOARDMANUFACTURINGPANEL = "Board Manufacturing";
+    private static final String ABORTMOVEPANEL = "Abort Move";
     private List<JButton> mainPhasesButtons;
     private List<JButton> buyDevCardButtons;
     private List<JButton> productionButtons;
     private List<JButton> boardManufacturingButtons;
+    private JButton abortMoveButton;
     private JPanel mainPanel;
     private CardLayout mainPanelLayout;
     private JPanel mainPhasesPanel;
     private JPanel buyDevCardPanel;
     private JPanel productionPanel;
     private JPanel boardManufacturingPanel;
+    private JPanel abortMovePanel;
     private GUI gui;
 
 
@@ -47,6 +51,7 @@ public class MainPhaseHandler extends JInternalFrame {
         this.mainPanel.add(BUYDEVCARDMOVE, this.buyDevCardPanel);
         this.mainPanel.add(PRODUCTIONPANEL, this.productionPanel);
         this.mainPanel.add(BOARDMANUFACTURINGPANEL, this.boardManufacturingPanel);
+        this.mainPanel.add(ABORTMOVEPANEL, this.abortMovePanel);
         this.mainPanelLayout.show(this.mainPanel, MAINPHASESPANEL);
         this.add(this.mainPanel);
     }
@@ -57,14 +62,17 @@ public class MainPhaseHandler extends JInternalFrame {
         this.buyDevCardPanel = new JPanel();
         this.productionPanel = new JPanel();
         this.boardManufacturingPanel = new JPanel();
+        this.abortMovePanel = new JPanel();
         this.mainPhasesPanel.setVisible(true);
         this.buyDevCardPanel.setVisible(true);
         this.productionPanel.setVisible(true);
         this.boardManufacturingPanel.setVisible(true);
+        this.abortMovePanel.setVisible(true);
         this.mainPhasesPanel.setLayout(new GridLayout(3, 1));
         this.buyDevCardPanel.setLayout(new GridLayout(4, 1));
         this.productionPanel.setLayout(new GridLayout(8, 1));
         this.boardManufacturingPanel.setLayout(new GridLayout(5, 1));
+        this.abortMovePanel.setLayout(new BorderLayout());
         for (JButton button : this.mainPhasesButtons) {
             this.mainPhasesPanel.add(button);
         }
@@ -77,6 +85,7 @@ public class MainPhaseHandler extends JInternalFrame {
         for (JButton button : this.boardManufacturingButtons) {
             this.boardManufacturingPanel.add(button);
         }
+        this.abortMovePanel.add(this.abortMoveButton);
     }
 
     private void createButtons() {
@@ -129,7 +138,7 @@ public class MainPhaseHandler extends JInternalFrame {
         buttonDevCardAndLeaderCardProduction.addActionListener(new DevLeaderCardsProductionListener(this.gui));
         buttonBoardAndDevCardAndLeaderCardProduction.addActionListener(new BoardDevLeaderCardsProductionListener(this.gui));
         buttonGoBackProduction.addActionListener(new GoBackFromProductionListener(this.gui));
-        // add JButtons to attribute
+        // adds JButtons to attribute
         this.productionButtons.add(buttonBoardProduction);
         this.productionButtons.add(buttonDevCardProduction);
         this.productionButtons.add(buttonLeaderCardProduction);
@@ -163,12 +172,16 @@ public class MainPhaseHandler extends JInternalFrame {
         buttonShield.addActionListener(new ShieldBoardProductionListener(this.gui));
         buttonStone.addActionListener(new StoneBoardProductionListener(this.gui));
         buttonGoBackBoardManufacturing.addActionListener(new GoBackFromBoardProduction(this.gui));
-        // add JButtons to attribute
+        // adds JButtons to attribute
         this.boardManufacturingButtons.add(buttonCoin);
         this.boardManufacturingButtons.add(buttonServant);
         this.boardManufacturingButtons.add(buttonShield);
         this.boardManufacturingButtons.add(buttonStone);
         this.boardManufacturingButtons.add(buttonGoBackBoardManufacturing);
+        // creates Abort Move button
+        this.abortMoveButton = new JButton("Abort Move");
+        // adds listeners
+        this.abortMoveButton.addActionListener(new AbortMoveListener(this.gui));
     }
 
     public void goToMainButtons() {
@@ -183,9 +196,9 @@ public class MainPhaseHandler extends JInternalFrame {
         this.mainPanelLayout.show(this.mainPanel, PRODUCTIONPANEL);
     }
 
-    public void goToBoardProductionButtons() {
-        this.mainPanelLayout.show(this.mainPanel, BOARDMANUFACTURINGPANEL);
-    }
+    public void goToBoardProductionButtons() { this.mainPanelLayout.show(this.mainPanel, BOARDMANUFACTURINGPANEL); }
+
+    public void goToAbortMovePanel() { this.mainPanelLayout.show(this.mainPanel, ABORTMOVEPANEL); }
 
     public void disableAllButtons() {
         for (JButton button : this.mainPhasesButtons) {

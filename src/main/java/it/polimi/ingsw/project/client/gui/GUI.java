@@ -230,6 +230,7 @@ public class GUI extends Observable<Move> {
 
     public void sendBuyDevCardMove(BuyDevCardMoveHandler buyDevCardMoveHandler) {
         this.informationsGUI.getMainPhaseHandler().enableAllButtons();
+        this.informationsGUI.refresh();
         enableAfterBuyDevCard();
         this.buyDevCardMoveHandler = buyDevCardMoveHandler;
         this.send(this.buyDevCardMoveHandler.getMove());
