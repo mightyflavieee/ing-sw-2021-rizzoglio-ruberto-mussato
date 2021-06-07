@@ -48,7 +48,7 @@ public class Match implements Serializable, Cloneable {
     private void nextPlayer() {
         int playerIndex = 0;
         int loopCounter = 0;
-        while (loopCounter < this.playerList.size()) {
+        while (loopCounter <= this.playerList.size()) {
             playerIndex = this.playerList.indexOf(currentPlayer);
             playerIndex = playerIndex + 1;
             if (playerIndex > this.playerList.size() - 1) {
@@ -338,6 +338,15 @@ public class Match implements Serializable, Cloneable {
 
     public int getBlackMarkerPosition() {
         return this.currentPlayer.getBlackMarkerPosition();
+    }
+
+    public void setPlayerConnectionToFalse(Player disconnectedPlayer) {
+        for (Player player : this.playerList) {
+            if (player.getNickname().equals(disconnectedPlayer.getNickname())) {
+                player.setIsConnected(false);
+                break;
+            }
+        }
     }
 
 }

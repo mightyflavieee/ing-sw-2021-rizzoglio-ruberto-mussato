@@ -40,10 +40,15 @@ public class Model extends Observable<MoveMessage> implements Serializable {
     }
 
     public void playerSkipTurn(Player disconnectedPlayer) {
+        this.setPlayerConnectionToFalse(disconnectedPlayer);
         if (disconnectedPlayer.getNickname().equals(this.match.getCurrentPlayer().getNickname())) {
             match.playerSkipTurn();
         }
         notify(new MoveMessage(this.match.clone()));
+    }
+
+    private void setPlayerConnectionToFalse(Player disconnectedPlayer) {
+        match.setPlayerConnectionToFalse(disconnectedPlayer);
     }
 
     public void notifyPartialMove() {
