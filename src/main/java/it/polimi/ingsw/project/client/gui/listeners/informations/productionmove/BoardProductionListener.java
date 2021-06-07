@@ -14,6 +14,7 @@ public class BoardProductionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        this.gui.getInformationsGUI().getjTextArea().setText("Select the resource you want to produce with the board:");
+        this.gui.getInformationsGUI().getMainPhaseHandler().goToBoardProductionButtons();
     }
 }

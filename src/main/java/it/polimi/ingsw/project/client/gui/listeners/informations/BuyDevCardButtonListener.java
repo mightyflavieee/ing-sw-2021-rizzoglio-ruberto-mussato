@@ -14,6 +14,9 @@ public class BuyDevCardButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        this.gui.getInformationsGUI().getjTextArea().setText("Select the position in which you want\n" +
+                "to put the card:");
+        this.gui.getInformationsGUI().getMainPhaseHandler().goToBuyDevCardButtons();
+        this.gui.disableForBuyDevCard();
     }
 }

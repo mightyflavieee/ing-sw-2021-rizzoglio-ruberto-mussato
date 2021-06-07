@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.client.gui.market;
 
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
+import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.market.Market;
 
 import javax.swing.*;
@@ -74,8 +75,8 @@ public class MarketGUI extends JInternalFrame {
 //    public void doubleSize() {
 //        jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/plancia portabiglie.png").getImage().getScaledInstance(jLabel.getWidth() * 2, jLabel.getHeight() * 2, Image.SCALE_SMOOTH)));
 //    }
-    public void setMarket(Market market){
-        this.trayGui.setMarket(market);
+    public void setMarket(Market market, Player mePlayer){
+        this.trayGui.setMarket(market,mePlayer);
     }
 
 

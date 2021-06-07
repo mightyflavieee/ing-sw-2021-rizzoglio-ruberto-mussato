@@ -72,7 +72,6 @@ public class GUI extends Observable<Move> {
         top2Panel.add(historyGUI);
         bottomPanel.add(top2Panel,BorderLayout.CENTER);
 
-
         bottomPanel.add(playersBarGUI,BorderLayout.SOUTH);
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
@@ -135,18 +134,44 @@ public class GUI extends Observable<Move> {
     }
 
     public void disableForTakeFromMarket() {
-
+        this.boardGUI.disableAllButtons();
+        this.leaderCardPlaceGUI.disableButtons();
+        this.cardContainerGUI.disableAllButtos();
     }
 
-    public void enableForTakeFromMarket() {
+    public void disableForBuyDevCard() {
+        this.cardContainerGUI.enableAllButtons();
+        this.boardGUI.enableAllButtons();
+        this.leaderCardPlaceGUI.disableButtons();
+        this.marketGUI.disableButtons();
+    }
 
+    public void disableForProduction() {
+        this.cardContainerGUI.disableAllButtos();
+        this.marketGUI.disableButtons();
+    }
+
+    public void enableAfterTakeFromMarket() {
+        this.boardGUI.enableAllButtons();
+        this.leaderCardPlaceGUI.enableButtons();
+        this.cardContainerGUI.enableAllButtons();
+    }
+
+    public void enableAfterBuyDevCard() {
+        this.leaderCardPlaceGUI.enableButtons();
+        this.marketGUI.enableButtons();
+    }
+
+    private void enableAfterProduction() {
+        this.cardContainerGUI.enableAllButtons();
+        this.marketGUI.enableButtons();
     }
 
     public void setMatch(Match match){//todo chiama i metodi set di tutti i jinternalframe e aggiorna tutto
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,this.mePlayer.getNickname());
         this.mePlayer = pair._1;
         this.opponentsPlayer = pair._2;
-        this.marketGUI.setMarket(match.getMarket());
+        this.marketGUI.setMarket(match.getMarket(),this.mePlayer);
         this.historyGUI.setMyHistory(this.mePlayer.getHistoryToString());
         this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
         this.cardContainerGUI.setCardContainer(match.getCardContainer());
@@ -184,6 +209,8 @@ public class GUI extends Observable<Move> {
         return this.boardGUI.getWarehouseGUI();
     }
 
+    public CardContainerGUI getCardContainerGUI() { return this.cardContainerGUI; }
+
     public ResourceInHandGUI getResourceInHandGUI() {
         return this.marketGUI.getResourceInHandGUI();
     }
@@ -195,6 +222,8 @@ public class GUI extends Observable<Move> {
     public BuyDevCardMoveHandler getBuyDevCardMoveHandler() { return buyDevCardMoveHandler; }
 
     public void sendMarketMove() {
+        this.informationsGUI.getMainPhaseHandler().enableAllButtons();
+        enableAfterTakeFromMarket();
         this.takeMarketResourceBuilder.setWarehouse(this.boardGUI.getWarehouseModel());
         this.takeMarketResourceBuilder.setMarket(this.marketGUI.getMarket());
         this.send(takeMarketResourceBuilder.getMove());
@@ -202,12 +231,17 @@ public class GUI extends Observable<Move> {
     }
 
     public void sendBuyDevCardMove(BuyDevCardMoveHandler buyDevCardMoveHandler) {
+        this.informationsGUI.getMainPhaseHandler().enableAllButtons();
+        this.informationsGUI.refresh();
+        enableAfterBuyDevCard();
         this.buyDevCardMoveHandler = buyDevCardMoveHandler;
         this.send(this.buyDevCardMoveHandler.getMove());
         this.buyDevCardMoveHandler.reset();
     }
 
     public void sendProductionMove(ProductionMoveHandler productionMoveHandler) {
+        this.informationsGUI.getMainPhaseHandler().enableAllButtons();
+        enableAfterProduction();
         this.productionMoveHandler = productionMoveHandler;
         this.send(this.productionMoveHandler.getMove());
         this.productionMoveHandler.reset();

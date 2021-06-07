@@ -7,6 +7,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="updated gui listeners in WarehouseGUI">
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" afterDir="false" />
@@ -24,6 +25,15 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/view/RemoteView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/view/RemoteView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/view/View.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/controller/ControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/controller/ControllerTest.java" afterDir="false" />
+=======
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="added AbortMove logic during Main Phase in gui">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/InformationsGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/CenterPositionPurchaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/CenterPositionPurchaseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/LeftPositionPurchaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/LeftPositionPurchaseListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/RightPositionPurchaseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/informations/buydevcardmove/RightPositionPurchaseListener.java" afterDir="false" />
+>>>>>>> 2b3988da8ba3cb509bcf03268fecdb42e379e443
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +92,8 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/leadercards" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
@@ -170,6 +182,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
+=======
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+>>>>>>> 2b3988da8ba3cb509bcf03268fecdb42e379e443
     <configuration name="ActivateLeaderCardMoveTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="GC23" />
       <selectedOptions>
@@ -391,69 +417,7 @@
       <workItem from="1622801251535" duration="19000" />
       <workItem from="1622803119809" duration="165000" />
       <workItem from="1622809577288" duration="3719000" />
-    </task>
-    <task id="LOCAL-00121" summary="added FaithMapGUI">
-      <created>1622215812022</created>
-      <option name="number" value="00121" />
-      <option name="presentableId" value="LOCAL-00121" />
-      <option name="project" value="LOCAL" />
-      <updated>1622215812022</updated>
-    </task>
-    <task id="LOCAL-00122" summary="added LeaderMoveHandler.java">
-      <created>1622218583765</created>
-      <option name="number" value="00122" />
-      <option name="presentableId" value="LOCAL-00122" />
-      <option name="project" value="LOCAL" />
-      <updated>1622218583765</updated>
-    </task>
-    <task id="LOCAL-00123" summary="added ClientAppGUI.java and InsertNameListener.java">
-      <created>1622221540890</created>
-      <option name="number" value="00123" />
-      <option name="presentableId" value="LOCAL-00123" />
-      <option name="project" value="LOCAL" />
-      <updated>1622221540890</updated>
-    </task>
-    <task id="LOCAL-00124" summary="Implemented login gui">
-      <created>1622278196523</created>
-      <option name="number" value="00124" />
-      <option name="presentableId" value="LOCAL-00124" />
-      <option name="project" value="LOCAL" />
-      <updated>1622278196523</updated>
-    </task>
-    <task id="LOCAL-00125" summary="Implemented join login gui">
-      <created>1622279404332</created>
-      <option name="number" value="00125" />
-      <option name="presentableId" value="LOCAL-00125" />
-      <option name="project" value="LOCAL" />
-      <updated>1622279404332</updated>
-    </task>
-    <task id="LOCAL-00126" summary="added listeners package">
-      <created>1622328110672</created>
-      <option name="number" value="00126" />
-      <option name="presentableId" value="LOCAL-00126" />
-      <option name="project" value="LOCAL" />
-      <updated>1622328110672</updated>
-    </task>
-    <task id="LOCAL-00127" summary="added WarehouseGUI">
-      <created>1622328139169</created>
-      <option name="number" value="00127" />
-      <option name="presentableId" value="LOCAL-00127" />
-      <option name="project" value="LOCAL" />
-      <updated>1622328139169</updated>
-    </task>
-    <task id="LOCAL-00128" summary="added MapTrayGUI">
-      <created>1622328156501</created>
-      <option name="number" value="00128" />
-      <option name="presentableId" value="LOCAL-00128" />
-      <option name="project" value="LOCAL" />
-      <updated>1622328156501</updated>
-    </task>
-    <task id="LOCAL-00129" summary="added ChestGUI">
-      <created>1622328191745</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1622328191745</updated>
+      <workItem from="1623061752926" duration="7512000" />
     </task>
     <task id="LOCAL-00130" summary="updated BoardGUI">
       <created>1622328214573</created>
@@ -735,7 +699,70 @@
       <option name="project" value="LOCAL" />
       <updated>1622908244376</updated>
     </task>
-    <option name="localTasksCounter" value="170" />
+    <task id="LOCAL-00170" summary="fixed minor error in gui listeners in WarehouseGUI">
+      <created>1622908959747</created>
+      <option name="number" value="00170" />
+      <option name="presentableId" value="LOCAL-00170" />
+      <option name="project" value="LOCAL" />
+      <updated>1622908959747</updated>
+    </task>
+    <task id="LOCAL-00171" summary="fixed MainPhaseHandler">
+      <created>1623000420922</created>
+      <option name="number" value="00171" />
+      <option name="presentableId" value="LOCAL-00171" />
+      <option name="project" value="LOCAL" />
+      <updated>1623000420922</updated>
+    </task>
+    <task id="LOCAL-00172" summary="added gui listeners for BuyDevCardMove">
+      <created>1623000450368</created>
+      <option name="number" value="00172" />
+      <option name="presentableId" value="LOCAL-00172" />
+      <option name="project" value="LOCAL" />
+      <updated>1623000450368</updated>
+    </task>
+    <task id="LOCAL-00173" summary="added disable/enable buttons functions in CardContainerGUI">
+      <created>1623000490191</created>
+      <option name="number" value="00173" />
+      <option name="presentableId" value="LOCAL-00173" />
+      <option name="project" value="LOCAL" />
+      <updated>1623000490191</updated>
+    </task>
+    <task id="LOCAL-00174" summary="updated some gui listeners">
+      <created>1623000524673</created>
+      <option name="number" value="00174" />
+      <option name="presentableId" value="LOCAL-00174" />
+      <option name="project" value="LOCAL" />
+      <updated>1623000524673</updated>
+    </task>
+    <task id="LOCAL-00175" summary="updated gui MainPhase listeners">
+      <created>1623001443754</created>
+      <option name="number" value="00175" />
+      <option name="presentableId" value="LOCAL-00175" />
+      <option name="project" value="LOCAL" />
+      <updated>1623001443754</updated>
+    </task>
+    <task id="LOCAL-00176" summary="added Board manufacturing panel in MainPhaseHandler">
+      <created>1623002757423</created>
+      <option name="number" value="00176" />
+      <option name="presentableId" value="LOCAL-00176" />
+      <option name="project" value="LOCAL" />
+      <updated>1623002757423</updated>
+    </task>
+    <task id="LOCAL-00177" summary="added listeners for Board production panel in MainPhaseHandler">
+      <created>1623010098304</created>
+      <option name="number" value="00177" />
+      <option name="presentableId" value="LOCAL-00177" />
+      <option name="project" value="LOCAL" />
+      <updated>1623010098304</updated>
+    </task>
+    <task id="LOCAL-00178" summary="added AbortMove logic during Main Phase in gui">
+      <created>1623079702802</created>
+      <option name="number" value="00178" />
+      <option name="presentableId" value="LOCAL-00178" />
+      <option name="project" value="LOCAL" />
+      <updated>1623079702802</updated>
+    </task>
+    <option name="localTasksCounter" value="179" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -765,15 +792,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Implemented Leader Card Action Logic using the GUI" />
-    <MESSAGE value="Updated login logic" />
-    <MESSAGE value="Added ResourceInHandGUI.java" />
-    <MESSAGE value="added insertInShelf function in WarehouseGUI" />
-    <MESSAGE value="added boardModel attribute in BoardGUI" />
-    <MESSAGE value="added changeShelf function in WarehouseGUI" />
-    <MESSAGE value="Added shelves button listener" />
-    <MESSAGE value="Updated ResourceInHandlerGUI.refresh" />
-    <MESSAGE value="Implemented Take market resource move using gui" />
     <MESSAGE value="Handled nullpointer exception in ClientCLI.resourceSelector" />
     <MESSAGE value="Added show black marker position in ClientCLI.viewer" />
     <MESSAGE value="Added ExtraDeposit Button" />
@@ -790,7 +808,16 @@
     <MESSAGE value="added initial Main Phase logic to GUI" />
     <MESSAGE value="updated listeners in ExtraDepositsGUI" />
     <MESSAGE value="updated gui listeners in WarehouseGUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated gui listeners in WarehouseGUI" />
+    <MESSAGE value="fixed minor error in gui listeners in WarehouseGUI" />
+    <MESSAGE value="fixed MainPhaseHandler" />
+    <MESSAGE value="added gui listeners for BuyDevCardMove" />
+    <MESSAGE value="added disable/enable buttons functions in CardContainerGUI" />
+    <MESSAGE value="updated some gui listeners" />
+    <MESSAGE value="updated gui MainPhase listeners" />
+    <MESSAGE value="added Board manufacturing panel in MainPhaseHandler" />
+    <MESSAGE value="added listeners for Board production panel in MainPhaseHandler" />
+    <MESSAGE value="added AbortMove logic during Main Phase in gui" />
+    <option name="LAST_COMMIT_MESSAGE" value="added AbortMove logic during Main Phase in gui" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

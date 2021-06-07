@@ -3,9 +3,11 @@ package it.polimi.ingsw.project.client.gui.market;
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.listeners.ArrowListener;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
+import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.market.Marble;
 import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.resource.Resource;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrayGUI extends JPanel {
-    private Image backgroundImage;
+    private ResourceType transmutationPerk;
     private Market market;
     private GridLayout gridLayout;
     private List<JButton> verticalArrows; //da sinistra a destra
@@ -26,13 +28,8 @@ public class TrayGUI extends JPanel {
         this.setLayout(gridLayout);
         this.createTray();
         this.createObservers(resourceInHandGUI,gui);
-        //            try {
-//                this.backgroundImage = ImageIO.read(new File("src/main/resources/plancia portabiglie.png")).getScaledInstance(100, 200, Image.SCALE_SMOOTH);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
         this.setVisible(true);
-       // this.setPreferredSize(new Dimension(200,100));
+        this.transmutationPerk = null;
     }
 
     private void createObservers(ResourceInHandGUI resourceInHandGUI, GUI gui) {
@@ -44,17 +41,7 @@ public class TrayGUI extends JPanel {
         }
     }
 
-    //    public void paintComponent(Graphics g) {
-//        super.paintComponent(g);
-//        g.drawImage(this.backgroundImage, 0, 0, this);
-//    }
     private void createTray(){
-//        for(MarbleType marbleType : this.market.toMarbleType()){
-//            JLabel jLabel = new JLabel();
-//            jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + marbleType.toString()+ ".png").getImage().getScaledInstance(50
-//           , 50
-//           , Image.SCALE_SMOOTH)));
-//            this.add(jLabel); }
         verticalArrows = new ArrayList<>();
         horizontalArrows = new ArrayList<>();
         Marble[][] tray = market.getTray();
@@ -87,7 +74,7 @@ public class TrayGUI extends JPanel {
 
     public List<Resource> insertMarble(int axis, int position) {
 
-        return this.market.insertMarble(axis,position,null); //TODO
+        return this.market.insertMarble(axis,position,transmutationPerk);
     }
 
     public void refresh(){
@@ -113,8 +100,9 @@ public class TrayGUI extends JPanel {
         }
     }
 
-    public void setMarket(Market market) {
+    public void setMarket(Market market, Player mePlayer) {
         this.market = market;
+        this.transmutationPerk = mePlayer.getTransmutationPerk();
         this.refresh();
     }
 
