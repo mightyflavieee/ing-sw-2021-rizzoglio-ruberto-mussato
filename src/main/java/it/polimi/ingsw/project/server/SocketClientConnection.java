@@ -3,7 +3,7 @@ package it.polimi.ingsw.project.server;
 import it.polimi.ingsw.project.model.playermove.DisconnectRequestMove;
 import it.polimi.ingsw.project.model.playermove.Move;
 import it.polimi.ingsw.project.model.playermove.interfaces.Controllable;
-import it.polimi.ingsw.project.model.playermove.interfaces.HandableMove;
+import it.polimi.ingsw.project.model.playermove.interfaces.MoveHandler;
 import it.polimi.ingsw.project.model.playermove.interfaces.Request;
 import it.polimi.ingsw.project.observer.*;
 

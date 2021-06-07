@@ -2,9 +2,9 @@ package it.polimi.ingsw.project.model.playermove;
 
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
-import it.polimi.ingsw.project.model.playermove.interfaces.HandableMove;
+import it.polimi.ingsw.project.model.playermove.interfaces.MoveHandler;
 
-public class PlayerDisconnectedRequestMove extends GameRequestMove implements HandableMove {
+public class PlayerDisconnectedRequestMove extends GameRequestMove implements MoveHandler {
   private Player disconnectedPlayer;
 
   public PlayerDisconnectedRequestMove(Player disconnectedPlayer) {
@@ -16,7 +16,7 @@ public class PlayerDisconnectedRequestMove extends GameRequestMove implements Ha
   }
 
   @Override
-  public void handleMove(Model model, HandableMove requestedMove) {
+  public void handleMove(Model model, MoveHandler requestedMove) {
     model.playerSkipTurn(disconnectedPlayer);
   }
 }

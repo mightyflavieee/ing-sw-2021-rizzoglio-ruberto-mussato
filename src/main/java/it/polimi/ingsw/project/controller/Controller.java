@@ -1,12 +1,12 @@
 package it.polimi.ingsw.project.controller;
 
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
-import it.polimi.ingsw.project.model.playermove.interfaces.HandableMove;
+import it.polimi.ingsw.project.model.playermove.interfaces.MoveHandler;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.observer.Observer;
 
-public class Controller implements Observer<HandableMove> {
+public class Controller implements Observer<MoveHandler> {
 
     private final Model model;
 
@@ -19,12 +19,12 @@ public class Controller implements Observer<HandableMove> {
         return this.model.getMatchCopy();
     }
 
-    private synchronized void performMove(HandableMove handableMove) {
+    private synchronized void performMove(MoveHandler handableMove) {
         handableMove.handleMove(this.model, handableMove);
     }
 
     @Override
-    public void update(HandableMove message) {
+    public void update(MoveHandler message) {
         performMove(message);
     }
 

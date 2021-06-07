@@ -5,10 +5,10 @@ import java.io.Serializable;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
-import it.polimi.ingsw.project.model.playermove.interfaces.HandableMove;
+import it.polimi.ingsw.project.model.playermove.interfaces.MoveHandler;
 import it.polimi.ingsw.project.view.View;
 
-public class PlayerMove implements Serializable, HandableMove {
+public class PlayerMove implements Serializable, MoveHandler {
     private final Player player;
     private final View view;
     private final Move move;
@@ -45,7 +45,7 @@ public class PlayerMove implements Serializable, HandableMove {
     }
 
     @Override
-    public void handleMove(Model model, HandableMove requestedMove) {
+    public void handleMove(Model model, MoveHandler requestedMove) {
         PlayerMove playerMove = (PlayerMove) requestedMove;
         if (!model.isPlayerTurn(playerMove.getPlayer())) {
             model.notifyPartialMove();
