@@ -3,6 +3,7 @@ package it.polimi.ingsw.project.client.gui;
 import it.polimi.ingsw.project.client.gui.informations.MainPhaseHandler;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandlerGUI;
 import it.polimi.ingsw.project.model.TurnPhase;
+import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
@@ -219,10 +220,14 @@ public class InformationsGUI extends JInternalFrame {
         return  productionType;
     }
 
+    public void createBuyDevCardHandler(DevCardPosition position) {
+        this.buyDevCardMoveHandler = new BuyDevCardMoveHandler();
+        this.buyDevCardMoveHandler.setPosition(position);
+    }
+
     // creates the BuyDevCardMoveHandler and the SelectResourcesHandler and updates
     // the informationsGUI
     public void createSelectResourcesHandlerForPurchase(DevelopmentCard developmentCard) {
-        this.buyDevCardMoveHandler = new BuyDevCardMoveHandler();
         this.selectResourcesHandler = new SelectResourcesHandler();
         this.buyDevCardMoveHandler.setDevelopmentCard(developmentCard);
         this.buyDevCardMoveHandler.setSelectResourcesHandler(this.selectResourcesHandler);

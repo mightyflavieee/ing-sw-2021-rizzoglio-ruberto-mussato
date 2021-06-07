@@ -209,6 +209,8 @@ public class GUI extends Observable<Move> {
         return this.boardGUI.getWarehouseGUI();
     }
 
+    public CardContainerGUI getCardContainerGUI() { return this.cardContainerGUI; }
+
     public ResourceInHandGUI getResourceInHandGUI() {
         return this.marketGUI.getResourceInHandGUI();
     }
