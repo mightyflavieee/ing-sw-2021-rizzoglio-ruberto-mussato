@@ -3,12 +3,16 @@ package it.polimi.ingsw.project.model.playermove;
 import java.io.Serializable;
 
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
+import it.polimi.ingsw.project.model.playermove.interfaces.HandableMove;
 import it.polimi.ingsw.project.view.View;
-public class PlayerMove implements Serializable {
+
+public class PlayerMove implements Serializable, HandableMove {
     private final Player player;
     private final View view;
     private final Move move;
+
     public PlayerMove(Player player, View view, Move move) {
         this.player = player;
         this.view = view;
@@ -23,17 +27,45 @@ public class PlayerMove implements Serializable {
         return view;
     }
 
-    public void performMove(Match match){
+    public void performMove(Match match) {
         this.move.performMove(match);
         this.updateHistory();
     }
+
     public boolean isFeasibleMove(Match match) {
-            return this.move.isFeasibleMove(match);
+        return this.move.isFeasibleMove(match);
     }
-    public boolean isMainMove(){
+
+    public boolean isMainMove() {
         return this.move.isMainMove();
     }
-    private void updateHistory(){
+
+    private void updateHistory() {
         this.player.updateHistory(this.move.toString());
+    }
+
+    @Override
+    public void handleMove(Model model, HandableMove requestedMove) {
+        PlayerMove playerMove = (PlayerMove) requestedMove;
+        if (!model.isPlayerTurn(playerMove.getPlayer())) {
+            model.notifyPartialMove();
+            return;
+        }
+        if (!model.isRightTurnPhase(playerMove)) {
+            model.notifyPartialMove();
+            return;
+        }
+        // it performs moves one by one
+
+        if (!model.isFeasibleMove(playerMove)) {
+            model.notifyPartialMove();
+            // playerMove.getView().reportError(gameMessage.occupiedCellMessage);
+            return;
+        }
+        model.performMove(playerMove);
+
+        // the turn is updated after all moves have been performed
+        model.updateTurn();
+
     }
 }

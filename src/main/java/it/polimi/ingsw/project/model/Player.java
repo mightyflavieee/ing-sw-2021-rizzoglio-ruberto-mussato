@@ -51,7 +51,20 @@ public class Player implements Serializable, Cloneable {
     return result;
   }
 
+  public boolean getIsConnected() {
+    return this.isConnected;
+  }
+
+  public void setIsConnected(boolean isConnected) {
+    this.isConnected = isConnected;
+  }
+
+  public void setToInitialPhase(){
+    this.turnPhase = TurnPhase.InitialPhase;
+  }
+
   public void updateTurnPhase() {
+
     this.turnPhase = turnPhase.next();
   }
 

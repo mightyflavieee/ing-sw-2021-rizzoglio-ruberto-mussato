@@ -7,6 +7,7 @@ import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.*;
+import it.polimi.ingsw.project.model.playermove.interfaces.Request;
 import it.polimi.ingsw.project.observer.Observer;
 
 import javax.swing.*;

@@ -1,7 +1,6 @@
 package it.polimi.ingsw.project.controller;
 
 import it.polimi.ingsw.project.model.*;
-import it.polimi.ingsw.project.model.actionTokens.MoveActionToken;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
@@ -14,6 +13,7 @@ import it.polimi.ingsw.project.model.market.Marble;
 import it.polimi.ingsw.project.model.market.MarbleType;
 import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.playermove.*;
+import it.polimi.ingsw.project.model.playermove.interfaces.HandableMove;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 import org.junit.jupiter.api.Test;
@@ -23,8 +23,6 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
-
-
 
         @Test
         void completeTest() {
@@ -106,7 +104,7 @@ class ControllerTest {
                 assertEquals(outsideMarble.getType(), model.getMatch().getMarket().getOutSideMarble().getType());
                 model.getMatch().getMarket().setTray(tray);
 
-               // System.out.println(model.getMatch().getMarket());
+                // System.out.println(model.getMatch().getMarket());
 
                 // beginning of the match
 
@@ -119,16 +117,15 @@ class ControllerTest {
                 warehouse1Gian.getShelves().get(ShelfFloor.First).add(new Resource(ResourceType.Coin));
                 warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
                 warehouse1Gian.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Servant));
-                Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, new ArrayList<>(), localMarket,
-                                false);
+                Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, new ArrayList<>(), localMarket, false);
                 PlayerMove playerMove1Gian = new PlayerMove(gianluca, null, move1Gian);
-                assertEquals(TurnPhase.InitialPhase,model.getMatch().getTurnPhase(gianluca.getNickname()));
-                model.updateTurn(); //now i am in the main phase
-                assertEquals(TurnPhase.MainPhase,gianluca.getTurnPhase());
-                controller.update(playerMove1Gian);
-                assertEquals(TurnPhase.EndPhase,gianluca.getTurnPhase());
-                controller.update(new PlayerMove(gianluca,null,new NoMove()));
-                assertEquals(TurnPhase.WaitPhase,gianluca.getTurnPhase());
+                assertEquals(TurnPhase.InitialPhase, model.getMatch().getTurnPhase(gianluca.getNickname()));
+                model.updateTurn(); // now i am in the main phase
+                assertEquals(TurnPhase.MainPhase, gianluca.getTurnPhase());
+                controller.update((HandableMove) playerMove1Gian);
+                assertEquals(TurnPhase.EndPhase, gianluca.getTurnPhase());
+                controller.update((HandableMove) (new PlayerMove(gianluca, null, new NoMove())));
+                assertEquals(TurnPhase.WaitPhase, gianluca.getTurnPhase());
                 assertEquals(0, model.getMatch().getVictoryPoints(gianluca.getNickname()));
                 assertEquals(0, model.getMatch().getMarkerPosition(gianluca.getNickname()));
                 assertEquals(1, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.First).size());
@@ -146,13 +143,12 @@ class ControllerTest {
                 warehouse1Flavio.getShelves().get(ShelfFloor.Third).add(new Resource(ResourceType.Servant));
                 warehouse1Flavio.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Stone));
                 warehouse1Flavio.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Stone));
-                Move move1Flavio = new TakeMarketResourcesMove(warehouse1Flavio, new ArrayList<>(), localMarket,
-                                false);
+                Move move1Flavio = new TakeMarketResourcesMove(warehouse1Flavio, new ArrayList<>(), localMarket, false);
                 PlayerMove playerMove1Flavio = new PlayerMove(flavio, null, move1Flavio);
-                assertEquals(TurnPhase.InitialPhase,flavio.getTurnPhase());
+                assertEquals(TurnPhase.InitialPhase, flavio.getTurnPhase());
                 model.updateTurn();
-                assertEquals(TurnPhase.MainPhase,flavio.getTurnPhase());
-                controller.update(playerMove1Flavio);
+                assertEquals(TurnPhase.MainPhase, flavio.getTurnPhase());
+                controller.update((HandableMove) playerMove1Flavio);
                 model.updateTurn();
                 assertEquals(0, flavio.getVictoryPoints());
                 assertEquals(0, flavio.getBoard().getFaithMap().getMarkerPosition());
@@ -170,11 +166,10 @@ class ControllerTest {
                 warehouse1Leo.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Coin));
                 warehouse1Leo.getShelves().get(ShelfFloor.First).add(new Resource(ResourceType.Stone));
                 Boolean hasRedMarble = true;
-                Move move1Leo = new TakeMarketResourcesMove(warehouse1Leo, new ArrayList<>(), localMarket,
-                        true);
+                Move move1Leo = new TakeMarketResourcesMove(warehouse1Leo, new ArrayList<>(), localMarket, true);
                 PlayerMove playerMove1Leo = new PlayerMove(leo, null, move1Leo);
                 model.updateTurn();
-                controller.update(playerMove1Leo);
+                controller.update((HandableMove) playerMove1Leo);
                 model.updateTurn();
                 assertEquals(0, leo.getVictoryPoints());
                 assertEquals(1, leo.getBoard().getFaithMap().getMarkerPosition());
@@ -192,7 +187,7 @@ class ControllerTest {
                                 new HashMap<>());
                 PlayerMove playerMove2Gian = new PlayerMove(gianluca, null, move2Gian);
                 model.updateTurn();
-                controller.update(playerMove2Gian);
+                controller.update((HandableMove) playerMove2Gian);
                 model.updateTurn();
                 assertEquals(0, gianluca.getVictoryPoints());
                 assertEquals(0, gianluca.getBoard().getFaithMap().getMarkerPosition());
@@ -207,7 +202,7 @@ class ControllerTest {
                 resourcesToEliminateWarehouse.clear();
                 Move move2Flavio = new DiscardLeaderCardMove("id3");
                 PlayerMove playerMove2Flavio = new PlayerMove(flavio, null, move2Flavio);
-                controller.update(playerMove2Flavio);
+                controller.update((HandableMove) playerMove2Flavio);
                 model.updateTurn();
                 model.updateTurn();
                 assertEquals(1, flavio.getBoard().getLeaderCards().size());
@@ -229,12 +224,12 @@ class ControllerTest {
                 discardedResources.add(new Resource(ResourceType.Servant));
                 Move move3Leo = new TakeMarketResourcesMove(warehouse2Leo, discardedResources, localMarket, false);
                 PlayerMove playerMove2Leo = new PlayerMove(leo, null, move2Leo);
-                controller.update(playerMove2Leo);
+                controller.update((HandableMove) playerMove2Leo);
                 assertEquals(2, leo.getBoard().getLeaderCards().size());
                 assertEquals(1, leo.getBoard().getFaithMap().getMarkerPosition());
                 PlayerMove playerMove3Leo = new PlayerMove(leo, null, move3Leo);
                 model.updateTurn();
-                controller.update(playerMove3Leo);
+                controller.update((HandableMove) playerMove3Leo);
                 model.updateTurn();
                 assertEquals(0, leo.getVictoryPoints());
                 assertEquals(4, flavio.getBoard().getFaithMap().getMarkerPosition());
@@ -250,7 +245,7 @@ class ControllerTest {
                                 ProductionType.Board, null);
                 PlayerMove playerMove3Gian = new PlayerMove(gianluca, null, move3Gian);
                 model.updateTurn();
-                controller.update(playerMove3Gian);
+                controller.update((HandableMove) playerMove3Gian);
                 model.updateTurn();
                 // end game
                 flavio.getBoard().moveForward();// 1
@@ -285,11 +280,9 @@ class ControllerTest {
                                 flavio.getBoard().getFaithMap().getPapalFavourSlots().get(0).getStatus());
                 assertEquals(PapalSlotStatus.Taken,
                                 flavio.getBoard().getFaithMap().getPapalFavourSlots().get(1).getStatus());
-                assertEquals(PapalSlotStatus.Taken, flavio.getBoard().getFaithMap().getPapalFavourSlots().get(2).getStatus());
+                assertEquals(PapalSlotStatus.Taken,
+                                flavio.getBoard().getFaithMap().getPapalFavourSlots().get(2).getStatus());
                 assertEquals(79, flavio.getVictoryPoints());
-
-
-
 
         }
 

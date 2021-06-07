@@ -2,17 +2,16 @@ package it.polimi.ingsw.project.view;
 
 import it.polimi.ingsw.project.messages.MoveMessage;
 import it.polimi.ingsw.project.model.Player;
-import it.polimi.ingsw.project.model.playermove.Move;
+import it.polimi.ingsw.project.model.playermove.interfaces.Controllable;
 import it.polimi.ingsw.project.observer.Observer;
-import it.polimi.ingsw.project.server.ClientConnection;
 import it.polimi.ingsw.project.server.SocketClientConnection;
 
 public class RemoteView extends View {
 
-    private class MessageReceiver implements Observer<Move> {
+    private class MessageReceiver implements Observer<Controllable> {
 
         @Override
-        public void update(Move message) {
+        public void update(Controllable message) {
             System.out.println("Received: " + message.toString());
             try {
                 handleMove(message);
@@ -36,7 +35,7 @@ public class RemoteView extends View {
     }
 
     @Override
-    protected void showMessage(Object message) {
+    protected void showMessage(MoveMessage message) {
         if (!this.clientConnection.getSocket().isClosed()) {
             this.clientConnection.asyncSend(message);
         }

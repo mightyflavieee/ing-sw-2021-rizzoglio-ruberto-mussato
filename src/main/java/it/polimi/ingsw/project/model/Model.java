@@ -2,10 +2,8 @@ package it.polimi.ingsw.project.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
 
 import it.polimi.ingsw.project.messages.MoveMessage;
-import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.observer.Observable;
 
@@ -39,6 +37,13 @@ public class Model extends Observable<MoveMessage> implements Serializable {
         }
         match.updatePlayer();
         notify(new MoveMessage(this.match.clone())); // è il messaggio che verrà inviato a l player
+    }
+
+    public void playerSkipTurn(Player disconnectedPlayer) {
+        if (disconnectedPlayer.getNickname().equals(this.match.getCurrentPlayer().getNickname())) {
+            match.playerSkipTurn();
+        }
+        notify(new MoveMessage(this.match.clone()));
     }
 
     public void notifyPartialMove() {

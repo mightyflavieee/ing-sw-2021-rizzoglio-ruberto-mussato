@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.model.playermove;
 
 import java.io.Serializable;
 
+import it.polimi.ingsw.project.model.playermove.interfaces.Request;
 import it.polimi.ingsw.project.server.SocketClientConnection;
 
 public class GameRequestMove implements Serializable, Request {
@@ -10,8 +11,9 @@ public class GameRequestMove implements Serializable, Request {
     public void action(SocketClientConnection connection) {
 
     }
+
     @Override
-    public String toString(){
+    public String toString() {
         return "Generic Game Request Move";
     }
 

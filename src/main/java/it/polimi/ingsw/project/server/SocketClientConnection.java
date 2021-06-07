@@ -1,7 +1,10 @@
 package it.polimi.ingsw.project.server;
 
+import it.polimi.ingsw.project.model.playermove.DisconnectRequestMove;
 import it.polimi.ingsw.project.model.playermove.Move;
-import it.polimi.ingsw.project.model.playermove.Request;
+import it.polimi.ingsw.project.model.playermove.interfaces.Controllable;
+import it.polimi.ingsw.project.model.playermove.interfaces.HandableMove;
+import it.polimi.ingsw.project.model.playermove.interfaces.Request;
 import it.polimi.ingsw.project.observer.*;
 
 import java.io.IOException;
@@ -10,7 +13,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.NoSuchElementException;
 
-public class SocketClientConnection extends Observable<Move> implements ClientConnection, Runnable {
+public class SocketClientConnection extends Observable<Controllable> implements ClientConnection, Runnable {
     private Socket socket;
     private ObjectOutputStream out;
     private Server server;
@@ -42,7 +45,6 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
             out.reset();
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            this.close();
         }
     }
 
@@ -58,6 +60,7 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
 
     private void close() {
         closeConnection();
+        notify(new DisconnectRequestMove());
         System.out.println("Deregistering client...");
         System.out.println("Done!");
     }
@@ -83,12 +86,12 @@ public class SocketClientConnection extends Observable<Move> implements ClientCo
                 receivedObject.action(this);
             }
         } catch (IOException | NoSuchElementException | ClassNotFoundException e) {
-            System.err.println("Error!" + e.getMessage());
+            System.err.println("An error occured!");
         } catch (Exception e1) {
             System.out.println(e1.getMessage());
             e1.printStackTrace();
         } finally {
-            close();
+            this.close();
         }
     }
 

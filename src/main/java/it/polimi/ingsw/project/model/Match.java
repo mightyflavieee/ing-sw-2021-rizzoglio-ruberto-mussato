@@ -45,13 +45,28 @@ public class Match implements Serializable, Cloneable {
     public Match() { // da usare nella clone
     }
 
-    private Player nextPlayer() {
-        int playerIndex = this.playerList.indexOf(currentPlayer);
-        playerIndex = playerIndex + 1;
-        if (playerIndex > this.playerList.size() - 1) {
-            playerIndex = 0;
+    private void nextPlayer() {
+        int playerIndex = 0;
+        int loopCounter = 0;
+        while (loopCounter < this.playerList.size()) {
+            playerIndex = this.playerList.indexOf(currentPlayer);
+            playerIndex = playerIndex + 1;
+            if (playerIndex > this.playerList.size() - 1) {
+                playerIndex = 0;
+            }
+            this.currentPlayer = playerList.get(playerIndex);
+            if (this.currentPlayer.getIsConnected()) {
+                this.currentPlayer.setToInitialPhase();
+                break;
+            } else {
+                loopCounter++;
+                continue;
+            }
         }
-        return playerList.get(playerIndex);
+    }
+
+    public void playerSkipTurn() {
+        this.nextPlayer();
     }
 
     public List<Player> getPlayerList() {
@@ -118,7 +133,7 @@ public class Match implements Serializable, Cloneable {
     public void updatePlayer() {
         if (this.currentPlayer.getTurnPhase() == TurnPhase.EndPhase) {
             this.currentPlayer.updateTurnPhase();
-            this.currentPlayer = this.nextPlayer();
+            this.nextPlayer();
         }
         this.currentPlayer.updateTurnPhase();
     }
@@ -324,4 +339,5 @@ public class Match implements Serializable, Cloneable {
     public int getBlackMarkerPosition() {
         return this.currentPlayer.getBlackMarkerPosition();
     }
+
 }

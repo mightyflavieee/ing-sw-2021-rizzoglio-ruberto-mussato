@@ -163,7 +163,6 @@ public class Server {
                 SocketClientConnection socketConnection = new SocketClientConnection(newSocket, this);
                 Thread threadSocket = new Thread(socketConnection);
                 threadSocket.start();
-                ;
             } catch (IOException e) {
                 System.out.println("Connection Error!");
             }
