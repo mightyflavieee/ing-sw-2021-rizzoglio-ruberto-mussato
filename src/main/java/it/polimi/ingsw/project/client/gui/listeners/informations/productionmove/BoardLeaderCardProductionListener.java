@@ -16,6 +16,7 @@ public class BoardLeaderCardProductionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         // todo this.gui.getInformationsGUI().createProductionMoveHandler();
 
+        this.gui.getInformationsGUI().getjTextArea().setText("Select the resource you want to produce with the board:");
         this.gui.getInformationsGUI().getMainPhaseHandler().goToBoardProductionButtons();
     }
 }

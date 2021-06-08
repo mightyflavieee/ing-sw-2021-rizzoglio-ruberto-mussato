@@ -133,7 +133,7 @@ public class MainPhaseHandler extends JInternalFrame {
         buttonBoardProduction.addActionListener(new BoardProductionListener(this.gui));
         buttonDevCardProduction.addActionListener(new DevCardProductionListener(this.gui));
         buttonLeaderCardProduction.addActionListener(new LeaderCardProductionListener(this.gui));
-        buttonBoardAndDevCardProduction.addActionListener(new BuyDevCardButtonListener(this.gui));
+        buttonBoardAndDevCardProduction.addActionListener(new BoardDevCardProductionListener(this.gui));
         buttonBoardAndLeaderCardProduction.addActionListener(new BoardLeaderCardProductionListener(this.gui));
         buttonDevCardAndLeaderCardProduction.addActionListener(new DevLeaderCardsProductionListener(this.gui));
         buttonBoardAndDevCardAndLeaderCardProduction.addActionListener(new BoardDevLeaderCardsProductionListener(this.gui));
