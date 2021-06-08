@@ -23,9 +23,9 @@ public class MapTrayGUI extends JInternalFrame {
         this.setVisible(true);
         this.setLayout(new GridLayout(1, 3));
         createButtons();
-        for (DevCardPosition position : this.mapTrayButtons.keySet()) {
-            this.add(this.mapTrayButtons.get(position));
-        }
+        this.add(this.mapTrayButtons.get(DevCardPosition.Left));
+        this.add(this.mapTrayButtons.get(DevCardPosition.Center));
+        this.add(this.mapTrayButtons.get(DevCardPosition.Right));
         this.pack();
         this.informationsGUI = informationsGUI;
         this.boardModel = boardModel;

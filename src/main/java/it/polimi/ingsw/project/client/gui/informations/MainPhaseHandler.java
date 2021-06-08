@@ -1,7 +1,6 @@
 package it.polimi.ingsw.project.client.gui.informations;
 
 import it.polimi.ingsw.project.client.gui.GUI;
-import it.polimi.ingsw.project.client.gui.listeners.ServantHandListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.AbortMoveListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.ActivateProductionButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.BuyDevCardButtonListener;
