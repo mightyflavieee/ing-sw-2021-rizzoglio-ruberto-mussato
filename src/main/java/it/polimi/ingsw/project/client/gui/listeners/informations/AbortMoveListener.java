@@ -18,6 +18,9 @@ public class AbortMoveListener implements ActionListener {
         this.gui.getInformationsGUI().getMainPhaseHandler().goToMainButtons();
         this.gui.disableButtonsHandler(TurnPhase.MainPhase);
 
+        this.gui.getBoardGUI().refresh(this.gui.getBoardGUI().getBoardModel());
+        // todo refresh cardcontainer
+
         // todo flush delle cose inserite dall'utente fino a quel punto
     }
 }

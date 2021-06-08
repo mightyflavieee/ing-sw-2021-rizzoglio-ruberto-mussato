@@ -139,5 +139,7 @@ class BuyDevCardMoveTest {
         // tests the move
         buyDevCardMove.performMove(match);
         assertEquals(devCard, player.getBoard().getMapTray().get(DevCardPosition.Left).get(0));
+        assertEquals(0, player.getBoard().getMapTray().get(DevCardPosition.Center).size());
+        assertEquals(0, player.getBoard().getMapTray().get(DevCardPosition.Right).size());
     }
 }

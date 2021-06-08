@@ -77,8 +77,10 @@ public class BoardGUI extends JInternalFrame {
         return chest;
     }
 
+    public Board getBoardModel() { return this.boardModel; }
+
     public Warehouse getWarehouseModel() {
-      return   this.warehouse.getWarehouseModel();
+      return this.warehouse.getWarehouseModel();
     }
 
     public void refresh(Board boardModel) {
