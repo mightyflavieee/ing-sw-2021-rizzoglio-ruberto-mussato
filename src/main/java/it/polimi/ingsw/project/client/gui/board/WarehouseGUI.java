@@ -88,6 +88,7 @@ public class WarehouseGUI extends JInternalFrame {
         this.warehouseModel = warehouse;
         this.clickable = false;
         refresh();
+        this.setCanChangeShelves(false);
     }
 
     public Map<ShelfFloor, List<JButton>> getShelvesButtons() { return shelvesButtons; }
@@ -100,10 +101,16 @@ public class WarehouseGUI extends JInternalFrame {
     // returns this.floorToChange
     public ShelfFloor getFloorToChange() { return this.floorToChange; }
 
-    public void setWarehouseModel(Warehouse warehouseModel) { this.warehouseModel = warehouseModel; }
+    public void setWarehouseModel(Warehouse warehouseModel) {
+        this.warehouseModel = warehouseModel;
+        this.canChangeShelves = false;
+        this.refresh();
+
+    }
 
     // sets this.canChangeShelves to true or false
-    public void setCanChangeShelves(boolean value) { this.canChangeShelves = value; }
+    public void setCanChangeShelves(boolean value) { this.canChangeShelves = value;
+    this.refresh();}
 
     // sets floor to change for change shelf move
     public void setFloorToChange(ShelfFloor floor) { this.floorToChange = floor; }

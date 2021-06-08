@@ -86,6 +86,7 @@ public class GUI extends Observable<Move> {
 
 
         this.jFrame.addComponentListener(new ResizeListener(this));
+        this.jFrame.setMinimumSize(new Dimension(1460,760));
     }
 
     public void send(Move move){
