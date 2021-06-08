@@ -125,4 +125,8 @@ public class BoardGUI extends JInternalFrame {
         this.mapTray.refreshSize(
                 (int) (width*0.4), (int) (height*0.6));
     }
+
+    public void setCanChangeShelves(boolean b) {
+        this.warehouse.setCanChangeShelves(b);
+    }
 }

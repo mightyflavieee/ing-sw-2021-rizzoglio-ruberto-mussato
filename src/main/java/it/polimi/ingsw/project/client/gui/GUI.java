@@ -142,6 +142,7 @@ public class GUI extends Observable<Move> {
         if(hasFaith){
             this.boardGUI.moveForward();
         }
+        this.boardGUI.setCanChangeShelves(true);
     }
 
     // shows your view
