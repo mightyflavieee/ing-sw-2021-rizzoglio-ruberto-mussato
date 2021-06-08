@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.util.*;
 
 public class CardContainer implements Cloneable, Serializable {
-  private final Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> cardContainer;
+  private final LinkedHashMap<CardLevel, LinkedHashMap<CardColor, List<DevelopmentCard>>> cardContainer;
 
-  public Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> getCardContainer() {
+  public LinkedHashMap<CardLevel, LinkedHashMap<CardColor, List<DevelopmentCard>>> getCardContainer() {
     return cardContainer;
   }
 
@@ -21,7 +21,7 @@ public class CardContainer implements Cloneable, Serializable {
     CardContainerBuilder cardContainerBuilder = new CardContainerBuilder("src/main/resources/developmentCards.json");
     List<DevelopmentCard> allCards = cardContainerBuilder.allCards;
     Collections.shuffle(allCards);
-    Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> tempCardContainer = initMapCards();
+    LinkedHashMap<CardLevel, LinkedHashMap<CardColor, List<DevelopmentCard>>> tempCardContainer = initLinkedHashMapCards();
     for (DevelopmentCard developmentCard : allCards) {
       tempCardContainer.get(developmentCard.getLevel()).get(developmentCard.getColor()).add(developmentCard);
     }
@@ -29,14 +29,14 @@ public class CardContainer implements Cloneable, Serializable {
 
   }
 
-  private Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> initMapCards() {
-    Map<CardLevel, Map<CardColor, List<DevelopmentCard>>> tempCardContainer = new HashMap<>();
+  private LinkedHashMap<CardLevel, LinkedHashMap<CardColor, List<DevelopmentCard>>> initLinkedHashMapCards() {
+    LinkedHashMap<CardLevel, LinkedHashMap<CardColor, List<DevelopmentCard>>> tempCardContainer = new LinkedHashMap<>();
     for (CardLevel cardLevel : CardLevel.values()) {
-      final Map<CardColor, List<DevelopmentCard>> mapColorCard = new HashMap<>();
+      final LinkedHashMap<CardColor, List<DevelopmentCard>> LinkedHashMapColorCard = new LinkedHashMap<>();
       for (CardColor cardColor : CardColor.values()) {
-        mapColorCard.put(cardColor, new ArrayList<>());
+        LinkedHashMapColorCard.put(cardColor, new ArrayList<>());
       }
-      tempCardContainer.put(cardLevel, mapColorCard);
+      tempCardContainer.put(cardLevel, LinkedHashMapColorCard);
     }
     return tempCardContainer;
   }

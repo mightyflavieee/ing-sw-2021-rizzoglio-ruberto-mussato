@@ -11,8 +11,8 @@ import java.util.*;
 
 public class Warehouse extends Observable<Warehouse> implements Serializable {
 
-  private final Map<ShelfFloor, List<Resource>> shelves;
-  private Map<ResourceType, Integer> extraDeposit; // da mettere nel costruttore
+  private final LinkedHashMap<ShelfFloor, List<Resource>> shelves;
+  private LinkedHashMap<ResourceType, Integer> extraDeposit; // da mettere nel costruttore
   private int numResourcesToDiscard;
 
   public Warehouse(Match match) {
@@ -23,58 +23,58 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
   }
 
   // returns ALL resources presents in the warehouse
-  public Map<ResourceType, Integer> mapAllContainedResources() {
-    Map<ResourceType, Integer> currentResourcesMap = new HashMap<>();
+  public LinkedHashMap<ResourceType, Integer> mapAllContainedResources() {
+    LinkedHashMap<ResourceType, Integer> currentResourcesLinkedHashMap = new LinkedHashMap<>();
     // getting resources from the entire warehouse
     shelves.forEach(
-        (ShelfFloor floor, List<Resource> listOfResources) -> mapResourcesHelper(currentResourcesMap, listOfResources));
+        (ShelfFloor floor, List<Resource> listOfResources) -> mapResourcesHelper(currentResourcesLinkedHashMap, listOfResources));
     // getting resources from extradeposit
     if (extraDeposit != null) {
       extraDeposit.forEach((ResourceType resourceType, Integer numberOfResources) -> {
-        boolean hasKey = currentResourcesMap.containsKey(resourceType);
+        boolean hasKey = currentResourcesLinkedHashMap.containsKey(resourceType);
         if (hasKey) {
-          currentResourcesMap.put(resourceType, currentResourcesMap.get(resourceType) + 1);
+          currentResourcesLinkedHashMap.put(resourceType, currentResourcesLinkedHashMap.get(resourceType) + 1);
         } else {
-          currentResourcesMap.put(resourceType, 1);
+          currentResourcesLinkedHashMap.put(resourceType, 1);
         }
       });
     }
-    return currentResourcesMap;
+    return currentResourcesLinkedHashMap;
   }
 
-  private Map<ShelfFloor, List<Resource>> initShelves() {
-    Map<ShelfFloor, List<Resource>> tempShelf = new HashMap<>();
+  private LinkedHashMap<ShelfFloor, List<Resource>> initShelves() {
+    LinkedHashMap<ShelfFloor, List<Resource>> tempShelf = new LinkedHashMap<>();
     tempShelf.put(ShelfFloor.First, new ArrayList<>());
     tempShelf.put(ShelfFloor.Second, new ArrayList<>());
     tempShelf.put(ShelfFloor.Third, new ArrayList<>());
     return tempShelf;
   }
 
-  // helper for listToMapResources
-  private void mapResourcesHelper(Map<ResourceType, Integer> currentResourcesMap, List<Resource> listOfResources) {
+  // helper for listToLinkedHashMapResources
+  private void mapResourcesHelper(LinkedHashMap<ResourceType, Integer> currentResourcesLinkedHashMap, List<Resource> listOfResources) {
     listOfResources.forEach((Resource resource) -> {
       ResourceType type = resource.getType();
-      boolean hasKey = currentResourcesMap.containsKey(type);
+      boolean hasKey = currentResourcesLinkedHashMap.containsKey(type);
       if (hasKey) {
-        currentResourcesMap.put(type, currentResourcesMap.get(type) + 1);
+        currentResourcesLinkedHashMap.put(type, currentResourcesLinkedHashMap.get(type) + 1);
       } else {
-        currentResourcesMap.put(type, 1);
+        currentResourcesLinkedHashMap.put(type, 1);
       }
     });
   }
 
-  // transform a list to a map
-  public Map<ResourceType, Integer> listToMapResources(List<Resource> inputResourcesList) {
-    Map<ResourceType, Integer> currentResourcesMap = new HashMap<>();
-    mapResourcesHelper(currentResourcesMap, inputResourcesList);
-    return currentResourcesMap;
+  // transform a list to a LinkedHashMap
+  public LinkedHashMap<ResourceType, Integer> listToMapResources(List<Resource> inputResourcesList) {
+    LinkedHashMap<ResourceType, Integer> currentResourcesLinkedHashMap = new LinkedHashMap<>();
+    mapResourcesHelper(currentResourcesLinkedHashMap, inputResourcesList);
+    return currentResourcesLinkedHashMap;
   }
 
-  public Map<ShelfFloor, List<Resource>> getShelves() {
+  public LinkedHashMap<ShelfFloor, List<Resource>> getShelves() {
     return shelves;
   }
 
-  public Map<ResourceType, Integer> getExtraDeposit() {
+  public LinkedHashMap<ResourceType, Integer> getExtraDeposit() {
     return extraDeposit;
   }
 
@@ -96,7 +96,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
   // creates the extra deposit
   public void createExtraDeposit(Resource resource) {
     if (this.extraDeposit == null) {
-      Map<ResourceType, Integer> newExtraDeposit = new HashMap<>();
+      LinkedHashMap<ResourceType, Integer> newExtraDeposit = new LinkedHashMap<>();
       newExtraDeposit.put(resource.getType(), 0);
       this.extraDeposit = newExtraDeposit;
     }else{
@@ -140,7 +140,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     }
   }
 
-  private boolean hasMoreResourcesThanFloor(Map<ShelfFloor, List<Resource>> shelfs) {
+  private boolean hasMoreResourcesThanFloor(LinkedHashMap<ShelfFloor, List<Resource>> shelfs) {
     for (ShelfFloor shelfFloor : shelfs.keySet()) {
       final List<Resource> resourcesOnFloor = shelfs.get(shelfFloor);
       if (shelfFloor == ShelfFloor.First) {
@@ -166,7 +166,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     return false;
   }
 
-  private boolean oneFloorHasDifferentTypesOfResources(Map<ShelfFloor, List<Resource>> shelfs) {
+  private boolean oneFloorHasDifferentTypesOfResources(LinkedHashMap<ShelfFloor, List<Resource>> shelfs) {
     for (ShelfFloor shelfFloor : shelfs.keySet()) {
       Resource oldResourceOnFloor = null;
       for (Resource resource : shelfs.get(shelfFloor)) {
@@ -181,7 +181,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     return false;
   }
 
-  private boolean floorsHaveSameTypeOfResource(Map<ShelfFloor, List<Resource>> shelfs) {
+  private boolean floorsHaveSameTypeOfResource(LinkedHashMap<ShelfFloor, List<Resource>> shelfs) {
     for (ShelfFloor shelfFloor : shelfs.keySet()) {
       if (!shelfs.get(shelfFloor).isEmpty()) {
         Resource resourceOfThisFloor = shelfs.get(shelfFloor).get(0);
@@ -203,7 +203,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
   }
 
   public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse) {
-    final Map<ShelfFloor, List<Resource>> shelvesToCheck = warehouse.getShelves();
+    final LinkedHashMap<ShelfFloor, List<Resource>> shelvesToCheck = warehouse.getShelves();
     if (hasMoreResourcesThanFloor(shelvesToCheck)) {
       return false;
     }
@@ -293,7 +293,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
     // string = this.shelves
     // .entrySet()
     // .stream()
-    // .map(x -> x.getKey().toString() + x.getValue().stream().map(y -> " " +
+    // .LinkedHashMap(x -> x.getKey().toString() + x.getValue().stream().LinkedHashMap(y -> " " +
     // y.toString()) + "\n")
     // .collect(Collectors.toList())
     // .stream()
