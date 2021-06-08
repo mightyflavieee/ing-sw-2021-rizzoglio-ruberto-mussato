@@ -120,6 +120,7 @@ public class BoardGUI extends JInternalFrame {
     }
 
     public void refreshSize(int width, int height) {
-        this.mapTray.refreshSize(width,height);
+        this.mapTray.refreshSize(
+                (int) (width*0.4), (int) (height*0.6));
     }
 }

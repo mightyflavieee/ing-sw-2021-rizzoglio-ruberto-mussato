@@ -97,6 +97,6 @@ public class MarketGUI extends JInternalFrame {
     }
 
     public void refreshSize(int width, int height) {
-        this.trayGui.refreshSize(width,height);
+        this.trayGui.refreshSize(width/4,height/3);
     }
 }

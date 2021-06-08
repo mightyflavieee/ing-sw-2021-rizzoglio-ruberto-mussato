@@ -207,10 +207,11 @@ public class GUI extends Observable<Move> {
 
     public void refreshSize(){
         Dimension d = this.jFrame.getSize();
-        this.leaderCardPlaceGUI.refreshSize((int) (d.width*0.25), (int) (d.height*0.4));
-        this.boardGUI.refreshSize((int) (d.width*0.25), (int) (d.height*0.3));
-        this.marketGUI.refreshSize((int) (d.width*0.05), (int) (d.height*0.09));
+        this.leaderCardPlaceGUI.refreshSize((int) (d.width*0.25), (int) (d.height*0.48));
+        this.boardGUI.refreshSize((int) (d.width*0.75), (int) (d.height*0.48));
+        this.marketGUI.refreshSize((int) (d.width*0.2), (int) (d.height*0.25));
         this.cardContainerGUI.refreshSize(d.width/4, (int) (d.height*0.45));
+        this.leaderCardPlaceGUI.refreshSize(d.width-boardGUI.getWidth(), (int) (d.height*0.48));
     }
 }
 

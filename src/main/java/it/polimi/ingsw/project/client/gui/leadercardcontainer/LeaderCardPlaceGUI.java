@@ -76,7 +76,7 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
 
     public void refreshSize(int width, int height) {
         for(int j = 0; j < this.leaderCardJlabelGUIList.size(); j++){
-            this.leaderCardJlabelGUIList.get(j).refreshSize(width/2,height);
+            this.leaderCardJlabelGUIList.get(j).refreshSize(width/2, (int) (height*0.8));
         }
     }
 }
