@@ -133,6 +133,7 @@ public class Warehouse extends Observable<Warehouse> implements Serializable {
             for (int i = 0; i < resourcesToEliminate.get(type); i++) {
               this.shelves.get(floor).remove(this.shelves.get(floor).get(0));
             }
+            break;
           }
         }
       }
