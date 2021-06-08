@@ -69,14 +69,14 @@ public class GUI extends Observable<Move> {
         top2Panel.add(marketGUI);
         top2Panel.add(cardContainerGUI);
         top2Panel.add(informationsGUI);
-        top2Panel.add(historyGUI);
+        top2Panel.add(leaderCardPlaceGUI);
         bottomPanel.add(top2Panel,BorderLayout.CENTER);
 
         bottomPanel.add(playersBarGUI,BorderLayout.SOUTH);
         JPanel topPanel = new JPanel();
         topPanel.setLayout(new BorderLayout());
         topPanel.add(boardGUI,BorderLayout.EAST);
-        topPanel.add(leaderCardPlaceGUI,BorderLayout.CENTER);
+        topPanel.add(historyGUI,BorderLayout.CENTER);
         this.jFrame.add(topPanel);
         this.jFrame.add(bottomPanel);
         this.jFrame.setVisible(true);
@@ -207,11 +207,11 @@ public class GUI extends Observable<Move> {
 
     public void refreshSize(){
         Dimension d = this.jFrame.getSize();
-        //this.leaderCardPlaceGUI.refreshSize((int) (d.width*0.25), (int) (d.height*0.48));
+        this.leaderCardPlaceGUI.refreshSize((int) (d.width*0.25), (int) (d.height*0.48));
         this.boardGUI.refreshSize((int) (d.width*0.75), (int) (d.height*0.48));
         this.marketGUI.refreshSize((int) (d.width*0.2), (int) (d.height*0.25));
         this.cardContainerGUI.refreshSize(d.width/4, (int) (d.height*0.45));
-        this.leaderCardPlaceGUI.refreshSize(d.width-boardGUI.getWidth(), (int) (d.height*0.48));
+       // this.leaderCardPlaceGUI.refreshSize(d.width-boardGUI.getWidth(), (int) (d.height*0.48));
 
     }
 }
