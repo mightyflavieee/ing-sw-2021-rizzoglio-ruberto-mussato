@@ -40,7 +40,11 @@ public class ArrowListener implements ActionListener {
                 break;
             }
         }
-        this.gui.showMarketInformations(hasFaith);
         this.takeMarketResourceBuilder.setHasRedMarble(hasFaith);
+        if(resourceList.size()==0){
+            this.gui.sendMarketMove();
+        }else {
+            this.gui.showMarketInformations(hasFaith);
+        }
     }
 }
