@@ -3,6 +3,8 @@ package it.polimi.ingsw.project.client.gui.board;
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
 import it.polimi.ingsw.project.client.gui.listeners.selectresources.ExtraDepositGUISelectResourceListener;
 import it.polimi.ingsw.project.client.gui.listeners.selectresources.WarehouseGUISelectResourceListener;
+import it.polimi.ingsw.project.client.gui.listeners.warehouse.ArrowDownButtonListener;
+import it.polimi.ingsw.project.client.gui.listeners.warehouse.ArrowUpButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.warehouse.ResourceButtonListener;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
@@ -109,8 +111,10 @@ public class WarehouseGUI extends JInternalFrame {
     }
 
     // sets this.canChangeShelves to true or false
-    public void setCanChangeShelves(boolean value) { this.canChangeShelves = value;
-    this.refresh();}
+    public void setCanChangeShelves(boolean value) {
+        this.canChangeShelves = value;
+        this.refresh();
+    }
 
     // sets floor to change for change shelf move
     public void setFloorToChange(ShelfFloor floor) { this.floorToChange = floor; }
@@ -126,6 +130,8 @@ public class WarehouseGUI extends JInternalFrame {
         arrowDown.setIcon(new ImageIcon(new javax.swing
                 .ImageIcon("src/main/resources/warehouse/arrow_down.png")
                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+        arrowUp.addActionListener(new ArrowUpButtonListener(this));
+        arrowDown.addActionListener(new ArrowDownButtonListener(this));
         arrowButtons.add(arrowUp);
         arrowButtons.add(arrowDown);
         return arrowButtons;
@@ -178,10 +184,6 @@ public class WarehouseGUI extends JInternalFrame {
         this.shelvesButtons.put(ShelfFloor.Third, thirdFloor);
     }
 
-    private void createExtraDepositsButtons() {
-
-    }
-
     public void refresh() {
         for (ShelfFloor floor : this.warehouseModel.getShelves().keySet()) {
             int count = 0;
@@ -190,7 +192,7 @@ public class WarehouseGUI extends JInternalFrame {
                 this.shelvesButtons.get(floor).get(count).setIcon(new ImageIcon(
                         new ImageIcon("src/main/resources/resourcetype/" + resource.getType() + ".png")
                         .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-                if (Arrays.stream(this.shelvesButtons.get(floor).get(count).getActionListeners()).count() == 0) {
+                /*if (Arrays.stream(this.shelvesButtons.get(floor).get(count).getActionListeners()).count() == 0) {
                     this.shelvesButtons.get(floor).get(count).addActionListener(new WarehouseGUISelectResourceListener(this,
                             this.informationsGUI, resource.getType(), floor, count));
                 } else {
@@ -198,7 +200,7 @@ public class WarehouseGUI extends JInternalFrame {
                     this.shelvesButtons.get(floor).get(count).removeActionListener(actionListener);
                     this.shelvesButtons.get(floor).get(count).addActionListener(new WarehouseGUISelectResourceListener(this,
                             this.informationsGUI, resource.getType(), floor, count));
-                }
+                }*/
                 count++;
                 resourceTypeInShelf = resource.getType();
             }
@@ -209,10 +211,32 @@ public class WarehouseGUI extends JInternalFrame {
                     this.shelvesButtons.get(floor).get(i-1).setIcon(new ImageIcon(
                             new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                             .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-                    if (this.shelvesButtons.get(floor).get(i-1).getActionListeners().length > 0) {
+
+                    /*if (this.shelvesButtons.get(floor).get(i-1).getActionListeners().length > 0) {
                         ActionListener actionListener = this.shelvesButtons.get(floor).get(i-1).getActionListeners()[0];
                         this.shelvesButtons.get(floor).get(i-1).removeActionListener(actionListener);
-                    }
+                    }*/
+                }
+            }
+        }
+    }
+
+    public void addSelectResourceListeners() {
+        for (ShelfFloor floor : this.warehouseModel.getShelves().keySet()) {
+            int count = 0;
+            for (Resource resource : this.warehouseModel.getShelves().get(floor)) {
+                this.shelvesButtons.get(floor).get(count).addActionListener(new WarehouseGUISelectResourceListener(this,
+                        this.informationsGUI, resource.getType(), floor, count));
+                count++;
+            }
+        }
+    }
+
+    public void removeSelectResourceListeners() {
+        for (ShelfFloor floor : this.shelvesButtons.keySet()) {
+            for (JButton button : this.shelvesButtons.get(floor)) {
+                if (button.getActionListeners().length > 1) {
+                    button.removeActionListener(button.getActionListeners()[1]);
                 }
             }
         }

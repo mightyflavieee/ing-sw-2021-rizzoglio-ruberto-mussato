@@ -192,6 +192,9 @@ public class GUI extends Observable<Move> {
     }
 
     public void sendBuyDevCardMove(BuyDevCardMoveHandler buyDevCardMoveHandler) {
+
+        this.boardGUI.getWarehouseGUI().removeSelectResourceListeners();
+
         disableAllButtons();
         this.informationsGUI.refresh();
         this.buyDevCardMoveHandler = buyDevCardMoveHandler;
@@ -200,6 +203,9 @@ public class GUI extends Observable<Move> {
     }
 
     public void sendProductionMove(ProductionMoveHandler productionMoveHandler) {
+
+        this.boardGUI.getWarehouseGUI().removeSelectResourceListeners();
+
         disableAllButtons();
         this.productionMoveHandler = productionMoveHandler;
         this.send(this.productionMoveHandler.getMove());

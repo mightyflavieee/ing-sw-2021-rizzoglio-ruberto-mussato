@@ -14,6 +14,9 @@ public class ActivateProductionButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        this.gui.getBoardGUI().getWarehouseGUI().removeSelectResourceListeners();
+
         this.gui.getInformationsGUI().getjTextArea().setText("Select Production type:");
         this.gui.getInformationsGUI().getMainPhaseHandler().goToProductionButtons();
     }
