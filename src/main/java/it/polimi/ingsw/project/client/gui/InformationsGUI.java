@@ -46,6 +46,8 @@ public class InformationsGUI extends JInternalFrame {
 
     public MainPhaseHandler getMainPhaseHandler() { return mainPhaseHandler; }
 
+    public ResourceInHandlerGUI getResourceInHandler() { return resourceInHandler; }
+
     public GUI getGUI() { return gui; }
 
     public void refresh() {
