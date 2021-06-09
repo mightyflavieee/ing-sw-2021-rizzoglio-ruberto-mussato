@@ -49,20 +49,29 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         int i;
         for(i = 0; i < leaderCards.size(); i++){
             leaderCardJlabelGUIList.get(i).setID(leaderCards.get(i).getId());
+            this.leaderMovePanelList.get(i).setID(leaderCards.get(i).getId());
             this.leaderMovePanelList.get(i).setActivationPossible(leaderCards.get(i).getStatus()== Status.Inactive
             && mePlayer.isFeasibleActivateLeaderCardMove(leaderCards.get(i).getId()));
+            this.leaderCardJlabelGUIList.get(i).setVisible(true);
+            this.leaderMovePanelList.get(i).setVisible(true);
         }
         for(int j = i; j < 2; j++){
             this.leaderCardJlabelGUIList.get(j).setVisible(false);
             this.leaderMovePanelList.get(j).setVisible(false);
-            this.leaderMovePanelList.get(j).setEnabled(false);
+            this.leaderMovePanelList.get(j).disableButtons();
         }
 
     }
     public void setOpponentLeaderCards(List<LeaderCard> leaderCards, String opponentNickName){
-        for(int i = 0; i < leaderCards.size(); i++){
+        int i;
+        for(i = 0; i < leaderCards.size(); i++){
             leaderCardJlabelGUIList.get(i).setID(leaderCards.get(i).getId());
         }        this.setTitle(opponentNickName + "'s Leader Cards");
+        for(int j = i; j < 2; j++){
+            this.leaderCardJlabelGUIList.get(j).setVisible(false);
+            this.leaderMovePanelList.get(j).setVisible(false);
+
+        }
         this.disableButtons();
     }
 

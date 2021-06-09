@@ -11,16 +11,20 @@ public class LeaderMovePanel extends JPanel {
     private String id;
     private JButton discardButton, activateButton;
     private boolean isActivable;
+    private LeaderCardDiscardButtonListener leaderCardDiscardButtonListener;
+    private LeaderCardActivateButtonListener leaderCardActivateButtonListener;
     public LeaderMovePanel(String id, GUI gui)  {
         this.id = id;
         this.setVisible(true);
         this.setPreferredSize(new Dimension(300,300));
         this.setLayout(new GridLayout(1,2));
         this.discardButton = new JButton("Discard");
-        this.discardButton.addActionListener(new LeaderCardDiscardButtonListener(this.id,gui));
+        this.leaderCardDiscardButtonListener = new LeaderCardDiscardButtonListener(this.id,gui);
+        this.discardButton.addActionListener(this.leaderCardDiscardButtonListener);
         this.add(discardButton);
         this.activateButton = new JButton("Activate");
-        this.activateButton.addActionListener(new LeaderCardActivateButtonListener(this.id,gui));
+        this.leaderCardActivateButtonListener = new LeaderCardActivateButtonListener(this.id,gui);
+        this.activateButton.addActionListener(this.leaderCardActivateButtonListener);
         this.add(activateButton);
         this.isActivable = true;
 //        this.pack();
@@ -40,5 +44,10 @@ public class LeaderMovePanel extends JPanel {
     public void enableButtons() {
         this.discardButton.setEnabled(true);
         this.activateButton.setEnabled(this.isActivable);
+    }
+
+    public void setID(String id) {
+        this.leaderCardActivateButtonListener.setID(id);
+        this.leaderCardDiscardButtonListener.setID(id);
     }
 }

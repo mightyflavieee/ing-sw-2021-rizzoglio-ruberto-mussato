@@ -16,6 +16,10 @@ public class LeaderCardActivateButtonListener implements ActionListener {
         this.gui = gui;
     }
 
+    public void setID(String id) {
+        this.id = id;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         this.gui.send(new ActivateLeaderCardMove(this.id));
