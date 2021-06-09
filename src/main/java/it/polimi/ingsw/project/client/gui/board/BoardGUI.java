@@ -77,6 +77,8 @@ public class BoardGUI extends JInternalFrame {
         return chest;
     }
 
+    public MapTrayGUI getMapTrayGUI() { return mapTray; }
+
     public Board getBoardModel() { return this.boardModel; }
 
     public Warehouse getWarehouseModel() {
