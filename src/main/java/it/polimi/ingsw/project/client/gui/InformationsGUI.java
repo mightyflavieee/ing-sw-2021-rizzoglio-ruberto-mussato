@@ -48,6 +48,8 @@ public class InformationsGUI extends JInternalFrame {
 
     public ResourceInHandlerGUI getResourceInHandler() { return resourceInHandler; }
 
+    public ProductionMoveHandler getProductionMoveHandler() { return productionMoveHandler; }
+
     public GUI getGUI() { return gui; }
 
     public void refresh() {
@@ -146,27 +148,14 @@ public class InformationsGUI extends JInternalFrame {
         this.jTextArea.setVisible(true);
     }
 
-    // creates the ProductionMoveHandler and the SelectResourcesHandler and updates
-    // the informationsGUI
-    public void createSelectResourcesHandlerForProduction(DevelopmentCard developmentCard,
-                                                          LeaderCard leaderCard,
-                                                          boolean isBoardProductionPresent,
-                                                          ResourceType resourceToManufactureForLeaderCardProduction,
-                                                          ResourceType resourceToManufactureForBoardProduction) {
+    // creates the ProductionMoveHandler
+    public void createProductionMoveHandler(ProductionType productionType) {
         this.productionMoveHandler = new ProductionMoveHandler();
-        if (developmentCard != null) {
-            this.productionMoveHandler.setDevCard(developmentCard);
-        }
-        if (leaderCard != null) {
-            this.productionMoveHandler.setLeaderCard(leaderCard);
-            this.productionMoveHandler.setBoardOrPerkManufacturedResource(resourceToManufactureForLeaderCardProduction);
-        }
-        if (isBoardProductionPresent) {
-            this.productionMoveHandler.setBoardOrPerkManufacturedResource(resourceToManufactureForBoardProduction);
-        }
-        this.productionMoveHandler.setProductionType(determineProductionType(developmentCard.getId(),
-                leaderCard.getId(),
-                isBoardProductionPresent));
+        this.productionMoveHandler.setProductionType(productionType);
+    }
+
+    // creates the SelectResourcesHandler and updates the informationsGUI
+    public void createSelectResourcesHandlerForProduction() {
         this.selectResourcesHandler = new SelectResourcesHandler();
         this.productionMoveHandler.setSelectResourcesHandler(this.selectResourcesHandler);
         showProductionInfo();
@@ -192,37 +181,6 @@ public class InformationsGUI extends JInternalFrame {
                     + "You stll need this resources:\n" + missingResourceString
                     + "Select the resources required from the Warehouse and/or the chest.");
         }
-    }
-
-    // determines the production type
-    private ProductionType determineProductionType(String devCardID, String leaderCardID, boolean isBoardProductionPresent) {
-        ProductionType productionType;
-        if (devCardID != null) {
-            if (leaderCardID != null) {
-                if (isBoardProductionPresent) {
-                    productionType = ProductionType.BoardAndDevCardAndLeaderCard;
-                } else {
-                    productionType = ProductionType.DevCardAndLeader;
-                }
-            } else {
-                if (isBoardProductionPresent) {
-                    productionType = ProductionType.BoardAndDevCard;
-                } else {
-                    productionType = ProductionType.DevCard;
-                }
-            }
-        } else {
-            if (leaderCardID != null) {
-                if (isBoardProductionPresent) {
-                    productionType = ProductionType.BoardAndLeaderCard;
-                } else {
-                    productionType = ProductionType.LeaderCard;
-                }
-            } else {
-                productionType = ProductionType.Board;
-            }
-        }
-        return  productionType;
     }
 
     public void createBuyDevCardHandler(DevCardPosition position) {
