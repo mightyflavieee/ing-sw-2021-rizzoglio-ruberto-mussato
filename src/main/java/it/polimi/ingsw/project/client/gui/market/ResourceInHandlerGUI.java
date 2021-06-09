@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class ResourceInHandlerGUI extends JInternalFrame {
     private ResourceType resourceType;
-    private JButton firstShelfButton, secondShelfButton, thirdShelfButton, extraDepositButton, discardButton;
+    private JButton firstShelfButton, secondShelfButton, thirdShelfButton, extraDepositButton, discardButton,deselectButton;
     private int resourceNum;
     private JLabel imageLabel, numLabel;
     private WarehouseGUI warehouseGUI;
@@ -21,7 +21,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         this.warehouseGUI = warehouseGUI;
         this.setTitle("Resource Selected:");
         this.setVisible(false);
-        this.setLayout(new GridLayout(6,1));
+        this.setLayout(new GridLayout(7,1));
         this.imageLabel = new JLabel();
         this.numLabel = new JLabel();
         this.firstShelfButton = new JButton("Insert in the First Shelf");
@@ -29,6 +29,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         this.thirdShelfButton = new JButton("Insert in the Third Shelf");
         this.extraDepositButton = new JButton("Insert in the Extra Deposit");
         this.discardButton = new JButton("Discard");
+        this.deselectButton = new JButton("Deselect");
         JPanel resourcePanel = new JPanel();
         resourcePanel.setLayout(new GridLayout(1,2));
         resourcePanel.add(imageLabel);
@@ -39,16 +40,19 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         this.add(thirdShelfButton);
         this.add(extraDepositButton);
         this.add(discardButton);
+        this.add(deselectButton);
         this.firstShelfButton.setEnabled(false);
         this.secondShelfButton.setEnabled(false);
         this.thirdShelfButton.setEnabled(false);
         this.extraDepositButton.setEnabled(false);
         this.discardButton.setEnabled(false);
+        this.deselectButton.setEnabled(false);
         this.firstShelfButton.addActionListener(new InsertFirstShelfButtonListener(this,warehouseGUI,resourceInHandGUI,gui));
         this.secondShelfButton.addActionListener(new InsertSecondShelfButtonListener(this,warehouseGUI,resourceInHandGUI,gui));
         this.thirdShelfButton.addActionListener(new InsertThirdShelfButtonListener(this,warehouseGUI,resourceInHandGUI,gui));
         this.extraDepositButton.addActionListener(new InsertExtraDepositButtonListener(this,warehouseGUI,resourceInHandGUI,gui));
         this.discardButton.addActionListener(new DiscardButtonListener(this,resourceInHandGUI,gui));
+        this.deselectButton.addActionListener(new DeselectButtonListener(this,resourceInHandGUI));
     }
     public void refresh(){
         Map<ShelfFloor,Integer> numOfResourcesPerShelves = this.warehouseGUI.getNumberOfResoucesPerShelf();
@@ -64,6 +68,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 this.thirdShelfButton.setEnabled(false);
                 this.extraDepositButton.setEnabled(false);
                 this.discardButton.setEnabled(false);
+                this.deselectButton.setEnabled(false);
                 break;
             case 1:
                 if(numOfResourcesPerShelves.get(ShelfFloor.First)==0) {
@@ -99,6 +104,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                     }
                 }
                 this.discardButton.setEnabled(true);
+                this.deselectButton.setEnabled(true);
                 break;
             case 2:
                 this.firstShelfButton.setEnabled(false);
@@ -128,6 +134,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                     }
                 }
                 this.discardButton.setEnabled(true);
+                this.deselectButton.setEnabled(true);
                 break;
             case 3:
                 this.firstShelfButton.setEnabled(false);
@@ -139,6 +146,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 }
                 this.extraDepositButton.setEnabled(false);
                 this.discardButton.setEnabled(true);
+                this.deselectButton.setEnabled(true);
                 break;
             default:
                 this.firstShelfButton.setEnabled(false);
@@ -146,6 +154,7 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 this.thirdShelfButton.setEnabled(false);
                 this.extraDepositButton.setEnabled(false);
                 this.discardButton.setEnabled(true);
+                this.deselectButton.setEnabled(true);
                 break;
         }
 
@@ -155,7 +164,6 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         this.resourceNum ++;
         this.refresh();
     }
-
     public void addStone() {
         this.resourceType = ResourceType.Stone;
         this.resourceNum ++;

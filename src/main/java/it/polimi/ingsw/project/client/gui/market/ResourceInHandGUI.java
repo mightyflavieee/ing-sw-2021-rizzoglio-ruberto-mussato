@@ -148,4 +148,24 @@ public class ResourceInHandGUI extends JInternalFrame {
         this.stoneButton.setEnabled(false);
         this.shieldButton.setEnabled(false);
     }
+
+    public void addResource(ResourceType resourceType, int n){
+        switch (resourceType) {
+            case Coin:
+                this.coinInt = this.coinInt + n;
+                break;
+            case Stone:
+                this.stoneInt = this.stoneInt + n;
+                break;
+            case Shield:
+                this.shieldInt = this.shieldInt + n;
+                break;
+            case Servant:
+                this.servantInt = this.servantInt + n;
+                break;
+            default:
+                break;
+        }
+        this.refresh();
+    }
 }
