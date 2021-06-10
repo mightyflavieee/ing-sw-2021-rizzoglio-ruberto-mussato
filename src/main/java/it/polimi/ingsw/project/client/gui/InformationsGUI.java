@@ -162,7 +162,7 @@ public class InformationsGUI extends JInternalFrame {
     }
 
     // Shows on the informationsGUI the necessary information for the BuyDevCardMove
-    private void showProductionInfo() {
+    public void showProductionInfo() {
         String selectedResourcesFromWarehouse = convertResourcesToString(this.selectResourcesHandler.getResourcesFromWarehouse());
         String selectedResourcesFromChest = convertResourcesToString(this.selectResourcesHandler.getResourcesFromChest());
         Map<ResourceType, Integer> insertedResources = countResources(this.selectResourcesHandler);

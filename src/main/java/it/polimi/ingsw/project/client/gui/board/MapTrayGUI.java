@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client.gui.board;
 
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
+import it.polimi.ingsw.project.client.gui.listeners.selectcard.SelectDevCardProductionListener;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
@@ -8,6 +9,8 @@ import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,15 +39,32 @@ public class MapTrayGUI extends JInternalFrame {
     public void refresh() {
         for (DevCardPosition position : this.boardModel.getMapTray().keySet()) {
             if (this.boardModel.getMapTray().get(position).size() == 0) {
+                // shows back of the devcard in that DevCardPosition
                 this.mapTrayButtons.get(position).setIcon(new ImageIcon(new javax.swing
                         .ImageIcon("src/main/resources/developmentcards/retro_devcard.png")
                         .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
+                // if present, removes ActionListener
+                if (this.mapTrayButtons.get(position).getActionListeners().length > 0) {
+                    ActionListener actionListener = this.mapTrayButtons.get(position).getActionListeners()[0];
+                    this.mapTrayButtons.get(position).removeActionListener(actionListener);
+                }
             } else {
+                // shows the last devcard in that DevCardPosition
                 DevelopmentCard lastCard = this.boardModel.getMapTray().get(position)
                         .get(this.boardModel.getMapTray().get(position).size()-1);
                 this.mapTrayButtons.get(position).setIcon(new ImageIcon(new javax.swing
                         .ImageIcon("src/main/resources/developmentcards/" + lastCard.getId() + ".png")
                         .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
+                // if not present, adds ActionListener. If present, removes old ActionListener and adds a new one
+                if (Arrays.stream(this.mapTrayButtons.get(position).getActionListeners()).count() == 0) {
+                    this.mapTrayButtons.get(position).addActionListener(
+                            new SelectDevCardProductionListener(this.informationsGUI.getGUI(), lastCard));
+                } else {
+                    ActionListener actionListener = this.mapTrayButtons.get(position).getActionListeners()[0];
+                    this.mapTrayButtons.get(position).removeActionListener(actionListener);
+                    this.mapTrayButtons.get(position).addActionListener(
+                            new SelectDevCardProductionListener(this.informationsGUI.getGUI(), lastCard));
+                }
             }
         }
     }

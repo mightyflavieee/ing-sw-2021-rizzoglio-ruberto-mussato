@@ -37,17 +37,31 @@ public class StoneBoardProductionListener implements ActionListener {
             }
             this.gui.getInformationsGUI().getProductionMoveHandler().setBoardRequireResources(requiredResources);
 
-            // todo enable dei bottoni
+            // todo enable dei bottoni LeaderCard
             switch (this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType()) {
                 case Board:
+                    this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
+                    this.gui.getBoardGUI().getChestGUI().enableAllButtons();
+                    this.gui.getInformationsGUI().showProductionInfo();
                     break;
                 case BoardAndDevCard:
+                    this.gui.getInformationsGUI().getjTextArea().setText("Select Development Card from the Map Tray for the production!");
+                    this.gui.getBoardGUI().getMapTrayGUI().enableAllButtons();
                     break;
                 case BoardAndLeaderCard:
+                    this.gui.getInformationsGUI().getjTextArea().setText("Select Leader Card for the production!");
+
+                    // qui mettere enable di bottoni leader cards
                     break;
                 case BoardAndDevCardAndLeaderCard:
+                    this.gui.getInformationsGUI().getjTextArea().setText("Select Development Card and Leader Card for the production!");
+                    this.gui.getBoardGUI().getMapTrayGUI().enableAllButtons();
+
+                    // qui mettere enable di bottoni leader cards
                     break;
             }
+
+            this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
         }
     }
 }
