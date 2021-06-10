@@ -96,17 +96,18 @@ public class GUI extends Observable<Move> {
     }
 
     public void disableButtonsHandler(TurnPhase turnPhase){
-        switch (turnPhase) {
-            case WaitPhase:
-            case MainPhase:
-                disableAllButtons();
-                break;
-            case InitialPhase:
-            case EndPhase:
-                disableAllButtons();
-                enableForLeaderCardPhase();
-                break;
-        }
+//        switch (turnPhase) {
+//            case WaitPhase:
+//            case MainPhase:
+//                disableAllButtons();
+//                break;
+//            case InitialPhase:
+//            case EndPhase:
+//                disableAllButtons();
+//                break;
+//        }
+        disableAllButtons();
+        this.leaderCardPlaceGUI.enableButtons(turnPhase);
     }
 
     private void disableAllButtons() {
@@ -114,10 +115,6 @@ public class GUI extends Observable<Move> {
         this.boardGUI.disableAllButtons();
         this.cardContainerGUI.disableAllButtons();
         this.marketGUI.disableButtons();
-    }
-
-    private void enableForLeaderCardPhase() {
-        this.leaderCardPlaceGUI.enableButtons();
     }
 
     public void enableForTakeFromMarket() {

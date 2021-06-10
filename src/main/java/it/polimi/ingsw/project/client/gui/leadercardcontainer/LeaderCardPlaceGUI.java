@@ -2,9 +2,11 @@ package it.polimi.ingsw.project.client.gui.leadercardcontainer;
 
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.model.Player;
+import it.polimi.ingsw.project.model.TurnPhase;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.Status;
+import it.polimi.ingsw.project.model.board.card.leaderCard.perk.PerkType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -52,6 +54,7 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
             this.leaderMovePanelList.get(i).setID(leaderCards.get(i).getId());
             this.leaderMovePanelList.get(i).setActivationPossible(leaderCards.get(i).getStatus()== Status.Inactive
             && mePlayer.isFeasibleActivateLeaderCardMove(leaderCards.get(i).getId()));
+            this.leaderMovePanelList.get(i).setProductable(leaderCards.get(i).getStatus()== Status.Active && leaderCards.get(i).getPerk().getType() == PerkType.Production);
             this.leaderCardJlabelGUIList.get(i).setVisible(true);
             this.leaderMovePanelList.get(i).setVisible(true);
         }
@@ -79,8 +82,8 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         this.leaderMovePanelList.forEach(LeaderMovePanel::disableButtons);
     }
 
-    public void enableButtons() {
-        this.leaderMovePanelList.forEach(LeaderMovePanel::enableButtons);
+    public void enableButtons(TurnPhase turnPhase) {
+        this.leaderMovePanelList.forEach(x -> x.enableButtons(turnPhase));
     }
 
     public void refreshSize(int width, int height) {
@@ -94,4 +97,5 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
             this.leaderCardJlabelGUIList.get(j).refreshSize(width/2, (int) (height*0.8));
         }
     }
+
 }
