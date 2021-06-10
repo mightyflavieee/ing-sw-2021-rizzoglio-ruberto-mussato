@@ -24,14 +24,14 @@ public class SelectDevCardProductionListener implements ActionListener {
             case BoardAndDevCard:
                 this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
                 this.gui.getBoardGUI().getChestGUI().enableAllButtons();
-                this.gui.getInformationsGUI().showProductionInfo();
+                this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
                 break;
             case DevCardAndLeader:
             case BoardAndDevCardAndLeaderCard:
                 if (this.gui.getInformationsGUI().getProductionMoveHandler().getLeaderCard() != null) {
                     this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
                     this.gui.getBoardGUI().getChestGUI().enableAllButtons();
-                    this.gui.getInformationsGUI().showProductionInfo();
+                    this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
                 }
                 break;
         }

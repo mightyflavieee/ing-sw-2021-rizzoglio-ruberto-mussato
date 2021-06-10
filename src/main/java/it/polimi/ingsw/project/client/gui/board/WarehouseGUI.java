@@ -222,8 +222,9 @@ public class WarehouseGUI extends JInternalFrame {
     }
 
     public void addSelectResourceListeners() {
+        int count;
         for (ShelfFloor floor : this.warehouseModel.getShelves().keySet()) {
-            int count = 0;
+            count = 0;
             for (Resource resource : this.warehouseModel.getShelves().get(floor)) {
                 this.shelvesButtons.get(floor).get(count).addActionListener(new WarehouseGUISelectResourceListener(this,
                         this.informationsGUI, resource.getType(), floor, count));

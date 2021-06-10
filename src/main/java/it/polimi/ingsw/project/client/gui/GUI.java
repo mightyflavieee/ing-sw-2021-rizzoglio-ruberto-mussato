@@ -162,9 +162,7 @@ public class GUI extends Observable<Move> {
 
     public InformationsGUI getInformationsGUI() { return informationsGUI; }
 
-    public BoardGUI getBoardGUI() {
-        return this.boardGUI;
-    }
+    public BoardGUI getBoardGUI() { return this.boardGUI; }
 
     public CardContainerGUI getCardContainerGUI() { return this.cardContainerGUI; }
 

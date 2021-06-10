@@ -38,7 +38,11 @@ public class WarehouseGUISelectResourceListener implements ActionListener {
                         .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                         .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
                 this.informationsGUI.updateSelectResourcesHandler(this.resourceType, true);
-                this.informationsGUI.showDevCardPurchaseInfo();
+                if (this.informationsGUI.getProductionMoveHandler() == null) {
+                    this.informationsGUI.showDevCardPurchaseInfo();
+                } else {
+                    this.informationsGUI.showProductionInfo();
+                }
             }
         }
     }

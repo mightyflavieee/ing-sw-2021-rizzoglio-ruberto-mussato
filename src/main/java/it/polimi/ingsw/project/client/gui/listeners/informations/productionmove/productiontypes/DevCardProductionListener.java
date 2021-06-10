@@ -17,5 +17,8 @@ public class DevCardProductionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.gui.getInformationsGUI().createProductionMoveHandler(ProductionType.DevCard);
         this.gui.getBoardGUI().getMapTrayGUI().enableAllButtons();
+        this.gui.getInformationsGUI().getjTextArea().setText("Select Development Card from the Map Tray for the production!");
+        this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
     }
 }
+

@@ -173,6 +173,7 @@ public class InformationsGUI extends JInternalFrame {
                 this.productionMoveHandler.getProductionType());
         if (verifyResourcesTargetReached(insertedResources, this.productionMoveHandler.getResourcesRequired())) {
             this.gui.sendProductionMove(this.productionMoveHandler);
+            this.productionMoveHandler = null;
         } else {
             Map<ResourceType, Integer> missingResources = calculateMissingResources(insertedResources, resourcesRequired);
             String missingResourceString = convertResourcesToString(missingResources);
@@ -209,6 +210,7 @@ public class InformationsGUI extends JInternalFrame {
         if (verifyResourcesTargetReached(insertedResources,
                 this.buyDevCardMoveHandler.getDevelopmentCard().getRequiredResources())) {
             this.gui.sendBuyDevCardMove(this.buyDevCardMoveHandler);
+            this.buyDevCardMoveHandler = null;
         } else {
             Map<ResourceType, Integer> missingResources = calculateMissingResources(insertedResources,
                     this.buyDevCardMoveHandler.getDevelopmentCard().getRequiredResources());

@@ -90,8 +90,8 @@ public class ProductionMoveHandler {
         resourceTypeList.add(ResourceType.Stone);
         switch (productionType) {
             case DevCard:
-                for (ResourceType type : developmentCard.getRequiredResources().keySet()) {
-                    totalResourcesRequired.put(type, leaderCard.getRequiredResources().get(type));
+                for (ResourceType type : developmentCard.getProduction().getRequiredResources().keySet()) {
+                    totalResourcesRequired.put(type, developmentCard.getProduction().getRequiredResources().get(type));
                 }
                 break;
             case LeaderCard:
@@ -106,12 +106,12 @@ public class ProductionMoveHandler {
                 break;
             case BoardAndDevCard:
                 for (ResourceType type : resourceTypeList) {
-                    if (developmentCard.getRequiredResources().containsKey(type)) {
+                    if (developmentCard.getProduction().getRequiredResources().containsKey(type)) {
                         if (boardRequiredResources.containsKey(type)) {
                             totalResourcesRequired.put(type,
-                                    developmentCard.getRequiredResources().get(type) + boardRequiredResources.get(type));
+                                    developmentCard.getProduction().getRequiredResources().get(type) + boardRequiredResources.get(type));
                         } else {
-                            totalResourcesRequired.put(type, developmentCard.getRequiredResources().get(type));
+                            totalResourcesRequired.put(type, developmentCard.getProduction().getRequiredResources().get(type));
                         }
                     } else {
                         if (boardRequiredResources.containsKey(type)) {
@@ -138,10 +138,10 @@ public class ProductionMoveHandler {
                 break;
             case DevCardAndLeader:
                 for (ResourceType type : resourceTypeList) {
-                    if (developmentCard.getRequiredResources().containsKey(type)) {
+                    if (developmentCard.getProduction().getRequiredResources().containsKey(type)) {
                         if (leaderCard.getRequiredResources().containsKey(type)) {
                             totalResourcesRequired.put(type,
-                                    developmentCard.getRequiredResources().get(type) + leaderCard.getRequiredResources().get(type));
+                                    developmentCard.getProduction().getRequiredResources().get(type) + leaderCard.getRequiredResources().get(type));
                         } else {
                             totalResourcesRequired.put(type, leaderCard.getRequiredResources().get(type));
                         }
@@ -154,21 +154,21 @@ public class ProductionMoveHandler {
                 break;
             case BoardAndDevCardAndLeaderCard:
                 for (ResourceType type : resourceTypeList) {
-                    if (developmentCard.getRequiredResources().containsKey(type)) {
+                    if (developmentCard.getProduction().getRequiredResources().containsKey(type)) {
                         if (leaderCard.getRequiredResources().containsKey(type)) {
                             if (boardRequiredResources.containsKey(type)) {
                                 totalResourcesRequired.put(type,
-                                        developmentCard.getRequiredResources().get(type) +
+                                        developmentCard.getProduction().getRequiredResources().get(type) +
                                         leaderCard.getRequiredResources().get(type) +
                                         boardRequiredResources.get(type));
                             }
                         } else {
                             if (boardRequiredResources.containsKey(type)) {
                                 totalResourcesRequired.put(type,
-                                        developmentCard.getRequiredResources().get(type) +
+                                        developmentCard.getProduction().getRequiredResources().get(type) +
                                         boardRequiredResources.get(type));
                             } else {
-                                totalResourcesRequired.put(type, developmentCard.getRequiredResources().get(type));
+                                totalResourcesRequired.put(type, developmentCard.getProduction().getRequiredResources().get(type));
                             }
                         }
                     } else {
@@ -192,12 +192,45 @@ public class ProductionMoveHandler {
     }
 
     public Move getMove() {
-        return new ProductionMove(this.developmentCard.getId(),
-                this.leaderCard.getId(),
-                this.selectResourcesHandler.getResourcesFromWarehouse(),
-                this.selectResourcesHandler.getResourcesFromChest(),
-                this.productionType,
-                this.boardOrPerkManufacturedResource);
+        ProductionMove productionMove = null;
+        switch (productionType) {
+            case Board:
+                productionMove = new ProductionMove(null,
+                        null,
+                        this.selectResourcesHandler.getResourcesFromWarehouse(),
+                        this.selectResourcesHandler.getResourcesFromChest(),
+                        this.productionType,
+                        this.boardOrPerkManufacturedResource);
+                break;
+            case DevCard:
+            case BoardAndDevCard:
+                productionMove = new ProductionMove(this.developmentCard.getId(),
+                        null,
+                        this.selectResourcesHandler.getResourcesFromWarehouse(),
+                        this.selectResourcesHandler.getResourcesFromChest(),
+                        this.productionType,
+                        this.boardOrPerkManufacturedResource);
+                break;
+            case LeaderCard:
+            case BoardAndLeaderCard:
+                productionMove = new ProductionMove(null,
+                        this.leaderCard.getId(),
+                        this.selectResourcesHandler.getResourcesFromWarehouse(),
+                        this.selectResourcesHandler.getResourcesFromChest(),
+                        this.productionType,
+                        this.boardOrPerkManufacturedResource);
+                break;
+            case DevCardAndLeader:
+            case BoardAndDevCardAndLeaderCard:
+                productionMove = new ProductionMove(this.developmentCard.getId(),
+                        this.leaderCard.getId(),
+                        this.selectResourcesHandler.getResourcesFromWarehouse(),
+                        this.selectResourcesHandler.getResourcesFromChest(),
+                        this.productionType,
+                        this.boardOrPerkManufacturedResource);
+                break;
+        }
+        return productionMove;
     }
 
     public void reset() {
@@ -207,6 +240,8 @@ public class ProductionMoveHandler {
         this.productionType = null;
         this.boardOrPerkManufacturedResource = null;
         this.resourcesRequired.clear();
-        this.boardRequiredResources.clear();
+        if (this.boardRequiredResources != null) {
+            this.boardRequiredResources.clear();
+        }
     }
 }
