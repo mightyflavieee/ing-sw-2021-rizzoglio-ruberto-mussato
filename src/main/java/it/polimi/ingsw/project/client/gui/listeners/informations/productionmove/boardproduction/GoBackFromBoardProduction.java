@@ -7,13 +7,19 @@ import java.awt.event.ActionListener;
 
 public class GoBackFromBoardProduction implements ActionListener {
     private GUI gui;
+    private boolean isManufacturingSelection;
 
-    public GoBackFromBoardProduction(GUI gui) {
+    public GoBackFromBoardProduction(GUI gui, boolean isManufacturingSelection) {
         this.gui = gui;
+        this.isManufacturingSelection = isManufacturingSelection;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.gui.getInformationsGUI().getMainPhaseHandler().goToProductionButtons();
+        if (this.isManufacturingSelection) {
+            this.gui.getInformationsGUI().getMainPhaseHandler().goToProductionButtons();
+        } else {
+            this.gui.getInformationsGUI().getMainPhaseHandler().goToBoardProductionButtons();
+        }
     }
 }

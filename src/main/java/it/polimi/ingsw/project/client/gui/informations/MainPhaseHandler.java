@@ -67,18 +67,21 @@ public class MainPhaseHandler extends JInternalFrame {
         this.productionPanel = new JPanel();
         this.boardManufacturingPanel = new JPanel();
         this.boardRequiredResourcesPanel = new JPanel();
+        JPanel boardReqResHelperPanel = new JPanel();
         this.abortMovePanel = new JPanel();
         this.mainPhasesPanel.setVisible(true);
         this.buyDevCardPanel.setVisible(true);
         this.productionPanel.setVisible(true);
         this.boardManufacturingPanel.setVisible(true);
         this.boardRequiredResourcesPanel.setVisible(true);
+        boardReqResHelperPanel.setVisible(true);
         this.abortMovePanel.setVisible(true);
         this.mainPhasesPanel.setLayout(new GridLayout(3, 1));
         this.buyDevCardPanel.setLayout(new GridLayout(4, 1));
         this.productionPanel.setLayout(new GridLayout(8, 1));
         this.boardManufacturingPanel.setLayout(new GridLayout(5, 1));
-        this.boardRequiredResourcesPanel.setLayout(new GridLayout(4, 2));
+        this.boardRequiredResourcesPanel.setLayout(new BorderLayout());
+        boardReqResHelperPanel.setLayout(new GridLayout(4, 2));
         this.abortMovePanel.setLayout(new BorderLayout());
         for (JButton button : this.mainPhasesButtons) {
             this.mainPhasesPanel.add(button);
@@ -93,8 +96,13 @@ public class MainPhaseHandler extends JInternalFrame {
             this.boardManufacturingPanel.add(button);
         }
         for (JButton button : this.boardRequiredResourcesButtons) {
-            this.boardRequiredResourcesPanel.add(button);
+            if (button.getText().equals("Go Back")) {
+                this.boardRequiredResourcesPanel.add(button, BorderLayout.SOUTH);
+            } else {
+                boardReqResHelperPanel.add(button);
+            }
         }
+        this.boardRequiredResourcesPanel.add(boardReqResHelperPanel, BorderLayout.CENTER);
         this.abortMovePanel.add(this.abortMoveButton);
     }
 
@@ -182,7 +190,7 @@ public class MainPhaseHandler extends JInternalFrame {
         buttonServant.addActionListener(new ServantBoardProductionListener(this.gui, true));
         buttonShield.addActionListener(new ShieldBoardProductionListener(this.gui, true));
         buttonStone.addActionListener(new StoneBoardProductionListener(this.gui, true));
-        buttonGoBackBoardManufacturing.addActionListener(new GoBackFromBoardProduction(this.gui));
+        buttonGoBackBoardManufacturing.addActionListener(new GoBackFromBoardProduction(this.gui, true));
         // adds JButtons to attribute
         this.boardManufacturingButtons.add(buttonCoin);
         this.boardManufacturingButtons.add(buttonServant);
@@ -198,6 +206,7 @@ public class MainPhaseHandler extends JInternalFrame {
         JButton buttonShield2 = new JButton();
         JButton buttonStone1 = new JButton();
         JButton buttonStone2 = new JButton();
+        JButton buttonGoBack = new JButton("Go Back");
         // sets resources icons
         buttonCoin1.setIcon(new ImageIcon(
                 new ImageIcon("src/main/resources/resourcetype/Coin.png")
@@ -232,6 +241,7 @@ public class MainPhaseHandler extends JInternalFrame {
         buttonShield2.addActionListener(new ShieldBoardProductionListener(this.gui, false));
         buttonStone1.addActionListener(new StoneBoardProductionListener(this.gui, false));
         buttonStone2.addActionListener(new StoneBoardProductionListener(this.gui, false));
+        buttonGoBack.addActionListener(new GoBackFromBoardProduction(this.gui, false));
         // adds JButtons to attribute
         this.boardRequiredResourcesButtons.add(buttonCoin1);
         this.boardRequiredResourcesButtons.add(buttonCoin2);
@@ -241,6 +251,7 @@ public class MainPhaseHandler extends JInternalFrame {
         this.boardRequiredResourcesButtons.add(buttonShield2);
         this.boardRequiredResourcesButtons.add(buttonStone1);
         this.boardRequiredResourcesButtons.add(buttonStone2);
+        this.boardRequiredResourcesButtons.add(buttonGoBack);
         // creates Abort Move button
         this.abortMoveButton = new JButton("Abort Move");
         // adds listeners

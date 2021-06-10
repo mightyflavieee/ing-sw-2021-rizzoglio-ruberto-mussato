@@ -71,6 +71,9 @@ public class ProductionMoveHandler {
     }
 
     public void setBoardRequireResources(Map<ResourceType, Integer> boardRequireResources) {
+        if (this.boardRequiredResources == null) {
+            this.boardRequiredResources = new HashMap<>();
+        }
         this.boardRequiredResources = boardRequireResources;
     }
 
