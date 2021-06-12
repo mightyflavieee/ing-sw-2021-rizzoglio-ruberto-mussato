@@ -1,8 +1,8 @@
 package it.polimi.ingsw.project.client.gui.leadercardcontainer;
 
 import it.polimi.ingsw.project.client.gui.GUI;
-import it.polimi.ingsw.project.client.gui.listeners.LeaderCardActivateButtonListener;
-import it.polimi.ingsw.project.client.gui.listeners.LeaderCardDiscardButtonListener;
+import it.polimi.ingsw.project.client.gui.listeners.leadercards.LeaderCardActivateButtonListener;
+import it.polimi.ingsw.project.client.gui.listeners.leadercards.LeaderCardDiscardButtonListener;
 import it.polimi.ingsw.project.model.TurnPhase;
 
 import javax.swing.*;

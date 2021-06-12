@@ -1,4 +1,4 @@
-package it.polimi.ingsw.project.client.gui.listeners;
+package it.polimi.ingsw.project.client.gui.listeners.players;
 
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.PlayersBarGUI;

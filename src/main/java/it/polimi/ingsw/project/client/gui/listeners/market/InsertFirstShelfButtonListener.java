@@ -1,4 +1,4 @@
-package it.polimi.ingsw.project.client.gui.listeners;
+package it.polimi.ingsw.project.client.gui.listeners.market;
 
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
@@ -12,12 +12,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InsertThirdShelfButtonListener implements ActionListener {
+public class InsertFirstShelfButtonListener implements ActionListener {
     private ResourceInHandlerGUI resourceInHandlerGUI;
     private WarehouseGUI warehouseGUI;
     private ResourceInHandGUI resourceInHandGUI;
     private GUI gui;
-    public InsertThirdShelfButtonListener(ResourceInHandlerGUI resourceInHandlerGUI, WarehouseGUI warehouseGUI, ResourceInHandGUI resourceInHandGUI, GUI gui) {
+
+    public InsertFirstShelfButtonListener(ResourceInHandlerGUI resourceInHandlerGUI, WarehouseGUI warehouseGUI, ResourceInHandGUI resourceInHandGUI, GUI gui) {
         this.resourceInHandlerGUI = resourceInHandlerGUI;
         this.warehouseGUI = warehouseGUI;
         this.resourceInHandGUI = resourceInHandGUI;
@@ -30,7 +31,7 @@ public class InsertThirdShelfButtonListener implements ActionListener {
         for(int i = 0; i< resourceInHandlerGUI.getResourceNum(); i++) {
             resourceList.add(new Resource(resourceInHandlerGUI.getResourceType()));
         }
-        this.warehouseGUI.insertInShelf(ShelfFloor.Third,resourceList);
+        this.warehouseGUI.insertInShelf(ShelfFloor.First,resourceList);
         this.resourceInHandlerGUI.removeResource();
         this.resourceInHandGUI.refresh();
         if(this.gui.getTakeMarketResourceBuilder().setHandClear()){

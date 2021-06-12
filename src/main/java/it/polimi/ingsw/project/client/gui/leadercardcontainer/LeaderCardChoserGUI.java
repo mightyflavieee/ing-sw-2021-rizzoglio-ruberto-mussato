@@ -1,7 +1,7 @@
 package it.polimi.ingsw.project.client.gui.leadercardcontainer;
 
 import it.polimi.ingsw.project.client.ClientGUI;
-import it.polimi.ingsw.project.client.gui.listeners.LeaderCardChoserListener;
+import it.polimi.ingsw.project.client.gui.listeners.leadercards.LeaderCardChoserListener;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.ChooseLeaderCardMove;
 

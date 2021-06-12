@@ -1,4 +1,4 @@
-package it.polimi.ingsw.project.client.gui.listeners;
+package it.polimi.ingsw.project.client.gui.listeners.market;
 
 import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.GUI;

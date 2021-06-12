@@ -1,4 +1,4 @@
-package it.polimi.ingsw.project.client.gui.listeners;
+package it.polimi.ingsw.project.client.gui.listeners.login;
 
 import it.polimi.ingsw.project.client.ClientGUI;
 

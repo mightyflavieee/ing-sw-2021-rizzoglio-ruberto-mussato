@@ -1,4 +1,5 @@
-package it.polimi.ingsw.project.client.gui.listeners;
+package it.polimi.ingsw.project.client.gui.listeners.login;
+
 
 import it.polimi.ingsw.project.client.ClientGUI;
 
@@ -6,22 +7,22 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ReInsertMatchIdListener implements ActionListener {
+public class InsertMatchIdListener implements ActionListener {
     private ClientGUI clientGUI;
     private JTextField idField;
-    private JFrame menuFrame;
+    private JButton submitButton;
 
-    public ReInsertMatchIdListener(ClientGUI clientGUI, JTextField idField,JFrame menuFrame) {
+    public InsertMatchIdListener(ClientGUI clientGUI, JTextField idField,JButton submitButton) {
         this.clientGUI = clientGUI;
         this.idField = idField;
-        this.menuFrame = menuFrame;
+        this.submitButton = submitButton;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         this.idField.setEnabled(false);
         this.clientGUI.setLocalGameID(this.idField.getText());
-        menuFrame.dispose();
-        this.clientGUI.createOrJoinGame();
+        this.submitButton.setVisible(true);
+
     }
 }

@@ -2,7 +2,10 @@ package it.polimi.ingsw.project.client.gui.market;
 
 import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
-import it.polimi.ingsw.project.client.gui.listeners.*;
+import it.polimi.ingsw.project.client.gui.listeners.market.CoinHandListener;
+import it.polimi.ingsw.project.client.gui.listeners.market.ServantHandListener;
+import it.polimi.ingsw.project.client.gui.listeners.market.ShieldHandListener;
+import it.polimi.ingsw.project.client.gui.listeners.market.StoneHandListener;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 

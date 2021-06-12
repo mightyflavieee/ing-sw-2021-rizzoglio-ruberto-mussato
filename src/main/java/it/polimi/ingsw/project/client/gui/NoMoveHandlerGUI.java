@@ -1,6 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
-import it.polimi.ingsw.project.client.gui.listeners.NoMoveButtonListener;
+import it.polimi.ingsw.project.client.gui.listeners.informations.NoMoveButtonListener;
 
 import javax.swing.*;
 import java.awt.*;

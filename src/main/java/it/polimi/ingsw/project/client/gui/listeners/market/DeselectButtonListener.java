@@ -1,4 +1,4 @@
-package it.polimi.ingsw.project.client.gui.listeners;
+package it.polimi.ingsw.project.client.gui.listeners.market;
 
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandlerGUI;

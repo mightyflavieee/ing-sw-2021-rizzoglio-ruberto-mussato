@@ -1,4 +1,4 @@
-package it.polimi.ingsw.project.client.gui.listeners;
+package it.polimi.ingsw.project.client.gui.listeners.login;
 
 import it.polimi.ingsw.project.client.ClientGUI;
 
@@ -6,11 +6,11 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ThreeRadioButtonListener implements ActionListener {
+public class OneRadioButtonListener implements ActionListener {
     private ClientGUI clientGUI;
     private JRadioButton oneRadioButton, twoRadioButton, threeRadioButton, fourRadiobutton;
 
-    public ThreeRadioButtonListener(ClientGUI clientGUI, JRadioButton oneRadioButton, JRadioButton twoRadioButton, JRadioButton threeRadioButton, JRadioButton fourRadiobutton) {
+    public OneRadioButtonListener(ClientGUI clientGUI, JRadioButton oneRadioButton, JRadioButton twoRadioButton, JRadioButton threeRadioButton, JRadioButton fourRadiobutton) {
         this.clientGUI = clientGUI;
         this.oneRadioButton = oneRadioButton;
         this.twoRadioButton = twoRadioButton;
@@ -24,7 +24,7 @@ public class ThreeRadioButtonListener implements ActionListener {
         this.twoRadioButton.setEnabled(false);
         this.threeRadioButton.setEnabled(false);
         this.fourRadiobutton.setEnabled(false);
-        this.clientGUI.setNumPlayers(3);
+        this.clientGUI.setNumPlayers(1);
 
     }
 }

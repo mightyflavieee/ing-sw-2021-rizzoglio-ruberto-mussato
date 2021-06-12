@@ -1,9 +1,10 @@
-package it.polimi.ingsw.project.client.gui.listeners;
+package it.polimi.ingsw.project.client.gui.listeners.market;
 
-import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandlerGUI;
+import it.polimi.ingsw.project.client.gui.board.WarehouseGUI;
+import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.resource.Resource;
 
 import java.awt.event.ActionEvent;
@@ -11,16 +12,17 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DiscardButtonListener implements ActionListener {
+public class InsertSecondShelfButtonListener implements ActionListener {
     private ResourceInHandlerGUI resourceInHandlerGUI;
+    private WarehouseGUI warehouseGUI;
     private ResourceInHandGUI resourceInHandGUI;
-    private TakeMarketResourceBuilder takeMarketResourceBuilder;
     private GUI gui;
 
-    public DiscardButtonListener(ResourceInHandlerGUI resourceInHandlerGUI, ResourceInHandGUI resourceInHandGUI, GUI gui) {
+
+    public InsertSecondShelfButtonListener(ResourceInHandlerGUI resourceInHandlerGUI, WarehouseGUI warehouseGUI,ResourceInHandGUI resourceInHandGUI, GUI gui) {
         this.resourceInHandlerGUI = resourceInHandlerGUI;
+        this.warehouseGUI = warehouseGUI;
         this.resourceInHandGUI = resourceInHandGUI;
-        this.takeMarketResourceBuilder = gui.getTakeMarketResourceBuilder();
         this.gui = gui;
     }
 
@@ -30,10 +32,10 @@ public class DiscardButtonListener implements ActionListener {
         for(int i = 0; i< resourceInHandlerGUI.getResourceNum(); i++) {
             resourceList.add(new Resource(resourceInHandlerGUI.getResourceType()));
         }
-        this.takeMarketResourceBuilder.addResourcesToDiscard(resourceList);
+        this.warehouseGUI.insertInShelf(ShelfFloor.Second,resourceList);
         this.resourceInHandlerGUI.removeResource();
         this.resourceInHandGUI.refresh();
-        if(this.takeMarketResourceBuilder.setHandClear()){
+        if(this.gui.getTakeMarketResourceBuilder().setHandClear()){
             this.gui.sendMarketMove();
         }
     }

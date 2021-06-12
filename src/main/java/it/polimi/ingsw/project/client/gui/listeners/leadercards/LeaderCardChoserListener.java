@@ -1,4 +1,4 @@
-package it.polimi.ingsw.project.client.gui.listeners;
+package it.polimi.ingsw.project.client.gui.listeners.leadercards;
 
 import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardChoserGUI;
 import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardButtonGUI;

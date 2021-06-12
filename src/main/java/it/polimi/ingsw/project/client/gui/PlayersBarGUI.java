@@ -1,7 +1,7 @@
 package it.polimi.ingsw.project.client.gui;
 
-import it.polimi.ingsw.project.client.gui.listeners.MyButtonListener;
-import it.polimi.ingsw.project.client.gui.listeners.OpponentsButtonListener;
+import it.polimi.ingsw.project.client.gui.listeners.players.MyButtonListener;
+import it.polimi.ingsw.project.client.gui.listeners.players.OpponentsButtonListener;
 
 import javax.swing.*;
 import java.awt.*;
