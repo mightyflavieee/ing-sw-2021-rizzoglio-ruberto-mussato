@@ -260,6 +260,7 @@ public class MainPhaseHandler extends JInternalFrame {
 
     public void goToMainButtons() {
         this.mainPanelLayout.show(this.mainPanel, MAINPHASESPANEL);
+        this.gui.getInformationsGUI().getjTextArea().setText("You must choose and perform one of the following actions:");
     }
 
     public void goToBuyDevCardButtons() {

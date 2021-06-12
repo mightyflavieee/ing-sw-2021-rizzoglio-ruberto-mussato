@@ -1,6 +1,8 @@
 package it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.boardproduction;
 
 import it.polimi.ingsw.project.client.gui.GUI;
+import it.polimi.ingsw.project.model.TurnPhase;
+import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import java.awt.event.ActionEvent;
@@ -37,12 +39,12 @@ public class StoneBoardProductionListener implements ActionListener {
             }
             this.gui.getInformationsGUI().getProductionMoveHandler().setBoardRequireResources(requiredResources);
 
-            // todo enable dei bottoni LeaderCard
-            switch (this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType()) {
+            ProductionType productionType = this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType();
+            switch (productionType) {
                 case Board:
                     this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
                     this.gui.getBoardGUI().getChestGUI().enableAllButtons();
-                    this.gui.getInformationsGUI().showProductionInfo();
+                    this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
                     break;
                 case BoardAndDevCard:
                     this.gui.getInformationsGUI().getjTextArea().setText("Select Development Card from the Map Tray for the production!");
@@ -50,18 +52,31 @@ public class StoneBoardProductionListener implements ActionListener {
                     break;
                 case BoardAndLeaderCard:
                     this.gui.getInformationsGUI().getjTextArea().setText("Select Leader Card for the production!");
-
-                    // qui mettere enable di bottoni leader cards
+                    this.gui.getLeaderCardPlaceGUI().enableButtons(TurnPhase.MainPhase);
                     break;
                 case BoardAndDevCardAndLeaderCard:
                     this.gui.getInformationsGUI().getjTextArea().setText("Select Development Card and Leader Card for the production!");
                     this.gui.getBoardGUI().getMapTrayGUI().enableAllButtons();
-
-                    // qui mettere enable di bottoni leader cards
+                    this.gui.getLeaderCardPlaceGUI().enableButtons(TurnPhase.MainPhase);
                     break;
             }
 
-            this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
+            if (productionType == ProductionType.Board) {
+                Map<ResourceType, Integer> boardRequiredResources = this.gui.getInformationsGUI().getProductionMoveHandler().getBoardRequiredResources();
+                if (boardRequiredResources.size() > 1) {
+                    this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
+                } else {
+                    int count = 0;
+                    for (ResourceType resourceType : boardRequiredResources.keySet()) {
+                        count++;
+                    }
+                    if (count == 2) {
+                        this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
+                    }
+                }
+            } else {
+                this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
+            }
         }
     }
 }

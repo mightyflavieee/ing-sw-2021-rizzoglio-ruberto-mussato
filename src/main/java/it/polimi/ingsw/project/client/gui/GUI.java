@@ -117,10 +117,6 @@ public class GUI extends Observable<Move> {
         this.marketGUI.disableButtons();
     }
 
-    public void enableForTakeFromMarket() {
-        this.marketGUI.enableButtons();
-    }
-
     public void setMatch(Match match){//todo chiama i metodi set di tutti i jinternalframe e aggiorna tutto
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,this.mePlayer.getNickname());
         this.mePlayer = pair._1;

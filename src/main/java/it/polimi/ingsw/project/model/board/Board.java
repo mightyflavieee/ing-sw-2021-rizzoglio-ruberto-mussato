@@ -143,7 +143,12 @@ public class Board implements Serializable, Cloneable {
       if (this.chest.containsKey(type)) {
         this.chest.put(type, this.chest.get(type) + resourcesToAdd.get(type));
       } else {
-        this.chest.put(type, resourcesToAdd.get(type));
+        if (type == ResourceType.Faith) {
+          moveForward();
+        } else {
+          this.chest.put(type, resourcesToAdd.get(type));
+        }
+
       }
     }
   }
@@ -468,10 +473,12 @@ public class Board implements Serializable, Cloneable {
         || productionType == ProductionType.BoardAndDevCardAndLeaderCard
         || productionType == ProductionType.DevCardAndLeader) {
       for (DevCardPosition position : this.mapTray.keySet()) {
-        DevelopmentCard lastElement = this.mapTray.get(position).get(this.mapTray.get(position).size() - 1);
-        if (lastElement.getId().equals(devCardID)) {
-          isDevCardInLastPosition = true;
-          break;
+        if (this.mapTray.get(position).size() > 0) {
+          DevelopmentCard lastElement = this.mapTray.get(position).get(this.mapTray.get(position).size() - 1);
+          if (lastElement.getId().equals(devCardID)) {
+            isDevCardInLastPosition = true;
+            break;
+          }
         }
       }
       // if the card is not in the last position, return false
