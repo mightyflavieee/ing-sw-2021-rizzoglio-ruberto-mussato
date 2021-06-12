@@ -3,20 +3,26 @@ package it.polimi.ingsw.project.client.gui.leadercardcontainer;
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.listeners.leadercards.LeaderCardActivateButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.leadercards.LeaderCardDiscardButtonListener;
+import it.polimi.ingsw.project.client.gui.listeners.selectcard.SelectLeaderCardProductionListener;
 import it.polimi.ingsw.project.model.TurnPhase;
+import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class LeaderMovePanel extends JPanel {
-    private String id;
+    private LeaderCard leaderCard;
     private JButton discardButton, activateButton, productionButton;
     private boolean isActivable;
     private boolean isProductable;
     private LeaderCardDiscardButtonListener leaderCardDiscardButtonListener;
     private LeaderCardActivateButtonListener leaderCardActivateButtonListener;
-    public LeaderMovePanel(String id, GUI gui)  {
-        this.id = id;
+    private GUI gui;
+
+    public LeaderMovePanel(LeaderCard leaderCard, GUI gui)  {
+        this.leaderCard = leaderCard;
+        this.gui = gui;
         this.setVisible(true);
         this.setPreferredSize(new Dimension(300,300));
         this.setLayout(new GridLayout(2,1));
@@ -24,16 +30,19 @@ public class LeaderMovePanel extends JPanel {
         leaderPhasePanel.setLayout(new GridLayout(1,2));
         this.add(leaderPhasePanel);
         this.discardButton = new JButton("Discard");
-        this.leaderCardDiscardButtonListener = new LeaderCardDiscardButtonListener(this.id,gui);
+        this.leaderCardDiscardButtonListener = new LeaderCardDiscardButtonListener(this.leaderCard.getId(), this.gui);
         this.discardButton.addActionListener(this.leaderCardDiscardButtonListener);
         leaderPhasePanel.add(discardButton);
         this.activateButton = new JButton("Activate");
-        this.leaderCardActivateButtonListener = new LeaderCardActivateButtonListener(this.id,gui);
+        this.leaderCardActivateButtonListener = new LeaderCardActivateButtonListener(this.leaderCard.getId(), this.gui);
         this.activateButton.addActionListener(this.leaderCardActivateButtonListener);
         leaderPhasePanel.add(activateButton);
         this.productionButton = new JButton("Use for Production");
+
+        ActionListener productionActionListener = new SelectLeaderCardProductionListener(this.gui, this.leaderCard);
+        this.productionButton.addActionListener(productionActionListener);
         //todo crea e salva il listener che deve potersi aggiornare cambiando l'id
-        //todo aggiungi il listener al bottone
+
         this.add(productionButton);
         this.isActivable = true;
         this.isProductable = false;

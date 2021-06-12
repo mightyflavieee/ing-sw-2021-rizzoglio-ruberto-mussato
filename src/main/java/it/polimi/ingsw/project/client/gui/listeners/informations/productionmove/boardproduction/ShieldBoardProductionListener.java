@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class ShieldBoardProductionListener implements ActionListener {
     private GUI gui;
@@ -61,20 +62,17 @@ public class ShieldBoardProductionListener implements ActionListener {
                     break;
             }
 
-            if (productionType == ProductionType.Board) {
-                Map<ResourceType, Integer> boardRequiredResources = this.gui.getInformationsGUI().getProductionMoveHandler().getBoardRequiredResources();
-                if (boardRequiredResources.size() > 1) {
+            // cheks if the user has selected the two resources for the Board production
+            Map<ResourceType, Integer> boardRequiredResources = this.gui.getInformationsGUI().getProductionMoveHandler().getBoardRequiredResources();
+            int count = 0;
+            for (ResourceType resourceType : boardRequiredResources.keySet()) {
+                if (boardRequiredResources.get(resourceType) == 2) {
                     this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
-                } else {
-                    int count = 0;
-                    for (ResourceType resourceType : boardRequiredResources.keySet()) {
-                        count++;
-                    }
-                    if (count == 2) {
-                        this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
-                    }
+                    break;
                 }
-            } else {
+                count++;
+            }
+            if (count == 2) {
                 this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
             }
         }

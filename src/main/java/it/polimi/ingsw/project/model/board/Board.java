@@ -148,7 +148,6 @@ public class Board implements Serializable, Cloneable {
         } else {
           this.chest.put(type, resourcesToAdd.get(type));
         }
-
       }
     }
   }
@@ -510,10 +509,10 @@ public class Board implements Serializable, Cloneable {
       manufacturedResources = card.getProduction().getManufacturedResources();
       if (productionType == ProductionType.BoardAndDevCard) {
         // aggiunge a manufacturedResources le risorse prodotte dalla Board
-        for (ResourceType type : manufacturedResources.keySet()) {
-          if (boardOrPerkManufacturedResource.get(0) == type) {
-            manufacturedResources.put(type, manufacturedResources.get(type) + 1);
-          }
+        if (manufacturedResources.containsKey(boardOrPerkManufacturedResource.get(0))) {
+          manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 2);
+        } else {
+          manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 1);
         }
       }
     }
@@ -541,10 +540,10 @@ public class Board implements Serializable, Cloneable {
       DevelopmentCard card = fetchDevCardById(devCardID);
       manufacturedResources = card.getProduction().getManufacturedResources();
       moveForward();
-      for (ResourceType type : manufacturedResources.keySet()) {
-        if (boardOrPerkManufacturedResource.get(0) == type) {
-          manufacturedResources.put(type, manufacturedResources.get(type) + 1);
-        }
+      if (manufacturedResources.containsKey(boardOrPerkManufacturedResource.get(0))) {
+        manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 2);
+      } else {
+        manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 1);
       }
     }
     // aggiunge a manufacturedResources le risorse prodotte dalla DevelopmentCard,
@@ -553,12 +552,18 @@ public class Board implements Serializable, Cloneable {
       DevelopmentCard card = fetchDevCardById(devCardID);
       manufacturedResources = card.getProduction().getManufacturedResources();
       moveForward();
-      for (ResourceType type : manufacturedResources.keySet()) {
-        if (boardOrPerkManufacturedResource.get(0) == type) {
-          manufacturedResources.put(type, manufacturedResources.get(type) + 1);
+      if (manufacturedResources.containsKey(boardOrPerkManufacturedResource.get(0))) {
+        if (boardOrPerkManufacturedResource.get(0) == boardOrPerkManufacturedResource.get(1)) {
+          manufacturedResources.put(boardOrPerkManufacturedResource.get(1), 3);
+        } else {
+          manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 2);
         }
-        if (boardOrPerkManufacturedResource.get(1) == type) {
-          manufacturedResources.put(type, manufacturedResources.get(type) + 1);
+      } else {
+        manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 1);
+        if (manufacturedResources.containsKey(boardOrPerkManufacturedResource.get(1))) {
+          manufacturedResources.put(boardOrPerkManufacturedResource.get(1), 2);
+        } else {
+          manufacturedResources.put(boardOrPerkManufacturedResource.get(1), 1);
         }
       }
     }

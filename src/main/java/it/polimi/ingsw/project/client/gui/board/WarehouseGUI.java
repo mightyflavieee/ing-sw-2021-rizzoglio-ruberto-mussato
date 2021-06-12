@@ -19,8 +19,7 @@ import java.util.*;
 import java.util.List;
 
 public class WarehouseGUI extends JInternalFrame {
-    private Map<ShelfFloor, List<JButton>> shelvesButtons;
-    private Map<ResourceType, List<JButton>> extraDepositsButtons;
+    private LinkedHashMap<ShelfFloor, List<JButton>> shelvesButtons;
     private Map<ShelfFloor, Integer> numberOfResoucesPerShelf;
     private Map<ShelfFloor, ResourceType> resourceTypePerShelf;
     private boolean canChangeShelves;
@@ -89,8 +88,8 @@ public class WarehouseGUI extends JInternalFrame {
         this.informationsGUI = informationsGUI;
         this.warehouseModel = warehouse;
         this.clickable = false;
-        refresh();
         this.setCanChangeShelves(false);
+        refresh();
     }
 
     public Map<ShelfFloor, List<JButton>> getShelvesButtons() { return shelvesButtons; }
@@ -139,7 +138,7 @@ public class WarehouseGUI extends JInternalFrame {
 
     // creates the resources buttons that are part of the shelves
     private void createResourceButtons() {
-        this.shelvesButtons = new HashMap<>();
+        this.shelvesButtons = new LinkedHashMap<>();
         List<JButton> firstFloor = new ArrayList<>();
         List<JButton> secondFloor = new ArrayList<>();
         List<JButton> thirdFloor = new ArrayList<>();
@@ -236,9 +235,14 @@ public class WarehouseGUI extends JInternalFrame {
     public void removeSelectResourceListeners() {
         for (ShelfFloor floor : this.shelvesButtons.keySet()) {
             for (JButton button : this.shelvesButtons.get(floor)) {
-                if (button.getActionListeners().length > 1) {
-                    button.removeActionListener(button.getActionListeners()[1]);
+                for (ActionListener actionListener : button.getActionListeners() ) {
+                    button.removeActionListener(actionListener);
                 }
+            }
+        }
+        for (ShelfFloor floor : this.shelvesButtons.keySet()) {
+            for (JButton button : this.shelvesButtons.get(floor)) {
+                button.addActionListener(new ResourceButtonListener(this, floor));
             }
         }
     }

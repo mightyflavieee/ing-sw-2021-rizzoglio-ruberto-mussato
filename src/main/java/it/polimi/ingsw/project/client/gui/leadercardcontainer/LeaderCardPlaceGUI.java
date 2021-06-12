@@ -29,7 +29,7 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         this.leaderMovePanelList = new ArrayList<>();
         for(int i = 0; i < leaderCards.size(); i++) {
             this.leaderCardJlabelGUIList.add(new LeaderCardJlabelGUI(leaderCards.get(i).getId()));
-            this.leaderMovePanelList.add(new LeaderMovePanel(leaderCards.get(i).getId(),gui));
+            this.leaderMovePanelList.add(new LeaderMovePanel(leaderCards.get(i), gui));
         }
 
         for(int i = 0; i < leaderCardJlabelGUIList.size(); i++){
