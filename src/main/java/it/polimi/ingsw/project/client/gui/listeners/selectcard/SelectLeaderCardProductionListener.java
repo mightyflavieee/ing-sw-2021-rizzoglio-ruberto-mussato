@@ -19,21 +19,24 @@ public class SelectLeaderCardProductionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.gui.getInformationsGUI().getProductionMoveHandler().setLeaderCard(this.leaderCard);
         this.gui.getLeaderCardPlaceGUI().disableButtons();
-        switch (this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType()) {
-            case LeaderCard:
-            case BoardAndLeaderCard:
-                this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
-                this.gui.getBoardGUI().getChestGUI().enableAllButtons();
-                this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
-                break;
-            case DevCardAndLeader:
-            case BoardAndDevCardAndLeaderCard:
-                if (this.gui.getInformationsGUI().getProductionMoveHandler().getDevCard() != null) {
-                    this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
-                    this.gui.getBoardGUI().getChestGUI().enableAllButtons();
-                    this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
-                }
-                break;
-        }
+        this.gui.getInformationsGUI().getjTextArea().setText("Select the resource you want to produce with the Leader Card:" +
+                "\n(additional to the Faith point)");
+        this.gui.getInformationsGUI().getMainPhaseHandler().goToLeaderProductionButtons();
+//        switch (this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType()) {
+//            case LeaderCard:
+//            case BoardAndLeaderCard:
+//                this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
+//                this.gui.getBoardGUI().getChestGUI().enableAllButtons();
+//                this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
+//                break;
+//            case DevCardAndLeader:
+//            case BoardAndDevCardAndLeaderCard:
+//                if (this.gui.getInformationsGUI().getProductionMoveHandler().getDevCard() != null) {
+//                    this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
+//                    this.gui.getBoardGUI().getChestGUI().enableAllButtons();
+//                    this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
+//                }
+//                break;
+//        }
     }
 }
