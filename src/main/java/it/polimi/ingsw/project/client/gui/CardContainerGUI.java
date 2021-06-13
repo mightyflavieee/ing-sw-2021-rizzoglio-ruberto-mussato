@@ -7,6 +7,7 @@ import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,8 +49,14 @@ public class CardContainerGUI extends JInternalFrame {
             this.showedCards.get(i).setIcon(new ImageIcon(
                     new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png")
                     .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
-            this.showedCards.get(i).addActionListener(new SelectCardForPurchaseListener(this.informationsGUI,
-                    this.cardContainer.fetchCard(this.cardsToShow.get(i))));
+                if (Arrays.stream(this.showedCards.get(i).getActionListeners()).count() == 0) {
+                    this.showedCards.get(i).addActionListener(new SelectCardForPurchaseListener(this.informationsGUI,
+                        this.cardContainer.fetchCard(this.cardsToShow.get(i))));
+                } else {
+                    this.showedCards.get(i).removeActionListener(this.showedCards.get(i).getActionListeners()[0]);
+                    this.showedCards.get(i).addActionListener(new SelectCardForPurchaseListener(this.informationsGUI,
+                            this.cardContainer.fetchCard(this.cardsToShow.get(i))));
+                }
         }
     }
 
