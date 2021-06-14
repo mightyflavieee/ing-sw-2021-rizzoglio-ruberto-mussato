@@ -1,21 +1,40 @@
 package it.polimi.ingsw.project.model;
 
-import java.io.Serializable;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import it.polimi.ingsw.project.messages.MoveMessage;
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.observer.Observable;
 
-public class Model extends Observable<MoveMessage> implements Serializable {
+public class Model extends Observable<MoveMessage> {
     private final Match match;
+    private final String matchUID;
 
-    public Model(List<Player> listOfPlayers) {
+    public Model(List<Player> listOfPlayers, String matchUID) {
         this.match = new Match(listOfPlayers);
+        this.matchUID = matchUID;
+    }
+
+    public Model(Match match, String matchUID) {
+        this.match = match;
+        this.matchUID = matchUID;
+    }
+
+    public int extractNumberOfPlayers() {
+        return this.match.getPlayerList().size();
     }
 
     public Match getMatch() {
         return match;
+    }
+
+    public String getMatchUID() {
+        return matchUID;
     }
 
     public boolean isPlayerTurn(Player player) {
@@ -65,5 +84,19 @@ public class Model extends Observable<MoveMessage> implements Serializable {
 
     public boolean isRightTurnPhase(PlayerMove playerMove) {
         return this.match.isRightTurnPhase(playerMove);
+    }
+
+    public void saveModelOnServer() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        String modelToJson = gson.toJson(this);
+        if (this.matchUID != null) {
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(this.matchUID + ".json"));
+                writer.write(modelToJson);
+                writer.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

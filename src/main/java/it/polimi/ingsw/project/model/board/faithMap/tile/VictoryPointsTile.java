@@ -1,8 +1,9 @@
 package it.polimi.ingsw.project.model.board.faithMap.tile;
 
+
 import it.polimi.ingsw.project.observer.Observable;
 
-public class VictoryPointsTile extends Observable<VictoryPointsTile> implements ActivableTile{
+public class VictoryPointsTile extends Observable<VictoryPointsTile> implements ActivableTile {
     private final int victoryPoints;
 
     public VictoryPointsTile(int victoryPoints) {

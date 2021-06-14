@@ -15,38 +15,40 @@ class ModelTest {
         Player player = new Player("pinco pallino");
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
-        Model model = new Model(playerList);
+        Model model = new Model(playerList, null);
         assertTrue(model.isPlayerTurn(player));
     }
 
     @Test
-    void isFeasibleLorenzoMove(){
+    void isFeasibleLorenzoMove() {
         Player player = new Player("pinco pallino");
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
-        Model model = new Model(playerList);
-        while(!(model.getMatch().getActionTokenContainer().getActionTokens().get(0) instanceof MoveActionToken)){
+        Model model = new Model(playerList, null);
+        while (!(model.getMatch().getActionTokenContainer().getActionTokens().get(0) instanceof MoveActionToken)) {
             model.getMatch().getActionTokenContainer().shuffle();
         }
     }
+
     @Test
-    void performLorenzoMove(){
+    void performLorenzoMove() {
         Player player = new Player("pinco pallino");
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
-        Model model = new Model(playerList);
-        while(!(model.getMatch().getActionTokenContainer().getActionTokens().get(0) instanceof MoveActionToken)){
+        Model model = new Model(playerList, null);
+        while (!(model.getMatch().getActionTokenContainer().getActionTokens().get(0) instanceof MoveActionToken)) {
             model.getMatch().getActionTokenContainer().shuffle();
         }
         model.getMatch().performExtractActionTokenMove();
         assertEquals(2, player.getBoard().getFaithMap().getBlackMarkerPosition());
     }
+
     @Test
-    void testclone(){
+    void testclone() {
         Player player = new Player("pinco pallino");
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
-        Model model = new Model(playerList);
-        assertNotEquals(model.getMatch(),model.getMatchCopy());
+        Model model = new Model(playerList, null);
+        assertNotEquals(model.getMatch(), model.getMatchCopy());
     }
 }

@@ -34,7 +34,7 @@ class ControllerTest {
                 playerList.add(gianluca);
                 playerList.add(flavio);
                 playerList.add(leo);
-                Model model = new Model(playerList);
+                Model model = new Model(playerList, null);
                 Controller controller = new Controller(model);
                 Perk perkLeaderCardGian1 = new Perk(new Resource(ResourceType.Servant), PerkType.Discount);
                 Perk perkLeaderCardGian2 = new Perk(new Resource(ResourceType.Shield), PerkType.Discount);

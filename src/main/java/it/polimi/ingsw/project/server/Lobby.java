@@ -49,7 +49,9 @@ public class Lobby {
     }
 
     public void setModel(Model model) {
-        this.model = model;
+        if (this.model == null) {
+            this.model = model;
+        }
     }
 
     public Model getModel() {
@@ -98,6 +100,10 @@ public class Lobby {
 
     public Map<String, SocketClientConnection> getMapOfSocketClientConnections() {
         return this.mapOfSocketClientConnections;
+    }
+
+    public void setMapOfSocketClientConnections(Map<String, SocketClientConnection> mapOfSocketClientConnections) {
+        this.mapOfSocketClientConnections = mapOfSocketClientConnections;
     }
 
     public Integer lenght() {

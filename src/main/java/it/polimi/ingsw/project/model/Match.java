@@ -30,7 +30,7 @@ public class Match implements Serializable, Cloneable {
     public Match(List<Player> playerList) {
         this.playerList = new ArrayList<>();
         this.playerList.addAll(playerList); // la lista mi arriva già shuffled
-        this.playerList.forEach(x -> x.createFaithMap(this)); // serve per l'inizio partita
+        this.playerList.forEach(x -> x.createFaithMapAndWarehouse(this)); // serve per l'inizio partita
         this.market = new Market();
         this.cardContainer = new CardContainer();
         if (playerList.size() == 1) {

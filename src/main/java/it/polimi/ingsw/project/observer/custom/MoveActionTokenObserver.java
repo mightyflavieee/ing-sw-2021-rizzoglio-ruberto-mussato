@@ -1,10 +1,12 @@
 package it.polimi.ingsw.project.observer.custom;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.actionTokens.MoveActionToken;
 import it.polimi.ingsw.project.observer.Observer;
 
-public class MoveActionTokenObserver implements Observer<MoveActionToken> {
+public class MoveActionTokenObserver implements Observer<MoveActionToken>,Serializable {
     private final Match match;
 
     public MoveActionTokenObserver(Match match) {

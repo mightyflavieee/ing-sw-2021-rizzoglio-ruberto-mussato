@@ -91,7 +91,6 @@ public class ClientCLI extends Client {
         });
         t.start();
         return t;
-
     }
 
     public void showErrorMessage(String error) {

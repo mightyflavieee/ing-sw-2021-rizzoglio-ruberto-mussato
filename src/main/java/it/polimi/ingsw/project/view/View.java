@@ -1,13 +1,9 @@
 package it.polimi.ingsw.project.view;
 
 import it.polimi.ingsw.project.messages.MoveMessage;
-import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.*;
-import it.polimi.ingsw.project.model.playermove.Move;
-import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.model.playermove.interfaces.Controllable;
 import it.polimi.ingsw.project.model.playermove.interfaces.MoveHandler;
-import it.polimi.ingsw.project.model.playermove.interfaces.Request;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.observer.Observer;
 
