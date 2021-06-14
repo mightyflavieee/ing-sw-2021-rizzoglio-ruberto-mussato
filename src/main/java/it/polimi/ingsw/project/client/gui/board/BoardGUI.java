@@ -16,7 +16,7 @@ public class BoardGUI extends JInternalFrame {
     private InformationsGUI informationsGUI;
     private Board boardModel;
 
-    public BoardGUI(String nickname, InformationsGUI informationsGUI, Board board){
+    public BoardGUI(String nickname, InformationsGUI informationsGUI, Board board, boolean isSinglePlayer){
         this.setTitle(nickname);
         this.setVisible(true);
 
@@ -24,7 +24,7 @@ public class BoardGUI extends JInternalFrame {
 
         this.informationsGUI = informationsGUI;
         this.boardModel = board;
-        this.faithMap = new FaithMapGUI(board.getFaithMap());
+        this.faithMap = new FaithMapGUI(board.getFaithMap(), isSinglePlayer);
         this.warehouse = new WarehouseGUI(this.informationsGUI, this.boardModel.getWarehouse());
         this.mapTray = new MapTrayGUI(this.informationsGUI, this.boardModel);
         this.chest = new ChestGUI(this.informationsGUI, this.boardModel);

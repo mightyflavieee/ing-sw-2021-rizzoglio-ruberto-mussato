@@ -39,21 +39,21 @@ public class GUI extends Observable<Move> {
         this.takeMarketResourceBuilder = new TakeMarketResourceBuilder();
         this.jFrame = new JFrame();
         this.jFrame.setTitle("Master of Renaissance");
-        jFrame.setLayout(new GridLayout(2,1));
-
-        //  boardGUI = new BoardGUI("Board");
+        this.jFrame.setLayout(new GridLayout(2,1));
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,myNickname);
         this.mePlayer = pair._1;
         this.opponentsPlayer = pair._2;
         this.informationsGUI = new InformationsGUI(this,this.mePlayer.getTurnPhase());
-        this.boardGUI = new BoardGUI(myNickname, this.informationsGUI, this.mePlayer.getBoard());
+        if (this.opponentsPlayer.size() == 0) {
+            this.boardGUI = new BoardGUI(myNickname, this.informationsGUI, this.mePlayer.getBoard(), true);
+        } else {
+            this.boardGUI = new BoardGUI(myNickname, this.informationsGUI, this.mePlayer.getBoard(), false);
+        }
         this.marketGUI = new MarketGUI(this,match.getMarket(),informationsGUI);
         this.historyGUI = new HistoryGUI(this.mePlayer.getHistoryToString());
         this.cardContainerGUI = new CardContainerGUI(this.informationsGUI, match.getCardContainer());
         this.leaderCardPlaceGUI = new LeaderCardPlaceGUI(this.mePlayer.getLeaderCards(),this);
         this.playersBarGUI = new PlayersBarGUI(this.opponentsPlayer.stream().map(Player::getNickname).collect(Collectors.toList()), myNickname,this);
-        //todo inizializzatori di altre cose
-
 
 //        this.jFrame.add(boardGUI, BorderLayout.NORTH);
 //        this.jFrame.add(informationsGUI, BorderLayout.CENTER);
@@ -62,6 +62,7 @@ public class GUI extends Observable<Move> {
 //        this.jFrame.add(cardContainerGUI, BorderLayout.WEST);
 //        this.jFrame.add(leaderCardPlaceGui, BorderLayout.EAST);
         //this.jFrame.add(playersBarGUI, BorderLayout.SOUTH);
+
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new BorderLayout());
         JPanel top2Panel = new JPanel();
@@ -83,7 +84,6 @@ public class GUI extends Observable<Move> {
         this.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.jFrame.pack();
         this.disableButtonsHandler(this.mePlayer.getTurnPhase());
-
 
         this.jFrame.addComponentListener(new ResizeListener(this));
         this.jFrame.setMinimumSize(new Dimension(1460,760));
@@ -117,7 +117,7 @@ public class GUI extends Observable<Move> {
         this.marketGUI.disableButtons();
     }
 
-    public void setMatch(Match match){//todo chiama i metodi set di tutti i jinternalframe e aggiorna tutto
+    public void setMatch(Match match){
         Pair<Player, List<Player>> pair = Utils.splitPlayers(match,this.mePlayer.getNickname());
         this.mePlayer = pair._1;
         this.opponentsPlayer = pair._2;
@@ -128,7 +128,6 @@ public class GUI extends Observable<Move> {
         this.leaderCardPlaceGUI.setMyLeaderCards(this.mePlayer);
         this.boardGUI.refresh(this.mePlayer.getBoard());
         this.disableButtonsHandler(this.mePlayer.getTurnPhase());
-        //todo setter di altre cose
     }
 
     public void showMarketInformations(boolean hasFaith) {

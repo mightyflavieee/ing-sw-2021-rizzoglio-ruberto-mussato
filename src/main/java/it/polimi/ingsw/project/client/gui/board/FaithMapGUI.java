@@ -14,10 +14,12 @@ public class FaithMapGUI extends JInternalFrame {
     private final List<JButton> tiles;
     private final List<JButton> papalCuoncilTiles;
     private int markerPosition;
+    private int blackMarkerPosition;
     private FaithMap faithMapModel;
     private boolean clickable;
+    private boolean isSinglePlayer;
 
-    public FaithMapGUI(FaithMap faithMap) {
+    public FaithMapGUI(FaithMap faithMap, boolean isSinglePlayer) {
         this.setTitle("FaithMap");
         this.setVisible(true);
         this.setLayout(new GridLayout(2, 24));
@@ -56,10 +58,11 @@ public class FaithMapGUI extends JInternalFrame {
         for (JButton button : this.tiles) {
             this.add(button);
         }
-        this.tiles.get(0).setBackground(new Color(105, 105, 105));
+        //this.tiles.get(0).setBackground(new Color(105, 105, 105));
         for (JButton button : this.papalCuoncilTiles) {
             this.add(button);
         }
+        refresh();
     }
 
     private void setBordersForCouncil() {
@@ -125,17 +128,30 @@ public class FaithMapGUI extends JInternalFrame {
 
     public void refresh() {
         this.markerPosition = this.faithMapModel.getMarkerPosition();
+        this.blackMarkerPosition = this.faithMapModel.getBlackMarkerPosition();
         for (JButton button : this.tiles) {
             button.setBackground(new Color(255, 255, 255));
+            button.setForeground(new Color(0, 0, 0));
+        }
+        if (this.isSinglePlayer) {
+            this.tiles.get(this.blackMarkerPosition).setBackground(new Color(0, 0, 0));
+            this.tiles.get(this.blackMarkerPosition).setForeground(new Color(255, 255, 255));
         }
         this.tiles.get(this.markerPosition).setBackground(new Color(105, 105, 105));
+        this.tiles.get(this.markerPosition).setForeground(new Color(255, 255, 255));
     }
 
     public void moveForward() {
         this.faithMapModel.moveForward();
-        this.tiles.get(this.markerPosition).setBackground(new Color(255, 255, 255));
-        this.markerPosition++;
-        this.tiles.get(this.markerPosition).setBackground(new Color(105, 105, 105));
+        refresh();
+//        this.tiles.get(this.markerPosition).setBackground(new Color(255, 255, 255));
+//        this.markerPosition++;
+//        this.tiles.get(this.markerPosition).setBackground(new Color(105, 105, 105));
+    }
+
+    public void moveForwardBlack() {
+        this.faithMapModel.moveForwardBlack();
+        refresh();
     }
 
     public void disableAllButtons() {
