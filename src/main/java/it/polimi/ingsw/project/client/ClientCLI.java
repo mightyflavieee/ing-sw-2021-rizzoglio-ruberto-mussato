@@ -1163,8 +1163,7 @@ public class ClientCLI extends Client {
 
         List<ResourceType> transmutationPerk = getMatch().get().getTransmutationPerk(getNickname());
 
-        // todo passargli solo il perk scelto SBAGLIATO FARE .get(0)
-        List<Resource> resourceList = market.insertMarble(axis, position, transmutationPerk.get(0));
+        List<Resource> resourceList = market.insertMarble(axis, position, this.handleTransmutationPerk(transmutationPerk));
 
         Boolean hasRedMarble = false;
         for (int i = 0; i < resourceList.size(); i++) {
@@ -1214,6 +1213,24 @@ public class ClientCLI extends Client {
             }
         }
         return new TakeMarketResourcesMove(warehouse, resourcesToDiscard, market, hasRedMarble);
+    }
+
+    private ResourceType handleTransmutationPerk(List<ResourceType> transmutationPerk) {
+        int answer;
+        if(transmutationPerk.size() == 0){
+            return null;
+        }
+        if(transmutationPerk.size() != 2){
+            return transmutationPerk.get(0);
+        }else{
+            do {
+                System.out.println("Chose the perk to use:\n" +
+                        "1 - " + transmutationPerk.get(0).toString()
+                        + "\n 2 - " + transmutationPerk.get(1).toString());
+                answer = Integer.parseInt(stdin.nextLine());
+            }while (answer == 1 || answer == 2);
+            return transmutationPerk.get(answer-1);
+        }
     }
 
     private void insertInShelves(Warehouse warehouse, Map<ResourceType, Integer> resourcesInHand) {

@@ -303,7 +303,7 @@ public class Match implements Serializable, Cloneable {
                 return player.getTransmutationPerk();
             }
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public String getOpponentsToString(String nickname) {
