@@ -13,13 +13,13 @@ import it.polimi.ingsw.project.model.actionTokens.DiscardActionToken;
 import it.polimi.ingsw.project.model.actionTokens.MoveActionToken;
 import it.polimi.ingsw.project.model.actionTokens.MoveAndShuffleActionToken;
 import it.polimi.ingsw.project.model.board.card.CardColor;
-import it.polimi.ingsw.project.utils.TypeAdapters.Serializers.ActionTokenSerializer;
+import it.polimi.ingsw.project.utils.TypeAdapters.Deserializers.ActionTokenDeserializer;
 
 public class AdapterActionToken extends TypeAdapter<ActionToken> {
 
   @Override
   public ActionToken read(JsonReader reader) throws IOException {
-    ActionTokenSerializer actionTokenSerializer = new ActionTokenSerializer();
+    ActionTokenDeserializer actionTokenSerializer = new ActionTokenDeserializer();
     String fieldName = "";
 
     reader.beginObject();

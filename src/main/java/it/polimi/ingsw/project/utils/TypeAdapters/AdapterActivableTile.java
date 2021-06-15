@@ -11,13 +11,13 @@ import it.polimi.ingsw.project.model.board.faithMap.tile.ActivableTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.NormalTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.PapalCouncilTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile;
-import it.polimi.ingsw.project.utils.TypeAdapters.Serializers.ActivableTileSerializer;
+import it.polimi.ingsw.project.utils.TypeAdapters.Deserializers.ActivableTileDeserializer;
 
 public class AdapterActivableTile extends TypeAdapter<ActivableTile> {
 
   @Override
   public ActivableTile read(JsonReader reader) throws IOException {
-    ActivableTileSerializer activableTileSerializer = new ActivableTileSerializer();
+    ActivableTileDeserializer activableTileSerializer = new ActivableTileDeserializer();
     String fieldName = "";
 
     reader.beginObject();
