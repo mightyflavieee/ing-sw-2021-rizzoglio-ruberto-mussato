@@ -67,5 +67,6 @@ public class PlayerMove implements Serializable, MoveHandler {
         // the turn is updated after all moves have been performed
         model.updateTurn();
 
+        model.saveModelOnServer();
     }
 }

@@ -13,7 +13,7 @@ class PlayerTest {
     void moveForward() {Player player = new Player("pinco pallino");
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
-        player.createFaithMap(new Match(playerList));
+        player.createFaithMapAndWarehouse(new Match(playerList));
         player.moveForward();
         assertEquals(1, player.getBoard().getFaithMap().getMarkerPosition());
         assertTrue(player.getIsConnected());
@@ -24,7 +24,7 @@ class PlayerTest {
         Player player = new Player("pinco pallino");
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
-        player.createFaithMap(new Match(playerList));
+        player.createFaithMapAndWarehouse(new Match(playerList));
         player.moveForwardBlack();
         assertEquals(1, player.getBoard().getFaithMap().getBlackMarkerPosition());
     }

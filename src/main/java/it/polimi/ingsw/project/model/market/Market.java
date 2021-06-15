@@ -4,10 +4,9 @@ import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.observer.Observable;
 
-import java.io.Serializable;
 import java.util.*;
 
-public class Market extends Observable<Market> implements Cloneable, Serializable {
+public class Market extends Observable<Market> implements Cloneable {
     // sarebbe da modificare inserendo la posizione delle biglie
     private Marble[][] tray = new Marble[4][3];
     // (0,2),(1,2),(2,2),(3,2)

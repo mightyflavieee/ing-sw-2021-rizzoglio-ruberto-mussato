@@ -15,7 +15,29 @@ public class JoinRequestMove extends GameRequestMove {
 
     @Override
     public void action(SocketClientConnection connection) {
-        if (connection.getServer().isGamePresent(this.gameId)) {
+        if (connection.getServer().doesGameExisted(this.gameId)) {
+            if (connection.getServer().isGameStarted(this.gameId)) {
+                if (connection.getServer().isPlayerPresentAndDisconnected(this.gameId, this.nickName)) {
+                    connection.getServer().rejoinGame(this.gameId, connection, this.nickName);
+                    if (connection.getServer().isRestartedGameReadyToStart(this.gameId)) {
+                        connection.getServer().sendToAllPlayersMoveMessage(this.gameId);
+                    } else {
+                        connection.getServer().sendWaitMessageToPlayer(this.gameId, this.nickName);
+                    }
+                } else {
+                    connection.send(new ErrorJoinMessage(
+                            "We are sorry but in this game you are not a player or there is already a player with this name but it is connected! Try another nickname."));
+                }
+            } else {
+                connection.getServer().recreateLobby(this.gameId);
+                connection.getServer().rejoinGame(this.gameId, connection, this.nickName);
+                if (connection.getServer().isRestartedGameReadyToStart(this.gameId)) {
+                    connection.getServer().sendToAllPlayersMoveMessage(this.gameId);
+                } else {
+                    connection.getServer().sendWaitMessageToPlayer(this.gameId, this.nickName);
+                }
+            }
+        } else if (connection.getServer().isGamePresent(this.gameId)) {
             if (connection.getServer().isGameNotFull(this.gameId)) {
                 if (connection.getServer().isNicknameUnique(this.gameId, this.nickName)) {
                     try {

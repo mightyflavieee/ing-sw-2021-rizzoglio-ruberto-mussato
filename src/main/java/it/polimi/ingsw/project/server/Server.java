@@ -1,9 +1,15 @@
 package it.polimi.ingsw.project.server;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import it.polimi.ingsw.project.controller.Controller;
 import it.polimi.ingsw.project.messages.ErrorChosenLeaderCards;
@@ -121,7 +127,7 @@ public class Server {
         for (Player player : listOfPlayer) {
             player.setLeaderCards(currentLobby.getchosenLeaderCardsByPlayer().get(player.getNickname()));
         }
-        currentLobby.setModel(new Model(listOfPlayer));
+        currentLobby.setModel(new Model(listOfPlayer, matchId));
         currentLobby.setController(new Controller(currentLobby.getModel()));
         for (String nickname : currentLobby.getMapOfViews().keySet()) {
             currentLobby.getModel().addObserver(currentLobby.getMapOfViews().get(nickname));
@@ -180,7 +186,7 @@ public class Server {
         while (true) {
             UUID uuid = UUID.randomUUID();
             String gameId = uuid.toString().substring(0, 5);
-            if (!this.mapOfAvailableLobbies.containsKey(gameId)) {
+            if (!this.mapOfAvailableLobbies.containsKey(gameId) && !(new File(gameId + ".json").exists())) {
                 this.mapOfAvailableLobbies.put(gameId, new Lobby(gameId, playersNumber));
                 return gameId;
             }
@@ -194,6 +200,62 @@ public class Server {
         } else {
             return true;
         }
+    }
+
+    public boolean doesGameExisted(String gameId) {
+        if (new File(gameId + ".json").exists()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void recreateLobby(String gameId) {
+        Gson gson = new GsonBuilder().create();
+        try {
+            Reader reader = new FileReader(gameId + ".json");
+            Model recreatedModel = gson.fromJson(reader, Model.class);
+            Lobby recreatedLobby = new Lobby(gameId, recreatedModel.extractNumberOfPlayers());
+            recreatedLobby.setModel(recreatedModel);
+
+            Map<String, RemoteView> mapOfViews = new HashMap<>();
+            for (Player player : recreatedLobby.getModel().getMatch().getPlayerList()) {
+                Socket newSocket = new Socket();
+                newSocket.close();
+                mapOfViews.put(player.getNickname(),
+                        new RemoteView(player, new SocketClientConnection(newSocket, this)));
+            }
+            recreatedLobby.setMapOfViews(mapOfViews);
+            recreatedLobby.setController(new Controller(recreatedLobby.getModel()));
+            for (String nickname : recreatedLobby.getMapOfViews().keySet()) {
+                recreatedLobby.getModel().addObserver(recreatedLobby.getMapOfViews().get(nickname));
+                recreatedLobby.getMapOfViews().get(nickname).addObserver(recreatedLobby.getController());
+            }
+            reader.close();
+            this.mapOfUnavailableLobbies.put(gameId, recreatedLobby);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isRestartedGameReadyToStart(String matchId) {
+        Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
+        int playersConnectedCounter = 0;
+        for (String nickname : currentLobby.getMapOfSocketClientConnections().keySet()) {
+            if (!currentLobby.getMapOfSocketClientConnections().get(nickname).getSocket().isClosed()) {
+                playersConnectedCounter++;
+            }
+        }
+        if (playersConnectedCounter == currentLobby.getMaxNumberOfPlayers()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void sendToAllPlayersMoveMessage(String matchId) {
+        Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
+        currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
+            connection.asyncSend(new MoveMessage(currentLobby.getModel().getMatchCopy()));
+        });
     }
 
 }
