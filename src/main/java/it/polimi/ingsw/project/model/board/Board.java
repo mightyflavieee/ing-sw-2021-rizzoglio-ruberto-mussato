@@ -60,6 +60,11 @@ public class Board implements Serializable, Cloneable {
     return result;
   }
 
+  public void readdObservers(Match match, Player player) {
+    this.warehouse.readdObservers(match);
+    this.faithMap.readdObservers(match, player);
+  }
+
   public FaithMap getFaithMap() {
     return faithMap;
   }
@@ -675,4 +680,5 @@ public class Board implements Serializable, Cloneable {
   public void setLeaderCards(List<LeaderCard> selectedLeaderCards) {
     this.leaderCards = selectedLeaderCards;
   }
+
 }

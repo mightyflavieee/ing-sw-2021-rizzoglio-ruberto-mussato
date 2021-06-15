@@ -13,18 +13,19 @@ import java.util.List;
 
 // è un Singleton
 public class ActionTokenContainer implements Serializable {
-    
+
     private final List<ActionToken> actionTokens;
 
-
-    // constructor of it.polimi.ingsw.project.model.ActionTokens.ActionTokenContainer, it adds all the different types of actionToken and then shuffles all actionToken
+    // constructor of
+    // it.polimi.ingsw.project.model.ActionTokens.ActionTokenContainer, it adds all
+    // the different types of actionToken and then shuffles all actionToken
     public ActionTokenContainer(Match match) {
         this.actionTokens = new ArrayList<>();
         MoveActionToken moveActionToken = new MoveActionToken();
         moveActionToken.addObserver(new MoveActionTokenObserver(match));
         this.actionTokens.add(moveActionToken);
         MoveAndShuffleActionToken moveAndShuffleActionToken = new MoveAndShuffleActionToken();
-        moveAndShuffleActionToken.addObserver(new MoveAndShuffleActionTokenObserver(match,this));
+        moveAndShuffleActionToken.addObserver(new MoveAndShuffleActionTokenObserver(match, this));
         this.actionTokens.add(moveAndShuffleActionToken);
         DiscardActionToken amethist = new DiscardActionToken(CardColor.Amethyst);
         DiscardActionToken emerald = new DiscardActionToken(CardColor.Emerald);
@@ -41,20 +42,26 @@ public class ActionTokenContainer implements Serializable {
         this.shuffle();
     }
 
-    public List<ActionToken> getActionTokens(){
+    public List<ActionToken> getActionTokens() {
         return new ArrayList<>(this.actionTokens);
     }
 
-    public void shuffle(){
+    public void shuffle() {
         Collections.shuffle(actionTokens);
     }
 
-    public String drawToken(){
+    public String drawToken() {
         ActionToken firstActionToken = this.actionTokens.get(0);
         firstActionToken.Action();
         this.actionTokens.remove(0);
         this.actionTokens.add(firstActionToken);
         return firstActionToken.toString();
+    }
+
+    public void readdObservers(Match match) {
+        for (ActionToken actionToken : actionTokens) {
+            actionToken.addObserverBasedOnType(match, this);
+        }
     }
 
 }

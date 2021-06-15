@@ -21,6 +21,11 @@ public class Warehouse extends Observable<Warehouse>{
     this.addObserver(new WarehouseObserver(match));
   }
 
+
+  public void readdObservers(Match match) {
+    this.addObserver(new WarehouseObserver(match));
+  }
+
   // returns ALL resources presents in the warehouse
   public LinkedHashMap<ResourceType, Integer> mapAllContainedResources() {
     LinkedHashMap<ResourceType, Integer> currentResourcesLinkedHashMap = new LinkedHashMap<>();
@@ -309,4 +314,5 @@ public class Warehouse extends Observable<Warehouse>{
     return this.extraDeposit.entrySet().stream().map(x -> x.getKey().toString() + " " + x.getValue().toString())
         .toString();
   }
+
 }

@@ -18,7 +18,11 @@ import it.polimi.ingsw.project.messages.MoveMessage;
 import it.polimi.ingsw.project.messages.WaitForLeaderCardsMessage;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
+import it.polimi.ingsw.project.model.actionTokens.ActionToken;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
+import it.polimi.ingsw.project.model.board.faithMap.tile.ActivableTile;
+import it.polimi.ingsw.project.utils.TypeAdapters.AdapterActionToken;
+import it.polimi.ingsw.project.utils.TypeAdapters.AdapterActivableTile;
 import it.polimi.ingsw.project.view.RemoteView;
 
 public class Server {
@@ -118,7 +122,7 @@ public class Server {
             listOfClientConnections.add(connection);
         });
         Map<String, RemoteView> mapOfViews = new HashMap<>();
-        for (int i = 0; i < currentLobby.getMapOfSocketClientConnections().size(); i++) {
+        for (int i = 0; i < currentLobby.lenght(); i++) {
             mapOfViews.put(listOfPlayer.get(i).getNickname(),
                     new RemoteView(listOfPlayer.get(i), listOfClientConnections.get(i)));
         }
@@ -136,6 +140,48 @@ public class Server {
         currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
             connection.asyncSend(new MoveMessage(currentLobby.getModel().getMatchCopy()));
         });
+    }
+
+    public void recreateLobby(String gameId) {
+        Gson gson = new GsonBuilder().registerTypeAdapter(ActivableTile.class, new AdapterActivableTile())
+                .registerTypeAdapter(ActionToken.class, new AdapterActionToken()).serializeNulls().create();
+        try {
+            Reader reader = new FileReader(gameId + ".json");
+            Model recreatedModel = gson.fromJson(reader, Model.class);
+            reader.close();
+            recreatedModel.reAddObserversOnMatch();
+            Lobby recreatedLobby = new Lobby(gameId, recreatedModel.extractNumberOfPlayers());
+            recreatedLobby.setModel(recreatedModel);
+            Map<String, SocketClientConnection> mapOfSocketClientConnection = new HashMap<String, SocketClientConnection>();
+            for (Player player : recreatedLobby.getModel().getMatch().getPlayerList()) {
+                final Socket newSocket = new Socket();
+                newSocket.close();
+                mapOfSocketClientConnection.put(player.getNickname(), new SocketClientConnection(newSocket, this));
+            }
+            recreatedLobby.setMapOfSocketClientConnections(mapOfSocketClientConnection);
+            List<SocketClientConnection> listOfClientConnections = new ArrayList<SocketClientConnection>();
+            List<Player> listOfPlayer = new ArrayList<Player>();
+            recreatedLobby.getMapOfSocketClientConnections()
+                    .forEach((String nickname, SocketClientConnection connection) -> {
+                        listOfPlayer.add(new Player(nickname));
+                        listOfClientConnections.add(connection);
+                    });
+            Map<String, RemoteView> mapOfViews = new HashMap<>();
+            for (int i = 0; i < recreatedLobby.lenght(); i++) {
+                mapOfViews.put(listOfPlayer.get(i).getNickname(),
+                        new RemoteView(listOfPlayer.get(i), listOfClientConnections.get(i)));
+            }
+
+            recreatedLobby.setMapOfViews(mapOfViews);
+            recreatedLobby.setController(new Controller(recreatedLobby.getModel()));
+            for (String nickname : recreatedLobby.getMapOfViews().keySet()) {
+                recreatedLobby.getModel().addObserver(recreatedLobby.getMapOfViews().get(nickname));
+                recreatedLobby.getMapOfViews().get(nickname).addObserver(recreatedLobby.getController());
+            }
+            this.mapOfUnavailableLobbies.put(gameId, recreatedLobby);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public synchronized boolean isGamePresent(String id) {
@@ -207,34 +253,6 @@ public class Server {
             return true;
         }
         return false;
-    }
-
-    public void recreateLobby(String gameId) {
-        Gson gson = new GsonBuilder().create();
-        try {
-            Reader reader = new FileReader(gameId + ".json");
-            Model recreatedModel = gson.fromJson(reader, Model.class);
-            Lobby recreatedLobby = new Lobby(gameId, recreatedModel.extractNumberOfPlayers());
-            recreatedLobby.setModel(recreatedModel);
-
-            Map<String, RemoteView> mapOfViews = new HashMap<>();
-            for (Player player : recreatedLobby.getModel().getMatch().getPlayerList()) {
-                Socket newSocket = new Socket();
-                newSocket.close();
-                mapOfViews.put(player.getNickname(),
-                        new RemoteView(player, new SocketClientConnection(newSocket, this)));
-            }
-            recreatedLobby.setMapOfViews(mapOfViews);
-            recreatedLobby.setController(new Controller(recreatedLobby.getModel()));
-            for (String nickname : recreatedLobby.getMapOfViews().keySet()) {
-                recreatedLobby.getModel().addObserver(recreatedLobby.getMapOfViews().get(nickname));
-                recreatedLobby.getMapOfViews().get(nickname).addObserver(recreatedLobby.getController());
-            }
-            reader.close();
-            this.mapOfUnavailableLobbies.put(gameId, recreatedLobby);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public boolean isRestartedGameReadyToStart(String matchId) {

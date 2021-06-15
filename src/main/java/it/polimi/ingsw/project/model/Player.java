@@ -51,6 +51,10 @@ public class Player implements Serializable, Cloneable {
     return result;
   }
 
+  public void readdObservers(Match match) {
+    this.board.readdObservers(match, this);
+  }
+
   public boolean getIsConnected() {
     return this.isConnected;
   }
@@ -193,4 +197,5 @@ public class Player implements Serializable, Cloneable {
   public int getBlackMarkerPosition() {
     return this.board.getMarkerPosition();
   }
+
 }

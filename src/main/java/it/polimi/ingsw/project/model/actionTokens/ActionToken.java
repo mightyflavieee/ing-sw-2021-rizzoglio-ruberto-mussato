@@ -1,7 +1,9 @@
 package it.polimi.ingsw.project.model.actionTokens;
 
-import java.io.Serializable;
+import it.polimi.ingsw.project.model.Match;
 
-public interface ActionToken extends Serializable {
+public interface ActionToken  {
     void Action();
+
+    void addObserverBasedOnType(Match match, ActionTokenContainer actionTokenContainer);
 }

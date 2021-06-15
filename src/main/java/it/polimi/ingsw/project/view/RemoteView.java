@@ -32,6 +32,8 @@ public class RemoteView extends View {
 
     public void setClientConnection(SocketClientConnection socketClientConnection) {
         this.clientConnection = socketClientConnection;
+        this.clientConnection.removeObserver(new MessageReceiver());
+        this.clientConnection.addObserver(new MessageReceiver());
     }
 
     @Override
