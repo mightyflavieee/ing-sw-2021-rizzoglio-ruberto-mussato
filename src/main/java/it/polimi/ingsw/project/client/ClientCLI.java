@@ -85,6 +85,7 @@ public class ClientCLI extends Client {
                     }
                 } catch (Exception e) {
                     setActive(false);
+                    unLock();
                 }
             }
 
@@ -246,6 +247,10 @@ public class ClientCLI extends Client {
                 try {
                     while (isActive()) {
                         isLock();
+                        if (!isActive()) {
+                            System.out.println("The server is disconnected retry later.");
+                            break;
+                        }
                         if (!getMatch().isEmpty()) {
                             Request move = handleTurn();
                             if (move != null) {
@@ -258,6 +263,7 @@ public class ClientCLI extends Client {
                 } catch (Exception e) {
                     e.printStackTrace();
                     setActive(false);
+
                 }
             }
         });
@@ -1386,7 +1392,7 @@ public class ClientCLI extends Client {
             t0.join();
             t1.join();
         } catch (InterruptedException | NoSuchElementException e) {
-            System.out.println("Connection closed from the client side");
+            System.out.println("Connection closed from the server side");
         } finally {
             this.stdin.close();
             getSocketIn().close();
