@@ -514,10 +514,11 @@ public class Board implements Serializable, Cloneable {
       manufacturedResources = card.getProduction().getManufacturedResources();
       if (productionType == ProductionType.BoardAndDevCard) {
         // aggiunge a manufacturedResources le risorse prodotte dalla Board
-        if (manufacturedResources.containsKey(boardOrPerkManufacturedResource.get(0))) {
-          manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 2);
+        ResourceType resourceType = boardOrPerkManufacturedResource.get(0);
+        if (manufacturedResources.containsKey(resourceType)) {
+          manufacturedResources.put(resourceType, manufacturedResources.get(resourceType) + 1);
         } else {
-          manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 1);
+          manufacturedResources.put(resourceType, 1);
         }
       }
     }
@@ -526,12 +527,13 @@ public class Board implements Serializable, Cloneable {
       // (LeaderCard
       moveForward();
       manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 1);
-      // aggiungere a manufacturedResources le risorse prodotte dalla Board
       if (productionType == ProductionType.BoardAndLeaderCard) {
-        if (manufacturedResources.containsKey(boardOrPerkManufacturedResource.get(1))) {
-          manufacturedResources.put(boardOrPerkManufacturedResource.get(1), 2);
+        // aggiungere a manufacturedResources le risorse prodotte dalla Board
+        ResourceType resourceType = boardOrPerkManufacturedResource.get(1);
+        if (manufacturedResources.containsKey(resourceType)) {
+          manufacturedResources.put(resourceType, 2);
         } else {
-          manufacturedResources.put(boardOrPerkManufacturedResource.get(1), 1);
+          manufacturedResources.put(resourceType, 1);
         }
       }
     }
@@ -545,10 +547,11 @@ public class Board implements Serializable, Cloneable {
       DevelopmentCard card = fetchDevCardById(devCardID);
       manufacturedResources = card.getProduction().getManufacturedResources();
       moveForward();
-      if (manufacturedResources.containsKey(boardOrPerkManufacturedResource.get(0))) {
-        manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 2);
+      ResourceType resourceType = boardOrPerkManufacturedResource.get(0);
+      if (manufacturedResources.containsKey(resourceType)) {
+        manufacturedResources.put(resourceType, manufacturedResources.get(resourceType) + 1);
       } else {
-        manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 1);
+        manufacturedResources.put(resourceType, 1);
       }
     }
     // aggiunge a manufacturedResources le risorse prodotte dalla DevelopmentCard,
@@ -557,18 +560,11 @@ public class Board implements Serializable, Cloneable {
       DevelopmentCard card = fetchDevCardById(devCardID);
       manufacturedResources = card.getProduction().getManufacturedResources();
       moveForward();
-      if (manufacturedResources.containsKey(boardOrPerkManufacturedResource.get(0))) {
-        if (boardOrPerkManufacturedResource.get(0) == boardOrPerkManufacturedResource.get(1)) {
-          manufacturedResources.put(boardOrPerkManufacturedResource.get(1), 3);
+      for (ResourceType resourceType : boardOrPerkManufacturedResource) {
+        if (manufacturedResources.containsKey(resourceType)) {
+          manufacturedResources.put(resourceType, manufacturedResources.get(resourceType) + 1);
         } else {
-          manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 2);
-        }
-      } else {
-        manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 1);
-        if (manufacturedResources.containsKey(boardOrPerkManufacturedResource.get(1))) {
-          manufacturedResources.put(boardOrPerkManufacturedResource.get(1), 2);
-        } else {
-          manufacturedResources.put(boardOrPerkManufacturedResource.get(1), 1);
+          manufacturedResources.put(resourceType, 1);
         }
       }
     }
