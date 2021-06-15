@@ -361,4 +361,12 @@ public class Match implements Serializable, Cloneable {
         }
     }
 
+    public void readdObservers() {
+        this.actionTokenContainer.readdObservers(this);
+        for (Player player : this.playerList) {
+            player.readdObservers(this);
+        }
+        this.currentPlayer.readdObservers(this);
+    }
+
 }
