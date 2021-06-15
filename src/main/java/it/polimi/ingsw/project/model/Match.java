@@ -297,7 +297,7 @@ public class Match implements Serializable, Cloneable {
         return this.playerList.get(playerIndex).getBoard();
     }
 
-    public ResourceType getTransmutationPerk(String nickname) {
+    public List<ResourceType> getTransmutationPerk(String nickname) {
         for (Player player : playerList) {
             if (player.getNickname().equals(nickname)) {
                 return player.getTransmutationPerk();

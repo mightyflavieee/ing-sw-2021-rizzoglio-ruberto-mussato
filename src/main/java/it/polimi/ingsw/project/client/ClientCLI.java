@@ -1161,8 +1161,11 @@ public class ClientCLI extends Client {
             } while (position > 2 || position < 0);
         }
 
-        ResourceType transmutationPerk = getMatch().get().getTransmutationPerk(getNickname());
-        List<Resource> resourceList = market.insertMarble(axis, position, transmutationPerk);
+        List<ResourceType> transmutationPerk = getMatch().get().getTransmutationPerk(getNickname());
+
+        // todo passargli solo il perk scelto SBAGLIATO FARE .get(0)
+        List<Resource> resourceList = market.insertMarble(axis, position, transmutationPerk.get(0));
+
         Boolean hasRedMarble = false;
         for (int i = 0; i < resourceList.size(); i++) {
             if (resourceList.get(i).getType() == ResourceType.Faith) {

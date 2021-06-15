@@ -25,7 +25,7 @@ public class Board implements Serializable, Cloneable {
   private List<LeaderCard> leaderCards;
   private FaithMap faithMap;
   private List<ResourceType> discounts;
-  private ResourceType transmutation;
+  private List<ResourceType> transmutation;
 
   public Board() {
     this.chest = new HashMap<>();
@@ -37,8 +37,8 @@ public class Board implements Serializable, Cloneable {
     this.mapTray.put(DevCardPosition.Center, listOfDevCardsCenter);
     this.mapTray.put(DevCardPosition.Right, listOfDevCardsRight);
     this.leaderCards = new ArrayList<>();
-    this.discounts = null;
-    this.transmutation = null;
+    this.discounts = new ArrayList<>();
+    this.transmutation = new ArrayList<>();
   }
 
   public void createFaithMapAndWarehouse(Match match, Player player) {
@@ -85,7 +85,7 @@ public class Board implements Serializable, Cloneable {
     return this.leaderCards;
   }
 
-  public ResourceType getTransmutation() {
+  public List<ResourceType> getTransmutation() {
     return transmutation;
   }
 
@@ -641,7 +641,7 @@ public class Board implements Serializable, Cloneable {
           }
         }
         if (card.getPerk().getType() == PerkType.Transmutation) {
-          this.transmutation = card.getPerk().getResource().getType();
+          this.transmutation.add(card.getPerk().getResource().getType());
         }
         break;
       }

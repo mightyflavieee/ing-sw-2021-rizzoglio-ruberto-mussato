@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrayGUI extends JPanel {
-    private ResourceType transmutationPerk;
+    private List<ResourceType> transmutationPerk;
     private Market market;
     private GridLayout gridLayout;
     private List<JButton> verticalArrows; //da sinistra a destra
