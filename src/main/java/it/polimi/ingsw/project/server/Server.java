@@ -12,7 +12,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import it.polimi.ingsw.project.controller.Controller;
+import it.polimi.ingsw.project.messages.ConfirmJoinMessage;
 import it.polimi.ingsw.project.messages.ErrorChosenLeaderCards;
+import it.polimi.ingsw.project.messages.ErrorJoinMessage;
 import it.polimi.ingsw.project.messages.LeaderCardsToChooseMessage;
 import it.polimi.ingsw.project.messages.MoveMessage;
 import it.polimi.ingsw.project.messages.WaitForLeaderCardsMessage;
@@ -274,6 +276,63 @@ public class Server {
         currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
             connection.asyncSend(new MoveMessage(currentLobby.getModel().getMatchCopy()));
         });
+    }
+
+    public void handleReconnectionAfterServerCrashed(SocketClientConnection connection, String gameId,
+            String nickName) {
+        if (connection.getServer().isGameStarted(gameId)) {
+            if (connection.getServer().isPlayerPresentAndDisconnected(gameId, nickName)) {
+                connection.getServer().rejoinGame(gameId, connection, nickName);
+                if (connection.getServer().isRestartedGameReadyToStart(gameId)) {
+                    connection.getServer().sendToAllPlayersMoveMessage(gameId);
+                } else {
+                    connection.getServer().sendWaitMessageToPlayer(gameId, nickName);
+                }
+            } else {
+                connection.send(new ErrorJoinMessage(
+                        "We are sorry but in this game you are not a player or there is already a player with this name but it is connected! Try another nickname."));
+            }
+        } else {
+            connection.getServer().recreateLobby(gameId);
+            connection.getServer().rejoinGame(gameId, connection, nickName);
+            if (connection.getServer().isRestartedGameReadyToStart(gameId)) {
+                connection.getServer().sendToAllPlayersMoveMessage(gameId);
+            } else {
+                connection.getServer().sendWaitMessageToPlayer(gameId, nickName);
+            }
+        }
+    }
+
+    public void handleReconnectionOnNotStartedGame(SocketClientConnection connection, String gameId, String nickName) {
+        if (connection.getServer().isGameNotFull(gameId)) {
+            if (connection.getServer().isNicknameUnique(gameId, nickName)) {
+                try {
+                    connection.getServer().addToLobby(gameId, connection, nickName);
+                    connection.send(new ConfirmJoinMessage(gameId));
+                    if (connection.getServer().tryToStartGame(gameId)) {
+                        connection.getServer().sendChooseLeaderCards(gameId);
+                    }
+                } catch (Exception e) {
+                    connection.send(new ErrorJoinMessage(e.getMessage()));
+                }
+            } else {
+                connection.send(new ErrorJoinMessage(
+                        "We are sorry but there is already a player with this nickname! Try a different one."));
+            }
+        } else {
+            connection.send(new ErrorJoinMessage(
+                    "We are sorry but the game you are trying to join is full! Try a different one."));
+        }
+    }
+
+    public void handleReconnectionOnStartedGame(SocketClientConnection connection, String gameId, String nickName) {
+        if (connection.getServer().isPlayerPresentAndDisconnected(gameId, nickName)) {
+            connection.getServer().rejoinGame(gameId, connection, nickName);
+            connection.getServer().sendModelBackToPlayer(gameId, nickName);
+        } else {
+            connection.send(new ErrorJoinMessage(
+                    "We are sorry but this game is already started and you are not a player of this game or there is already a player with this name but it is connected! Try another nickname."));
+        }
     }
 
 }
