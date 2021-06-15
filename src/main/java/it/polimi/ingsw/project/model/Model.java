@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import it.polimi.ingsw.project.messages.MoveMessage;
 import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.observer.Observable;
+import it.polimi.ingsw.project.utils.TypeAdapters.AdapterModel;
 
 public class Model extends Observable<MoveMessage> {
     private final Match match;
@@ -23,6 +24,10 @@ public class Model extends Observable<MoveMessage> {
     public Model(Match match, String matchUID) {
         this.match = match;
         this.matchUID = matchUID;
+    }
+
+    public void reAddObserversOnMatch(){
+        this.match.readdObservers();
     }
 
     public int extractNumberOfPlayers() {
@@ -87,7 +92,8 @@ public class Model extends Observable<MoveMessage> {
     }
 
     public void saveModelOnServer() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder().registerTypeAdapter(Model.class, new AdapterModel())
+                .create();
         String modelToJson = gson.toJson(this);
         if (this.matchUID != null) {
             try {
