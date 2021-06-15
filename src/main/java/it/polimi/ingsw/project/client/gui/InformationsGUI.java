@@ -302,4 +302,8 @@ public class InformationsGUI extends JInternalFrame {
     public void addShield() { this.resourceInHandler.addShield(); }
 
     public void addServant() { this.resourceInHandler.addServant(); }
+
+    public void goToTransmutationPanel() {
+        this.mainPhaseHandler.goToTransmutationPanel();
+    }
 }

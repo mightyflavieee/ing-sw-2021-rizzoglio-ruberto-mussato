@@ -39,4 +39,8 @@ public class SelectLeaderCardProductionListener implements ActionListener {
 //                break;
 //        }
     }
+
+    public void setLeaderCard(LeaderCard leaderCard) {
+        this.leaderCard = leaderCard;
+    }
 }

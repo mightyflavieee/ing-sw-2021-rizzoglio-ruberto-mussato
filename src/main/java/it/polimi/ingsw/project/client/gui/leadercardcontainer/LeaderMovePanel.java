@@ -9,7 +9,6 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class LeaderMovePanel extends JPanel {
     private LeaderCard leaderCard;
@@ -18,6 +17,7 @@ public class LeaderMovePanel extends JPanel {
     private boolean isProductable;
     private LeaderCardDiscardButtonListener leaderCardDiscardButtonListener;
     private LeaderCardActivateButtonListener leaderCardActivateButtonListener;
+    private SelectLeaderCardProductionListener selectLeaderCardProductionListener;
     private GUI gui;
 
     public LeaderMovePanel(LeaderCard leaderCard, GUI gui)  {
@@ -39,9 +39,9 @@ public class LeaderMovePanel extends JPanel {
         leaderPhasePanel.add(activateButton);
         this.productionButton = new JButton("Use for Production");
 
-        ActionListener productionActionListener = new SelectLeaderCardProductionListener(this.gui, this.leaderCard);
+        SelectLeaderCardProductionListener productionActionListener = new SelectLeaderCardProductionListener(this.gui, this.leaderCard);
+        this.selectLeaderCardProductionListener = productionActionListener;
         this.productionButton.addActionListener(productionActionListener);
-        //todo crea e salva il listener che deve potersi aggiornare cambiando l'id
 
         this.add(productionButton);
         this.isActivable = true;
@@ -81,9 +81,10 @@ public class LeaderMovePanel extends JPanel {
         }
            }
 
-    public void setID(String id) {
-        this.leaderCardActivateButtonListener.setID(id);
-        this.leaderCardDiscardButtonListener.setID(id);
+    public void setID(LeaderCard leaderCard) {
+        this.leaderCardActivateButtonListener.setID(leaderCard.getId());
+        this.leaderCardDiscardButtonListener.setID(leaderCard.getId());
+        this.selectLeaderCardProductionListener.setLeaderCard(leaderCard);
     }
 
 }

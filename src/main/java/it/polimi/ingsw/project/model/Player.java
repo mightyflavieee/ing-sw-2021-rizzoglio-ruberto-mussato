@@ -170,7 +170,7 @@ public class Player implements Serializable, Cloneable {
     return this.board.getWarehouse();
   }
 
-  public ResourceType getTransmutationPerk() {
+  public List<ResourceType> getTransmutationPerk() {
     return this.board.getTransmutation();
   }
 

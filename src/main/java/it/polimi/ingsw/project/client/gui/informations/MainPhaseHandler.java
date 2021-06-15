@@ -1,10 +1,7 @@
 package it.polimi.ingsw.project.client.gui.informations;
 
 import it.polimi.ingsw.project.client.gui.GUI;
-import it.polimi.ingsw.project.client.gui.listeners.informations.AbortMoveListener;
-import it.polimi.ingsw.project.client.gui.listeners.informations.ActivateProductionButtonListener;
-import it.polimi.ingsw.project.client.gui.listeners.informations.BuyDevCardButtonListener;
-import it.polimi.ingsw.project.client.gui.listeners.informations.TakeResourcesFromMarketButtonListener;
+import it.polimi.ingsw.project.client.gui.listeners.informations.*;
 import it.polimi.ingsw.project.client.gui.listeners.informations.buydevcardmove.CenterPositionPurchaseListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.buydevcardmove.GoBackFromPurchaseListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.buydevcardmove.LeftPositionPurchaseListener;
@@ -13,6 +10,7 @@ import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.
 import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.boardproduction.*;
 import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.leaderproduction.*;
 import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.productiontypes.*;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,12 +25,14 @@ public class MainPhaseHandler extends JInternalFrame {
     private static final String BOARDMANUFACTURINGPANEL = "Board Manufacturing";
     private static final String BOARDREQUIREDRESOURCESPANEL = "Board Required Resources";
     private static final String ABORTMOVEPANEL = "Abort Move";
+    private static final String TRANSMUTATIONPANEL = "Select Transmutation Perk";
     private List<JButton> mainPhasesButtons;
     private List<JButton> buyDevCardButtons;
     private List<JButton> productionButtons;
     private List<JButton> leaderManufacturingButtons;
     private List<JButton> boardManufacturingButtons;
     private List<JButton> boardRequiredResourcesButtons;
+    private List<JButton> transmutationButtons;
     private JButton abortMoveButton;
     private JPanel mainPanel;
     private CardLayout mainPanelLayout;
@@ -43,6 +43,7 @@ public class MainPhaseHandler extends JInternalFrame {
     private JPanel boardManufacturingPanel;
     private JPanel boardRequiredResourcesPanel;
     private JPanel abortMovePanel;
+    private JPanel transmutationPanel;
     private GUI gui;
 
 
@@ -61,6 +62,7 @@ public class MainPhaseHandler extends JInternalFrame {
         this.mainPanel.add(BOARDMANUFACTURINGPANEL, this.boardManufacturingPanel);
         this.mainPanel.add(BOARDREQUIREDRESOURCESPANEL, this.boardRequiredResourcesPanel);
         this.mainPanel.add(ABORTMOVEPANEL, this.abortMovePanel);
+        this.mainPanel.add(TRANSMUTATIONPANEL,this.transmutationPanel);
         this.mainPanelLayout.show(this.mainPanel, MAINPHASESPANEL);
         this.add(this.mainPanel);
     }
@@ -115,6 +117,14 @@ public class MainPhaseHandler extends JInternalFrame {
         }
         this.boardRequiredResourcesPanel.add(boardReqResHelperPanel, BorderLayout.CENTER);
         this.abortMovePanel.add(this.abortMoveButton);
+
+
+        this.transmutationPanel = new JPanel();
+        this.transmutationPanel.setLayout(new GridLayout(2,1));
+        for(int i = 0; i < this.transmutationButtons.size(); i++){
+            this.transmutationPanel.add(this.transmutationButtons.get(i));
+        }
+
     }
 
     private void createButtons() {
@@ -299,6 +309,15 @@ public class MainPhaseHandler extends JInternalFrame {
         this.abortMoveButton = new JButton("Abort Move");
         // adds listeners
         this.abortMoveButton.addActionListener(new AbortMoveListener(this.gui));
+
+        this.transmutationButtons = new ArrayList<>();
+        JButton transmutationButton1 = new JButton();
+        JButton transmutationButton2 = new JButton();
+        transmutationButton1.addActionListener(new TransmutationSelectorListener(transmutationButton1,gui));
+        transmutationButton2.addActionListener(new TransmutationSelectorListener(transmutationButton2,gui));
+        this.transmutationButtons.add(transmutationButton1);
+        this.transmutationButtons.add(transmutationButton2);
+
     }
 
     public void goToMainButtons() {
@@ -321,4 +340,13 @@ public class MainPhaseHandler extends JInternalFrame {
     public void goToBoardRequiredResourcesButtons() { this.mainPanelLayout.show(this.mainPanel, BOARDREQUIREDRESOURCESPANEL); }
 
     public void goToAbortMovePanel() { this.mainPanelLayout.show(this.mainPanel, ABORTMOVEPANEL); }
+
+    public void goToTransmutationPanel() {
+        List<ResourceType> transmutationPerks = new ArrayList<>();
+        transmutationPerks = this.gui.getTransmutationPerks();
+        for(int i = 0; i < 2; i++){
+            this.transmutationButtons.get(i).setText(transmutationPerks.get(i).toString());
+        }
+        this.mainPanelLayout.show(this.mainPanel,TRANSMUTATIONPANEL);
+    }
 }

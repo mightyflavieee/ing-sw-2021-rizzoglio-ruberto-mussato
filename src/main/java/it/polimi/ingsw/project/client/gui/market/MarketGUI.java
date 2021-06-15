@@ -4,9 +4,11 @@ import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.market.Market;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class MarketGUI extends JInternalFrame {
     //JPanel jPanel;
@@ -98,5 +100,17 @@ public class MarketGUI extends JInternalFrame {
 
     public void refreshSize(int width, int height) {
         this.trayGui.refreshSize(width/4,height/3);
+    }
+
+    public boolean isTransmutationChosable() {
+        return this.trayGui.isTransmutationChosable();
+    }
+
+    public List<ResourceType> getTransmutationPerks() {
+        return this.trayGui.getTransmutationPerks();
+    }
+
+    public void setChosedTransmutationPerk(ResourceType resourceType) {
+        this.trayGui.setChosedTransmutationPerk(resourceType);
     }
 }

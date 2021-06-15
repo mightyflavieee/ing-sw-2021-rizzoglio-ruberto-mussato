@@ -10,6 +10,7 @@ import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.TurnPhase;
 import it.polimi.ingsw.project.model.playermove.Move;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.utils.Pair;
 import it.polimi.ingsw.project.utils.Utils;
@@ -208,6 +209,27 @@ public class GUI extends Observable<Move> {
         this.cardContainerGUI.refreshSize(d.width/4, (int) (d.height*0.45));
        // this.leaderCardPlaceGUI.refreshSize(d.width-boardGUI.getWidth(), (int) (d.height*0.48));
 
+    }
+
+    public void startMarketMove() {
+        if(this.marketGUI.isTransmutationChosable()){
+            this.informationsGUI.goToTransmutationPanel();
+        }else {
+            this.marketGUI.enableButtons();
+            this.boardGUI.getWarehouseGUI().enableAllButtons();
+            this.informationsGUI.getMainPhaseHandler().goToAbortMovePanel();
+        }
+    }
+
+    public List<ResourceType> getTransmutationPerks() {
+        return this.marketGUI.getTransmutationPerks();
+    }
+
+    public void setChosedTransmutationPerk(ResourceType resourceType) {
+        this.marketGUI.setChosedTransmutationPerk(resourceType);
+        this.marketGUI.enableButtons();
+        this.boardGUI.getWarehouseGUI().enableAllButtons();
+        this.informationsGUI.getMainPhaseHandler().goToAbortMovePanel();
     }
 }
 

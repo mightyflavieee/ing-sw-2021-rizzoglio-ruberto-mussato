@@ -14,7 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrayGUI extends JPanel {
-    private ResourceType transmutationPerk;
+    private List<ResourceType> transmutationPerks;
+    private ResourceType chosedTransmutationPerk;
     private Market market;
     private GridLayout gridLayout;
     private List<JButton> verticalArrows; //da sinistra a destra
@@ -29,7 +30,7 @@ public class TrayGUI extends JPanel {
         this.createTray();
         this.createObservers(resourceInHandGUI,gui);
         this.setVisible(true);
-        this.transmutationPerk = null;
+        this.transmutationPerks = new ArrayList<>();
     }
 
     private void createObservers(ResourceInHandGUI resourceInHandGUI, GUI gui) {
@@ -73,8 +74,10 @@ public class TrayGUI extends JPanel {
     }
 
     public List<Resource> insertMarble(int axis, int position) {
+        ResourceType resourceType = this.chosedTransmutationPerk;
+        this.chosedTransmutationPerk = null;
 
-        return this.market.insertMarble(axis,position,transmutationPerk);
+        return this.market.insertMarble(axis,position,resourceType);
     }
 
     public void refresh(){
@@ -110,7 +113,7 @@ public class TrayGUI extends JPanel {
 
     public void setMarket(Market market, Player mePlayer) {
         this.market = market;
-        this.transmutationPerk = mePlayer.getTransmutationPerk();
+        this.transmutationPerks = mePlayer.getTransmutationPerk();
         this.refresh();
     }
 
@@ -131,5 +134,27 @@ public class TrayGUI extends JPanel {
             this.width = width;
         }
         this.refresh();
+    }
+
+    public boolean isTransmutationChosable() {
+        switch (this.transmutationPerks.size()){
+            case 0:
+                this.chosedTransmutationPerk = null;
+                return false;
+            case 1:
+                this.chosedTransmutationPerk = this.transmutationPerks.get(0);
+                return false;
+            default:
+                return true;
+
+        }
+    }
+
+    public List<ResourceType> getTransmutationPerks() {
+        return this.transmutationPerks;
+    }
+
+    public void setChosedTransmutationPerk(ResourceType resourceType) {
+        this.chosedTransmutationPerk = resourceType;
     }
 }

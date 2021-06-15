@@ -3,7 +3,6 @@ package it.polimi.ingsw.project.client.gui.leadercardcontainer;
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.TurnPhase;
-import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.Status;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.PerkType;
@@ -51,7 +50,7 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         int i;
         for(i = 0; i < leaderCards.size(); i++){
             leaderCardJlabelGUIList.get(i).setID(leaderCards.get(i).getId());
-            this.leaderMovePanelList.get(i).setID(leaderCards.get(i).getId());
+            this.leaderMovePanelList.get(i).setID(leaderCards.get(i));
             this.leaderMovePanelList.get(i).setActivationPossible(leaderCards.get(i).getStatus()== Status.Inactive
             && mePlayer.isFeasibleActivateLeaderCardMove(leaderCards.get(i).getId()));
             this.leaderMovePanelList.get(i).setProductable(leaderCards.get(i).getStatus()== Status.Active && leaderCards.get(i).getPerk().getType() == PerkType.Production);
