@@ -23,7 +23,9 @@ public class FaithMapGUI extends JInternalFrame {
         this.setTitle("FaithMap");
         this.setVisible(true);
         this.setLayout(new GridLayout(2, 24));
+        this.isSinglePlayer = isSinglePlayer;
         this.markerPosition = 0;
+        this.blackMarkerPosition = 0;
         this.faithMapModel = faithMap;
         this.tiles = new ArrayList<>();
         this.papalCuoncilTiles = new ArrayList<>();
