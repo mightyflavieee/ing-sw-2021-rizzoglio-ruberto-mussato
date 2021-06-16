@@ -826,15 +826,12 @@ public class ClientCLI extends Client {
     // production for the ProductionMove
     private void selectResourcesToEliminateForBoardProduction(Map<ResourceType, Integer> resourcesToEliminateWarehouse,
             Map<ResourceType, Integer> resourcesToEliminateChest) {
-        boolean eliminateFromWarehouse = false;
-        boolean eliminateFromChest = false;
         int toBeEliminated = 2;
         while (true) {
             System.out.println(
                     "Do you want to eliminate resources from the Warehouse for the Board production? [y/n]:\n" + "> ");
             String answer = this.stdin.nextLine();
             if (answer.equals("y")) {
-                eliminateFromWarehouse = true;
                 while (toBeEliminated == 2) {
                     System.out.println(
                             "How many types of resources do you want to eliminate from the Warehouse? [1/2]:\n" + "> ");
