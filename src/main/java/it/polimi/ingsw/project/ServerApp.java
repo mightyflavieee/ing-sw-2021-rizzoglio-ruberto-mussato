@@ -7,6 +7,7 @@ import java.io.IOException;
 public class ServerApp {
     public static void main( String[] args ) {
         Server server;
+        System.out.println("ServerAPP started");
         try {
             server = new Server();
             server.run();
