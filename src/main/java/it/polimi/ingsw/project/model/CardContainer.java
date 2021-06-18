@@ -18,7 +18,7 @@ public class CardContainer implements Cloneable, Serializable {
   public CardContainer() {
 
     // Convert JSON File to Java Object
-    CardContainerBuilder cardContainerBuilder = new CardContainerBuilder("src/main/resources/developmentCards.json");
+    CardContainerBuilder cardContainerBuilder = new CardContainerBuilder("");
     List<DevelopmentCard> allCards = cardContainerBuilder.allCards;
     Collections.shuffle(allCards);
     LinkedHashMap<CardLevel, LinkedHashMap<CardColor, List<DevelopmentCard>>> tempCardContainer = initLinkedHashMapCards();

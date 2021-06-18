@@ -14,8 +14,8 @@ public class LeaderCardContainer implements Serializable {
     private Map<String, List<LeaderCard>> mapOfExtractedCards;
 
     public LeaderCardContainer() {
-        LeaderCardContainerBuilder leaderCardContainerBuilder = new LeaderCardContainerBuilder(
-                "src/main/resources/leadercards.json");
+        LeaderCardContainerBuilder leaderCardContainerBuilder = new LeaderCardContainerBuilder(""
+        );
         List<LeaderCard> leaderCards = leaderCardContainerBuilder.getLeaderCards();
         Collections.shuffle(leaderCards);
         this.mapOfExtractedCards = new HashMap<String, List<LeaderCard>>();

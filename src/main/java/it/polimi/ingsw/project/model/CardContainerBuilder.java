@@ -1,10 +1,8 @@
 package it.polimi.ingsw.project.model;
 
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Serializable;
+import java.io.*;
 import java.util.List;
+import java.util.Scanner;
 
 import com.google.gson.Gson;
 
@@ -16,11 +14,16 @@ public class CardContainerBuilder implements Serializable {
     public CardContainerBuilder(String fileSrc) {
         Gson gson = new Gson();
 
-        try (Reader reader = new FileReader(fileSrc)) {
-            // Convert JSON File to Java Object
-            this.allCards = gson.fromJson(reader, CardContainerBuilder.class).allCards;
+        try  {
+            InputStream inputStream = CardContainerBuilder.class.getClassLoader().getResourceAsStream("developmentCards.json");
+            Scanner s = new Scanner(inputStream);
+            String string = "";
+            while (s.hasNext()) {
+                string = string + s.nextLine();
+            }
+                this.allCards = gson.fromJson(string, CardContainerBuilder.class).allCards;
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

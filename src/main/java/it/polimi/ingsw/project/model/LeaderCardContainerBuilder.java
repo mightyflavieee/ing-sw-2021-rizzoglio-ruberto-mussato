@@ -1,9 +1,8 @@
 package it.polimi.ingsw.project.model;
 
-import java.io.FileReader;
-import java.io.Reader;
-import java.io.Serializable;
+import java.io.*;
 import java.util.List;
+import java.util.Scanner;
 
 import com.google.gson.Gson;
 
@@ -15,9 +14,13 @@ public class LeaderCardContainerBuilder implements Serializable {
     public LeaderCardContainerBuilder(String src) {
         Gson gson = new Gson();
         try {
-            Reader reader = new FileReader(src);
-            this.leaderCards = gson.fromJson(reader, LeaderCardContainerBuilder.class).leaderCards;
-            reader.close();
+             InputStream inputStream = LeaderCardContainerBuilder.class.getClassLoader().getResourceAsStream("leadercards.json");
+             Scanner s = new Scanner(inputStream);
+            String string = "";
+            while (s.hasNext()){
+                string = string + s.nextLine();
+            }
+            this.leaderCards = gson.fromJson(string, LeaderCardContainerBuilder.class).leaderCards;
         } catch (Exception e) {
             e.printStackTrace();
         }

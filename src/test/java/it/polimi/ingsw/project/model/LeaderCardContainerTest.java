@@ -12,12 +12,13 @@ class LeaderCardContainerTest {
 
     @Test
     void getLeaderCards() {
-        LeaderCardContainerBuilder leaderCardContainerBuilder = new LeaderCardContainerBuilder(
-                "src/main/resources/leadercards.json");
+        LeaderCardContainerBuilder leaderCardContainerBuilder = new LeaderCardContainerBuilder(""
+        );
         List<LeaderCard> leaderCards = leaderCardContainerBuilder.getLeaderCards();
         assertEquals(16, leaderCards.size());
         assertEquals("id1", leaderCards.get(0).getId());
         assertEquals("id16", leaderCards.get(15).getId());
+
     }
 
     @Test
