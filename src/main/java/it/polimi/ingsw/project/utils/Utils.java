@@ -1,11 +1,17 @@
 package it.polimi.ingsw.project.utils;
 
+import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.polimi.ingsw.project.client.gui.market.TrayGUI;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class Utils {
     public static List<String> extractOpponentsName(Player currentPlayer, List<Player> listOfAllPlayers) {
@@ -48,6 +54,16 @@ public class Utils {
             }
         }
         return selectedLeaderCards;
+    }
+
+    public static Icon readIcon(String src, int width, int height){
+        //sei già nella cartella risorse, quindi src è tipo leadercards.json
+        try {
+            return new ImageIcon(ImageIO.read(TrayGUI.class.getClassLoader().getResourceAsStream(src)).getScaledInstance(width, height, Image.SCALE_SMOOTH));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

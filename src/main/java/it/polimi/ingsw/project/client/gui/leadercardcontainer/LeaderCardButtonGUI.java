@@ -1,7 +1,8 @@
 package it.polimi.ingsw.project.client.gui.leadercardcontainer;
 
+import it.polimi.ingsw.project.utils.Utils;
+
 import javax.swing.*;
-import java.awt.*;
 
 public class LeaderCardButtonGUI extends JButton {
     private String id;
@@ -19,9 +20,20 @@ public class LeaderCardButtonGUI extends JButton {
         this.id = id;
         this.leaderCardChoserGUI = leaderCardChoserGUI;
         this.setVisible(true);
-        this.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/leadercards/"+ this.id + ".png").getImage().getScaledInstance(230, 348, Image.SCALE_SMOOTH)));
+       // this.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/leadercards/"+ this.id + ".png").getImage().getScaledInstance(230, 348, Image.SCALE_SMOOTH)));
 
-       // this.refresh();
+
+        //InputStream inputStream = LeaderCardButtonGUI.class.getClassLoader().getResourceAsStream("/leadercards/"+ this.id + ".png");
+        //this.setIcon(new ImageIcon(ImageIO.read(inputStream).getScaledInstance(230, 348, Image.SCALE_SMOOTH)));
+//        try {
+//            this.setIcon(new ImageIcon(ImageIO.read(LeaderCardButtonGUI.class.getClassLoader().getResourceAsStream("leadercards/"+ this.id + ".png")).getScaledInstance(230, 348, Image.SCALE_SMOOTH)));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        this.setIcon(Utils.readIcon("leadercards/" + this.id + ".png",230,348));
+
+
+        // this.refresh();
     }
 
     public String getID() {

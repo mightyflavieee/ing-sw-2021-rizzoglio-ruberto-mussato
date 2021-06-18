@@ -1,5 +1,7 @@
 package it.polimi.ingsw.project.client.gui.leadercardcontainer;
 
+import it.polimi.ingsw.project.utils.Utils;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,9 +13,9 @@ public class LeaderCardJlabelGUI extends JLabel {
 
     public LeaderCardJlabelGUI(String id) { //used for the leadercard place
         this.id = id;
-        this.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/leadercards/"+ this.id + ".png").getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
-        //  this.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/plancia portabiglie.png").getImage().getScaledInstance(380, 500, Image.SCALE_SMOOTH)));
-        //  this.addActionListener(new LeaderCardGUIListener(this));
+        //this.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/leadercards/"+ this.id + ".png").getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
+        this.setIcon(Utils.readIcon("leadercards/" + this.id + ".png",width,height));
+
         this.setVisible(true);
     }
 
@@ -34,7 +36,8 @@ public class LeaderCardJlabelGUI extends JLabel {
     }
 
     private void refresh() {
-        this.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/leadercards/"+ this.id + ".png").getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
+       // this.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/leadercards/"+ this.id + ".png").getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
+        this.setIcon(Utils.readIcon("leadercards/" + this.id + ".png",width,height));
 
     }
 
