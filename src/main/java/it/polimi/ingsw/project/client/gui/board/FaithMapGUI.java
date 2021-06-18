@@ -3,6 +3,7 @@ package it.polimi.ingsw.project.client.gui.board;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
+import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
@@ -40,19 +41,22 @@ public class FaithMapGUI extends JInternalFrame {
                 button.setVisible(false);
             }
             if (i == 5) {
-                button.setIcon(new ImageIcon(
-                        new javax.swing.ImageIcon("src/main/resources/tiles/quadrato giallo.png")
-                        .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+//                button.setIcon(new ImageIcon(
+//                        new javax.swing.ImageIcon("src/main/resources/tiles/quadrato giallo.png")
+//                        .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+                button.setIcon(Utils.readIcon("tiles/quadrato giallo.png",30,30));
             }
             if (i == 13) {
-                button.setIcon(new ImageIcon(
-                        new javax.swing.ImageIcon("src/main/resources/tiles/quadrato arancione.png")
-                        .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+//                button.setIcon(new ImageIcon(
+//                        new javax.swing.ImageIcon("src/main/resources/tiles/quadrato arancione.png")
+//                        .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+                button.setIcon(Utils.readIcon("tiles/quadrato arancione.png",30,30));
             }
             if (i == 20) {
-                button.setIcon(new ImageIcon(
-                        new javax.swing.ImageIcon("src/main/resources/tiles/quadrato rosso.png")
-                        .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+//                button.setIcon(new ImageIcon(
+//                        new javax.swing.ImageIcon("src/main/resources/tiles/quadrato rosso.png")
+//                        .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+                button.setIcon(Utils.readIcon("tiles/quadrato rosso.png",30,30));
             }
             this.papalCuoncilTiles.add(button);
         }

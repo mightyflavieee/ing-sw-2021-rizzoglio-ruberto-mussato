@@ -6,6 +6,7 @@ import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.resource.ResourceType;
+import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -89,18 +90,24 @@ public class ChestGUI extends JInternalFrame {
         JLabel servantLabel = new JLabel();
         JLabel shieldLabel = new JLabel();
         JLabel stoneLabel = new JLabel();
-        coinLabel.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/resourcetype/Coin.png")
-                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-        servantLabel.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/resourcetype/Servant.png")
-                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-        shieldLabel.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/resourcetype/Shield.png")
-                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-        stoneLabel.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/resourcetype/Stone.png")
-                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
+//        coinLabel.setIcon(new ImageIcon(new javax.swing
+//                .ImageIcon("src/main/resources/resourcetype/Coin.png")
+//                .getImage().getScaledInstance10,10, Image.SCALE_SMOOTH)));
+//        servantLabel.setIcon(new ImageIcon(new javax.swing
+//                .ImageIcon("src/main/resources/resourcetype/Servant.png")
+//                .getImage().getScaledInstance10,10, Image.SCALE_SMOOTH)));
+//        shieldLabel.setIcon(new ImageIcon(new javax.swing
+//                .ImageIcon("src/main/resources/resourcetype/Shield.png")
+//                .getImage().getScaledInstance10,10, Image.SCALE_SMOOTH)));
+//        stoneLabel.setIcon(new ImageIcon(new javax.swing
+//                .ImageIcon("src/main/resources/resourcetype/Stone.png")
+//                .getImage().getScaledInstance10,10, Image.SCALE_SMOOTH)));
+        coinLabel.setIcon(Utils.readIcon("resourcetype/Coin.png",10,10));
+        servantLabel.setIcon(Utils.readIcon("resourcetype/Servant.png",10,10));
+        shieldLabel.setIcon(Utils.readIcon("resourcetype/Shield.png",10,10));
+        stoneLabel.setIcon(Utils.readIcon("resourcetype/Stone.png",10,10));
+
+
         list.add(coinLabel);
         list.add(servantLabel);
         list.add(shieldLabel);

@@ -59,9 +59,11 @@ public class Utils {
     public static Icon readIcon(String src, int width, int height){
         //sei già nella cartella risorse, quindi src è tipo leadercards.json
         try {
+           // System.out.println(src);
             return new ImageIcon(ImageIO.read(TrayGUI.class.getClassLoader().getResourceAsStream(src)).getScaledInstance(width, height, Image.SCALE_SMOOTH));
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println(src);
         }
         return null;
     }

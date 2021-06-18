@@ -3,6 +3,7 @@ package it.polimi.ingsw.project.client.gui;
 import it.polimi.ingsw.project.client.gui.listeners.selectcard.SelectCardForPurchaseListener;
 import it.polimi.ingsw.project.model.CardContainer;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
+import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,9 +37,11 @@ public class CardContainerGUI extends JInternalFrame {
             this.add(jButton);
             this.showedCards.add(jButton);
 
-            jButton.setIcon(new ImageIcon(
-                    new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png")
-                    .getImage().getScaledInstance(this.width,this.height, Image.SCALE_SMOOTH)));
+//            jButton.setIcon(new ImageIcon(
+//                    new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png")
+//                    .getImage().getScaledInstance(this.width,this.height, Image.SCALE_SMOOTH)));
+            jButton.setIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
+
             jButton.setVisible(true);
         }
     }
@@ -46,10 +49,12 @@ public class CardContainerGUI extends JInternalFrame {
     public void refresh() {
         this.cardsToShow = cardContainer.getAvailableDevCards().stream().map(DevelopmentCard::getId).collect(Collectors.toList());
         for (int i = 0; i < cardsToShow.size(); i++){
-            this.showedCards.get(i).setIcon(new ImageIcon(
-                    new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png")
-                    .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
-                if (Arrays.stream(this.showedCards.get(i).getActionListeners()).count() == 0) {
+//            this.showedCards.get(i).setIcon(new ImageIcon(
+//                    new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png")
+//                    .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
+            this.showedCards.get(i).setIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
+
+            if (Arrays.stream(this.showedCards.get(i).getActionListeners()).count() == 0) {
                     this.showedCards.get(i).addActionListener(new SelectCardForPurchaseListener(this.informationsGUI,
                         this.cardContainer.fetchCard(this.cardsToShow.get(i))));
                 } else {

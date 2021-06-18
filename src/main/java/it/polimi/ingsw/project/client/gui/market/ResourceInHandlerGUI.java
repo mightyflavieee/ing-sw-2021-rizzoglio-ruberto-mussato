@@ -5,6 +5,7 @@ import it.polimi.ingsw.project.client.gui.board.WarehouseGUI;
 import it.polimi.ingsw.project.client.gui.listeners.market.*;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.resource.ResourceType;
+import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -58,7 +59,8 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         Map<ShelfFloor,ResourceType> resourceTypePerShelf = this.warehouseGUI.getResourceTypePerShelf();
         Map<ResourceType, Integer> extraDeposit = this.warehouseGUI.getWarehouseModel().getExtraDeposit();
 
-        this.imageLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/resourcetype/" + this.resourceType.toString() + ".png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        //this.imageLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/resourcetype/" + this.resourceType.toString() + ".png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
+        this.imageLabel.setIcon(Utils.readIcon("resourcetype/" + this.resourceType.toString() + ".png",30,30));
         this.numLabel.setText(String.valueOf(this.resourceNum));
         switch (this.resourceNum){
             case 0:
