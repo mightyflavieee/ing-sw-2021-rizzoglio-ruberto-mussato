@@ -1,7 +1,10 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.client.ClientGUI;
+import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardChoserGUI;
 import it.polimi.ingsw.project.client.gui.listeners.newgame.SelectGameTypeListener;
 import it.polimi.ingsw.project.client.gui.listeners.newgame.SelectNicknameListener;
+import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +42,8 @@ public class NewGameHandler extends JPanel {
     private JPanel selectGameTypePanel;
     private JPanel selectJoinGameIDPanel;
     private JPanel waitingRoomPanel;
-    private JPanel leaderCardChooserPanel;
+    private LeaderCardChoserGUI leaderCardChooser;
+    private ClientGUI clientGUI;
 
     public NewGameHandler() {
         this.setVisible(true);
@@ -52,7 +56,7 @@ public class NewGameHandler extends JPanel {
         this.mainPanel.add(SELECTTYPEOFGAME, this.selectGameTypePanel);
         this.mainPanel.add(SELECTJOINGAMEID, this.selectJoinGameIDPanel);
         this.mainPanel.add(WAITINGROOM, this.waitingRoomPanel);
-        //this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooserPanel);
+        this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooser);
         this.mainLayout.show(this.mainPanel, SELECTNICKNAME);
         this.add(this.mainPanel);
     }
@@ -62,7 +66,6 @@ public class NewGameHandler extends JPanel {
         createSelectGameTypePanel();
         createSelectJoinGameIDPanel();
         createWaitingRoomPanel();
-        createLeaderCardChooserPanel();
     }
 
     private void createSelectNicknamePanel() {
@@ -146,10 +149,6 @@ public class NewGameHandler extends JPanel {
         this.waitingRoomPanel.add(voidPanel);
     }
 
-    private void createLeaderCardChooserPanel() {
-
-    }
-
     private void createSelectNicknameComponents() {
         this.selectNicknameTitle = new JLabel();
         this.selectNicknameTitle.setText("Masters of Renaissance");
@@ -222,7 +221,10 @@ public class NewGameHandler extends JPanel {
 
     public void goToWaitingRoom() { this.mainLayout.show(this.mainPanel, WAITINGROOM); }
 
-    public void goToLeaderCardChooser() { this.mainLayout.show(this.mainPanel, LEADERCARDCHOOSER); }
+    public void goToLeaderCardChooser(List<LeaderCard> leaderCards) {
+        this.leaderCardChooser = new LeaderCardChoserGUI(leaderCards, this.clientGUI);
+        this.mainLayout.show(this.mainPanel, LEADERCARDCHOOSER);
+    }
 
     public static void main(String[] args) {
         JFrame jFrame = new JFrame();
