@@ -2,6 +2,9 @@ package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.client.ClientGUI;
 import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardChoserGUI;
+import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.boardproduction.GoBackFromBoardProduction;
+import it.polimi.ingsw.project.client.gui.listeners.newgame.GoBackFromJoinListener;
+import it.polimi.ingsw.project.client.gui.listeners.newgame.JoinGameListener;
 import it.polimi.ingsw.project.client.gui.listeners.newgame.SelectGameTypeListener;
 import it.polimi.ingsw.project.client.gui.listeners.newgame.SelectNicknameListener;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
@@ -56,7 +59,7 @@ public class NewGameHandler extends JPanel {
         this.mainPanel.add(SELECTTYPEOFGAME, this.selectGameTypePanel);
         this.mainPanel.add(SELECTJOINGAMEID, this.selectJoinGameIDPanel);
         this.mainPanel.add(WAITINGROOM, this.waitingRoomPanel);
-        this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooser);
+        //this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooser);
         this.mainLayout.show(this.mainPanel, SELECTNICKNAME);
         this.add(this.mainPanel);
     }
@@ -201,6 +204,8 @@ public class NewGameHandler extends JPanel {
         this.selectJoinGameIDTextField = new JTextField();
         JButton buttonGoBack = new JButton("Go Back");
         JButton buttonJoin = new JButton("Join");
+        buttonGoBack.addActionListener(new GoBackFromJoinListener(this));
+        buttonJoin.addActionListener(new JoinGameListener(this.clientGUI));
         this.selectJoinGameIDButtons = new ArrayList<>();
         this.selectJoinGameIDButtons.add(buttonGoBack);
         this.selectJoinGameIDButtons.add(buttonJoin);
