@@ -61,8 +61,8 @@ public class MainPhaseHandler extends JInternalFrame {
         this.mainPanel.add(LEADERMANUFACTURINGPANEL, this.leaderManufacturingPanel);
         this.mainPanel.add(BOARDMANUFACTURINGPANEL, this.boardManufacturingPanel);
         this.mainPanel.add(BOARDREQUIREDRESOURCESPANEL, this.boardRequiredResourcesPanel);
-        this.mainPanel.add(ABORTMOVEPANEL, this.abortMovePanel);
         this.mainPanel.add(TRANSMUTATIONPANEL,this.transmutationPanel);
+        this.mainPanel.add(ABORTMOVEPANEL, this.abortMovePanel);
         this.mainPanelLayout.show(this.mainPanel, MAINPHASESPANEL);
         this.add(this.mainPanel);
     }
@@ -76,6 +76,7 @@ public class MainPhaseHandler extends JInternalFrame {
         this.boardManufacturingPanel = new JPanel();
         this.boardRequiredResourcesPanel = new JPanel();
         JPanel boardReqResHelperPanel = new JPanel();
+        this.transmutationPanel = new JPanel();
         this.abortMovePanel = new JPanel();
         this.mainPhasesPanel.setVisible(true);
         this.buyDevCardPanel.setVisible(true);
@@ -84,6 +85,7 @@ public class MainPhaseHandler extends JInternalFrame {
         this.boardManufacturingPanel.setVisible(true);
         this.boardRequiredResourcesPanel.setVisible(true);
         boardReqResHelperPanel.setVisible(true);
+        this.transmutationPanel.setVisible(true);
         this.abortMovePanel.setVisible(true);
         this.mainPhasesPanel.setLayout(new GridLayout(3, 1));
         this.buyDevCardPanel.setLayout(new GridLayout(4, 1));
@@ -92,6 +94,7 @@ public class MainPhaseHandler extends JInternalFrame {
         this.boardManufacturingPanel.setLayout(new GridLayout(5, 1));
         this.boardRequiredResourcesPanel.setLayout(new BorderLayout());
         boardReqResHelperPanel.setLayout(new GridLayout(4, 2));
+        this.transmutationPanel.setLayout(new GridLayout(2,1));
         this.abortMovePanel.setLayout(new BorderLayout());
         for (JButton button : this.mainPhasesButtons) {
             this.mainPhasesPanel.add(button);
@@ -116,15 +119,10 @@ public class MainPhaseHandler extends JInternalFrame {
             }
         }
         this.boardRequiredResourcesPanel.add(boardReqResHelperPanel, BorderLayout.CENTER);
-        this.abortMovePanel.add(this.abortMoveButton);
-
-
-        this.transmutationPanel = new JPanel();
-        this.transmutationPanel.setLayout(new GridLayout(2,1));
         for(int i = 0; i < this.transmutationButtons.size(); i++){
             this.transmutationPanel.add(this.transmutationButtons.get(i));
         }
-
+        this.abortMovePanel.add(this.abortMoveButton);
     }
 
     private void createButtons() {
@@ -134,6 +132,7 @@ public class MainPhaseHandler extends JInternalFrame {
         this.leaderManufacturingButtons = new ArrayList<>();
         this.boardManufacturingButtons = new ArrayList<>();
         this.boardRequiredResourcesButtons = new ArrayList<>();
+        this.transmutationButtons = new ArrayList<>();
         // creates main buttons
         JButton buttonMarket = new JButton("Take Resources From Market");
         JButton buttonPurchase = new JButton("Buy Development Card");
@@ -305,19 +304,19 @@ public class MainPhaseHandler extends JInternalFrame {
         this.boardRequiredResourcesButtons.add(buttonStone1);
         this.boardRequiredResourcesButtons.add(buttonStone2);
         this.boardRequiredResourcesButtons.add(buttonGoBack);
+        // creates Transmutation Perk Selection buttons
+        JButton transmutationButton1 = new JButton();
+        JButton transmutationButton2 = new JButton();
+        // adds listeners
+        transmutationButton1.addActionListener(new TransmutationSelectorListener(transmutationButton1,gui));
+        transmutationButton2.addActionListener(new TransmutationSelectorListener(transmutationButton2,gui));
+        // adds JButtons to attribute
+        this.transmutationButtons.add(transmutationButton1);
+        this.transmutationButtons.add(transmutationButton2);
         // creates Abort Move button
         this.abortMoveButton = new JButton("Abort Move");
         // adds listeners
         this.abortMoveButton.addActionListener(new AbortMoveListener(this.gui));
-
-        this.transmutationButtons = new ArrayList<>();
-        JButton transmutationButton1 = new JButton();
-        JButton transmutationButton2 = new JButton();
-        transmutationButton1.addActionListener(new TransmutationSelectorListener(transmutationButton1,gui));
-        transmutationButton2.addActionListener(new TransmutationSelectorListener(transmutationButton2,gui));
-        this.transmutationButtons.add(transmutationButton1);
-        this.transmutationButtons.add(transmutationButton2);
-
     }
 
     public void goToMainButtons() {
@@ -339,14 +338,16 @@ public class MainPhaseHandler extends JInternalFrame {
 
     public void goToBoardRequiredResourcesButtons() { this.mainPanelLayout.show(this.mainPanel, BOARDREQUIREDRESOURCESPANEL); }
 
-    public void goToAbortMovePanel() { this.mainPanelLayout.show(this.mainPanel, ABORTMOVEPANEL); }
-
     public void goToTransmutationPanel() {
-        List<ResourceType> transmutationPerks = new ArrayList<>();
-        transmutationPerks = this.gui.getTransmutationPerks();
-        for(int i = 0; i < 2; i++){
-            this.transmutationButtons.get(i).setText(transmutationPerks.get(i).toString());
-        }
-        this.mainPanelLayout.show(this.mainPanel,TRANSMUTATIONPANEL);
+        List<ResourceType> transmutationPerks = this.gui.getTransmutationPerks();
+        this.transmutationButtons.get(0).setIcon(new ImageIcon(
+                new ImageIcon("src/main/resources/resourcetype/" + transmutationPerks.get(0) + ".png")
+                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        this.transmutationButtons.get(1).setIcon(new ImageIcon(
+                new ImageIcon("src/main/resources/resourcetype/" + transmutationPerks.get(1) + ".png")
+                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        this.mainPanelLayout.show(this.mainPanel, TRANSMUTATIONPANEL);
     }
+
+    public void goToAbortMovePanel() { this.mainPanelLayout.show(this.mainPanel, ABORTMOVEPANEL); }
 }

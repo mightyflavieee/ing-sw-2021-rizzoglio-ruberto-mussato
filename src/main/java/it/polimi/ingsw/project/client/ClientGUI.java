@@ -5,6 +5,7 @@ import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardChoserGU
 import it.polimi.ingsw.project.client.gui.listeners.login.*;
 import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.board.card.Card;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.*;
 import it.polimi.ingsw.project.model.playermove.interfaces.Request;
@@ -29,7 +30,6 @@ public class ClientGUI extends Client implements Observer<Move> {
     public ClientGUI(String ip, int port) {
         super(ip, port);
         this.numPlayers = 0;
-
     }
 
     public ClientGUI getInstance() {
