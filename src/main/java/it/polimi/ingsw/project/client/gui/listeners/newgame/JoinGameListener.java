@@ -14,6 +14,10 @@ public class JoinGameListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        this.clientGUI.createOrJoinGame();
+
+        // todo andare nella waiting room (da ClientGUI forse?)
+        // this.newGameHandler.goToWaitingRoom();
 
     }
 }

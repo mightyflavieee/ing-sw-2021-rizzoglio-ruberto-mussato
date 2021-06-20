@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class LeaderCardChoserGUI extends JFrame {
+public class LeaderCardChoserGUI extends JInternalFrame {
     private List<LeaderCardButtonGUI> leaderCardButtonGUIList;
     private List<String> chosedIDs;
     private List <LeaderCard> leadercards;

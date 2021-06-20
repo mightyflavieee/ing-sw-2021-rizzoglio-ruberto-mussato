@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client;
 
 import it.polimi.ingsw.project.client.gui.GUI;
+import it.polimi.ingsw.project.client.gui.NewGameHandler;
 import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardChoserGUI;
 import it.polimi.ingsw.project.client.gui.listeners.login.*;
 import it.polimi.ingsw.project.messages.ResponseMessage;
@@ -26,6 +27,8 @@ public class ClientGUI extends Client implements Observer<Move> {
     private JFrame tempJFrame;
     private boolean createGame; // true create, false join
     private int numPlayers;
+
+    private NewGameHandler newGameHandler;
 
     public ClientGUI(String ip, int port) {
         super(ip, port);
@@ -66,6 +69,9 @@ public class ClientGUI extends Client implements Observer<Move> {
     @Override
     public void setGameId(String gameId) {
         this.gameId = gameId;
+        this.newGameHandler.goToWaitingRoom(gameId);
+
+        /*this.gameId = gameId;
         this.tempJFrame = new JFrame("Waiting room");
         JTextArea jTextArea = new JTextArea("Wait for the other players\nYour game ID is: " + gameId);
         jTextArea.setEditable(false);
@@ -73,15 +79,19 @@ public class ClientGUI extends Client implements Observer<Move> {
         this.tempJFrame.add(jTextArea);
         this.tempJFrame.setVisible(true);
         this.tempJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.tempJFrame.pack();
-
+        this.tempJFrame.pack();*/
     }
+
     public void setLocalGameID(String gameId){
         this.gameId = gameId;
     }
+
     @Override
     public void reBuildGame(String errorMessage) {
-        JFrame jFrame;
+
+        // todo change to fit new structure with NewGameHandler
+
+        /*JFrame jFrame;
         jFrame = new JFrame();
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -92,24 +102,32 @@ public class ClientGUI extends Client implements Observer<Move> {
         idMatchField.addActionListener(new ReInsertMatchIdListener(getInstance(), idMatchField, jFrame));
         jFrame.add(idMatchField);
         jFrame.pack();
-        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);*/
     }
 
     @Override
     public void chooseLeaderCards(List<LeaderCard> possibleLeaderCards) {
-        new LeaderCardChoserGUI(possibleLeaderCards, this);
-        this.tempJFrame.dispose();
 
+        this.newGameHandler.goToLeaderCardChooser(possibleLeaderCards);
+
+        //new LeaderCardChoserGUI(possibleLeaderCards, this);
+        //this.tempJFrame.dispose();
     }
 
     @Override
     public void reChooseLeaderCards(String errorMessage, List<LeaderCard> possibleLeaderCards) {
-        //todo
-        this.chooseLeaderCards(possibleLeaderCards);
+        //todo display error message
+
+        this.newGameHandler.goToLeaderCardChooser(possibleLeaderCards);
+
+        //this.chooseLeaderCards(possibleLeaderCards);
     }
 
     @Override
     public void showWaitMessageForOtherPlayers() {
+
+        // todo change to fit new structure with NewGameHandler
+
         this.tempJFrame = new JFrame();
         JTextArea jTextArea = new JTextArea("Wait for the other players");
         jTextArea.setEditable(false);
@@ -153,7 +171,15 @@ public class ClientGUI extends Client implements Observer<Move> {
 
     private void buildGame() {
 
-        JFrame jFrame;
+        this.tempJFrame = new JFrame();
+        this.tempJFrame.setVisible(true);
+        this.tempJFrame.setLayout(new GridLayout(1,1));
+        this.tempJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.newGameHandler = new NewGameHandler(this);
+        this.tempJFrame.add(this.newGameHandler);
+        this.tempJFrame.pack();
+
+        /*JFrame jFrame;
         jFrame = new JFrame();
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -227,24 +253,7 @@ public class ClientGUI extends Client implements Observer<Move> {
                 .addActionListener(new CreateButtonListener(getInstance(), createRadioButton, joinRadioButton,submitButton));
         idMatchField.addActionListener(new InsertMatchIdListener(getInstance(), idMatchField,submitButton));
         jFrame.pack();
-        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        // while (true) {
-        // System.out.println("What do you want to 'join' or 'create' a game?");
-        // String request = stdin.nextLine();
-        // boolean wasValid = false;
-        // if (request.equals("join")) {
-        // wasValid = joinGame();
-        // } else if (request.equals("create")) {
-        // wasValid = createGame();
-        // } else {
-        // System.out.println("Request not valid!");
-        // }
-        // if (wasValid) {
-        // break;
-        // }
-        // }
-
+        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);*/
     }
 
     public void createOrJoinGame() {
@@ -255,20 +264,17 @@ public class ClientGUI extends Client implements Observer<Move> {
         }
     }
 
-    private void joinGame() { // returns true if the joining request was created successfully
-
-            this.send(new JoinRequestMove(this.myNickname, this.gameId));
-
-
+    // sends JoinRequestMove, returns true if the joining request was created successfully
+    private void joinGame() {
+        this.send(new JoinRequestMove(this.myNickname, this.gameId));
     }
 
-    private void createGame() { // returns true if the creation request was created successfully
-
-            this.send(new CreateRequestMove(this.numPlayers, this.myNickname));
-
+    // sends CreateRequestMove, returns true if the creation request was created successfully
+    private void createGame() {
+        this.send(new CreateRequestMove(this.numPlayers, this.myNickname));
     }
 
-    // public Thread asyncCli() {// sends to server and shows the match
+    /*// public Thread asyncCli() {// sends to server and shows the match
     // Thread t = new Thread(new Runnable() {
     // @Override
     // public void run() {
@@ -311,7 +317,7 @@ public class ClientGUI extends Client implements Observer<Move> {
     // }
     //
     // return null;
-    // }
+    // }*/
 
     public void run() throws IOException {
         Socket socket = new Socket(ip, port);

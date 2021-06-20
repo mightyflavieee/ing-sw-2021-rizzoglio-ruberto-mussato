@@ -2,7 +2,6 @@ package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.client.ClientGUI;
 import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardChoserGUI;
-import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.boardproduction.GoBackFromBoardProduction;
 import it.polimi.ingsw.project.client.gui.listeners.newgame.GoBackFromJoinListener;
 import it.polimi.ingsw.project.client.gui.listeners.newgame.JoinGameListener;
 import it.polimi.ingsw.project.client.gui.listeners.newgame.SelectGameTypeListener;
@@ -30,6 +29,7 @@ public class NewGameHandler extends JPanel {
 
     private JLabel selectGameTypeTitle;
     private JPanel selectGameTypeButtonGroupPanel;
+    private ButtonGroup selectGameTypeRadioButtonGroup;
     private List<JRadioButton> selectGameTypeRadioButtons;
     private List<JButton> selectGameTypeButtons;
 
@@ -48,9 +48,10 @@ public class NewGameHandler extends JPanel {
     private LeaderCardChoserGUI leaderCardChooser;
     private ClientGUI clientGUI;
 
-    public NewGameHandler() {
+    public NewGameHandler(ClientGUI clientGUI) {
         this.setVisible(true);
         this.setLayout(new GridLayout(1, 1));
+        this.clientGUI = clientGUI;
         createPanels();
         this.mainLayout = new CardLayout();
         this.mainPanel = new JPanel();
@@ -159,7 +160,7 @@ public class NewGameHandler extends JPanel {
         this.selectNicknameLabel = new JLabel("Choose a nickname:");
         this.selectNicknameTextField = new JTextField();
         this.selectNicknameButton = new JButton("Confirm Nickname");
-        this.selectNicknameButton.addActionListener(new SelectNicknameListener(this));
+        this.selectNicknameButton.addActionListener(new SelectNicknameListener(this.clientGUI, this));
     }
 
     private void createSelectGameTypeComponents() {
@@ -175,8 +176,9 @@ public class NewGameHandler extends JPanel {
         radioButtonGroup.add(button4Players);
         JButton createGameButton = new JButton("Create Game");
         JButton joinGameButton = new JButton("Join Game");
-        createGameButton.addActionListener(new SelectGameTypeListener(this, true));
-        joinGameButton.addActionListener(new SelectGameTypeListener(this, false));
+        createGameButton.addActionListener(new SelectGameTypeListener(this.clientGUI, this, true));
+        joinGameButton.addActionListener(new SelectGameTypeListener(this.clientGUI,this, false));
+        this.selectGameTypeRadioButtonGroup = radioButtonGroup;
         this.selectGameTypeButtons = new ArrayList<>();
         this.selectGameTypeButtons.add(createGameButton);
         this.selectGameTypeButtons.add(joinGameButton);
@@ -224,18 +226,28 @@ public class NewGameHandler extends JPanel {
 
     public void goTOSelectJoinGameID() { this.mainLayout.show(this.mainPanel, SELECTJOINGAMEID); }
 
-    public void goToWaitingRoom() { this.mainLayout.show(this.mainPanel, WAITINGROOM); }
+    public void goToWaitingRoom(String gameID) {
+        this.waitingRoomLabel.setText("Wait for the other players\nYour game ID is: " + gameID);
+        this.mainLayout.show(this.mainPanel, WAITINGROOM);
+    }
 
     public void goToLeaderCardChooser(List<LeaderCard> leaderCards) {
         this.leaderCardChooser = new LeaderCardChoserGUI(leaderCards, this.clientGUI);
+        this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooser);
         this.mainLayout.show(this.mainPanel, LEADERCARDCHOOSER);
     }
+
+    public JTextField getNicknameTextField() { return this.selectNicknameTextField; }
+
+    public List<JRadioButton> getRadioButtons() { return this.selectGameTypeRadioButtons; }
+
+    public ButtonGroup getRadioButtonGroup() { return this.selectGameTypeRadioButtonGroup; }
 
     public static void main(String[] args) {
         JFrame jFrame = new JFrame();
         jFrame.setVisible(true);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        NewGameHandler newGameHandler = new NewGameHandler();
+        NewGameHandler newGameHandler = new NewGameHandler(new ClientGUI("localhost", 8080));
         jFrame.add(newGameHandler);
         jFrame.pack();
     }
