@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
+import it.polimi.ingsw.project.client.ClientGUI;
 import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.board.*;
 import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardPlaceGUI;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 
 public class GUI extends Observable<Move> {
     private JFrame jFrame;
+    private ClientGUI clientGUI;
     private BoardGUI boardGUI;
     private MarketGUI marketGUI;
     private LeaderCardPlaceGUI leaderCardPlaceGUI;
@@ -35,8 +37,8 @@ public class GUI extends Observable<Move> {
     private BuyDevCardMoveHandler buyDevCardMoveHandler;
     private ProductionMoveHandler productionMoveHandler;
 
-
-    public GUI(Match match, String myNickname) {
+    public GUI(ClientGUI clientGUI, Match match, String myNickname) {
+        this.clientGUI = clientGUI;
         this.takeMarketResourceBuilder = new TakeMarketResourceBuilder();
         this.jFrame = new JFrame();
         this.jFrame.setTitle("Master of Renaissance");
@@ -55,14 +57,6 @@ public class GUI extends Observable<Move> {
         this.cardContainerGUI = new CardContainerGUI(this.informationsGUI, match.getCardContainer());
         this.leaderCardPlaceGUI = new LeaderCardPlaceGUI(this.mePlayer.getLeaderCards(),this);
         this.playersBarGUI = new PlayersBarGUI(this.opponentsPlayer.stream().map(Player::getNickname).collect(Collectors.toList()), myNickname,this);
-
-//        this.jFrame.add(boardGUI, BorderLayout.NORTH);
-//        this.jFrame.add(informationsGUI, BorderLayout.CENTER);
-//        //this.jFrame.add(historyGUI, BorderLayout.NORTH);
-//        this.jFrame.add(marketGUI, BorderLayout.SOUTH);
-//        this.jFrame.add(cardContainerGUI, BorderLayout.WEST);
-//        this.jFrame.add(leaderCardPlaceGui, BorderLayout.EAST);
-        //this.jFrame.add(playersBarGUI, BorderLayout.SOUTH);
 
         JPanel bottomPanel = new JPanel();
         bottomPanel.setLayout(new BorderLayout());
@@ -119,16 +113,20 @@ public class GUI extends Observable<Move> {
     }
 
     public void setMatch(Match match){
-        Pair<Player, List<Player>> pair = Utils.splitPlayers(match,this.mePlayer.getNickname());
-        this.mePlayer = pair._1;
-        this.opponentsPlayer = pair._2;
-        this.marketGUI.setMarket(match.getMarket(),this.mePlayer);
-        this.historyGUI.setMyHistory(this.mePlayer.getHistoryToString());
-        this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
-        this.cardContainerGUI.setCardContainer(match.getCardContainer());
-        this.leaderCardPlaceGUI.setMyLeaderCards(this.mePlayer);
-        this.boardGUI.refresh(this.mePlayer.getBoard());
-        this.disableButtonsHandler(this.mePlayer.getTurnPhase());
+        if (match.getisOver()) {
+            this.clientGUI.endGame();
+        } else {
+            Pair<Player, List<Player>> pair = Utils.splitPlayers(match,this.mePlayer.getNickname());
+            this.mePlayer = pair._1;
+            this.opponentsPlayer = pair._2;
+            this.marketGUI.setMarket(match.getMarket(),this.mePlayer);
+            this.historyGUI.setMyHistory(this.mePlayer.getHistoryToString());
+            this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
+            this.cardContainerGUI.setCardContainer(match.getCardContainer());
+            this.leaderCardPlaceGUI.setMyLeaderCards(this.mePlayer);
+            this.boardGUI.refresh(this.mePlayer.getBoard());
+            this.disableButtonsHandler(this.mePlayer.getTurnPhase());
+        }
     }
 
     public void showMarketInformations(boolean hasFaith) {
@@ -155,6 +153,8 @@ public class GUI extends Observable<Move> {
         this.boardGUI.setBoardByPlayer(this.mePlayer);
         this.disableAllButtons();
     }
+
+    public JFrame getJFrame() { return this.jFrame; }
 
     public InformationsGUI getInformationsGUI() { return informationsGUI; }
 

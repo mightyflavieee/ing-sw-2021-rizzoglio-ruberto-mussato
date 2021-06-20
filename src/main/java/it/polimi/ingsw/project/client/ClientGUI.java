@@ -1,12 +1,10 @@
 package it.polimi.ingsw.project.client;
 
+import it.polimi.ingsw.project.client.gui.EndGameHandler;
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.NewGameHandler;
-import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardChoserGUI;
-import it.polimi.ingsw.project.client.gui.listeners.login.*;
 import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.Match;
-import it.polimi.ingsw.project.model.board.card.Card;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.*;
 import it.polimi.ingsw.project.model.playermove.interfaces.Request;
@@ -24,11 +22,11 @@ import java.util.List;
 public class ClientGUI extends Client implements Observer<Move> {
 
     private GUI gui;
-    private JFrame tempJFrame;
+    private JFrame jFrame;
     private boolean createGame; // true create, false join
     private int numPlayers;
-
     private NewGameHandler newGameHandler;
+    private EndGameHandler endGameHandler;
 
     public ClientGUI(String ip, int port) {
         super(ip, port);
@@ -39,19 +37,23 @@ public class ClientGUI extends Client implements Observer<Move> {
         return this;
     }
 
+    public Optional<GUI> getGui() {
+        return Optional.ofNullable(gui);
+    }
+
+    public Optional<Match> getMatch() {
+        return Optional.ofNullable(match);
+    }
+
     @Override
     public void setMatch(Match match) {
         if(this.getGui().isEmpty()){
-            this.tempJFrame.dispose();
-            this.gui = new GUI(match, this.myNickname);
+            this.jFrame.dispose();
+            this.gui = new GUI(this, match, this.myNickname);
             this.gui.addObserver(this);
         }else {
-            gui.setMatch(match);
+            this.gui.setMatch(match);
         }
-    }
-
-    public Optional<GUI> getGui() {
-        return Optional.ofNullable(gui);
     }
 
     public void setCreateGame(boolean createGame) {
@@ -60,10 +62,6 @@ public class ClientGUI extends Client implements Observer<Move> {
 
     public void setNumPlayers(int numPlayers) {
         this.numPlayers = numPlayers;
-    }
-
-    public Optional<Match> getMatch() {
-        return Optional.ofNullable(match);
     }
 
     @Override
@@ -107,11 +105,7 @@ public class ClientGUI extends Client implements Observer<Move> {
 
     @Override
     public void chooseLeaderCards(List<LeaderCard> possibleLeaderCards) {
-
         this.newGameHandler.goToLeaderCardChooser(possibleLeaderCards);
-
-        //new LeaderCardChoserGUI(possibleLeaderCards, this);
-        //this.tempJFrame.dispose();
     }
 
     @Override
@@ -128,14 +122,14 @@ public class ClientGUI extends Client implements Observer<Move> {
 
         // todo change to fit new structure with NewGameHandler
 
-        this.tempJFrame = new JFrame();
+        this.jFrame = new JFrame();
         JTextArea jTextArea = new JTextArea("Wait for the other players");
         jTextArea.setEditable(false);
         jTextArea.setVisible(true);
-        this.tempJFrame.add(jTextArea);
-        this.tempJFrame.setVisible(true);
-        this.tempJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.tempJFrame.pack();
+        this.jFrame.add(jTextArea);
+        this.jFrame.setVisible(true);
+        this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.jFrame.pack();
     }
 
     public void send(Request request){
@@ -171,13 +165,13 @@ public class ClientGUI extends Client implements Observer<Move> {
 
     private void buildGame() {
 
-        this.tempJFrame = new JFrame();
-        this.tempJFrame.setVisible(true);
-        this.tempJFrame.setLayout(new GridLayout(1,1));
-        this.tempJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.jFrame = new JFrame();
+        this.jFrame.setVisible(true);
+        this.jFrame.setLayout(new GridLayout(1,1));
+        this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.newGameHandler = new NewGameHandler(this);
-        this.tempJFrame.add(this.newGameHandler);
-        this.tempJFrame.pack();
+        this.jFrame.add(this.newGameHandler);
+        this.jFrame.pack();
 
         /*JFrame jFrame;
         jFrame = new JFrame();
@@ -272,6 +266,21 @@ public class ClientGUI extends Client implements Observer<Move> {
     // sends CreateRequestMove, returns true if the creation request was created successfully
     private void createGame() {
         this.send(new CreateRequestMove(this.numPlayers, this.myNickname));
+    }
+
+    public void endGame() {
+        this.gui.getJFrame().dispose();
+        this.endGameHandler = new EndGameHandler(this.match, this);
+        this.jFrame = new JFrame();
+        this.jFrame.setVisible(true);
+        this.jFrame.setLayout(new GridLayout(1,1));
+        this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.jFrame.add(this.endGameHandler);
+        this.jFrame.pack();
+    }
+
+    public void restart() {
+        buildGame();
     }
 
     /*// public Thread asyncCli() {// sends to server and shows the match

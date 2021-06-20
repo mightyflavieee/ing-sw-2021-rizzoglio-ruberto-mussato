@@ -369,4 +369,25 @@ public class Match implements Serializable, Cloneable {
         this.currentPlayer.readdObservers(this);
     }
 
+    public LinkedHashMap<Integer, Player> getLeaderboard() {
+        LinkedHashMap<Integer, Player> leaderboard = new LinkedHashMap<>();
+        Player[] orderedListOfPlayers = new Player[this.playerList.size()];
+        for (int i = 0; i < this.playerList.size(); i++) {
+            orderedListOfPlayers[i] = this.playerList.get(i);
+        }
+        for (int i = 0; i < orderedListOfPlayers.length; i++) {
+            for (int j = i-1; j >= 0; j--) {
+                if (orderedListOfPlayers[i].getVictoryPoints() >
+                    orderedListOfPlayers[j].getVictoryPoints()) {
+                    Player temp = orderedListOfPlayers[j];
+                    orderedListOfPlayers[j] = orderedListOfPlayers[i];
+                    orderedListOfPlayers[i] = temp;
+                }
+            }
+        }
+        for (int i = 0; i < orderedListOfPlayers.length; i++) {
+            leaderboard.put(i, orderedListOfPlayers[i]);
+        }
+        return leaderboard;
+    }
 }

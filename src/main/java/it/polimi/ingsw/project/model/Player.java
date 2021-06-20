@@ -83,9 +83,7 @@ public class Player implements Serializable, Cloneable {
     return this.nickname;
   }
 
-  public int getVictoryPoints() {
-    return this.victoryPoints;
-  }
+  public int getVictoryPoints() { return this.victoryPoints; }
 
   public void addVictoryPoints(int newVictoryPoints) {
     this.victoryPoints = this.victoryPoints + newVictoryPoints;

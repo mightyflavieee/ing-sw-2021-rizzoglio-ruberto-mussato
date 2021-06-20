@@ -60,7 +60,6 @@ public class NewGameHandler extends JPanel {
         this.mainPanel.add(SELECTTYPEOFGAME, this.selectGameTypePanel);
         this.mainPanel.add(SELECTJOINGAMEID, this.selectJoinGameIDPanel);
         this.mainPanel.add(WAITINGROOM, this.waitingRoomPanel);
-        //this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooser);
         this.mainLayout.show(this.mainPanel, SELECTNICKNAME);
         this.add(this.mainPanel);
     }
@@ -233,7 +232,9 @@ public class NewGameHandler extends JPanel {
 
     public void goToLeaderCardChooser(List<LeaderCard> leaderCards) {
         this.leaderCardChooser = new LeaderCardChoserGUI(leaderCards, this.clientGUI);
-        this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooser);
+        if (this.mainPanel.getComponentCount() == 4) {
+            this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooser);
+        }
         this.mainLayout.show(this.mainPanel, LEADERCARDCHOOSER);
     }
 
@@ -242,13 +243,4 @@ public class NewGameHandler extends JPanel {
     public List<JRadioButton> getRadioButtons() { return this.selectGameTypeRadioButtons; }
 
     public ButtonGroup getRadioButtonGroup() { return this.selectGameTypeRadioButtonGroup; }
-
-    public static void main(String[] args) {
-        JFrame jFrame = new JFrame();
-        jFrame.setVisible(true);
-        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        NewGameHandler newGameHandler = new NewGameHandler(new ClientGUI("localhost", 8080));
-        jFrame.add(newGameHandler);
-        jFrame.pack();
-    }
 }
