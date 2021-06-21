@@ -11,6 +11,7 @@ import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.
 import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.leaderproduction.*;
 import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.productiontypes.*;
 import it.polimi.ingsw.project.model.resource.ResourceType;
+import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -340,13 +341,10 @@ public class MainPhaseHandler extends JInternalFrame {
 
     public void goToTransmutationPanel() {
         List<ResourceType> transmutationPerks = this.gui.getTransmutationPerks();
-        this.transmutationButtons.get(0).setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/" + transmutationPerks.get(0) + ".png")
-                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        this.transmutationButtons.get(1).setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/" + transmutationPerks.get(1) + ".png")
-                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        this.mainPanelLayout.show(this.mainPanel, TRANSMUTATIONPANEL);
+        this.transmutationButtons.get(0).setIcon(Utils.readIcon("resourcetype/" + transmutationPerks.get(0) + ".png",
+                20 ,20));
+        this.transmutationButtons.get(1).setIcon(Utils.readIcon("resourcetype/" + transmutationPerks.get(1) + ".png",
+                20 ,20));
     }
 
     public void goToAbortMovePanel() { this.mainPanelLayout.show(this.mainPanel, ABORTMOVEPANEL); }
