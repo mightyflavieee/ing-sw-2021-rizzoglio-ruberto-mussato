@@ -677,4 +677,7 @@ public class Board implements Serializable, Cloneable {
     this.leaderCards = selectedLeaderCards;
   }
 
+    public int getBlackMarkerPosition() {
+      return this.faithMap.getBlackMarkerPosition();
+    }
 }

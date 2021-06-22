@@ -206,7 +206,7 @@ public class NewGameHandler extends JPanel {
         JButton buttonGoBack = new JButton("Go Back");
         JButton buttonJoin = new JButton("Join");
         buttonGoBack.addActionListener(new GoBackFromJoinListener(this));
-        buttonJoin.addActionListener(new JoinGameListener(this.clientGUI));
+        buttonJoin.addActionListener(new JoinGameListener(this.clientGUI,this));
         this.selectJoinGameIDButtons = new ArrayList<>();
         this.selectJoinGameIDButtons.add(buttonGoBack);
         this.selectJoinGameIDButtons.add(buttonJoin);
@@ -243,4 +243,12 @@ public class NewGameHandler extends JPanel {
     public List<JRadioButton> getRadioButtons() { return this.selectGameTypeRadioButtons; }
 
     public ButtonGroup getRadioButtonGroup() { return this.selectGameTypeRadioButtonGroup; }
+
+    public JTextField getSelectJoinGameIDTextField() {
+        return selectJoinGameIDTextField;
+    }
+
+    public void setSelectJoinGameIDTextField(JTextField selectJoinGameIDTextField) {
+        this.selectJoinGameIDTextField = selectJoinGameIDTextField;
+    }
 }

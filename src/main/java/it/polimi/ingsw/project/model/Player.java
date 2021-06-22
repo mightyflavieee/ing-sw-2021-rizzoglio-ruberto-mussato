@@ -193,7 +193,7 @@ public class Player implements Serializable, Cloneable {
   }
 
   public int getBlackMarkerPosition() {
-    return this.board.getMarkerPosition();
+    return this.board.getBlackMarkerPosition();
   }
 
 }
