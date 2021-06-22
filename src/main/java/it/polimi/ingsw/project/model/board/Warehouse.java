@@ -315,4 +315,12 @@ public class Warehouse extends Observable<Warehouse>{
         .toString();
   }
 
+  public int calculateResourceVictoryPoints() {
+    double totalResources = 0;
+    LinkedHashMap<ResourceType, Integer> containedResources = mapAllContainedResources();
+    for (ResourceType resourceType : containedResources.keySet()) {
+      totalResources = totalResources + containedResources.get(resourceType);
+    }
+    return (int) Math.floor(totalResources / 5);
+  }  
 }

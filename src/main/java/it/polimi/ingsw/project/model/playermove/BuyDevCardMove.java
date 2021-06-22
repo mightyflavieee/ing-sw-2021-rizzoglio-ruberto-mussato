@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.model.playermove;
 
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
+import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import java.util.Map;
@@ -26,7 +27,12 @@ public class BuyDevCardMove extends Move{
 
     @Override
     public void performMove(Match match) {
+        // performs move
         match.performBuyDevCardMove(this.devCardID, this.resourcesToEliminateWarehouse, this.resourcesToEliminateChest, this.position);
+        // adds DevelopmentCard victory points to player
+        int victoryPointsToAdd = match.getCurrentPlayer().getBoard().fetchDevCardById(this.devCardID).getPoints();
+        match.getCurrentPlayer().addVictoryPoints(victoryPointsToAdd);
+        // checks if the player has 7 DevelopmentCards, if yes the last turn is player or the game ends
         if (match.getCurrentPlayer().hasSevenCards()) {
             match.setIsLastTurn(true);
         }

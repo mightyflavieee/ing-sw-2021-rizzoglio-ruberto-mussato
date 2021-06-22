@@ -16,7 +16,11 @@ public class ActivateLeaderCardMove extends Move{
 
     @Override
     public void performMove(Match match){
+        // performs move
         match.performActivateLeaderCardMove(this.leaderCardID);
+        // adds LeaderCard victory points to player
+        int victoryPointsToAdd = match.getCurrentPlayer().getBoard().fetchLeaderCardById(this.leaderCardID).getPoints();
+        match.getCurrentPlayer().addVictoryPoints(victoryPointsToAdd);
     }
 
     @Override

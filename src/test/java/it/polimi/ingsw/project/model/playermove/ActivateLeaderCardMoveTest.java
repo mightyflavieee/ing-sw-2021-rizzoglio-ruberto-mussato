@@ -130,6 +130,7 @@ class ActivateLeaderCardMoveTest {
         activateLeaderCard.performMove(match);
         // tests the function
         assertEquals(Status.Active, player.getBoard().getLeaderCards().get(0).getStatus());
+        assertEquals(1, player.getVictoryPoints());
     }
     @Test
     void activateLeaderCardWithDevCard(){

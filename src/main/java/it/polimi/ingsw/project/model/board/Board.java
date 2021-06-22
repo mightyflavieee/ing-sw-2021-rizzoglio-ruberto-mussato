@@ -124,7 +124,7 @@ public class Board implements Serializable, Cloneable {
   }
 
   // fetches a DevelopmentCard by Id in the mapTray, returns null if not present
-  private DevelopmentCard fetchDevCardById(String devCardID) {
+  public DevelopmentCard fetchDevCardById(String devCardID) {
     for (DevCardPosition position : this.mapTray.keySet()) {
       for (DevelopmentCard card : this.mapTray.get(position)) {
         if (card.getId().equals(devCardID)) {
@@ -137,7 +137,7 @@ public class Board implements Serializable, Cloneable {
   }
 
   // fetches a LeaderCard by Id in this.leaderCards, returns null if not present
-  private LeaderCard fetchLeaderCardById(String leaderCardID) {
+  public LeaderCard fetchLeaderCardById(String leaderCardID) {
     for (LeaderCard card : this.leaderCards) {
       if (card.getId().equals(leaderCardID)) {
         return card;
@@ -242,7 +242,7 @@ public class Board implements Serializable, Cloneable {
   }
 
   // converts a CardLevel type to int
-  private int getIntegerFromCardLevel(CardLevel level) { // TODO no va bene
+  private int getIntegerFromCardLevel(CardLevel level) {
     if (level.equals(CardLevel.One)) {
       return 1;
     } else {
@@ -695,5 +695,19 @@ public class Board implements Serializable, Cloneable {
       count = count + this.mapTray.get(position).size();
     }
     return count;
+  }
+
+  public int calculateResourceVictoryPoints() {
+    int resourceVictoryPointsWarehouse = this.warehouse.calculateResourceVictoryPoints();
+    int resourceVictoryPointsChest = calculateChestResourceVictoryPoints();
+    return resourceVictoryPointsWarehouse + resourceVictoryPointsChest;
+  }
+
+  private int calculateChestResourceVictoryPoints() {
+    double totalResources = 0;
+    for (ResourceType resourceType : this.chest.keySet()) {
+      totalResources = totalResources + this.chest.get(resourceType);
+    }
+    return (int) Math.floor(totalResources / 5);
   }
 }

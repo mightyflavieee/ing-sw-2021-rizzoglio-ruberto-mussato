@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.model;
 
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
+import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
@@ -201,5 +202,10 @@ public class Player implements Serializable, Cloneable {
       return true;
     }
     return false;
+  }
+
+  public void addResourceVictoryPoints() {
+    int victoryPointsToAdd = this.board.calculateResourceVictoryPoints();
+    addVictoryPoints(victoryPointsToAdd);
   }
 }

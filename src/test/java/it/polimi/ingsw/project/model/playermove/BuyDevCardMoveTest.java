@@ -141,5 +141,6 @@ class BuyDevCardMoveTest {
         assertEquals(devCard, player.getBoard().getMapTray().get(DevCardPosition.Left).get(0));
         assertEquals(0, player.getBoard().getMapTray().get(DevCardPosition.Center).size());
         assertEquals(0, player.getBoard().getMapTray().get(DevCardPosition.Right).size());
+        assertEquals(1, player.getVictoryPoints());
     }
 }
