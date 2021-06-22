@@ -130,10 +130,21 @@ public class Match implements Serializable, Cloneable {
         this.isOver = true;
     }
 
+    public void setIsLastTurn(boolean isLastTurn) {
+        this.isLastTurn = isLastTurn;
+    }
+
     public void end() {
         if (this.isLastTurn && this.currentPlayer.getNickname()
                 .equals(this.playerList.get(this.playerList.size() - 1).getNickname())) {
+            addResourceVictoryPoints();
             this.isOver = true;
+        }
+    }
+
+    public void addResourceVictoryPoints() {
+        for (Player player : this.playerList) {
+            player.addResourceVictoryPoints();
         }
     }
 
@@ -394,6 +405,4 @@ public class Match implements Serializable, Cloneable {
         }
         return leaderboard;
     }
-
-    public void setIsLastTurn(boolean isLastTurn) { this.isLastTurn = isLastTurn; }
 }

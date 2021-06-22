@@ -692,4 +692,18 @@ public class Board implements Serializable, Cloneable {
     }
     return count;
   }
+
+  public int calculateResourceVictoryPoints() {
+    int resourceVictoryPointsWarehouse = this.warehouse.calculateResourceVictoryPoints();
+    int resourceVictoryPointsChest = calculateChestResourceVictoryPoints();
+    return resourceVictoryPointsWarehouse + resourceVictoryPointsChest;
+  }
+
+  private int calculateChestResourceVictoryPoints() {
+    double totalResources = 0;
+    for (ResourceType resourceType : this.chest.keySet()) {
+      totalResources = totalResources + this.chest.get(resourceType);
+    }
+    return (int) Math.floor(totalResources / 5);
+  }
 }

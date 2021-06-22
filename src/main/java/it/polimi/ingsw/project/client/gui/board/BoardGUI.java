@@ -116,7 +116,7 @@ public class BoardGUI extends JInternalFrame {
     }
 
     public void setBoardByPlayer(Player mePlayer) {
-        this.setTitle(mePlayer.getNickname());
+        this.setTitle(mePlayer.getNickname() + " - VP:" + mePlayer.getVictoryPoints());
         this.warehouse.setWarehouseByPlayer(mePlayer);
         this.chest.setChestByPlayer(mePlayer);
         this.mapTray.setMapTrayByPlayer(mePlayer);
