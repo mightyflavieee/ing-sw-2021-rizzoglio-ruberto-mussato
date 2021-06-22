@@ -11,6 +11,7 @@ import java.util.Map;
 import it.polimi.ingsw.project.client.gui.market.TrayGUI;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
+import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 
 import javax.imageio.ImageIO;
@@ -80,5 +81,16 @@ public class Utils {
         }
     }
 
-
+    public static boolean isOneLevelUpper(CardLevel big, CardLevel small) {
+        switch (big) {
+            case One:
+                return false;
+            case Two:
+                return small == CardLevel.One;
+            case Three:
+                return small == CardLevel.Two;
+            default:
+                return false;
+        }
+    }
 }

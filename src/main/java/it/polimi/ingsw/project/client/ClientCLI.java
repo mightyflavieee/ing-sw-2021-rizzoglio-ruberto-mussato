@@ -68,7 +68,10 @@ public class ClientCLI extends Client {
     }
 
     private void showScoreboard() {
-        System.out.println(match.getLeaderboard());
+        LinkedHashMap<Integer, Player> scoreboard = match.getLeaderboard();
+        for(Integer position : scoreboard.keySet()){
+            System.out.println(""+ position + scoreboard.get(position));
+        }
     }
 
     @Override
@@ -661,7 +664,6 @@ public class ClientCLI extends Client {
     // bought. Returns null
     // if the player wants to go back.
     private DevCardPosition selectPositionForDevCard(String devCardToBuyID) {
-        boolean goBack = false;
         DevelopmentCard devCardToBuy = this.match.getCardContainer().fetchCard(devCardToBuyID);
         DevCardPosition chosenPosition = null;
         String answer = null;
@@ -672,8 +674,7 @@ public class ClientCLI extends Client {
                 answer = this.stdin.nextLine();
                 switch (answer) {
                     case "0":
-                        goBack = true;
-                        break;
+                        return null;
                     case "1":
                         chosenPosition = DevCardPosition.Left;
                         break;
@@ -690,22 +691,19 @@ public class ClientCLI extends Client {
             }
             // verifies that the player can put the DevelopmentCard in the position he/she
             // indicated
-            if (!goBack) {
                 int lastPosition = this.match.getBoardByPlayerNickname(getNickname()).getMapTray()
                         .get(chosenPosition).size();
                 if(lastPosition == 0)
                     return chosenPosition;
                 DevelopmentCard devCardInLastPosition = this.match.getBoardByPlayerNickname(getNickname())
                         .getMapTray().get(chosenPosition).get(lastPosition-1);
-                if (devCardInLastPosition.getLevel().compareTo(devCardToBuy.getLevel()) > 0) {
+                if (!Utils.isOneLevelUpper(devCardToBuy.getLevel(),devCardInLastPosition.getLevel())) {
                     chosenPosition = null;
                     System.out.println(
-                            "The level of the upper Development Card present in the section you selected of the "
-                                    + "Map Tray is higher than the one of the Card you want to buy. Please select another position "
-                                    + "or go back.");
+                            "Forbidden Action");
                 }
-            }
-        } while (chosenPosition == null || !goBack);
+
+        } while (chosenPosition == null);
         return chosenPosition;
     }
 

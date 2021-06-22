@@ -14,15 +14,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Fixed minor error in Board.eliminateResourcesFromChest">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="corrected minor error in Warehouse.mapAllContainedResources">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/68714.json" beforeDir="false" afterPath="$PROJECT_DIR$/0c79d.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarCLI/CLI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarCLI/CLI.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarGUI/GUI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarGUI/GUI.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/68714.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/0c79d.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/playermove/ProductionMoveTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/playermove/ProductionMoveTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/utils/Utils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +94,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato" />
+      <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\out\artifacts\GC23_jarSERVER" />
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources\leadercards" />
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources" />
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\deliverables" />
@@ -122,7 +120,7 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ProductionMoveTest">
+  <component name="RunManager" selected="Application.CLI">
     <configuration name="CLI" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ClientApp" />
       <module name="GC23" />
@@ -283,9 +281,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ServerApp" />
         <item itemvalue="JUnit.ProductionMoveTest" />
         <item itemvalue="JUnit.ProductionMoveTest.enoughResourcesBoardProduction" />
-        <item itemvalue="Application.ServerApp" />
         <item itemvalue="JUnit.ControllerTest.completeTest" />
         <item itemvalue="Application.ClientAppGUI" />
       </list>
@@ -440,14 +438,7 @@
       <workItem from="1624278106264" duration="660000" />
       <workItem from="1624283235019" duration="757000" />
       <workItem from="1624285516389" duration="126000" />
-      <workItem from="1624355736658" duration="25404000" />
-    </task>
-    <task id="LOCAL-00147" summary="added boardModel attribute in BoardGUI">
-      <created>1622628260066</created>
-      <option name="number" value="00147" />
-      <option name="presentableId" value="LOCAL-00147" />
-      <option name="project" value="LOCAL" />
-      <updated>1622628260066</updated>
+      <workItem from="1624355736658" duration="28565000" />
     </task>
     <task id="LOCAL-00148" summary="added changeShelf function in WarehouseGUI">
       <created>1622630617405</created>
@@ -785,7 +776,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624380214588</updated>
     </task>
-    <option name="localTasksCounter" value="196" />
+    <task id="LOCAL-00196" summary="corrected minor error in Warehouse.mapAllContainedResources">
+      <created>1624382985564</created>
+      <option name="number" value="00196" />
+      <option name="presentableId" value="LOCAL-00196" />
+      <option name="project" value="LOCAL" />
+      <updated>1624382985564</updated>
+    </task>
+    <option name="localTasksCounter" value="197" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -815,7 +813,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fixed minor error in gui listeners in WarehouseGUI" />
     <MESSAGE value="fixed MainPhaseHandler" />
     <MESSAGE value="added gui listeners for BuyDevCardMove" />
     <MESSAGE value="added disable/enable buttons functions in CardContainerGUI" />
@@ -840,7 +837,8 @@
     <MESSAGE value="Fixed minor error in server.handleReconnectionAfterServerCrashed and in Match.setPlayerConnectionToTrue" />
     <MESSAGE value="Fixed minor error in Match.setPlayerConnectionToTrue" />
     <MESSAGE value="Fixed minor error in Board.eliminateResourcesFromChest" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed minor error in Board.eliminateResourcesFromChest" />
+    <MESSAGE value="corrected minor error in Warehouse.mapAllContainedResources" />
+    <option name="LAST_COMMIT_MESSAGE" value="corrected minor error in Warehouse.mapAllContainedResources" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -880,19 +878,9 @@
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java</url>
-          <line>497</line>
-          <option name="timeStamp" value="62" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/SocketClientConnection.java</url>
           <line>77</line>
           <option name="timeStamp" value="63" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java</url>
-          <line>476</line>
-          <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/controller/Controller.java</url>
