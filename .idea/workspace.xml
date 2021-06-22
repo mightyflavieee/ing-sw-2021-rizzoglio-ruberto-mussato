@@ -14,15 +14,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Fixed minor error in Match.setPlayerConnectionToTrue">
-      <change afterPath="$PROJECT_DIR$/647fc.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/87d6c.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c03ba.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eb96e.json" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Fixed minor error in Board.eliminateResourcesFromChest">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/68714.json" beforeDir="false" afterPath="$PROJECT_DIR$/68714.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/68714.json" beforeDir="false" afterPath="$PROJECT_DIR$/0c79d.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarCLI/CLI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarCLI/CLI.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarGUI/GUI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarGUI/GUI.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/68714.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/0c79d.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/playermove/ProductionMoveTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/playermove/ProductionMoveTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +122,7 @@
       <recent name="it.polimi.ingsw.project.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.CLI">
+  <component name="RunManager" selected="JUnit.ProductionMoveTest">
     <configuration name="CLI" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ClientApp" />
       <module name="GC23" />
@@ -167,25 +167,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CardContainerTest.constructor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="GC23" />
-      <selectedOptions>
-        <option name="module.classpath" />
-      </selectedOptions>
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.project.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.project.model" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.model.CardContainerTest" />
-      <option name="METHOD_NAME" value="constructor" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ControllerTest.completeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="GC23" />
       <selectedOptions>
@@ -205,20 +186,39 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SerializeTest.deserializedTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ProductionMoveTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="GC23" />
       <selectedOptions>
         <option name="module.classpath" />
       </selectedOptions>
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.project.server.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.project.model.playermove.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.project.server" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.server.SerializeTest" />
-      <option name="METHOD_NAME" value="deserializedTest" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.project.model.playermove" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.model.playermove.ProductionMoveTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProductionMoveTest.enoughResourcesBoardProduction" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="GC23" />
+      <selectedOptions>
+        <option name="module.classpath" />
+      </selectedOptions>
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.project.model.playermove.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.project.model.playermove" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.model.playermove.ProductionMoveTest" />
+      <option name="METHOD_NAME" value="enoughResourcesBoardProduction" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -277,17 +277,17 @@
       <item itemvalue="JAR Application.GUI" />
       <item itemvalue="JAR Application.CLI" />
       <item itemvalue="JUnit.testCoverage" />
-      <item itemvalue="JUnit.CardContainerTest.constructor" />
-      <item itemvalue="JUnit.SerializeTest.deserializedTest" />
       <item itemvalue="JUnit.ControllerTest.completeTest" />
+      <item itemvalue="JUnit.ProductionMoveTest.enoughResourcesBoardProduction" />
+      <item itemvalue="JUnit.ProductionMoveTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ProductionMoveTest" />
+        <item itemvalue="JUnit.ProductionMoveTest.enoughResourcesBoardProduction" />
         <item itemvalue="Application.ServerApp" />
         <item itemvalue="JUnit.ControllerTest.completeTest" />
         <item itemvalue="Application.ClientAppGUI" />
-        <item itemvalue="JUnit.SerializeTest.deserializedTest" />
-        <item itemvalue="JUnit.CardContainerTest.constructor" />
       </list>
     </recent_temporary>
   </component>
@@ -440,14 +440,7 @@
       <workItem from="1624278106264" duration="660000" />
       <workItem from="1624283235019" duration="757000" />
       <workItem from="1624285516389" duration="126000" />
-      <workItem from="1624355736658" duration="22822000" />
-    </task>
-    <task id="LOCAL-00146" summary="added insertInShelf function in WarehouseGUI">
-      <created>1622628224209</created>
-      <option name="number" value="00146" />
-      <option name="presentableId" value="LOCAL-00146" />
-      <option name="project" value="LOCAL" />
-      <updated>1622628224209</updated>
+      <workItem from="1624355736658" duration="25404000" />
     </task>
     <task id="LOCAL-00147" summary="added boardModel attribute in BoardGUI">
       <created>1622628260066</created>
@@ -785,7 +778,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624375411253</updated>
     </task>
-    <option name="localTasksCounter" value="195" />
+    <task id="LOCAL-00195" summary="Fixed minor error in Board.eliminateResourcesFromChest">
+      <created>1624380214588</created>
+      <option name="number" value="00195" />
+      <option name="presentableId" value="LOCAL-00195" />
+      <option name="project" value="LOCAL" />
+      <updated>1624380214588</updated>
+    </task>
+    <option name="localTasksCounter" value="196" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -815,7 +815,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="updated gui listeners in WarehouseGUI" />
     <MESSAGE value="fixed minor error in gui listeners in WarehouseGUI" />
     <MESSAGE value="fixed MainPhaseHandler" />
     <MESSAGE value="added gui listeners for BuyDevCardMove" />
@@ -840,7 +839,8 @@
     <MESSAGE value="Fixed minor error in Board" />
     <MESSAGE value="Fixed minor error in server.handleReconnectionAfterServerCrashed and in Match.setPlayerConnectionToTrue" />
     <MESSAGE value="Fixed minor error in Match.setPlayerConnectionToTrue" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed minor error in Match.setPlayerConnectionToTrue" />
+    <MESSAGE value="Fixed minor error in Board.eliminateResourcesFromChest" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed minor error in Board.eliminateResourcesFromChest" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -851,33 +851,28 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
-          <line>185</line>
+          <line>190</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
-          <line>146</line>
+          <line>151</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
-          <line>153</line>
+          <line>158</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
-          <line>160</line>
+          <line>165</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/observer/custom/DiscardActionTokenObserver.java</url>
           <line>15</line>
           <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/controller/Controller.java</url>
-          <line>20</line>
-          <option name="timeStamp" value="48" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/Server.java</url>
@@ -895,14 +890,14 @@
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/SocketClientConnection.java</url>
-          <line>82</line>
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java</url>
           <line>476</line>
           <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/controller/Controller.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Match.java</url>

@@ -58,7 +58,9 @@ class ProductionMoveTest {
             assertTrue(player.getBoard().getChest().containsKey(type));
             assertEquals(newCurrentChestResources.get(type), player.getBoard().getChest().get(type));
         }
-        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
+        for(ResourceType resourceType : player.getBoard().getWarehouse().mapAllContainedResources().keySet()){
+            assertEquals(0,player.getBoard().getWarehouse().mapAllContainedResources().get(resourceType));
+        }
     }
 
     @Test
@@ -134,7 +136,9 @@ class ProductionMoveTest {
             assertTrue(player.getBoard().getChest().containsKey(type));
             assertEquals(newCurrentChestResources.get(type), player.getBoard().getChest().get(type));
         }
-        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
+        for(ResourceType resourceType : player.getBoard().getWarehouse().mapAllContainedResources().keySet()){
+            assertEquals(0,player.getBoard().getWarehouse().mapAllContainedResources().get(resourceType));
+        }
     }
 
     @Test
@@ -206,7 +210,9 @@ class ProductionMoveTest {
         newCurrentChestResources.put(ResourceType.Shield, 1);
         assertTrue(player.getBoard().getChest().containsKey(ResourceType.Shield));
         assertEquals(newCurrentChestResources.get(ResourceType.Shield), player.getBoard().getChest().get(ResourceType.Shield));
-        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
+        for(ResourceType resourceType : player.getBoard().getWarehouse().mapAllContainedResources().keySet()){
+            assertEquals(0,player.getBoard().getWarehouse().mapAllContainedResources().get(resourceType));
+        }
     }
 
     @Test
@@ -282,7 +288,9 @@ class ProductionMoveTest {
             assertTrue(player.getBoard().getChest().containsKey(type));
             assertEquals(newCurrentChestResources.get(type), player.getBoard().getChest().get(type));
         }
-        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
+        for(ResourceType resourceType : player.getBoard().getWarehouse().mapAllContainedResources().keySet()){
+            assertEquals(0,player.getBoard().getWarehouse().mapAllContainedResources().get(resourceType));
+        }
     }
 
     @Test
@@ -359,8 +367,9 @@ class ProductionMoveTest {
             assertTrue(player.getBoard().getChest().containsKey(type));
             assertEquals(newCurrentChestResources.get(type), player.getBoard().getChest().get(type));
         }
-        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
-    }
+        for(ResourceType resourceType : player.getBoard().getWarehouse().mapAllContainedResources().keySet()){
+            assertEquals(0,player.getBoard().getWarehouse().mapAllContainedResources().get(resourceType));
+        }    }
 
     @Test
     // Board and LeaderCard production with not enough resources to complete the move
@@ -460,7 +469,9 @@ class ProductionMoveTest {
             assertTrue(player.getBoard().getChest().containsKey(type));
             assertEquals(newCurrentChestResources.get(type), player.getBoard().getChest().get(type));
         }
-        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
+        for(ResourceType resourceType : player.getBoard().getWarehouse().mapAllContainedResources().keySet()){
+            assertEquals(0,player.getBoard().getWarehouse().mapAllContainedResources().get(resourceType));
+        }
     }
 
     @Test
@@ -569,7 +580,9 @@ class ProductionMoveTest {
             assertTrue(player.getBoard().getChest().containsKey(type));
             assertEquals(newCurrentChestResources.get(type), player.getBoard().getChest().get(type));
         }
-        assertTrue(player.getBoard().getWarehouse().mapAllContainedResources().isEmpty());
+        for(ResourceType resourceType : player.getBoard().getWarehouse().mapAllContainedResources().keySet()){
+            assertEquals(0,player.getBoard().getWarehouse().mapAllContainedResources().get(resourceType));
+        }
     }
 
     @Test

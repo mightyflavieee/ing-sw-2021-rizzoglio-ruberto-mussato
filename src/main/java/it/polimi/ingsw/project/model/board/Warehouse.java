@@ -29,6 +29,11 @@ public class Warehouse extends Observable<Warehouse>{
   // returns ALL resources presents in the warehouse
   public LinkedHashMap<ResourceType, Integer> mapAllContainedResources() {
     LinkedHashMap<ResourceType, Integer> currentResourcesLinkedHashMap = new LinkedHashMap<>();
+    currentResourcesLinkedHashMap.put(ResourceType.Coin,0);
+    currentResourcesLinkedHashMap.put(ResourceType.Stone,0);
+    currentResourcesLinkedHashMap.put(ResourceType.Shield,0);
+    currentResourcesLinkedHashMap.put(ResourceType.Servant,0);
+
     // getting resources from the entire warehouse
     shelves.forEach(
         (ShelfFloor floor, List<Resource> listOfResources) -> mapResourcesHelper(currentResourcesLinkedHashMap, listOfResources));
