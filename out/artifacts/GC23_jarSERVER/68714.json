@@ -14,25 +14,9 @@
           "numResourcesToDiscard": 0,
           "observers": []
         },
-        "leaderCards": [
-          {
-            "id": "id12",
-            "perk": {
-              "resource": {
-                "type": "Coin"
-              },
-              "type": "Transmutation"
-            },
-            "requiredDevCards": {
-              "Amethyst": 2,
-              "Emerald": 1
-            },
-            "status": "Inactive",
-            "victoryPoints": 5
-          }
-        ],
+        "leaderCards": [],
         "faithMap": {
-          "markerPosition": 1,
+          "markerPosition": 2,
           "blackMarkerPosition": 2,
           "faithTiles": [
             {},
@@ -1111,25 +1095,9 @@
         "numResourcesToDiscard": 0,
         "observers": []
       },
-      "leaderCards": [
-        {
-          "id": "id12",
-          "perk": {
-            "resource": {
-              "type": "Coin"
-            },
-            "type": "Transmutation"
-          },
-          "requiredDevCards": {
-            "Amethyst": 2,
-            "Emerald": 1
-          },
-          "status": "Inactive",
-          "victoryPoints": 5
-        }
-      ],
+      "leaderCards": [],
       "faithMap": {
-        "markerPosition": 1,
+        "markerPosition": 2,
         "blackMarkerPosition": 2,
         "faithTiles": [
           {},

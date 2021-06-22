@@ -326,9 +326,9 @@ public class Server {
     }
 
     public void handleReconnectionOnStartedGame(SocketClientConnection connection, String gameId, String nickName) {
-        if (connection.getServer().isPlayerPresentAndDisconnected(gameId, nickName)) {
-            connection.getServer().rejoinGame(gameId, connection, nickName);
-            connection.getServer().sendModelBackToPlayer(gameId, nickName);
+        if (this.isPlayerPresentAndDisconnected(gameId, nickName)) {
+            this.rejoinGame(gameId, connection, nickName);
+            this.sendModelBackToPlayer(gameId, nickName);
         } else {
             connection.send(new ErrorJoinMessage(
                     "We are sorry but this game is already started and you are not a player of this game or there is already a player with this name but it is connected! Try another nickname."));

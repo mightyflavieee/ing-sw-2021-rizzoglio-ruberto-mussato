@@ -21,6 +21,7 @@ public class SelectGameTypeListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        this.clientGUI.setCreateGame(isCreatingGame);
         boolean didSelect = false;
         for (JRadioButton radioButton : this.newGameHandler.getRadioButtons()) {
             didSelect = didSelect || radioButton.isSelected();
@@ -41,17 +42,16 @@ public class SelectGameTypeListener implements ActionListener {
                 }
             }
         }
-        if(!didSelect)
-            return;
+
         if (isCreatingGame) {
-            this.clientGUI.setCreateGame(true);
+            if(!didSelect)
+                return;
             this.clientGUI.createOrJoinGame();
 
             // todo andare nella waiting room (da ClientGUI forse?)
             // this.newGameHandler.goToWaitingRoom();
 
         } else {
-            this.clientGUI.setCreateGame(false);
             this.newGameHandler.goTOSelectJoinGameID();
         }
     }

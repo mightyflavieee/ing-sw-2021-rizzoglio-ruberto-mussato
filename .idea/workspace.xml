@@ -14,12 +14,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Fixed Minor error in the new Login GUI">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_19_17__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_19_17__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_01_08__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_01_08__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_13_41__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_13_41__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_16_07__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_16_07__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_17_27__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_17_27__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Corrected Minor error in SelectGameTypeListener.java and FaithMapGUI.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarCLI/CLI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarCLI/CLI.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarGUI/GUI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarGUI/GUI.jar" afterDir="false" />
@@ -27,6 +22,7 @@
       <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/FaithMapGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/FaithMapGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/newgame/SelectGameTypeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/newgame/SelectGameTypeListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -422,14 +418,7 @@
       <workItem from="1624278106264" duration="660000" />
       <workItem from="1624283235019" duration="757000" />
       <workItem from="1624285516389" duration="126000" />
-      <workItem from="1624355736658" duration="3016000" />
-    </task>
-    <task id="LOCAL-00140" summary="Updated InformationsGUI interaction with the market">
-      <created>1622383795522</created>
-      <option name="number" value="00140" />
-      <option name="presentableId" value="LOCAL-00140" />
-      <option name="project" value="LOCAL" />
-      <updated>1622383795522</updated>
+      <workItem from="1624355736658" duration="4333000" />
     </task>
     <task id="LOCAL-00141" summary="Added updated LeaderCardChoserGUI and implemented the beginning of the match using GUI interface">
       <created>1622496502282</created>
@@ -767,7 +756,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624357960511</updated>
     </task>
-    <option name="localTasksCounter" value="189" />
+    <task id="LOCAL-00189" summary="Corrected Minor error in SelectGameTypeListener.java and FaithMapGUI.java">
+      <created>1624358997774</created>
+      <option name="number" value="00189" />
+      <option name="presentableId" value="LOCAL-00189" />
+      <option name="project" value="LOCAL" />
+      <updated>1624358997774</updated>
+    </task>
+    <option name="localTasksCounter" value="190" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -797,7 +793,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Updated GUI design" />
     <MESSAGE value="added gui listeners for ProductionMove" />
     <MESSAGE value="added clickable attribute to enable/disable BoardGUI or one of its elements" />
     <MESSAGE value="added initial Main Phase logic to GUI" />
@@ -822,7 +817,8 @@
     <MESSAGE value="Changed GUI's icons input for jar compatibility" />
     <MESSAGE value="Improved Gui resize performance" />
     <MESSAGE value="Fixed Minor error in the new Login GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed Minor error in the new Login GUI" />
+    <MESSAGE value="Corrected Minor error in SelectGameTypeListener.java and FaithMapGUI.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected Minor error in SelectGameTypeListener.java and FaithMapGUI.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
