@@ -29,6 +29,10 @@ public class Board implements Serializable, Cloneable {
 
   public Board() {
     this.chest = new HashMap<>();
+    this.chest.put(ResourceType.Coin,0);
+    this.chest.put(ResourceType.Stone,0);
+    this.chest.put(ResourceType.Shield,0);
+    this.chest.put(ResourceType.Servant,0);
     this.mapTray = new HashMap<>();
     List<DevelopmentCard> listOfDevCardsLeft = new ArrayList<>();
     List<DevelopmentCard> listOfDevCardsCenter = new ArrayList<>();
@@ -682,7 +686,7 @@ public class Board implements Serializable, Cloneable {
     }
 
   public String resourcesToString(){
-    return this.warehouse.toString() + "\n Chest:\n " +this.chest.toString();
+    return this.warehouse.toString() + "\nChest:\n" +this.chest.toString();
   }
 
   public int countDevCards() {
