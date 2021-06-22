@@ -2,7 +2,9 @@ package it.polimi.ingsw.project.client;
 
 import it.polimi.ingsw.project.messages.ResponseMessage;
 import it.polimi.ingsw.project.model.Match;
+import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.TurnPhase;
+import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
@@ -51,11 +53,25 @@ public class ClientCLI extends Client {
         if (this.match != null)
             oldTurnPhase = getMatch().get().getTurnPhase(getNickname());
         this.match = match;
-        if (oldTurnPhase == TurnPhase.WaitPhase
-                && getMatch().get().getTurnPhase(getNickname()) == TurnPhase.InitialPhase) {
-            System.out.println("It's your Turn!\nPress 0 to start");
+        if(!this.match.getisOver()) {
+            if (oldTurnPhase == TurnPhase.WaitPhase
+                    && getMatch().get().getTurnPhase(getNickname()) == TurnPhase.InitialPhase) {
+                System.out.println("It's your Turn!\nPress 0 to start");
+            }
+        }else{
+            this.showScoreboard();
+            super.setActive(false);
         }
+
         unLock();
+
+    }
+
+    private void showScoreboard() {
+        List <Player> playerList = this.match.getPlayerList();
+        for(int i = 0; i < playerList.size(); i++){
+            System.out.println(playerList.get(i).getNickname() + playerList.get(i).getVictoryPoints());
+        }
     }
 
     @Override
@@ -397,9 +413,8 @@ public class ClientCLI extends Client {
         return playerMove;
     }
 
-    // TODO
     private boolean isActivateLeaderCardMovePossible(String leaderCardID) {
-        return false;
+        return this.match.isFeasibleActivateLeaderCardMove(leaderCardID);
     }
 
     // constructs the BuyDevCardMove according to the player choices
@@ -410,60 +425,130 @@ public class ClientCLI extends Client {
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
         boolean skipElimination = false;
         List<DevelopmentCard> availableDevCards = getMatch().get().getCardContainer().getAvailableDevCards();
-        String devCardToBuyID = showAndSelectDevCardToBuy(availableDevCards);
-        if (devCardToBuyID != null) {
-            while (true) {
-                System.out.println("Do you want to eliminate resources from the Warehouse? (y/n): ");
-                String answer = this.stdin.nextLine();
-                if (answer.equals("y")) {
-                    resourcesToEliminateWarehouse = selectResourcesToEliminate(devCardToBuyID, "Warehouse");
-                    break;
-                } else {
-                    if (answer.equals("n")) {
-                        skipElimination = true;
-                        break;
-                    } else {
-                        System.out.println("Choose a correct option.\n");
-                    }
-                }
-            }
-            if (!resourcesToEliminateWarehouse.isEmpty() || skipElimination) {
-                skipElimination = false;
-                while (true) {
-                    System.out.println("Do you want to eliminate resources from the Chest? (y/n): ");
-                    String answer = this.stdin.nextLine();
-                    if (answer.equals("y")) {
-                        resourcesToEliminateChest = selectResourcesToEliminate(devCardToBuyID, "Chest");
-                        break;
-                    } else {
-                        if (answer.equals("n")) {
-                            skipElimination = true;
-                            break;
-                        } else {
-                            System.out.println("Choose a correct option.\n");
-                        }
-                    }
-                }
-                if (!resourcesToEliminateChest.isEmpty() || skipElimination) {
-                    if (resourcesToEliminateWarehouse.isEmpty() && resourcesToEliminateChest.isEmpty()) {
-                        System.out.println("You did not select any resource to be eliminated. Move aborted.\n");
-                    } else {
-                        DevCardPosition position = selectPositionForDevCard(devCardToBuyID);
-                        if (position != null) {
-                            playerMove = new BuyDevCardMove(devCardToBuyID, position, resourcesToEliminateWarehouse,
-                                    resourcesToEliminateChest);
-                        }
-                    }
-                }
-            }
+        DevelopmentCard devCardToBuy = showAndSelectDevCardToBuy(availableDevCards);
+        if (devCardToBuy != null) {
+//            while (true) {
+//                System.out.println("Do you want to eliminate resources from the Warehouse? (y/n): ");
+//                String answer = this.stdin.nextLine();
+//                if (answer.equals("y")) {
+//                    resourcesToEliminateWarehouse = selectResourcesToEliminate(devCardToBuyID, "Warehouse");
+//                    break;
+//                } else {
+//                    if (answer.equals("n")) {
+//                        skipElimination = true;
+//                        break;
+//                    } else {
+//                        System.out.println("Choose a correct option.\n");
+//                    }
+//                }
+//            }
+//            if (!resourcesToEliminateWarehouse.isEmpty() || skipElimination) {
+//                skipElimination = false;
+//                while (true) {
+//                    System.out.println("Do you want to eliminate resources from the Chest? (y/n): ");
+//                    String answer = this.stdin.nextLine();
+//                    if (answer.equals("y")) {
+//                        resourcesToEliminateChest = selectResourcesToEliminate(devCardToBuyID, "Chest");
+//                        break;
+//                    } else {
+//                        if (answer.equals("n")) {
+//                            skipElimination = true;
+//                            break;
+//                        } else {
+//                            System.out.println("Choose a correct option.\n");
+//                        }
+//                    }
+//                }
+//                if (!resourcesToEliminateChest.isEmpty() || skipElimination) {
+//                    if (resourcesToEliminateWarehouse.isEmpty() && resourcesToEliminateChest.isEmpty()) {
+//                        System.out.println("You did not select any resource to be eliminated. Move aborted.\n");
+//                    } else {
+//                        DevCardPosition position = selectPositionForDevCard(devCardToBuyID);
+//                        if (position != null) {
+//                            playerMove = new BuyDevCardMove(devCardToBuyID, position, resourcesToEliminateWarehouse,
+//                                    resourcesToEliminateChest);
+//                        }
+//                    }
+//                }
+//            }
+           return this.selectResToBuyDevCard(devCardToBuy);
         }
         return playerMove;
+    }
+
+    private Move selectResToBuyDevCard(DevelopmentCard developmentCard) {
+        Board board = this.match.getBoardByPlayerNickname(myNickname);
+        String answer;
+        Map <ResourceType, Integer> resourceRequired, resourcesToEliminateWarehouse, resourceToEliminateChest;
+        resourceRequired = developmentCard.getCost();
+        resourcesToEliminateWarehouse = new HashMap<>();
+        resourceToEliminateChest = new HashMap<>();
+        if(!board.areEnoughResourcesPresent(resourceRequired)){
+            System.out.println("Not enough resources!");
+            return null;
+            //questo mi attesta che le risorse ci sono di sicuro, devo solo scegliere l'ordine
+        }
+        for(Map.Entry<ResourceType, Integer> entry : resourceRequired.entrySet()) {
+            System.out.println(entry.getKey() + " required : " + entry.getValue());
+            System.out.println("Your Resources: \n" + board.resourcesToString());
+            System.out.println("0 - go back\n" +
+                    "1 - use Warehouse's resources first and then Chest's\n" +
+                    "2 - use Chest's resources first and then Warehouse's");
+            answer = stdin.nextLine();
+            switch (answer){
+                //uno di questi metodi deve per forza andare bene a causa del controllo precedente
+                case "1":
+                    this.warehousefirst(board,entry.getKey(),entry.getValue(),resourcesToEliminateWarehouse,resourceToEliminateChest);
+                    break;
+                case "2":
+                    this.chestfirst(board,entry.getKey(),entry.getValue(),resourcesToEliminateWarehouse,resourceToEliminateChest);
+                    break;
+                case "0":
+                default:
+                    return null;
+            }
+        }
+        DevCardPosition devCardPosition = selectPositionForDevCard(developmentCard.getId());
+        if(devCardPosition == null){
+            return null;
+        }else
+            return new BuyDevCardMove(developmentCard.getId(),devCardPosition,resourcesToEliminateWarehouse,resourceToEliminateChest);
+    }
+
+    private void chestfirst(Board board, ResourceType resourcetype, Integer integer, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourceToEliminateChest) {
+        Map<ResourceType,Integer> wareHouseMap = new HashMap();
+        Map<ResourceType,Integer> chestMap = new HashMap();
+        for(int i = 0; i < integer; i++){
+            wareHouseMap.put(resourcetype,i);
+            chestMap.put(resourcetype,integer - i);
+
+            if(board.areEnoughResourcesPresentForBuyAndProduction(wareHouseMap,chestMap)){
+                break;
+            }
+        }
+        resourceToEliminateChest.put(resourcetype,chestMap.get(resourcetype));
+        resourcesToEliminateWarehouse.put(resourcetype,wareHouseMap.get(resourcetype));
+    }
+
+    private void warehousefirst(Board board, ResourceType resourcetype, Integer integer, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourceToEliminateChest) {
+        Map<ResourceType,Integer> wareHouseMap = new HashMap();
+        Map<ResourceType,Integer> chestMap = new HashMap();
+        for(int i = 0; i < integer; i++){
+            wareHouseMap.put(resourcetype,integer - i);
+            chestMap.put(resourcetype,i);
+
+            if(board.areEnoughResourcesPresentForBuyAndProduction(wareHouseMap,chestMap)){
+                break;
+            }
+        }
+        resourceToEliminateChest.put(resourcetype,chestMap.get(resourcetype));
+        resourcesToEliminateWarehouse.put(resourcetype,wareHouseMap.get(resourcetype));
     }
 
     // provides the id of the DevelopmentCard the player wants to buy. Returns null
     // if the player
     // wants to go back
-    private String showAndSelectDevCardToBuy(List<DevelopmentCard> availableDevCards) {
+    private DevelopmentCard showAndSelectDevCardToBuy(List<DevelopmentCard> availableDevCards) {
         boolean isCardPresent = false;
         String answer = null;
         System.out.println("Development Cards available for purchase:\n");
@@ -477,8 +562,7 @@ public class ClientCLI extends Client {
             if (!answer.equals("back")) {
                 for (DevelopmentCard devCard : availableDevCards) {
                     if (answer.equals(devCard.getId())) {
-                        isCardPresent = true;
-                        break;
+                        return devCard;
                     }
                 }
                 if (!isCardPresent) {
@@ -486,11 +570,10 @@ public class ClientCLI extends Client {
                             + "or go back.");
                 }
             } else {
-                answer = null;
-                break;
+                return null;
             }
         }
-        return answer;
+        return null;
     }
 
     // helper for the selectResourcesToEliminate() function, asks the player to
@@ -533,7 +616,7 @@ public class ClientCLI extends Client {
         boolean goBack = false;
         boolean isDone = false;
         do {
-            System.out.println("Select the resource type to eliminate from the " + location + " :" + "0 - Go Back;\n"
+            System.out.println("Select the resource type to eliminate from the " + location + " :\n" + "0 - Go Back;\n"
                     + "1 - Coin;\n" + "2 - Servant;\n" + "3 - Shield;\n" + "4 - Stone;\n" + "Enter here your answer: ");
             answer = stdin.nextLine();
             switch (answer) {
@@ -613,8 +696,10 @@ public class ClientCLI extends Client {
             if (!goBack) {
                 int lastPosition = getMatch().get().getBoardByPlayerNickname(getNickname()).getMapTray()
                         .get(chosenPosition).size();
+                if(lastPosition == 0)
+                    return chosenPosition;
                 DevelopmentCard devCardInLastPosition = getMatch().get().getBoardByPlayerNickname(getNickname())
-                        .getMapTray().get(chosenPosition).get(lastPosition);
+                        .getMapTray().get(chosenPosition).get(lastPosition-1);
                 if (devCardInLastPosition.getLevel().compareTo(devCardToBuy.getLevel()) > 0) {
                     chosenPosition = null;
                     System.out.println(
@@ -1199,7 +1284,7 @@ public class ClientCLI extends Client {
                     this.insertInExtraDeposit(warehouse, resourcesInHand);
                     break;
                 case "4":
-                    resourcesToDiscard.addAll(this.discardResources(warehouse, resourcesInHand));
+                    resourcesToDiscard.addAll(this.discardResources(resourcesInHand));
                     break;
                 case "5":
                     swapShelves(warehouse);
@@ -1341,7 +1426,7 @@ public class ClientCLI extends Client {
 
     }
 
-    private List<Resource> discardResources(Warehouse warehouse, Map<ResourceType, Integer> resourcesInHand) {
+    private List<Resource> discardResources(Map<ResourceType, Integer> resourcesInHand) {
         System.out.println("Which Resource type do you want to discard?\n");
         Pair<ResourceType, Integer> resourceSelected = resourceSelector(resourcesInHand);
         if (resourceSelected == null) {

@@ -18,7 +18,9 @@ public class SelectNicknameListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String nickname = this.newGameHandler.getNicknameTextField().getText();
-        this.clientGUI.setNickname(nickname);
-        this.newGameHandler.goToSelectGameType();
+        if(!nickname.isEmpty()) {
+            this.clientGUI.setNickname(nickname);
+            this.newGameHandler.goToSelectGameType();
+        }
     }
 }

@@ -160,7 +160,7 @@ public class Board implements Serializable, Cloneable {
   // double checks if the resources indicated by the user are actually present
   // usable in "isFeasible" and "perform" methods only within BuyDevCardMove
   // and DevCardProductionMove
-  private boolean areEnoughResourcesPresentForBuyAndProduction(Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+  public boolean areEnoughResourcesPresentForBuyAndProduction(Map<ResourceType, Integer> resourcesToEliminateWarehouse,
       Map<ResourceType, Integer> resourcesToEliminateChest) {
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
     if (resourcesToEliminateWarehouse != null) {
@@ -189,7 +189,7 @@ public class Board implements Serializable, Cloneable {
   }
 
   // checks if the resources indicated in the parameter are actually present
-  private boolean areEnoughResourcesPresent(Map<ResourceType, Integer> resourcesToCheck) {
+  public boolean areEnoughResourcesPresent(Map<ResourceType, Integer> resourcesToCheck) {
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
     if (resourcesToCheck != null) {
       for (ResourceType type : resourcesToCheck.keySet()) {
@@ -677,4 +677,11 @@ public class Board implements Serializable, Cloneable {
     this.leaderCards = selectedLeaderCards;
   }
 
+  public int getBlackMarkerPosition() {
+      return this.faithMap.getBlackMarkerPosition();
+    }
+
+  public String resourcesToString(){
+    return this.warehouse.toString() + "\n Chest:\n " +this.chest.toString();
+  }
 }
