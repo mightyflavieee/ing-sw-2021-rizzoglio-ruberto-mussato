@@ -62,41 +62,43 @@ public class LeaderCard extends Card {
     String converted;
     converted = "Id: " + this.id + "\n" + "Perk: " + this.perk.toString() + "Status: " + this.status.toString() + "\n";
     if (this.requiredDevCardLevel != null) {
-      converted = converted + "Required DevelopmentCard level: " + this.requiredDevCardLevel + "\n";
+      converted = converted + "Required DevelopmentCard level:\n" + this.requiredDevCardLevel + "\n";
     } else if (this.requiredResources != null) {
-      StringBuilder convertedBuilder = new StringBuilder(converted + "Required resources:\n");
-      for (ResourceType type : this.requiredResources.keySet()) {
-        if (type == ResourceType.Coin) {
-          convertedBuilder.append("Coin = ").append(this.requiredResources.get(type)).append("\n");
-        }
-        if (type == ResourceType.Servant) {
-          convertedBuilder.append("Servant = ").append(this.requiredResources.get(type)).append("\n");
-        }
-        if (type == ResourceType.Shield) {
-          convertedBuilder.append("Shield = ").append(this.requiredResources.get(type)).append("\n");
-        }
-        if (type == ResourceType.Stone) {
-          convertedBuilder.append("Stone = ").append(this.requiredResources.get(type)).append("\n");
-        }
-      }
-      converted = convertedBuilder.toString();
+//      StringBuilder convertedBuilder = new StringBuilder(converted + "Required resources:\n");
+//      for (ResourceType type : this.requiredResources.keySet()) {
+//        if (type == ResourceType.Coin) {
+//          convertedBuilder.append("Coin = ").append(this.requiredResources.get(type)).append("\n");
+//        }
+//        if (type == ResourceType.Servant) {
+//          convertedBuilder.append("Servant = ").append(this.requiredResources.get(type)).append("\n");
+//        }
+//        if (type == ResourceType.Shield) {
+//          convertedBuilder.append("Shield = ").append(this.requiredResources.get(type)).append("\n");
+//        }
+//        if (type == ResourceType.Stone) {
+//          convertedBuilder.append("Stone = ").append(this.requiredResources.get(type)).append("\n");
+//        }
+//      }
+//      converted = convertedBuilder.toString();
+      converted = converted + "Required Resources:\n" + this.requiredResources + "\n";
     } else {
-      StringBuilder convertedBuilder = new StringBuilder(converted + "Required Development Cards:\n");
-      for (CardColor cardColor : this.requiredDevCards.keySet()) {
-        if (cardColor == CardColor.Gold) {
-          convertedBuilder.append("Gold = ").append(this.requiredDevCards.get(cardColor)).append("\n");
-        }
-        if (cardColor == CardColor.Amethyst) {
-          convertedBuilder.append("Amethyst = ").append(this.requiredDevCards.get(cardColor)).append("\n");
-        }
-        if (cardColor == CardColor.Emerald) {
-          convertedBuilder.append("Emerald = ").append(this.requiredDevCards.get(cardColor)).append("\n");
-        }
-        if (cardColor == CardColor.Sapphire) {
-          convertedBuilder.append("Sapphire = ").append(this.requiredDevCards.get(cardColor)).append("\n");
-        }
-      }
-      converted = convertedBuilder.toString();
+//      StringBuilder convertedBuilder = new StringBuilder(converted + "Required Development Cards:\n");
+//      for (CardColor cardColor : this.requiredDevCards.keySet()) {
+//        if (cardColor == CardColor.Gold) {
+//          convertedBuilder.append("Gold = ").append(this.requiredDevCards.get(cardColor)).append("\n");
+//        }
+//        if (cardColor == CardColor.Amethyst) {
+//          convertedBuilder.append("Amethyst = ").append(this.requiredDevCards.get(cardColor)).append("\n");
+//        }
+//        if (cardColor == CardColor.Emerald) {
+//          convertedBuilder.append("Emerald = ").append(this.requiredDevCards.get(cardColor)).append("\n");
+//        }
+//        if (cardColor == CardColor.Sapphire) {
+//          convertedBuilder.append("Sapphire = ").append(this.requiredDevCards.get(cardColor)).append("\n");
+//        }
+//      }
+//      converted = convertedBuilder.toString();
+      converted = converted + "Required Develompent Cards:\n" + this.requiredDevCards + "\n";
     }
     return converted;
   }

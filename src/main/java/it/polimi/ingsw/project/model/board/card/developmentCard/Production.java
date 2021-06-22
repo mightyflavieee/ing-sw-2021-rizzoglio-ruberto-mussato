@@ -28,7 +28,7 @@ public class Production implements Serializable{
         for (ResourceType type : this.requiredResources.keySet()) {
             converted.append("\t").append(type).append(" = ").append(this.requiredResources.get(type)).append("\n");
         }
-        converted.append("\n" + "Manufactured resources:\n");
+        converted.append("Manufactured resources:\n");
         for (ResourceType type : this.manufacturedResources.keySet()) {
             converted.append("\t").append(type).append(" = ").append(this.manufacturedResources.get(type)).append("\n");
         }

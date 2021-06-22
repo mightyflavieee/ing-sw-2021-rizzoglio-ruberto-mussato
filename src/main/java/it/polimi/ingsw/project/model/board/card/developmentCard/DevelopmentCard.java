@@ -46,11 +46,15 @@ public class DevelopmentCard extends Card {
 
   public String toString() {
     StringBuilder converted;
-    converted = new StringBuilder("Id: " + this.id + "\n" + "Production: " + this.production + "\nLevel: " + this.level + "\nColor: " + this.color + "\n");
+    converted = new StringBuilder("Id: " + this.id + "\n" + "Production:\n" + this.production + "Level: " + this.level + "\nColor: " + this.color + "\n");
     converted.append("Cost:\n");
     for (ResourceType type : this.cost.keySet()) {
       converted.append("\t").append(type).append(" = ").append(this.cost.get(type)).append("\n");
     }
     return converted.toString();
+  }
+
+  public Map<ResourceType, Integer> getCost() {
+    return cost;
   }
 }
