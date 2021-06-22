@@ -129,6 +129,7 @@ public class GUI extends Observable<Move> {
             this.cardContainerGUI.setCardContainer(match.getCardContainer());
             this.leaderCardPlaceGUI.setMyLeaderCards(this.mePlayer);
             this.boardGUI.refresh(this.mePlayer.getBoard());
+            this.boardGUI.setBoardTitle(this.mePlayer.getNickname(), this.mePlayer.getVictoryPoints());
             this.disableButtonsHandler(this.mePlayer.getTurnPhase());
         }
     }

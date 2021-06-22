@@ -17,7 +17,7 @@ public class BoardGUI extends JInternalFrame {
     private Board boardModel;
 
     public BoardGUI(String nickname, InformationsGUI informationsGUI, Board board, boolean isSinglePlayer){
-        this.setTitle(nickname);
+        this.setTitle(nickname + " - VP: 0");
         this.setVisible(true);
 
         // this.setLayout(new GridBagLayout());
@@ -95,6 +95,10 @@ public class BoardGUI extends JInternalFrame {
         this.mapTray.refresh();
         this.faithMap.setBoardModel(boardModel);
         this.faithMap.refresh();
+    }
+
+    public void setBoardTitle(String nickname, int victoryPoints) {
+        this.setTitle(nickname + " - VP:" + victoryPoints);
     }
 
     public void disableAllButtons() {
