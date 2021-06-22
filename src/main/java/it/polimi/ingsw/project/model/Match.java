@@ -363,7 +363,7 @@ public class Match implements Serializable, Cloneable {
         for (Player player : this.playerList) {
             if (player.getNickname().equals(disconnectedPlayerNickname)) {
                 player.setIsConnected(true);
-                if(!currentPlayer.getIsConnected()){
+                if(!currentPlayer.getIsConnected() || currentPlayer.getNickname().equals(disconnectedPlayerNickname)){
                     currentPlayer = player;
                 }
                 break;
