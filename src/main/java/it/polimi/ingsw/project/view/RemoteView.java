@@ -12,7 +12,7 @@ public class RemoteView extends View {
 
         @Override
         public void update(Controllable message) {
-            System.out.println("Received: " + message.toString());
+          //  System.out.println("Received: " + message.toString());
             try {
                 handleMove(message);
             } catch (IllegalArgumentException e) {

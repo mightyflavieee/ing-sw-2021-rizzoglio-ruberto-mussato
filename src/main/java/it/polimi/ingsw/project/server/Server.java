@@ -280,37 +280,37 @@ public class Server {
 
     public void handleReconnectionAfterServerCrashed(SocketClientConnection connection, String gameId,
             String nickName) {
-        if (connection.getServer().isGameStarted(gameId)) {
-            if (connection.getServer().isPlayerPresentAndDisconnected(gameId, nickName)) {
-                connection.getServer().rejoinGame(gameId, connection, nickName);
-                if (connection.getServer().isRestartedGameReadyToStart(gameId)) {
-                    connection.getServer().sendToAllPlayersMoveMessage(gameId);
+        if (this.isGameStarted(gameId)) {
+            if (this.isPlayerPresentAndDisconnected(gameId, nickName)) {
+                this.rejoinGame(gameId, connection, nickName);
+                if (this.isRestartedGameReadyToStart(gameId)) {
+                    this.sendToAllPlayersMoveMessage(gameId);
                 } else {
-                    connection.getServer().sendWaitMessageToPlayer(gameId, nickName);
+                    this.sendWaitMessageToPlayer(gameId, nickName);
                 }
             } else {
                 connection.send(new ErrorJoinMessage(
                         "We are sorry but in this game you are not a player or there is already a player with this name but it is connected! Try another nickname."));
             }
         } else {
-            connection.getServer().recreateLobby(gameId);
-            connection.getServer().rejoinGame(gameId, connection, nickName);
-            if (connection.getServer().isRestartedGameReadyToStart(gameId)) {
-                connection.getServer().sendToAllPlayersMoveMessage(gameId);
+            this.recreateLobby(gameId);
+            this.rejoinGame(gameId, connection, nickName);
+            if (this.isRestartedGameReadyToStart(gameId)) {
+                this.sendToAllPlayersMoveMessage(gameId);
             } else {
-                connection.getServer().sendWaitMessageToPlayer(gameId, nickName);
+                this.sendWaitMessageToPlayer(gameId, nickName);
             }
         }
     }
 
     public void handleReconnectionOnNotStartedGame(SocketClientConnection connection, String gameId, String nickName) {
-        if (connection.getServer().isGameNotFull(gameId)) {
-            if (connection.getServer().isNicknameUnique(gameId, nickName)) {
+        if (this.isGameNotFull(gameId)) {
+            if (this.isNicknameUnique(gameId, nickName)) {
                 try {
-                    connection.getServer().addToLobby(gameId, connection, nickName);
+                    this.addToLobby(gameId, connection, nickName);
                     connection.send(new ConfirmJoinMessage(gameId));
-                    if (connection.getServer().tryToStartGame(gameId)) {
-                        connection.getServer().sendChooseLeaderCards(gameId);
+                    if (this.tryToStartGame(gameId)) {
+                        this.sendChooseLeaderCards(gameId);
                     }
                 } catch (Exception e) {
                     connection.send(new ErrorJoinMessage(e.getMessage()));
