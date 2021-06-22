@@ -121,7 +121,7 @@
       "isConnected": true,
       "nickname": "das",
       "victoryPoints": 0,
-      "turnPhase": "InitialPhase",
+      "turnPhase": "MainPhase",
       "history": [
         "Discard Leader Card Move, Leader CardID: id2",
         "Take Market Resources Move",
@@ -1111,9 +1111,25 @@
         "numResourcesToDiscard": 0,
         "observers": []
       },
-      "leaderCards": [],
+      "leaderCards": [
+        {
+          "id": "id12",
+          "perk": {
+            "resource": {
+              "type": "Coin"
+            },
+            "type": "Transmutation"
+          },
+          "requiredDevCards": {
+            "Amethyst": 2,
+            "Emerald": 1
+          },
+          "status": "Inactive",
+          "victoryPoints": 5
+        }
+      ],
       "faithMap": {
-        "markerPosition": 2,
+        "markerPosition": 1,
         "blackMarkerPosition": 2,
         "faithTiles": [
           {},

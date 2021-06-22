@@ -14,23 +14,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Improved Gui resize performance">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Fixed Minor error in the new Login GUI">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_19_17__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_19_17__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_01_08__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_01_08__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_13_41__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_13_41__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_16_07__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_16_07__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_17_27__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_17_27__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarCLI/CLI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarCLI/CLI.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarGUI/GUI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarGUI/GUI.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/607b5.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/68714.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/6c3b2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/68714.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/68714.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/NewGameHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/NewGameHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/newgame/JoinGameListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/newgame/JoinGameListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/market/MarketGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/market/MarketGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/calamaio.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plancia portabiglie.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/prova_board.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/prova_carte_resized.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/table.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/FaithMapGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/board/FaithMapGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/newgame/SelectGameTypeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/listeners/newgame/SelectGameTypeListener.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -426,14 +422,7 @@
       <workItem from="1624278106264" duration="660000" />
       <workItem from="1624283235019" duration="757000" />
       <workItem from="1624285516389" duration="126000" />
-      <workItem from="1624355736658" duration="1931000" />
-    </task>
-    <task id="LOCAL-00139" summary="Added HistoryGUI.java">
-      <created>1622382802292</created>
-      <option name="number" value="00139" />
-      <option name="presentableId" value="LOCAL-00139" />
-      <option name="project" value="LOCAL" />
-      <updated>1622382802292</updated>
+      <workItem from="1624355736658" duration="3016000" />
     </task>
     <task id="LOCAL-00140" summary="Updated InformationsGUI interaction with the market">
       <created>1622383795522</created>
@@ -771,7 +760,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624048763871</updated>
     </task>
-    <option name="localTasksCounter" value="188" />
+    <task id="LOCAL-00188" summary="Fixed Minor error in the new Login GUI">
+      <created>1624357960511</created>
+      <option name="number" value="00188" />
+      <option name="presentableId" value="LOCAL-00188" />
+      <option name="project" value="LOCAL" />
+      <updated>1624357960511</updated>
+    </task>
+    <option name="localTasksCounter" value="189" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -801,7 +797,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Corrected Minor error in extradeposit" />
     <MESSAGE value="Updated GUI design" />
     <MESSAGE value="added gui listeners for ProductionMove" />
     <MESSAGE value="added clickable attribute to enable/disable BoardGUI or one of its elements" />
@@ -826,7 +821,8 @@
     <MESSAGE value="Added Utils.readIcon" />
     <MESSAGE value="Changed GUI's icons input for jar compatibility" />
     <MESSAGE value="Improved Gui resize performance" />
-    <option name="LAST_COMMIT_MESSAGE" value="Improved Gui resize performance" />
+    <MESSAGE value="Fixed Minor error in the new Login GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Minor error in the new Login GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -139,12 +139,16 @@ public class FaithMapGUI extends JInternalFrame {
             button.setBackground(new Color(255, 255, 255));
             button.setForeground(new Color(0, 0, 0));
         }
-        if (this.isSinglePlayer) {
-            this.tiles.get(this.blackMarkerPosition).setBackground(new Color(0, 0, 0));
-            this.tiles.get(this.blackMarkerPosition).setForeground(new Color(255, 255, 255));
+        if(blackMarkerPosition != 0) {
+            if (this.isSinglePlayer) {
+                this.tiles.get(this.blackMarkerPosition-1).setBackground(new Color(0, 0, 0));
+                this.tiles.get(this.blackMarkerPosition-1).setForeground(new Color(255, 255, 255));
+            }
         }
-        this.tiles.get(this.markerPosition).setBackground(new Color(105, 105, 105));
-        this.tiles.get(this.markerPosition).setForeground(new Color(255, 255, 255));
+        if(markerPosition != 0) {
+            this.tiles.get(this.markerPosition-1).setBackground(new Color(105, 105, 105));
+            this.tiles.get(this.markerPosition-1).setForeground(new Color(255, 255, 255));
+        }
     }
 
     public void moveForward() {

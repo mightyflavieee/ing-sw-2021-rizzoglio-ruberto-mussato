@@ -21,7 +21,9 @@ public class SelectGameTypeListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        boolean didSelect = false;
         for (JRadioButton radioButton : this.newGameHandler.getRadioButtons()) {
+            didSelect = didSelect || radioButton.isSelected();
             if (radioButton.isSelected()) {
                 switch (radioButton.getText()) {
                     case "Single Player":
@@ -39,6 +41,8 @@ public class SelectGameTypeListener implements ActionListener {
                 }
             }
         }
+        if(!didSelect)
+            return;
         if (isCreatingGame) {
             this.clientGUI.setCreateGame(true);
             this.clientGUI.createOrJoinGame();
