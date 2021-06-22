@@ -189,7 +189,7 @@ class ControllerTest {
                 model.updateTurn();
                 controller.update((MoveHandler) playerMove2Gian);
                 model.updateTurn();
-                assertEquals(0, gianluca.getVictoryPoints());
+                assertEquals(1, gianluca.getVictoryPoints());
                 assertEquals(0, gianluca.getBoard().getFaithMap().getMarkerPosition());
                 assertEquals(1, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.First).size());
                 assertEquals(0, gianluca.getBoard().getWarehouse().getShelves().get(ShelfFloor.Second).size());
@@ -235,7 +235,7 @@ class ControllerTest {
                 assertEquals(4, flavio.getBoard().getFaithMap().getMarkerPosition());
                 assertEquals(3, gianluca.getBoard().getFaithMap().getMarkerPosition());
                 assertEquals(1, flavio.getVictoryPoints());
-                assertEquals(1, gianluca.getVictoryPoints());
+                assertEquals(2, gianluca.getVictoryPoints());
 
                 // turn 3 gianluca
                 resourcesToEliminateWarehouse.clear();
