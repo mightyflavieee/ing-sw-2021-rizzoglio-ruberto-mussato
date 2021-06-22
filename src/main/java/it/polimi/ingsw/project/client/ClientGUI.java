@@ -268,7 +268,7 @@ public class ClientGUI extends Client implements Observer<Move> {
         this.send(new CreateRequestMove(this.numPlayers, this.myNickname));
     }
 
-    public void endGame() {
+    public void endGame(boolean isSinglePlayer) {
         this.gui.getJFrame().dispose();
         this.endGameHandler = new EndGameHandler(this.match, this);
         this.jFrame = new JFrame();
@@ -280,6 +280,7 @@ public class ClientGUI extends Client implements Observer<Move> {
     }
 
     public void restart() {
+        this.jFrame.dispose();
         buildGame();
     }
 

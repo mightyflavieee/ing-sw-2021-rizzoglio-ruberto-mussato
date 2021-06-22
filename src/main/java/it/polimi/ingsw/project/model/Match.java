@@ -26,6 +26,7 @@ public class Match implements Serializable, Cloneable {
     private Player currentPlayer;
     private boolean isLastTurn;
     private boolean isOver;
+    private boolean lorenzoWon;
 
     public Match(List<Player> playerList) {
         this.playerList = new ArrayList<>();
@@ -40,6 +41,7 @@ public class Match implements Serializable, Cloneable {
         this.currentPlayer.updateTurnPhase();
         this.isLastTurn = false;
         this.isOver = false;
+        this.lorenzoWon = false;
     }
 
     public Match() { // da usare nella clone
@@ -100,6 +102,8 @@ public class Match implements Serializable, Cloneable {
         return isOver;
     }
 
+    public boolean getLorenzoWon() { return this.lorenzoWon; }
+
     public void notifyFaithMapsForCouncil(int numTile) {
         // TODO devo notificare anche lorenzo?
         playerList.forEach(x -> x.papalCouncil(numTile));
@@ -122,7 +126,7 @@ public class Match implements Serializable, Cloneable {
     }
 
     private void youLost() {
-        // TODO
+        this.lorenzoWon = true;
         this.isOver = true;
     }
 

@@ -114,7 +114,11 @@ public class GUI extends Observable<Move> {
 
     public void setMatch(Match match){
         if (match.getisOver()) {
-            this.clientGUI.endGame();
+            if (match.getLorenzoWon()) {
+                this.clientGUI.endGame(true);
+            } else {
+                this.clientGUI.endGame(false);
+            }
         } else {
             Pair<Player, List<Player>> pair = Utils.splitPlayers(match,this.mePlayer.getNickname());
             this.mePlayer = pair._1;
