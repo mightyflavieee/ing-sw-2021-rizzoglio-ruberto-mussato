@@ -394,4 +394,6 @@ public class Match implements Serializable, Cloneable {
         }
         return leaderboard;
     }
+
+    public void setIsLastTurn(boolean isLastTurn) { this.isLastTurn = isLastTurn; }
 }

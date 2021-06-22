@@ -684,4 +684,12 @@ public class Board implements Serializable, Cloneable {
   public String resourcesToString(){
     return this.warehouse.toString() + "\n Chest:\n " +this.chest.toString();
   }
+
+  public int countDevCards() {
+    int count = 0;
+    for (DevCardPosition position : this.mapTray.keySet()) {
+      count = count + this.mapTray.get(position).size();
+    }
+    return count;
+  }
 }

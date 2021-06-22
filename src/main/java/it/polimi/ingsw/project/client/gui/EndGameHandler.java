@@ -8,7 +8,6 @@ import it.polimi.ingsw.project.model.Player;
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
-import java.util.List;
 
 public class EndGameHandler extends JPanel {
     private static final String SINGLEPLAYERPANEL = "SINGLEPLAYERPANEL";
@@ -144,12 +143,5 @@ public class EndGameHandler extends JPanel {
         JButton buttonGoBack = new JButton("Start New Game");
         buttonGoBack.addActionListener(new StartNewGameListener(this.clientGUI));
         bottomPanel.add(buttonGoBack, BorderLayout.SOUTH);
-    }
-
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setVisible(true);
-        frame.add(new EndGameHandler(new Match(), new ClientGUI("1", 2)));
-        frame.pack();
     }
 }

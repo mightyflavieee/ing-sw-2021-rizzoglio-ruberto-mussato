@@ -27,6 +27,9 @@ public class BuyDevCardMove extends Move{
     @Override
     public void performMove(Match match) {
         match.performBuyDevCardMove(this.devCardID, this.resourcesToEliminateWarehouse, this.resourcesToEliminateChest, this.position);
+        if (match.getCurrentPlayer().hasSevenCards()) {
+            match.setIsLastTurn(true);
+        }
     }
 
     @Override

@@ -196,4 +196,10 @@ public class Player implements Serializable, Cloneable {
     return this.board.getBlackMarkerPosition();
   }
 
+  public boolean hasSevenCards() {
+    if (this.board.countDevCards() == 7) {
+      return true;
+    }
+    return false;
+  }
 }
