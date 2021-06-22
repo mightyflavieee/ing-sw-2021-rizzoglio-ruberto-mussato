@@ -227,18 +227,18 @@ public class Board implements Serializable, Cloneable {
     List<ResourceType> resourceTypeToEliminate = new ArrayList<>();
     for (ResourceType type : this.chest.keySet()) {
       if (resourcesToEliminate.containsKey(type)) {
-        if (this.chest.get(type).equals(resourcesToEliminate.get(type))) {
-          resourceTypeToEliminate.add(type);
-        } else {
+//        if (this.chest.get(type).equals(resourcesToEliminate.get(type))) {
+//          resourceTypeToEliminate.add(type);
+//        } else {
           this.chest.put(type, this.chest.get(type) - resourcesToEliminate.get(type));
-        }
+      //  }
       }
     }
-    if (resourceTypeToEliminate.size() > 0) {
-      for (ResourceType type : resourceTypeToEliminate) {
-        this.chest.remove(type);
-      }
-    }
+//    if (resourceTypeToEliminate.size() > 0) {
+//      for (ResourceType type : resourceTypeToEliminate) {
+//        this.chest.remove(type);
+//      }
+//    }
   }
 
   // converts a CardLevel type to int
@@ -686,7 +686,7 @@ public class Board implements Serializable, Cloneable {
     }
 
   public String resourcesToString(){
-    return this.warehouse.toString() + "\nChest:\n" +this.chest.toString();
+    return this.warehouse.toString() + "Chest:\n" +this.chest.toString();
   }
 
   public int countDevCards() {

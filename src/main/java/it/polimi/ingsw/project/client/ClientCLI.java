@@ -342,8 +342,8 @@ public class ClientCLI extends Client {
         Move playerMove = null;
         boolean isInputError = false;
         do {
-            System.out.print("What do you want to do?\n" + "0 - See informations\n" + "1 - Take Resources from Market\n"
-                    + "2 - Buy one Development Card\n" + "3 - Activate Production.\n" + "> ");
+            System.out.println("What do you want to do?\n" + "0 - See informations\n" + "1 - Take Resources from Market\n"
+                    + "2 - Buy one Development Card\n" + "3 - Activate Production.\n");
             do {
                 String answer = stdin.nextLine();
                 switch (answer) {
@@ -515,7 +515,7 @@ public class ClientCLI extends Client {
     private void chestfirst(Board board, ResourceType resourcetype, Integer integer, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourceToEliminateChest) {
         Map<ResourceType,Integer> wareHouseMap = new HashMap();
         Map<ResourceType,Integer> chestMap = new HashMap();
-        for(int i = 0; i < integer; i++){
+        for(int i = 0; i <= integer; i++){
             wareHouseMap.put(resourcetype,i);
             chestMap.put(resourcetype,integer - i);
 
@@ -530,7 +530,7 @@ public class ClientCLI extends Client {
     private void warehousefirst(Board board, ResourceType resourcetype, Integer integer, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourceToEliminateChest) {
         Map<ResourceType,Integer> wareHouseMap = new HashMap();
         Map<ResourceType,Integer> chestMap = new HashMap();
-        for(int i = 0; i < integer; i++){
+        for(int i = 0; i <= integer; i++){
             wareHouseMap.put(resourcetype,integer - i);
             chestMap.put(resourcetype,i);
 
@@ -1137,12 +1137,12 @@ public class ClientCLI extends Client {
         if (gameSize == 1) {
             System.out.println("0 - Go Back\n" + "1 - Show the Black Marker Position\n" + "2 - show your Points\n"
                     + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
-                    + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Warehouse\n"
+                    + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Resources\n"
                     + "8 - show your history and the Action Token that have been extracted");
         } else {
             System.out.println("0 - Go Back\n" + "1 - show informations about the others players\n"
                     + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
-                    + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Warehouse\n"
+                    + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Resources\n"
                     + "8 - show your history");
         }
         String answer = stdin.nextLine();
@@ -1173,7 +1173,7 @@ public class ClientCLI extends Client {
                 System.out.println(this.match.getMarket());
                 break;
             case "7":
-                System.out.println(this.match.getWarehouseToString(getNickname()));
+                System.out.println("Your resources are:\n" + this.match.getBoardByPlayerNickname(myNickname).resourcesToString());
                 break;
             case "8":
                 System.out.println(this.match.getHistoryToString(getNickname()));

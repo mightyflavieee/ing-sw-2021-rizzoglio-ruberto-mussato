@@ -9,14 +9,14 @@
           "Left": []
         },
         "warehouse": {
-          "shelves": {"First":[{"type":"Servant"}],"Second":[{"type":"Stone"}],"Third":[{"type":"Coin"}]},
+          "shelves": {"First":[{"type":"Servant"}],"Second":[{"type":"Stone"}],"Third":[{"type":"Coin"},{"type":"Coin"}]},
           "extraDeposit": null,
           "numResourcesToDiscard": 0,
           "observers": []
         },
         "leaderCards": [],
         "faithMap": {
-          "markerPosition": 2,
+          "markerPosition": 24,
           "blackMarkerPosition": 2,
           "faithTiles": [
             {},
@@ -111,13 +111,14 @@
         "Take Market Resources Move",
         "No Move",
         "Move Action Token",
-        "Discard Action Token, cardcolor: Sapphire"
+        "Discard Action Token, cardcolor: Sapphire",
+        "Discard Action Token, cardcolor: Gold"
       ]
     }
   ],
   "market": {
-    "tray": [[{"marbleType":"Red"},{"marbleType":"White"},{"marbleType":"Yellow"}],[{"marbleType":"Grey"},{"marbleType":"Blue"},{"marbleType":"Purple"}],[{"marbleType":"Purple"},{"marbleType":"Yellow"},{"marbleType":"Blue"}],[{"marbleType":"Grey"},{"marbleType":"White"},{"marbleType":"White"}]],
-    "outsideMarble": {"marbleType":"White"},
+    "tray": [[{"marbleType":"White"},{"marbleType":"Red"},{"marbleType":"White"}],[{"marbleType":"Grey"},{"marbleType":"Blue"},{"marbleType":"Purple"}],[{"marbleType":"Purple"},{"marbleType":"Yellow"},{"marbleType":"Blue"}],[{"marbleType":"Grey"},{"marbleType":"White"},{"marbleType":"White"}]],
+    "outsideMarble": {"marbleType":"Yellow"},
     "observers": []
   },
   "cardContainer": {
@@ -1053,11 +1054,6 @@
   "actionTokenContainer": {
     "actionTokens": [
       {
-        "cardColor": "Gold",
-        "type": "discardActionToken",
-        "observers": []
-      },
-      {
         "cardColor": "Emerald",
         "type": "discardActionToken",
         "observers": []
@@ -1079,6 +1075,11 @@
         "cardColor": "Sapphire",
         "type": "discardActionToken",
         "observers": []
+      },
+      {
+        "cardColor": "Gold",
+        "type": "discardActionToken",
+        "observers": []
       }
     ]
   },
@@ -1091,14 +1092,14 @@
         "Left": []
       },
       "warehouse": {
-        "shelves": {"First":[{"type":"Servant"}],"Second":[{"type":"Stone"}],"Third":[{"type":"Coin"}]},
+        "shelves": {"First":[{"type":"Servant"}],"Second":[{"type":"Stone"}],"Third":[{"type":"Coin"},{"type":"Coin"}]},
         "extraDeposit": null,
         "numResourcesToDiscard": 0,
         "observers": []
       },
       "leaderCards": [],
       "faithMap": {
-        "markerPosition": 2,
+        "markerPosition": 24,
         "blackMarkerPosition": 2,
         "faithTiles": [
           {},
@@ -1193,7 +1194,8 @@
       "Take Market Resources Move",
       "No Move",
       "Move Action Token",
-      "Discard Action Token, cardcolor: Sapphire"
+      "Discard Action Token, cardcolor: Sapphire",
+      "Discard Action Token, cardcolor: Gold"
     ]
   },
   "isLastTurn": false,
