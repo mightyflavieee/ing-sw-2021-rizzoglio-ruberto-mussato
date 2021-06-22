@@ -19,7 +19,7 @@ class SerializeTest {
   void deserializedTest() {
     try {
       Server server = new Server();
-      server.recreateLobby("e9ffa");
+      //server.recreateLobby("e9ffa");
     } catch (Exception e) {
       // TODO: handle exception
     }

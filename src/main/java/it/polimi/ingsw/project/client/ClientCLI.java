@@ -51,11 +51,11 @@ public class ClientCLI extends Client {
     public void setMatch(Match match) {
         TurnPhase oldTurnPhase = TurnPhase.MainPhase;
         if (this.match != null)
-            oldTurnPhase = getMatch().get().getTurnPhase(getNickname());
+            oldTurnPhase = this.match.getTurnPhase(getNickname());
         this.match = match;
         if(!this.match.getisOver()) {
             if (oldTurnPhase == TurnPhase.WaitPhase
-                    && getMatch().get().getTurnPhase(getNickname()) == TurnPhase.InitialPhase) {
+                    && this.match.getTurnPhase(getNickname()) == TurnPhase.InitialPhase) {
                 System.out.println("It's your Turn!\nPress 0 to start");
             }
         }else{
@@ -68,10 +68,7 @@ public class ClientCLI extends Client {
     }
 
     private void showScoreboard() {
-        List <Player> playerList = this.match.getPlayerList();
-        for(int i = 0; i < playerList.size(); i++){
-            System.out.println(playerList.get(i).getNickname() + playerList.get(i).getVictoryPoints());
-        }
+        System.out.println(match.getLeaderboard());
     }
 
     @Override
@@ -292,7 +289,7 @@ public class ClientCLI extends Client {
         // visualizzare le varie informazioni
 
         while (true) {
-            switch (getMatch().get().getTurnPhase(getNickname())) {
+            switch (this.match.getTurnPhase(getNickname())) {
                 case WaitPhase:
                     viewer();
                     break;
@@ -321,7 +318,7 @@ public class ClientCLI extends Client {
                     viewer();
                     break;
                 case "1":
-                    System.out.println(getMatch().get().getLeaderCardsToString(getNickname()));
+                    System.out.println(this.match.getLeaderCardsToString(getNickname()));
                     System.out.println("Give the LeaderCard id that you want to discard");
                     return new DiscardLeaderCardMove(stdin.nextLine());
                 case "2":
@@ -381,13 +378,13 @@ public class ClientCLI extends Client {
         boolean isCorrectID = false;
         boolean isMovePossible = false;
         String leaderCardID = null;
-        if (!getMatch().get().getCurrentPlayer().getBoard().getLeaderCards().isEmpty()) {
-            System.out.println(getMatch().get().getLeaderCardsToString(getNickname()));
+        if (!this.match.getCurrentPlayer().getBoard().getLeaderCards().isEmpty()) {
+            System.out.println(this.match.getLeaderCardsToString(getNickname()));
             do {
                 System.out.println(
                         "Provide the ID of the LeaderCard you want to activate: (Type 'quit' to go back)\n" + "> ");
                 String answer = this.stdin.nextLine();
-                for (LeaderCard leaderCard : getMatch().get().getCurrentPlayer().getBoard().getLeaderCards()) {
+                for (LeaderCard leaderCard : this.match.getCurrentPlayer().getBoard().getLeaderCards()) {
                     if (answer.equals(leaderCard.getId())) {
                         isCorrectID = true;
                         leaderCardID = answer;
@@ -424,7 +421,7 @@ public class ClientCLI extends Client {
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
         boolean skipElimination = false;
-        List<DevelopmentCard> availableDevCards = getMatch().get().getCardContainer().getAvailableDevCards();
+        List<DevelopmentCard> availableDevCards = this.match.getCardContainer().getAvailableDevCards();
         DevelopmentCard devCardToBuy = showAndSelectDevCardToBuy(availableDevCards);
         if (devCardToBuy != null) {
 //            while (true) {
@@ -490,7 +487,7 @@ public class ClientCLI extends Client {
         }
         for(Map.Entry<ResourceType, Integer> entry : resourceRequired.entrySet()) {
             System.out.println(entry.getKey() + " required : " + entry.getValue());
-            System.out.println("Your Resources: \n" + board.resourcesToString());
+            System.out.println("\n Your Resources: \n" + board.resourcesToString());
             System.out.println("0 - go back\n" +
                     "1 - use Warehouse's resources first and then Chest's\n" +
                     "2 - use Chest's resources first and then Warehouse's");
@@ -665,7 +662,7 @@ public class ClientCLI extends Client {
     // if the player wants to go back.
     private DevCardPosition selectPositionForDevCard(String devCardToBuyID) {
         boolean goBack = false;
-        DevelopmentCard devCardToBuy = getMatch().get().getCardContainer().fetchCard(devCardToBuyID);
+        DevelopmentCard devCardToBuy = this.match.getCardContainer().fetchCard(devCardToBuyID);
         DevCardPosition chosenPosition = null;
         String answer = null;
         do {
@@ -694,11 +691,11 @@ public class ClientCLI extends Client {
             // verifies that the player can put the DevelopmentCard in the position he/she
             // indicated
             if (!goBack) {
-                int lastPosition = getMatch().get().getBoardByPlayerNickname(getNickname()).getMapTray()
+                int lastPosition = this.match.getBoardByPlayerNickname(getNickname()).getMapTray()
                         .get(chosenPosition).size();
                 if(lastPosition == 0)
                     return chosenPosition;
-                DevelopmentCard devCardInLastPosition = getMatch().get().getBoardByPlayerNickname(getNickname())
+                DevelopmentCard devCardInLastPosition = this.match.getBoardByPlayerNickname(getNickname())
                         .getMapTray().get(chosenPosition).get(lastPosition-1);
                 if (devCardInLastPosition.getLevel().compareTo(devCardToBuy.getLevel()) > 0) {
                     chosenPosition = null;
@@ -838,7 +835,7 @@ public class ClientCLI extends Client {
         boolean isCorrectID = false;
         boolean goBack = false;
         String leaderCardID = null;
-        List<LeaderCard> leaderCards = getMatch().get().getCurrentPlayer().getBoard().getLeaderCards();
+        List<LeaderCard> leaderCards = this.match.getCurrentPlayer().getBoard().getLeaderCards();
         System.out.println("Choose a Development Card:\n");
         for (LeaderCard leaderCard : leaderCards) {
             System.out.println(leaderCard + "\n");
@@ -873,7 +870,7 @@ public class ClientCLI extends Client {
         boolean isCorrectID = false;
         boolean goBack = false;
         String devCardID = null;
-        Map<DevCardPosition, DevelopmentCard> productionDevCards = getMatch().get().getCurrentPlayer().getBoard()
+        Map<DevCardPosition, DevelopmentCard> productionDevCards = this.match.getCurrentPlayer().getBoard()
                 .getCurrentProductionCards();
         System.out.println("Choose a Development Card:\n");
         for (DevCardPosition position : productionDevCards.keySet()) {
@@ -1160,25 +1157,26 @@ public class ClientCLI extends Client {
                 }
                 break;
             case "2":
-                System.out.println("Your points are: " + getMatch().get().getVictoryPoints(getNickname()));
+                System.out.println("Your points are: " + this.match.getVictoryPoints(getNickname()));
                 break;
             case "3":
                 System.out.println(
-                        "Your marker position is: " + getMatch().get().getMarkerPosition(getNickname()) + "/24");
+                        "Your marker position is: " + this.match.getMarkerPosition(getNickname()) + "/24");
                 break;
             case "4":
-                System.out.println("Your Leader Cards are: " + getMatch().get().getLeaderCardsToString(getNickname()));
+                System.out.println("Your Leader Cards are: " + this.match.getLeaderCardsToString(getNickname()));
                 break;
             case "5":
+                System.out.println(this.match.getBoardByPlayerNickname(myNickname).getMapTray());
                 break;
             case "6":
-                System.out.println(getMatch().get().getMarket());
+                System.out.println(this.match.getMarket());
                 break;
             case "7":
-                System.out.println(getMatch().get().getWarehouseToString(getNickname()));
+                System.out.println(this.match.getWarehouseToString(getNickname()));
                 break;
             case "8":
-                System.out.println(getMatch().get().getHistoryToString(getNickname()));
+                System.out.println(this.match.getHistoryToString(getNickname()));
                 break;
             default:
                 return;
@@ -1190,7 +1188,7 @@ public class ClientCLI extends Client {
     private void viewer(String myNickname) {
         // shows informations about other players
         System.out.println(
-                "Your opponents are : " + getMatch().get().getOpponentsToString(myNickname) + "\n tell the nickname");
+                "Your opponents are : " + this.match.getOpponentsToString(myNickname) + "\n tell the nickname");
 
         String opponent = stdin.nextLine();
         System.out.println(
@@ -1202,15 +1200,15 @@ public class ClientCLI extends Client {
             case "0":
                 break;
             case "1":
-                System.out.println(opponent + " points are: " + getMatch().get().getVictoryPoints(opponent));
+                System.out.println(opponent + " points are: " + this.match.getVictoryPoints(opponent));
                 break;
             case "2":
                 System.out.println(
-                        opponent + " marker position is: " + getMatch().get().getMarkerPosition(opponent) + "/24");
+                        opponent + " marker position is: " + this.match.getMarkerPosition(opponent) + "/24");
                 break;
             case "3":
                 System.out
-                        .println(opponent + " Leader Cards are: " + getMatch().get().getLeaderCardsToString(opponent));
+                        .println(opponent + " Leader Cards are: " + this.match.getLeaderCardsToString(opponent));
                 break;
             default:
                 return;
@@ -1219,7 +1217,7 @@ public class ClientCLI extends Client {
 
     private TakeMarketResourcesMove handleTakeMarketResourcesMove() {
         List<Resource> resourcesToDiscard = new ArrayList<>();
-        Market market = getMatch().get().getMarket();
+        Market market = this.match.getMarket();
         System.out.println(market);
         String answer;
         int axis, position;
@@ -1243,7 +1241,7 @@ public class ClientCLI extends Client {
             } while (position > 2 || position < 0);
         }
 
-        List<ResourceType> transmutationPerk = getMatch().get().getTransmutationPerk(getNickname());
+        List<ResourceType> transmutationPerk = this.match.getTransmutationPerk(getNickname());
 
         List<Resource> resourceList = market.insertMarble(axis, position, this.handleTransmutationPerk(transmutationPerk));
 
@@ -1255,7 +1253,7 @@ public class ClientCLI extends Client {
                 break;
             }
         }
-        Warehouse warehouse = getMatch().get().getWarehouse(getNickname());
+        Warehouse warehouse = this.match.getWarehouse(getNickname());
         Map<ResourceType, Integer> resourcesInHand = warehouse.listToMapResources(resourceList);
         System.out.println(warehouse);
         System.out.println("Resources in hand:");
