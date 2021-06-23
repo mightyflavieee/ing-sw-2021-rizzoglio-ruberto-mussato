@@ -87,4 +87,12 @@ public class LeaderMovePanel extends JPanel {
         this.selectLeaderCardProductionListener.setLeaderCard(leaderCard);
     }
 
+    public void setActivated(boolean b) {
+        if(b){
+            this.activateButton.setText("Activated");
+        }else
+        {
+            this.activateButton.setText("Activate");
+        }
+    }
 }

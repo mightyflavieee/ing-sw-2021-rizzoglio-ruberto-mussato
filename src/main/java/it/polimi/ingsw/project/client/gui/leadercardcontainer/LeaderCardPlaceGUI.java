@@ -39,6 +39,7 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         }
         for(int i = 0; i < leaderCards.size(); i++){
             leaderMovePanelList.get(i).setActivationPossible(false);
+            this.leaderMovePanelList.get(i).setActivated(leaderCards.get(i).getStatus()== Status.Active);
         }
         this.setVisible(true);
     }
@@ -54,6 +55,7 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
             this.leaderMovePanelList.get(i).setActivationPossible(leaderCards.get(i).getStatus()== Status.Inactive
             && mePlayer.isFeasibleActivateLeaderCardMove(leaderCards.get(i).getId()));
             this.leaderMovePanelList.get(i).setProductable(leaderCards.get(i).getStatus()== Status.Active && leaderCards.get(i).getPerk().getType() == PerkType.Production);
+            this.leaderMovePanelList.get(i).setActivated(leaderCards.get(i).getStatus()== Status.Active);
             this.leaderCardJlabelGUIList.get(i).setVisible(true);
             this.leaderMovePanelList.get(i).setVisible(true);
         }

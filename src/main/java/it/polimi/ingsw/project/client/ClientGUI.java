@@ -123,6 +123,7 @@ public class ClientGUI extends Client implements Observer<Move> {
         // todo change to fit new structure with NewGameHandler
 
         this.jFrame = new JFrame();
+        this.jFrame.setTitle("Master of Renaissance");
         JTextArea jTextArea = new JTextArea("Wait for the other players");
         jTextArea.setEditable(false);
         jTextArea.setVisible(true);
@@ -166,6 +167,7 @@ public class ClientGUI extends Client implements Observer<Move> {
     private void buildGame() {
 
         this.jFrame = new JFrame();
+        this.jFrame.setTitle("Master of Renaissance");
         this.jFrame.setVisible(true);
         this.jFrame.setLayout(new GridLayout(1,1));
         this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -272,6 +274,7 @@ public class ClientGUI extends Client implements Observer<Move> {
         this.gui.getJFrame().dispose();
         this.endGameHandler = new EndGameHandler(this.match, this);
         this.jFrame = new JFrame();
+        this.jFrame.setTitle("Master of Renaissance");
         this.jFrame.setVisible(true);
         this.jFrame.setLayout(new GridLayout(1,1));
         this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
