@@ -98,7 +98,7 @@ public class ClientCLI extends Client {
             public void run() {
                 try {
                     while (isActive()) {
-                        ResponseMessage inputObject = (ResponseMessage) getSocketIn().readObject();
+                        ResponseMessage inputObject = (ResponseMessage) socketIn.readObject();
                         inputObject.action(getInstance());
                     }
                 } catch (Exception e) {
@@ -152,9 +152,9 @@ public class ClientCLI extends Client {
             }
         }
         try {
-            getSocketOut().writeObject(new ChooseLeaderCardMove(getNickname(), super.gameId,
+            socketOut.writeObject(new ChooseLeaderCardMove(getNickname(), super.gameId,
                     Utils.extractSelectedLeaderCards(allLeaderCard, chosenIds)));
-            getSocketOut().flush();
+            socketOut.flush();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             setActive(false);
@@ -216,8 +216,8 @@ public class ClientCLI extends Client {
             return false;
         }
         try {
-            getSocketOut().writeObject(new JoinRequestMove(getNickname(), gameId));
-            getSocketOut().flush();
+            socketOut.writeObject(new JoinRequestMove(getNickname(), gameId));
+            socketOut.flush();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             setActive(false);
@@ -249,8 +249,8 @@ public class ClientCLI extends Client {
             }
         }
         try {
-            getSocketOut().writeObject(new CreateRequestMove(playersNumber, getNickname()));
-            getSocketOut().flush();
+            socketOut.writeObject(new CreateRequestMove(playersNumber, getNickname()));
+            socketOut.flush();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             setActive(false);
@@ -272,9 +272,9 @@ public class ClientCLI extends Client {
                         if (!getMatch().isEmpty()) {
                             Request move = handleTurn();
                             if (move != null) {
-                                getSocketOut().writeObject(move);
+                                socketOut.writeObject(move);
                             }
-                            getSocketOut().flush();
+                            socketOut.flush();
                         }
                         setLock();
                     }
@@ -1495,8 +1495,8 @@ public class ClientCLI extends Client {
             System.out.println("Connection closed from the server side");
         } finally {
             this.stdin.close();
-            getSocketIn().close();
-            getSocketOut().close();
+            socketIn.close();
+            socketOut.close();
             this.socket.close();
         }
     }
