@@ -1206,7 +1206,7 @@ public class ClientCLI extends Client {
     private void viewer(String myNickname) {
         // shows informations about other players
         System.out.println(
-                "Your opponents are : " + this.match.getOpponentsToString(myNickname) + "\n tell the nickname");
+                "Your opponents are : " + this.match.getOpponentsToString(myNickname) + "\nTell the nickname");
 
         String opponent = stdin.nextLine();
         System.out.println(
