@@ -29,10 +29,10 @@ public class Board implements Serializable, Cloneable {
 
   public Board() {
     this.chest = new HashMap<>();
-    this.chest.put(ResourceType.Coin,0);
-    this.chest.put(ResourceType.Stone,0);
-    this.chest.put(ResourceType.Shield,0);
-    this.chest.put(ResourceType.Servant,0);
+    this.chest.put(ResourceType.Coin, 0);
+    this.chest.put(ResourceType.Stone, 0);
+    this.chest.put(ResourceType.Shield, 0);
+    this.chest.put(ResourceType.Servant, 0);
     this.mapTray = new HashMap<>();
     List<DevelopmentCard> listOfDevCardsLeft = new ArrayList<>();
     List<DevelopmentCard> listOfDevCardsCenter = new ArrayList<>();
@@ -229,18 +229,18 @@ public class Board implements Serializable, Cloneable {
     List<ResourceType> resourceTypeToEliminate = new ArrayList<>();
     for (ResourceType type : this.chest.keySet()) {
       if (resourcesToEliminate.containsKey(type)) {
-//        if (this.chest.get(type).equals(resourcesToEliminate.get(type))) {
-//          resourceTypeToEliminate.add(type);
-//        } else {
-          this.chest.put(type, this.chest.get(type) - resourcesToEliminate.get(type));
-      //  }
+        // if (this.chest.get(type).equals(resourcesToEliminate.get(type))) {
+        // resourceTypeToEliminate.add(type);
+        // } else {
+        this.chest.put(type, this.chest.get(type) - resourcesToEliminate.get(type));
+        // }
       }
     }
-//    if (resourceTypeToEliminate.size() > 0) {
-//      for (ResourceType type : resourceTypeToEliminate) {
-//        this.chest.remove(type);
-//      }
-//    }
+    // if (resourceTypeToEliminate.size() > 0) {
+    // for (ResourceType type : resourceTypeToEliminate) {
+    // this.chest.remove(type);
+    // }
+    // }
   }
 
   // converts a CardLevel type to int
@@ -684,11 +684,11 @@ public class Board implements Serializable, Cloneable {
   }
 
   public int getBlackMarkerPosition() {
-      return this.faithMap.getBlackMarkerPosition();
-    }
+    return this.faithMap.getBlackMarkerPosition();
+  }
 
-  public String resourcesToString(){
-    return this.warehouse.toString() + "Chest:\n" +this.chest.toString();
+  public String resourcesToString() {
+    return this.warehouse.toString() + "Chest:\n" + this.chest.toString();
   }
 
   public int countDevCards() {
@@ -711,5 +711,12 @@ public class Board implements Serializable, Cloneable {
       totalResources = totalResources + this.chest.get(resourceType);
     }
     return (int) Math.floor(totalResources / 5);
+  }
+
+  public void insertChosenResources(List<ResourceType> listOfResources) {
+    this.warehouse.insertResources(listOfResources);
+  }
+  public List<ResourceType> getDiscounts() {
+    return discounts;
   }
 }

@@ -1,13 +1,16 @@
 package it.polimi.ingsw.project.server;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import it.polimi.ingsw.project.controller.Controller;
 import it.polimi.ingsw.project.model.LeaderCardContainer;
 import it.polimi.ingsw.project.model.Model;
+import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.view.RemoteView;
 
 public class Lobby {
@@ -17,15 +20,26 @@ public class Lobby {
     private Map<String, SocketClientConnection> mapOfSocketClientConnections;
     private LeaderCardContainer leaderCardContainer;
     private Map<String, List<LeaderCard>> chosenLeaderCardsByPlayer;
+    private Map<String, List<ResourceType>> chosenResourcesByPlayer;
     private Map<String, RemoteView> mapOfViews;
+    private List<Player> playerList;
     private Controller controller;
 
     public Lobby(String id, Integer maxNumberOfPlayers) {
         this.id = id;
         this.maxNumberOfPlayers = maxNumberOfPlayers;
-        this.mapOfSocketClientConnections = new HashMap<>();
+        this.mapOfSocketClientConnections = new LinkedHashMap<String, SocketClientConnection>();
         this.leaderCardContainer = new LeaderCardContainer();
         this.chosenLeaderCardsByPlayer = new HashMap<String, List<LeaderCard>>();
+        this.chosenResourcesByPlayer = new HashMap<String, List<ResourceType>>();
+    }
+
+    public List<Player> getPlayerList() {
+        return playerList;
+    }
+
+    public void setPlayerList(List<Player> playerList) {
+        this.playerList = playerList;
     }
 
     public void setController(Controller controller) {
@@ -92,6 +106,14 @@ public class Lobby {
 
     public Map<String, List<LeaderCard>> getchosenLeaderCardsByPlayer() {
         return this.chosenLeaderCardsByPlayer;
+    }
+
+    public void addChosenResourcesToPlayer(String nickname, List<ResourceType> resources) {
+        this.chosenResourcesByPlayer.put(nickname, resources);
+    }
+
+    public Map<String, List<ResourceType>> getChosenResourcesByPlayer() {
+        return this.chosenResourcesByPlayer;
     }
 
     public Integer getMaxNumberOfPlayers() {

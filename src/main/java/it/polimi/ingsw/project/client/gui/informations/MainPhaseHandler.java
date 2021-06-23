@@ -10,7 +10,7 @@ import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.
 import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.boardproduction.*;
 import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.leaderproduction.*;
 import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.productiontypes.*;
-import it.polimi.ingsw.project.client.gui.market.TransmutationButton;
+import it.polimi.ingsw.project.client.gui.ResourceButton;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.utils.Utils;
 
@@ -34,7 +34,7 @@ public class MainPhaseHandler extends JInternalFrame {
     private List<JButton> leaderManufacturingButtons;
     private List<JButton> boardManufacturingButtons;
     private List<JButton> boardRequiredResourcesButtons;
-    private List<TransmutationButton> transmutationButtons;
+    private List<ResourceButton> resourceButtons;
     private JButton abortMoveButton;
     private JPanel mainPanel;
     private CardLayout mainPanelLayout;
@@ -124,8 +124,8 @@ public class MainPhaseHandler extends JInternalFrame {
             }
         }
         this.boardRequiredResourcesPanel.add(boardReqResHelperPanel, BorderLayout.CENTER);
-        for(int i = 0; i < this.transmutationButtons.size(); i++){
-            this.transmutationPanel.add(this.transmutationButtons.get(i));
+        for(int i = 0; i < this.resourceButtons.size(); i++){
+            this.transmutationPanel.add(this.resourceButtons.get(i));
         }
         this.abortMovePanel.add(this.abortMoveButton);
     }
@@ -137,7 +137,7 @@ public class MainPhaseHandler extends JInternalFrame {
         this.leaderManufacturingButtons = new ArrayList<>();
         this.boardManufacturingButtons = new ArrayList<>();
         this.boardRequiredResourcesButtons = new ArrayList<>();
-        this.transmutationButtons = new ArrayList<>();
+        this.resourceButtons = new ArrayList<>();
         // creates main buttons
         JButton buttonMarket = new JButton("Take Resources From Market");
         JButton buttonPurchase = new JButton("Buy Development Card");
@@ -310,14 +310,14 @@ public class MainPhaseHandler extends JInternalFrame {
         this.boardRequiredResourcesButtons.add(buttonStone2);
         this.boardRequiredResourcesButtons.add(buttonGoBack);
         // creates Transmutation Perk Selection buttons
-        TransmutationButton transmutationButton1 = new TransmutationButton();
-        TransmutationButton transmutationButton2 = new TransmutationButton();
+        ResourceButton resourceButton1 = new ResourceButton();
+        ResourceButton resourceButton2 = new ResourceButton();
         // adds listeners
-        transmutationButton1.addActionListener(new TransmutationSelectorListener(transmutationButton1,gui));
-        transmutationButton2.addActionListener(new TransmutationSelectorListener(transmutationButton2,gui));
+        resourceButton1.addActionListener(new TransmutationSelectorListener(resourceButton1,gui));
+        resourceButton2.addActionListener(new TransmutationSelectorListener(resourceButton2,gui));
         // adds JButtons to attribute
-        this.transmutationButtons.add(transmutationButton1);
-        this.transmutationButtons.add(transmutationButton2);
+        this.resourceButtons.add(resourceButton1);
+        this.resourceButtons.add(resourceButton2);
         // creates Abort Move button
         this.abortMoveButton = new JButton("Abort Move");
         // adds listeners
@@ -343,12 +343,12 @@ public class MainPhaseHandler extends JInternalFrame {
 
     public void goToTransmutationPanel() {
         List<ResourceType> transmutationPerks = this.gui.getTransmutationPerks();
-        this.transmutationButtons.get(0).setIcon(Utils.readIcon("resourcetype/" + transmutationPerks.get(0) + ".png",
-                30 ,30));
-        this.transmutationButtons.get(0).setResourceType(transmutationPerks.get(0));
-        this.transmutationButtons.get(1).setIcon(Utils.readIcon("resourcetype/" + transmutationPerks.get(1) + ".png",
-                30 ,30));
-        this.transmutationButtons.get(1).setResourceType(transmutationPerks.get(1));
+//        this.resourceButtons.get(0).setIcon(Utils.readIcon("resourcetype/" + transmutationPerks.get(0) + ".png",
+//                30 ,30));
+        this.resourceButtons.get(0).setResourceType(transmutationPerks.get(0));
+//        this.resourceButtons.get(1).setIcon(Utils.readIcon("resourcetype/" + transmutationPerks.get(1) + ".png",
+//                30 ,30));
+        this.resourceButtons.get(1).setResourceType(transmutationPerks.get(1));
         this.mainPanelLayout.show(this.mainPanel,TRANSMUTATIONPANEL);
     }
 

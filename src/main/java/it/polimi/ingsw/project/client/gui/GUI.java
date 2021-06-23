@@ -102,7 +102,7 @@ public class GUI extends Observable<Move> {
 //                break;
 //        }
         disableAllButtons();
-        this.leaderCardPlaceGUI.enableButtons(turnPhase);
+        this.leaderCardPlaceGUI.enableButtonsForLeaderPhase();
     }
 
     private void disableAllButtons() {
@@ -208,9 +208,9 @@ public class GUI extends Observable<Move> {
 
     public void refreshSize(){
         Dimension d = this.jFrame.getSize();
-        this.leaderCardPlaceGUI.refreshSize((int) (d.width*0.25), (int) (d.height*0.48));
+        this.leaderCardPlaceGUI.refreshSize((int) (d.width*0.25), (int) (d.height*0.4));
         this.boardGUI.refreshSize((int) (d.width*0.75), (int) (d.height*0.48));
-        this.marketGUI.refreshSize((int) (d.width*0.2), (int) (d.height*0.25));
+        this.marketGUI.refreshSize((int) (d.width*0.2), (int) (d.height*0.2));
         this.cardContainerGUI.refreshSize(d.width/4, (int) (d.height*0.45));
        // this.leaderCardPlaceGUI.refreshSize(d.width-boardGUI.getWidth(), (int) (d.height*0.48));
 

@@ -4,7 +4,6 @@ import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.client.gui.listeners.leadercards.LeaderCardActivateButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.leadercards.LeaderCardDiscardButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.selectcard.SelectLeaderCardProductionListener;
-import it.polimi.ingsw.project.model.TurnPhase;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 
 import javax.swing.*;
@@ -65,20 +64,10 @@ public class LeaderMovePanel extends JPanel {
         this.productionButton.setEnabled(false);
     }
 
-    public void enableButtons(TurnPhase turnPhase) {
+    public void enableButtonsForLeaderPhase() {
         this.disableButtons();
-        switch (turnPhase) {
-            case MainPhase:
-                this.productionButton.setEnabled(isProductable);
-                break;
-            case InitialPhase:
-            case EndPhase:
-                this.discardButton.setEnabled(true);
-                this.activateButton.setEnabled(this.isActivable);
-                break;
-            default:
-                break;
-        }
+        this.discardButton.setEnabled(true);
+        this.activateButton.setEnabled(this.isActivable);
            }
 
     public void setID(LeaderCard leaderCard) {
@@ -94,5 +83,10 @@ public class LeaderMovePanel extends JPanel {
         {
             this.activateButton.setText("Activate");
         }
+    }
+
+    public void enableButtonsForProduction() {
+        this.disableButtons();
+        this.productionButton.setEnabled(isProductable);
     }
 }

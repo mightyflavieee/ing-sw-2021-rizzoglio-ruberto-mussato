@@ -19,6 +19,7 @@ public class NewGameHandler extends JPanel {
     private static final String SELECTJOINGAMEID = "SELECT_JOIN_GAME_ID";
     private static final String WAITINGROOM = "WAITING_ROOM";
     private static final String LEADERCARDCHOOSER = "LEADERCARDCHOOSER";
+    private static final String RESOURCESELECTOR = "RESOURCESELECTOR";
     private JPanel mainPanel;
     private CardLayout mainLayout;
 
@@ -45,6 +46,10 @@ public class NewGameHandler extends JPanel {
     private JPanel selectGameTypePanel;
     private JPanel selectJoinGameIDPanel;
     private JPanel waitingRoomPanel;
+
+    private InitResourceSelectorPanel initResourceSelectorPanel;
+
+
     private LeaderCardChoserGUI leaderCardChooser;
     private ClientGUI clientGUI;
 
@@ -69,7 +74,9 @@ public class NewGameHandler extends JPanel {
         createSelectGameTypePanel();
         createSelectJoinGameIDPanel();
         createWaitingRoomPanel();
+
     }
+
 
     private void createSelectNicknamePanel() {
         this.selectNicknamePanel = new JPanel();
@@ -226,15 +233,22 @@ public class NewGameHandler extends JPanel {
     public void goTOSelectJoinGameID() { this.mainLayout.show(this.mainPanel, SELECTJOINGAMEID); }
 
     public void goToWaitingRoom(String gameID) {
-        this.waitingRoomLabel.setText("Wait for the other players\nYour game ID is: " + gameID);
+        this.waitingRoomLabel.setText("Wait for the other players\n Your game ID is: " + gameID);
         this.mainLayout.show(this.mainPanel, WAITINGROOM);
     }
 
     public void goToLeaderCardChooser(List<LeaderCard> leaderCards) {
-        this.leaderCardChooser = new LeaderCardChoserGUI(leaderCards, this.clientGUI);
-        if (this.mainPanel.getComponentCount() == 4) {
-            this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooser);
+        if(this.leaderCardChooser!=null){
+            this.leaderCardChooser.dispose();
+            this.mainLayout.removeLayoutComponent(leaderCardChooser);
         }
+        this.leaderCardChooser = new LeaderCardChoserGUI(leaderCards, this.clientGUI);
+//        if (this.mainPanel.getComponentCount() == 4) {
+//            this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooser);
+//        }
+
+        this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooser);
+
         this.mainLayout.show(this.mainPanel, LEADERCARDCHOOSER);
     }
 
@@ -250,5 +264,14 @@ public class NewGameHandler extends JPanel {
 
     public void setSelectJoinGameIDTextField(JTextField selectJoinGameIDTextField) {
         this.selectJoinGameIDTextField = selectJoinGameIDTextField;
+    }
+
+    public void goToResourceSelector(Integer numberOfResourcesToChoose){
+        if(this.initResourceSelectorPanel!=null){
+            this.mainLayout.removeLayoutComponent(leaderCardChooser);
+        }
+        this.initResourceSelectorPanel = new InitResourceSelectorPanel(clientGUI,this,numberOfResourcesToChoose);
+        this.mainPanel.add(RESOURCESELECTOR,this.initResourceSelectorPanel);
+        this.mainLayout.show(this.mainPanel,RESOURCESELECTOR);
     }
 }

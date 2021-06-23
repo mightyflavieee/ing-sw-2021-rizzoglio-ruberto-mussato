@@ -17,6 +17,6 @@ public class LeaderCardProductionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.gui.getInformationsGUI().createProductionMoveHandler(ProductionType.LeaderCard);
-        this.gui.getLeaderCardPlaceGUI().enableButtons(TurnPhase.MainPhase);
+        this.gui.getLeaderCardPlaceGUI().enableButtonsForProduction();
     }
 }

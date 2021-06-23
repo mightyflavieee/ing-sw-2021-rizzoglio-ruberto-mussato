@@ -103,8 +103,9 @@ public class InformationsGUI extends JInternalFrame {
                 break;
             case WaitPhase:
             default:
-
-                this.mainPhaseHandler.setVisible(false);
+                if(this.mainPhaseHandler!=null) {
+                    this.mainPhaseHandler.setVisible(false);
+                }
 
                 if(this.phaseFrame != null){
                     this.phaseFrame.dispose();

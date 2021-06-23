@@ -18,7 +18,7 @@ public class DevLeaderCardsProductionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.gui.getInformationsGUI().createProductionMoveHandler(ProductionType.DevCardAndLeader);
         this.gui.getBoardGUI().getMapTrayGUI().enableAllButtons();
-        this.gui.getLeaderCardPlaceGUI().enableButtons(TurnPhase.MainPhase);
+        this.gui.getLeaderCardPlaceGUI().enableButtonsForLeaderPhase();
         this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
         this.gui.getInformationsGUI().getjTextArea().setText("Choose a Leader Card and a Development Card");
     }

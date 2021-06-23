@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import it.polimi.ingsw.project.client.Client;
 
-public class WaitForLeaderCardsMessage implements Serializable, ResponseMessage {
+public class WaitForOtherPlayersMessage implements Serializable, ResponseMessage {
 
   @Override
   public void action(Client client) {
