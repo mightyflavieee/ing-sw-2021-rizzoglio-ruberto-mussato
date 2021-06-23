@@ -8,7 +8,7 @@ import java.awt.*;
 public class LeaderCardJlabelGUI extends JLabel {
     private String id;
     private LeaderCardChoserGUI leaderCardChoserGUI;
-    private int width = 200, height = 350;
+    private int width = 200, height = 325;
 
 
     public LeaderCardJlabelGUI(String id) { //used for the leadercard place

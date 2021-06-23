@@ -8,6 +8,7 @@ import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.*;
 import it.polimi.ingsw.project.model.playermove.interfaces.Request;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.observer.Observer;
 
 import javax.swing.*;
@@ -101,6 +102,7 @@ public class ClientGUI extends Client implements Observer<Move> {
         jFrame.add(idMatchField);
         jFrame.pack();
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);*/
+        this.newGameHandler.goToSelectNickname();
     }
 
     @Override
@@ -122,20 +124,22 @@ public class ClientGUI extends Client implements Observer<Move> {
 
         // todo change to fit new structure with NewGameHandler
 
-        this.jFrame = new JFrame();
-        this.jFrame.setTitle("Master of Renaissance");
-        JTextArea jTextArea = new JTextArea("Wait for the other players");
-        jTextArea.setEditable(false);
-        jTextArea.setVisible(true);
-        this.jFrame.add(jTextArea);
-        this.jFrame.setVisible(true);
-        this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.jFrame.pack();
+//        this.jFrame = new JFrame();
+//        this.jFrame.setTitle("Master of Renaissance");
+//        JTextArea jTextArea = new JTextArea("Wait for the other players");
+//        jTextArea.setEditable(false);
+//        jTextArea.setVisible(true);
+//        this.jFrame.add(jTextArea);
+//        this.jFrame.setVisible(true);
+//        this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        this.jFrame.pack();
+        this.newGameHandler.goToWaitingRoom(this.gameId);
+
     }
 
     @Override
     public void chooseResources(Integer numberOfResourcesToChoose) {
-//todo
+        this.newGameHandler.goToResourceSelector(numberOfResourcesToChoose);
     }
 
     public void send(Request request){
@@ -172,6 +176,7 @@ public class ClientGUI extends Client implements Observer<Move> {
     private void buildGame() {
 
         this.jFrame = new JFrame();
+        this.jFrame.setLocation(0,0);
         this.jFrame.setTitle("Master of Renaissance");
         this.jFrame.setVisible(true);
         this.jFrame.setLayout(new GridLayout(1,1));
@@ -361,5 +366,15 @@ public class ClientGUI extends Client implements Observer<Move> {
     @Override
     public void update(Move message) {
         this.send(message);
+    }
+
+    public void sendListOfChosenResources(List<ResourceType> resourceTypeList) {
+        try {
+            getSocketOut().writeObject(new ChooseResourcesMove(this.myNickname, this.gameId, resourceTypeList));
+            getSocketOut().flush();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            setActive(false);
+        }
     }
 }
