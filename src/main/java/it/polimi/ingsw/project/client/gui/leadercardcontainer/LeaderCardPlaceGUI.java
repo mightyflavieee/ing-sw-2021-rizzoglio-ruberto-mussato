@@ -2,7 +2,6 @@ package it.polimi.ingsw.project.client.gui.leadercardcontainer;
 
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.model.Player;
-import it.polimi.ingsw.project.model.TurnPhase;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.Status;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.PerkType;
@@ -83,8 +82,8 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         this.leaderMovePanelList.forEach(LeaderMovePanel::disableButtons);
     }
 
-    public void enableButtons(TurnPhase turnPhase) {
-        this.leaderMovePanelList.forEach(x -> x.enableButtons(turnPhase));
+    public void enableButtonsForLeaderPhase() {
+        this.leaderMovePanelList.forEach(x -> x.enableButtonsForLeaderPhase());
     }
 
     public void refreshSize(int width, int height) {
@@ -99,4 +98,7 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         }
     }
 
+    public void enableButtonsForProduction() {
+        this.leaderMovePanelList.forEach(x -> x.enableButtonsForProduction());
+    }
 }

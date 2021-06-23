@@ -1,7 +1,6 @@
 package it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.boardproduction;
 
 import it.polimi.ingsw.project.client.gui.GUI;
-import it.polimi.ingsw.project.model.TurnPhase;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
@@ -9,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class ShieldBoardProductionListener implements ActionListener {
     private GUI gui;
@@ -53,12 +51,12 @@ public class ShieldBoardProductionListener implements ActionListener {
                     break;
                 case BoardAndLeaderCard:
                     this.gui.getInformationsGUI().getjTextArea().setText("Select Leader Card for the production!");
-                    this.gui.getLeaderCardPlaceGUI().enableButtons(TurnPhase.MainPhase);
+                    this.gui.getLeaderCardPlaceGUI().enableButtonsForLeaderPhase();
                     break;
                 case BoardAndDevCardAndLeaderCard:
                     this.gui.getInformationsGUI().getjTextArea().setText("Select Development Card and Leader Card for the production!");
                     this.gui.getBoardGUI().getMapTrayGUI().enableAllButtons();
-                    this.gui.getLeaderCardPlaceGUI().enableButtons(TurnPhase.MainPhase);
+                    this.gui.getLeaderCardPlaceGUI().enableButtonsForLeaderPhase();
                     break;
             }
 

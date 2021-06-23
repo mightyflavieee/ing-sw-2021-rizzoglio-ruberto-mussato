@@ -1,7 +1,6 @@
 package it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.productiontypes;
 
 import it.polimi.ingsw.project.client.gui.GUI;
-import it.polimi.ingsw.project.model.TurnPhase;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
 
 import java.awt.event.ActionEvent;
@@ -18,6 +17,6 @@ public class DevLeaderCardsProductionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.gui.getInformationsGUI().createProductionMoveHandler(ProductionType.DevCardAndLeader);
         this.gui.getBoardGUI().getMapTrayGUI().enableAllButtons();
-        this.gui.getLeaderCardPlaceGUI().enableButtons(TurnPhase.MainPhase);
+        this.gui.getLeaderCardPlaceGUI().enableButtonsForLeaderPhase();
     }
 }

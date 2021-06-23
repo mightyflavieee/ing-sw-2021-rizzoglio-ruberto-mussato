@@ -133,6 +133,11 @@ public class ClientGUI extends Client implements Observer<Move> {
         this.jFrame.pack();
     }
 
+    @Override
+    public void chooseResources(Integer numberOfResourcesToChoose) {
+//todo
+    }
+
     public void send(Request request){
         try {
             this.socketOut.writeObject(request);

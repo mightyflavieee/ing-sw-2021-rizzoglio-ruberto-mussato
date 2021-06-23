@@ -102,7 +102,7 @@ public class GUI extends Observable<Move> {
 //                break;
 //        }
         disableAllButtons();
-        this.leaderCardPlaceGUI.enableButtons(turnPhase);
+        this.leaderCardPlaceGUI.enableButtonsForLeaderPhase();
     }
 
     private void disableAllButtons() {
