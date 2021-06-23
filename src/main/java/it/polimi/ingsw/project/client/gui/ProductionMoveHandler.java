@@ -95,9 +95,7 @@ public class ProductionMoveHandler {
                 }
                 break;
             case LeaderCard:
-                for (ResourceType type : leaderCard.getRequiredResources().keySet()) {
-                    totalResourcesRequired.put(type, leaderCard.getRequiredResources().get(type));
-                }
+                totalResourcesRequired.put(leaderCard.getPerk().getResource().getType(), 1);
                 break;
             case Board:
                 for (ResourceType type : boardRequiredResources.keySet()) {
@@ -122,12 +120,11 @@ public class ProductionMoveHandler {
                 break;
             case BoardAndLeaderCard:
                 for (ResourceType type : resourceTypeList) {
-                    if (leaderCard.getRequiredResources().containsKey(type)) {
+                    if (leaderCard.getPerk().getResource().getType() == type) {
                         if (boardRequiredResources.containsKey(type)) {
-                            totalResourcesRequired.put(type,
-                                    leaderCard.getRequiredResources().get(type) + boardRequiredResources.get(type));
+                            totalResourcesRequired.put(type, 1 + boardRequiredResources.get(type));
                         } else {
-                            totalResourcesRequired.put(type, leaderCard.getRequiredResources().get(type));
+                            totalResourcesRequired.put(type, 1);
                         }
                     } else {
                         if (boardRequiredResources.containsKey(type)) {
@@ -139,15 +136,14 @@ public class ProductionMoveHandler {
             case DevCardAndLeader:
                 for (ResourceType type : resourceTypeList) {
                     if (developmentCard.getProduction().getRequiredResources().containsKey(type)) {
-                        if (leaderCard.getRequiredResources().containsKey(type)) {
-                            totalResourcesRequired.put(type,
-                                    developmentCard.getProduction().getRequiredResources().get(type) + leaderCard.getRequiredResources().get(type));
+                        if (leaderCard.getPerk().getResource().getType() == type) {
+                            totalResourcesRequired.put(type, developmentCard.getProduction().getRequiredResources().get(type) + 1);
                         } else {
-                            totalResourcesRequired.put(type, leaderCard.getRequiredResources().get(type));
+                            totalResourcesRequired.put(type, 1);
                         }
                     } else {
-                        if (boardRequiredResources.containsKey(type)) {
-                            totalResourcesRequired.put(type, leaderCard.getRequiredResources().get(type));
+                        if (leaderCard.getPerk().getResource().getType() == type) {
+                            totalResourcesRequired.put(type, 1);
                         }
                     }
                 }
@@ -155,12 +151,12 @@ public class ProductionMoveHandler {
             case BoardAndDevCardAndLeaderCard:
                 for (ResourceType type : resourceTypeList) {
                     if (developmentCard.getProduction().getRequiredResources().containsKey(type)) {
-                        if (leaderCard.getRequiredResources().containsKey(type)) {
+                        if (leaderCard.getPerk().getResource().getType() == type) {
                             if (boardRequiredResources.containsKey(type)) {
                                 totalResourcesRequired.put(type,
                                         developmentCard.getProduction().getRequiredResources().get(type) +
-                                        leaderCard.getRequiredResources().get(type) +
-                                        boardRequiredResources.get(type));
+                                        boardRequiredResources.get(type) +
+                                        1);
                             }
                         } else {
                             if (boardRequiredResources.containsKey(type)) {
@@ -172,16 +168,16 @@ public class ProductionMoveHandler {
                             }
                         }
                     } else {
-                        if (leaderCard.getRequiredResources().containsKey(type)) {
+                        if (leaderCard.getPerk().getResource().getType() == type) {
                             if (boardRequiredResources.containsKey(type)) {
-                                totalResourcesRequired.put(type,
-                                        leaderCard.getRequiredResources().get(type) +
-                                        boardRequiredResources.get(type));
+                                totalResourcesRequired.put(type, boardRequiredResources.get(type) + 1);
                             } else {
-                                totalResourcesRequired.put(type, leaderCard.getRequiredResources().get(type));
+                                totalResourcesRequired.put(type, 1);
                             }
                         } else {
-                            totalResourcesRequired.put(type, boardRequiredResources.get(type));
+                            if (boardRequiredResources.containsKey(type)) {
+                                totalResourcesRequired.put(type, boardRequiredResources.get(type));
+                            }
                         }
                     }
                 }
