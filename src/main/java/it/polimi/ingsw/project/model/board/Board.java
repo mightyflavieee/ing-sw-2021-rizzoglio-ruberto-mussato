@@ -89,6 +89,8 @@ public class Board implements Serializable, Cloneable {
     return this.leaderCards;
   }
 
+  public List<ResourceType> getDiscounts() { return this.discounts; }
+
   public List<ResourceType> getTransmutation() {
     return transmutation;
   }
