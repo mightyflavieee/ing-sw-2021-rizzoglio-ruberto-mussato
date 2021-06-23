@@ -26,12 +26,12 @@ public class ChestGUI extends JInternalFrame {
         this.setTitle("Chest");
         this.setVisible(true);
         this.setLayout(new GridLayout(4, 1));
+        this.informationsGUI = informationsGUI;
         createButtons();
         for (ResourceType type : this.resourcesButtons.keySet()) {
             this.add(this.resourcesButtons.get(type));
         }
         this.pack();
-        this.informationsGUI = informationsGUI;
         this.boardModel = boardModel;
         this.clickable = false;
         refresh();
