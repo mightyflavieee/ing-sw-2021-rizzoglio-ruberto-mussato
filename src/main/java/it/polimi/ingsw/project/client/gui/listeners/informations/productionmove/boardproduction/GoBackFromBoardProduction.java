@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.boardproduction;
 
 import it.polimi.ingsw.project.client.gui.GUI;
+import it.polimi.ingsw.project.model.TurnPhase;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +19,7 @@ public class GoBackFromBoardProduction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (this.isManufacturingSelection) {
             this.gui.getInformationsGUI().getMainPhaseHandler().goToProductionButtons();
+            this.gui.disableButtonsHandler(TurnPhase.MainPhase);
         } else {
             this.gui.getInformationsGUI().getMainPhaseHandler().goToBoardProductionButtons();
         }
