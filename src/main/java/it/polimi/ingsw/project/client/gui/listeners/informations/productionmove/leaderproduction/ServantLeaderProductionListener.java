@@ -13,13 +13,15 @@ public class ServantLeaderProductionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.gui.getInformationsGUI().getProductionMoveHandler().setBoardOrPerkManufacturedResource(ResourceType.Servant);
+        this.gui.getInformationsGUI().getProductionMoveHandler().setBoardOrPerkManufacturedResource(ResourceType.Coin);
         switch (this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType()) {
             case LeaderCard:
             case BoardAndLeaderCard:
                 this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
                 this.gui.getBoardGUI().getChestGUI().enableAllButtons();
                 this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
+                this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
+                this.gui.getInformationsGUI().showProductionInfo();
                 break;
             case DevCardAndLeader:
             case BoardAndDevCardAndLeaderCard:
@@ -27,6 +29,11 @@ public class ServantLeaderProductionListener implements ActionListener {
                     this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
                     this.gui.getBoardGUI().getChestGUI().enableAllButtons();
                     this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
+                    this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
+                    this.gui.getInformationsGUI().showProductionInfo();
+                } else {
+                    this.gui.getInformationsGUI().getjTextArea().setText("Select the Development Card!");
+                    this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
                 }
                 break;
         }
