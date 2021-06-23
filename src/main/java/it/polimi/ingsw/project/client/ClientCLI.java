@@ -430,10 +430,9 @@ public class ClientCLI extends Client {
         if (!this.match.getCurrentPlayer().getBoard().getLeaderCards().isEmpty()) {
             System.out.println(this.match.getLeaderCardsToString(getNickname()));
             do {
-                System.out.println(
-                        "Provide the ID of the LeaderCard you want to activate: (Type 'back' to go back)");
+                System.out.println("Provide the ID of the LeaderCard you want to activate: (Type 'back' to go back)");
                 String answer = this.stdin.nextLine();
-                if(answer.equals("back")){
+                if (answer.equals("back")) {
                     return null;
                 }
                 for (LeaderCard leaderCard : this.match.getCurrentPlayer().getBoard().getLeaderCards()) {
@@ -537,7 +536,7 @@ public class ClientCLI extends Client {
         String answer;
         Map<ResourceType, Integer> resourceRequired, resourcesToEliminateWarehouse, resourceToEliminateChest;
         resourceRequired = developmentCard.getCost();
-        this.decreaseForDiscount(resourceRequired,board);
+        this.decreaseForDiscount(resourceRequired, board);
         resourcesToEliminateWarehouse = new HashMap<>();
         resourceToEliminateChest = new HashMap<>();
         if (!board.areEnoughResourcesPresent(resourceRequired)) {
@@ -549,9 +548,8 @@ public class ClientCLI extends Client {
         for (Map.Entry<ResourceType, Integer> entry : resourceRequired.entrySet()) {
             System.out.println(entry.getKey() + " required : " + entry.getValue());
             System.out.println("\nYour Resources: \n" + board.resourcesToString());
-            System.out.println("0 - go back\n" +
-                    "1 - use Warehouse's resources first and then Chest's\n" +
-                    "2 - use Chest's resources first and then Warehouse's");
+            System.out.println("0 - go back\n" + "1 - use Warehouse's resources first and then Chest's\n"
+                    + "2 - use Chest's resources first and then Warehouse's");
             answer = stdin.nextLine();
             switch (answer) {
                 // uno di questi metodi deve per forza andare bene a causa del controllo
@@ -577,17 +575,16 @@ public class ClientCLI extends Client {
                     resourceToEliminateChest);
     }
 
-
     private void decreaseForDiscount(Map<ResourceType, Integer> resourceRequired, Board board) {
         List<ResourceType> discounts = board.getDiscounts();
-        for(ResourceType resourceType : resourceRequired.keySet()){
-            if(resourceRequired.get(resourceType)>0){
-                if(discounts.contains(resourceType)) {
+        for (ResourceType resourceType : resourceRequired.keySet()) {
+            if (resourceRequired.get(resourceType) > 0) {
+                if (discounts.contains(resourceType)) {
                     resourceRequired.put(resourceType, resourceRequired.get(resourceType) - 1);
                 }
             }
         }
-    } 
+    }
 
     private void chestfirst(Board board, ResourceType resourcetype, Integer integer,
             Map<ResourceType, Integer> resourcesToEliminateWarehouse,
@@ -597,13 +594,7 @@ public class ClientCLI extends Client {
         for (int i = 0; i <= integer; i++) {
             wareHouseMap.put(resourcetype, i);
             chestMap.put(resourcetype, integer - i);
-
-            if (board.areEnoughResourcesPresentForBuyAndProduction(wareHouseMap, chestMap)) {
-                break;
-            }
         }
-        resourceToEliminateChest.put(resourcetype, chestMap.get(resourcetype));
-        resourcesToEliminateWarehouse.put(resourcetype, wareHouseMap.get(resourcetype));
     }
 
     private void warehousefirst(Board board, ResourceType resourcetype, Integer integer,
@@ -1262,8 +1253,8 @@ public class ClientCLI extends Client {
 
     private void viewer(String myNickname) {
         // shows informations about other players
-        System.out.println(
-                "Your opponents are : " + this.match.getOpponentsToString(myNickname) + "\nTell the nickname");
+        System.out
+                .println("Your opponents are : " + this.match.getOpponentsToString(myNickname) + "\nTell the nickname");
 
         String opponent = stdin.nextLine();
         System.out.println(
@@ -1378,12 +1369,11 @@ public class ClientCLI extends Client {
             return transmutationPerk.get(0);
         } else {
             do {
-                System.out.println("Chose the perk to use:\n" +
-                        "1 - " + transmutationPerk.get(0).toString()
-                        + "\n2 - " + transmutationPerk.get(1).toString());
+                System.out.println("Chose the perk to use:\n" + "1 - " + transmutationPerk.get(0).toString() + "\n2 - "
+                        + transmutationPerk.get(1).toString());
                 answer = Integer.parseInt(stdin.nextLine());
-            }while (!(answer == 1 || answer == 2));
-            return transmutationPerk.get(answer-1);
+            } while (!(answer == 1 || answer == 2));
+            return transmutationPerk.get(answer - 1);
         }
     }
 
