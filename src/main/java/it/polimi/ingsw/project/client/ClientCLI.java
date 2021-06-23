@@ -273,10 +273,13 @@ public class ClientCLI extends Client {
                             Request move = handleTurn();
                             if (move != null) {
                                 socketOut.writeObject(move);
+                                socketOut.flush();
+                                socketOut.reset();
+                                setLock();
                             }
-                            socketOut.flush();
+
                         }
-                        setLock();
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -387,8 +390,11 @@ public class ClientCLI extends Client {
             System.out.println(this.match.getLeaderCardsToString(getNickname()));
             do {
                 System.out.println(
-                        "Provide the ID of the LeaderCard you want to activate: (Type 'quit' to go back)\n");
+                        "Provide the ID of the LeaderCard you want to activate: (Type 'back' to go back)");
                 String answer = this.stdin.nextLine();
+                if(answer.equals("back")){
+                    return null;
+                }
                 for (LeaderCard leaderCard : this.match.getCurrentPlayer().getBoard().getLeaderCards()) {
                     if (answer.equals(leaderCard.getId())) {
                         isCorrectID = true;
@@ -483,6 +489,7 @@ public class ClientCLI extends Client {
         String answer;
         Map <ResourceType, Integer> resourceRequired, resourcesToEliminateWarehouse, resourceToEliminateChest;
         resourceRequired = developmentCard.getCost();
+        this.decreaseForDiscount(resourceRequired,board);
         resourcesToEliminateWarehouse = new HashMap<>();
         resourceToEliminateChest = new HashMap<>();
         if(!board.areEnoughResourcesPresent(resourceRequired)){
@@ -492,7 +499,7 @@ public class ClientCLI extends Client {
         }
         for(Map.Entry<ResourceType, Integer> entry : resourceRequired.entrySet()) {
             System.out.println(entry.getKey() + " required : " + entry.getValue());
-            System.out.println("\n Your Resources: \n" + board.resourcesToString());
+            System.out.println("\nYour Resources: \n" + board.resourcesToString());
             System.out.println("0 - go back\n" +
                     "1 - use Warehouse's resources first and then Chest's\n" +
                     "2 - use Chest's resources first and then Warehouse's");
@@ -515,6 +522,17 @@ public class ClientCLI extends Client {
             return null;
         }else
             return new BuyDevCardMove(developmentCard.getId(),devCardPosition,resourcesToEliminateWarehouse,resourceToEliminateChest);
+    }
+
+    private void decreaseForDiscount(Map<ResourceType, Integer> resourceRequired, Board board) {
+        List<ResourceType> discounts = board.getDiscounts();
+        for(ResourceType resourceType : resourceRequired.keySet()){
+            if(resourceRequired.get(resourceType)>0){
+                if(discounts.contains(resourceType)) {
+                    resourceRequired.put(resourceType, resourceRequired.get(resourceType) - 1);
+                }
+            }
+        }
     }
 
     private void chestfirst(Board board, ResourceType resourcetype, Integer integer, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourceToEliminateChest) {

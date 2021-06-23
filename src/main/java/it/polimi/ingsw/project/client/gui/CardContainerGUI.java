@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,8 +48,10 @@ public class CardContainerGUI extends JInternalFrame {
     }
 
     public void refresh() {
+        int i;
         this.cardsToShow = cardContainer.getAvailableDevCards().stream().map(DevelopmentCard::getId).collect(Collectors.toList());
-        for (int i = 0; i < cardsToShow.size(); i++){
+        Collections.reverse(cardsToShow);
+        for (i = 0; i < 12; i++){
 //            this.showedCards.get(i).setIcon(new ImageIcon(
 //                    new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png")
 //                    .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
@@ -62,7 +65,12 @@ public class CardContainerGUI extends JInternalFrame {
                     this.showedCards.get(i).addActionListener(new SelectCardForPurchaseListener(this.informationsGUI,
                             this.cardContainer.fetchCard(this.cardsToShow.get(i))));
                 }
+            if(i > cardsToShow.size()){
+                this.showedCards.get(i).setIcon(Utils.readIcon("developmentcards/retro_devcard.png",width,height));
+                this.showedCards.get(i).setEnabled(false);
+            }
         }
+
     }
 
     public void setCardContainer(CardContainer cardContainer) {

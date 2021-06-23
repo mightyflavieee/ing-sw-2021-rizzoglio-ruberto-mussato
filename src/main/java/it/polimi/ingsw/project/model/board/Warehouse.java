@@ -315,9 +315,13 @@ public class Warehouse extends Observable<Warehouse>{
   public String getExtraDepositToString() {
     if (this.extraDeposit == null) {
       return "no extra deposit\n";
+    }else{
+      String string = "";
+      for(ResourceType resourceType : extraDeposit.keySet()){
+        string = string + resourceType.toString() + " "+ extraDeposit.get(resourceType) + "\n";
+      }
+      return string;
     }
-    return this.extraDeposit.entrySet().stream().map(x -> x.getKey().toString() + " " + x.getValue().toString())
-        .toString();
   }
 
   public int calculateResourceVictoryPoints() {

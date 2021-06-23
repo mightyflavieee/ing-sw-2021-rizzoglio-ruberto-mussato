@@ -710,4 +710,8 @@ public class Board implements Serializable, Cloneable {
     }
     return (int) Math.floor(totalResources / 5);
   }
+
+  public List<ResourceType> getDiscounts() {
+    return discounts;
+  }
 }
