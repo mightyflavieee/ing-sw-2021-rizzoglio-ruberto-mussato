@@ -47,6 +47,21 @@ public class Match implements Serializable, Cloneable {
     public Match() { // da usare nella clone
     }
 
+    public void moveForwardForStartingGame() {
+        for (int i = 0; i < this.playerList.size(); i++) {
+            Player player = this.playerList.get(i);
+            switch (i) {
+                case 0:
+                case 1:
+                    break;
+                case 2:
+                case 3:
+                    player.moveForward();
+                    break;
+            }
+        }
+    }
+
     private void nextPlayer() {
         int playerIndex = 0;
         int loopCounter = 0;
@@ -102,7 +117,9 @@ public class Match implements Serializable, Cloneable {
         return isOver;
     }
 
-    public boolean getLorenzoWon() { return this.lorenzoWon; }
+    public boolean getLorenzoWon() {
+        return this.lorenzoWon;
+    }
 
     public void notifyFaithMapsForCouncil(int numTile) {
         // TODO devo notificare anche lorenzo?
@@ -362,7 +379,7 @@ public class Match implements Serializable, Cloneable {
         for (Player player : this.playerList) {
             if (player.getNickname().equals(disconnectedPlayer.getNickname())) {
                 player.setIsConnected(false);
-                if(!currentPlayer.getIsConnected()){
+                if (!currentPlayer.getIsConnected()) {
                     this.nextPlayer();
                 }
                 break;
@@ -374,7 +391,7 @@ public class Match implements Serializable, Cloneable {
         for (Player player : this.playerList) {
             if (player.getNickname().equals(disconnectedPlayerNickname)) {
                 player.setIsConnected(true);
-                if(!currentPlayer.getIsConnected() || currentPlayer.getNickname().equals(disconnectedPlayerNickname)){
+                if (!currentPlayer.getIsConnected() || currentPlayer.getNickname().equals(disconnectedPlayerNickname)) {
                     currentPlayer = player;
                 }
                 break;
@@ -397,9 +414,8 @@ public class Match implements Serializable, Cloneable {
             orderedListOfPlayers[i] = this.playerList.get(i);
         }
         for (int i = 0; i < orderedListOfPlayers.length; i++) {
-            for (int j = i-1; j >= 0; j--) {
-                if (orderedListOfPlayers[i].getVictoryPoints() >
-                    orderedListOfPlayers[j].getVictoryPoints()) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (orderedListOfPlayers[i].getVictoryPoints() > orderedListOfPlayers[j].getVictoryPoints()) {
                     Player temp = orderedListOfPlayers[j];
                     orderedListOfPlayers[j] = orderedListOfPlayers[i];
                     orderedListOfPlayers[i] = temp;
@@ -410,5 +426,14 @@ public class Match implements Serializable, Cloneable {
             leaderboard.put(i, orderedListOfPlayers[i]);
         }
         return leaderboard;
+    }
+
+    public void setSelectedResourcesForEachPlayer(Map<String, List<ResourceType>> chosenResourcesByPlayer) {
+        for (Player player : this.playerList) {
+            List<ResourceType> selectedResources = chosenResourcesByPlayer.get(player.getNickname());
+            if (selectedResources != null) {
+                player.setResources(selectedResources);
+            }
+        }
     }
 }

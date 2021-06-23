@@ -208,4 +208,8 @@ public class Player implements Serializable, Cloneable {
     int victoryPointsToAdd = this.board.calculateResourceVictoryPoints();
     addVictoryPoints(victoryPointsToAdd);
   }
+
+  public void setResources(List<ResourceType> listOfResources) {
+    this.board.insertChosenResources(listOfResources);
+  }
 }

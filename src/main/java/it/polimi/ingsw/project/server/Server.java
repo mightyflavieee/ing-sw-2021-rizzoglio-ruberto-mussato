@@ -17,12 +17,14 @@ import it.polimi.ingsw.project.messages.ErrorChosenLeaderCards;
 import it.polimi.ingsw.project.messages.ErrorJoinMessage;
 import it.polimi.ingsw.project.messages.LeaderCardsToChooseMessage;
 import it.polimi.ingsw.project.messages.MoveMessage;
-import it.polimi.ingsw.project.messages.WaitForLeaderCardsMessage;
+import it.polimi.ingsw.project.messages.ResourcesToChooseMessage;
+import it.polimi.ingsw.project.messages.WaitForOtherPlayersMessage;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.actionTokens.ActionToken;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.board.faithMap.tile.ActivableTile;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.utils.TypeAdapters.AdapterActionToken;
 import it.polimi.ingsw.project.utils.TypeAdapters.AdapterActivableTile;
 import it.polimi.ingsw.project.view.RemoteView;
@@ -79,9 +81,28 @@ public class Server {
         });
     }
 
+    public void addChosenResourcesToPlayer(String matchId, String nickname, List<ResourceType> selectedResources) {
+        Lobby currentLobby = this.mapOfUnavailableLobbies.get(matchId);
+        currentLobby.addChosenResourcesToPlayer(nickname, selectedResources);
+        if (allPlayersHasChosenResources(matchId)) {
+            initModel(matchId);
+        } else {
+            sendWaitMessageToPlayer(matchId, nickname);
+        }
+    }
+
     public synchronized boolean allPlayersHasChosenCards(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
         if (currentLobby.getchosenLeaderCardsByPlayer().size() == currentLobby.getMaxNumberOfPlayers()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public synchronized boolean allPlayersHasChosenResources(String matchId) {
+        Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
+        if (currentLobby.getChosenResourcesByPlayer().size() == currentLobby.getMaxNumberOfPlayers() - 1) {
             return true;
         } else {
             return false;
@@ -96,7 +117,7 @@ public class Server {
 
     public void sendWaitMessageToPlayer(String matchId, String nickname) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
-        currentLobby.getMapOfSocketClientConnections().get(nickname).asyncSend(new WaitForLeaderCardsMessage());
+        currentLobby.getMapOfSocketClientConnections().get(nickname).asyncSend(new WaitForOtherPlayersMessage());
     }
 
     public synchronized void addChosenCardsToPlayer(String matchId, String nickname,
@@ -105,7 +126,7 @@ public class Server {
         if (currentLobby.leaderCardsChosenWereRight(nickname, chosenLeaderCards)) {
             currentLobby.addChosenLeaderCardsToPlayer(nickname, chosenLeaderCards);
             if (allPlayersHasChosenCards(matchId)) {
-                initModel(matchId);
+                initPlayers(matchId);
             } else {
                 sendWaitMessageToPlayer(matchId, nickname);
             }
@@ -115,12 +136,39 @@ public class Server {
 
     }
 
-    public void initModel(String matchId) {
+    public void initPlayers(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
-        List<SocketClientConnection> listOfClientConnections = new ArrayList<SocketClientConnection>();
         List<Player> listOfPlayer = new ArrayList<Player>();
         currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
             listOfPlayer.add(new Player(nickname));
+        });
+        Map<String, SocketClientConnection> mapOfConnections = currentLobby.getMapOfSocketClientConnections();
+        Collections.shuffle(listOfPlayer);
+        for (int i = 0; i < listOfPlayer.size(); i++) {
+            final Player player = listOfPlayer.get(i);
+            if (i != 0) {
+                Integer numberOfResourcesToChoose = 0;
+                switch (i) {
+                    case 1:
+                    case 2:
+                        numberOfResourcesToChoose = 1;
+                        break;
+                    case 3:
+                        numberOfResourcesToChoose = 2;
+                        break;
+                }
+                mapOfConnections.get(player.getNickname())
+                        .asyncSend(new ResourcesToChooseMessage(numberOfResourcesToChoose));
+            } 
+        }
+        currentLobby.setPlayerList(listOfPlayer);
+    }
+
+    public void initModel(String matchId) {
+        Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
+        List<SocketClientConnection> listOfClientConnections = new ArrayList<SocketClientConnection>();
+        List<Player> listOfPlayer = currentLobby.getPlayerList();
+        currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
             listOfClientConnections.add(connection);
         });
         Map<String, RemoteView> mapOfViews = new HashMap<>();
@@ -129,7 +177,6 @@ public class Server {
                     new RemoteView(listOfPlayer.get(i), listOfClientConnections.get(i)));
         }
         currentLobby.setMapOfViews(mapOfViews);
-        Collections.shuffle(listOfPlayer);
         for (Player player : listOfPlayer) {
             player.setLeaderCards(currentLobby.getchosenLeaderCardsByPlayer().get(player.getNickname()));
         }
@@ -139,6 +186,8 @@ public class Server {
             currentLobby.getModel().addObserver(currentLobby.getMapOfViews().get(nickname));
             currentLobby.getMapOfViews().get(nickname).addObserver(currentLobby.getController());
         }
+        currentLobby.getModel().getMatch().moveForwardForStartingGame();
+        currentLobby.getModel().getMatch().setSelectedResourcesForEachPlayer(currentLobby.getChosenResourcesByPlayer());
         currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
             connection.asyncSend(new MoveMessage(currentLobby.getModel().getMatchCopy()));
         });

@@ -101,4 +101,6 @@ public abstract class Client {
                                                                                                          // uguale?
 
     public abstract void showWaitMessageForOtherPlayers();
+
+    public abstract void chooseResources(Integer numberOfResourcesToChoose);
 }

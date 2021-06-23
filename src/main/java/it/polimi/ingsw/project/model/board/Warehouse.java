@@ -8,7 +8,7 @@ import it.polimi.ingsw.project.observer.custom.WarehouseObserver;
 
 import java.util.*;
 
-public class Warehouse extends Observable<Warehouse>{
+public class Warehouse extends Observable<Warehouse> {
 
   private final LinkedHashMap<ShelfFloor, List<Resource>> shelves;
   private LinkedHashMap<ResourceType, Integer> extraDeposit; // da mettere nel costruttore
@@ -21,7 +21,6 @@ public class Warehouse extends Observable<Warehouse>{
     this.addObserver(new WarehouseObserver(match));
   }
 
-
   public void readdObservers(Match match) {
     this.addObserver(new WarehouseObserver(match));
   }
@@ -29,14 +28,14 @@ public class Warehouse extends Observable<Warehouse>{
   // returns ALL resources presents in the warehouse
   public LinkedHashMap<ResourceType, Integer> mapAllContainedResources() {
     LinkedHashMap<ResourceType, Integer> currentResourcesLinkedHashMap = new LinkedHashMap<>();
-    currentResourcesLinkedHashMap.put(ResourceType.Coin,0);
-    currentResourcesLinkedHashMap.put(ResourceType.Stone,0);
-    currentResourcesLinkedHashMap.put(ResourceType.Shield,0);
-    currentResourcesLinkedHashMap.put(ResourceType.Servant,0);
+    currentResourcesLinkedHashMap.put(ResourceType.Coin, 0);
+    currentResourcesLinkedHashMap.put(ResourceType.Stone, 0);
+    currentResourcesLinkedHashMap.put(ResourceType.Shield, 0);
+    currentResourcesLinkedHashMap.put(ResourceType.Servant, 0);
 
     // getting resources from the entire warehouse
-    shelves.forEach(
-        (ShelfFloor floor, List<Resource> listOfResources) -> mapResourcesHelper(currentResourcesLinkedHashMap, listOfResources));
+    shelves.forEach((ShelfFloor floor,
+        List<Resource> listOfResources) -> mapResourcesHelper(currentResourcesLinkedHashMap, listOfResources));
     // getting resources from extradeposit
     if (extraDeposit != null) {
       extraDeposit.forEach((ResourceType resourceType, Integer numberOfResources) -> {
@@ -60,7 +59,8 @@ public class Warehouse extends Observable<Warehouse>{
   }
 
   // helper for listToLinkedHashMapResources
-  private void mapResourcesHelper(LinkedHashMap<ResourceType, Integer> currentResourcesLinkedHashMap, List<Resource> listOfResources) {
+  private void mapResourcesHelper(LinkedHashMap<ResourceType, Integer> currentResourcesLinkedHashMap,
+      List<Resource> listOfResources) {
     listOfResources.forEach((Resource resource) -> {
       ResourceType type = resource.getType();
       boolean hasKey = currentResourcesLinkedHashMap.containsKey(type);
@@ -108,8 +108,8 @@ public class Warehouse extends Observable<Warehouse>{
       LinkedHashMap<ResourceType, Integer> newExtraDeposit = new LinkedHashMap<>();
       newExtraDeposit.put(resource.getType(), 0);
       this.extraDeposit = newExtraDeposit;
-    }else{
-      this.extraDeposit.put(resource.getType(),0);
+    } else {
+      this.extraDeposit.put(resource.getType(), 0);
     }
   }
 
@@ -302,7 +302,8 @@ public class Warehouse extends Observable<Warehouse>{
     // string = this.shelves
     // .entrySet()
     // .stream()
-    // .LinkedHashMap(x -> x.getKey().toString() + x.getValue().stream().LinkedHashMap(y -> " " +
+    // .LinkedHashMap(x -> x.getKey().toString() +
+    // x.getValue().stream().LinkedHashMap(y -> " " +
     // y.toString()) + "\n")
     // .collect(Collectors.toList())
     // .stream()
@@ -327,5 +328,19 @@ public class Warehouse extends Observable<Warehouse>{
       totalResources = totalResources + containedResources.get(resourceType);
     }
     return (int) Math.floor(totalResources / 5);
-  }  
+  }
+
+  public void insertResources(List<ResourceType> listOfResources) {
+    for (ResourceType resourceType : listOfResources) {
+      if (shelves.get(ShelfFloor.Third).isEmpty()) {
+        shelves.get(ShelfFloor.Third).add(new Resource(resourceType));
+      } else {
+        if (shelves.get(ShelfFloor.Third).get(0).getType().equals(resourceType)) {
+          shelves.get(ShelfFloor.Third).add(new Resource(resourceType));
+        } else {
+          shelves.get(ShelfFloor.Second).add(new Resource(resourceType));
+        }
+      }
+    }
+  }
 }

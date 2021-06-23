@@ -7,7 +7,7 @@ import it.polimi.ingsw.project.client.Client;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 
 public class LeaderCardsToChooseMessage implements ResponseMessage, Serializable {
-
+    
     private List<LeaderCard> leaderCardsToChoose;
 
     public LeaderCardsToChooseMessage(List<LeaderCard> leaderCardsToChoose) {
