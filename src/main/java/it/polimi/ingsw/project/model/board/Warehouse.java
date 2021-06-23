@@ -314,7 +314,7 @@ public class Warehouse extends Observable<Warehouse>{
 
   public String getExtraDepositToString() {
     if (this.extraDeposit == null) {
-      return "no extra deposit";
+      return "no extra deposit\n";
     }
     return this.extraDeposit.entrySet().stream().map(x -> x.getKey().toString() + " " + x.getValue().toString())
         .toString();

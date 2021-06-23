@@ -387,7 +387,7 @@ public class ClientCLI extends Client {
             System.out.println(this.match.getLeaderCardsToString(getNickname()));
             do {
                 System.out.println(
-                        "Provide the ID of the LeaderCard you want to activate: (Type 'quit' to go back)\n" + "> ");
+                        "Provide the ID of the LeaderCard you want to activate: (Type 'quit' to go back)\n");
                 String answer = this.stdin.nextLine();
                 for (LeaderCard leaderCard : this.match.getCurrentPlayer().getBoard().getLeaderCards()) {
                     if (answer.equals(leaderCard.getId())) {
@@ -1306,9 +1306,9 @@ public class ClientCLI extends Client {
             do {
                 System.out.println("Chose the perk to use:\n" +
                         "1 - " + transmutationPerk.get(0).toString()
-                        + "\n 2 - " + transmutationPerk.get(1).toString());
+                        + "\n2 - " + transmutationPerk.get(1).toString());
                 answer = Integer.parseInt(stdin.nextLine());
-            }while (answer == 1 || answer == 2);
+            }while (!(answer == 1 || answer == 2));
             return transmutationPerk.get(answer-1);
         }
     }
