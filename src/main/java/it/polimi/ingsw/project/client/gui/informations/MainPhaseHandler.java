@@ -10,6 +10,7 @@ import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.
 import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.boardproduction.*;
 import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.leaderproduction.*;
 import it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.productiontypes.*;
+import it.polimi.ingsw.project.client.gui.market.TransmutationButton;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.utils.Utils;
 
@@ -33,7 +34,7 @@ public class MainPhaseHandler extends JInternalFrame {
     private List<JButton> leaderManufacturingButtons;
     private List<JButton> boardManufacturingButtons;
     private List<JButton> boardRequiredResourcesButtons;
-    private List<JButton> transmutationButtons;
+    private List<TransmutationButton> transmutationButtons;
     private JButton abortMoveButton;
     private JPanel mainPanel;
     private CardLayout mainPanelLayout;
@@ -95,7 +96,10 @@ public class MainPhaseHandler extends JInternalFrame {
         this.boardManufacturingPanel.setLayout(new GridLayout(5, 1));
         this.boardRequiredResourcesPanel.setLayout(new BorderLayout());
         boardReqResHelperPanel.setLayout(new GridLayout(4, 2));
-        this.transmutationPanel.setLayout(new GridLayout(2,1));
+        this.transmutationPanel.setLayout(new GridLayout(3,1));
+        JTextArea transmuteTextArea = new JTextArea("Select how to transmutate the white marbles");
+        transmuteTextArea.setEditable(false);
+        this.transmutationPanel.add(transmuteTextArea);
         this.abortMovePanel.setLayout(new BorderLayout());
         for (JButton button : this.mainPhasesButtons) {
             this.mainPhasesPanel.add(button);
@@ -306,8 +310,8 @@ public class MainPhaseHandler extends JInternalFrame {
         this.boardRequiredResourcesButtons.add(buttonStone2);
         this.boardRequiredResourcesButtons.add(buttonGoBack);
         // creates Transmutation Perk Selection buttons
-        JButton transmutationButton1 = new JButton();
-        JButton transmutationButton2 = new JButton();
+        TransmutationButton transmutationButton1 = new TransmutationButton();
+        TransmutationButton transmutationButton2 = new TransmutationButton();
         // adds listeners
         transmutationButton1.addActionListener(new TransmutationSelectorListener(transmutationButton1,gui));
         transmutationButton2.addActionListener(new TransmutationSelectorListener(transmutationButton2,gui));
@@ -342,9 +346,12 @@ public class MainPhaseHandler extends JInternalFrame {
     public void goToTransmutationPanel() {
         List<ResourceType> transmutationPerks = this.gui.getTransmutationPerks();
         this.transmutationButtons.get(0).setIcon(Utils.readIcon("resourcetype/" + transmutationPerks.get(0) + ".png",
-                20 ,20));
+                30 ,30));
+        this.transmutationButtons.get(0).setResourceType(transmutationPerks.get(0));
         this.transmutationButtons.get(1).setIcon(Utils.readIcon("resourcetype/" + transmutationPerks.get(1) + ".png",
-                20 ,20));
+                30 ,30));
+        this.transmutationButtons.get(1).setResourceType(transmutationPerks.get(1));
+        this.mainPanelLayout.show(this.mainPanel,TRANSMUTATIONPANEL);
     }
 
     public void goToAbortMovePanel() { this.mainPanelLayout.show(this.mainPanel, ABORTMOVEPANEL); }

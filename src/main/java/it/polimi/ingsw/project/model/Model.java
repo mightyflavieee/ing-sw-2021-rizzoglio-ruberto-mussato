@@ -27,7 +27,7 @@ public class Model extends Observable<MoveMessage> {
     }
 
     public void reAddObserversOnMatch(){
-   //todo      this.match.readdObservers();
+         this.match.readdObservers();
     }
 
     public int extractNumberOfPlayers() {

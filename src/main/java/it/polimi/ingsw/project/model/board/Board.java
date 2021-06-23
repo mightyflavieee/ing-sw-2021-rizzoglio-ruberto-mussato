@@ -714,4 +714,7 @@ public class Board implements Serializable, Cloneable {
   public void insertChosenResources(List<ResourceType> listOfResources) {
     this.warehouse.insertResources(listOfResources);
   }
+  public List<ResourceType> getDiscounts() {
+    return discounts;
+  }
 }
