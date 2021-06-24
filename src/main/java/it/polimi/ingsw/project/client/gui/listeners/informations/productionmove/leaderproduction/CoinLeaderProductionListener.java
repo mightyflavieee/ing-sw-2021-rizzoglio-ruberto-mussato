@@ -20,6 +20,8 @@ public class CoinLeaderProductionListener implements ActionListener {
                 this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
                 this.gui.getBoardGUI().getChestGUI().enableAllButtons();
                 this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
+                this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
+                this.gui.getInformationsGUI().showProductionInfo();
                 break;
             case DevCardAndLeader:
             case BoardAndDevCardAndLeaderCard:
@@ -27,6 +29,11 @@ public class CoinLeaderProductionListener implements ActionListener {
                     this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
                     this.gui.getBoardGUI().getChestGUI().enableAllButtons();
                     this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
+                    this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
+                    this.gui.getInformationsGUI().showProductionInfo();
+                } else {
+                    this.gui.getInformationsGUI().getjTextArea().setText("Select the Development Card!");
+                    this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
                 }
                 break;
         }

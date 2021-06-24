@@ -240,6 +240,16 @@ public class InformationsGUI extends JInternalFrame {
     // calculates the missing resources from target
     private Map<ResourceType, Integer> calculateMissingResources(Map<ResourceType, Integer> yourResources, Map<ResourceType, Integer> target) {
         Map<ResourceType, Integer> missingResources = new HashMap<>();
+        List<ResourceType> discounts = this.gui.getBoardGUI().getBoardModel().getDiscounts();
+        if (discounts.size() > 0) {
+            for (ResourceType targetType : target.keySet()) {
+                for (ResourceType discountType : discounts) {
+                    if (targetType == discountType) {
+                        target.put(targetType, target.get(targetType) - 1);
+                    }
+                }
+            }
+        }
         for (ResourceType type : target.keySet()) {
             if (!yourResources.containsKey(type)) {
                 missingResources.put(type, target.get(type));

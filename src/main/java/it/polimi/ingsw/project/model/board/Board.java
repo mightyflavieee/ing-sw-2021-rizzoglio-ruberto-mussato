@@ -89,6 +89,8 @@ public class Board implements Serializable, Cloneable {
     return this.leaderCards;
   }
 
+  public List<ResourceType> getDiscounts() { return this.discounts; }
+
   public List<ResourceType> getTransmutation() {
     return transmutation;
   }
@@ -713,8 +715,5 @@ public class Board implements Serializable, Cloneable {
 
   public void insertChosenResources(List<ResourceType> listOfResources) {
     this.warehouse.insertResources(listOfResources);
-  }
-  public List<ResourceType> getDiscounts() {
-    return discounts;
   }
 }

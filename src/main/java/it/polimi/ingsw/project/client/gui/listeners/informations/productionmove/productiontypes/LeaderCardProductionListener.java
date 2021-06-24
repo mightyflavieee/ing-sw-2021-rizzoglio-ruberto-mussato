@@ -18,5 +18,7 @@ public class LeaderCardProductionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         this.gui.getInformationsGUI().createProductionMoveHandler(ProductionType.LeaderCard);
         this.gui.getLeaderCardPlaceGUI().enableButtonsForProduction();
+        this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
+        this.gui.getInformationsGUI().getjTextArea().setText("Choose a Leader Card for the production!");
     }
 }

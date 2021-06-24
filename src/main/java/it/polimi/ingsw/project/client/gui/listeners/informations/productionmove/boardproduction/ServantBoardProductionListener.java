@@ -51,12 +51,12 @@ public class ServantBoardProductionListener implements ActionListener {
                     break;
                 case BoardAndLeaderCard:
                     this.gui.getInformationsGUI().getjTextArea().setText("Select Leader Card for the production!");
-                    this.gui.getLeaderCardPlaceGUI().enableButtonsForLeaderPhase();
+                    this.gui.getLeaderCardPlaceGUI().enableButtonsForProduction();
                     break;
                 case BoardAndDevCardAndLeaderCard:
                     this.gui.getInformationsGUI().getjTextArea().setText("Select Development Card and Leader Card for the production!");
                     this.gui.getBoardGUI().getMapTrayGUI().enableAllButtons();
-                    this.gui.getLeaderCardPlaceGUI().enableButtonsForLeaderPhase();
+                    this.gui.getLeaderCardPlaceGUI().enableButtonsForProduction();
                     break;
             }
 

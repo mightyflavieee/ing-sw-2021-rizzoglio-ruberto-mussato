@@ -27,7 +27,11 @@ public class ChestGUISelectResourceListener implements ActionListener {
             if (previousValue != 0) {
                 this.chestGUI.getNumberOfResouces().get(this.resourceType).setText(String.valueOf(previousValue-1));
                 this.informationsGUI.updateSelectResourcesHandler(this.resourceType, false);
-                this.informationsGUI.showDevCardPurchaseInfo();
+                if (this.informationsGUI.getProductionMoveHandler() == null) {
+                    this.informationsGUI.showDevCardPurchaseInfo();
+                } else {
+                    this.informationsGUI.showProductionInfo();
+                }
             }
         }
     }

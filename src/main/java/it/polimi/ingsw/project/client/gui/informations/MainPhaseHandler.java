@@ -333,9 +333,7 @@ public class MainPhaseHandler extends JInternalFrame {
         this.mainPanelLayout.show(this.mainPanel, BUYDEVCARDMOVE);
     }
 
-    public void goToProductionButtons() {
-        this.mainPanelLayout.show(this.mainPanel, PRODUCTIONPANEL);
-    }
+    public void goToProductionButtons() { this.mainPanelLayout.show(this.mainPanel, PRODUCTIONPANEL); }
 
     public void goToLeaderProductionButtons() { this.mainPanelLayout.show(this.mainPanel, LEADERMANUFACTURINGPANEL); }
 
