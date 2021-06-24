@@ -184,6 +184,7 @@ public class Match implements Serializable, Cloneable {
         result.isOver = isOver;
         result.market = market;
         result.playerList = playerList.stream().map(Player::clone).collect(Collectors.toList());
+        result.lorenzoWon = lorenzoWon;
         return result;
     }
 

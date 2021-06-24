@@ -69,7 +69,9 @@ public class InformationsGUI extends JInternalFrame {
                 break;
             case EndPhase:
 
-                this.mainPhaseHandler.setVisible(false);
+                if (this.mainPhaseHandler != null) {
+                    this.mainPhaseHandler.setVisible(false);
+                }
                 this.remove(this.mainPhaseHandler);
                 this.mainPhaseHandler = null;
 

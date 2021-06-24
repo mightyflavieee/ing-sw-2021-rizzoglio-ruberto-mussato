@@ -48,6 +48,7 @@ public class ClientGUI extends Client implements Observer<Move> {
 
     @Override
     public void setMatch(Match match) {
+        this.match = match;
         if(this.getGui().isEmpty()){
             this.jFrame.dispose();
             this.gui = new GUI(this, match, this.myNickname);
@@ -283,7 +284,7 @@ public class ClientGUI extends Client implements Observer<Move> {
         this.send(new CreateRequestMove(this.numPlayers, this.myNickname));
     }
 
-    public void endGame(boolean isSinglePlayer) {
+    public void endGame() {
         this.gui.getJFrame().dispose();
         this.endGameHandler = new EndGameHandler(this.match, this);
         this.jFrame = new JFrame();

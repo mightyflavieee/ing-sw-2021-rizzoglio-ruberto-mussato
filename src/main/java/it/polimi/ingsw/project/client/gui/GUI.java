@@ -117,12 +117,9 @@ public class GUI extends Observable<Move>  {
 
     public void setMatch(Match match){
         if (match.getisOver()) {
-            if (match.getLorenzoWon()) {
-                this.clientGUI.endGame(true);
-            } else {
-                this.clientGUI.endGame(false);
+                this.clientGUI.endGame();
             }
-        } else {
+         else {
             Pair<Player, List<Player>> pair = Utils.splitPlayers(match,this.mePlayer.getNickname());
             this.mePlayer = pair._1;
             this.opponentsPlayer = pair._2;
@@ -158,7 +155,7 @@ public class GUI extends Observable<Move>  {
         this.historyGUI.setHistory(this.opponentsPlayer.get(index).getHistoryToString(),this.opponentsPlayer.get(index).getNickname());
         this.informationsGUI.showOpponentView(this.opponentsPlayer.get(index).getNickname());
         this.leaderCardPlaceGUI.setOpponentLeaderCards(this.opponentsPlayer.get(index).getLeaderCards(),this.opponentsPlayer.get(index).getNickname());
-        this.boardGUI.setBoardByPlayer(this.mePlayer);
+        this.boardGUI.setBoardByPlayer(this.opponentsPlayer.get(index));
         this.disableAllButtons();
     }
 
