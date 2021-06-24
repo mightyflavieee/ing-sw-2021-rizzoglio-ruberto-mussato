@@ -167,6 +167,7 @@ public class InformationsGUI extends JInternalFrame {
     // Shows on the informationsGUI the necessary information for the BuyDevCardMove
     public void showProductionInfo() {
         String selectedResourcesFromWarehouse = convertResourcesToString(this.selectResourcesHandler.getResourcesFromWarehouse());
+        String selectResourcesFromExtraDeposit = convertResourcesToString(this.selectResourcesHandler.getResourcesFromExtraDeposit());
         String selectedResourcesFromChest = convertResourcesToString(this.selectResourcesHandler.getResourcesFromChest());
         Map<ResourceType, Integer> insertedResources = countResources(this.selectResourcesHandler);
         Map<ResourceType, Integer> resourcesRequired = this.productionMoveHandler.calculateResourcesRequired(
@@ -181,7 +182,9 @@ public class InformationsGUI extends JInternalFrame {
             Map<ResourceType, Integer> missingResources = calculateMissingResources(insertedResources, resourcesRequired);
             String missingResourceString = convertResourcesToString(missingResources);
             this.jTextArea.setText("You selected this resources:\n"
-                    + "From Warehouse:\n" + selectedResourcesFromWarehouse + "From Chest:\n" + selectedResourcesFromChest
+                    + "From Warehouse:\n" + selectedResourcesFromWarehouse
+                    + "From Extra Deposit:\n" + selectResourcesFromExtraDeposit
+                    + "From Chest:\n" + selectedResourcesFromChest
                     + "You stll need this resources:\n" + missingResourceString
                     + "Select the resources required from the Warehouse and/or the chest.");
         }
@@ -206,6 +209,7 @@ public class InformationsGUI extends JInternalFrame {
         // creates the string for the informationsGUI for the selected resources from warehouse
         // and selected resources from the chest
         String selectedResourcesFromWarehouse = convertResourcesToString(this.selectResourcesHandler.getResourcesFromWarehouse());
+        String selectResourcesFromExtraDeposit = convertResourcesToString(this.selectResourcesHandler.getResourcesFromExtraDeposit());
         String selectedResourcesFromChest = convertResourcesToString(this.selectResourcesHandler.getResourcesFromChest());
         // counts the inserted resources, if they are enough, cunstructs the BuyDevCardMove, otherwise
         // prints in the informationsGUI the necessary information
@@ -219,9 +223,11 @@ public class InformationsGUI extends JInternalFrame {
                     this.buyDevCardMoveHandler.getDevelopmentCard().getRequiredResources());
             String missingResourceString = convertResourcesToString(missingResources);
             this.jTextArea.setText("You selected this resources:\n"
-                + "From Warehouse:\n" + selectedResourcesFromWarehouse + "From Chest:\n" + selectedResourcesFromChest
-                + "You stll need this resources:\n" + missingResourceString
-                + "Select the resources required from the Warehouse and/or the chest.");
+                    + "From Warehouse:\n" + selectedResourcesFromWarehouse
+                    + "From Extra Deposit:\n" + selectResourcesFromExtraDeposit
+                    + "From Chest:\n" + selectedResourcesFromChest
+                    + "You stll need this resources:\n" + missingResourceString
+                    + "Select the resources required from the Warehouse and/or the chest.");
         }
     }
 
@@ -275,15 +281,38 @@ public class InformationsGUI extends JInternalFrame {
         for (ResourceType type : resourceTypeList) {
             if (selectResourcesHandler.getResourcesFromWarehouse().containsKey(type)) {
                 if (selectResourcesHandler.getResourcesFromChest().containsKey(type)) {
-                    insertedResources.put(type,
-                            selectResourcesHandler.getResourcesFromWarehouse().get(type) +
-                                    selectResourcesHandler.getResourcesFromChest().get(type));
+                    if (selectResourcesHandler.getResourcesFromExtraDeposit().containsKey(type)) {
+                        insertedResources.put(type,
+                                selectResourcesHandler.getResourcesFromWarehouse().get(type) +
+                                selectResourcesHandler.getResourcesFromExtraDeposit().get(type) +
+                                selectResourcesHandler.getResourcesFromChest().get(type));
+                    } else {
+                        insertedResources.put(type,
+                                selectResourcesHandler.getResourcesFromWarehouse().get(type) +
+                                selectResourcesHandler.getResourcesFromChest().get(type));
+                    }
                 } else {
-                    insertedResources.put(type, selectResourcesHandler.getResourcesFromWarehouse().get(type));
+                    if (selectResourcesHandler.getResourcesFromExtraDeposit().containsKey(type)) {
+                        insertedResources.put(type,
+                                selectResourcesHandler.getResourcesFromWarehouse().get(type) +
+                                selectResourcesHandler.getResourcesFromExtraDeposit().get(type));
+                    } else {
+                        insertedResources.put(type, selectResourcesHandler.getResourcesFromWarehouse().get(type));
+                    }
                 }
             } else {
                 if (selectResourcesHandler.getResourcesFromChest().containsKey(type)) {
-                    insertedResources.put(type, selectResourcesHandler.getResourcesFromChest().get(type));
+                    if (selectResourcesHandler.getResourcesFromExtraDeposit().containsKey(type)) {
+                        insertedResources.put(type,
+                                selectResourcesHandler.getResourcesFromChest().get(type) +
+                                selectResourcesHandler.getResourcesFromExtraDeposit().get(type));
+                    } else {
+                        insertedResources.put(type, selectResourcesHandler.getResourcesFromChest().get(type));
+                    }
+                } else {
+                    if (selectResourcesHandler.getResourcesFromExtraDeposit().containsKey(type)) {
+                        insertedResources.put(type, selectResourcesHandler.getResourcesFromExtraDeposit().get(type));
+                    }
                 }
             }
         }
@@ -322,7 +351,5 @@ public class InformationsGUI extends JInternalFrame {
 
     public void addServant() { this.resourceInHandler.addServant(); }
 
-    public void goToTransmutationPanel() {
-        this.mainPhaseHandler.goToTransmutationPanel();
-    }
+    public void goToTransmutationPanel() { this.mainPhaseHandler.goToTransmutationPanel(); }
 }

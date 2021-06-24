@@ -43,6 +43,11 @@ public class ExtraDepositGUISelectResourceListener implements ActionListener {
                                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
             }
             this.informationsGUI.updateSelectResourcesHandler(this.resourceType, "ExtraDeposit");
+            if (this.informationsGUI.getProductionMoveHandler() == null) {
+                this.informationsGUI.showDevCardPurchaseInfo();
+            } else {
+                this.informationsGUI.showProductionInfo();
+            }
         }
     }
 }
