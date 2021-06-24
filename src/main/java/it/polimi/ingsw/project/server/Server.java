@@ -162,6 +162,9 @@ public class Server {
             } 
         }
         currentLobby.setPlayerList(listOfPlayer);
+        if(listOfPlayer.size() ==1){
+            initModel(matchId);
+        }
     }
 
     public void initModel(String matchId) {

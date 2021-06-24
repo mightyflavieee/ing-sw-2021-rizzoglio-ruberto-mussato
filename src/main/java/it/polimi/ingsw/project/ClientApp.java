@@ -11,7 +11,7 @@ public class ClientApp {
         // } else if (args.equals("gui")) {
         // client = new ClientGUI("127.0.0.1", 12345);
         // }
-        ClientCLI client = new ClientCLI("0.tcp.ngrok.io", 14341);
+        ClientCLI client = new ClientCLI("127.0.0.1", 12345);
         try {
             client.run();
         } catch (IOException e) {
