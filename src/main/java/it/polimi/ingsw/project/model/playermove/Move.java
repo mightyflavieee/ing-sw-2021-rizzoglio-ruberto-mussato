@@ -11,6 +11,7 @@ import java.io.Serializable;
 
 //messaggio ricevuto dal server
 public class Move implements Serializable, Request, Controllable {
+    private static final long serialVersionUID = 3842222222475092704L;
     public boolean isFeasibleMove(Match match) {
         // TODO
         return true;

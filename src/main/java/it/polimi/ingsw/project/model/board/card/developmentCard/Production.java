@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Production implements Serializable{
+    private static final long serialVersionUID = 3843338592475092704L;
     private final Map<ResourceType, Integer> requiredResources;
     private final Map<ResourceType, Integer> manufacturedResources;
 

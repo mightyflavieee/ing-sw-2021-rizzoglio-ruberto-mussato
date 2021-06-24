@@ -9,6 +9,7 @@ import it.polimi.ingsw.project.model.playermove.interfaces.MoveHandler;
 import it.polimi.ingsw.project.view.View;
 
 public class PlayerMove implements Serializable, MoveHandler {
+    private static final long serialVersionUID = 3840280592411112704L;
     private final Player player;
     private final View view;
     private final Move move;

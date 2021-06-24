@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class Board implements Serializable, Cloneable {
+  private static final long serialVersionUID = 3840280592466662704L;
 
   // TODO: fare clone di tutti gli oggetti
   private Map<ResourceType, Integer> chest;

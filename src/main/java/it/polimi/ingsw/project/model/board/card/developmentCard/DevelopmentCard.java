@@ -8,6 +8,7 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import java.util.*;
 
 public class DevelopmentCard extends Card {
+  private static final long serialVersionUID = 2440280592475092704L;
   final private CardColor color;
   final private CardLevel level;
   final private Production production;

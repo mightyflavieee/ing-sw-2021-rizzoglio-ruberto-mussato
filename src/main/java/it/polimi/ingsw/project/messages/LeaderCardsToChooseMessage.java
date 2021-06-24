@@ -7,6 +7,7 @@ import it.polimi.ingsw.project.client.Client;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 
 public class LeaderCardsToChooseMessage implements ResponseMessage, Serializable {
+    private static final long serialVersionUID = 3111280592475092704L;
     
     private List<LeaderCard> leaderCardsToChoose;
 

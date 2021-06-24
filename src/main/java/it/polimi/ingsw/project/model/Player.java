@@ -12,6 +12,7 @@ import java.io.*;
 import java.util.*;
 
 public class Player implements Serializable, Cloneable {
+  private static final long serialVersionUID = 3840280592475092888L;
 
   private Board board;
   private boolean isConnected;

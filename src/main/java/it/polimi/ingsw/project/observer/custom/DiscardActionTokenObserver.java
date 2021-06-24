@@ -8,6 +8,7 @@ import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.observer.Observer;
 
 public class DiscardActionTokenObserver implements Observer<CardColor>, Serializable {
+    private static final long serialVersionUID = 3840280595555504L;
     private final Match match;
 
     public DiscardActionTokenObserver(Match match) {

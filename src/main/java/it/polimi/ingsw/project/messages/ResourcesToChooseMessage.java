@@ -7,6 +7,7 @@ import it.polimi.ingsw.project.client.Client;
 public class ResourcesToChooseMessage implements ResponseMessage, Serializable {
 
     private Integer numberOfResourcesToChoose;
+    private static final long serialVersionUID = 3840280592475092111L;
 
     public ResourcesToChooseMessage(Integer numberOfResourcesToChoose) {
         this.numberOfResourcesToChoose = numberOfResourcesToChoose;

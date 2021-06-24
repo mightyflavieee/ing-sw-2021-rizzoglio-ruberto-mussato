@@ -13,6 +13,7 @@ import java.util.List;
 
 // è un Singleton
 public class ActionTokenContainer implements Serializable {
+    private static final long serialVersionUID = 3840280592475092999L;
 
     private final List<ActionToken> actionTokens;
 

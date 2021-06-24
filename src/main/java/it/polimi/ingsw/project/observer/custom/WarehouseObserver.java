@@ -7,6 +7,7 @@ import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.observer.Observer;
 
 public class WarehouseObserver implements Observer<Warehouse>, Serializable {
+    private static final long serialVersionUID = 2240280592475092704L;
     private final Match match;
 
     public WarehouseObserver(Match match) {

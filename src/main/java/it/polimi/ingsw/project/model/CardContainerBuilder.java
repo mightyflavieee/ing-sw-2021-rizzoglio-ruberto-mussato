@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 
 public class CardContainerBuilder implements Serializable {
+    private static final long serialVersionUID = 3840280592473292704L;
     public List<DevelopmentCard> allCards;
 
     public CardContainerBuilder(String fileSrc) {

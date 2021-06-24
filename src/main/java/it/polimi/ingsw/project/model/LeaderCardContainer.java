@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class LeaderCardContainer implements Serializable {
+    private static final long serialVersionUID = 384028059247505555L;
     private final List<LeaderCard> leaderCards;
     private Map<String, List<LeaderCard>> mapOfExtractedCards;
 

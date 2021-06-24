@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.*;
 
 public class CardContainer implements Cloneable, Serializable {
+  private static final long serialVersionUID = 3440280592475092704L;
   private final LinkedHashMap<CardLevel, LinkedHashMap<CardColor, List<DevelopmentCard>>> cardContainer;
 
   public LinkedHashMap<CardLevel, LinkedHashMap<CardColor, List<DevelopmentCard>>> getCardContainer() {

@@ -6,6 +6,7 @@ import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 
 public class NormalTile implements ActivableTile, Serializable {
+    private static final long serialVersionUID = 3841111112475092704L;
     @Override
     public void activate() {
 

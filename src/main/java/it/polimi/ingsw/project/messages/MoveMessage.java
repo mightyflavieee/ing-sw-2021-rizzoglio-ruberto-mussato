@@ -8,6 +8,7 @@ import it.polimi.ingsw.project.model.Match;
 public class MoveMessage implements Serializable, ResponseMessage { // messaggio che rimando al player che viene poi
                                                                     // visualizzato
     private final Match match;
+    private static final long serialVersionUID = 3840280592412192704L;
 
     public MoveMessage(Match match) {
         this.match = match;

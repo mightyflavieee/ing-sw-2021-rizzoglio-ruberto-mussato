@@ -8,6 +8,7 @@ import it.polimi.ingsw.project.model.actionTokens.MoveAndShuffleActionToken;
 import it.polimi.ingsw.project.observer.Observer;
 
 public class MoveAndShuffleActionTokenObserver implements Observer<MoveAndShuffleActionToken>, Serializable {
+    private static final long serialVersionUID = 3840259247509211114L;
     private final Match match;
     private final ActionTokenContainer actionTokenContainer;
 

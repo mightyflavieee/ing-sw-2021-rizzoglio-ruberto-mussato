@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FaithMap implements Serializable {
+  private static final long serialVersionUID = 3840280592475091294L;
   private int markerPosition;
   private int blackMarkerPosition;
   private List<ActivableTile> faithTiles;

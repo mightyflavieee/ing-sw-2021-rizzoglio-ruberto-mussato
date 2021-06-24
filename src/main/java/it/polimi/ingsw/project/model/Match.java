@@ -18,6 +18,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Match implements Serializable, Cloneable {
+    private static final long serialVersionUID = 3840280592475092777L;
 
     private List<Player> playerList;
     private Market market;

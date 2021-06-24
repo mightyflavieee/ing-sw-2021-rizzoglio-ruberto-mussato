@@ -5,6 +5,7 @@ import it.polimi.ingsw.project.model.resource.Resource;
 import java.io.Serializable;
 
 public class Perk implements Serializable {
+  private static final long serialVersionUID = 3840280592475999704L;
   final Resource resource;
   final PerkType type;
 

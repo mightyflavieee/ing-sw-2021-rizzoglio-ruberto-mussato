@@ -9,6 +9,7 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 public class LeaderCard extends Card {
+  private static final long serialVersionUID = 2340280592475092704L;
   final private String id;
   final private Perk perk;
   final private Map<ResourceType, Integer> requiredResources;
