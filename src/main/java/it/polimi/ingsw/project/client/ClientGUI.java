@@ -115,7 +115,7 @@ public class ClientGUI extends Client implements Observer<Move> {
         //todo display error message
 
         this.newGameHandler.goToLeaderCardChooser(possibleLeaderCards);
-
+       // this.jFrame.pack();
         //this.chooseLeaderCards(possibleLeaderCards);
     }
 
@@ -183,6 +183,9 @@ public class ClientGUI extends Client implements Observer<Move> {
         this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.newGameHandler = new NewGameHandler(this);
         this.jFrame.add(this.newGameHandler);
+        //this.jFrame.pack();
+
+        this.jFrame.setPreferredSize(new Dimension(400,680));
         this.jFrame.pack();
 
         /*JFrame jFrame;

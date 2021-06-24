@@ -30,8 +30,7 @@ public class LeaderCardButtonGUI extends JButton {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
-        this.setIcon(Utils.readIcon("leadercards/" + this.id + ".png",230,348));
-
+        this.setIcon(Utils.readIcon("leadercards/" + this.id + ".png",200,300));
 
         // this.refresh();
     }

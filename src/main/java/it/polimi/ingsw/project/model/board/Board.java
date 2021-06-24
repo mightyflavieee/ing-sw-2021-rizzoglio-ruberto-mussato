@@ -21,7 +21,7 @@ public class Board implements Serializable, Cloneable {
 
   // TODO: fare clone di tutti gli oggetti
   private Map<ResourceType, Integer> chest;
-  private Map<DevCardPosition, List<DevelopmentCard>> mapTray;
+  private LinkedHashMap<DevCardPosition, List<DevelopmentCard>> mapTray;
   private Warehouse warehouse;
   private List<LeaderCard> leaderCards;
   private FaithMap faithMap;
@@ -34,7 +34,7 @@ public class Board implements Serializable, Cloneable {
     this.chest.put(ResourceType.Stone, 0);
     this.chest.put(ResourceType.Shield, 0);
     this.chest.put(ResourceType.Servant, 0);
-    this.mapTray = new HashMap<>();
+    this.mapTray = new LinkedHashMap<>();
     List<DevelopmentCard> listOfDevCardsLeft = new ArrayList<>();
     List<DevelopmentCard> listOfDevCardsCenter = new ArrayList<>();
     List<DevelopmentCard> listOfDevCardsRight = new ArrayList<>();
@@ -716,5 +716,16 @@ public class Board implements Serializable, Cloneable {
 
   public void insertChosenResources(List<ResourceType> listOfResources) {
     this.warehouse.insertResources(listOfResources);
+  }
+
+  public String getMapTrayToString() {
+    String string = "";
+    for(DevCardPosition devCardPosition : this.mapTray.keySet()){
+      string = string + devCardPosition +":\n";
+      if(mapTray.get(devCardPosition).size()!=0) {
+        string = string + mapTray.get(devCardPosition).get(mapTray.get(devCardPosition).size() - 1).toString() + "\n";
+      }
+    }
+    return string;
   }
 }

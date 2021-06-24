@@ -9,13 +9,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InitResourceSelectorPanel extends JPanel {
+public class InitResourceSelectorPanel extends JInternalFrame {
         private ResourceButton coinButton, shieldButton, stoneButton, servantButton;
         private int coinInt, shieldInt, stoneInt, servantInt;
         private ClientGUI clientGUI;
         private int numberOfResourcesToChoose;
         private NewGameHandler newGameHandler;
     public InitResourceSelectorPanel(ClientGUI clientGUI, NewGameHandler newGameHandler, Integer numberOfResourcesToChoose) {
+        this.setTitle("Select " + numberOfResourcesToChoose + "resources");
         this.clientGUI = clientGUI;
         this.setLayout(new GridLayout(2,2));
         coinButton = new ResourceButton(ResourceType.Coin);

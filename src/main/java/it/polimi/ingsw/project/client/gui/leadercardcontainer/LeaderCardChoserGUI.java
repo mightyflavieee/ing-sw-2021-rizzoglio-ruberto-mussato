@@ -17,7 +17,7 @@ public class LeaderCardChoserGUI extends JInternalFrame {
     private List <LeaderCard> leadercards;
     private ClientGUI clientGUI;
     public LeaderCardChoserGUI(List<LeaderCard> leadercards, ClientGUI clientGUI) {
-        this.setTitle("Leader Card Choser");
+        this.setTitle("Select Two Leader Cards");
         this.clientGUI = clientGUI;
         this.leadercards = leadercards;
         this.chosedIDs = new ArrayList<>();
@@ -30,6 +30,7 @@ public class LeaderCardChoserGUI extends JInternalFrame {
             this.add(leaderCardButtonGUI);
         }
         this.setVisible(true);
+        this.setPreferredSize(new Dimension(400,600));
         this.pack();
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     }

@@ -250,6 +250,7 @@ public class NewGameHandler extends JPanel {
         this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooser);
 
         this.mainLayout.show(this.mainPanel, LEADERCARDCHOOSER);
+        this.leaderCardChooser.pack();
     }
 
     public JTextField getNicknameTextField() { return this.selectNicknameTextField; }

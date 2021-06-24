@@ -101,6 +101,7 @@ public class ClientCLI extends Client {
         try {
             getSocketOut().writeObject(new ChooseResourcesMove(this.myNickname, this.gameId, listOfChosenResources));
             getSocketOut().flush();
+            this.showWaitMessageForOtherPlayers();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             setActive(false);
@@ -1233,7 +1234,7 @@ public class ClientCLI extends Client {
                 System.out.println("Your Leader Cards are: " + this.match.getLeaderCardsToString(getNickname()));
                 break;
             case "5":
-                System.out.println(this.match.getBoardByPlayerNickname(myNickname).getMapTray());
+                System.out.println(this.match.getBoardByPlayerNickname(myNickname).getMapTrayToString());
                 break;
             case "6":
                 System.out.println(this.match.getMarket());
