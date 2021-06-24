@@ -1,10 +1,12 @@
 package it.polimi.ingsw.project.model.actionTokens;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.observer.custom.MoveAndShuffleActionTokenObserver;
 
-public class MoveAndShuffleActionToken extends Observable<MoveAndShuffleActionToken> implements ActionToken {
+public class MoveAndShuffleActionToken extends Observable<MoveAndShuffleActionToken> implements ActionToken, Serializable {
     public MoveAndShuffleActionToken() {
         super.setType("moveAndShuffleActionToken");
     }

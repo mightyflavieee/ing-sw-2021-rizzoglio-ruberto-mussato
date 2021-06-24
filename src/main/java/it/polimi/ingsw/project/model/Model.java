@@ -2,6 +2,7 @@ package it.polimi.ingsw.project.model;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.Serializable;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -12,7 +13,7 @@ import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.utils.TypeAdapters.AdapterModel;
 
-public class Model extends Observable<MoveMessage> {
+public class Model extends Observable<MoveMessage> implements Serializable {
     private final Match match;
     private final String matchUID;
 

@@ -1,10 +1,12 @@
 package it.polimi.ingsw.project.model.actionTokens;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.observer.custom.MoveActionTokenObserver;
 
-public class MoveActionToken extends Observable<MoveActionToken> implements ActionToken {
+public class MoveActionToken extends Observable<MoveActionToken> implements ActionToken, Serializable {
     public MoveActionToken() {
         super.setType("moveActionToken");
     }

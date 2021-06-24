@@ -18,10 +18,11 @@ import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GUI extends Observable<Move> {
+public class GUI extends Observable<Move> implements Serializable {
     private JFrame jFrame;
     private ClientGUI clientGUI;
     private BoardGUI boardGUI;

@@ -1,11 +1,13 @@
 package it.polimi.ingsw.project.model.actionTokens;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.observer.custom.DiscardActionTokenObserver;
 
-public class DiscardActionToken extends Observable<CardColor> implements ActionToken {
+public class DiscardActionToken extends Observable<CardColor> implements ActionToken, Serializable {
     private final CardColor cardColor;
 
     public DiscardActionToken(CardColor cardColor) {

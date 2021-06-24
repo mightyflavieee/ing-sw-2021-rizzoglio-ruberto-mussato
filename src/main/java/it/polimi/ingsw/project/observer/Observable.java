@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Observable<T> implements Serializable {
+public class Observable<T> {
     private final List<Observer<T>> observers = new ArrayList<>();
     private String type = "Generic Type";
 
