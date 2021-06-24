@@ -173,10 +173,10 @@ public class Board implements Serializable, Cloneable {
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
     Map<ResourceType, Integer> resourcesToEliminateWarehouseAndExtraDeposit = sumWarehouseResources(resourcesToEliminateWarehouse,
             resourcesToEliminateExtraDeposit);
-    if (resourcesToEliminateWarehouseAndExtraDeposit.isEmpty()) {
-      for (ResourceType type : resourcesToEliminateWarehouse.keySet()) {
+    if (!resourcesToEliminateWarehouseAndExtraDeposit.isEmpty()) {
+      for (ResourceType type : resourcesToEliminateWarehouseAndExtraDeposit.keySet()) {
         if (warehouseResources.containsKey(type)) {
-          if (warehouseResources.get(type) < resourcesToEliminateWarehouse.get(type)) {
+          if (warehouseResources.get(type) < resourcesToEliminateWarehouseAndExtraDeposit.get(type)) {
             return false;
           }
         } else {
@@ -184,7 +184,7 @@ public class Board implements Serializable, Cloneable {
         }
       }
     }
-    if (resourcesToEliminateChest.isEmpty()) {
+    if (!resourcesToEliminateChest.isEmpty()) {
       for (ResourceType type : resourcesToEliminateChest.keySet()) {
         if (this.chest.containsKey(type)) {
           if (this.chest.get(type) < resourcesToEliminateChest.get(type)) {
@@ -201,24 +201,36 @@ public class Board implements Serializable, Cloneable {
   // sums the resources fron the warehouse and the extr deposit indicated by the user
   private Map<ResourceType, Integer> sumWarehouseResources(Map<ResourceType, Integer> resourcesToEliminateWarehouse,
                                                            Map<ResourceType, Integer> resourcesToEliminateExtraDeposit) {
-    Map<ResourceType, Integer> sommedWarehouseResources = new HashMap<>();
+    Map<ResourceType, Integer> summedWarehouseResources = new HashMap<>();
     List<ResourceType> resourceTypes = new ArrayList<>();
-    for (ResourceType resourceType : resourceTypes) {
-      if (resourcesToEliminateWarehouse.containsKey(resourceType)) {
-        if (resourcesToEliminateExtraDeposit.containsKey(resourceType)) {
-          sommedWarehouseResources.put(resourceType,
-                  resourcesToEliminateWarehouse.get(resourceType) +
-                  resourcesToEliminateExtraDeposit.get(resourceType));
-        } else {
-          sommedWarehouseResources.put(resourceType, resourcesToEliminateWarehouse.get(resourceType));
+    resourceTypes.add(ResourceType.Coin);
+    resourceTypes.add(ResourceType.Servant);
+    resourceTypes.add(ResourceType.Shield);
+    resourceTypes.add(ResourceType.Stone);
+    if (resourcesToEliminateWarehouse != null) {
+      if (resourcesToEliminateExtraDeposit != null) {
+        for (ResourceType resourceType : resourceTypes) {
+          if (resourcesToEliminateWarehouse.containsKey(resourceType)) {
+            if (resourcesToEliminateExtraDeposit.containsKey(resourceType)) {
+              summedWarehouseResources.put(resourceType,
+                      resourcesToEliminateWarehouse.get(resourceType) +
+                              resourcesToEliminateExtraDeposit.get(resourceType));
+            } else {
+              summedWarehouseResources.put(resourceType, resourcesToEliminateWarehouse.get(resourceType));
+            }
+          } else {
+            if (resourcesToEliminateExtraDeposit.containsKey(resourceType)) {
+              summedWarehouseResources.put(resourceType, resourcesToEliminateExtraDeposit.get(resourceType));
+            }
+          }
         }
       } else {
-        if (resourcesToEliminateExtraDeposit.containsKey(resourceType)) {
-          sommedWarehouseResources.put(resourceType, resourcesToEliminateExtraDeposit.get(resourceType));
-        }
+        summedWarehouseResources = resourcesToEliminateWarehouse;
       }
+    } else {
+      summedWarehouseResources = resourcesToEliminateExtraDeposit;
     }
-    return sommedWarehouseResources;
+    return summedWarehouseResources;
   }
 
   // checks if the resources indicated in the parameter are actually present
@@ -405,7 +417,7 @@ public class Board implements Serializable, Cloneable {
     for (ResourceType type : devCard.getRequiredResources().keySet()) {
       // verifies if there are any discount on the current ResourceType
       isDiscountPresent = false;
-      if (this.discounts != null) {
+      if (!this.discounts.isEmpty()) {
         for (ResourceType discountType : this.discounts) {
           if (discountType.equals(type)) {
             isDiscountPresent = true;
@@ -413,28 +425,29 @@ public class Board implements Serializable, Cloneable {
           }
         }
       }
+      Map<ResourceType, Integer> resourcesToEliminateWarehouseAndExtraDeposit = sumWarehouseResources(resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit);
       // verifies if there are enough resources to buy the DevelopmentCard
       // (takes into account the eventual discounts)
-      if (resourcesToEliminateWarehouse.containsKey(type)) {
+      if (resourcesToEliminateWarehouseAndExtraDeposit.containsKey(type)) {
         if (resourcesToEliminateChest.containsKey(type)) {
           if (isDiscountPresent) {
-            if ((devCard.getRequiredResources().get(type) - 1) > (resourcesToEliminateWarehouse.get(type)
+            if ((devCard.getRequiredResources().get(type) - 1) > (resourcesToEliminateWarehouseAndExtraDeposit.get(type)
                 + resourcesToEliminateChest.get(type))) {
               return false;
             }
           } else {
             if (devCard.getRequiredResources()
-                .get(type) > (resourcesToEliminateWarehouse.get(type) + resourcesToEliminateChest.get(type))) {
+                .get(type) > (resourcesToEliminateWarehouseAndExtraDeposit.get(type) + resourcesToEliminateChest.get(type))) {
               return false;
             }
           }
         } else {
           if (isDiscountPresent) {
-            if ((devCard.getRequiredResources().get(type) - 1) > resourcesToEliminateWarehouse.get(type)) {
+            if ((devCard.getRequiredResources().get(type) - 1) > resourcesToEliminateWarehouseAndExtraDeposit.get(type)) {
               return false;
             }
           } else {
-            if (devCard.getRequiredResources().get(type) > resourcesToEliminateWarehouse.get(type)) {
+            if (devCard.getRequiredResources().get(type) > resourcesToEliminateWarehouseAndExtraDeposit.get(type)) {
               return false;
             }
           }
