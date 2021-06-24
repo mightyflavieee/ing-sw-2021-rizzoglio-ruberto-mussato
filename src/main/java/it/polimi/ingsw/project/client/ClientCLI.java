@@ -549,37 +549,35 @@ public class ClientCLI extends Client {
             // questo mi attesta che le risorse ci sono di sicuro, devo solo scegliere
             // l'ordine
         }
-        for (Map.Entry<ResourceType, Integer> entry : resourceRequired.entrySet()) {
-            System.out.println(entry.getKey() + " required : " + entry.getValue());
-            System.out.println("\nYour Resources: \n" + board.resourcesToString());
-            System.out.println("0 - go back\n" + "1 - use Warehouse's resources first and then Chest's\n"
-                    + "2 - use Chest's resources first and then Warehouse's");
-            answer = stdin.nextLine();
-            switch (answer) {
-                // uno di questi metodi deve per forza andare bene a causa del controllo
-                // precedente
-                case "1":
-                    this.warehousefirst(board, entry.getKey(), entry.getValue(), resourcesToEliminateWarehouse,
-                            resourceToEliminateChest);
-                    break;
-                case "2":
-                    this.chestfirst(board, entry.getKey(), entry.getValue(), resourcesToEliminateWarehouse,
-                            resourceToEliminateChest);
-                    break;
-                case "0":
-                default:
-                    return null;
-            }
-        }
+//        for (Map.Entry<ResourceType, Integer> entry : resourceRequired.entrySet()) {
+//            System.out.println(entry.getKey() + " required : " + entry.getValue());
+//            System.out.println("\nYour Resources: \n" + board.resourcesToString());
+//            System.out.println("0 - go back\n" + "1 - use Warehouse's resources first and then Chest's\n"
+//                    + "2 - use Chest's resources first and then Warehouse's");
+//            answer = stdin.nextLine();
+//            switch (answer) {
+//                // uno di questi metodi deve per forza andare bene a causa del controllo
+//                // precedente
+//                case "1":
+//                    this.warehousefirst(board, entry.getKey(), entry.getValue(), resourcesToEliminateWarehouse,
+//                            resourceToEliminateChest);
+//                    break;
+//                case "2":
+//                    this.chestfirst(board, entry.getKey(), entry.getValue(), resourcesToEliminateWarehouse,
+//                            resourceToEliminateChest);
+//                    break;
+//                case "0":
+//                default:
+//                    return null;
+//            }
+//        }
         DevCardPosition devCardPosition = selectPositionForDevCard(developmentCard.getId());
         if (devCardPosition == null) {
             return null;
         } else
         {
-            //this.selectResourcesFromBoard(resourceRequired,resourcesToEliminateWarehouse,resourceToEliminateChest,resourceToEliminateExtraDeposit);
+            this.selectResourcesFromBoard(resourceRequired,resourcesToEliminateWarehouse,resourceToEliminateChest,resourceToEliminateExtraDeposit);
         }
-
-            //TODO METTERE MAPPA CON EXTRA DEPOSIT E SOSTITUIRLA ALLA new HashMap<>()
 
             return new BuyDevCardMove(developmentCard.getId(),
                     devCardPosition,
@@ -1268,7 +1266,7 @@ public class ClientCLI extends Client {
                 System.out.println("Your Leader Cards are: " + this.match.getLeaderCardsToString(getNickname()));
                 break;
             case "5":
-                System.out.println(this.match.getBoardByPlayerNickname(myNickname).getMapTrayToString());
+                System.out.println("Your Development Cards are:\n" + this.match.getBoardByPlayerNickname(myNickname).getMapTrayToString());
                 break;
             case "6":
                 System.out.println(this.match.getMarket());
@@ -1579,6 +1577,79 @@ public class ClientCLI extends Client {
         }
     }
     private void selectResourcesFromBoard(Map<ResourceType, Integer> resourceRequired,Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourceToEliminateChest,Map<ResourceType, Integer> resourceToEliminateExtraDeposit){
+        Board board = this.match.getBoardByPlayerNickname(myNickname);
+        Warehouse warehouse = board.getWarehouse();
+        System.out.println("Your resources are:\n" + board.resourcesToString());
+        for (ResourceType resourceType : resourceRequired.keySet()) {
+            for(int i = 0; i < 3; i++){
+                if(resourceRequired.get(resourceType) == 0) {
+                    break;
+                }
+                int resourceSelected = 0;
+                switch (i){
+                    case 0:
+                        do {
+                            System.out.println("You need " + resourceRequired.get(resourceType) + " " + resourceType);
+                            System.out.println("How many " + resourceType + " do you want to take from the Shelves?");
+                            System.out.print(warehouse.getShelvesToString());
+                            String answer = stdin.nextLine();
+                            try {
+                                resourceSelected = Integer.parseInt(answer);
+                            }catch (NumberFormatException e){
+                                resourceSelected = - 1;
+                            }
+
+
+                        }while (resourceSelected > resourceRequired.get(resourceType) || resourceSelected < 0);
+                        resourceRequired.put(resourceType,resourceRequired.get(resourceType) - resourceSelected);
+                        resourcesToEliminateWarehouse.put(resourceType,resourceSelected);
+                        break;
+                    case 1:
+                        if(warehouse.getExtraDeposit()!=null) {
+                            if (warehouse.getExtraDeposit().containsKey(resourceType)) {
+                                if (warehouse.getExtraDeposit().get(resourceType) != 0) {
+                                    do {
+                                        System.out.println("You need " + resourceRequired.get(resourceType) + " " + resourceType);
+                                        System.out.println("How many " + resourceType + " do you want to take from the Extra Deposit?");
+                                        System.out.print(warehouse.getExtraDepositToString());
+                                        String answer = stdin.nextLine();
+                                        try {
+                                            resourceSelected = Integer.parseInt(answer);
+                                        }catch (NumberFormatException e){
+                                            resourceSelected = - 1;
+                                        }
+                                    } while (resourceSelected > resourceRequired.get(resourceType) || resourceSelected < 0);
+                                    resourceRequired.put(resourceType, resourceRequired.get(resourceType) - resourceSelected);
+                                    resourceToEliminateExtraDeposit.put(resourceType,resourceSelected);
+                                }
+                            }
+                        }
+
+                        break;
+                    case 2:
+                        if(board.getChest().containsKey(resourceType)){
+                            if (board.getChest().get(resourceType)!=0){
+                                do {
+                                    System.out.println("You need " + resourceRequired.get(resourceType) + " " + resourceType);
+                                    System.out.println("How many " + resourceType + " do you want to take from the Chest?");
+                                    System.out.println(board.getChest().toString());
+                                    String answer = stdin.nextLine();
+                                    try {
+                                        resourceSelected = Integer.parseInt(answer);
+                                    }catch (NumberFormatException e){
+                                        resourceSelected = - 1;
+                                    }
+                                }while (resourceSelected > resourceRequired.get(resourceType) || resourceSelected < 0);
+                                resourceRequired.put(resourceType,resourceRequired.get(resourceType) - resourceSelected);
+                                resourcesToEliminateWarehouse.put(resourceType,resourceSelected);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
 
     }
 
