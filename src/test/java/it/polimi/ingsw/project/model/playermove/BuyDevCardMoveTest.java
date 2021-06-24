@@ -13,10 +13,7 @@ import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,7 +29,7 @@ class BuyDevCardMoveTest {
         // creates the DevelopmentCard
         Map<ResourceType, Integer> resourcesRequired = new HashMap<>();
         resourcesRequired.put(ResourceType.Coin, 1);
-        resourcesRequired.put(ResourceType.Stone, 2);
+        resourcesRequired.put(ResourceType.Stone, 3);
         Production production = new Production(resourcesRequired, resourcesRequired);
         DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "test", 1, resourcesRequired);
         // creates the container and inserts the card into it
@@ -40,10 +37,16 @@ class BuyDevCardMoveTest {
         cardContainer.addCardToContainer(devCard);
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
+        Map<ResourceType, Integer> resourcesToEliminateExtraDeposit = new HashMap<>();
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
+        resourcesToEliminateExtraDeposit.put(ResourceType.Stone, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
-        Move buyDevCardMove = new BuyDevCardMove("test", DevCardPosition.Left, resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest);
+        Move buyDevCardMove = new BuyDevCardMove("test",
+                DevCardPosition.Left,
+                resourcesToEliminateWarehouse,
+                resourcesToEliminateExtraDeposit,
+                resourcesToEliminateChest);
         // tests the move
         assertFalse(buyDevCardMove.isFeasibleMove(match));
     }
@@ -58,12 +61,15 @@ class BuyDevCardMoveTest {
         // creates the DevelopmentCard
         Map<ResourceType, Integer> resourcesRequired = new HashMap<>();
         resourcesRequired.put(ResourceType.Coin, 1);
-        resourcesRequired.put(ResourceType.Stone, 2);
+        resourcesRequired.put(ResourceType.Stone, 3);
         Production production = new Production(resourcesRequired, resourcesRequired);
         DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "test", 1, resourcesRequired);
         // Inserts the card into the CardContainer
         match.getCardContainer().addCardToContainer(devCard);
-        // adds resources to the Warehouse and chest
+        // adds resources to the Warehouse, chest and extra deposit
+        player.getBoard().getWarehouse().createExtraDeposit(new Resource(ResourceType.Stone));
+        LinkedHashMap<ResourceType, Integer> extraDeposit = player.getBoard().getWarehouse().getExtraDeposit();
+        extraDeposit.put(ResourceType.Stone, 1);
         List<Resource> resourcesListFirstFloor = new ArrayList<>();
         List<Resource> resourcesListSecondFloor = new ArrayList<>();
         List<Resource> resourcesListThirdFloor = new ArrayList<>();
@@ -86,10 +92,16 @@ class BuyDevCardMoveTest {
         player.getBoard().getChest().put(ResourceType.Stone, 3);
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
+        Map<ResourceType, Integer> resourcesToEliminateExtraDeposit = new HashMap<>();
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
+        resourcesToEliminateExtraDeposit.put(ResourceType.Stone, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
-        Move buyDevCardMove = new BuyDevCardMove("test", DevCardPosition.Left, resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest);
+        Move buyDevCardMove = new BuyDevCardMove("test",
+                DevCardPosition.Left,
+                resourcesToEliminateWarehouse,
+                resourcesToEliminateExtraDeposit,
+                resourcesToEliminateChest);
         // tests the move
         assertTrue(buyDevCardMove.isFeasibleMove(match));
     }

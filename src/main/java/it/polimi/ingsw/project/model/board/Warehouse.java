@@ -41,9 +41,9 @@ public class Warehouse extends Observable<Warehouse> {
       extraDeposit.forEach((ResourceType resourceType, Integer numberOfResources) -> {
         boolean hasKey = currentResourcesLinkedHashMap.containsKey(resourceType);
         if (hasKey) {
-          currentResourcesLinkedHashMap.put(resourceType, currentResourcesLinkedHashMap.get(resourceType) + 1);
+          currentResourcesLinkedHashMap.put(resourceType, currentResourcesLinkedHashMap.get(resourceType) + numberOfResources);
         } else {
-          currentResourcesLinkedHashMap.put(resourceType, 1);
+          currentResourcesLinkedHashMap.put(resourceType, numberOfResources);
         }
       });
     }
