@@ -533,11 +533,12 @@ public class ClientCLI extends Client {
         return playerMove;
     }
 
-    //TODO CON EXTRADEPOSIT
+    // TODO CON EXTRADEPOSIT
     private Move selectResToBuyDevCard(DevelopmentCard developmentCard) {
         Board board = this.match.getBoardByPlayerNickname(myNickname);
         String answer;
-        Map<ResourceType, Integer> resourceRequired, resourcesToEliminateWarehouse, resourceToEliminateChest, resourceToEliminateExtraDeposit;
+        Map<ResourceType, Integer> resourceRequired, resourcesToEliminateWarehouse, resourceToEliminateChest,
+                resourceToEliminateExtraDeposit;
         resourceRequired = developmentCard.getCost();
         this.decreaseForDiscount(resourceRequired, board);
         resourcesToEliminateWarehouse = new HashMap<>();
@@ -574,18 +575,14 @@ public class ClientCLI extends Client {
         DevCardPosition devCardPosition = selectPositionForDevCard(developmentCard.getId());
         if (devCardPosition == null) {
             return null;
-        } else
-        {
-            //this.selectResourcesFromBoard(resourceRequired,resourcesToEliminateWarehouse,resourceToEliminateChest,resourceToEliminateExtraDeposit);
+        } else {
+            // this.selectResourcesFromBoard(resourceRequired,resourcesToEliminateWarehouse,resourceToEliminateChest,resourceToEliminateExtraDeposit);
         }
 
-            //TODO METTERE MAPPA CON EXTRA DEPOSIT E SOSTITUIRLA ALLA new HashMap<>()
+        // TODO METTERE MAPPA CON EXTRA DEPOSIT E SOSTITUIRLA ALLA new HashMap<>()
 
-            return new BuyDevCardMove(developmentCard.getId(),
-                    devCardPosition,
-                    resourcesToEliminateWarehouse,
-                    resourceToEliminateExtraDeposit,
-                    resourceToEliminateChest);
+        return new BuyDevCardMove(developmentCard.getId(), devCardPosition, resourcesToEliminateWarehouse,
+                resourceToEliminateExtraDeposit, resourceToEliminateChest);
     }
 
     private void decreaseForDiscount(Map<ResourceType, Integer> resourceRequired, Board board) {
@@ -610,7 +607,7 @@ public class ClientCLI extends Client {
         }
     }
 
-    //TODO METTERE MAPPA CON EXTRA DEPOSIT E SOSTITUIRLA ALLA new HashMap<>()
+    // TODO METTERE MAPPA CON EXTRA DEPOSIT E SOSTITUIRLA ALLA new HashMap<>()
     private void warehousefirst(Board board, ResourceType resourcetype, Integer integer,
             Map<ResourceType, Integer> resourcesToEliminateWarehouse,
             Map<ResourceType, Integer> resourceToEliminateChest) {
@@ -620,7 +617,7 @@ public class ClientCLI extends Client {
             wareHouseMap.put(resourcetype, integer - i);
             chestMap.put(resourcetype, i);
 
-            //TODO METTERE MAPPA CON EXTRA DEPOSIT E SOSTITUIRLA ALLA new HashMap<>()
+            // TODO METTERE MAPPA CON EXTRA DEPOSIT E SOSTITUIRLA ALLA new HashMap<>()
             if (board.areEnoughResourcesPresentForBuyAndProduction(wareHouseMap, new HashMap<>(), chestMap)) {
                 break;
             }
@@ -694,7 +691,7 @@ public class ClientCLI extends Client {
     // purchase of the
     // DevelopmentCard the player wants to buy. Returns null if the player wants to
     // go back.
-    private Map<ResourceType, Integer> selectResourcesToEliminate(String devCardToBuyID, String location) {
+    private Map<ResourceType, Integer> selectResourcesToEliminate(String location) {
         Map<ResourceType, Integer> resourcesToEliminate = new HashMap<>();
         String answer = null;
         boolean goBack = false;
@@ -843,14 +840,11 @@ public class ClientCLI extends Client {
                     // selects which resources to eliminate and from where
                     selectResourcesToEliminateForBoardProduction(resourcesToEliminateWarehouse,
                             resourcesToEliminateWarehouse);
-                    // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new HashMap<>() )
+                    // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new
+                    // HashMap<>() )
                     // constructs the move
-                    playerMove = new ProductionMove(null,
-                            null,
-                            resourcesToEliminateWarehouse,
-                            new HashMap<>(),
-                            resourcesToEliminateChest,
-                            productionType,
+                    playerMove = new ProductionMove(null, null, resourcesToEliminateWarehouse, new HashMap<>(),
+                            resourcesToEliminateChest, productionType,
                             selectBoardOrPerkManufacturedResource(productionType));
                     break;
                 case DevCard:
@@ -858,16 +852,12 @@ public class ClientCLI extends Client {
                     if (devCardID.equals("quit")) {
                         goBack = true;
                     } else {
-                        resourcesToEliminateWarehouse = selectResourcesToEliminate(devCardID, "Warehouse");
-                        resourcesToEliminateChest = selectResourcesToEliminate(devCardID, "Chest");
-                        // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new HashMap<>() )
-                        playerMove = new ProductionMove(devCardID,
-                                null,
-                                resourcesToEliminateWarehouse,
-                                new HashMap<>(),
-                                resourcesToEliminateChest,
-                                productionType,
-                                null);
+                        resourcesToEliminateWarehouse = selectResourcesToEliminate("Warehouse");
+                        resourcesToEliminateChest = selectResourcesToEliminate("Chest");
+                        // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new
+                        // HashMap<>() )
+                        playerMove = new ProductionMove(devCardID, null, resourcesToEliminateWarehouse, new HashMap<>(),
+                                resourcesToEliminateChest, productionType, null);
                     }
                     break;
                 case LeaderCard:
@@ -876,15 +866,12 @@ public class ClientCLI extends Client {
                     if (leaderCardID.equals("quit")) {
                         goBack = true;
                     } else {
-                        resourcesToEliminateWarehouse = selectResourcesToEliminate(devCardID, "Warehouse");
-                        resourcesToEliminateChest = selectResourcesToEliminate(devCardID, "Chest");
-                        // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new HashMap<>() )
-                        playerMove = new ProductionMove(null,
-                                leaderCardID,
-                                resourcesToEliminateWarehouse,
-                                new HashMap<>(),
-                                resourcesToEliminateChest,
-                                productionType,
+                        resourcesToEliminateWarehouse = selectResourcesToEliminate("Warehouse");
+                        resourcesToEliminateChest = selectResourcesToEliminate("Chest");
+                        // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new
+                        // HashMap<>() )
+                        playerMove = new ProductionMove(null, leaderCardID, resourcesToEliminateWarehouse,
+                                new HashMap<>(), resourcesToEliminateChest, productionType,
                                 selectBoardOrPerkManufacturedResource(productionType));
                     }
                     break;
@@ -893,15 +880,12 @@ public class ClientCLI extends Client {
                     if (devCardID.equals("quit")) {
                         goBack = true;
                     } else {
-                        resourcesToEliminateWarehouse = selectResourcesToEliminate(devCardID, "Warehouse");
-                        resourcesToEliminateChest = selectResourcesToEliminate(devCardID, "Chest");
-                        // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new HashMap<>() )
-                        playerMove = new ProductionMove(devCardID,
-                                null,
-                                resourcesToEliminateWarehouse,
-                                new HashMap<>(),
-                                resourcesToEliminateChest,
-                                productionType,
+                        resourcesToEliminateWarehouse = selectResourcesToEliminate("Warehouse");
+                        resourcesToEliminateChest = selectResourcesToEliminate("Chest");
+                        // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new
+                        // HashMap<>() )
+                        playerMove = new ProductionMove(devCardID, null, resourcesToEliminateWarehouse, new HashMap<>(),
+                                resourcesToEliminateChest, productionType,
                                 selectBoardOrPerkManufacturedResource(productionType));
                     }
                     break;
@@ -912,15 +896,12 @@ public class ClientCLI extends Client {
                     if (devCardID.equals("quit")) {
                         goBack = true;
                     } else {
-                        resourcesToEliminateWarehouse = selectResourcesToEliminate(devCardID, "Warehouse");
-                        resourcesToEliminateChest = selectResourcesToEliminate(devCardID, "Chest");
-                        // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new HashMap<>() )
-                        playerMove = new ProductionMove(devCardID,
-                                leaderCardID,
-                                resourcesToEliminateWarehouse,
-                                new HashMap<>(),
-                                resourcesToEliminateChest,
-                                productionType,
+                        resourcesToEliminateWarehouse = selectResourcesToEliminate("Warehouse");
+                        resourcesToEliminateChest = selectResourcesToEliminate("Chest");
+                        // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new
+                        // HashMap<>() )
+                        playerMove = new ProductionMove(devCardID, leaderCardID, resourcesToEliminateWarehouse,
+                                new HashMap<>(), resourcesToEliminateChest, productionType,
                                 selectBoardOrPerkManufacturedResource(productionType));
                     }
                     break;
@@ -1578,7 +1559,11 @@ public class ClientCLI extends Client {
                 break;
         }
     }
-    private void selectResourcesFromBoard(Map<ResourceType, Integer> resourceRequired,Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourceToEliminateChest,Map<ResourceType, Integer> resourceToEliminateExtraDeposit){
+
+    private void selectResourcesFromBoard(Map<ResourceType, Integer> resourceRequired,
+            Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+            Map<ResourceType, Integer> resourceToEliminateChest,
+            Map<ResourceType, Integer> resourceToEliminateExtraDeposit) {
 
     }
 
