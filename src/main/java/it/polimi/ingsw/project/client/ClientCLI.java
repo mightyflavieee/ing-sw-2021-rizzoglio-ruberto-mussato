@@ -312,13 +312,13 @@ public class ClientCLI extends Client {
                         }
                         if (!getMatch().isEmpty()) {
                             Request move = handleTurn();
-                            if (move != null) {
-                                socketOut.writeObject(move);
-                                socketOut.flush();
-                                socketOut.reset();
-                                setLock();
+                            while (move == null) {
+                                move = handleTurn();
                             }
-
+                            socketOut.writeObject(move);
+                            socketOut.flush();
+                            socketOut.reset();
+                            setLock();
                         }
 
                     }
