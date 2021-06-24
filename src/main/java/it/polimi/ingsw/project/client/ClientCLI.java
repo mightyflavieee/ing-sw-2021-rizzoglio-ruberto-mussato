@@ -395,7 +395,6 @@ public class ClientCLI extends Client {
             System.out
                     .println("What do you want to do?\n" + "0 - See informations\n" + "1 - Take Resources from Market\n"
                             + "2 - Buy one Development Card\n" + "3 - Activate Production.\n");
-            do {
                 String answer = stdin.nextLine();
                 switch (answer) {
                     case "0":
@@ -417,7 +416,7 @@ public class ClientCLI extends Client {
                         System.out.println("Please provide a correct number.\n" + "> ");
                         isInputError = true;
                         break;
-                }
+
             } while (isInputError);
         } while (playerMove == null);
         return playerMove;
@@ -1576,7 +1575,7 @@ public class ClientCLI extends Client {
                 break;
         }
     }
-    private void selectResourcesFromBoard(Map<ResourceType, Integer> resourceRequired,Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourceToEliminateChest,Map<ResourceType, Integer> resourceToEliminateExtraDeposit){
+    private void selectResourcesFromBoard(Map<ResourceType, Integer> resourceRequired,Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,Map<ResourceType, Integer> resourceToEliminateExtraDeposit){
         Board board = this.match.getBoardByPlayerNickname(myNickname);
         Warehouse warehouse = board.getWarehouse();
         System.out.println("Your resources are:\n" + board.resourcesToString());
@@ -1601,8 +1600,10 @@ public class ClientCLI extends Client {
 
 
                         }while (resourceSelected > resourceRequired.get(resourceType) || resourceSelected < 0);
-                        resourceRequired.put(resourceType,resourceRequired.get(resourceType) - resourceSelected);
-                        resourcesToEliminateWarehouse.put(resourceType,resourceSelected);
+                        if(resourceSelected != 0) {
+                            resourceRequired.put(resourceType, resourceRequired.get(resourceType) - resourceSelected);
+                            resourcesToEliminateWarehouse.put(resourceType, resourceSelected);
+                        }
                         break;
                     case 1:
                         if(warehouse.getExtraDeposit()!=null) {
@@ -1619,8 +1620,10 @@ public class ClientCLI extends Client {
                                             resourceSelected = - 1;
                                         }
                                     } while (resourceSelected > resourceRequired.get(resourceType) || resourceSelected < 0);
-                                    resourceRequired.put(resourceType, resourceRequired.get(resourceType) - resourceSelected);
-                                    resourceToEliminateExtraDeposit.put(resourceType,resourceSelected);
+                                    if(resourceSelected != 0) {
+                                        resourceRequired.put(resourceType, resourceRequired.get(resourceType) - resourceSelected);
+                                        resourceToEliminateExtraDeposit.put(resourceType, resourceSelected);
+                                    }
                                 }
                             }
                         }
@@ -1640,8 +1643,10 @@ public class ClientCLI extends Client {
                                         resourceSelected = - 1;
                                     }
                                 }while (resourceSelected > resourceRequired.get(resourceType) || resourceSelected < 0);
-                                resourceRequired.put(resourceType,resourceRequired.get(resourceType) - resourceSelected);
-                                resourcesToEliminateWarehouse.put(resourceType,resourceSelected);
+                                if(resourceSelected != 0) {
+                                    resourceRequired.put(resourceType, resourceRequired.get(resourceType) - resourceSelected);
+                                    resourcesToEliminateChest.put(resourceType, resourceSelected);
+                                }
                             }
                         }
                         break;
