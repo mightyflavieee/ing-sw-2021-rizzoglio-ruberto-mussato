@@ -111,29 +111,41 @@ public class Player implements Serializable, Cloneable {
   }
 
   public boolean isFeasibleBuyDevCardMove(DevelopmentCard devCard,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
-      DevCardPosition position) {
-    return this.board.isFeasibleBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest,
-        position);
+                                          Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                          Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                          Map<ResourceType, Integer> resourcesToEliminateChest,
+                                          DevCardPosition position) {
+    return this.board.isFeasibleBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit,
+            resourcesToEliminateChest, position);
   }
 
-  public void performBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-      Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
-    this.board.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest, position);
+  public void performBuyDevCardMove(DevelopmentCard devCard,
+                                    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                    Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                    Map<ResourceType, Integer> resourcesToEliminateChest,
+                                    DevCardPosition position) {
+    this.board.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit,
+            resourcesToEliminateChest, position);
   }
 
-  public boolean isFeasibleProductionMove(String devCardID, String leaderCardId,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
-      ProductionType productionType) {
+  public boolean isFeasibleProductionMove(String devCardID,
+                                          String leaderCardId,
+                                          Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                          Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                          Map<ResourceType, Integer> resourcesToEliminateChest,
+                                          ProductionType productionType) {
     return this.board.isFeasibleProductionMove(devCardID, leaderCardId, resourcesToEliminateWarehouse,
-        resourcesToEliminateChest, productionType);
+            resourcesToEliminateExtraDeposit, resourcesToEliminateChest, productionType);
   }
 
-  public void performProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-      Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType,
-      List<ResourceType> boardOrPerkManufacturedResource) {
-    this.board.performProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateChest,
-        productionType, boardOrPerkManufacturedResource);
+  public void performProductionMove(String devCardID,
+                                    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                    Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                    Map<ResourceType, Integer> resourcesToEliminateChest,
+                                    ProductionType productionType,
+                                    List<ResourceType> boardOrPerkManufacturedResource) {
+    this.board.performProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit,
+            resourcesToEliminateChest, productionType, boardOrPerkManufacturedResource);
   }
 
   public boolean isFeasibleActivateLeaderCardMove(String leaderCardID) {

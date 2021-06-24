@@ -7,16 +7,20 @@ import java.util.Map;
 
 public class SelectResourcesHandler {
     private Map<ResourceType, Integer> resourcesFromWarehouse;
+    private Map<ResourceType, Integer> resourcesFromExtraDeposit;
     private Map<ResourceType, Integer> resourcesFromChest;
 
     public SelectResourcesHandler() {
         this.resourcesFromWarehouse = new HashMap<>();
+        this.resourcesFromExtraDeposit = new HashMap<>();
         this.resourcesFromChest = new HashMap<>();
     }
 
     public Map<ResourceType, Integer> getResourcesFromWarehouse() {
         return resourcesFromWarehouse;
     }
+
+    public Map<ResourceType, Integer> getResourcesFromExtraDeposit() { return resourcesFromExtraDeposit; }
 
     public Map<ResourceType, Integer> getResourcesFromChest() {
         return resourcesFromChest;
@@ -27,6 +31,14 @@ public class SelectResourcesHandler {
             this.resourcesFromWarehouse.put(resourceType, this.resourcesFromWarehouse.get(resourceType) + 1);
         } else {
             this.resourcesFromWarehouse.put(resourceType, 1);
+        }
+    }
+
+    public void incrementResourcesFromExtraDeposit(ResourceType resourceType) {
+        if (this.resourcesFromExtraDeposit.containsKey(resourceType)) {
+            this.resourcesFromExtraDeposit.put(resourceType, this.resourcesFromExtraDeposit.get(resourceType) + 1);
+        } else {
+            this.resourcesFromExtraDeposit.put(resourceType, 1);
         }
     }
 

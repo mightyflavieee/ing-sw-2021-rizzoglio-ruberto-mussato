@@ -168,9 +168,12 @@ public class Board implements Serializable, Cloneable {
   // usable in "isFeasible" and "perform" methods only within BuyDevCardMove
   // and DevCardProductionMove
   public boolean areEnoughResourcesPresentForBuyAndProduction(Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-      Map<ResourceType, Integer> resourcesToEliminateChest) {
+                                                              Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                                              Map<ResourceType, Integer> resourcesToEliminateChest) {
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
-    if (resourcesToEliminateWarehouse != null) {
+    Map<ResourceType, Integer> resourcesToEliminateWarehouseAndExtraDeposit = sumWarehouseResources(resourcesToEliminateWarehouse,
+            resourcesToEliminateExtraDeposit);
+    if (resourcesToEliminateWarehouseAndExtraDeposit.isEmpty()) {
       for (ResourceType type : resourcesToEliminateWarehouse.keySet()) {
         if (warehouseResources.containsKey(type)) {
           if (warehouseResources.get(type) < resourcesToEliminateWarehouse.get(type)) {
@@ -181,7 +184,7 @@ public class Board implements Serializable, Cloneable {
         }
       }
     }
-    if (resourcesToEliminateChest != null) {
+    if (resourcesToEliminateChest.isEmpty()) {
       for (ResourceType type : resourcesToEliminateChest.keySet()) {
         if (this.chest.containsKey(type)) {
           if (this.chest.get(type) < resourcesToEliminateChest.get(type)) {
@@ -193,6 +196,29 @@ public class Board implements Serializable, Cloneable {
       }
     }
     return true;
+  }
+
+  // sums the resources fron the warehouse and the extr deposit indicated by the user
+  private Map<ResourceType, Integer> sumWarehouseResources(Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                                           Map<ResourceType, Integer> resourcesToEliminateExtraDeposit) {
+    Map<ResourceType, Integer> sommedWarehouseResources = new HashMap<>();
+    List<ResourceType> resourceTypes = new ArrayList<>();
+    for (ResourceType resourceType : resourceTypes) {
+      if (resourcesToEliminateWarehouse.containsKey(resourceType)) {
+        if (resourcesToEliminateExtraDeposit.containsKey(resourceType)) {
+          sommedWarehouseResources.put(resourceType,
+                  resourcesToEliminateWarehouse.get(resourceType) +
+                  resourcesToEliminateExtraDeposit.get(resourceType));
+        } else {
+          sommedWarehouseResources.put(resourceType, resourcesToEliminateWarehouse.get(resourceType));
+        }
+      } else {
+        if (resourcesToEliminateExtraDeposit.containsKey(resourceType)) {
+          sommedWarehouseResources.put(resourceType, resourcesToEliminateExtraDeposit.get(resourceType));
+        }
+      }
+    }
+    return sommedWarehouseResources;
   }
 
   // checks if the resources indicated in the parameter are actually present
@@ -361,13 +387,17 @@ public class Board implements Serializable, Cloneable {
 
   // checks if the current player can buy the card he/she selected
   public boolean isFeasibleBuyDevCardMove(DevelopmentCard devCard,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
-      DevCardPosition position) {
+                                          Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                          Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                          Map<ResourceType, Integer> resourcesToEliminateChest,
+                                          DevCardPosition position) {
     int intLevel = 0;
     boolean isOneLessCardLevelPresent = false;
     boolean isDiscountPresent;
     // double checks if the resources indicated by the user are actually present
-    if (!areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateChest)) {
+    if (!areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse,
+            resourcesToEliminateExtraDeposit,
+            resourcesToEliminateChest)) {
       return false;
     }
     // for each type of resource required, if there isn't enough resources, the move
@@ -465,17 +495,23 @@ public class Board implements Serializable, Cloneable {
 
   // puts the bought DevelopmentCard in the mapTray and eliminates the required
   // resources from the warehouse or the strongbox (this.chest)
-  public void performBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-      Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+  public void performBuyDevCardMove(DevelopmentCard devCard,
+                                    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                    Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                    Map<ResourceType, Integer> resourcesToEliminateChest,
+                                    DevCardPosition position) {
     this.mapTray.get(position).add(devCard);
-    this.warehouse.eliminateResources(resourcesToEliminateWarehouse);
+    this.warehouse.eliminateResources(resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit);
     eliminateResourcesFromChest(resourcesToEliminateChest);
   }
 
   // checks if the current player can activate the production selected
-  public boolean isFeasibleProductionMove(String devCardID, String leaderCardId,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest,
-      ProductionType productionType) {
+  public boolean isFeasibleProductionMove(String devCardID,
+                                          String leaderCardId,
+                                          Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                          Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                          Map<ResourceType, Integer> resourcesToEliminateChest,
+                                          ProductionType productionType) {
     boolean isDevCardInLastPosition = false;
     // checks if the DevelopmentCard selected is in the last position (if the
     // DevelopmentCard is required
@@ -506,15 +542,20 @@ public class Board implements Serializable, Cloneable {
       }
     }
     // double checks if the resources indicated by the user are actually present
-    return areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+    return areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse,
+            resourcesToEliminateExtraDeposit,
+            resourcesToEliminateChest);
   }
 
   // performs the production putting the resources manufactured in the strongbox
   // and eliminating
   // the resources required
-  public void performProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-      Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType,
-      List<ResourceType> boardOrPerkManufacturedResource) {
+  public void performProductionMove(String devCardID,
+                                    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                    Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                    Map<ResourceType, Integer> resourcesToEliminateChest,
+                                    ProductionType productionType,
+                                    List<ResourceType> boardOrPerkManufacturedResource) {
     Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
     if (productionType == ProductionType.DevCard || productionType == ProductionType.BoardAndDevCard) {
       DevelopmentCard card = fetchDevCardById(devCardID);
@@ -579,7 +620,7 @@ public class Board implements Serializable, Cloneable {
     // production
     addToStrongbox(manufacturedResources);
     if (resourcesToEliminateWarehouse != null) {
-      this.warehouse.eliminateResources(resourcesToEliminateWarehouse);
+      this.warehouse.eliminateResources(resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit);
     }
     if (resourcesToEliminateChest != null) {
       eliminateResourcesFromChest(resourcesToEliminateChest);

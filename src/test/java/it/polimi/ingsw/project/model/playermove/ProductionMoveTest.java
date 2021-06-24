@@ -47,7 +47,7 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 1);
         ProductionMove productionMove = new ProductionMove(null, null, resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, ProductionType.Board, boardManufacturedResource);
+                null, resourcesToEliminateChest, ProductionType.Board, boardManufacturedResource);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -84,7 +84,7 @@ class ProductionMoveTest {
         boardManufacturedResource.add(ResourceType.Shield);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 1);
-        ProductionMove productionMove = new ProductionMove(null, null, resourcesToEliminateWarehouse,
+        ProductionMove productionMove = new ProductionMove(null, null, resourcesToEliminateWarehouse, null,
                 resourcesToEliminateChest, ProductionType.Board, boardManufacturedResource);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
@@ -124,7 +124,7 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
         ProductionMove productionMove = new ProductionMove("test", null, resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, ProductionType.DevCard, null);
+                null, resourcesToEliminateChest, ProductionType.DevCard, null);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -169,7 +169,7 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
         ProductionMove productionMove = new ProductionMove("test", null, resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, ProductionType.DevCard, null);
+                null, resourcesToEliminateChest, ProductionType.DevCard, null);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
@@ -202,7 +202,7 @@ class ProductionMoveTest {
         boardManufacturedResource.add(ResourceType.Shield);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         ProductionMove productionMove = new ProductionMove(null, "test", resourcesToEliminateWarehouse,
-                null, ProductionType.LeaderCard, boardManufacturedResource);
+                null, null, ProductionType.LeaderCard, boardManufacturedResource);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -237,7 +237,7 @@ class ProductionMoveTest {
         boardManufacturedResource.add(ResourceType.Shield);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         ProductionMove productionMove = new ProductionMove(null, "test", resourcesToEliminateWarehouse,
-                null, ProductionType.LeaderCard, boardManufacturedResource);
+                null, null,  ProductionType.LeaderCard, boardManufacturedResource);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
@@ -277,7 +277,7 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 3);
         ProductionMove productionMove = new ProductionMove("test", null, resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, ProductionType.BoardAndDevCard, boardManufacturedResource);
+                null, resourcesToEliminateChest, ProductionType.BoardAndDevCard, boardManufacturedResource);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -317,7 +317,7 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 3);
         ProductionMove productionMove = new ProductionMove("test", null, resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, ProductionType.BoardAndDevCard, boardManufacturedResource);
+                null, resourcesToEliminateChest, ProductionType.BoardAndDevCard, boardManufacturedResource);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
@@ -355,7 +355,7 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 1);
         ProductionMove productionMove = new ProductionMove(null, "test", resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, ProductionType.BoardAndLeaderCard, boardManufacturedResource);
+                null, resourcesToEliminateChest, ProductionType.BoardAndLeaderCard, boardManufacturedResource);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -403,7 +403,7 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 1);
         ProductionMove productionMove = new ProductionMove(null, "test", resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, ProductionType.BoardAndLeaderCard, boardManufacturedResource);
+                null, resourcesToEliminateChest, ProductionType.BoardAndLeaderCard, boardManufacturedResource);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
@@ -458,7 +458,7 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 3);
         resourcesToEliminateChest.put(ResourceType.Stone, 3);
         ProductionMove productionMove = new ProductionMove("DEV_id", "LEADER_id", resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, ProductionType.BoardAndDevCardAndLeaderCard, boardAndPerkManufacturedResources);
+                null, resourcesToEliminateChest, ProductionType.BoardAndDevCardAndLeaderCard, boardAndPerkManufacturedResources);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -518,7 +518,7 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 3);
         resourcesToEliminateChest.put(ResourceType.Stone, 3);
         ProductionMove productionMove = new ProductionMove("DEV_id", "LEADER_id", resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, ProductionType.BoardAndDevCardAndLeaderCard, boardAndPerkManufacturedResources);
+                null, resourcesToEliminateChest, ProductionType.BoardAndDevCardAndLeaderCard, boardAndPerkManufacturedResources);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
@@ -569,7 +569,7 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
         ProductionMove productionMove = new ProductionMove("DEV_id", "LEADER_id", resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, ProductionType.DevCardAndLeader, LeaderCardManufacturedResources);
+                null, resourcesToEliminateChest, ProductionType.DevCardAndLeader, LeaderCardManufacturedResources);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -630,13 +630,13 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
         ProductionMove productionMove = new ProductionMove("DEV_id", "LEADER_id", resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, ProductionType.DevCardAndLeader, LeaderCardManufacturedResources);
+                null, resourcesToEliminateChest, ProductionType.DevCardAndLeader, LeaderCardManufacturedResources);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
     @Test
     void testToString(){
-        Move move = new ProductionMove("as","sad",null,null,ProductionType.Board,null);
+        Move move = new ProductionMove("as","sad",null,null, null, ProductionType.Board,null);
         String string = move.toString();
         assertFalse(string.isEmpty());
         assertFalse(string.isBlank());

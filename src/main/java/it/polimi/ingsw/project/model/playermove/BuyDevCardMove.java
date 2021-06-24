@@ -10,24 +10,38 @@ public class BuyDevCardMove extends Move{
     private final String devCardID;
     private final DevCardPosition position;
     private final Map<ResourceType, Integer> resourcesToEliminateWarehouse;
+    private final Map<ResourceType, Integer> resourcesToEliminateExtraDeposit;
     private final Map<ResourceType, Integer> resourcesToEliminateChest;
 
-    public BuyDevCardMove(String devCardID, DevCardPosition position, Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourcesToEliminateChest) {
+    public BuyDevCardMove(String devCardID,
+                          DevCardPosition position,
+                          Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                          Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                          Map<ResourceType, Integer> resourcesToEliminateChest) {
         this.devCardID = devCardID;
         this.position = position;
         this.resourcesToEliminateWarehouse = resourcesToEliminateWarehouse;
+        this.resourcesToEliminateExtraDeposit = resourcesToEliminateExtraDeposit;
         this.resourcesToEliminateChest = resourcesToEliminateChest;
     }
 
     @Override
     public boolean isFeasibleMove(Match match){
-        return match.isFeasibleBuyDevCardMove(this.devCardID, this.resourcesToEliminateWarehouse, this.resourcesToEliminateChest, this.position);
+        return match.isFeasibleBuyDevCardMove(this.devCardID,
+                this.resourcesToEliminateWarehouse,
+                this.resourcesToEliminateExtraDeposit,
+                this.resourcesToEliminateChest,
+                this.position);
     }
 
     @Override
     public void performMove(Match match) {
         // performs move
-        match.performBuyDevCardMove(this.devCardID, this.resourcesToEliminateWarehouse, this.resourcesToEliminateChest, this.position);
+        match.performBuyDevCardMove(this.devCardID,
+                this.resourcesToEliminateWarehouse,
+                this.resourcesToEliminateExtraDeposit,
+                this.resourcesToEliminateChest,
+                this.position);
         // adds DevelopmentCard victory points to player
         int victoryPointsToAdd = match.getCurrentPlayer().getBoard().fetchDevCardById(this.devCardID).getPoints();
         match.getCurrentPlayer().addVictoryPoints(victoryPointsToAdd);

@@ -43,7 +43,7 @@ class BuyDevCardMoveTest {
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
-        Move buyDevCardMove = new BuyDevCardMove("test", DevCardPosition.Left, resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Move buyDevCardMove = new BuyDevCardMove("test", DevCardPosition.Left, resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest);
         // tests the move
         assertFalse(buyDevCardMove.isFeasibleMove(match));
     }
@@ -89,7 +89,7 @@ class BuyDevCardMoveTest {
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
-        Move buyDevCardMove = new BuyDevCardMove("test", DevCardPosition.Left, resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Move buyDevCardMove = new BuyDevCardMove("test", DevCardPosition.Left, resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest);
         // tests the move
         assertTrue(buyDevCardMove.isFeasibleMove(match));
     }
@@ -135,7 +135,7 @@ class BuyDevCardMoveTest {
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
-        Move buyDevCardMove = new BuyDevCardMove("test", DevCardPosition.Left, resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Move buyDevCardMove = new BuyDevCardMove("test", DevCardPosition.Left, resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest);
         // tests the move
         buyDevCardMove.performMove(match);
         assertEquals(devCard, player.getBoard().getMapTray().get(DevCardPosition.Left).get(0));

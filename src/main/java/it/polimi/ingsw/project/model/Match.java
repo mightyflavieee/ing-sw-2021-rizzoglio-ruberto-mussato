@@ -196,41 +196,53 @@ public class Match implements Serializable, Cloneable {
         this.currentPlayer.performDiscardLeaderCardMove(leaderCardID);
     }
 
-    public boolean isFeasibleBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-            Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+    public boolean isFeasibleBuyDevCardMove(String devCardID,
+                                            Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                            Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                            Map<ResourceType, Integer> resourcesToEliminateChest,
+                                            DevCardPosition position) {
         if (!this.cardContainer.isCardPresent(devCardID)) {
             return false;
         } else {
             DevelopmentCard devCard = this.cardContainer.fetchCard(devCardID);
             return this.currentPlayer.isFeasibleBuyDevCardMove(devCard, resourcesToEliminateWarehouse,
-                    resourcesToEliminateChest, position);
+                    resourcesToEliminateExtraDeposit, resourcesToEliminateChest, position);
         }
     }
 
-    public void performBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-            Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
+    public void performBuyDevCardMove(String devCardID,
+                                      Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                      Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                      Map<ResourceType, Integer> resourcesToEliminateChest,
+                                      DevCardPosition position) {
         DevelopmentCard devCard = this.cardContainer.removeBoughtCard(devCardID);
-        this.currentPlayer.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateChest,
-                position);
+        this.currentPlayer.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit,
+                resourcesToEliminateChest, position);
     }
 
-    public boolean isFeasibleProductionMove(String devCardID, String leaderCardId,
-            Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-            Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType) {
+    public boolean isFeasibleProductionMove(String devCardID,
+                                            String leaderCardId,
+                                            Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                            Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                            Map<ResourceType, Integer> resourcesToEliminateChest,
+                                            ProductionType productionType) {
         if (devCardID != null) {
             if (this.cardContainer.isCardPresent(devCardID)) {
                 return false;
             }
         }
         return this.currentPlayer.isFeasibleProductionMove(devCardID, leaderCardId, resourcesToEliminateWarehouse,
-                resourcesToEliminateChest, productionType);
+                resourcesToEliminateExtraDeposit, resourcesToEliminateChest, productionType);
     }
 
-    public void performProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-            Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType,
-            List<ResourceType> boardOrPerkManufacturedResource) {
-        this.currentPlayer.performProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateChest,
-                productionType, boardOrPerkManufacturedResource);
+    public void performProductionMove(String devCardID,
+                                      Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                      Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                      Map<ResourceType, Integer> resourcesToEliminateChest,
+                                      ProductionType productionType,
+                                      List<ResourceType> boardOrPerkManufacturedResource) {
+        this.currentPlayer.performProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit,
+                resourcesToEliminateChest, productionType, boardOrPerkManufacturedResource);
     }
 
     public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse) {

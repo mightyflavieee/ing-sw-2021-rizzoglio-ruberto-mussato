@@ -183,7 +183,7 @@ class ControllerTest {
                 // turn 2 gianluca
                 Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
                 resourcesToEliminateWarehouse.put(ResourceType.Servant, 2);
-                Move move2Gian = new BuyDevCardMove("id2", DevCardPosition.Right, resourcesToEliminateWarehouse,
+                Move move2Gian = new BuyDevCardMove("id2", DevCardPosition.Right, resourcesToEliminateWarehouse, new HashMap<>(),
                                 new HashMap<>());
                 PlayerMove playerMove2Gian = new PlayerMove(gianluca, null, move2Gian);
                 model.updateTurn();
@@ -241,7 +241,8 @@ class ControllerTest {
                 resourcesToEliminateWarehouse.clear();
                 resourcesToEliminateWarehouse = gianluca.getBoard().getMapTray().get(DevCardPosition.Right).get(0)
                                 .getProduction().getRequiredResources();
-                ProductionMove move3Gian = new ProductionMove("id2", null, resourcesToEliminateWarehouse, null,
+                ProductionMove move3Gian = new ProductionMove("id2", null, resourcesToEliminateWarehouse,
+                        null, null,
                                 ProductionType.Board, null);
                 PlayerMove playerMove3Gian = new PlayerMove(gianluca, null, move3Gian);
                 model.updateTurn();

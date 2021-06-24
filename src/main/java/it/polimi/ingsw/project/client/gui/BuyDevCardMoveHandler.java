@@ -29,8 +29,11 @@ public class BuyDevCardMoveHandler {
     public void setPosition(DevCardPosition position) { this.position = position; }
 
     public Move getMove() {
-        return new BuyDevCardMove(this.developmentCard.getId(), this.position,
-                this.selectResourcesHandler.getResourcesFromWarehouse(), this.selectResourcesHandler.getResourcesFromChest());
+        return new BuyDevCardMove(this.developmentCard.getId(),
+                this.position,
+                this.selectResourcesHandler.getResourcesFromWarehouse(),
+                this.selectResourcesHandler.getResourcesFromExtraDeposit(),
+                this.selectResourcesHandler.getResourcesFromChest());
     }
 
     public void reset() {

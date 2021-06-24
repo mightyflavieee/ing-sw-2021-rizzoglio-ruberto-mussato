@@ -194,6 +194,7 @@ public class ProductionMoveHandler {
                 productionMove = new ProductionMove(null,
                         null,
                         this.selectResourcesHandler.getResourcesFromWarehouse(),
+                        this.selectResourcesHandler.getResourcesFromExtraDeposit(),
                         this.selectResourcesHandler.getResourcesFromChest(),
                         this.productionType,
                         this.boardOrPerkManufacturedResource);
@@ -203,6 +204,7 @@ public class ProductionMoveHandler {
                 productionMove = new ProductionMove(this.developmentCard.getId(),
                         null,
                         this.selectResourcesHandler.getResourcesFromWarehouse(),
+                        this.selectResourcesHandler.getResourcesFromExtraDeposit(),
                         this.selectResourcesHandler.getResourcesFromChest(),
                         this.productionType,
                         this.boardOrPerkManufacturedResource);
@@ -212,6 +214,7 @@ public class ProductionMoveHandler {
                 productionMove = new ProductionMove(null,
                         this.leaderCard.getId(),
                         this.selectResourcesHandler.getResourcesFromWarehouse(),
+                        this.selectResourcesHandler.getResourcesFromExtraDeposit(),
                         this.selectResourcesHandler.getResourcesFromChest(),
                         this.productionType,
                         this.boardOrPerkManufacturedResource);
@@ -221,6 +224,7 @@ public class ProductionMoveHandler {
                 productionMove = new ProductionMove(this.developmentCard.getId(),
                         this.leaderCard.getId(),
                         this.selectResourcesHandler.getResourcesFromWarehouse(),
+                        this.selectResourcesHandler.getResourcesFromExtraDeposit(),
                         this.selectResourcesHandler.getResourcesFromChest(),
                         this.productionType,
                         this.boardOrPerkManufacturedResource);

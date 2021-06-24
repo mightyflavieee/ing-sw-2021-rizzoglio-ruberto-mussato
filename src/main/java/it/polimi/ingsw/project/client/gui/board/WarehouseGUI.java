@@ -75,6 +75,7 @@ public class WarehouseGUI extends JInternalFrame {
         mainWarehouse.add(resourcesColumns);
         mainWarehouse.add(arrowColumns);
 
+        this.informationsGUI = informationsGUI;
         this.extraDepositsGUI = new ExtraDepositsGUI(this.informationsGUI, warehouse);
         this.add(mainWarehouse);
         this.add(this.extraDepositsGUI);
@@ -86,7 +87,6 @@ public class WarehouseGUI extends JInternalFrame {
         this.numberOfResoucesPerShelf.put(ShelfFloor.First, 0);
         this.numberOfResoucesPerShelf.put(ShelfFloor.Second, 0);
         this.numberOfResoucesPerShelf.put(ShelfFloor.Third, 0);
-        this.informationsGUI = informationsGUI;
         this.warehouseModel = warehouse;
         this.clickable = false;
         this.setCanChangeShelves(false);
@@ -105,6 +105,7 @@ public class WarehouseGUI extends JInternalFrame {
 
     public void setWarehouseModel(Warehouse warehouseModel) {
         this.warehouseModel = warehouseModel;
+        this.extraDepositsGUI.setWarehouseModel(warehouseModel);
         this.canChangeShelves = false;
         this.refresh();
 
@@ -192,6 +193,7 @@ public class WarehouseGUI extends JInternalFrame {
     }
 
     public void refresh() {
+        this.extraDepositsGUI.refresh();
         for (ShelfFloor floor : this.warehouseModel.getShelves().keySet()) {
             int count = 0;
             ResourceType resourceTypeInShelf = null;

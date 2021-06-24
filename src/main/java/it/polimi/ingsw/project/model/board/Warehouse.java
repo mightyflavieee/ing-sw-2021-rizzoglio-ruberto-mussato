@@ -119,34 +119,56 @@ public class Warehouse extends Observable<Warehouse> {
 
   // eliminates resources from the warehouse (the correctness of the overall
   // elimination must be done beforehand)
-  public void eliminateResources(Map<ResourceType, Integer> resourcesToEliminate) {
+  public void eliminateResources(Map<ResourceType, Integer> resourcesToEliminateShelves,
+                                 Map<ResourceType, Integer> resourcesToEliminateExtraDeposit) {
+    if (!resourcesToEliminateShelves.isEmpty()) {
+      for (ShelfFloor floor : this.shelves.keySet()) {
+        if (this.shelves.get(floor).size() != 0) {
+          for (ResourceType type : resourcesToEliminateShelves.keySet()) {
+            if (this.shelves.get(floor).get(0).getType() == type) {
+              for (int i = 0; i < resourcesToEliminateShelves.get(type); i++) {
+                this.shelves.get(floor).remove(this.shelves.get(floor).get(0));
+              }
+              break;
+            }
+          }
+        }
+      }
+    }
+    if (!resourcesToEliminateExtraDeposit.isEmpty()) {
+      for (ResourceType type : resourcesToEliminateExtraDeposit.keySet()) {
+        for (int i = 0; i < resourcesToEliminateExtraDeposit.get(type); i++) {
+          this.extraDeposit.put(type, this.extraDeposit.get(type) - 1);
+        }
+      }
+    }
 
-    for (ShelfFloor floor : this.shelves.keySet()) {
+/*    for (ShelfFloor floor : this.shelves.keySet()) {
       if (this.shelves.get(floor).size() != 0) {
-        for (ResourceType type : resourcesToEliminate.keySet()) {
+        for (ResourceType type : resourcesToEliminateShelves.keySet()) {
           if (this.shelves.get(floor).get(0).getType() == type) {
             // if the resources to eliminate are higher then the ones the floor can contain,
             // I remove some of them
             // first from the extraDeposit (so the correctness of the overall elimination
             // must be done beforehand)
-            if (((resourcesToEliminate.get(type) > 1 && floor == ShelfFloor.First)
-                || (resourcesToEliminate.get(type) > 2 && floor == ShelfFloor.Second)
-                || (resourcesToEliminate.get(type) > 3 && floor == ShelfFloor.Third)) && this.extraDeposit != null) {
+            if (((resourcesToEliminateShelves.get(type) > 1 && floor == ShelfFloor.First)
+                || (resourcesToEliminateShelves.get(type) > 2 && floor == ShelfFloor.Second)
+                || (resourcesToEliminateShelves.get(type) > 3 && floor == ShelfFloor.Third)) && this.extraDeposit != null) {
               int currentResourcesInExtraDeposit = this.extraDeposit.get(type);
-              int newExtraDepositResources = Math.max(currentResourcesInExtraDeposit - resourcesToEliminate.get(type),
+              int newExtraDepositResources = Math.max(currentResourcesInExtraDeposit - resourcesToEliminateShelves.get(type),
                   0);
               this.extraDeposit.put(type, newExtraDepositResources);
-              resourcesToEliminate.put(type, resourcesToEliminate.get(type) - currentResourcesInExtraDeposit);
+              resourcesToEliminateShelves.put(type, resourcesToEliminateShelves.get(type) - currentResourcesInExtraDeposit);
             }
             // here the resources are simply removed from the floor
-            for (int i = 0; i < resourcesToEliminate.get(type); i++) {
+            for (int i = 0; i < resourcesToEliminateShelves.get(type); i++) {
               this.shelves.get(floor).remove(this.shelves.get(floor).get(0));
             }
             break;
           }
         }
       }
-    }
+    }*/
   }
 
   private boolean hasMoreResourcesThanFloor(LinkedHashMap<ShelfFloor, List<Resource>> shelfs) {

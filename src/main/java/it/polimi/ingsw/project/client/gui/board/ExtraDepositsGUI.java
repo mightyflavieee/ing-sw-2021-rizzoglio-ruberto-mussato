@@ -28,6 +28,7 @@ public class ExtraDepositsGUI extends JInternalFrame {
         this.setLayout(new GridLayout(2, 1));
 //        JInternalFrame firstExtraDepo = new JInternalFrame("First extra deposit");
 //        JInternalFrame secondExtraDepo = new JInternalFrame("Second extra deposit");
+        this.informationsGUI = informationsGUI;
         JPanel firstExtraDepo = new JPanel();
         JPanel secondExtraDepo = new JPanel();
         firstExtraDepo.setVisible(true);
@@ -42,7 +43,6 @@ public class ExtraDepositsGUI extends JInternalFrame {
         this.add(firstExtraDepo);
         this.add(secondExtraDepo);
         this.pack();
-        this.informationsGUI = informationsGUI;
         this.warehouseModel = warehouseModel;
         this.clickable = false;
         List<ActionListener> listenersFirstExtraDeposit = new ArrayList<>();
@@ -53,22 +53,15 @@ public class ExtraDepositsGUI extends JInternalFrame {
         refresh();
     }
 
-    private void refresh() {
+    public void refresh() {
         if (this.warehouseModel.getExtraDeposit() != null) {
             int count = 1;
             for (ResourceType type : this.warehouseModel.getExtraDeposit().keySet()) {
                 if (this.warehouseModel.getExtraDeposit().get(type) == 1) {
                     if (count == 1) {
                         // adds updated images
-//                        this.firstExtraDepositButtons.get(0).setIcon(new ImageIcon(
-//                                new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
-//                                .getImage().getScaledInstance20,20, Image.SCALE_SMOOTH)));
                         this.firstExtraDepositButtons.get(0).setIcon(Utils.readIcon("resourcetype/" + type + ".png",20,20));
-//                        this.firstExtraDepositButtons.get(1).setIcon(new ImageIcon(
-//                                new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-//                                .getImage().getScaledInstance20,20, Image.SCALE_SMOOTH)));
                         this.firstExtraDepositButtons.get(1).setIcon(Utils.readIcon("warehouse/warehouse_no_resource.png",20,20));
-
                         // adds listener and checks if there aren't already other listeners on the object
                         if (Arrays.stream(this.firstExtraDepositButtons.get(0).getActionListeners()).count() == 0) {
                             ActionListener actionListener = new ExtraDepositGUISelectResourceListener(this,
@@ -81,13 +74,7 @@ public class ExtraDepositsGUI extends JInternalFrame {
                         }
                     } else {
                         // adds updated images
-//                        this.secondExtraDepositButtons.get(0).setIcon(new ImageIcon(
-//                                new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
-//                                .getImage().getScaledInstance20,20, Image.SCALE_SMOOTH)));
                         this.secondExtraDepositButtons.get(0).setIcon(Utils.readIcon("resourcetype/" + type + ".png",20,20));
-//                        this.secondExtraDepositButtons.get(1).setIcon(new ImageIcon(
-//                                new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-//                                .getImage().getScaledInstance20,20, Image.SCALE_SMOOTH)));
                         this.secondExtraDepositButtons.get(1).setIcon(Utils.readIcon("warehouse/warehouse_no_resource.png",20,20));
                         // adds listener and checks if there aren't already other listeners on the object
                         if (Arrays.stream(this.firstExtraDepositButtons.get(0).getActionListeners()).count() == 0) {
@@ -104,13 +91,7 @@ public class ExtraDepositsGUI extends JInternalFrame {
                 if (this.warehouseModel.getExtraDeposit().get(type) == 2) {
                     if (count == 1) {
                         // adds updated images
-//                        this.firstExtraDepositButtons.get(0).setIcon(new ImageIcon(
-//                                new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
-//                                        .getImage().getScaledInstance20,20, Image.SCALE_SMOOTH)));
                         this.firstExtraDepositButtons.get(0).setIcon(Utils.readIcon("resourcetype/" + type + ".png",20,20));
-//                        this.firstExtraDepositButtons.get(1).setIcon(new ImageIcon(
-//                                new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
-//                                        .getImage().getScaledInstance20,20, Image.SCALE_SMOOTH)));
                         this.firstExtraDepositButtons.get(0).setIcon(Utils.readIcon("resourcetype/" + type + ".png",20,20));
                         // adds listener and checks if there aren't already other listeners on the objects
                         if (Arrays.stream(this.firstExtraDepositButtons.get(0).getActionListeners()).count() == 0) {
@@ -126,13 +107,7 @@ public class ExtraDepositsGUI extends JInternalFrame {
                             addListenerToList(1, actionListener);
                         }
                     } else {
-//                        this.secondExtraDepositButtons.get(0).setIcon(new ImageIcon(
-//                                new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
-//                                        .getImage().getScaledInstance20,20, Image.SCALE_SMOOTH)));
                         this.secondExtraDepositButtons.get(0).setIcon(Utils.readIcon("resourcetype/" + type + ".png",20,20));
-//                        this.secondExtraDepositButtons.get(1).setIcon(new ImageIcon(
-//                                new ImageIcon("src/main/resources/resourcetype/" + type + ".png")
-//                                        .getImage().getScaledInstance20,20, Image.SCALE_SMOOTH)));
                         this.secondExtraDepositButtons.get(1).setIcon(Utils.readIcon("resourcetype/" + type + ".png",20,20));
                         // adds listener and checks if there aren't already other listeners on the object
                         if (Arrays.stream(this.firstExtraDepositButtons.get(0).getActionListeners()).count() == 0) {
@@ -151,6 +126,18 @@ public class ExtraDepositsGUI extends JInternalFrame {
                 }
                 count++;
             }
+            // if i have 2 (count starts from 1, so I check if it i equal to 3) extra deposit activated I set all the
+            // buttons to enabled, otherwise I enable only the first ones. After that, the variable isClickable is
+            // put to false, preventing any misclick on the button
+            if (count == 3) {
+                for (JButton button : this.secondExtraDepositButtons) {
+                    button.setEnabled(true);
+                }
+            }
+            for (JButton button : this.firstExtraDepositButtons) {
+                button.setEnabled(true);
+            }
+            disableAllButtons();
         }
     }
 
@@ -167,18 +154,6 @@ public class ExtraDepositsGUI extends JInternalFrame {
         JButton button2FirstExtraDepo = new JButton();
         JButton button1SecondExtraDepo = new JButton();
         JButton button2SecondExtraDepo = new JButton();
-//        button1FirstExtraDepo.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-//                .getImage().getScaledInstance20,20, Image.SCALE_SMOOTH)));
-//        button2FirstExtraDepo.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-//                .getImage().getScaledInstance20,20, Image.SCALE_SMOOTH)));
-//        button1SecondExtraDepo.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-//                .getImage().getScaledInstance20,20, Image.SCALE_SMOOTH)));
-//        button2SecondExtraDepo.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-//                .getImage().getScaledInstance20,20, Image.SCALE_SMOOTH)));
         button1FirstExtraDepo.setIcon(Utils.readIcon("warehouse/warehouse_no_resource.png",20,20));
         button2FirstExtraDepo.setIcon(Utils.readIcon("warehouse/warehouse_no_resource.png",20,20));
         button1SecondExtraDepo.setIcon(Utils.readIcon("warehouse/warehouse_no_resource.png",20,20));
@@ -214,7 +189,7 @@ public class ExtraDepositsGUI extends JInternalFrame {
     }
 
     public void enableExtraDeposit(ResourceType type) {
-        if (this.firstExtraDepositButtons.get(0).isEnabled()) {
+        /*if (this.firstExtraDepositButtons.get(0).isEnabled()) {
             this.secondExtraDepositButtons.get(0).setEnabled(true);
             this.secondExtraDepositButtons.get(1).setEnabled(true);
             this.secondExtraDepositButtons.get(0).addActionListener(new ExtraDepositGUISelectResourceListener(this,
@@ -228,14 +203,14 @@ public class ExtraDepositsGUI extends JInternalFrame {
                     this.informationsGUI, type, 1, 1));
             this.secondExtraDepositButtons.get(1).addActionListener(new ExtraDepositGUISelectResourceListener(this,
                     this.informationsGUI, type, 1, 2));
-        }
+        }*/
     }
+
+    public void setWarehouseModel(Warehouse warehouseModel) { this.warehouseModel = warehouseModel; }
 
     public void disableAllButtons() { this.clickable = false; }
 
-    public void enableAllButtons() {
-        this.clickable = true;
-    }
+    public void enableAllButtons() { this.clickable = true; }
 
     public boolean isClickable() {
         return this.clickable;

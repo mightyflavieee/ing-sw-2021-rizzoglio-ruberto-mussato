@@ -300,11 +300,17 @@ public class InformationsGUI extends JInternalFrame {
     }
 
     // updates the SelectResourcesHandler incrementing the current resources chosen
-    public void updateSelectResourcesHandler(ResourceType resourceType, boolean isFromWarehouse) {
-        if (isFromWarehouse) {
-            this.selectResourcesHandler.incrementResourcesFromWarehouse(resourceType);
-        } else {
-            this.selectResourcesHandler.incrementResourcesFromChest(resourceType);
+    public void updateSelectResourcesHandler(ResourceType resourceType, String location) {
+        switch (location) {
+            case "Warehouse":
+                this.selectResourcesHandler.incrementResourcesFromWarehouse(resourceType);
+                break;
+            case "Chest":
+                this.selectResourcesHandler.incrementResourcesFromChest(resourceType);
+                break;
+            case "ExtraDeposit":
+                this.selectResourcesHandler.incrementResourcesFromExtraDeposit(resourceType);
+                break;
         }
     }
 
