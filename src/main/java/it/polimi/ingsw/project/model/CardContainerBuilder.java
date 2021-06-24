@@ -14,14 +14,16 @@ public class CardContainerBuilder implements Serializable {
     public CardContainerBuilder(String fileSrc) {
         Gson gson = new Gson();
 
-        try  {
-            InputStream inputStream = CardContainerBuilder.class.getClassLoader().getResourceAsStream("developmentCards.json");
+        try {
+            InputStream inputStream = CardContainerBuilder.class.getClassLoader()
+                    .getResourceAsStream("developmentCards.json");
             Scanner s = new Scanner(inputStream);
             String string = "";
             while (s.hasNext()) {
                 string = string + s.nextLine();
             }
-                this.allCards = gson.fromJson(string, CardContainerBuilder.class).allCards;
+            s.close();
+            this.allCards = gson.fromJson(string, CardContainerBuilder.class).allCards;
 
         } catch (Exception e) {
             e.printStackTrace();

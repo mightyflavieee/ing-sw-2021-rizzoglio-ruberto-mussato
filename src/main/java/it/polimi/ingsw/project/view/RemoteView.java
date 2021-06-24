@@ -1,6 +1,5 @@
 package it.polimi.ingsw.project.view;
 
-import java.io.Serializable;
 
 import it.polimi.ingsw.project.messages.MoveMessage;
 import it.polimi.ingsw.project.model.Player;
@@ -8,7 +7,7 @@ import it.polimi.ingsw.project.model.playermove.interfaces.Controllable;
 import it.polimi.ingsw.project.observer.Observer;
 import it.polimi.ingsw.project.server.SocketClientConnection;
 
-public class RemoteView extends View implements Serializable {
+public class RemoteView extends View  {
 
     private class MessageReceiver implements Observer<Controllable> {
 

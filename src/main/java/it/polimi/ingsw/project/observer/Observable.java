@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Observable<T> {
+public class Observable<T> implements Serializable{
+    private static final long serialVersionUID = 3840280592475043704L;
     private final List<Observer<T>> observers = new ArrayList<>();
     private String type = "Generic Type";
 

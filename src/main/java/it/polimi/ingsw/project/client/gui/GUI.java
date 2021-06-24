@@ -18,11 +18,11 @@ import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.Serializable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GUI extends Observable<Move> implements Serializable {
+public class GUI extends Observable<Move>  {
+    private static final long serialVersionUID = 3840332592475092704L;
     private JFrame jFrame;
     private ClientGUI clientGUI;
     private BoardGUI boardGUI;

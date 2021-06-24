@@ -4,10 +4,10 @@ import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.observer.Observable;
 
-import java.io.Serializable;
 import java.util.*;
 
-public class Market extends Observable<Market> implements Cloneable, Serializable {
+public class Market extends Observable<Market> implements Cloneable {
+    private static final long serialVersionUID = 3840280593885092704L;
     // sarebbe da modificare inserendo la posizione delle biglie
     private Marble[][] tray = new Marble[4][3];
     // (0,2),(1,2),(2,2),(3,2)

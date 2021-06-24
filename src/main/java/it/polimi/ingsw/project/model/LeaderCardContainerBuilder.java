@@ -20,6 +20,7 @@ public class LeaderCardContainerBuilder implements Serializable {
             while (s.hasNext()){
                 string = string + s.nextLine();
             }
+            s.close();
             this.leaderCards = gson.fromJson(string, LeaderCardContainerBuilder.class).leaderCards;
         } catch (Exception e) {
             e.printStackTrace();

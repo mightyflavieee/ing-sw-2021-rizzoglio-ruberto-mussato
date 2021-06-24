@@ -8,11 +8,11 @@ import it.polimi.ingsw.project.observer.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.net.Socket;
 import java.util.NoSuchElementException;
 
-public class SocketClientConnection extends Observable<Controllable> implements ClientConnection, Runnable, Serializable {
+public class SocketClientConnection extends Observable<Controllable> implements ClientConnection, Runnable{
+    private static final long serialVersionUID = 3840280592475092704L;
     private Socket socket;
     private ObjectOutputStream out;
     private Server server;

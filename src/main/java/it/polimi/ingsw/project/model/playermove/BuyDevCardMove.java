@@ -2,7 +2,6 @@ package it.polimi.ingsw.project.model.playermove;
 
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
-import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import java.util.Map;

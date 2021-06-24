@@ -6,11 +6,10 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.observer.custom.WarehouseObserver;
 
-import java.io.Serializable;
 import java.util.*;
 
-public class Warehouse extends Observable<Warehouse> implements Serializable{
-
+public class Warehouse extends Observable<Warehouse> {
+  private static final long serialVersionUID = 3840284672475092704L;
   private final LinkedHashMap<ShelfFloor, List<Resource>> shelves;
   private LinkedHashMap<ResourceType, Integer> extraDeposit; // da mettere nel costruttore
   private int numResourcesToDiscard;
