@@ -536,11 +536,12 @@ public class ClientCLI extends Client {
     private Move selectResToBuyDevCard(DevelopmentCard developmentCard) {
         Board board = this.match.getBoardByPlayerNickname(myNickname);
         String answer;
-        Map<ResourceType, Integer> resourceRequired, resourcesToEliminateWarehouse, resourceToEliminateChest;
+        Map<ResourceType, Integer> resourceRequired, resourcesToEliminateWarehouse, resourceToEliminateChest, resourceToEliminateExtraDeposit;
         resourceRequired = developmentCard.getCost();
         this.decreaseForDiscount(resourceRequired, board);
         resourcesToEliminateWarehouse = new HashMap<>();
         resourceToEliminateChest = new HashMap<>();
+        resourceToEliminateExtraDeposit = new HashMap<>();
         if (!board.areEnoughResourcesPresent(resourceRequired)) {
             System.out.println("Not enough resources!");
             return null;
@@ -1543,6 +1544,9 @@ public class ClientCLI extends Client {
                 System.out.println("wrong input");
                 break;
         }
+    }
+    private void selectResourcesFromBoard(Map<ResourceType, Integer> resourceRequired,Map<ResourceType, Integer> resourcesToEliminateWarehouse, Map<ResourceType, Integer> resourceToEliminateChest,Map<ResourceType, Integer> resourceToEliminateExtraDeposit){
+
     }
 
     public void run() throws IOException {
