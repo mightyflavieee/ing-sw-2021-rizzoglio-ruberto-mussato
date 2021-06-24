@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client;
 
 import it.polimi.ingsw.project.messages.ResponseMessage;
+import it.polimi.ingsw.project.model.CardContainer;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.TurnPhase;
@@ -1192,12 +1193,14 @@ public class ClientCLI extends Client {
             System.out.println("0 - Go Back\n" + "1 - Show the Black Marker Position\n" + "2 - show your Points\n"
                     + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
                     + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Resources\n"
-                    + "8 - show your history and the Action Token that have been extracted");
+                    + "8 - show your history and the Action Token that have been extracted\n"
+                    + "9 - show the CardContainer");
         } else {
             System.out.println("0 - Go Back\n" + "1 - show informations about the others players\n"
                     + "2 - show your Points\n" + "3 - show your Marker Position\n" + "4 - show your Leader Cards\n"
                     + "5 - show your Development Cards\n" + "6 - show the Market\n" + "7 - show your Resources\n"
-                    + "8 - show your history");
+                    + "8 - show your history\n"
+                    + "9 - show the CardContainer");
         }
         String answer = stdin.nextLine();
         switch (answer) {
@@ -1232,6 +1235,13 @@ public class ClientCLI extends Client {
                 break;
             case "8":
                 System.out.println(this.match.getHistoryToString(getNickname()));
+                break;
+            case "9":
+                CardContainer cardContainer = match.getCardContainer();
+                List<DevelopmentCard> availableDevCards = cardContainer.getAvailableDevCards();
+                for (DevelopmentCard devCard : availableDevCards) {
+                    System.out.println(devCard.toString());
+                }
                 break;
             default:
                 return;
