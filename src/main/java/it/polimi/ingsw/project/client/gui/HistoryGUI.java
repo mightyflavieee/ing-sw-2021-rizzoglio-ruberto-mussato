@@ -36,7 +36,7 @@ public class HistoryGUI extends JInternalFrame {
     public void setHistory(String history,String opponentNickName) {
         this.setTitle(opponentNickName + "'s History");
         if(history.equals("")) {
-            this.jTextArea = new JTextArea("No History");
+            this.jTextArea.setText("No History");
         }else
         {
             this.jTextArea.setText(history);
@@ -47,7 +47,7 @@ public class HistoryGUI extends JInternalFrame {
     public void setMyHistory(String history){
         this.setTitle("My history");
         if(history.equals("")) {
-            this.jTextArea = new JTextArea("No History");
+            this.jTextArea.setText("No History");
         }else
         {
             this.jTextArea.setText(history);
