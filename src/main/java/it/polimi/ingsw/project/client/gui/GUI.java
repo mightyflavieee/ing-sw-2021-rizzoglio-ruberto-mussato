@@ -150,6 +150,8 @@ public class GUI extends Observable<Move>  {
         this.leaderCardPlaceGUI.setMyLeaderCards(this.mePlayer);
         this.boardGUI.setBoardByPlayer(this.mePlayer);
         playersBarGUI.clickMyButton();
+        disableButtonsHandler(this.mePlayer.getTurnPhase());
+
     }
 
     // show the view of the opponent opponentPLayers(index)
