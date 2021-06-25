@@ -334,6 +334,15 @@ public class ClientCLI extends Client {
         return t;
     }
 
+    private boolean verifyInput(String input, List<String> acceptedStrings) {
+        for (String acceptedString : acceptedStrings) {
+            if (input.equals(acceptedString)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Move handleTurn() {
         // quando do come comando 0 entro SEMPRE in una funzione che mi permette di
         // visualizzare le varie informazioni
@@ -359,9 +368,11 @@ public class ClientCLI extends Client {
         // visualizzare le varie informazioni
 
         while (true) {
-            System.out.println("Do you want to perform a Leader Card Action?\n" + "0 - See information;\n"
-                    + "1 - Discard Leader Card;\n" + "2 - Activate Leader Card;\n" + "3 - No");
-
+            System.out.println("Do you want to perform a Leader Card Action?\n"
+                    + "0 - See information;\n"
+                    + "1 - Discard Leader Card;\n"
+                    + "2 - Activate Leader Card;\n"
+                    + "3 - No");
             String answer = stdin.nextLine();
             switch (answer) {
                 case "0":
@@ -380,6 +391,7 @@ public class ClientCLI extends Client {
                     }
                     break;
                 default:
+                    System.out.println("Choose a correct option, please!\n");
                     break;
             }
         }
@@ -413,7 +425,7 @@ public class ClientCLI extends Client {
                     playerMove = constructProductionMove();
                     break;
                 default:
-                    System.out.println("Please provide a correct number.\n" + "> ");
+                    System.out.println("Please provide a correct number.");
                     isInputError = true;
                     break;
 
