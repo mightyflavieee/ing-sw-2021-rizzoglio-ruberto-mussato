@@ -48,7 +48,6 @@ public class ClientGUI extends Client implements Observer<Move> {
 
     @Override
     public void setMatch(Match match) {
-        match.getPlayerList().forEach(x -> System.out.println(x.getTurnPhase()) );
         this.match = match.clone();
         if(this.getGui().isEmpty()){
             this.jFrame.dispose();

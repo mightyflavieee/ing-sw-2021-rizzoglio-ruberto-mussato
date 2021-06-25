@@ -42,7 +42,7 @@ public class CardContainerGUI extends JInternalFrame {
 //                    new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png")
 //                    .getImage().getScaledInstance(this.width,this.height, Image.SCALE_SMOOTH)));
             jButton.setIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
-
+            jButton.setDisabledIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
             jButton.setVisible(true);
         }
     }
@@ -56,7 +56,7 @@ public class CardContainerGUI extends JInternalFrame {
 //                    new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png")
 //                    .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
             this.showedCards.get(i).setIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
-
+            this.showedCards.get(i).setDisabledIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
             if (Arrays.stream(this.showedCards.get(i).getActionListeners()).count() == 0) {
                     this.showedCards.get(i).addActionListener(new SelectCardForPurchaseListener(this.informationsGUI,
                         this.cardContainer.fetchCard(this.cardsToShow.get(i))));

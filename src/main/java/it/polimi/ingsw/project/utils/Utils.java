@@ -26,9 +26,6 @@ public class Utils {
     }
     public static Pair<Player, List<Player>> splitPlayers(Match match, String nickame){
         List<Player> playerList = new ArrayList<>();
-        for(Player player :match.getPlayerList()){
-            System.out.println(player.getTurnPhase());
-        }
         playerList.addAll(match.getPlayerList());
 
         Player player = null;
@@ -38,7 +35,6 @@ public class Utils {
                 break;
             }
         }
-        System.out.println(player.getTurnPhase());
         return new Pair<>(player,playerList);
     }
 
