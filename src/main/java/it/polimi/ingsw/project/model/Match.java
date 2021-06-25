@@ -35,9 +35,9 @@ public class Match implements Serializable, Cloneable {
         this.playerList.forEach(x -> x.createFaithMapAndWarehouse(this)); // serve per l'inizio partita
         this.market = new Market();
         this.cardContainer = new CardContainer();
-        if (playerList.size() == 1) {
+      //  if (playerList.size() == 1) {
             actionTokenContainer = new ActionTokenContainer(this);
-        }
+
         this.currentPlayer = playerList.get(0);
         this.currentPlayer.updateTurnPhase();
         this.isLastTurn = false;
