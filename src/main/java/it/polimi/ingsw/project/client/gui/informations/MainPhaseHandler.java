@@ -332,6 +332,8 @@ public class MainPhaseHandler extends JInternalFrame {
     }
 
     public void goToBuyDevCardButtons() {
+        this.gui.showMyView();
+        this.gui.getPlayersBarGUI().disableAllButtons();
         this.mainPanelLayout.show(this.mainPanel, BUYDEVCARDMOVE);
     }
 
