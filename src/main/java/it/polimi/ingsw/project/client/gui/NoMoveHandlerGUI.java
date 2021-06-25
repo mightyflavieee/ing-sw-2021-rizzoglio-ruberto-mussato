@@ -16,6 +16,8 @@ public class NoMoveHandlerGUI extends JInternalFrame {
         JTextArea jTextArea = new JTextArea("You can Activate or Discard a Leader Card by clicking on it.\n" +
                 " If you want " + string + " and you don't want to perform a Leader Card Action click on Next Phase");
         jTextArea.setEditable(false);
+        jTextArea.setLineWrap(true);
+        jTextArea.setWrapStyleWord(true);
         this.add(jTextArea,BorderLayout.NORTH);
         this.noMoveButton = new JButton("Next Phase");
         this.add(noMoveButton,BorderLayout.SOUTH);
