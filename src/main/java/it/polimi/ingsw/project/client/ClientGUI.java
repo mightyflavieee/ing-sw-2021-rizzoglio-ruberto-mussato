@@ -48,7 +48,8 @@ public class ClientGUI extends Client implements Observer<Move> {
 
     @Override
     public void setMatch(Match match) {
-        this.match = match;
+        match.getPlayerList().forEach(x -> System.out.println(x.getTurnPhase()) );
+        this.match = match.clone();
         if(this.getGui().isEmpty()){
             this.jFrame.dispose();
             this.gui = new GUI(this, match, this.myNickname);
@@ -145,6 +146,7 @@ public class ClientGUI extends Client implements Observer<Move> {
 
     public void send(Request request){
         try {
+            this.socketOut.reset();
             this.socketOut.writeObject(request);
             this.socketOut.flush();
             this.socketOut.reset();

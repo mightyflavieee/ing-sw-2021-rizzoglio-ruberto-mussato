@@ -143,7 +143,7 @@ public class Server {
             listOfPlayer.add(new Player(nickname));
         });
         Map<String, SocketClientConnection> mapOfConnections = currentLobby.getMapOfSocketClientConnections();
-        Collections.shuffle(listOfPlayer);
+       // Collections.shuffle(listOfPlayer);
         for (int i = 0; i < listOfPlayer.size(); i++) {
             final Player player = listOfPlayer.get(i);
             if (i != 0) {

@@ -52,7 +52,7 @@ public class LeaderCardChoserGUI extends JInternalFrame {
             }
             this.clientGUI.send(new ChooseLeaderCardMove(this.clientGUI.getNickname(), this.clientGUI.getGameId(), leaderCardsToSend));
             this.newGameHandler.goToWaitingRoom(clientGUI.getGameId());
-            this.dispose();
+           // this.dispose();
         }
 
     }

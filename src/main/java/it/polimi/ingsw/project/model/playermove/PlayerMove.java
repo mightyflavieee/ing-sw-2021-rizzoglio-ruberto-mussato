@@ -49,16 +49,19 @@ public class PlayerMove implements Serializable, MoveHandler {
     public void handleMove(Model model, MoveHandler requestedMove) {
         PlayerMove playerMove = (PlayerMove) requestedMove;
         if (!model.isPlayerTurn(playerMove.getPlayer())) {
+            System.out.println("Wrong turn");
             model.notifyPartialMove();
             return;
         }
         if (!model.isRightTurnPhase(playerMove)) {
+            System.out.println("Wrong turnphase");
             model.notifyPartialMove();
             return;
         }
         // it performs moves one by one
 
         if (!model.isFeasibleMove(playerMove)) {
+            System.out.println("Not feasible");
             model.notifyPartialMove();
             // playerMove.getView().reportError(gameMessage.occupiedCellMessage);
             return;

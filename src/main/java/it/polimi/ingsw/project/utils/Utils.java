@@ -2,10 +2,8 @@ package it.polimi.ingsw.project.utils;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 import it.polimi.ingsw.project.client.gui.market.TrayGUI;
 import it.polimi.ingsw.project.model.Match;
@@ -28,7 +26,11 @@ public class Utils {
     }
     public static Pair<Player, List<Player>> splitPlayers(Match match, String nickame){
         List<Player> playerList = new ArrayList<>();
-        playerList = match.getPlayerList();
+        for(Player player :match.getPlayerList()){
+            System.out.println(player.getTurnPhase());
+        }
+        playerList.addAll(match.getPlayerList());
+
         Player player = null;
         for(int i = 0; i < playerList.size(); i++){
             if(playerList.get(i).getNickname().equals(nickame)){
@@ -36,6 +38,7 @@ public class Utils {
                 break;
             }
         }
+        System.out.println(player.getTurnPhase());
         return new Pair<>(player,playerList);
     }
 
