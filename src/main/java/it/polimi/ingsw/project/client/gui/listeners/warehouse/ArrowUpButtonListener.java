@@ -22,7 +22,11 @@ public class ArrowUpButtonListener implements ActionListener {
                             this.warehouseGUI.setFloorToChange(null);
                             break;
                         case Third:
-                            this.warehouseGUI.changeShelf(ShelfFloor.Third, ShelfFloor.Second);
+                            if (this.warehouseGUI.getWarehouseModel().getShelves().get(ShelfFloor.Second).size() == 2) {
+                                this.warehouseGUI.changeShelf(ShelfFloor.Third, ShelfFloor.First);
+                            } else {
+                                this.warehouseGUI.changeShelf(ShelfFloor.Third, ShelfFloor.Second);
+                            }
                             this.warehouseGUI.setFloorToChange(null);
                             break;
                     }

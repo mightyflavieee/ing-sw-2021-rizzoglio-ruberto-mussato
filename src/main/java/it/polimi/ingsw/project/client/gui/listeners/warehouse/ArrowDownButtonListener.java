@@ -18,7 +18,11 @@ public class ArrowDownButtonListener implements ActionListener {
                 if (this.warehouseGUI.getFloorToChange() != ShelfFloor.Third) {
                     switch (this.warehouseGUI.getFloorToChange()) {
                         case First:
-                            this.warehouseGUI.changeShelf(ShelfFloor.First, ShelfFloor.Second);
+                            if (this.warehouseGUI.getWarehouseModel().getShelves().get(ShelfFloor.Second).size() == 2) {
+                                this.warehouseGUI.changeShelf(ShelfFloor.First, ShelfFloor.Third);
+                            } else {
+                                this.warehouseGUI.changeShelf(ShelfFloor.First, ShelfFloor.Second);
+                            }
                             this.warehouseGUI.setFloorToChange(null);
                             break;
                         case Second:
