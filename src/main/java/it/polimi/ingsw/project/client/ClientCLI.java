@@ -402,7 +402,6 @@ public class ClientCLI extends Client {
         // quando do come comando 0 entro SEMPRE in una funzione che mi permette di
         // visualizzare le varie informazioni
         Move playerMove = null;
-        boolean isInputError = false;
         do {
             System.out
                     .println("What do you want to do?\n" + "0 - See informations\n" + "1 - Take Resources from Market\n"
@@ -413,25 +412,19 @@ public class ClientCLI extends Client {
                     viewer();
                     break;
                 case "1":
-                    isInputError = false;
                     playerMove = handleTakeMarketResourcesMove();
                     break;
                 case "2":
-                    isInputError = false;
                     playerMove = constructBuyDevCardMove();
                     break;
                 case "3":
-                    isInputError = false;
                     playerMove = constructProductionMove();
                     break;
                 default:
                     System.out.println("Please provide a correct number.");
-                    isInputError = true;
                     break;
 
             }
-            while (isInputError)
-                ;
         } while (playerMove == null);
         return playerMove;
     }
