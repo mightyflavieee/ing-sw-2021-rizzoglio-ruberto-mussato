@@ -279,8 +279,8 @@ public class ClientCLI extends Client {
                         return false;
                     }
                     playersNumber = Integer.parseInt(request);
-                } catch (Exception e) {
-                    throw new Exception(e.getMessage());
+                } catch (NumberFormatException e) {
+                    playersNumber = 5;
                 }
                 if (playersNumber > 4) {
                     throw new Exception("Insert an integer number less than equal 4.");
@@ -1298,7 +1298,11 @@ public class ClientCLI extends Client {
         do {
             System.out.println("do you want to insert the marble horizontally or vertically?\n" + "0 - vertical\n"
                     + "1 - horizontal\n" + "2 - go back and to an other move");
-            axis = Integer.parseInt(stdin.nextLine());
+            try {
+                axis = Integer.parseInt(stdin.nextLine());
+            }catch (NumberFormatException e){
+                axis = 2;
+            }
         } while (axis < 0 || axis > 2);
         if (axis == 2) {
             return null;
@@ -1306,12 +1310,22 @@ public class ClientCLI extends Client {
         if (axis == 0) {
             do {
                 System.out.println("Which column?\n" + "from 0 to 3, from left to right");
-                position = Integer.parseInt(stdin.nextLine());
+                try {
+                    position = Integer.parseInt(stdin.nextLine());
+                }catch (NumberFormatException e){
+                    System.out.println("Wrong input");
+                    position = - 1;
+                }
             } while (position > 3 || position < 0);
         } else {
             do {
                 System.out.println("Which line?\n" + "from 0 to 2, from bottom to up");
-                position = Integer.parseInt(stdin.nextLine());
+                try {
+                    position = Integer.parseInt(stdin.nextLine());
+                }catch (NumberFormatException e){
+                    System.out.println("Wrong input");
+                    position = - 1;
+                }
             } while (position > 2 || position < 0);
         }
 
@@ -1381,7 +1395,12 @@ public class ClientCLI extends Client {
             do {
                 System.out.println("Chose the perk to use:\n" + "1 - " + transmutationPerk.get(0).toString() + "\n2 - "
                         + transmutationPerk.get(1).toString());
-                answer = Integer.parseInt(stdin.nextLine());
+                try {
+                    answer = Integer.parseInt(stdin.nextLine());
+                }catch (NumberFormatException e){
+                    answer = 0;
+                    System.out.println("Wrong input");
+                }
             } while (!(answer == 1 || answer == 2));
             return transmutationPerk.get(answer - 1);
         }
@@ -1440,7 +1459,12 @@ public class ClientCLI extends Client {
         System.out.println("1 - coin\n" + "2 - stone\n" + "3 - shield\n" + "4 - servant");
         resourceType = stdin.nextLine();
         System.out.println("how many?");
-        n = Integer.parseInt(stdin.nextLine());
+        try {
+            n = Integer.parseInt(stdin.nextLine());
+        }catch (NumberFormatException e){
+            System.out.println("wrong input");
+            return null;
+        }
         switch (resourceType) {
             case "1":
                 type = ResourceType.Coin;
