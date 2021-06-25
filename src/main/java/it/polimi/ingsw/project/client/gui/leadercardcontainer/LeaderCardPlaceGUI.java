@@ -14,13 +14,17 @@ import java.util.List;
 public class LeaderCardPlaceGUI extends JInternalFrame {
     private List<LeaderCardJlabelGUI> leaderCardJlabelGUIList;
     private List<LeaderMovePanel> leaderMovePanelList;
+    private JPanel imagesPanel, buttonsPanel;
+    private GUI gui;
+
     public LeaderCardPlaceGUI(List<LeaderCard> leaderCards, GUI gui) {
+        this.gui = gui;
         this.setTitle("My Leader Cards");
         this.setLayout(new BorderLayout());
-        JPanel imagesPanel = new JPanel();
+        imagesPanel = new JPanel();
         imagesPanel.setLayout(new GridLayout(1,2));
         this.add(imagesPanel,BorderLayout.NORTH);
-        JPanel buttonsPanel = new JPanel();
+        buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(1,2));
         this.add(buttonsPanel,BorderLayout.CENTER);
         this.leaderCardJlabelGUIList = new ArrayList<>();
@@ -47,6 +51,15 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
     public void setMyLeaderCards(Player mePlayer) {
         List<LeaderCard> leaderCards = mePlayer.getLeaderCards();
         this.setTitle("My Leader Cards");
+        for (int k = leaderCardJlabelGUIList.size(); k < leaderCards.size(); k++){
+            LeaderCardJlabelGUI leaderCardJlabelGUI = new LeaderCardJlabelGUI(leaderCards.get(k).getId());
+            leaderCardJlabelGUIList.add(leaderCardJlabelGUI);
+            imagesPanel.add(leaderCardJlabelGUI);
+            LeaderMovePanel leaderMovePanel = new LeaderMovePanel(leaderCards.get(k),gui);
+            leaderMovePanelList.add(leaderMovePanel);
+            buttonsPanel.add(leaderMovePanel);
+        }
+
         int i;
         for(i = 0; i < leaderCards.size(); i++){
             leaderCardJlabelGUIList.get(i).setID(leaderCards.get(i).getId());
@@ -58,7 +71,7 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
             this.leaderMovePanelList.get(i).setActivated(leaderCards.get(i).getStatus()== Status.Active);
             this.leaderMovePanelList.get(i).setVisible(true);
         }
-        for(int j = i; j < 2; j++){
+        for(int j = i; j < leaderCardJlabelGUIList.size(); j++){
             this.leaderCardJlabelGUIList.get(j).setVisible(false);
             this.leaderMovePanelList.get(j).setVisible(false);
             this.leaderMovePanelList.get(j).disableButtons();
@@ -66,6 +79,14 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
 
     }
     public void setOpponentLeaderCards(List<LeaderCard> leaderCards, String opponentNickName){
+        for (int k = leaderCardJlabelGUIList.size(); k < leaderCards.size(); k++){
+            LeaderCardJlabelGUI leaderCardJlabelGUI = new LeaderCardJlabelGUI(leaderCards.get(k).getId());
+            leaderCardJlabelGUIList.add(leaderCardJlabelGUI);
+            imagesPanel.add(leaderCardJlabelGUI);
+            LeaderMovePanel leaderMovePanel = new LeaderMovePanel(leaderCards.get(k),gui);
+            leaderMovePanelList.add(leaderMovePanel);
+            buttonsPanel.add(leaderMovePanel);
+        }
         int i;
         for(i = 0; i < leaderCards.size(); i++){
             leaderCardJlabelGUIList.get(i).setID(leaderCards.get(i).getId());
@@ -74,8 +95,7 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
             leaderMovePanelList.get(i).setVisible(true);
             leaderMovePanelList.get(i).disableButtons();
         }        this.setTitle(opponentNickName + "'s Leader Cards");
-        for(int j = i; j < 2; j++){
-            leaderCardJlabelGUIList.get(i).setID(leaderCards.get(i).getId());
+        for(int j = i; j < leaderCardJlabelGUIList.size(); j++){
             leaderCardJlabelGUIList.get(i).setVisible(false);
             this.leaderMovePanelList.get(j).setVisible(false);
             this.leaderMovePanelList.get(i).disableButtons();
