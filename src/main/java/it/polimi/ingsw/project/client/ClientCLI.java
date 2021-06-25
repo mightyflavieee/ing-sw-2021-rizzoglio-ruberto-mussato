@@ -102,7 +102,6 @@ public class ClientCLI extends Client {
         try {
             getSocketOut().writeObject(new ChooseResourcesMove(this.myNickname, this.gameId, listOfChosenResources));
             getSocketOut().flush();
-            this.showWaitMessageForOtherPlayers();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             setActive(false);

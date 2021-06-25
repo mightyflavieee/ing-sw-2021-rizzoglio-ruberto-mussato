@@ -143,7 +143,7 @@ public class Server {
             listOfPlayer.add(new Player(nickname));
         });
         Map<String, SocketClientConnection> mapOfConnections = currentLobby.getMapOfSocketClientConnections();
-       // Collections.shuffle(listOfPlayer);
+        Collections.shuffle(listOfPlayer);
         for (int i = 0; i < listOfPlayer.size(); i++) {
             final Player player = listOfPlayer.get(i);
             if (i != 0) {
@@ -159,25 +159,21 @@ public class Server {
                 }
                 mapOfConnections.get(player.getNickname())
                         .asyncSend(new ResourcesToChooseMessage(numberOfResourcesToChoose));
-            } 
+            }
         }
         currentLobby.setPlayerList(listOfPlayer);
-        if(listOfPlayer.size() ==1){
+        if (listOfPlayer.size() == 1) {
             initModel(matchId);
         }
     }
 
     public void initModel(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
-        List<SocketClientConnection> listOfClientConnections = new ArrayList<SocketClientConnection>();
         List<Player> listOfPlayer = currentLobby.getPlayerList();
-        currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
-            listOfClientConnections.add(connection);
-        });
         Map<String, RemoteView> mapOfViews = new HashMap<>();
-        for (int i = 0; i < currentLobby.lenght(); i++) {
-            mapOfViews.put(listOfPlayer.get(i).getNickname(),
-                    new RemoteView(listOfPlayer.get(i), listOfClientConnections.get(i)));
+        for (Player player : listOfPlayer) {
+            mapOfViews.put(player.getNickname(),
+                    new RemoteView(player, currentLobby.getMapOfSocketClientConnections().get(player.getNickname())));
         }
         currentLobby.setMapOfViews(mapOfViews);
         for (Player player : listOfPlayer) {
