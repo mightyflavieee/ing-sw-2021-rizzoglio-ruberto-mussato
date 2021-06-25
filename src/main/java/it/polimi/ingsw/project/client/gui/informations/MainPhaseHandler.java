@@ -327,6 +327,8 @@ public class MainPhaseHandler extends JInternalFrame {
     public void goToMainButtons() {
         this.mainPanelLayout.show(this.mainPanel, MAINPHASESPANEL);
         this.gui.getInformationsGUI().getjTextArea().setText("You must choose and perform one of the following actions:");
+        this.gui.showMyView();
+        this.gui.getPlayersBarGUI().clickMyButton();
     }
 
     public void goToBuyDevCardButtons() {
@@ -352,5 +354,8 @@ public class MainPhaseHandler extends JInternalFrame {
         this.mainPanelLayout.show(this.mainPanel,TRANSMUTATIONPANEL);
     }
 
-    public void goToAbortMovePanel() { this.mainPanelLayout.show(this.mainPanel, ABORTMOVEPANEL); }
+    public void goToAbortMovePanel() { this.mainPanelLayout.show(this.mainPanel, ABORTMOVEPANEL);
+        this.gui.showMyView();
+        this.gui.getPlayersBarGUI().disableAllButtons();
+    }
 }

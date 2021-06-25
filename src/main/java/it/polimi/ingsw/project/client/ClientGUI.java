@@ -184,7 +184,7 @@ public class ClientGUI extends Client implements Observer<Move> {
     private void buildGame() {
 
         this.jFrame = new JFrame();
-        this.jFrame.setLocation(0,0);
+        jFrame.setLocation(600,100);
         this.jFrame.setTitle("Master of Renaissance");
         this.jFrame.setVisible(true);
         this.jFrame.setLayout(new GridLayout(1,1));
@@ -301,6 +301,7 @@ public class ClientGUI extends Client implements Observer<Move> {
         this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.jFrame.add(this.endGameHandler);
         this.jFrame.pack();
+        jFrame.setLocation(600,100);
     }
 
     public void restart() {

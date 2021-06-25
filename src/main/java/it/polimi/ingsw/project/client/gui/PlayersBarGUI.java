@@ -53,4 +53,10 @@ public class PlayersBarGUI extends JInternalFrame {
             }
         }
     }
+
+    public void disableAllButtons(){
+        clickMyButton();
+        this.opponentsButtons.forEach(x -> x.setEnabled(false));
+    }
+
 }

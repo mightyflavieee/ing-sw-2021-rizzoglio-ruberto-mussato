@@ -131,6 +131,7 @@ public class GUI extends Observable<Move>  {
             this.boardGUI.refresh(this.mePlayer.getBoard());
             this.boardGUI.setBoardTitle(this.mePlayer.getNickname(), this.mePlayer.getVictoryPoints());
             this.disableButtonsHandler(this.mePlayer.getTurnPhase());
+            playersBarGUI.clickMyButton();
         }
     }
 
@@ -148,6 +149,7 @@ public class GUI extends Observable<Move>  {
         this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
         this.leaderCardPlaceGUI.setMyLeaderCards(this.mePlayer);
         this.boardGUI.setBoardByPlayer(this.mePlayer);
+        playersBarGUI.clickMyButton();
     }
 
     // show the view of the opponent opponentPLayers(index)
@@ -157,6 +159,7 @@ public class GUI extends Observable<Move>  {
         this.leaderCardPlaceGUI.setOpponentLeaderCards(this.opponentsPlayer.get(index).getLeaderCards(),this.opponentsPlayer.get(index).getNickname());
         this.boardGUI.setBoardByPlayer(this.opponentsPlayer.get(index));
         this.disableAllButtons();
+        playersBarGUI.clickOpponentButton(index);
     }
 
     public JFrame getJFrame() { return this.jFrame; }
@@ -235,6 +238,10 @@ public class GUI extends Observable<Move>  {
         this.marketGUI.enableButtons();
         this.boardGUI.getWarehouseGUI().enableAllButtons();
         this.informationsGUI.getMainPhaseHandler().goToAbortMovePanel();
+    }
+
+    public PlayersBarGUI getPlayersBarGUI() {
+        return playersBarGUI;
     }
 }
 
