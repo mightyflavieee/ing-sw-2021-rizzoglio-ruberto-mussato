@@ -132,6 +132,9 @@ public class GUI extends Observable<Move>  {
             this.boardGUI.setBoardTitle(this.mePlayer.getNickname(), this.mePlayer.getVictoryPoints());
             this.disableButtonsHandler(this.mePlayer.getTurnPhase());
             playersBarGUI.clickMyButton();
+            if(TurnPhase.MainPhase == this.mePlayer.getTurnPhase()){
+                this.informationsGUI.getMainPhaseHandler().goToMainButtons();
+            }
         }
     }
 
@@ -150,7 +153,10 @@ public class GUI extends Observable<Move>  {
         this.leaderCardPlaceGUI.setMyLeaderCards(this.mePlayer);
         this.boardGUI.setBoardByPlayer(this.mePlayer);
         playersBarGUI.clickMyButton();
-
+        TurnPhase turnPhase = mePlayer.getTurnPhase();
+        if(turnPhase == TurnPhase.EndPhase || turnPhase == TurnPhase.InitialPhase){
+            this.leaderCardPlaceGUI.enableButtonsForLeaderPhase();
+        }
     }
 
     // show the view of the opponent opponentPLayers(index)
@@ -215,7 +221,7 @@ public class GUI extends Observable<Move>  {
         this.leaderCardPlaceGUI.refreshSize((int) (d.width*0.25), (int) (d.height*0.4));
         this.boardGUI.refreshSize((int) (d.width*0.75), (int) (d.height*0.48));
         this.marketGUI.refreshSize((int) (d.width*0.2), (int) (d.height*0.2));
-        this.cardContainerGUI.refreshSize(d.width/4, (int) (d.height*0.45));
+        this.cardContainerGUI.refreshSize(d.width/4, (int) (d.height*0.4));
        // this.leaderCardPlaceGUI.refreshSize(d.width-boardGUI.getWidth(), (int) (d.height*0.48));
 
     }

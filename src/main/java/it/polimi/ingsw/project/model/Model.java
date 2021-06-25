@@ -62,7 +62,6 @@ public class Model extends Observable<MoveMessage> {
         }
         match.updatePlayer();
         notify(new MoveMessage(this.match.clone())); // è il messaggio che verrà inviato a l player
-        match.getPlayerList().forEach(x -> System.out.println(x.getTurnPhase()) );
     }
 
     public void playerSkipTurn(Player disconnectedPlayer) {
