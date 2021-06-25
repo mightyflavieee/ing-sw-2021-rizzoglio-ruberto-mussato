@@ -11,6 +11,8 @@ public class ClientApp {
         Client client;
         String ip = "0.tcp.ngrok.io";
         int port = 13598;
+//        String ip = "127.0.0.1";
+//        int port = 12345;
         String input = "";
         for(int i = 0; i < args.length; i++){
             input = input + args[i];

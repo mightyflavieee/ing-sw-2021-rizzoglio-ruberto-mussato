@@ -131,7 +131,9 @@ public class GUI extends Observable<Move>  {
             this.boardGUI.refresh(this.mePlayer.getBoard());
             this.boardGUI.setBoardTitle(this.mePlayer.getNickname(), this.mePlayer.getVictoryPoints());
             this.disableButtonsHandler(this.mePlayer.getTurnPhase());
-            playersBarGUI.clickMyButton();
+            if (!this.playersBarGUI.isClosed()) {
+                this.playersBarGUI.clickMyButton();
+            }
             if(TurnPhase.MainPhase == this.mePlayer.getTurnPhase()){
                 this.informationsGUI.getMainPhaseHandler().goToMainButtons();
             }
@@ -148,11 +150,14 @@ public class GUI extends Observable<Move>  {
 
     // shows your view
     public void showMyView() {
+        if (playersBarGUI.isClosed()) {
+            return;
+        }
         this.historyGUI.setMyHistory(this.mePlayer.getHistoryToString());
         this.informationsGUI.setTurnPhase(this.mePlayer.getTurnPhase());
         this.leaderCardPlaceGUI.setMyLeaderCards(this.mePlayer);
         this.boardGUI.setBoardByPlayer(this.mePlayer);
-        playersBarGUI.clickMyButton();
+        this.playersBarGUI.clickMyButton();
         TurnPhase turnPhase = mePlayer.getTurnPhase();
         if(turnPhase == TurnPhase.EndPhase || turnPhase == TurnPhase.InitialPhase){
             this.leaderCardPlaceGUI.enableButtonsForLeaderPhase();

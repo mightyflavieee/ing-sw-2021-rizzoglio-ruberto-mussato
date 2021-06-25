@@ -1,5 +1,6 @@
 package it.polimi.ingsw.project.client.gui.listeners.warehouse;
 
+import it.polimi.ingsw.project.client.gui.InformationsGUI;
 import it.polimi.ingsw.project.client.gui.board.WarehouseGUI;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 
@@ -8,8 +9,12 @@ import java.awt.event.ActionListener;
 
 public class ArrowUpButtonListener implements ActionListener {
     private WarehouseGUI warehouseGUI;
+    private InformationsGUI informationsGUI;
 
-    public ArrowUpButtonListener(WarehouseGUI warehouseGUI) { this.warehouseGUI = warehouseGUI; }
+    public ArrowUpButtonListener(WarehouseGUI warehouseGUI, InformationsGUI informationsGUI) {
+        this.warehouseGUI = warehouseGUI;
+        this.informationsGUI = informationsGUI;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -30,6 +35,7 @@ public class ArrowUpButtonListener implements ActionListener {
                             this.warehouseGUI.setFloorToChange(null);
                             break;
                     }
+                    this.informationsGUI.getResourceInHandler().refresh();
                 } else {
                     this.warehouseGUI.getInformationsGUI().getjTextArea().setText("Cannot move up the first shelf floor!");
                 }

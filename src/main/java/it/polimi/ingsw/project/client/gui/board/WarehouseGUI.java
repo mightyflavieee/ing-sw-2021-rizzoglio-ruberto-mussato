@@ -133,8 +133,8 @@ public class WarehouseGUI extends JInternalFrame {
 //                .ImageIcon("src/main/resources/warehouse/arrow_down.png")
 //                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
         arrowDown.setIcon(Utils.readIcon("warehouse/arrow_down.png",10,10));
-        arrowUp.addActionListener(new ArrowUpButtonListener(this));
-        arrowDown.addActionListener(new ArrowDownButtonListener(this));
+        arrowUp.addActionListener(new ArrowUpButtonListener(this, this.informationsGUI));
+        arrowDown.addActionListener(new ArrowDownButtonListener(this, this.informationsGUI));
         arrowButtons.add(arrowUp);
         arrowButtons.add(arrowDown);
         return arrowButtons;
