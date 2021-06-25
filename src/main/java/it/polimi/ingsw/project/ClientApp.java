@@ -10,7 +10,7 @@ public class ClientApp {
     public static void main(String[] args) {
         Client client;
         String ip = "0.tcp.ngrok.io";
-        int port = 19792;
+        int port = 14670;
         String input = "";
         for(int i = 0; i < args.length; i++){
             input = input + args[i];

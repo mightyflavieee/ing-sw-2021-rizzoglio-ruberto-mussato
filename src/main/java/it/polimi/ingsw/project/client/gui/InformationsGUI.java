@@ -57,9 +57,12 @@ public class InformationsGUI extends JInternalFrame {
             case InitialPhase:
 
                 if (this.mainPhaseHandler != null) {
-                    this.mainPhaseHandler.setVisible(false);
+                    //this.mainPhaseHandler.setVisible(false);
+                    this.mainPhaseHandler.dispose();
                 }
-
+                if(this.resourceInHandler!=null){
+                    this.resourceInHandler.dispose();
+                }
                 if(this.phaseFrame!=null){
                     this.phaseFrame.dispose();
                 }
@@ -70,10 +73,12 @@ public class InformationsGUI extends JInternalFrame {
             case EndPhase:
 
                 if (this.mainPhaseHandler != null) {
-                    this.mainPhaseHandler.setVisible(false);
+                   // this.mainPhaseHandler.setVisible(false);
+                    this.mainPhaseHandler.dispose();
                 }
-                this.remove(this.mainPhaseHandler);
-                this.mainPhaseHandler = null;
+//                this.remove(this.mainPhaseHandler);
+//                this.mainPhaseHandler = null;
+
 
                 if(this.phaseFrame!=null){
                     this.phaseFrame.dispose();
@@ -106,7 +111,11 @@ public class InformationsGUI extends JInternalFrame {
             case WaitPhase:
             default:
                 if(this.mainPhaseHandler!=null) {
-                    this.mainPhaseHandler.setVisible(false);
+                  //  this.mainPhaseHandler.setVisible(false);
+                    this.mainPhaseHandler.dispose();
+                }
+                if(this.resourceInHandler!=null){
+                    this.resourceInHandler.dispose();
                 }
 
                 if(this.phaseFrame != null){

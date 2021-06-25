@@ -202,6 +202,7 @@ public class ClientCLI extends Client {
             System.out.println(e.getMessage());
             setActive(false);
         }
+        this.showWaitMessageForOtherPlayers();
     }
 
     @Override

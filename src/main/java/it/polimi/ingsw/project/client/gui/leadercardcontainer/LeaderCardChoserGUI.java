@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client.gui.leadercardcontainer;
 
 import it.polimi.ingsw.project.client.ClientGUI;
+import it.polimi.ingsw.project.client.gui.NewGameHandler;
 import it.polimi.ingsw.project.client.gui.listeners.leadercards.LeaderCardChoserListener;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.ChooseLeaderCardMove;
@@ -16,7 +17,8 @@ public class LeaderCardChoserGUI extends JInternalFrame {
     private List<String> chosedIDs;
     private List <LeaderCard> leadercards;
     private ClientGUI clientGUI;
-    public LeaderCardChoserGUI(List<LeaderCard> leadercards, ClientGUI clientGUI) {
+    private NewGameHandler newGameHandler;
+    public LeaderCardChoserGUI(List<LeaderCard> leadercards, ClientGUI clientGUI, NewGameHandler newGameHandler) {
         this.setTitle("Select Two Leader Cards");
         this.clientGUI = clientGUI;
         this.leadercards = leadercards;
@@ -29,6 +31,7 @@ public class LeaderCardChoserGUI extends JInternalFrame {
             this.leaderCardButtonGUIList.add(leaderCardButtonGUI);
             this.add(leaderCardButtonGUI);
         }
+        this.newGameHandler = newGameHandler;
         this.setVisible(true);
         this.setPreferredSize(new Dimension(400,600));
         this.pack();
@@ -48,6 +51,7 @@ public class LeaderCardChoserGUI extends JInternalFrame {
                 }
             }
             this.clientGUI.send(new ChooseLeaderCardMove(this.clientGUI.getNickname(), this.clientGUI.getGameId(), leaderCardsToSend));
+            this.newGameHandler.goToWaitingRoom(clientGUI.getGameId());
             this.dispose();
         }
 
