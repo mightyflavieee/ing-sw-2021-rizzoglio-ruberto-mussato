@@ -67,6 +67,7 @@ public class CardContainerGUI extends JInternalFrame {
                 }
             if(i > cardsToShow.size()){
                 this.showedCards.get(i).setIcon(Utils.readIcon("developmentcards/retro_devcard.png",width,height));
+                this.showedCards.get(i).setDisabledIcon(Utils.readIcon("developmentcards/retro_devcard.png",width,height));
                 this.showedCards.get(i).setEnabled(false);
             }
         }

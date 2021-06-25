@@ -39,8 +39,10 @@ public class HistoryGUI extends JInternalFrame {
             this.jTextArea = new JTextArea("No History");
         }else
         {
-            this.jTextArea = new JTextArea(history);
+            this.jTextArea.setText(history);
         }
+        this.jTextArea.setEditable(false);
+        this.jTextArea.setVisible(true);
     }
     public void setMyHistory(String history){
         this.setTitle("My history");
@@ -50,5 +52,7 @@ public class HistoryGUI extends JInternalFrame {
         {
             this.jTextArea.setText(history);
         }
+        this.jTextArea.setEditable(false);
+        this.jTextArea.setVisible(true);
     }
 }
