@@ -203,25 +203,16 @@ public class Server {
             Lobby recreatedLobby = new Lobby(gameId, recreatedModel.extractNumberOfPlayers());
             recreatedLobby.setModel(recreatedModel);
             Map<String, SocketClientConnection> mapOfSocketClientConnection = new HashMap<String, SocketClientConnection>();
+            Map<String, RemoteView> mapOfViews = new HashMap<>();
             for (Player player : recreatedLobby.getModel().getMatch().getPlayerList()) {
                 final Socket newSocket = new Socket();
                 newSocket.close();
                 mapOfSocketClientConnection.put(player.getNickname(), new SocketClientConnection(newSocket, this));
+                player.setIsConnected(false);
+                mapOfViews.put(player.getNickname(),
+                        new RemoteView(player, mapOfSocketClientConnection.get(player.getNickname())));
             }
             recreatedLobby.setMapOfSocketClientConnections(mapOfSocketClientConnection);
-            List<SocketClientConnection> listOfClientConnections = new ArrayList<SocketClientConnection>();
-            List<Player> listOfPlayer = new ArrayList<Player>();
-            recreatedLobby.getMapOfSocketClientConnections()
-                    .forEach((String nickname, SocketClientConnection connection) -> {
-                        listOfPlayer.add(new Player(nickname));
-                        listOfClientConnections.add(connection);
-                    });
-            Map<String, RemoteView> mapOfViews = new HashMap<>();
-            for (int i = 0; i < recreatedLobby.lenght(); i++) {
-                mapOfViews.put(listOfPlayer.get(i).getNickname(),
-                        new RemoteView(listOfPlayer.get(i), listOfClientConnections.get(i)));
-            }
-
             recreatedLobby.setMapOfViews(mapOfViews);
             recreatedLobby.setController(new Controller(recreatedLobby.getModel()));
             for (String nickname : recreatedLobby.getMapOfViews().keySet()) {
@@ -298,9 +289,13 @@ public class Server {
         }
     }
 
-    public boolean doesGameExisted(String gameId) {
+    public boolean doesGameExistedAndHasNotRestarted(String gameId) {
         if (new File(gameId + ".json").exists()) {
-            return true;
+            if (!this.mapOfUnavailableLobbies.containsKey(gameId)) {
+                return true;
+            } else if (!this.mapOfUnavailableLobbies.get(gameId).isGameStarted()) {
+                return true;
+            }
         }
         return false;
     }
@@ -332,6 +327,7 @@ public class Server {
             if (this.isPlayerPresentAndDisconnected(gameId, nickName)) {
                 this.rejoinGame(gameId, connection, nickName);
                 if (this.isRestartedGameReadyToStart(gameId)) {
+                    this.setGameStarted(gameId);
                     this.sendToAllPlayersMoveMessage(gameId);
                 } else {
                     this.sendWaitMessageToPlayer(gameId, nickName);
@@ -341,14 +337,41 @@ public class Server {
                         "We are sorry but in this game you are not a player or there is already a player with this name but it is connected! Try another nickname."));
             }
         } else {
-            this.recreateLobby(gameId);
-            this.rejoinGame(gameId, connection, nickName);
-            if (this.isRestartedGameReadyToStart(gameId)) {
-                this.sendToAllPlayersMoveMessage(gameId);
+            if (this.doesMatchContainPlayer(nickName, gameId)) {
+                this.recreateLobby(gameId);
+                this.rejoinGame(gameId, connection, nickName);
+                if (this.isRestartedGameReadyToStart(gameId)) {
+                    this.sendToAllPlayersMoveMessage(gameId);
+                } else {
+                    this.sendWaitMessageToPlayer(gameId, nickName);
+                }
             } else {
-                this.sendWaitMessageToPlayer(gameId, nickName);
+                connection.send(new ErrorJoinMessage(
+                        "We are sorry but in this game you are not a player. Try another nickname."));
             }
         }
+    }
+
+    private void setGameStarted(String gameId) {
+        this.mapOfUnavailableLobbies.get(gameId).setGameStarted();
+    }
+
+    private boolean doesMatchContainPlayer(String nickName, String gameId) {
+        Gson gson = new GsonBuilder().registerTypeAdapter(ActivableTile.class, new AdapterActivableTile())
+                .registerTypeAdapter(ActionToken.class, new AdapterActionToken()).serializeNulls().create();
+        try {
+            Reader reader = new FileReader(gameId + ".json");
+            Model recreatedModel = gson.fromJson(reader, Model.class);
+            reader.close();
+            for (Player player : recreatedModel.getMatch().getPlayerList()) {
+                if (player.getNickname().equals(nickName)) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public void handleReconnectionOnNotStartedGame(SocketClientConnection connection, String gameId, String nickName) {
@@ -358,6 +381,7 @@ public class Server {
                     this.addToLobby(gameId, connection, nickName);
                     connection.send(new ConfirmJoinMessage(gameId));
                     if (this.tryToStartGame(gameId)) {
+                        this.setGameStarted(gameId);
                         this.sendChooseLeaderCards(gameId);
                     }
                 } catch (Exception e) {

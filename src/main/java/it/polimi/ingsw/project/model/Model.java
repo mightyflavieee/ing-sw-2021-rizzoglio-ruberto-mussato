@@ -67,7 +67,7 @@ public class Model extends Observable<MoveMessage> {
     public void playerSkipTurn(Player disconnectedPlayer) {
         this.setPlayerConnectionToFalse(disconnectedPlayer);
         if (disconnectedPlayer.getNickname().equals(this.match.getCurrentPlayer().getNickname())) {
-            match.playerSkipTurn();
+            this.match.playerSkipTurn();
         }
         notify(new MoveMessage(this.match.clone()));
     }

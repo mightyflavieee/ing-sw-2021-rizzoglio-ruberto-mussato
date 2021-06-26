@@ -24,6 +24,7 @@ public class Lobby {
     private Map<String, RemoteView> mapOfViews;
     private List<Player> playerList;
     private Controller controller;
+    private boolean isGameStarted = false;
 
     public Lobby(String id, Integer maxNumberOfPlayers) {
         this.id = id;
@@ -36,6 +37,14 @@ public class Lobby {
 
     public List<Player> getPlayerList() {
         return playerList;
+    }
+
+    public boolean isGameStarted() {
+        return isGameStarted;
+    }
+
+    public void setGameStarted() {
+        this.isGameStarted = true;
     }
 
     public void setPlayerList(List<Player> playerList) {
@@ -73,9 +82,10 @@ public class Lobby {
     }
 
     public boolean isPlayerPresentAndDisconnected(String nickName) {
-        if (this.mapOfSocketClientConnections.containsKey(nickName)
-                && this.mapOfSocketClientConnections.get(nickName).getSocket().isClosed()) {
-            return true;
+        if (this.mapOfSocketClientConnections.containsKey(nickName)) {
+            if (this.mapOfSocketClientConnections.get(nickName).getSocket().isClosed()) {
+                return true;
+            }
         }
         return false;
     }
