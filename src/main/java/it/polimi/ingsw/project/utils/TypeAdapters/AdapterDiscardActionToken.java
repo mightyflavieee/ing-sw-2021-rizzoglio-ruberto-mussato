@@ -12,7 +12,7 @@ import it.polimi.ingsw.project.model.actionTokens.DiscardActionToken;
 public class AdapterDiscardActionToken extends TypeAdapter<DiscardActionToken> {
 
   @Override
-  public DiscardActionToken read(JsonReader reader) throws IOException {
+  public DiscardActionToken read(JsonReader reader) {
     return null;
   }
 

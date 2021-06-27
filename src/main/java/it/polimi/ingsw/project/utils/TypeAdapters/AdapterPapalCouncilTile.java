@@ -11,7 +11,7 @@ import it.polimi.ingsw.project.model.board.faithMap.tile.PapalCouncilTile;
 public class AdapterPapalCouncilTile extends TypeAdapter<PapalCouncilTile> {
 
   @Override
-  public PapalCouncilTile read(JsonReader reader) throws IOException {
+  public PapalCouncilTile read(JsonReader reader) {
     return null;
   }
 

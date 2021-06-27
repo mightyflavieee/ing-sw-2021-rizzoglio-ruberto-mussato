@@ -12,7 +12,7 @@ import it.polimi.ingsw.project.model.board.Warehouse;
 public class AdapterWarehouse extends TypeAdapter<Warehouse> {
 
   @Override
-  public Warehouse read(JsonReader reader) throws IOException {
+  public Warehouse read(JsonReader reader) {
     return null;
   }
 

@@ -11,7 +11,7 @@ import it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile;
 public class AdapterVictoryPointsTile extends TypeAdapter<VictoryPointsTile> {
 
   @Override
-  public VictoryPointsTile read(JsonReader reader) throws IOException {
+  public VictoryPointsTile read(JsonReader reader) {
     return null;
   }
 

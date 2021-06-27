@@ -186,9 +186,6 @@ public class ExtraDepositsGUI extends JInternalFrame {
         refresh();
     }
 
-    public void enableExtraDeposit(ResourceType type) {
-    }
-
     public void setWarehouseModel(Warehouse warehouseModel) { this.warehouseModel = warehouseModel; }
 
     public void disableAllButtons() { this.clickable = false; }

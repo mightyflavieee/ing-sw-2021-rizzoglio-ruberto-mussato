@@ -248,6 +248,7 @@ public class Server {
                 threadSocket.start();
             } catch (IOException e) {
                 System.out.println("Connection Error!");
+                break;
             }
         }
     }

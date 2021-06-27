@@ -68,7 +68,7 @@ public class AdapterActivableTile extends TypeAdapter<ActivableTile> {
   }
 
   @Override
-  public void write(JsonWriter writer, ActivableTile observableObj) throws IOException {
+  public void write(JsonWriter writer, ActivableTile observableObj) {
     // not needed for this object
   }
 }

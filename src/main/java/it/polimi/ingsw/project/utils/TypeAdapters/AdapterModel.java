@@ -19,7 +19,7 @@ import it.polimi.ingsw.project.model.market.Market;
 public class AdapterModel extends TypeAdapter<Model> {
 
   @Override 
-  public Model read(JsonReader reader) throws IOException {
+  public Model read(JsonReader reader) {
     return null;
   }
 

@@ -13,14 +13,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Corrected minor error in LeaderCardPlaceGUI.java">
-      <change afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/8d612.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/c3d30.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/8aeff.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarCLIENT/CLIENT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarCLIENT/CLIENT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/ClientApp.java" afterDir="false" />
-    </list>
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Code cleanup" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,6 +50,9 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="2" />
   </component>
   <component name="ProjectId" id="1qr6yOXo6JG8nHlrSUjH6bFrZI6" />
   <component name="ProjectLevelVcsManager">
@@ -448,21 +444,7 @@
       <workItem from="1624540245709" duration="1584000" />
       <workItem from="1624541892878" duration="14320000" />
       <workItem from="1624568777841" duration="40743000" />
-      <workItem from="1624776144967" duration="7242000" />
-    </task>
-    <task id="LOCAL-00182" summary="Added jar">
-      <created>1623960795028</created>
-      <option name="number" value="00182" />
-      <option name="presentableId" value="LOCAL-00182" />
-      <option name="project" value="LOCAL" />
-      <updated>1623960795029</updated>
-    </task>
-    <task id="LOCAL-00183" summary="Added CLI.jar">
-      <created>1623961274420</created>
-      <option name="number" value="00183" />
-      <option name="presentableId" value="LOCAL-00183" />
-      <option name="project" value="LOCAL" />
-      <updated>1623961274420</updated>
+      <workItem from="1624776144967" duration="9140000" />
     </task>
     <task id="LOCAL-00184" summary="Changed Gson reading for Jar use">
       <created>1624039286573</created>
@@ -793,7 +775,21 @@
       <option name="project" value="LOCAL" />
       <updated>1624784423642</updated>
     </task>
-    <option name="localTasksCounter" value="231" />
+    <task id="LOCAL-00231" summary="Code cleanup">
+      <created>1624790417019</created>
+      <option name="number" value="00231" />
+      <option name="presentableId" value="LOCAL-00231" />
+      <option name="project" value="LOCAL" />
+      <updated>1624790417019</updated>
+    </task>
+    <task id="LOCAL-00232" summary="Code cleanup">
+      <created>1624790809661</created>
+      <option name="number" value="00232" />
+      <option name="presentableId" value="LOCAL-00232" />
+      <option name="project" value="LOCAL" />
+      <updated>1624790809661</updated>
+    </task>
+    <option name="localTasksCounter" value="233" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -823,7 +819,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Corrected minor error in ClientCLI" />
     <MESSAGE value="Added LeaderCardPlaceGUI.enableButtonsForProduction" />
     <MESSAGE value="Implemented ClientGUI.chooseResources" />
     <MESSAGE value="Correcter minor error in Server.initModel" />
@@ -848,7 +843,8 @@
     <MESSAGE value="Corrected minor error in ClientCLI.showScoreboard" />
     <MESSAGE value="Corrected minor error in MainPhaseHandler.java" />
     <MESSAGE value="Corrected minor error in LeaderCardPlaceGUI.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected minor error in LeaderCardPlaceGUI.java" />
+    <MESSAGE value="Code cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Code cleanup" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -859,12 +855,12 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
-          <line>180</line>
+          <line>154</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
-          <line>187</line>
+          <line>161</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

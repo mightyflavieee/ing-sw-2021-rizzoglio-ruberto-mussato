@@ -147,9 +147,6 @@ public class ChestGUI extends JInternalFrame {
 
     public boolean isClickable() { return this.clickable; }
 
-    public void setMyChest(Player mePlayer) {
-    }
-
     public void setChestByPlayer(Player mePlayer) {
         this.boardModel = mePlayer.getBoard();
         refresh();

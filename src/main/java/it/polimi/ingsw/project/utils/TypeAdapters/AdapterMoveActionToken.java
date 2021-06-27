@@ -11,7 +11,7 @@ import it.polimi.ingsw.project.model.actionTokens.MoveActionToken;
 public class AdapterMoveActionToken extends TypeAdapter<MoveActionToken> {
 
   @Override
-  public MoveActionToken read(JsonReader reader) throws IOException {
+  public MoveActionToken read(JsonReader reader) {
     return null;
   }
 

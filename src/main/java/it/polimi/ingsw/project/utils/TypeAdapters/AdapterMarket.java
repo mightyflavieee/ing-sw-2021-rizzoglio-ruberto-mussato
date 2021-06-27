@@ -12,7 +12,7 @@ import it.polimi.ingsw.project.model.market.Market;
 public class AdapterMarket extends TypeAdapter<Market> {
 
   @Override
-  public Market read(JsonReader reader) throws IOException {
+  public Market read(JsonReader reader) {
     return null;
   }
 

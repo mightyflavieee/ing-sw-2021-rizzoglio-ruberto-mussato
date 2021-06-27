@@ -11,7 +11,7 @@ import it.polimi.ingsw.project.model.actionTokens.MoveAndShuffleActionToken;
 public class AdapterMoveAndShuffleActionToken extends TypeAdapter<MoveAndShuffleActionToken> {
 
   @Override
-  public MoveAndShuffleActionToken read(JsonReader reader) throws IOException {
+  public MoveAndShuffleActionToken read(JsonReader reader) {
     return null;
   }
 

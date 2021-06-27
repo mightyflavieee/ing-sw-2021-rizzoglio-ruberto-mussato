@@ -62,7 +62,7 @@ public class AdapterActionToken extends TypeAdapter<ActionToken> {
   }
 
   @Override
-  public void write(JsonWriter writer, ActionToken observableObj) throws IOException {
+  public void write(JsonWriter writer, ActionToken observableObj) {
     // not needed for this object
   }
 }

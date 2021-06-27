@@ -648,7 +648,7 @@ public class ClientCLI extends Client {
         for (DevelopmentCard devCard : availableDevCards) {
             System.out.println(devCard.toString());
         }
-        while (!isCardPresent) {
+        while (true) {
             System.out.println("Which Development Card do you want to buy? (Provide the correct ID or type "
                     + "'back' to go back): ");
             answer = stdin.nextLine();
@@ -658,15 +658,13 @@ public class ClientCLI extends Client {
                         return devCard;
                     }
                 }
-                if (!isCardPresent) {
-                    System.out.println("A Development Card with that ID is not available. Please provide a correct ID "
+                System.out.println("A Development Card with that ID is not available. Please provide a correct ID "
                             + "or go back.");
-                }
+
             } else {
                 return null;
             }
         }
-        return null;
     }
 
     // helper for the selectResourcesToEliminate() function, asks the player to
