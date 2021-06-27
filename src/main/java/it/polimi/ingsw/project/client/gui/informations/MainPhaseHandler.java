@@ -199,18 +199,6 @@ public class MainPhaseHandler extends JInternalFrame {
         JButton buttonStoneLeader = new JButton();
         JButton buttonGoBackLeaderManufacturing = new JButton("Go Back");
         // sets resources icons
-//        buttonCoinLeader.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Coin.png")
-//                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-//        buttonServantLeader.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Servant.png")
-//                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-//        buttonShieldLeader.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Shield.png")
-//                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-//        buttonStoneLeader.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Stone.png")
-//                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         buttonCoinLeader.setIcon(Utils.readIcon("resourcetype/Coin.png",20,20));
         buttonServantLeader.setIcon(Utils.readIcon("resourcetype/Servant.png",20,20));
         buttonShieldLeader.setIcon(Utils.readIcon("resourcetype/Shield.png",20,20));
@@ -234,18 +222,6 @@ public class MainPhaseHandler extends JInternalFrame {
         JButton buttonStone = new JButton();
         JButton buttonGoBackBoardManufacturing = new JButton("Go Back");
         // sets resources icons
-//        buttonCoin.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Coin.png")
-//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-//        buttonServant.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Servant.png")
-//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-//        buttonShield.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Shield.png")
-//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-//        buttonStone.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Stone.png")
-//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
         buttonCoin.setIcon(Utils.readIcon("resourcetype/Coin.png",20,20));
         buttonServant.setIcon(Utils.readIcon("resourcetype/Servant.png",20,20));
         buttonShield.setIcon(Utils.readIcon("resourcetype/Shield.png",20,20));

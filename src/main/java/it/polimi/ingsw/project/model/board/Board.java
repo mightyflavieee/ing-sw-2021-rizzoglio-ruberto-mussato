@@ -71,7 +71,7 @@ public class Board implements Serializable, Cloneable {
   }
 
   public FaithMap getFaithMap() {
-    return faithMap;
+    return this.faithMap;
   }
 
   public Map<DevCardPosition, List<DevelopmentCard>> getMapTray() {
@@ -95,7 +95,7 @@ public class Board implements Serializable, Cloneable {
   }
 
   public List<ResourceType> getTransmutation() {
-    return transmutation;
+    return this.transmutation;
   }
 
   // it extracts the last DevelopmentCard in from the mapTray at that position
@@ -116,12 +116,10 @@ public class Board implements Serializable, Cloneable {
   }
 
   // it moves the player forward on the faithMap
-  public void moveForward() {
-    faithMap.moveForward();
-  }
+  public void moveForward() { this.faithMap.moveForward(); }
 
   public int papalCouncil(int numTile) {
-    return faithMap.papalCouncil(numTile);
+    return this.faithMap.papalCouncil(numTile);
   }
 
   public int moveForwardBlack() {
@@ -158,7 +156,9 @@ public class Board implements Serializable, Cloneable {
         this.chest.put(type, this.chest.get(type) + resourcesToAdd.get(type));
       } else {
         if (type == ResourceType.Faith) {
-          moveForward();
+          for (int i = 0; i < resourcesToAdd.get(type); i++) {
+            moveForward();
+          }
         } else {
           this.chest.put(type, resourcesToAdd.get(type));
         }
