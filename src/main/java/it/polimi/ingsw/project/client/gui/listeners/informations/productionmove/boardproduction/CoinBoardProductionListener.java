@@ -7,7 +7,9 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class CoinBoardProductionListener implements ActionListener {
     private GUI gui;
@@ -37,42 +39,48 @@ public class CoinBoardProductionListener implements ActionListener {
                 requiredResources.put(ResourceType.Coin, 1);
             }
             this.gui.getInformationsGUI().getProductionMoveHandler().setBoardRequireResources(requiredResources);
-
-            ProductionType productionType = this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType();
-            switch (productionType) {
-                case Board:
-                    this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
-                    this.gui.getBoardGUI().getChestGUI().enableAllButtons();
-                    this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
-                    break;
-                case BoardAndDevCard:
-                    this.gui.getInformationsGUI().getjTextArea().setText("Select Development Card from the Map Tray for the production!");
-                    this.gui.getBoardGUI().getMapTrayGUI().enableAllButtons();
-                    break;
-                case BoardAndLeaderCard:
-                    this.gui.getInformationsGUI().getjTextArea().setText("Select Leader Card for the production!");
-                    this.gui.getLeaderCardPlaceGUI().enableButtonsForProduction();
-                    break;
-                case BoardAndDevCardAndLeaderCard:
-                    this.gui.getInformationsGUI().getjTextArea().setText("Select Development Card and Leader Card for the production!");
-                    this.gui.getBoardGUI().getMapTrayGUI().enableAllButtons();
-                    this.gui.getLeaderCardPlaceGUI().enableButtonsForProduction();
-                    break;
-            }
-
-            // cheks if the user has selected the two resources for the Board production
-            Map<ResourceType, Integer> boardRequiredResources = this.gui.getInformationsGUI().getProductionMoveHandler().getBoardRequiredResources();
-            int count = 0;
-            for (ResourceType resourceType : boardRequiredResources.keySet()) {
-                if (boardRequiredResources.get(resourceType) == 2) {
-                    this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
-                    break;
+            // cheks if the user has selected the two resources for the Board production, if yes, proceeds
+            // with the cards selection or the resources selection (based on the ProductionType)
+            if (checkHasSelectedTwoResources(this.gui.getInformationsGUI().getProductionMoveHandler().getBoardRequiredResources())) {
+                ProductionType productionType = this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType();
+                switch (productionType) {
+                    case Board:
+                        this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
+                        this.gui.getBoardGUI().getChestGUI().enableAllButtons();
+                        this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
+                        break;
+                    case BoardAndDevCard:
+                        this.gui.getInformationsGUI().getjTextArea().setText("Select Development Card from the Map Tray for the production!");
+                        this.gui.getBoardGUI().getMapTrayGUI().enableAllButtons();
+                        break;
+                    case BoardAndLeaderCard:
+                        this.gui.getInformationsGUI().getjTextArea().setText("Select Leader Card for the production!");
+                        this.gui.getLeaderCardPlaceGUI().enableButtonsForProduction();
+                        break;
+                    case BoardAndDevCardAndLeaderCard:
+                        this.gui.getInformationsGUI().getjTextArea().setText("Select Development Card and Leader Card for the production!");
+                        this.gui.getBoardGUI().getMapTrayGUI().enableAllButtons();
+                        this.gui.getLeaderCardPlaceGUI().enableButtonsForProduction();
+                        break;
                 }
-                count++;
-            }
-            if (count == 2) {
                 this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
             }
         }
+    }
+
+    private boolean checkHasSelectedTwoResources(Map<ResourceType, Integer> boardRequiredResources) {
+        if (boardRequiredResources.size() == 2) {
+            return true;
+        } else {
+            if (boardRequiredResources.size() == 1) {
+                for (ResourceType resourceType : boardRequiredResources.keySet()) {
+                    if (boardRequiredResources.get(resourceType) == 2) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+        return false;
     }
 }

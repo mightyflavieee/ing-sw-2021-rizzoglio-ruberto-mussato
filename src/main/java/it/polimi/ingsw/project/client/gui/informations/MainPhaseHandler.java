@@ -124,8 +124,8 @@ public class MainPhaseHandler extends JInternalFrame {
             }
         }
         this.boardRequiredResourcesPanel.add(boardReqResHelperPanel, BorderLayout.CENTER);
-        for(int i = 0; i < this.resourceButtons.size(); i++){
-            this.transmutationPanel.add(this.resourceButtons.get(i));
+        for (ResourceButton resourceButton : this.resourceButtons) {
+            this.transmutationPanel.add(resourceButton);
         }
         this.abortMovePanel.add(this.abortMoveButton);
     }
