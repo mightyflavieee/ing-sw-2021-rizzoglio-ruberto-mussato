@@ -3,7 +3,6 @@ package it.polimi.ingsw.project.client.gui.leadercardcontainer;
 import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class LeaderCardJlabelGUI extends JLabel {
     private String id;

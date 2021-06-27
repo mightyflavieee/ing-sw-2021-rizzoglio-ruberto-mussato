@@ -2,7 +2,6 @@ package it.polimi.ingsw.project.client.gui.listeners.leadercards;
 
 import it.polimi.ingsw.project.client.gui.GUI;
 import it.polimi.ingsw.project.model.playermove.ActivateLeaderCardMove;
-import it.polimi.ingsw.project.model.playermove.DiscardLeaderCardMove;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

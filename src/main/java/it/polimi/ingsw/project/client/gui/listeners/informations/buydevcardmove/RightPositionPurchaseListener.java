@@ -1,7 +1,6 @@
 package it.polimi.ingsw.project.client.gui.listeners.informations.buydevcardmove;
 
 import it.polimi.ingsw.project.client.gui.GUI;
-import it.polimi.ingsw.project.client.gui.InformationsGUI;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 
 import java.awt.event.ActionEvent;

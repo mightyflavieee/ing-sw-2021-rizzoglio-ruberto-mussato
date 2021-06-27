@@ -1,6 +1,5 @@
 package it.polimi.ingsw.project.model;
 
-import com.google.gson.Gson;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import org.junit.jupiter.api.Test;
 

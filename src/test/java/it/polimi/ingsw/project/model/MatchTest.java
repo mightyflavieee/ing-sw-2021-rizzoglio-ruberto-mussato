@@ -1,7 +1,6 @@
 package it.polimi.ingsw.project.model;
 
 import it.polimi.ingsw.project.model.actionTokens.MoveActionToken;
-import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import org.junit.jupiter.api.Test;
@@ -9,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 class MatchTest {

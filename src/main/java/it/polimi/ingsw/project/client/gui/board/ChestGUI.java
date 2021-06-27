@@ -4,7 +4,6 @@ import it.polimi.ingsw.project.client.gui.InformationsGUI;
 import it.polimi.ingsw.project.client.gui.listeners.selectresources.ChestGUISelectResourceListener;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.Board;
-import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.utils.Utils;
 

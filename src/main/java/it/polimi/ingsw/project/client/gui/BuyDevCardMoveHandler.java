@@ -4,10 +4,6 @@ import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.playermove.BuyDevCardMove;
 import it.polimi.ingsw.project.model.playermove.Move;
-import it.polimi.ingsw.project.model.resource.ResourceType;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class BuyDevCardMoveHandler {
     private DevelopmentCard developmentCard;

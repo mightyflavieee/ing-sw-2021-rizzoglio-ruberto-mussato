@@ -1,6 +1,5 @@
 package it.polimi.ingsw.project.client.gui.listeners.newgame;
 
-import it.polimi.ingsw.project.client.Client;
 import it.polimi.ingsw.project.client.ClientGUI;
 import it.polimi.ingsw.project.client.gui.NewGameHandler;
 

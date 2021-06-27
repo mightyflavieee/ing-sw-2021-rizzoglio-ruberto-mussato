@@ -4,7 +4,6 @@ import it.polimi.ingsw.project.client.Client;
 import it.polimi.ingsw.project.client.ClientCLI;
 import it.polimi.ingsw.project.client.ClientGUI;
 
-import javax.sound.sampled.Port;
 import java.io.IOException;
 
 public class ClientApp {

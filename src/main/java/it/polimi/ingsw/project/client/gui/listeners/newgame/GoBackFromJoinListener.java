@@ -2,7 +2,6 @@ package it.polimi.ingsw.project.client.gui.listeners.newgame;
 
 import it.polimi.ingsw.project.client.gui.NewGameHandler;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

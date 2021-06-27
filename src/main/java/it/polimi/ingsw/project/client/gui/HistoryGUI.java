@@ -1,12 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
-import it.polimi.ingsw.project.model.CardContainer;
-import it.polimi.ingsw.project.model.LeaderCardContainer;
-import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
-
 import javax.swing.*;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class HistoryGUI extends JInternalFrame {
   //  private String history;

@@ -5,7 +5,6 @@ import it.polimi.ingsw.project.client.gui.market.ResourceInHandlerGUI;
 import it.polimi.ingsw.project.model.TurnPhase;
 import it.polimi.ingsw.project.model.board.DevCardPosition;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
-import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 

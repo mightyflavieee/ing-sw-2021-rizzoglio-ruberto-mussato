@@ -1,7 +1,6 @@
 package it.polimi.ingsw.project.client.gui.board;
 
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
-import it.polimi.ingsw.project.client.gui.listeners.selectresources.ExtraDepositGUISelectResourceListener;
 import it.polimi.ingsw.project.client.gui.listeners.selectresources.WarehouseGUISelectResourceListener;
 import it.polimi.ingsw.project.client.gui.listeners.warehouse.ArrowDownButtonListener;
 import it.polimi.ingsw.project.client.gui.listeners.warehouse.ArrowUpButtonListener;

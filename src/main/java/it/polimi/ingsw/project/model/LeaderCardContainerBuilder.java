@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 
+@SuppressWarnings("unused")
 public class LeaderCardContainerBuilder implements Serializable {
     private static final long serialVersionUID = 3840280592475092666L;
     private List<LeaderCard> leaderCards;

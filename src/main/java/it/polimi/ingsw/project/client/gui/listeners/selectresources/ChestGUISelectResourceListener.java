@@ -2,7 +2,6 @@ package it.polimi.ingsw.project.client.gui.listeners.selectresources;
 
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
 import it.polimi.ingsw.project.client.gui.board.ChestGUI;
-import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import java.awt.event.ActionEvent;

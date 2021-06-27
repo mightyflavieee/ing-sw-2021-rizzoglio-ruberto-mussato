@@ -3,11 +3,9 @@ package it.polimi.ingsw.project.client.gui;
 import it.polimi.ingsw.project.client.ClientGUI;
 import it.polimi.ingsw.project.client.gui.listeners.endgame.StartNewGameListener;
 import it.polimi.ingsw.project.model.Match;
-import it.polimi.ingsw.project.model.Player;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
 
 public class EndGameHandler extends JPanel {
     private static final String SINGLEPLAYERPANEL = "SINGLEPLAYERPANEL";

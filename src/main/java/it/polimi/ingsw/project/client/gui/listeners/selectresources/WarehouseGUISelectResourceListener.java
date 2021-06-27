@@ -1,7 +1,6 @@
 package it.polimi.ingsw.project.client.gui.listeners.selectresources;
 
 import it.polimi.ingsw.project.client.gui.InformationsGUI;
-import it.polimi.ingsw.project.client.gui.board.ExtraDepositsGUI;
 import it.polimi.ingsw.project.client.gui.board.WarehouseGUI;
 import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.resource.ResourceType;

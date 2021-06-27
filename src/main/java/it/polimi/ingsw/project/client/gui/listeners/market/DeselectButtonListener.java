@@ -3,7 +3,6 @@ package it.polimi.ingsw.project.client.gui.listeners.market;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandlerGUI;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

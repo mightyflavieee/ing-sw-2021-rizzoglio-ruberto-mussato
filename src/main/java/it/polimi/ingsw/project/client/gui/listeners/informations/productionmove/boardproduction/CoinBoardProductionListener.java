@@ -7,9 +7,7 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class CoinBoardProductionListener implements ActionListener {
     private final GUI gui;
