@@ -55,7 +55,7 @@ public class ClientGUI extends Client implements Observer<Move> {
     @Override
     public void setMatch(Match match) {
         this.match = match.clone();
-        if(this.getGui().isEmpty()){
+        if(!this.getGui().isPresent()){
             this.jFrame.dispose();
             this.gui = new GUI(this, match, this.myNickname);
             this.gui.addObserver(this);

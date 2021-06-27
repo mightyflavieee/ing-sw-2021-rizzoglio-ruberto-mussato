@@ -5,21 +5,41 @@
   </component>
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="GC23:jarCLI" />
-      <artifact name="GC23:jarGUI" />
-      <artifact name="GC23:jarSERVER" />
+      <artifact name="GC23:jarCLIENT" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="corrected minor error in Warehouse.mapAllContainedResources">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Corrected minor error in ClientCLI.showScoreboard">
+      <change afterPath="$PROJECT_DIR$/8124d.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d17fd.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/4801a.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/8124d.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/8aeff.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/d17fd.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_19_17__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_19_17__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_01_08__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_01_08__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_13_41__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_13_41__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_16_07__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_16_07__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_17_27__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_17_27__Default_Changelist_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/68714.json" beforeDir="false" afterPath="$PROJECT_DIR$/0c79d.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/68714.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/0c79d.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GC23.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GC23.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarCLIENT/CLIENT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarCLIENT/CLIENT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/ClientApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/informations/MainPhaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/informations/MainPhaseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/JoinAfterDisconnectionRequestMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/JoinAfterDisconnectionRequestMove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/board/WarehouseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/board/WarehouseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/board/card/developmentCard/DevelopmentCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/board/card/developmentCard/DevelopmentCardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/board/card/leaderCard/LeaderCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/board/card/leaderCard/LeaderCardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/market/MarketTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/market/MarketTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/playermove/ProductionMoveTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/playermove/ProductionMoveTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,9 +109,12 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
+    <property name="settings.editor.selected.configurable" value="Runtime.Targets.Configurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="it.polimi.ingsw.project.client.gui" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato" />
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\out\artifacts\GC23_jarSERVER" />
@@ -121,15 +144,16 @@
     </key>
   </component>
   <component name="RunManager" selected="Application.CLI">
-    <configuration name="CLI" type="Application" factoryName="Application">
+    <configuration name="CLI" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ClientApp" />
       <module name="GC23" />
+      <option name="PROGRAM_PARAMETERS" value="cli" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClientAppGUI" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ClientAppGUI" />
+    <configuration name="GUI" type="Application" factoryName="Application" singleton="false" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.project.ClientApp" />
       <module name="GC23" />
       <extension name="coverage">
         <pattern>
@@ -269,7 +293,7 @@
     </configuration>
     <list>
       <item itemvalue="Application.CLI" />
-      <item itemvalue="Application.ClientAppGUI" />
+      <item itemvalue="Application.GUI" />
       <item itemvalue="Application.ServerApp" />
       <item itemvalue="JAR Application.SERVER" />
       <item itemvalue="JAR Application.GUI" />
@@ -282,10 +306,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.ServerApp" />
+        <item itemvalue="Application.GUI" />
         <item itemvalue="JUnit.ProductionMoveTest" />
         <item itemvalue="JUnit.ProductionMoveTest.enoughResourcesBoardProduction" />
         <item itemvalue="JUnit.ControllerTest.completeTest" />
-        <item itemvalue="Application.ClientAppGUI" />
       </list>
     </recent_temporary>
   </component>
@@ -438,231 +462,13 @@
       <workItem from="1624278106264" duration="660000" />
       <workItem from="1624283235019" duration="757000" />
       <workItem from="1624285516389" duration="126000" />
-      <workItem from="1624355736658" duration="28565000" />
-    </task>
-    <task id="LOCAL-00148" summary="added changeShelf function in WarehouseGUI">
-      <created>1622630617405</created>
-      <option name="number" value="00148" />
-      <option name="presentableId" value="LOCAL-00148" />
-      <option name="project" value="LOCAL" />
-      <updated>1622630617405</updated>
-    </task>
-    <task id="LOCAL-00149" summary="Added shelves button listener">
-      <created>1622651182300</created>
-      <option name="number" value="00149" />
-      <option name="presentableId" value="LOCAL-00149" />
-      <option name="project" value="LOCAL" />
-      <updated>1622651182300</updated>
-    </task>
-    <task id="LOCAL-00150" summary="Updated ResourceInHandlerGUI.refresh">
-      <created>1622652388224</created>
-      <option name="number" value="00150" />
-      <option name="presentableId" value="LOCAL-00150" />
-      <option name="project" value="LOCAL" />
-      <updated>1622652388224</updated>
-    </task>
-    <task id="LOCAL-00151" summary="Updated ResourceInHandlerGUI.refresh">
-      <created>1622654234902</created>
-      <option name="number" value="00151" />
-      <option name="presentableId" value="LOCAL-00151" />
-      <option name="project" value="LOCAL" />
-      <updated>1622654234902</updated>
-    </task>
-    <task id="LOCAL-00152" summary="Implemented Take market resource move using gui">
-      <created>1622656926983</created>
-      <option name="number" value="00152" />
-      <option name="presentableId" value="LOCAL-00152" />
-      <option name="project" value="LOCAL" />
-      <updated>1622656926983</updated>
-    </task>
-    <task id="LOCAL-00153" summary="Handled nullpointer exception in ClientCLI.resourceSelector">
-      <created>1622665082744</created>
-      <option name="number" value="00153" />
-      <option name="presentableId" value="LOCAL-00153" />
-      <option name="project" value="LOCAL" />
-      <updated>1622665082745</updated>
-    </task>
-    <task id="LOCAL-00154" summary="Added show black marker position in ClientCLI.viewer">
-      <created>1622667405005</created>
-      <option name="number" value="00154" />
-      <option name="presentableId" value="LOCAL-00154" />
-      <option name="project" value="LOCAL" />
-      <updated>1622667405005</updated>
-    </task>
-    <task id="LOCAL-00155" summary="Added ExtraDeposit Button">
-      <created>1622707647707</created>
-      <option name="number" value="00155" />
-      <option name="presentableId" value="LOCAL-00155" />
-      <option name="project" value="LOCAL" />
-      <updated>1622707647707</updated>
-    </task>
-    <task id="LOCAL-00156" summary="Added a test">
-      <created>1622710965875</created>
-      <option name="number" value="00156" />
-      <option name="presentableId" value="LOCAL-00156" />
-      <option name="project" value="LOCAL" />
-      <updated>1622710965876</updated>
-    </task>
-    <task id="LOCAL-00157" summary="added refresh() function in MapTrayGUI">
-      <created>1622718290205</created>
-      <option name="number" value="00157" />
-      <option name="presentableId" value="LOCAL-00157" />
-      <option name="project" value="LOCAL" />
-      <updated>1622718290205</updated>
-    </task>
-    <task id="LOCAL-00158" summary="refactored gui package">
-      <created>1622718577833</created>
-      <option name="number" value="00158" />
-      <option name="presentableId" value="LOCAL-00158" />
-      <option name="project" value="LOCAL" />
-      <updated>1622718577833</updated>
-    </task>
-    <task id="LOCAL-00159" summary="corrected error in previous refactor">
-      <created>1622718734912</created>
-      <option name="number" value="00159" />
-      <option name="presentableId" value="LOCAL-00159" />
-      <option name="project" value="LOCAL" />
-      <updated>1622718734912</updated>
-    </task>
-    <task id="LOCAL-00160" summary="Updated InsertExtraDepositButtonListener.java">
-      <created>1622789121472</created>
-      <option name="number" value="00160" />
-      <option name="presentableId" value="LOCAL-00160" />
-      <option name="project" value="LOCAL" />
-      <updated>1622789121473</updated>
-    </task>
-    <task id="LOCAL-00161" summary="Corrected Minor error in GUI.disableButtonsHandler">
-      <created>1622811055695</created>
-      <option name="number" value="00161" />
-      <option name="presentableId" value="LOCAL-00161" />
-      <option name="project" value="LOCAL" />
-      <updated>1622811055696</updated>
-    </task>
-    <task id="LOCAL-00162" summary="Corrected Minor error in extradeposit">
-      <created>1622813151578</created>
-      <option name="number" value="00162" />
-      <option name="presentableId" value="LOCAL-00162" />
-      <option name="project" value="LOCAL" />
-      <updated>1622813151578</updated>
-    </task>
-    <task id="LOCAL-00163" summary="Updated GUI design">
-      <created>1622877676305</created>
-      <option name="number" value="00163" />
-      <option name="presentableId" value="LOCAL-00163" />
-      <option name="project" value="LOCAL" />
-      <updated>1622877676305</updated>
-    </task>
-    <task id="LOCAL-00164" summary="Updated GUI design">
-      <created>1622877981685</created>
-      <option name="number" value="00164" />
-      <option name="presentableId" value="LOCAL-00164" />
-      <option name="project" value="LOCAL" />
-      <updated>1622877981685</updated>
-    </task>
-    <task id="LOCAL-00165" summary="added gui listeners for ProductionMove">
-      <created>1622906065439</created>
-      <option name="number" value="00165" />
-      <option name="presentableId" value="LOCAL-00165" />
-      <option name="project" value="LOCAL" />
-      <updated>1622906065439</updated>
-    </task>
-    <task id="LOCAL-00166" summary="added clickable attribute to enable/disable BoardGUI or one of its elements">
-      <created>1622906192858</created>
-      <option name="number" value="00166" />
-      <option name="presentableId" value="LOCAL-00166" />
-      <option name="project" value="LOCAL" />
-      <updated>1622906192858</updated>
-    </task>
-    <task id="LOCAL-00167" summary="added initial Main Phase logic to GUI">
-      <created>1622906257828</created>
-      <option name="number" value="00167" />
-      <option name="presentableId" value="LOCAL-00167" />
-      <option name="project" value="LOCAL" />
-      <updated>1622906257828</updated>
-    </task>
-    <task id="LOCAL-00168" summary="updated listeners in ExtraDepositsGUI">
-      <created>1622907697736</created>
-      <option name="number" value="00168" />
-      <option name="presentableId" value="LOCAL-00168" />
-      <option name="project" value="LOCAL" />
-      <updated>1622907697736</updated>
-    </task>
-    <task id="LOCAL-00169" summary="updated gui listeners in WarehouseGUI">
-      <created>1622908244376</created>
-      <option name="number" value="00169" />
-      <option name="presentableId" value="LOCAL-00169" />
-      <option name="project" value="LOCAL" />
-      <updated>1622908244376</updated>
-    </task>
-    <task id="LOCAL-00170" summary="fixed minor error in gui listeners in WarehouseGUI">
-      <created>1622908959747</created>
-      <option name="number" value="00170" />
-      <option name="presentableId" value="LOCAL-00170" />
-      <option name="project" value="LOCAL" />
-      <updated>1622908959747</updated>
-    </task>
-    <task id="LOCAL-00171" summary="fixed MainPhaseHandler">
-      <created>1623000420922</created>
-      <option name="number" value="00171" />
-      <option name="presentableId" value="LOCAL-00171" />
-      <option name="project" value="LOCAL" />
-      <updated>1623000420922</updated>
-    </task>
-    <task id="LOCAL-00172" summary="added gui listeners for BuyDevCardMove">
-      <created>1623000450368</created>
-      <option name="number" value="00172" />
-      <option name="presentableId" value="LOCAL-00172" />
-      <option name="project" value="LOCAL" />
-      <updated>1623000450368</updated>
-    </task>
-    <task id="LOCAL-00173" summary="added disable/enable buttons functions in CardContainerGUI">
-      <created>1623000490191</created>
-      <option name="number" value="00173" />
-      <option name="presentableId" value="LOCAL-00173" />
-      <option name="project" value="LOCAL" />
-      <updated>1623000490191</updated>
-    </task>
-    <task id="LOCAL-00174" summary="updated some gui listeners">
-      <created>1623000524673</created>
-      <option name="number" value="00174" />
-      <option name="presentableId" value="LOCAL-00174" />
-      <option name="project" value="LOCAL" />
-      <updated>1623000524673</updated>
-    </task>
-    <task id="LOCAL-00175" summary="updated gui MainPhase listeners">
-      <created>1623001443754</created>
-      <option name="number" value="00175" />
-      <option name="presentableId" value="LOCAL-00175" />
-      <option name="project" value="LOCAL" />
-      <updated>1623001443754</updated>
-    </task>
-    <task id="LOCAL-00176" summary="added Board manufacturing panel in MainPhaseHandler">
-      <created>1623002757423</created>
-      <option name="number" value="00176" />
-      <option name="presentableId" value="LOCAL-00176" />
-      <option name="project" value="LOCAL" />
-      <updated>1623002757423</updated>
-    </task>
-    <task id="LOCAL-00177" summary="added listeners for Board production panel in MainPhaseHandler">
-      <created>1623010098304</created>
-      <option name="number" value="00177" />
-      <option name="presentableId" value="LOCAL-00177" />
-      <option name="project" value="LOCAL" />
-      <updated>1623010098304</updated>
-    </task>
-    <task id="LOCAL-00178" summary="added BoardGUI.moveForward">
-      <created>1623100455433</created>
-      <option name="number" value="00178" />
-      <option name="presentableId" value="LOCAL-00178" />
-      <option name="project" value="LOCAL" />
-      <updated>1623100455434</updated>
-    </task>
-    <task id="LOCAL-00179" summary="added possibility to switch player view">
-      <created>1623107165366</created>
-      <option name="number" value="00179" />
-      <option name="presentableId" value="LOCAL-00179" />
-      <option name="project" value="LOCAL" />
-      <updated>1623107165367</updated>
+      <workItem from="1624355736658" duration="31848000" />
+      <workItem from="1624393178315" duration="1567000" />
+      <workItem from="1624453472019" duration="16358000" />
+      <workItem from="1624540245709" duration="1584000" />
+      <workItem from="1624541892878" duration="14320000" />
+      <workItem from="1624568777841" duration="40743000" />
+      <workItem from="1624776144967" duration="5790000" />
     </task>
     <task id="LOCAL-00180" summary="added refresh after every turn">
       <created>1623108120759</created>
@@ -783,7 +589,231 @@
       <option name="project" value="LOCAL" />
       <updated>1624382985564</updated>
     </task>
-    <option name="localTasksCounter" value="197" />
+    <task id="LOCAL-00197" summary="Corrected minor error in ClientCLI.selectPositionForDevCard">
+      <created>1624386143373</created>
+      <option name="number" value="00197" />
+      <option name="presentableId" value="LOCAL-00197" />
+      <option name="project" value="LOCAL" />
+      <updated>1624386143373</updated>
+    </task>
+    <task id="LOCAL-00198" summary="Corrected minor error in ClientCLI.showScoreboard">
+      <created>1624387356331</created>
+      <option name="number" value="00198" />
+      <option name="presentableId" value="LOCAL-00198" />
+      <option name="project" value="LOCAL" />
+      <updated>1624387356331</updated>
+    </task>
+    <task id="LOCAL-00199" summary="Corrected minor error in ClientCLI">
+      <created>1624454884666</created>
+      <option name="number" value="00199" />
+      <option name="presentableId" value="LOCAL-00199" />
+      <option name="project" value="LOCAL" />
+      <updated>1624454884667</updated>
+    </task>
+    <task id="LOCAL-00200" summary="Corrected minor error in ClientCLI.handleTransmutationPerk">
+      <created>1624456006864</created>
+      <option name="number" value="00200" />
+      <option name="presentableId" value="LOCAL-00200" />
+      <option name="project" value="LOCAL" />
+      <updated>1624456006865</updated>
+    </task>
+    <task id="LOCAL-00201" summary="Added TransmutationButton">
+      <created>1624457804637</created>
+      <option name="number" value="00201" />
+      <option name="presentableId" value="LOCAL-00201" />
+      <option name="project" value="LOCAL" />
+      <updated>1624457804637</updated>
+    </task>
+    <task id="LOCAL-00202" summary="Corrected minor error in Warehouse.getExtraDepositToString">
+      <created>1624463145174</created>
+      <option name="number" value="00202" />
+      <option name="presentableId" value="LOCAL-00202" />
+      <option name="project" value="LOCAL" />
+      <updated>1624463145174</updated>
+    </task>
+    <task id="LOCAL-00203" summary="Corrected minor error in ClientCLI">
+      <created>1624463980287</created>
+      <option name="number" value="00203" />
+      <option name="presentableId" value="LOCAL-00203" />
+      <option name="project" value="LOCAL" />
+      <updated>1624463980287</updated>
+    </task>
+    <task id="LOCAL-00204" summary="Added LeaderCardPlaceGUI.enableButtonsForProduction">
+      <created>1624464767694</created>
+      <option name="number" value="00204" />
+      <option name="presentableId" value="LOCAL-00204" />
+      <option name="project" value="LOCAL" />
+      <updated>1624464767694</updated>
+    </task>
+    <task id="LOCAL-00205" summary="Implemented ClientGUI.chooseResources">
+      <created>1624469127115</created>
+      <option name="number" value="00205" />
+      <option name="presentableId" value="LOCAL-00205" />
+      <option name="project" value="LOCAL" />
+      <updated>1624469127115</updated>
+    </task>
+    <task id="LOCAL-00206" summary="Correcter minor error in Server.initModel">
+      <created>1624546367840</created>
+      <option name="number" value="00206" />
+      <option name="presentableId" value="LOCAL-00206" />
+      <option name="project" value="LOCAL" />
+      <updated>1624546367841</updated>
+    </task>
+    <task id="LOCAL-00207" summary="Correcter minor error in CLI">
+      <created>1624548159404</created>
+      <option name="number" value="00207" />
+      <option name="presentableId" value="LOCAL-00207" />
+      <option name="project" value="LOCAL" />
+      <updated>1624548159404</updated>
+    </task>
+    <task id="LOCAL-00208" summary="Correcter minor errors">
+      <created>1624555078870</created>
+      <option name="number" value="00208" />
+      <option name="presentableId" value="LOCAL-00208" />
+      <option name="project" value="LOCAL" />
+      <updated>1624555078870</updated>
+    </task>
+    <task id="LOCAL-00209" summary="Unified client Jar into one Jar">
+      <created>1624556405988</created>
+      <option name="number" value="00209" />
+      <option name="presentableId" value="LOCAL-00209" />
+      <option name="project" value="LOCAL" />
+      <updated>1624556405988</updated>
+    </task>
+    <task id="LOCAL-00210" summary="Unified client Jar into one Jar">
+      <created>1624558181538</created>
+      <option name="number" value="00210" />
+      <option name="presentableId" value="LOCAL-00210" />
+      <option name="project" value="LOCAL" />
+      <updated>1624558181538</updated>
+    </task>
+    <task id="LOCAL-00211" summary="Added ClientCLI.selectResourcesFromBoard">
+      <created>1624574302056</created>
+      <option name="number" value="00211" />
+      <option name="presentableId" value="LOCAL-00211" />
+      <option name="project" value="LOCAL" />
+      <updated>1624574302057</updated>
+    </task>
+    <task id="LOCAL-00212" summary="Corrected minor error in  ClientCLI.selectResourcesFromBoard">
+      <created>1624575501713</created>
+      <option name="number" value="00212" />
+      <option name="presentableId" value="LOCAL-00212" />
+      <option name="project" value="LOCAL" />
+      <updated>1624575501713</updated>
+    </task>
+    <task id="LOCAL-00213" summary="Corrected minor error in  ClientCLI.viewer">
+      <created>1624577560906</created>
+      <option name="number" value="00213" />
+      <option name="presentableId" value="LOCAL-00213" />
+      <option name="project" value="LOCAL" />
+      <updated>1624577560906</updated>
+    </task>
+    <task id="LOCAL-00214" summary="Corrected minor error in  LeaderCardChoserGUI">
+      <created>1624605130863</created>
+      <option name="number" value="00214" />
+      <option name="presentableId" value="LOCAL-00214" />
+      <option name="project" value="LOCAL" />
+      <updated>1624605130863</updated>
+    </task>
+    <task id="LOCAL-00215" summary="Corrected minor error in Server.initPlayers">
+      <created>1624609218318</created>
+      <option name="number" value="00215" />
+      <option name="presentableId" value="LOCAL-00215" />
+      <option name="project" value="LOCAL" />
+      <updated>1624609218318</updated>
+    </task>
+    <task id="LOCAL-00216" summary="Changed disabled icon in CardContainerGUI.java">
+      <created>1624638517325</created>
+      <option name="number" value="00216" />
+      <option name="presentableId" value="LOCAL-00216" />
+      <option name="project" value="LOCAL" />
+      <updated>1624638517325</updated>
+    </task>
+    <task id="LOCAL-00217" summary="Updated GUI look and feel">
+      <created>1624641966403</created>
+      <option name="number" value="00217" />
+      <option name="presentableId" value="LOCAL-00217" />
+      <option name="project" value="LOCAL" />
+      <updated>1624641966403</updated>
+    </task>
+    <task id="LOCAL-00218" summary="Centered login panel">
+      <created>1624650789459</created>
+      <option name="number" value="00218" />
+      <option name="presentableId" value="LOCAL-00218" />
+      <option name="project" value="LOCAL" />
+      <updated>1624650789459</updated>
+    </task>
+    <task id="LOCAL-00219" summary="Corrected minor error in GUI.showMyView">
+      <created>1624651274085</created>
+      <option name="number" value="00219" />
+      <option name="presentableId" value="LOCAL-00219" />
+      <option name="project" value="LOCAL" />
+      <updated>1624651274085</updated>
+    </task>
+    <task id="LOCAL-00220" summary="Corrected minor error in MainPhaseHandler.goToBuyDevCardButtons">
+      <created>1624651506697</created>
+      <option name="number" value="00220" />
+      <option name="presentableId" value="LOCAL-00220" />
+      <option name="project" value="LOCAL" />
+      <updated>1624651506697</updated>
+    </task>
+    <task id="LOCAL-00221" summary="Corrected minor error in Match.java">
+      <created>1624652065632</created>
+      <option name="number" value="00221" />
+      <option name="presentableId" value="LOCAL-00221" />
+      <option name="project" value="LOCAL" />
+      <updated>1624652065632</updated>
+    </task>
+    <task id="LOCAL-00222" summary="Corrected minor error in GUI.setMatch">
+      <created>1624654126117</created>
+      <option name="number" value="00222" />
+      <option name="presentableId" value="LOCAL-00222" />
+      <option name="project" value="LOCAL" />
+      <updated>1624654126117</updated>
+    </task>
+    <task id="LOCAL-00223" summary="Corrected minor error in HistoryGUI">
+      <created>1624658289899</created>
+      <option name="number" value="00223" />
+      <option name="presentableId" value="LOCAL-00223" />
+      <option name="project" value="LOCAL" />
+      <updated>1624658289899</updated>
+    </task>
+    <task id="LOCAL-00224" summary="Corrected minor error in LeaderCardPlaceGUI.java">
+      <created>1624659446017</created>
+      <option name="number" value="00224" />
+      <option name="presentableId" value="LOCAL-00224" />
+      <option name="project" value="LOCAL" />
+      <updated>1624659446017</updated>
+    </task>
+    <task id="LOCAL-00225" summary="Corrected minor error in LeaderCardPlaceGUI.java">
+      <created>1624661606172</created>
+      <option name="number" value="00225" />
+      <option name="presentableId" value="LOCAL-00225" />
+      <option name="project" value="LOCAL" />
+      <updated>1624661606172</updated>
+    </task>
+    <task id="LOCAL-00226" summary="Added try catch to Integer.parseInt">
+      <created>1624662503272</created>
+      <option name="number" value="00226" />
+      <option name="presentableId" value="LOCAL-00226" />
+      <option name="project" value="LOCAL" />
+      <updated>1624662503272</updated>
+    </task>
+    <task id="LOCAL-00227" summary="Corrected minor error in ClientCLI.handleMainPhase">
+      <created>1624663103733</created>
+      <option name="number" value="00227" />
+      <option name="presentableId" value="LOCAL-00227" />
+      <option name="project" value="LOCAL" />
+      <updated>1624663103735</updated>
+    </task>
+    <task id="LOCAL-00228" summary="Corrected minor error in ClientCLI.showScoreboard">
+      <created>1624697720960</created>
+      <option name="number" value="00228" />
+      <option name="presentableId" value="LOCAL-00228" />
+      <option name="project" value="LOCAL" />
+      <updated>1624697720960</updated>
+    </task>
+    <option name="localTasksCounter" value="229" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -813,32 +843,32 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fixed MainPhaseHandler" />
-    <MESSAGE value="added gui listeners for BuyDevCardMove" />
-    <MESSAGE value="added disable/enable buttons functions in CardContainerGUI" />
-    <MESSAGE value="updated some gui listeners" />
-    <MESSAGE value="updated gui MainPhase listeners" />
-    <MESSAGE value="added Board manufacturing panel in MainPhaseHandler" />
-    <MESSAGE value="added listeners for Board production panel in MainPhaseHandler" />
-    <MESSAGE value="added BoardGUI.moveForward" />
-    <MESSAGE value="added possibility to switch player view" />
-    <MESSAGE value="added refresh after every turn" />
-    <MESSAGE value="updated listeners" />
-    <MESSAGE value="Added jar" />
-    <MESSAGE value="Added CLI.jar" />
-    <MESSAGE value="Changed Gson reading for Jar use" />
-    <MESSAGE value="Added Utils.readIcon" />
-    <MESSAGE value="Changed GUI's icons input for jar compatibility" />
-    <MESSAGE value="Improved Gui resize performance" />
-    <MESSAGE value="Fixed Minor error in the new Login GUI" />
-    <MESSAGE value="Corrected Minor error in SelectGameTypeListener.java and FaithMapGUI.java" />
-    <MESSAGE value="Changed CLI BUY development card move" />
-    <MESSAGE value="Fixed minor error in Board" />
-    <MESSAGE value="Fixed minor error in server.handleReconnectionAfterServerCrashed and in Match.setPlayerConnectionToTrue" />
-    <MESSAGE value="Fixed minor error in Match.setPlayerConnectionToTrue" />
-    <MESSAGE value="Fixed minor error in Board.eliminateResourcesFromChest" />
-    <MESSAGE value="corrected minor error in Warehouse.mapAllContainedResources" />
-    <option name="LAST_COMMIT_MESSAGE" value="corrected minor error in Warehouse.mapAllContainedResources" />
+    <MESSAGE value="Corrected minor error in Warehouse.getExtraDepositToString" />
+    <MESSAGE value="Corrected minor error in ClientCLI" />
+    <MESSAGE value="Added LeaderCardPlaceGUI.enableButtonsForProduction" />
+    <MESSAGE value="Implemented ClientGUI.chooseResources" />
+    <MESSAGE value="Correcter minor error in Server.initModel" />
+    <MESSAGE value="Correcter minor error in CLI" />
+    <MESSAGE value="Correcter minor errors" />
+    <MESSAGE value="Unified client Jar into one Jar" />
+    <MESSAGE value="Added ClientCLI.selectResourcesFromBoard" />
+    <MESSAGE value="Corrected minor error in  ClientCLI.selectResourcesFromBoard" />
+    <MESSAGE value="Corrected minor error in  ClientCLI.viewer" />
+    <MESSAGE value="Corrected minor error in  LeaderCardChoserGUI" />
+    <MESSAGE value="Corrected minor error in Server.initPlayers" />
+    <MESSAGE value="Changed disabled icon in CardContainerGUI.java" />
+    <MESSAGE value="Updated GUI look and feel" />
+    <MESSAGE value="Centered login panel" />
+    <MESSAGE value="Corrected minor error in GUI.showMyView" />
+    <MESSAGE value="Corrected minor error in MainPhaseHandler.goToBuyDevCardButtons" />
+    <MESSAGE value="Corrected minor error in Match.java" />
+    <MESSAGE value="Corrected minor error in GUI.setMatch" />
+    <MESSAGE value="Corrected minor error in HistoryGUI" />
+    <MESSAGE value="Corrected minor error in LeaderCardPlaceGUI.java" />
+    <MESSAGE value="Added try catch to Integer.parseInt" />
+    <MESSAGE value="Corrected minor error in ClientCLI.handleMainPhase" />
+    <MESSAGE value="Corrected minor error in ClientCLI.showScoreboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected minor error in ClientCLI.showScoreboard" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -849,47 +879,32 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
-          <line>190</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
-          <line>151</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
-          <line>158</line>
+          <line>180</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/board/Warehouse.java</url>
-          <line>165</line>
+          <line>187</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/observer/custom/DiscardActionTokenObserver.java</url>
-          <line>15</line>
+          <line>16</line>
           <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/Server.java</url>
-          <line>220</line>
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/server/SocketClientConnection.java</url>
-          <line>77</line>
-          <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/controller/Controller.java</url>
           <line>21</line>
           <option name="timeStamp" value="66" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/PlayerMove.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Match.java</url>
-          <line>171</line>
+          <line>190</line>
           <properties class="it.polimi.ingsw.project.model.Match" method="isFeasibleDiscardLeaderCardMove">
             <option name="EMULATED" value="true" />
           </properties>
@@ -901,6 +916,7 @@
       <pinned-members>
         <PinnedItemInfo parentTag="it.polimi.ingsw.project.server.SocketClientConnection" memberName="out" />
         <PinnedItemInfo parentTag="java.io.StreamCorruptedException" memberName="cause" />
+        <PinnedItemInfo parentTag="it.polimi.ingsw.project.model.Player" memberName="history" />
       </pinned-members>
     </pin-to-top-manager>
     <watches-manager>

@@ -316,7 +316,7 @@ public class ClientCLI extends Client {
                             System.out.println("The server is disconnected retry later.");
                             break;
                         }
-                        if (!getMatch().isEmpty()) {
+                        if (getMatch().isPresent()) {
                             Request move = handleTurn();
                             while (move == null) {
                                 move = handleTurn();

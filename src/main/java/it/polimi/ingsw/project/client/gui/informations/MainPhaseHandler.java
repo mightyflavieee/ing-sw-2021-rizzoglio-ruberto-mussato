@@ -199,18 +199,22 @@ public class MainPhaseHandler extends JInternalFrame {
         JButton buttonStoneLeader = new JButton();
         JButton buttonGoBackLeaderManufacturing = new JButton("Go Back");
         // sets resources icons
-        buttonCoinLeader.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Coin.png")
-                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        buttonServantLeader.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Servant.png")
-                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        buttonShieldLeader.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Shield.png")
-                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        buttonStoneLeader.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Stone.png")
-                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonCoinLeader.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Coin.png")
+//                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonServantLeader.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Servant.png")
+//                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonShieldLeader.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Shield.png")
+//                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonStoneLeader.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Stone.png")
+//                        .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        buttonCoinLeader.setIcon(Utils.readIcon("resourcetype/Coin.png",20,20));
+        buttonServantLeader.setIcon(Utils.readIcon("resourcetype/Servant.png",20,20));
+        buttonShieldLeader.setIcon(Utils.readIcon("resourcetype/Shield.png",20,20));
+        buttonStoneLeader.setIcon(Utils.readIcon("resourcetype/Stone.png",20,20));
         // adds listeners
         buttonCoinLeader.addActionListener(new CoinLeaderProductionListener(this.gui));
         buttonServantLeader.addActionListener(new ServantLeaderProductionListener(this.gui));
@@ -230,18 +234,22 @@ public class MainPhaseHandler extends JInternalFrame {
         JButton buttonStone = new JButton();
         JButton buttonGoBackBoardManufacturing = new JButton("Go Back");
         // sets resources icons
-        buttonCoin.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Coin.png")
-                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        buttonServant.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Servant.png")
-                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        buttonShield.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Shield.png")
-                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        buttonStone.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Stone.png")
-                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonCoin.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Coin.png")
+//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonServant.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Servant.png")
+//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonShield.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Shield.png")
+//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonStone.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Stone.png")
+//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+        buttonCoin.setIcon(Utils.readIcon("resourcetype/Coin.png",20,20));
+        buttonServant.setIcon(Utils.readIcon("resourcetype/Servant.png",20,20));
+        buttonShield.setIcon(Utils.readIcon("resourcetype/Shield.png",20,20));
+        buttonStone.setIcon(Utils.readIcon("resourcetype/Stone.png",20,20));
         // adds listeners
         buttonCoin.addActionListener(new CoinBoardProductionListener(this.gui, true));
         buttonServant.addActionListener(new ServantBoardProductionListener(this.gui, true));
@@ -265,30 +273,39 @@ public class MainPhaseHandler extends JInternalFrame {
         JButton buttonStone2 = new JButton();
         JButton buttonGoBack = new JButton("Go Back");
         // sets resources icons
-        buttonCoin1.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Coin.png")
-                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        buttonCoin2.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Coin.png")
-                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        buttonServant1.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Servant.png")
-                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        buttonServant2.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Servant.png")
-                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        buttonShield1.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Shield.png")
-                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        buttonShield2.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Shield.png")
-                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        buttonStone1.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Stone.png")
-                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-        buttonStone2.setIcon(new ImageIcon(
-                new ImageIcon("src/main/resources/resourcetype/Stone.png")
-                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonCoin1.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Coin.png")
+//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonCoin2.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Coin.png")
+//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonServant1.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Servant.png")
+//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonServant2.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Servant.png")
+//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonShield1.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Shield.png")
+//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonShield2.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Shield.png")
+//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonStone1.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Stone.png")
+//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+//        buttonStone2.setIcon(new ImageIcon(
+//                new ImageIcon("src/main/resources/resourcetype/Stone.png")
+//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
+
+        buttonCoin1.setIcon(Utils.readIcon("resourcetype/Coin.png",20,20));
+        buttonServant1.setIcon(Utils.readIcon("resourcetype/Servant.png",20,20));
+        buttonShield1.setIcon(Utils.readIcon("resourcetype/Shield.png",20,20));
+        buttonStone1.setIcon(Utils.readIcon("resourcetype/Stone.png",20,20));
+        buttonCoin2.setIcon(Utils.readIcon("resourcetype/Coin.png",20,20));
+        buttonServant2.setIcon(Utils.readIcon("resourcetype/Servant.png",20,20));
+        buttonShield2.setIcon(Utils.readIcon("resourcetype/Shield.png",20,20));
+        buttonStone2.setIcon(Utils.readIcon("resourcetype/Stone.png",20,20));
         // adds listeners
         buttonCoin1.addActionListener(new CoinBoardProductionListener(this.gui, false));
         buttonCoin2.addActionListener(new CoinBoardProductionListener(this.gui, false));
