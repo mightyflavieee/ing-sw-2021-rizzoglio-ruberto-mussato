@@ -1126,6 +1126,11 @@ public class ClientCLI extends Client {
             case "3":
                 System.out.println(opponent + " Leader Cards are: " + this.match.getLeaderCardsToString(opponent));
                 break;
+            case "4":
+                System.out.println(opponent + " Development Cards are: " + this.match.getBoardByPlayerNickname(opponent).getMapTrayToString());
+                break;
+            case "5":
+                System.out.println(opponent + " Resources are: " + this.match.getBoardByPlayerNickname(opponent).resourcesToString());
             default:
         }
     }
