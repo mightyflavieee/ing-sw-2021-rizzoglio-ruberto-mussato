@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class NoMoveHandlerGUI extends JInternalFrame {
-    private final JButton noMoveButton;
 
     public NoMoveHandlerGUI(String string, GUI gui) {
         this.setTitle("Leader Card Action Phase");
@@ -19,9 +18,9 @@ public class NoMoveHandlerGUI extends JInternalFrame {
         jTextArea.setLineWrap(true);
         jTextArea.setWrapStyleWord(true);
         this.add(jTextArea,BorderLayout.NORTH);
-        this.noMoveButton = new JButton("Next Phase");
+        JButton noMoveButton = new JButton("Next Phase");
         this.add(noMoveButton,BorderLayout.SOUTH);
-        this.noMoveButton.addActionListener(new NoMoveButtonListener(gui,this));
+        noMoveButton.addActionListener(new NoMoveButtonListener(gui,this));
         this.setVisible(true);
         this.pack();
     }

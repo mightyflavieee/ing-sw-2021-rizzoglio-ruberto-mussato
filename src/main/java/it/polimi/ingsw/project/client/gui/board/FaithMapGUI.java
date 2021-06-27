@@ -41,21 +41,12 @@ public class FaithMapGUI extends JInternalFrame {
                 button.setVisible(false);
             }
             if (i == 5) {
-//                button.setIcon(new ImageIcon(
-//                        new javax.swing.ImageIcon("src/main/resources/tiles/quadrato giallo.png")
-//                        .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                 button.setIcon(Utils.readIcon("tiles/quadrato giallo.png",30,30));
             }
             if (i == 13) {
-//                button.setIcon(new ImageIcon(
-//                        new javax.swing.ImageIcon("src/main/resources/tiles/quadrato arancione.png")
-//                        .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                 button.setIcon(Utils.readIcon("tiles/quadrato arancione.png",30,30));
             }
             if (i == 20) {
-//                button.setIcon(new ImageIcon(
-//                        new javax.swing.ImageIcon("src/main/resources/tiles/quadrato rosso.png")
-//                        .getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
                 button.setIcon(Utils.readIcon("tiles/quadrato rosso.png",30,30));
             }
             this.papalCuoncilTiles.add(button);
@@ -154,9 +145,6 @@ public class FaithMapGUI extends JInternalFrame {
     public void moveForward() {
         this.faithMapModel.moveForward();
         refresh();
-//        this.tiles.get(this.markerPosition).setBackground(new Color(255, 255, 255));
-//        this.markerPosition++;
-//        this.tiles.get(this.markerPosition).setBackground(new Color(105, 105, 105));
     }
 
     public void moveForwardBlack() {

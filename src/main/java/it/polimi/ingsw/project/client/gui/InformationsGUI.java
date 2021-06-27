@@ -78,8 +78,6 @@ public class InformationsGUI extends JInternalFrame {
                    // this.mainPhaseHandler.setVisible(false);
                     this.mainPhaseHandler.dispose();
                 }
-//                this.remove(this.mainPhaseHandler);
-//                this.mainPhaseHandler = null;
 
 
                 if(this.phaseFrame!=null){
@@ -97,10 +95,6 @@ public class InformationsGUI extends JInternalFrame {
                     this.phaseFrame.dispose();
                 }
                 this.jTextArea.setVisible(true);
-                /*this.jTextArea.setText("You must choose and perform one of the following actions:" +
-                        "\nTake Resources from the Market" +
-                        "\nBuy one Development Card" +
-                        "\nActivate the Production");*/
 
                 this.jTextArea.setText("You must choose and perform one of the following actions:");
                 if (this.mainPhaseHandler == null) {

@@ -54,8 +54,6 @@ class WarehouseTest {
         assertEquals(2, (int) returnedResources.get(ResourceType.Coin));
         assertEquals(1, (int) returnedResources.get(ResourceType.Servant));
         assertEquals(1, (int) returnedResources.get(ResourceType.Shield));
-      //  assertTrue(returnedResources.get(ResourceType.Faith)==0);
-      //  assertTrue(returnedResources.get(ResourceType.Stone)==0);
     }
     @Test
     void swapShelves(){

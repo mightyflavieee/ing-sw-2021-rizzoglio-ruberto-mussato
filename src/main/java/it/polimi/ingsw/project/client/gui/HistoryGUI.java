@@ -28,8 +28,6 @@ public class HistoryGUI extends JInternalFrame {
 
         this.add(jScrollPane);
 
-       // jScrollPane.add(jTextArea);
-      //  this.setHistory(new CardContainer().fetchCard("id1").toString() + new CardContainer().fetchCard("id1").toString());
         this.setVisible(true);
     }
 

@@ -36,7 +36,6 @@ public class GUI extends Observable<Move>  {
     private final PlayersBarGUI playersBarGUI;
     private final TakeMarketResourceBuilder takeMarketResourceBuilder;
     private BuyDevCardMoveHandler buyDevCardMoveHandler;
-    private ProductionMoveHandler productionMoveHandler;
 
     public GUI(ClientGUI clientGUI, Match match, String myNickname) {
         this.clientGUI = clientGUI;
@@ -104,8 +103,6 @@ public class GUI extends Observable<Move>  {
                 break;
         }
 
-//        disableAllButtons();
-//        this.leaderCardPlaceGUI.enableButtonsForLeaderPhase();
     }
 
     private void disableAllButtons() {
@@ -216,9 +213,8 @@ public class GUI extends Observable<Move>  {
     public void sendProductionMove(ProductionMoveHandler productionMoveHandler) {
         this.boardGUI.getWarehouseGUI().removeSelectResourceListeners();
         disableAllButtons();
-        this.productionMoveHandler = productionMoveHandler;
-        this.send(this.productionMoveHandler.getMove());
-        this.productionMoveHandler.reset();
+        this.send(productionMoveHandler.getMove());
+        productionMoveHandler.reset();
     }
 
     public void refreshSize(){

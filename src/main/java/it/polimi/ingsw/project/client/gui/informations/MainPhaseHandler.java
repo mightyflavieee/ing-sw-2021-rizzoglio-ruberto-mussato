@@ -249,30 +249,6 @@ public class MainPhaseHandler extends JInternalFrame {
         JButton buttonStone2 = new JButton();
         JButton buttonGoBack = new JButton("Go Back");
         // sets resources icons
-//        buttonCoin1.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Coin.png")
-//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-//        buttonCoin2.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Coin.png")
-//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-//        buttonServant1.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Servant.png")
-//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-//        buttonServant2.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Servant.png")
-//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-//        buttonShield1.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Shield.png")
-//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-//        buttonShield2.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Shield.png")
-//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-//        buttonStone1.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Stone.png")
-//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-//        buttonStone2.setIcon(new ImageIcon(
-//                new ImageIcon("src/main/resources/resourcetype/Stone.png")
-//                .getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 
         buttonCoin1.setIcon(Utils.readIcon("resourcetype/Coin.png",20,20));
         buttonServant1.setIcon(Utils.readIcon("resourcetype/Servant.png",20,20));
@@ -345,11 +321,7 @@ public class MainPhaseHandler extends JInternalFrame {
 
     public void goToTransmutationPanel() {
         List<ResourceType> transmutationPerks = this.gui.getTransmutationPerks();
-//        this.resourceButtons.get(0).setIcon(Utils.readIcon("resourcetype/" + transmutationPerks.get(0) + ".png",
-//                30 ,30));
         this.resourceButtons.get(0).setResourceType(transmutationPerks.get(0));
-//        this.resourceButtons.get(1).setIcon(Utils.readIcon("resourcetype/" + transmutationPerks.get(1) + ".png",
-//                30 ,30));
         this.resourceButtons.get(1).setResourceType(transmutationPerks.get(1));
         this.mainPanelLayout.show(this.mainPanel,TRANSMUTATIONPANEL);
     }

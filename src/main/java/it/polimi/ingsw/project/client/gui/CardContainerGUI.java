@@ -38,9 +38,6 @@ public class CardContainerGUI extends JInternalFrame {
             this.add(jButton);
             this.showedCards.add(jButton);
 
-//            jButton.setIcon(new ImageIcon(
-//                    new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png")
-//                    .getImage().getScaledInstance(this.width,this.height, Image.SCALE_SMOOTH)));
             jButton.setIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
             jButton.setDisabledIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
             jButton.setVisible(true);
@@ -52,9 +49,6 @@ public class CardContainerGUI extends JInternalFrame {
         this.cardsToShow = cardContainer.getAvailableDevCards().stream().map(DevelopmentCard::getId).collect(Collectors.toList());
         Collections.reverse(cardsToShow);
         for (i = 0; i < 12; i++){
-//            this.showedCards.get(i).setIcon(new ImageIcon(
-//                    new javax.swing.ImageIcon("src/main/resources/developmentcards/"+ this.cardsToShow.get(i) + ".png")
-//                    .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
             this.showedCards.get(i).setIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
             this.showedCards.get(i).setDisabledIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
             if (Arrays.stream(this.showedCards.get(i).getActionListeners()).count() == 0) {

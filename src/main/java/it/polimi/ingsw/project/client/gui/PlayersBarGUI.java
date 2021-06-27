@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayersBarGUI extends JInternalFrame {
-    private List<String> opponentsIDs;
-    private String myNickname;
     private JButton myButton;
     private List<JButton> opponentsButtons;
     public PlayersBarGUI(List<String> opponentsIDs, String myNickname,GUI gui) {
@@ -19,19 +17,19 @@ public class PlayersBarGUI extends JInternalFrame {
             return;
         }
         this.setVisible(true);
-        this.opponentsIDs = opponentsIDs;
-        this.myNickname = myNickname;
+        List<String> opponentsIDs1 = opponentsIDs;
+        String myNickname1 = myNickname;
         this.setTitle("Players Bar");
-        this.opponentsIDs = opponentsIDs;
-        this.myNickname = myNickname;
-        this.setLayout(new GridLayout(1,1+this.opponentsIDs.size()));
-        this.myButton = new JButton(this.myNickname);
+        opponentsIDs1 = opponentsIDs;
+        myNickname1 = myNickname;
+        this.setLayout(new GridLayout(1,1+ opponentsIDs1.size()));
+        this.myButton = new JButton(myNickname1);
         this.myButton.addActionListener(new MyButtonListener(gui,this));
         this.myButton.setEnabled(false);
         this.add(myButton);
         this.opponentsButtons = new ArrayList<>();
-        for(int i = 0; i < this.opponentsIDs.size(); i++){
-            this.opponentsButtons.add(new JButton(this.opponentsIDs.get(i)));
+        for(int i = 0; i < opponentsIDs1.size(); i++){
+            this.opponentsButtons.add(new JButton(opponentsIDs1.get(i)));
             this.add(this.opponentsButtons.get(i));
             this.opponentsButtons.get(i).addActionListener(new OpponentsButtonListener(gui,this,i));
         }

@@ -10,11 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InitResourceSelectorPanel extends JInternalFrame {
-        private final ResourceButton coinButton;
-    private final ResourceButton shieldButton;
-    private final ResourceButton stoneButton;
-    private final ResourceButton servantButton;
-        private int coinInt, shieldInt, stoneInt, servantInt;
+    private int coinInt, shieldInt, stoneInt, servantInt;
         private final ClientGUI clientGUI;
         private int numberOfResourcesToChoose;
         private final NewGameHandler newGameHandler;
@@ -22,10 +18,10 @@ public class InitResourceSelectorPanel extends JInternalFrame {
         this.setTitle("Select " + numberOfResourcesToChoose + " resources");
         this.clientGUI = clientGUI;
         this.setLayout(new GridLayout(2,2));
-        coinButton = new ResourceButton(ResourceType.Coin);
-        shieldButton = new ResourceButton(ResourceType.Shield);
-        stoneButton = new ResourceButton(ResourceType.Stone);
-        servantButton = new ResourceButton(ResourceType.Servant);
+        ResourceButton coinButton = new ResourceButton(ResourceType.Coin);
+        ResourceButton shieldButton = new ResourceButton(ResourceType.Shield);
+        ResourceButton stoneButton = new ResourceButton(ResourceType.Stone);
+        ResourceButton servantButton = new ResourceButton(ResourceType.Servant);
         this.coinInt = 0;
         this.shieldInt = 0;
         this.stoneInt = 0;

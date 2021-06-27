@@ -19,13 +19,6 @@ public class LeaderCardJlabelGUI extends JLabel {
         this.setVisible(true);
     }
 
-//    public LeaderCardButtonGUI(String id, LeaderCardChoserGUI leaderCardChoserGUI) { //used at the beginning of the game when you chose 2 leadercards
-//        this.id = id;
-//        this.leaderCardChoserGUI = leaderCardChoserGUI;
-//        this.setVisible(true);
-//        this.refresh();
-//    }
-
     public String getID() {
         return this.id;
     }

@@ -243,9 +243,6 @@ public class NewGameHandler extends JPanel {
             this.mainLayout.removeLayoutComponent(leaderCardChooser);
         }
         this.leaderCardChooser = new LeaderCardChoserGUI(leaderCards, this.clientGUI, this);
-//        if (this.mainPanel.getComponentCount() == 4) {
-//            this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooser);
-//        }
 
         this.mainPanel.add(LEADERCARDCHOOSER, this.leaderCardChooser);
 

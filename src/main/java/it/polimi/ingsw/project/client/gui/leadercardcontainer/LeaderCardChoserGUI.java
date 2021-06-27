@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LeaderCardChoserGUI extends JInternalFrame {
-    private final List<LeaderCardButtonGUI> leaderCardButtonGUIList;
     private final List<String> chosedIDs;
     private final List <LeaderCard> leadercards;
     private final ClientGUI clientGUI;
@@ -23,12 +22,12 @@ public class LeaderCardChoserGUI extends JInternalFrame {
         this.clientGUI = clientGUI;
         this.leadercards = leadercards;
         this.chosedIDs = new ArrayList<>();
-        this.leaderCardButtonGUIList = new ArrayList<>();
+        List<LeaderCardButtonGUI> leaderCardButtonGUIList = new ArrayList<>();
         this.setLayout(new GridLayout(2,2));
         for(String id : this.leadercards.stream().map(LeaderCard::getId).collect(Collectors.toList())){
             LeaderCardButtonGUI leaderCardButtonGUI = new LeaderCardButtonGUI(id, this);
             leaderCardButtonGUI.addActionListener(new LeaderCardChoserListener(leaderCardButtonGUI,this));
-            this.leaderCardButtonGUIList.add(leaderCardButtonGUI);
+            leaderCardButtonGUIList.add(leaderCardButtonGUI);
             this.add(leaderCardButtonGUI);
         }
         this.newGameHandler = newGameHandler;

@@ -18,7 +18,6 @@ public class TrayGUI extends JPanel {
     private List<ResourceType> transmutationPerks;
     private ResourceType chosedTransmutationPerk;
     private Market market;
-    private final GridLayout gridLayout;
     private List<JButton> verticalArrows; //da sinistra a destra
     private List<JButton> horizontalArrows; //dall'alto verso il basso , è al contrario rispetto a quando faccio la move
     private final JLabel[][] trayJlabel = new JLabel[4][3];
@@ -26,7 +25,7 @@ public class TrayGUI extends JPanel {
     private int width = 60;
     public TrayGUI(ResourceInHandGUI resourceInHandGUI, GUI gui, Market market)  {
         this.market = market;
-        gridLayout = new GridLayout(4,5);
+        GridLayout gridLayout = new GridLayout(4, 5);
         this.setLayout(gridLayout);
         this.createTray();
         this.createObservers(resourceInHandGUI,gui);

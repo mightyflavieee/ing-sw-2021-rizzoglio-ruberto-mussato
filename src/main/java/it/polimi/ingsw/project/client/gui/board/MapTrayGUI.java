@@ -41,9 +41,6 @@ public class MapTrayGUI extends JInternalFrame {
         for (DevCardPosition position : this.boardModel.getMapTray().keySet()) {
             if (this.boardModel.getMapTray().get(position).size() == 0) {
                 // shows back of the devcard in that DevCardPosition
-//                this.mapTrayButtons.get(position).setIcon(new ImageIcon(new javax.swing
-//                        .ImageIcon("src/main/resources/developmentcards/retro_devcard.png")
-//                        .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
                 this.mapTrayButtons.get(position).setIcon(Utils.readIcon("developmentcards/retro_devcard.png",width,height));
                 // if present, removes ActionListener
                 if (this.mapTrayButtons.get(position).getActionListeners().length > 0) {
@@ -54,9 +51,6 @@ public class MapTrayGUI extends JInternalFrame {
                 // shows the last devcard in that DevCardPosition
                 DevelopmentCard lastCard = this.boardModel.getMapTray().get(position)
                         .get(this.boardModel.getMapTray().get(position).size()-1);
-//                this.mapTrayButtons.get(position).setIcon(new ImageIcon(new javax.swing
-//                        .ImageIcon("src/main/resources/developmentcards/" + lastCard.getId() + ".png")
-//                        .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
                 this.mapTrayButtons.get(position).setIcon(Utils.readIcon("developmentcards/" + lastCard.getId() + ".png",width,height));
                 // if not present, adds ActionListener. If present, removes old ActionListener and adds a new one
                 if (Arrays.stream(this.mapTrayButtons.get(position).getActionListeners()).count() == 0) {
@@ -77,17 +71,8 @@ public class MapTrayGUI extends JInternalFrame {
         JButton leftButton = new JButton();
         JButton centerButton = new JButton();
         JButton rightButton = new JButton();
-//        leftButton.setIcon(new ImageIcon(new javax.swing
-//                .ImageIcon("src/main/resources/retro_devcard.png")
-//                .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
         leftButton.setIcon(Utils.readIcon("developmentcards/retro_devcard.png",width,height));
-//        centerButton.setIcon(new ImageIcon(new javax.swing
-//                .ImageIcon("src/main/resources/retro_devcard.png")
-//                .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
         centerButton.setIcon(Utils.readIcon("developmentcards/retro_devcard.png",width,height));
-//        rightButton.setIcon(new ImageIcon(new javax.swing
-//                .ImageIcon("src/main/resources/retro_devcard.png")
-//                .getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
         rightButton.setIcon(Utils.readIcon("developmentcards/retro_devcard.png",width,height));
 
         this.mapTrayButtons.put(DevCardPosition.Left, leftButton);

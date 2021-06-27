@@ -26,8 +26,6 @@ public class ExtraDepositsGUI extends JInternalFrame {
         this.setTitle("Extra Deposits");
         this.setVisible(true);
         this.setLayout(new GridLayout(2, 1));
-//        JInternalFrame firstExtraDepo = new JInternalFrame("First extra deposit");
-//        JInternalFrame secondExtraDepo = new JInternalFrame("Second extra deposit");
         this.informationsGUI = informationsGUI;
         JPanel firstExtraDepo = new JPanel();
         JPanel secondExtraDepo = new JPanel();
@@ -189,21 +187,6 @@ public class ExtraDepositsGUI extends JInternalFrame {
     }
 
     public void enableExtraDeposit(ResourceType type) {
-        /*if (this.firstExtraDepositButtons.get(0).isEnabled()) {
-            this.secondExtraDepositButtons.get(0).setEnabled(true);
-            this.secondExtraDepositButtons.get(1).setEnabled(true);
-            this.secondExtraDepositButtons.get(0).addActionListener(new ExtraDepositGUISelectResourceListener(this,
-                    this.informationsGUI, type, 2, 1));
-            this.secondExtraDepositButtons.get(1).addActionListener(new ExtraDepositGUISelectResourceListener(this,
-                    this.informationsGUI, type, 1, 1));
-        } else {
-            this.firstExtraDepositButtons.get(0).setEnabled(true);
-            this.firstExtraDepositButtons.get(1).setEnabled(true);
-            this.firstExtraDepositButtons.get(0).addActionListener(new ExtraDepositGUISelectResourceListener(this,
-                    this.informationsGUI, type, 1, 1));
-            this.secondExtraDepositButtons.get(1).addActionListener(new ExtraDepositGUISelectResourceListener(this,
-                    this.informationsGUI, type, 1, 2));
-        }*/
     }
 
     public void setWarehouseModel(Warehouse warehouseModel) { this.warehouseModel = warehouseModel; }

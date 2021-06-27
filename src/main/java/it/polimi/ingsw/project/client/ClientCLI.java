@@ -32,7 +32,6 @@ public class ClientCLI extends Client {
 
     private Scanner stdin;
     private boolean lock = true;
-    private Socket socket;
 
     public ClientCLI(String ip, int port) {
         super(ip, port);
@@ -1670,10 +1669,10 @@ public class ClientCLI extends Client {
     }
 
     public void run() throws IOException {
-        this.socket = new Socket(getIp(), getPort());
+        Socket socket = new Socket(getIp(), getPort());
         System.out.println("Connection established");
-        setSocketOut(new ObjectOutputStream(this.socket.getOutputStream()));
-        setSocketIn(new ObjectInputStream(this.socket.getInputStream()));
+        setSocketOut(new ObjectOutputStream(socket.getOutputStream()));
+        setSocketIn(new ObjectInputStream(socket.getInputStream()));
         this.stdin = new Scanner(System.in);
         try {
             Thread t0 = asyncReadFromSocket();
@@ -1687,7 +1686,7 @@ public class ClientCLI extends Client {
             this.stdin.close();
             socketIn.close();
             socketOut.close();
-            this.socket.close();
+            socket.close();
         }
     }
 }

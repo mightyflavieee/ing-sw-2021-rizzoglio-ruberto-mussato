@@ -70,8 +70,6 @@ public class WarehouseGUI extends JInternalFrame {
         for (JButton button: arrowButtons) {
             arrowColumns.add(button);
         }
-        //this.add(resourcesColumns);
-        //this.add(arrowColumns);
         mainWarehouse.add(resourcesColumns);
         mainWarehouse.add(arrowColumns);
 
@@ -125,13 +123,7 @@ public class WarehouseGUI extends JInternalFrame {
         List<JButton> arrowButtons = new ArrayList<>();
         JButton arrowUp = new JButton();
         JButton arrowDown = new JButton();
-//        arrowUp.setIcon(new ImageIcon(new javax.swing
-//                .ImageIcon("src/main/resources/warehouse/arrow_up.png")
-//                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
         arrowUp.setIcon(Utils.readIcon("warehouse/arrow_up.png",10,10));
-//        arrowDown.setIcon(new ImageIcon(new javax.swing
-//                .ImageIcon("src/main/resources/warehouse/arrow_down.png")
-//                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
         arrowDown.setIcon(Utils.readIcon("warehouse/arrow_down.png",10,10));
         arrowUp.addActionListener(new ArrowUpButtonListener(this, this.informationsGUI));
         arrowDown.addActionListener(new ArrowDownButtonListener(this, this.informationsGUI));
@@ -152,9 +144,6 @@ public class WarehouseGUI extends JInternalFrame {
         JButton button1ThirdFloor = new JButton();
         JButton button2ThirdFloor = new JButton();
         JButton button3ThirdFloor = new JButton();
-//        button1FirstFloor.setIcon(new ImageIcon(new javax.swing
-//                .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-//                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
         button1SecondFloor.setIcon(new ImageIcon(new javax.swing
                 .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
                 .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
@@ -198,19 +187,7 @@ public class WarehouseGUI extends JInternalFrame {
             int count = 0;
             ResourceType resourceTypeInShelf = null;
             for (Resource resource : this.warehouseModel.getShelves().get(floor)) {
-//                this.shelvesButtons.get(floor).get(count).setIcon(new ImageIcon(
-//                        new ImageIcon("src/main/resources/resourcetype/" + resource.getType() + ".png")
-//                        .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
                 this.shelvesButtons.get(floor).get(count).setIcon(Utils.readIcon("resourcetype/" + resource.getType() + ".png",10,10));
-                /*if (Arrays.stream(this.shelvesButtons.get(floor).get(count).getActionListeners()).count() == 0) {
-                    this.shelvesButtons.get(floor).get(count).addActionListener(new WarehouseGUISelectResourceListener(this,
-                            this.informationsGUI, resource.getType(), floor, count));
-                } else {
-                    ActionListener actionListener = this.shelvesButtons.get(floor).get(count).getActionListeners()[0];
-                    this.shelvesButtons.get(floor).get(count).removeActionListener(actionListener);
-                    this.shelvesButtons.get(floor).get(count).addActionListener(new WarehouseGUISelectResourceListener(this,
-                            this.informationsGUI, resource.getType(), floor, count));
-                }*/
                 count++;
                 resourceTypeInShelf = resource.getType();
             }
@@ -218,15 +195,8 @@ public class WarehouseGUI extends JInternalFrame {
             this.resourceTypePerShelf.put(floor, resourceTypeInShelf);
             if (this.shelvesButtons.get(floor).size() > this.warehouseModel.getShelves().get(floor).size()) {
                 for (int i = this.shelvesButtons.get(floor).size(); i > this.warehouseModel.getShelves().get(floor).size(); i--) {
-//                    this.shelvesButtons.get(floor).get(i-1).setIcon(new ImageIcon(
-//                            new ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-//                            .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
                     this.shelvesButtons.get(floor).get(i-1).setIcon(Utils.readIcon("warehouse/warehouse_no_resource.png",10,10));
 
-                    /*if (this.shelvesButtons.get(floor).get(i-1).getActionListeners().length > 0) {
-                        ActionListener actionListener = this.shelvesButtons.get(floor).get(i-1).getActionListeners()[0];
-                        this.shelvesButtons.get(floor).get(i-1).removeActionListener(actionListener);
-                    }*/
                 }
             }
         }

@@ -10,7 +10,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LeaderMovePanel extends JPanel {
-    private final LeaderCard leaderCard;
     private final JButton discardButton;
     private final JButton activateButton;
     private final JButton productionButton;
@@ -19,11 +18,8 @@ public class LeaderMovePanel extends JPanel {
     private final LeaderCardDiscardButtonListener leaderCardDiscardButtonListener;
     private final LeaderCardActivateButtonListener leaderCardActivateButtonListener;
     private final SelectLeaderCardProductionListener selectLeaderCardProductionListener;
-    private final GUI gui;
 
     public LeaderMovePanel(LeaderCard leaderCard, GUI gui)  {
-        this.leaderCard = leaderCard;
-        this.gui = gui;
         this.setVisible(true);
         this.setPreferredSize(new Dimension(300,300));
         this.setLayout(new GridLayout(2,1));
@@ -31,24 +27,22 @@ public class LeaderMovePanel extends JPanel {
         leaderPhasePanel.setLayout(new GridLayout(1,2));
         this.add(leaderPhasePanel);
         this.discardButton = new JButton("Discard");
-        this.leaderCardDiscardButtonListener = new LeaderCardDiscardButtonListener(this.leaderCard.getId(), this.gui);
+        this.leaderCardDiscardButtonListener = new LeaderCardDiscardButtonListener(leaderCard.getId(), gui);
         this.discardButton.addActionListener(this.leaderCardDiscardButtonListener);
         leaderPhasePanel.add(discardButton);
         this.activateButton = new JButton("Activate");
-        this.leaderCardActivateButtonListener = new LeaderCardActivateButtonListener(this.leaderCard.getId(), this.gui);
+        this.leaderCardActivateButtonListener = new LeaderCardActivateButtonListener(leaderCard.getId(), gui);
         this.activateButton.addActionListener(this.leaderCardActivateButtonListener);
         leaderPhasePanel.add(activateButton);
         this.productionButton = new JButton("Use for Production");
 
-        SelectLeaderCardProductionListener productionActionListener = new SelectLeaderCardProductionListener(this.gui, this.leaderCard);
+        SelectLeaderCardProductionListener productionActionListener = new SelectLeaderCardProductionListener(gui, leaderCard);
         this.selectLeaderCardProductionListener = productionActionListener;
         this.productionButton.addActionListener(productionActionListener);
 
         this.add(productionButton);
         this.isActivable = true;
         this.isProductable = false;
-//        this.pack();
-//        this.setAlwaysOnTop(true);
     }
 
     public void setActivationPossible(Boolean value){

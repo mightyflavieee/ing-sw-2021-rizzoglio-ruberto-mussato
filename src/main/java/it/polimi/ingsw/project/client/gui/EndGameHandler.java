@@ -16,39 +16,26 @@ public class EndGameHandler extends JPanel {
     private final ClientGUI clientGUI;
     private final Match matchModel;
 
-    private final JPanel mainPanel;
-    private final CardLayout mainLayout;
     private JPanel singlePlayerPanel;
-    private JPanel multiPlayerPanel;
 
     public EndGameHandler(Match matchModel, ClientGUI clientGUI) {
         this.clientGUI = clientGUI;
         this.matchModel = matchModel;
 
-        this.mainLayout = new CardLayout();
+        CardLayout mainLayout = new CardLayout();
 
-        this.mainPanel = new JPanel();
+        JPanel mainPanel = new JPanel();
 
-        this.mainPanel.setLayout(this.mainLayout);
+        mainPanel.setLayout(mainLayout);
 
         //this.mainPanel.setLayout(new GridLayout(3, 1));
 
         createPanels();
-        this.mainPanel.add(SINGLEPLAYERPANEL, this.singlePlayerPanel);
+        mainPanel.add(SINGLEPLAYERPANEL, this.singlePlayerPanel);
         //this.mainPanel.add(MULTIPLAYERPANEL, this.multiPlayerPanel);
-        this.mainLayout.show(this.mainPanel, SINGLEPLAYERPANEL);
+        mainLayout.show(mainPanel, SINGLEPLAYERPANEL);
 
-        /*JPanel titlePanel = new JPanel();
-        JPanel leaderboardPanel = new JPanel();
-        JPanel bottomPanel = new JPanel();
-        createTitlePanel(titlePanel);
-        createLeaderboardPanel(leaderboardPanel);
-        createBottomPanel(bottomPanel);
-        this.mainPanel.add(titlePanel);
-        this.mainPanel.add(leaderboardPanel);
-        this.mainPanel.add(bottomPanel);*/
-
-        this.add(this.mainPanel);
+        this.add(mainPanel);
     }
 
     private void createPanels() {
@@ -77,11 +64,11 @@ public class EndGameHandler extends JPanel {
         createTitlePanel(titlePanel);
         createLeaderboardPanel(leaderboardPanel);
         createBottomPanel(bottomPanel);
-        this.multiPlayerPanel = new JPanel();
-        this.multiPlayerPanel.setLayout(new GridLayout(3, 1));
-        this.multiPlayerPanel.add(titlePanel);
-        this.multiPlayerPanel.add(leaderboardPanel);
-        this.multiPlayerPanel.add(bottomPanel);
+        JPanel multiPlayerPanel = new JPanel();
+        multiPlayerPanel.setLayout(new GridLayout(3, 1));
+        multiPlayerPanel.add(titlePanel);
+        multiPlayerPanel.add(leaderboardPanel);
+        multiPlayerPanel.add(bottomPanel);
     }
 
     private void createTitlePanel(JPanel titlePanel) {

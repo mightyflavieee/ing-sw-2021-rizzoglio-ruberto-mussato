@@ -278,11 +278,6 @@ public class Board implements Serializable, Cloneable {
         // }
       }
     }
-    // if (resourceTypeToEliminate.size() > 0) {
-    // for (ResourceType type : resourceTypeToEliminate) {
-    // this.chest.remove(type);
-    // }
-    // }
   }
 
   // converts a CardLevel type to int

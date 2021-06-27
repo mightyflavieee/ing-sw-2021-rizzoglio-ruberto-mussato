@@ -27,7 +27,6 @@ public class ClientGUI extends Client implements Observer<Move> {
     private boolean createGame; // true create, false join
     private int numPlayers;
     private NewGameHandler newGameHandler;
-    private EndGameHandler endGameHandler;
 
     public ClientGUI(String ip, int port) {
         super(ip, port);
@@ -77,15 +76,6 @@ public class ClientGUI extends Client implements Observer<Move> {
         this.gameId = gameId;
         this.newGameHandler.goToWaitingRoom(gameId);
 
-        /*this.gameId = gameId;
-        this.tempJFrame = new JFrame("Waiting room");
-        JTextArea jTextArea = new JTextArea("Wait for the other players\nYour game ID is: " + gameId);
-        jTextArea.setEditable(false);
-        jTextArea.setVisible(true);
-        this.tempJFrame.add(jTextArea);
-        this.tempJFrame.setVisible(true);
-        this.tempJFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.tempJFrame.pack();*/
     }
 
     public void setLocalGameID(String gameId){
@@ -97,18 +87,6 @@ public class ClientGUI extends Client implements Observer<Move> {
 
         // todo change to fit new structure with NewGameHandler
 
-        /*JFrame jFrame;
-        jFrame = new JFrame();
-        jFrame.setVisible(true);
-        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        jFrame.setLayout(new GridLayout(2, 1));
-        JLabel matchIDLabel = new JLabel("Wrong ID! Insert a right ID:");
-        jFrame.add(matchIDLabel);
-        JTextField idMatchField = new JTextField();
-        idMatchField.addActionListener(new ReInsertMatchIdListener(getInstance(), idMatchField, jFrame));
-        jFrame.add(idMatchField);
-        jFrame.pack();
-        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);*/
         this.newGameHandler.goToSelectNickname();
     }
 
@@ -122,8 +100,6 @@ public class ClientGUI extends Client implements Observer<Move> {
         //todo display error message
 
         this.newGameHandler.goToLeaderCardChooser(possibleLeaderCards);
-       // this.jFrame.pack();
-        //this.chooseLeaderCards(possibleLeaderCards);
     }
 
     @Override
@@ -131,15 +107,6 @@ public class ClientGUI extends Client implements Observer<Move> {
 
         // todo change to fit new structure with NewGameHandler
 
-//        this.jFrame = new JFrame();
-//        this.jFrame.setTitle("Master of Renaissance");
-//        JTextArea jTextArea = new JTextArea("Wait for the other players");
-//        jTextArea.setEditable(false);
-//        jTextArea.setVisible(true);
-//        this.jFrame.add(jTextArea);
-//        this.jFrame.setVisible(true);
-//        this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        this.jFrame.pack();
         this.newGameHandler.goToWaitingRoom(this.gameId);
 
     }
@@ -196,81 +163,6 @@ public class ClientGUI extends Client implements Observer<Move> {
         this.jFrame.setPreferredSize(new Dimension(400,680));
         this.jFrame.pack();
 
-        /*JFrame jFrame;
-        jFrame = new JFrame();
-        jFrame.setVisible(true);
-        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        jFrame.setLayout(new GridLayout(13, 1));
-        jFrame.add(new JLabel("What is your name?"));
-        JTextField nicknameField = new JTextField();
-        jFrame.add(nicknameField);
-        JLabel numPlayerLabel = new JLabel("How many players?");
-        jFrame.add(numPlayerLabel);
-        JRadioButton oneRadioButton, twoRadioButton, threeRadioButton, fourRadioButton;
-        oneRadioButton = new JRadioButton("1");
-        twoRadioButton = new JRadioButton("2");
-        threeRadioButton = new JRadioButton("3");
-        fourRadioButton = new JRadioButton("4");
-        jFrame.add(oneRadioButton);
-        jFrame.add(twoRadioButton);
-        jFrame.add(threeRadioButton);
-        jFrame.add(fourRadioButton);
-        JLabel createJoinLabel = new JLabel("Do you want to join or to create a new game?");
-        jFrame.add(createJoinLabel);
-        JRadioButton createRadioButton;
-        createRadioButton = new JRadioButton("Create Game");
-        jFrame.add(createRadioButton);
-        JRadioButton joinRadioButton;
-        joinRadioButton = new JRadioButton("Join Game");
-        jFrame.add(joinRadioButton);
-        JLabel matchIDLabel = new JLabel("ID:");
-        matchIDLabel.setVisible(false);
-        jFrame.add(matchIDLabel);
-        JTextField idMatchField = new JTextField();
-        idMatchField.setEnabled(false);
-        idMatchField.setVisible(false);
-        jFrame.add(idMatchField);
-        joinRadioButton.addActionListener(
-                new JoinButtonListener(getInstance(), createRadioButton, joinRadioButton, idMatchField, matchIDLabel));
-
-        oneRadioButton.addActionListener(new OneRadioButtonListener(getInstance(), oneRadioButton, twoRadioButton,
-                threeRadioButton, fourRadioButton));
-        twoRadioButton.addActionListener(new TwoRadioButtonListener(getInstance(), oneRadioButton, twoRadioButton,
-                threeRadioButton, fourRadioButton));
-        threeRadioButton.addActionListener(new ThreeRadioButtonListener(getInstance(), oneRadioButton, twoRadioButton,
-                threeRadioButton, fourRadioButton));
-        fourRadioButton.addActionListener(new FourRadioButtonListener(getInstance(), oneRadioButton, twoRadioButton,
-                threeRadioButton, fourRadioButton));
-        JButton submitButton;
-        List<JComponent> previousButtons = new ArrayList<>(); //all the buttons before the submit
-        previousButtons.add(nicknameField);
-        previousButtons.add(createRadioButton);
-        previousButtons.add(joinRadioButton);
-        previousButtons.add(oneRadioButton);
-        previousButtons.add(twoRadioButton);
-        previousButtons.add(threeRadioButton);
-        previousButtons.add(fourRadioButton);
-        previousButtons.add(idMatchField);
-        List<JComponent> successiveButtons = new ArrayList<>();//buttons after the nicknameField
-        successiveButtons.add(createRadioButton);
-        successiveButtons.add(joinRadioButton);
-        successiveButtons.add(oneRadioButton);
-        successiveButtons.add(twoRadioButton);
-        successiveButtons.add(threeRadioButton);
-        successiveButtons.add(fourRadioButton);
-        successiveButtons.add(numPlayerLabel);
-        successiveButtons.add(createJoinLabel);
-        successiveButtons.forEach(x -> x.setVisible(false));
-        submitButton = new JButton("Submit");
-        submitButton.setVisible(false);
-        jFrame.add(submitButton);
-        submitButton.addActionListener(new SubmitButtonListener(getInstance(), jFrame, previousButtons));
-        nicknameField.addActionListener(new InsertNameListener(getInstance(), nicknameField, successiveButtons));
-        createRadioButton
-                .addActionListener(new CreateButtonListener(getInstance(), createRadioButton, joinRadioButton,submitButton));
-        idMatchField.addActionListener(new InsertMatchIdListener(getInstance(), idMatchField,submitButton));
-        jFrame.pack();
-        jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);*/
     }
 
     public void createOrJoinGame() {
@@ -293,13 +185,13 @@ public class ClientGUI extends Client implements Observer<Move> {
 
     public void endGame() {
         this.gui.getJFrame().dispose();
-        this.endGameHandler = new EndGameHandler(this.match, this);
+        EndGameHandler endGameHandler = new EndGameHandler(this.match, this);
         this.jFrame = new JFrame();
         this.jFrame.setTitle("Master of Renaissance");
         this.jFrame.setVisible(true);
         this.jFrame.setLayout(new GridLayout(1,1));
         this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.jFrame.add(this.endGameHandler);
+        this.jFrame.add(endGameHandler);
         this.jFrame.pack();
         jFrame.setLocation(600,100);
     }
