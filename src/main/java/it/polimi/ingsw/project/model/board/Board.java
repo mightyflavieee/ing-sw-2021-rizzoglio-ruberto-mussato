@@ -236,6 +236,55 @@ public class Board implements Serializable, Cloneable {
     return summedWarehouseResources;
   }
 
+  public Map<ResourceType, Integer> sumResourcesMaps(Map<ResourceType, Integer> resourcesToSum1, Map<ResourceType, Integer> resourcesToSum2) {
+    Map<ResourceType, Integer> sumRequiredResources = new HashMap<>();
+    List<ResourceType> resourceTypes = new ArrayList<>();
+    resourceTypes.add(ResourceType.Coin);
+    resourceTypes.add(ResourceType.Servant);
+    resourceTypes.add(ResourceType.Shield);
+    resourceTypes.add(ResourceType.Stone);
+    for (ResourceType resourceType : resourceTypes) {
+      if (resourcesToSum1.containsKey(resourceType)) {
+        if (resourcesToSum2.containsKey(resourceType)) {
+          sumRequiredResources.put(resourceType,
+                  resourcesToSum1.get(resourceType) + resourcesToSum2.get(resourceType));
+        } else {
+          sumRequiredResources.put(resourceType, resourcesToSum1.get(resourceType));
+        }
+      } else {
+        if (resourcesToSum2.containsKey(resourceType)) {
+          sumRequiredResources.put(resourceType, resourcesToSum2.get(resourceType));
+        }
+      }
+    }
+    return sumRequiredResources;
+  }
+
+  // checks if two maps have the same values
+  private boolean compareResourcesMaps(Map<ResourceType, Integer> resourcesMap1, Map<ResourceType, Integer> resourcesMap2) {
+    List<ResourceType> resourceTypes = new ArrayList<>();
+    resourceTypes.add(ResourceType.Coin);
+    resourceTypes.add(ResourceType.Servant);
+    resourceTypes.add(ResourceType.Shield);
+    resourceTypes.add(ResourceType.Stone);
+    for (ResourceType type : resourceTypes) {
+      if (resourcesMap1.containsKey(type)) {
+        if (resourcesMap2.containsKey(type)) {
+          if (!resourcesMap1.get(type).equals(resourcesMap2.get(type))) {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      } else {
+        if (resourcesMap2.containsKey(type)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
   // checks if the resources indicated in the parameter are actually present
   public boolean areEnoughResourcesPresent(Map<ResourceType, Integer> resourcesToCheck) {
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
@@ -263,6 +312,19 @@ public class Board implements Serializable, Cloneable {
       }
     }
     return true;
+  }
+
+  // checks if a DevelopmentCard is a production card
+  public boolean isDevCardAProductionCard(String devCardID) {
+    Map<DevCardPosition, DevelopmentCard> currentProductionCards = getCurrentProductionCards();
+    for (DevCardPosition position : currentProductionCards.keySet()) {
+      if (currentProductionCards.get(position) != null) {
+        if (devCardID.equals(currentProductionCards.get(position).getId())) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   // eliminates resources from the chest, usable only within
@@ -512,10 +574,13 @@ public class Board implements Serializable, Cloneable {
   }
 
   // checks if the current player can activate the production selected
-  public boolean isFeasibleProductionMove(String devCardID, String leaderCardId,
-      Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-      Map<ResourceType, Integer> resourcesToEliminateExtraDeposit, Map<ResourceType, Integer> resourcesToEliminateChest,
-      ProductionType productionType) {
+  public boolean isFeasibleProductionMove(List<String> devCardIDs,
+                                          List<String> leaderCardIDs,
+                                          Map<ResourceType, Integer> requiredResources,
+                                          Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                          Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                          Map<ResourceType, Integer> resourcesToEliminateChest,
+                                          ProductionType productionType) {
     boolean isDevCardInLastPosition = false;
     // checks if the DevelopmentCard selected is in the last position (if the
     // DevelopmentCard is required
@@ -523,27 +588,28 @@ public class Board implements Serializable, Cloneable {
     if (productionType == ProductionType.DevCard || productionType == ProductionType.BoardAndDevCard
         || productionType == ProductionType.BoardAndDevCardAndLeaderCard
         || productionType == ProductionType.DevCardAndLeader) {
-      for (DevCardPosition position : this.mapTray.keySet()) {
-        if (this.mapTray.get(position).size() > 0) {
-          DevelopmentCard lastElement = this.mapTray.get(position).get(this.mapTray.get(position).size() - 1);
-          if (lastElement.getId().equals(devCardID)) {
-            isDevCardInLastPosition = true;
-            break;
-          }
+      // checks if all the development card are production cards, if not returns false
+      for (String devCardID : devCardIDs) {
+        if (!isDevCardAProductionCard(devCardID)) {
+          return false;
         }
       }
-      // if the card is not in the last position, return false
-      if (!isDevCardInLastPosition) {
-        return false;
-      }
     }
-    // checks if the LeaderCard is present (if required for the production)
+    // checks if the LeaderCards are present (if required for the production)
     if (productionType == ProductionType.LeaderCard || productionType == ProductionType.BoardAndLeaderCard
         || productionType == ProductionType.BoardAndDevCardAndLeaderCard
         || productionType == ProductionType.DevCardAndLeader) {
-      if (fetchLeaderCardById(leaderCardId) == null) {
-        return false;
+      for (String leaderCardID : leaderCardIDs) {
+        if (fetchLeaderCardById(leaderCardID) == null) {
+          return false;
+        }
       }
+    }
+    // checks if the requiredResources are met
+    Map<ResourceType, Integer> allResourcesSelected = sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit);
+    allResourcesSelected = sumResourcesMaps(allResourcesSelected, resourcesToEliminateChest);
+    if (!compareResourcesMaps(requiredResources, allResourcesSelected)) {
+      return false;
     }
     // double checks if the resources indicated by the user are actually present
     return areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit,
@@ -553,67 +619,86 @@ public class Board implements Serializable, Cloneable {
   // performs the production putting the resources manufactured in the strongbox
   // and eliminating
   // the resources required
-  public void performProductionMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-      Map<ResourceType, Integer> resourcesToEliminateExtraDeposit, Map<ResourceType, Integer> resourcesToEliminateChest,
-      ProductionType productionType, List<ResourceType> boardOrPerkManufacturedResource) {
+  public void performProductionMove(List<String> devCardIDs,
+                                    Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+                                    Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+                                    Map<ResourceType, Integer> resourcesToEliminateChest,
+                                    ProductionType productionType,
+                                    ResourceType boardManufacturedResource,
+                                    List<ResourceType> perkManufacturedResources) {
     Map<ResourceType, Integer> manufacturedResources = new HashMap<>();
     if (productionType == ProductionType.DevCard || productionType == ProductionType.BoardAndDevCard) {
-      DevelopmentCard card = fetchDevCardById(devCardID);
-      manufacturedResources = card.getProduction().getManufacturedResources();
+      for (String devCardID : devCardIDs) {
+        DevelopmentCard card = fetchDevCardById(devCardID);
+        manufacturedResources = sumResourcesMaps(manufacturedResources, card.getProduction().getManufacturedResources());
+      }
       if (productionType == ProductionType.BoardAndDevCard) {
         // aggiunge a manufacturedResources le risorse prodotte dalla Board
-        ResourceType resourceType = boardOrPerkManufacturedResource.get(0);
+        if (manufacturedResources.containsKey(boardManufacturedResource)) {
+          manufacturedResources.put(boardManufacturedResource, manufacturedResources.get(boardManufacturedResource) + 1);
+        } else {
+          manufacturedResources.put(boardManufacturedResource, 1);
+        }
+      }
+    }
+    if (productionType == ProductionType.LeaderCard || productionType == ProductionType.BoardAndLeaderCard) {
+      // aggiunge a manufacturedResources le risorse prodotte dal ProductionPerk (LeaderCard)
+      for (ResourceType resourceType : perkManufacturedResources) {
+        moveForward();
         if (manufacturedResources.containsKey(resourceType)) {
           manufacturedResources.put(resourceType, manufacturedResources.get(resourceType) + 1);
         } else {
           manufacturedResources.put(resourceType, 1);
         }
       }
-    }
-    if (productionType == ProductionType.LeaderCard || productionType == ProductionType.BoardAndLeaderCard) {
-      // aggiunge a manufacturedResources le risorse prodotte dal ProductionPerk
-      // (LeaderCard
-      moveForward();
-      manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 1);
       if (productionType == ProductionType.BoardAndLeaderCard) {
         // aggiungere a manufacturedResources le risorse prodotte dalla Board
-        ResourceType resourceType = boardOrPerkManufacturedResource.get(1);
-        if (manufacturedResources.containsKey(resourceType)) {
-          manufacturedResources.put(resourceType, 2);
+        if (manufacturedResources.containsKey(boardManufacturedResource)) {
+          manufacturedResources.put(boardManufacturedResource, manufacturedResources.get(boardManufacturedResource) + 1);
         } else {
-          manufacturedResources.put(resourceType, 1);
+          manufacturedResources.put(boardManufacturedResource, 1);
         }
       }
     }
     // aggiunge a manufacturedResources le risorse prodotte dalla Board
     if (productionType == ProductionType.Board) {
-      manufacturedResources.put(boardOrPerkManufacturedResource.get(0), 1);
+      manufacturedResources.put(boardManufacturedResource, 1);
     }
     // aggiunge a manufacturedResources le risorse prodotte dalla DevelopmentCard e
     // dalla LeaderCard
     if (productionType == ProductionType.DevCardAndLeader) {
-      DevelopmentCard card = fetchDevCardById(devCardID);
-      manufacturedResources = card.getProduction().getManufacturedResources();
-      moveForward();
-      ResourceType resourceType = boardOrPerkManufacturedResource.get(0);
-      if (manufacturedResources.containsKey(resourceType)) {
-        manufacturedResources.put(resourceType, manufacturedResources.get(resourceType) + 1);
-      } else {
-        manufacturedResources.put(resourceType, 1);
+      for (String devCardID : devCardIDs) {
+        DevelopmentCard card = fetchDevCardById(devCardID);
+        manufacturedResources = sumResourcesMaps(manufacturedResources, card.getProduction().getManufacturedResources());
       }
-    }
-    // aggiunge a manufacturedResources le risorse prodotte dalla DevelopmentCard,
-    // dalla LeaderCard e dalla Board
-    if (productionType == ProductionType.BoardAndDevCardAndLeaderCard) {
-      DevelopmentCard card = fetchDevCardById(devCardID);
-      manufacturedResources = card.getProduction().getManufacturedResources();
-      moveForward();
-      for (ResourceType resourceType : boardOrPerkManufacturedResource) {
+      for (ResourceType resourceType : perkManufacturedResources) {
+        moveForward();
         if (manufacturedResources.containsKey(resourceType)) {
           manufacturedResources.put(resourceType, manufacturedResources.get(resourceType) + 1);
         } else {
           manufacturedResources.put(resourceType, 1);
         }
+      }
+    }
+    // aggiunge a manufacturedResources le risorse prodotte dalla DevelopmentCard,
+    // dalla LeaderCard e dalla Board
+    if (productionType == ProductionType.BoardAndDevCardAndLeaderCard) {
+      for (String devCardID : devCardIDs) {
+        DevelopmentCard card = fetchDevCardById(devCardID);
+        manufacturedResources = sumResourcesMaps(manufacturedResources, card.getProduction().getManufacturedResources());
+      }
+      for (ResourceType resourceType : perkManufacturedResources) {
+        moveForward();
+        if (manufacturedResources.containsKey(resourceType)) {
+          manufacturedResources.put(resourceType, manufacturedResources.get(resourceType) + 1);
+        } else {
+          manufacturedResources.put(resourceType, 1);
+        }
+      }
+      if (manufacturedResources.containsKey(boardManufacturedResource)) {
+        manufacturedResources.put(boardManufacturedResource, manufacturedResources.get(boardManufacturedResource) + 1);
+      } else {
+        manufacturedResources.put(boardManufacturedResource, 1);
       }
     }
     // adds resources to the Strongbox and eliminates the resources required for the

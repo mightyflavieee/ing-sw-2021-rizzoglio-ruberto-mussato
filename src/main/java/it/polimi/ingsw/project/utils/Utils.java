@@ -10,6 +10,7 @@ import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
+import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -87,5 +88,29 @@ public class Utils {
             default:
                 return false;
         }
+    }
+
+    public static Map<ResourceType, Integer> sumResourcesMaps(Map<ResourceType, Integer> resourcesToSum1, Map<ResourceType, Integer> resourcesToSum2) {
+        Map<ResourceType, Integer> sumRequiredResources = new HashMap<>();
+        List<ResourceType> resourceTypes = new ArrayList<>();
+        resourceTypes.add(ResourceType.Coin);
+        resourceTypes.add(ResourceType.Servant);
+        resourceTypes.add(ResourceType.Shield);
+        resourceTypes.add(ResourceType.Stone);
+        for (ResourceType resourceType : resourceTypes) {
+            if (resourcesToSum1.containsKey(resourceType)) {
+                if (resourcesToSum2.containsKey(resourceType)) {
+                    sumRequiredResources.put(resourceType,
+                            resourcesToSum1.get(resourceType) + resourcesToSum2.get(resourceType));
+                } else {
+                    sumRequiredResources.put(resourceType, resourcesToSum1.get(resourceType));
+                }
+            } else {
+                if (resourcesToSum2.containsKey(resourceType)) {
+                    sumRequiredResources.put(resourceType, resourcesToSum2.get(resourceType));
+                }
+            }
+        }
+        return sumRequiredResources;
     }
 }

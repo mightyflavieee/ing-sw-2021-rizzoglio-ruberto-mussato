@@ -239,9 +239,10 @@ class ControllerTest {
                 resourcesToEliminateWarehouse.clear();
                 resourcesToEliminateWarehouse = gianluca.getBoard().getMapTray().get(DevCardPosition.Right).get(0)
                                 .getProduction().getRequiredResources();
-                ProductionMove move3Gian = new ProductionMove("id2", null, resourcesToEliminateWarehouse,
-                        null, null,
-                                ProductionType.Board, null);
+                
+                ProductionMove move3Gian = new ProductionMove(null, null, resourcesToEliminateWarehouse,
+                        resourcesToEliminateWarehouse, new HashMap<>(), new HashMap<>(),
+                        ProductionType.Board, ResourceType.Coin, null);
                 PlayerMove playerMove3Gian = new PlayerMove(gianluca, null, move3Gian);
                 model.updateTurn();
                 controller.update(playerMove3Gian);

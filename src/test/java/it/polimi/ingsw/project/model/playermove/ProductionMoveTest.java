@@ -39,12 +39,13 @@ class ProductionMoveTest {
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
-        List<ResourceType> boardManufacturedResource = new ArrayList<>();
-        boardManufacturedResource.add(ResourceType.Shield);
+        ResourceType boardManufacturedResource = ResourceType.Shield;
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 1);
-        ProductionMove productionMove = new ProductionMove(null, null, resourcesToEliminateWarehouse,
-                new HashMap<>(), resourcesToEliminateChest, ProductionType.Board, boardManufacturedResource);
+        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        ProductionMove productionMove = new ProductionMove(null, null, requiredResources,
+                resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest, ProductionType.Board,
+                boardManufacturedResource, null);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -77,12 +78,13 @@ class ProductionMoveTest {
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
-        List<ResourceType> boardManufacturedResource = new ArrayList<>();
-        boardManufacturedResource.add(ResourceType.Shield);
+        ResourceType boardManufacturedResource = ResourceType.Shield;
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 1);
-        ProductionMove productionMove = new ProductionMove(null, null, resourcesToEliminateWarehouse, null,
-                resourcesToEliminateChest, ProductionType.Board, boardManufacturedResource);
+        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        ProductionMove productionMove = new ProductionMove(null, null, requiredResources,
+                resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
+                ProductionType.Board, boardManufacturedResource, null);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
@@ -106,6 +108,8 @@ class ProductionMoveTest {
         manufacturedResources.put(ResourceType.Servant, 2);
         Production production = new Production(resourcesRequired, manufacturedResources);
         DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "test", 1, resourcesRequired);
+        List<String> devCardIDs = new ArrayList<>();
+        devCardIDs.add(devCard.getId());
         // adds the card to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
         // adds necessary resources to the Warehouse and chest and ExtraDeposit
@@ -125,8 +129,11 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateExtraDeposit.put(ResourceType.Stone, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
-        ProductionMove productionMove = new ProductionMove("test", null, resourcesToEliminateWarehouse,
-                resourcesToEliminateExtraDeposit, resourcesToEliminateChest, ProductionType.DevCard, null);
+        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        requiredResources = player.getBoard().sumResourcesMaps(requiredResources, resourcesToEliminateExtraDeposit);
+        ProductionMove productionMove = new ProductionMove(devCardIDs, null, requiredResources,
+                resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit, resourcesToEliminateChest,
+                ProductionType.DevCard, null, null);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -157,6 +164,8 @@ class ProductionMoveTest {
         resourcesRequired.put(ResourceType.Stone, 2);
         Production production = new Production(resourcesRequired, resourcesRequired);
         DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "test", 1, resourcesRequired);
+        List<String> devCardIDs = new ArrayList<>();
+        devCardIDs.add(devCard.getId());
         // adds the card to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
         // adds necessary resources to the Warehouse and chest
@@ -170,8 +179,10 @@ class ProductionMoveTest {
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
-        ProductionMove productionMove = new ProductionMove("test", null, resourcesToEliminateWarehouse,
-                new HashMap<>(), resourcesToEliminateChest, ProductionType.DevCard, null);
+        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        ProductionMove productionMove = new ProductionMove(devCardIDs, null, requiredResources,
+                resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
+                ProductionType.DevCard, null, null);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
@@ -190,6 +201,8 @@ class ProductionMoveTest {
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
         LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequiredForActivation, null, null);
+        List<String> leaderCardIDs = new ArrayList<>();
+        leaderCardIDs.add(leaderCard.getId());
         // adds the LeaderCard to the Board
         player.getBoard().getLeaderCards().add(leaderCard);
         // adds necessary resources to the Warehouse and chest
@@ -200,11 +213,13 @@ class ProductionMoveTest {
         shelves.put(ShelfFloor.First, resourcesListFirstFloor);
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
-        List<ResourceType> boardManufacturedResource = new ArrayList<>();
-        boardManufacturedResource.add(ResourceType.Shield);
+        List<ResourceType> perkManufacturedResource = new ArrayList<>();
+        perkManufacturedResource.add(ResourceType.Shield);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
-        ProductionMove productionMove = new ProductionMove(null, "test", resourcesToEliminateWarehouse,
-                new HashMap<>(), new HashMap<>(), ProductionType.LeaderCard, boardManufacturedResource);
+        Map<ResourceType, Integer> requiredResources = new HashMap<>(resourcesToEliminateWarehouse);
+        ProductionMove productionMove = new ProductionMove(null, leaderCardIDs, requiredResources,
+                resourcesToEliminateWarehouse, new HashMap<>(), new HashMap<>(),
+                ProductionType.LeaderCard, null, perkManufacturedResource);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -231,15 +246,19 @@ class ProductionMoveTest {
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
         LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequiredForActivation, null, null);
+        List<String> leaderCardIDs = new ArrayList<>();
+        leaderCardIDs.add(leaderCard.getId());
         // adds the LeaderCard to the Board
         player.getBoard().getLeaderCards().add(leaderCard);
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
-        List<ResourceType> boardManufacturedResource = new ArrayList<>();
-        boardManufacturedResource.add(ResourceType.Shield);
+        List<ResourceType> perkManufacturedResource = new ArrayList<>();
+        perkManufacturedResource.add(ResourceType.Shield);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
-        ProductionMove productionMove = new ProductionMove(null, "test", resourcesToEliminateWarehouse,
-                new HashMap<>(), new HashMap<>(),  ProductionType.LeaderCard, boardManufacturedResource);
+        Map<ResourceType, Integer> requiredResources = new HashMap<>(resourcesToEliminateWarehouse);
+        ProductionMove productionMove = new ProductionMove(null, leaderCardIDs, requiredResources,
+                resourcesToEliminateWarehouse, new HashMap<>(), new HashMap<>(),
+                ProductionType.LeaderCard, null, perkManufacturedResource);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
@@ -261,6 +280,8 @@ class ProductionMoveTest {
         resourcesRequired.put(ResourceType.Stone, 2);
         Production production = new Production(resourcesRequired, manufacturedResources);
         DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "test", 1, resourcesRequired);
+        List<String> devCardIDs = new ArrayList<>();
+        devCardIDs.add(devCard.getId());
         // adds the card to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
         // adds necessary resources to the Warehouse and chest
@@ -274,12 +295,13 @@ class ProductionMoveTest {
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
-        List<ResourceType> boardManufacturedResource = new ArrayList<>();
-        boardManufacturedResource.add(ResourceType.Shield);
+        ResourceType boardManufacturedResource = ResourceType.Shield;
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 3);
-        ProductionMove productionMove = new ProductionMove("test", null, resourcesToEliminateWarehouse,
-                new HashMap<>(), resourcesToEliminateChest, ProductionType.BoardAndDevCard, boardManufacturedResource);
+        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        ProductionMove productionMove = new ProductionMove(devCardIDs, null, requiredResources,
+                resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
+                ProductionType.BoardAndDevCard, boardManufacturedResource, null);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -309,17 +331,19 @@ class ProductionMoveTest {
         resourcesRequired.put(ResourceType.Stone, 2);
         Production production = new Production(resourcesRequired, resourcesRequired);
         DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "test", 1, resourcesRequired);
+        List<String> devCardIDs = new ArrayList<>();
+        devCardIDs.add(devCard.getId());
         // adds the card to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
-        List<ResourceType> boardManufacturedResource = new ArrayList<>();
-        boardManufacturedResource.add(ResourceType.Shield);
+        ResourceType boardManufacturedResource = ResourceType.Shield;
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 3);
-        ProductionMove productionMove = new ProductionMove("test", null, resourcesToEliminateWarehouse,
-                new HashMap<>(), resourcesToEliminateChest, ProductionType.BoardAndDevCard, boardManufacturedResource);
+        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        ProductionMove productionMove = new ProductionMove(devCardIDs, null, requiredResources, resourcesToEliminateWarehouse,
+                new HashMap<>(), resourcesToEliminateChest, ProductionType.BoardAndDevCard, boardManufacturedResource, null);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
@@ -338,6 +362,8 @@ class ProductionMoveTest {
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
         LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequiredForActivation, null, null);
+        List<String> leaderCardIDs = new ArrayList<>();
+        leaderCardIDs.add(leaderCard.getId());
         // adds the LeaderCard to the Board
         player.getBoard().getLeaderCards().add(leaderCard);
         // adds necessary resources to the Warehouse and chest
@@ -351,13 +377,15 @@ class ProductionMoveTest {
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
-        List<ResourceType> boardManufacturedResource = new ArrayList<>();
-        boardManufacturedResource.add(ResourceType.Shield);
-        boardManufacturedResource.add(ResourceType.Servant);
+        ResourceType boardManufacturedResource = ResourceType.Shield;
+        List<ResourceType> perkManufacturedResource = new ArrayList<>();
+        perkManufacturedResource.add(ResourceType.Servant);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 1);
-        ProductionMove productionMove = new ProductionMove(null, "test", resourcesToEliminateWarehouse,
-                new HashMap<>(), resourcesToEliminateChest, ProductionType.BoardAndLeaderCard, boardManufacturedResource);
+        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        ProductionMove productionMove = new ProductionMove(null, leaderCardIDs, requiredResources,
+                resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
+                ProductionType.BoardAndLeaderCard, boardManufacturedResource, perkManufacturedResource);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -371,7 +399,8 @@ class ProductionMoveTest {
         }
         for(ResourceType resourceType : player.getBoard().getWarehouse().mapAllContainedResources().keySet()){
             assertEquals(0,player.getBoard().getWarehouse().mapAllContainedResources().get(resourceType));
-        }    }
+        }
+    }
 
     @Test
     // Board and LeaderCard production with not enough resources to complete the move
@@ -387,6 +416,8 @@ class ProductionMoveTest {
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
         LeaderCard leaderCard = new LeaderCard("test", perk, 1, resourcesRequiredForActivation, null, null);
+        List<String> leaderCardIDs = new ArrayList<>();
+        leaderCardIDs.add(leaderCard.getId());
         // adds the LeaderCard to the Board
         player.getBoard().getLeaderCards().add(leaderCard);
         // adds necessary resources to the Warehouse and chest
@@ -400,12 +431,15 @@ class ProductionMoveTest {
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
-        List<ResourceType> boardManufacturedResource = new ArrayList<>();
-        boardManufacturedResource.add(ResourceType.Shield);
+        ResourceType boardManufacturedResource = ResourceType.Shield;
+        List<ResourceType> perkManufacturedResource = new ArrayList<>();
+        perkManufacturedResource.add(ResourceType.Servant);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 1);
-        ProductionMove productionMove = new ProductionMove(null, "test", resourcesToEliminateWarehouse,
-                new HashMap<>(), resourcesToEliminateChest, ProductionType.BoardAndLeaderCard, boardManufacturedResource);
+        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        ProductionMove productionMove = new ProductionMove(null, leaderCardIDs, requiredResources,
+                resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
+                ProductionType.BoardAndLeaderCard, boardManufacturedResource, perkManufacturedResource);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
@@ -433,12 +467,16 @@ class ProductionMoveTest {
         manufacturedResources.put(ResourceType.Servant, 2);
         Production production = new Production(resourcesRequired, manufacturedResources);
         DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "DEV_id", 1, resourcesRequired);
+        List<String> devCardIDs = new ArrayList<>();
+        devCardIDs.add(devCard.getId());
         // creates the LeaderCard
         Perk perk = new Perk(new Resource(ResourceType.Coin), PerkType.Production);
         Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
         LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation, null, null);
+        List<String> leaderCardIDs = new ArrayList<>();
+        leaderCardIDs.add(leaderCard.getId());
         // adds the DevelopmentCard and the LeaderCard to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
         player.getBoard().getLeaderCards().add(leaderCard);
@@ -454,13 +492,15 @@ class ProductionMoveTest {
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
-        List<ResourceType> boardAndPerkManufacturedResources = new ArrayList<>();
-        boardAndPerkManufacturedResources.add(ResourceType.Shield);
-        boardAndPerkManufacturedResources.add(ResourceType.Servant);
+        ResourceType boardManufacturedResource = ResourceType.Shield;
+        List<ResourceType> perkManufacturedResource = new ArrayList<>();
+        perkManufacturedResource.add(ResourceType.Servant);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 3);
         resourcesToEliminateChest.put(ResourceType.Stone, 3);
-        ProductionMove productionMove = new ProductionMove("DEV_id", "LEADER_id", resourcesToEliminateWarehouse,
-                new HashMap<>(), resourcesToEliminateChest, ProductionType.BoardAndDevCardAndLeaderCard, boardAndPerkManufacturedResources);
+        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        ProductionMove productionMove = new ProductionMove(devCardIDs, leaderCardIDs, requiredResources,
+                resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
+                ProductionType.BoardAndDevCardAndLeaderCard, boardManufacturedResource, perkManufacturedResource);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -493,12 +533,16 @@ class ProductionMoveTest {
         manufacturedResources.put(ResourceType.Servant, 2);
         Production production = new Production(resourcesRequired, manufacturedResources);
         DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "DEV_id", 1, resourcesRequired);
+        List<String> devCardIDs = new ArrayList<>();
+        devCardIDs.add(devCard.getId());
         // creates the LeaderCard
         Perk perk = new Perk(new Resource(ResourceType.Coin), PerkType.Production);
         Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
         LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation, null, null);
+        List<String> leaderCardIDs = new ArrayList<>();
+        leaderCardIDs.add(leaderCard.getId());
         // adds the DevelopmentCard and the LeaderCard to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
         player.getBoard().getLeaderCards().add(leaderCard);
@@ -514,14 +558,15 @@ class ProductionMoveTest {
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
-        List<ResourceType> boardAndPerkManufacturedResources = new ArrayList<>();
-        boardAndPerkManufacturedResources.add(ResourceType.Shield);
-        boardAndPerkManufacturedResources.add(ResourceType.Servant);
+        ResourceType boardManufacturedResource = ResourceType.Shield;
+        List<ResourceType> perkManufacturedResource = new ArrayList<>();
+        perkManufacturedResource.add(ResourceType.Servant);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 3);
         resourcesToEliminateChest.put(ResourceType.Stone, 3);
-        ProductionMove productionMove = new ProductionMove("DEV_id", "LEADER_id", resourcesToEliminateWarehouse,
-                new HashMap<>(), resourcesToEliminateChest, ProductionType.BoardAndDevCardAndLeaderCard, boardAndPerkManufacturedResources);
-        // tests the move
+        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        ProductionMove productionMove = new ProductionMove(devCardIDs, leaderCardIDs, requiredResources,
+                resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
+                ProductionType.BoardAndDevCardAndLeaderCard, boardManufacturedResource, perkManufacturedResource);
         assertFalse(productionMove.isFeasibleMove(match));
     }
 
@@ -546,12 +591,16 @@ class ProductionMoveTest {
         manufacturedResources.put(ResourceType.Servant, 2);
         Production production = new Production(resourcesRequired, manufacturedResources);
         DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "DEV_id", 1, resourcesRequired);
+        List<String> devCardIDs = new ArrayList<>();
+        devCardIDs.add(devCard.getId());
         // creates the LeaderCard
         Perk perk = new Perk(new Resource(ResourceType.Coin), PerkType.Production);
         Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
         LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation, null, null);
+        List<String> leaderCardIDs = new ArrayList<>();
+        leaderCardIDs.add(leaderCard.getId());
         // adds the DevelopmentCard and the LeaderCard to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
         player.getBoard().getLeaderCards().add(leaderCard);
@@ -566,12 +615,13 @@ class ProductionMoveTest {
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
-        List<ResourceType> LeaderCardManufacturedResources = new ArrayList<>();
-        LeaderCardManufacturedResources.add(ResourceType.Servant);
+        List<ResourceType> perkManufacturedResource = new ArrayList<>();
+        perkManufacturedResource.add(ResourceType.Servant);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
-        ProductionMove productionMove = new ProductionMove("DEV_id", "LEADER_id", resourcesToEliminateWarehouse,
-                new HashMap<>(), resourcesToEliminateChest, ProductionType.DevCardAndLeader, LeaderCardManufacturedResources);
+        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        ProductionMove productionMove = new ProductionMove(devCardIDs, leaderCardIDs, requiredResources, resourcesToEliminateWarehouse,
+                new HashMap<>(), resourcesToEliminateChest, ProductionType.DevCardAndLeader, null, perkManufacturedResource);
         // tests the move
         assertTrue(productionMove.isFeasibleMove(match));
         productionMove.performMove(match);
@@ -608,12 +658,16 @@ class ProductionMoveTest {
         manufacturedResources.put(ResourceType.Servant, 2);
         Production production = new Production(resourcesRequired, manufacturedResources);
         DevelopmentCard devCard = new DevelopmentCard(CardColor.Gold, CardLevel.One, production, "DEV_id", 1, resourcesRequired);
+        List<String> devCardIDs = new ArrayList<>();
+        devCardIDs.add(devCard.getId());
         // creates the LeaderCard
         Perk perk = new Perk(new Resource(ResourceType.Coin), PerkType.Production);
         Map<ResourceType, Integer> resourcesRequiredForActivation = new HashMap<>();
         resourcesRequiredForActivation.put(ResourceType.Coin, 1);
         resourcesRequiredForActivation.put(ResourceType.Stone, 2);
         LeaderCard leaderCard = new LeaderCard("LEADER_id", perk, 1, resourcesRequiredForActivation, null, null);
+        List<String> leaderCardIDs = new ArrayList<>();
+        leaderCardIDs.add(leaderCard.getId());
         // adds the DevelopmentCard and the LeaderCard to the Board
         player.getBoard().getMapTray().get(DevCardPosition.Left).add(devCard);
         player.getBoard().getLeaderCards().add(leaderCard);
@@ -627,26 +681,35 @@ class ProductionMoveTest {
         // creates the move
         Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
-        List<ResourceType> LeaderCardManufacturedResources = new ArrayList<>();
-        LeaderCardManufacturedResources.add(ResourceType.Servant);
+        List<ResourceType> perkManufacturedResource = new ArrayList<>();
+        perkManufacturedResource.add(ResourceType.Servant);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
-        ProductionMove productionMove = new ProductionMove("DEV_id", "LEADER_id", resourcesToEliminateWarehouse,
-                new HashMap<>(), resourcesToEliminateChest, ProductionType.DevCardAndLeader, LeaderCardManufacturedResources);
+        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        ProductionMove productionMove = new ProductionMove(devCardIDs, leaderCardIDs, requiredResources,
+                resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
+                ProductionType.DevCardAndLeader, null, perkManufacturedResource);
         // tests the move
         assertFalse(productionMove.isFeasibleMove(match));
     }
     @Test
     void testToString(){
-        Move move = new ProductionMove("as",
-                "sad",
+        //TODO
+        List<String> devCardIDs = new ArrayList<>();
+        devCardIDs.add("ciaoDevCard");
+        List<String> leaderCardIDs = new ArrayList<>();
+        leaderCardIDs.add("ciaoLeaderCard");
+        Move move = new ProductionMove(devCardIDs,
+                leaderCardIDs,
+                new HashMap<>(),
                 new HashMap<>(),
                 new HashMap<>(),
                 new HashMap<>(),
                 ProductionType.Board,
+                null,
                 null);
         String string = move.toString();
         assertFalse(string.isEmpty());
-       // assertFalse(string.isBlank());
+        //assertFalse(string.isBlank());
     }
 }

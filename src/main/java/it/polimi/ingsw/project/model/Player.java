@@ -128,24 +128,26 @@ public class Player implements Serializable, Cloneable {
             resourcesToEliminateChest, position);
   }
 
-  public boolean isFeasibleProductionMove(String devCardID,
-                                          String leaderCardId,
+  public boolean isFeasibleProductionMove(List<String> devCardIDs,
+                                          List<String> leaderCardIDs,
+                                          Map<ResourceType, Integer> requiredResources,
                                           Map<ResourceType, Integer> resourcesToEliminateWarehouse,
                                           Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
                                           Map<ResourceType, Integer> resourcesToEliminateChest,
                                           ProductionType productionType) {
-    return this.board.isFeasibleProductionMove(devCardID, leaderCardId, resourcesToEliminateWarehouse,
+    return this.board.isFeasibleProductionMove(devCardIDs, leaderCardIDs, requiredResources, resourcesToEliminateWarehouse,
             resourcesToEliminateExtraDeposit, resourcesToEliminateChest, productionType);
   }
 
-  public void performProductionMove(String devCardID,
+  public void performProductionMove(List<String> devCardIDs,
                                     Map<ResourceType, Integer> resourcesToEliminateWarehouse,
                                     Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
                                     Map<ResourceType, Integer> resourcesToEliminateChest,
                                     ProductionType productionType,
-                                    List<ResourceType> boardOrPerkManufacturedResource) {
-    this.board.performProductionMove(devCardID, resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit,
-            resourcesToEliminateChest, productionType, boardOrPerkManufacturedResource);
+                                    ResourceType boardManufacturedResource,
+                                    List<ResourceType> perkManufacturedResource) {
+    this.board.performProductionMove(devCardIDs, resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit,
+            resourcesToEliminateChest, productionType, boardManufacturedResource, perkManufacturedResource);
   }
 
   public boolean isFeasibleActivateLeaderCardMove(String leaderCardID) {

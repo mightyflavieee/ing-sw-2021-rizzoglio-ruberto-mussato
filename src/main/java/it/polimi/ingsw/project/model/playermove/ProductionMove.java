@@ -7,43 +7,58 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductionMove extends Move{
-    private final String devCardID;
-    private final String leaderCardId;
+    private final List<String> devCardIDs;
+    private final List<String> leaderCardIDs;
+    private final Map<ResourceType, Integer> requiredResources;
     private final Map<ResourceType, Integer> resourcesToEliminateWarehouse;
     private final Map<ResourceType, Integer> resourcesToEliminateExtraDeposit;
     private final Map<ResourceType, Integer> resourcesToEliminateChest;
     private final ProductionType productionType;
-    private final List<ResourceType> boardOrPerkManufacturedResource;
+    private final ResourceType boardManufacturedResource;
+    private final List<ResourceType> perkManufacturedResource;
 
     // constructs the ProductionMove. If either devCardID or leaderCardId (or both) aren't required,
     // put null as a parameter
-    public ProductionMove(String devCardID,
-                          String leaderCardId,
+    public ProductionMove(List<String> devCardIDs,
+                          List<String> leaderCardIDs,
+                          Map<ResourceType, Integer> requiredResources,
                           Map<ResourceType, Integer> resourcesToEliminateWarehouse,
                           Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
                           Map<ResourceType, Integer> resourcesToEliminateChest,
                           ProductionType productionType,
-                          List<ResourceType> boardOrPerkManufacturedResource) {
-        this.devCardID = devCardID;
-        this.leaderCardId = leaderCardId;
+                          ResourceType boardManufacturedResource,
+                          List<ResourceType> perkManufacturedResource) {
+        this.devCardIDs = devCardIDs;
+        this.leaderCardIDs = leaderCardIDs;
+        this.requiredResources = requiredResources;
         this.resourcesToEliminateWarehouse = resourcesToEliminateWarehouse;
         this.resourcesToEliminateExtraDeposit = resourcesToEliminateExtraDeposit;
         this.resourcesToEliminateChest = resourcesToEliminateChest;
         this.productionType = productionType;
-        this.boardOrPerkManufacturedResource = boardOrPerkManufacturedResource;
+        this.boardManufacturedResource = boardManufacturedResource;
+        this.perkManufacturedResource = perkManufacturedResource;
     }
 
     @Override
     public boolean isFeasibleMove(Match match){
-        return match.isFeasibleProductionMove(this.devCardID, this.leaderCardId, this.resourcesToEliminateWarehouse,
-                this.resourcesToEliminateExtraDeposit, this.resourcesToEliminateChest, this.productionType);
+        return match.isFeasibleProductionMove(this.devCardIDs,
+                this.leaderCardIDs,
+                this.requiredResources,
+                this.resourcesToEliminateWarehouse,
+                this.resourcesToEliminateExtraDeposit,
+                this.resourcesToEliminateChest,
+                this.productionType);
     }
 
     @Override
     public void performMove(Match match){
-        match.performProductionMove(this.devCardID, this.resourcesToEliminateWarehouse,
-                this.resourcesToEliminateExtraDeposit, this.resourcesToEliminateChest, this.productionType,
-                this.boardOrPerkManufacturedResource);
+        match.performProductionMove(this.devCardIDs,
+                this.resourcesToEliminateWarehouse,
+                this.resourcesToEliminateExtraDeposit,
+                this.resourcesToEliminateChest,
+                this.productionType,
+                this.boardManufacturedResource,
+                this.perkManufacturedResource);
     }
 
     @Override
