@@ -21,11 +21,7 @@ class LeaderCardContainerTest {
 
     }
 
-    @Test
-    void setJsonLeaderCard() {
-        Gson gson = new Gson();
 
-    }
 
     @Test
     void testGetLeaderCards() {

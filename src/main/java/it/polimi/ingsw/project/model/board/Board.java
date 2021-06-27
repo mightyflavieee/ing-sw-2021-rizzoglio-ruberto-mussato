@@ -268,7 +268,6 @@ public class Board implements Serializable, Cloneable {
   // eliminates resources from the chest, usable only within
   // performBuyDevCardMove()
   private void eliminateResourcesFromChest(Map<ResourceType, Integer> resourcesToEliminate) {
-    List<ResourceType> resourceTypeToEliminate = new ArrayList<>();
     for (ResourceType type : this.chest.keySet()) {
       if (resourcesToEliminate.containsKey(type)) {
         // if (this.chest.get(type).equals(resourcesToEliminate.get(type))) {

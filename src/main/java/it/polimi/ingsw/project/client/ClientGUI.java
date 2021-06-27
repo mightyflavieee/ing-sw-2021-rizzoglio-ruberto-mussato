@@ -78,10 +78,6 @@ public class ClientGUI extends Client implements Observer<Move> {
 
     }
 
-    public void setLocalGameID(String gameId){
-        this.gameId = gameId;
-    }
-
     @Override
     public void reBuildGame(String errorMessage) {
 

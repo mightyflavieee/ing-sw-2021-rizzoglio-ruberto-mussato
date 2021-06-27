@@ -25,7 +25,7 @@ public class Lobby {
     private Controller controller;
     private boolean isGameStarted = false;
 
-    public Lobby(String id, Integer maxNumberOfPlayers) {
+    public Lobby(Integer maxNumberOfPlayers) {
         this.maxNumberOfPlayers = maxNumberOfPlayers;
         this.mapOfSocketClientConnections = new LinkedHashMap<String, SocketClientConnection>();
         this.leaderCardContainer = new LeaderCardContainer();

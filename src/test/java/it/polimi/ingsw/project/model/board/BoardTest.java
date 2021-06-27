@@ -75,7 +75,7 @@ class BoardTest {
         Player player = new Player("darkangelcraft_XDXD_6969");
         List<Player> playerList = new ArrayList<>();
         playerList.add(player);
-        Match match = new Match(playerList);
+        new Match(playerList);
         // adds resources to the Warehouse and chest
         Map<ShelfFloor, List<Resource>> shelves = player.getBoard().getWarehouse().getShelves();
         List<Resource> resourcesListFirstFloor = new ArrayList<>();

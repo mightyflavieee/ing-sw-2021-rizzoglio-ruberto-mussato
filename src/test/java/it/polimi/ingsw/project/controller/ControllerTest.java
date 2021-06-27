@@ -165,7 +165,6 @@ class ControllerTest {
                 warehouse1Leo.getShelves().get(ShelfFloor.Third).add(new Resource(ResourceType.Shield));
                 warehouse1Leo.getShelves().get(ShelfFloor.Second).add(new Resource(ResourceType.Coin));
                 warehouse1Leo.getShelves().get(ShelfFloor.First).add(new Resource(ResourceType.Stone));
-                Boolean hasRedMarble = true;
                 Move move1Leo = new TakeMarketResourcesMove(warehouse1Leo, new ArrayList<>(), localMarket, true);
                 PlayerMove playerMove1Leo = new PlayerMove(leo, null, move1Leo);
                 model.updateTurn();

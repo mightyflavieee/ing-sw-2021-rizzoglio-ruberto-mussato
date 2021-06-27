@@ -192,7 +192,7 @@ public class Server {
             Model recreatedModel = gson.fromJson(reader, Model.class);
             reader.close();
             recreatedModel.reAddObserversOnMatch();
-            Lobby recreatedLobby = new Lobby(gameId, recreatedModel.extractNumberOfPlayers());
+            Lobby recreatedLobby = new Lobby(recreatedModel.extractNumberOfPlayers());
             recreatedLobby.setModel(recreatedModel);
             Map<String, SocketClientConnection> mapOfSocketClientConnection = new HashMap<String, SocketClientConnection>();
             Map<String, RemoteView> mapOfViews = new HashMap<>();
@@ -258,7 +258,7 @@ public class Server {
             UUID uuid = UUID.randomUUID();
             String gameId = uuid.toString().substring(0, 5);
             if (!this.mapOfAvailableLobbies.containsKey(gameId) && !(new File(gameId + ".json").exists())) {
-                this.mapOfAvailableLobbies.put(gameId, new Lobby(gameId, playersNumber));
+                this.mapOfAvailableLobbies.put(gameId, new Lobby(playersNumber));
                 return gameId;
             }
         }

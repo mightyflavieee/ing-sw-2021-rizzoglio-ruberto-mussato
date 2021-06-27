@@ -4,6 +4,7 @@ import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
 
+@SuppressWarnings("unused")
 public class LeaderCardButtonGUI extends JButton {
     private final String id;
 
