@@ -111,10 +111,14 @@ public class ClientCLI extends Client {
     }
 
     private void showScoreboard() {
-        LinkedHashMap<Integer, Player> scoreboard = match.getLeaderboard();
-        for (Integer position : scoreboard.keySet()) {
-            System.out.println("" + (position + 1) + "° " + scoreboard.get(position).getNickname() + " VictoryPoints:"
-                    + scoreboard.get(position).getVictoryPoints());
+        if(!match.getLorenzoWon()) {
+            LinkedHashMap<Integer, Player> scoreboard = match.getLeaderboard();
+            for (Integer position : scoreboard.keySet()) {
+                System.out.println("" + (position + 1) + "° " + scoreboard.get(position).getNickname() + " VictoryPoints:"
+                        + scoreboard.get(position).getVictoryPoints());
+            }
+        }else{
+            System.out.println("Lorenzo il magnifico won!");
         }
 
     }

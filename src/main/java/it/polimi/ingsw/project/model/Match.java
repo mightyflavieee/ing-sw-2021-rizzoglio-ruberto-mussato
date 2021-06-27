@@ -394,7 +394,9 @@ public class Match implements Serializable, Cloneable {
             if (player.getNickname().equals(disconnectedPlayer.getNickname())) {
                 player.setIsConnected(false);
                 if (!currentPlayer.getIsConnected()) {
+                    this.currentPlayer.setToWaitPhase();
                     this.nextPlayer();
+                    this.currentPlayer.setToInitialPhase();
                 }
                 break;
             }

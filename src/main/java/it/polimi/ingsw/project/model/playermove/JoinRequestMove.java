@@ -14,12 +14,12 @@ public class JoinRequestMove extends GameRequestMove {
 
     @Override
     public void action(SocketClientConnection connection) {
-        if (connection.getServer().isGameStarted(this.gameId)) {
+        if (connection.getServer().doesGameExistedAndHasNotRestarted(this.gameId)) {
+            connection.getServer().handleReconnectionAfterServerCrashed(connection, this.gameId, this.nickName);
+        } else if (connection.getServer().isGameStarted(this.gameId)) {
             connection.getServer().handleReconnectionOnStartedGame(connection, this.gameId, this.nickName);
         } else if (connection.getServer().isGamePresent(this.gameId)) {
             connection.getServer().handleReconnectionOnNotStartedGame(connection, this.gameId, this.nickName);
-        } else if (connection.getServer().doesGameExisted(this.gameId)) {
-            connection.getServer().handleReconnectionAfterServerCrashed(connection, this.gameId, this.nickName);
         } else {
             connection.send(new ErrorJoinMessage(
                     "We are sorry but we couldn't find the game you are trying to join. Check the id!"));
