@@ -6,7 +6,7 @@ import it.polimi.ingsw.project.client.Client;
 
 public class ConfirmJoinMessage implements Serializable, ResponseMessage {
     private static final long serialVersionUID = 3840280592455322704L;
-    private String gameId;
+    private final String gameId;
 
     public ConfirmJoinMessage(String gameId) {
         this.gameId = gameId;

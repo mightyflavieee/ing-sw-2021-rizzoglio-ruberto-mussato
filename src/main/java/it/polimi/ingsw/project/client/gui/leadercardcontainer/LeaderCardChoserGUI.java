@@ -13,11 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LeaderCardChoserGUI extends JInternalFrame {
-    private List<LeaderCardButtonGUI> leaderCardButtonGUIList;
-    private List<String> chosedIDs;
-    private List <LeaderCard> leadercards;
-    private ClientGUI clientGUI;
-    private NewGameHandler newGameHandler;
+    private final List<LeaderCardButtonGUI> leaderCardButtonGUIList;
+    private final List<String> chosedIDs;
+    private final List <LeaderCard> leadercards;
+    private final ClientGUI clientGUI;
+    private final NewGameHandler newGameHandler;
     public LeaderCardChoserGUI(List<LeaderCard> leadercards, ClientGUI clientGUI, NewGameHandler newGameHandler) {
         this.setTitle("Select Two Leader Cards");
         this.clientGUI = clientGUI;

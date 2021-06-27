@@ -21,13 +21,13 @@ import java.util.List;
 
 public class WarehouseGUI extends JInternalFrame {
     private LinkedHashMap<ShelfFloor, List<JButton>> shelvesButtons;
-    private Map<ShelfFloor, Integer> numberOfResoucesPerShelf;
-    private Map<ShelfFloor, ResourceType> resourceTypePerShelf;
+    private final Map<ShelfFloor, Integer> numberOfResoucesPerShelf;
+    private final Map<ShelfFloor, ResourceType> resourceTypePerShelf;
     private boolean canChangeShelves;
     private ShelfFloor floorToChange;
-    private InformationsGUI informationsGUI;
+    private final InformationsGUI informationsGUI;
     private Warehouse warehouseModel;
-    private ExtraDepositsGUI extraDepositsGUI;
+    private final ExtraDepositsGUI extraDepositsGUI;
     private boolean clickable;
 
     public WarehouseGUI(InformationsGUI informationsGUI, Warehouse warehouse) {

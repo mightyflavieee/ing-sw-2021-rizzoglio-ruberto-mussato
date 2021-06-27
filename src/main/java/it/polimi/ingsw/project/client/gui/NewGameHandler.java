@@ -20,8 +20,8 @@ public class NewGameHandler extends JPanel {
     private static final String WAITINGROOM = "WAITING_ROOM";
     private static final String LEADERCARDCHOOSER = "LEADERCARDCHOOSER";
     private static final String RESOURCESELECTOR = "RESOURCESELECTOR";
-    private JPanel mainPanel;
-    private CardLayout mainLayout;
+    private final JPanel mainPanel;
+    private final CardLayout mainLayout;
 
     private JLabel selectNicknameTitle;
     private JLabel selectNicknameLabel;
@@ -51,7 +51,7 @@ public class NewGameHandler extends JPanel {
 
 
     private LeaderCardChoserGUI leaderCardChooser;
-    private ClientGUI clientGUI;
+    private final ClientGUI clientGUI;
 
     public NewGameHandler(ClientGUI clientGUI) {
         this.setVisible(true);

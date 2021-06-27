@@ -8,9 +8,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class InsertNameListener implements ActionListener {
-    private ClientGUI clientGUI;
-    private JTextField nicknameField;
-    private List<JComponent> successiveButtons;
+    private final ClientGUI clientGUI;
+    private final JTextField nicknameField;
+    private final List<JComponent> successiveButtons;
 
     public InsertNameListener(ClientGUI clientGUI, JTextField nicknameField, List<JComponent> successiveButtons) {
         this.clientGUI = clientGUI;

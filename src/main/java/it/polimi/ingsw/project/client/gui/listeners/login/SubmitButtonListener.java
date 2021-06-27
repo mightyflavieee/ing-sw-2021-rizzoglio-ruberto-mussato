@@ -8,9 +8,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class SubmitButtonListener implements ActionListener {//it is uset for the submit button at the end of clientGUI.createGame
-    private ClientGUI clientGUI;
-    private JFrame menuFrame;
-    private List<JComponent> previousButtons;
+    private final ClientGUI clientGUI;
+    private final JFrame menuFrame;
+    private final List<JComponent> previousButtons;
 
     public SubmitButtonListener(ClientGUI clientGUI, JFrame menuFrame, List<JComponent> previousButtons) {
         this.clientGUI = clientGUI;

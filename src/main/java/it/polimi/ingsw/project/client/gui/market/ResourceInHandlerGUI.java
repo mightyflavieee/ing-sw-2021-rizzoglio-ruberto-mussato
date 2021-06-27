@@ -13,10 +13,16 @@ import java.util.Map;
 
 public class ResourceInHandlerGUI extends JInternalFrame {
     private ResourceType resourceType;
-    private JButton firstShelfButton, secondShelfButton, thirdShelfButton, extraDepositButton, discardButton,deselectButton;
+    private final JButton firstShelfButton;
+    private final JButton secondShelfButton;
+    private final JButton thirdShelfButton;
+    private final JButton extraDepositButton;
+    private final JButton discardButton;
+    private final JButton deselectButton;
     private int resourceNum;
-    private JLabel imageLabel, numLabel;
-    private WarehouseGUI warehouseGUI;
+    private final JLabel imageLabel;
+    private final JLabel numLabel;
+    private final WarehouseGUI warehouseGUI;
     public ResourceInHandlerGUI(WarehouseGUI warehouseGUI, ResourceInHandGUI resourceInHandGUI, GUI gui) {
         this.warehouseGUI = warehouseGUI;
         this.setTitle("Resource Selected:");
@@ -72,42 +78,26 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 this.deselectButton.setEnabled(false);
                 break;
             case 1:
-                if(numOfResourcesPerShelves.get(ShelfFloor.First)==0
-                && resourceTypePerShelf.get(ShelfFloor.Second) != this.resourceType
-                        && resourceTypePerShelf.get(ShelfFloor.Third) != this.resourceType) {
-                    this.firstShelfButton.setEnabled(true);
-                }else{
-                    this.firstShelfButton.setEnabled(false);
-                }
-                if(((resourceTypePerShelf.get(ShelfFloor.Second)==this.resourceType
-                && numOfResourcesPerShelves.get(ShelfFloor.Second) < 2)
-                        || numOfResourcesPerShelves.get(ShelfFloor.Second)==0)
-                        && resourceTypePerShelf.get(ShelfFloor.First) != this.resourceType
-                        && resourceTypePerShelf.get(ShelfFloor.Third) != this.resourceType) {
-                    this.secondShelfButton.setEnabled(true);
-                }else{
-                    this.secondShelfButton.setEnabled(false);
-                }
-                if(((resourceTypePerShelf.get(ShelfFloor.Third)==this.resourceType
-                        && numOfResourcesPerShelves.get(ShelfFloor.Third) < 3)
-                        || numOfResourcesPerShelves.get(ShelfFloor.Third)==0)
+                this.firstShelfButton.setEnabled(numOfResourcesPerShelves.get(ShelfFloor.First) == 0
                         && resourceTypePerShelf.get(ShelfFloor.Second) != this.resourceType
-                        && resourceTypePerShelf.get(ShelfFloor.First) != this.resourceType) {
-                    this.thirdShelfButton.setEnabled(true);
-                }else{
-                    this.thirdShelfButton.setEnabled(false);
-                }
+                        && resourceTypePerShelf.get(ShelfFloor.Third) != this.resourceType);
+                this.secondShelfButton.setEnabled(((resourceTypePerShelf.get(ShelfFloor.Second) == this.resourceType
+                        && numOfResourcesPerShelves.get(ShelfFloor.Second) < 2)
+                        || numOfResourcesPerShelves.get(ShelfFloor.Second) == 0)
+                        && resourceTypePerShelf.get(ShelfFloor.First) != this.resourceType
+                        && resourceTypePerShelf.get(ShelfFloor.Third) != this.resourceType);
+                this.thirdShelfButton.setEnabled(((resourceTypePerShelf.get(ShelfFloor.Third) == this.resourceType
+                        && numOfResourcesPerShelves.get(ShelfFloor.Third) < 3)
+                        || numOfResourcesPerShelves.get(ShelfFloor.Third) == 0)
+                        && resourceTypePerShelf.get(ShelfFloor.Second) != this.resourceType
+                        && resourceTypePerShelf.get(ShelfFloor.First) != this.resourceType);
                 if(extraDeposit == null){
                     this.extraDepositButton.setEnabled(false);
                 }else{
                     if(!extraDeposit.containsKey(this.resourceType)){
                         this.extraDepositButton.setEnabled(false);
                     }else{
-                        if(extraDeposit.get(this.resourceType) < 2){
-                            this.extraDepositButton.setEnabled(true);
-                        }else{
-                            this.extraDepositButton.setEnabled(false);
-                        }
+                        this.extraDepositButton.setEnabled(extraDeposit.get(this.resourceType) < 2);
                     }
                 }
                 this.discardButton.setEnabled(true);
@@ -115,33 +105,21 @@ public class ResourceInHandlerGUI extends JInternalFrame {
                 break;
             case 2:
                 this.firstShelfButton.setEnabled(false);
-                if(numOfResourcesPerShelves.get(ShelfFloor.Second)==0
+                this.secondShelfButton.setEnabled(numOfResourcesPerShelves.get(ShelfFloor.Second) == 0
                         && resourceTypePerShelf.get(ShelfFloor.First) != this.resourceType
-                        && resourceTypePerShelf.get(ShelfFloor.Third) != this.resourceType) {
-                    this.secondShelfButton.setEnabled(true);
-                }else{
-                    this.secondShelfButton.setEnabled(false);
-                }
-                if(((resourceTypePerShelf.get(ShelfFloor.Third)==this.resourceType
+                        && resourceTypePerShelf.get(ShelfFloor.Third) != this.resourceType);
+                this.thirdShelfButton.setEnabled(((resourceTypePerShelf.get(ShelfFloor.Third) == this.resourceType
                         && numOfResourcesPerShelves.get(ShelfFloor.Third) < 2)
-                        || numOfResourcesPerShelves.get(ShelfFloor.Third)==0)
+                        || numOfResourcesPerShelves.get(ShelfFloor.Third) == 0)
                         && resourceTypePerShelf.get(ShelfFloor.Second) != this.resourceType
-                        && resourceTypePerShelf.get(ShelfFloor.First) != this.resourceType) {
-                    this.thirdShelfButton.setEnabled(true);
-                }else{
-                    this.thirdShelfButton.setEnabled(false);
-                }
+                        && resourceTypePerShelf.get(ShelfFloor.First) != this.resourceType);
                 if(extraDeposit == null){
                     this.extraDepositButton.setEnabled(false);
                 }else{
                     if(!extraDeposit.containsKey(this.resourceType)){
                         this.extraDepositButton.setEnabled(false);
                     }else{
-                        if(extraDeposit.get(this.resourceType) ==0){
-                            this.extraDepositButton.setEnabled(true);
-                        }else{
-                            this.extraDepositButton.setEnabled(false);
-                        }
+                        this.extraDepositButton.setEnabled(extraDeposit.get(this.resourceType) == 0);
                     }
                 }
                 this.discardButton.setEnabled(true);
@@ -150,13 +128,9 @@ public class ResourceInHandlerGUI extends JInternalFrame {
             case 3:
                 this.firstShelfButton.setEnabled(false);
                 this.secondShelfButton.setEnabled(false);
-                if(numOfResourcesPerShelves.get(ShelfFloor.Third) == 0
+                this.thirdShelfButton.setEnabled(numOfResourcesPerShelves.get(ShelfFloor.Third) == 0
                         && resourceTypePerShelf.get(ShelfFloor.Second) != this.resourceType
-                        && resourceTypePerShelf.get(ShelfFloor.First) != this.resourceType) {
-                    this.thirdShelfButton.setEnabled(true);
-                }else{
-                    this.thirdShelfButton.setEnabled(false);
-                }
+                        && resourceTypePerShelf.get(ShelfFloor.First) != this.resourceType);
                 this.extraDepositButton.setEnabled(false);
                 this.discardButton.setEnabled(true);
                 this.deselectButton.setEnabled(true);

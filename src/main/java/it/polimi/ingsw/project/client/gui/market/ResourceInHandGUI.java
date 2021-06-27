@@ -15,10 +15,16 @@ import java.awt.*;
 import java.util.List;
 
 public class ResourceInHandGUI extends JInternalFrame {
-    private JButton coinButton, stoneButton, shieldButton, servantButton;
-    private JLabel coinLabel, stoneLabel, shieldLabel, servantLabel;
+    private final JButton coinButton;
+    private final JButton stoneButton;
+    private final JButton shieldButton;
+    private final JButton servantButton;
+    private final JLabel coinLabel;
+    private final JLabel stoneLabel;
+    private final JLabel shieldLabel;
+    private final JLabel servantLabel;
     private int coinInt, stoneInt, shieldInt, servantInt;
-    private TakeMarketResourceBuilder takeMarketResourceBuilder;
+    private final TakeMarketResourceBuilder takeMarketResourceBuilder;
     public ResourceInHandGUI(InformationsGUI informationsGUI, TakeMarketResourceBuilder takeMarketResourceBuilder) {
         this.setTitle("Resources in Hand");
         this.setLayout(new GridLayout(2,4));
@@ -98,31 +104,11 @@ public class ResourceInHandGUI extends JInternalFrame {
         this.stoneLabel.setText(String.valueOf(this.stoneInt));
         this.shieldLabel.setText(String.valueOf(this.shieldInt));
         this.servantLabel.setText(String.valueOf(this.servantInt));
-        if(this.coinInt == 0){
-            this.coinButton.setEnabled(false);
-        }else{
-            this.coinButton.setEnabled(true);
-        }
-        if(this.stoneInt == 0){
-            this.stoneButton.setEnabled(false);
-        }else{
-            this.stoneButton.setEnabled(true);
-        }
-        if(this.shieldInt == 0){
-            this.shieldButton.setEnabled(false);
-        }else{
-            this.shieldButton.setEnabled(true);
-        }
-        if(this.servantInt == 0){
-            this.servantButton.setEnabled(false);
-        }else{
-            this.servantButton.setEnabled(true);
-        }
-        if(coinInt + stoneInt + servantInt + shieldInt == 0){
-            takeMarketResourceBuilder.setMarketClear(true);
-        }else{
-            takeMarketResourceBuilder.setMarketClear(false);
-        }
+        this.coinButton.setEnabled(this.coinInt != 0);
+        this.stoneButton.setEnabled(this.stoneInt != 0);
+        this.shieldButton.setEnabled(this.shieldInt != 0);
+        this.servantButton.setEnabled(this.servantInt != 0);
+        takeMarketResourceBuilder.setMarketClear(coinInt + stoneInt + servantInt + shieldInt == 0);
     }
     public void decreaseCoin(){
         this.coinInt --;

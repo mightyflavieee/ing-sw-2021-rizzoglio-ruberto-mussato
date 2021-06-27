@@ -18,14 +18,14 @@ import java.util.Map;
 
 public class InformationsGUI extends JInternalFrame {
     private TurnPhase turnPhase;
-    private JTextArea jTextArea;
+    private final JTextArea jTextArea;
     private JInternalFrame phaseFrame;
     private ResourceInHandlerGUI resourceInHandler;
     private MainPhaseHandler mainPhaseHandler;
     private SelectResourcesHandler selectResourcesHandler;
     private BuyDevCardMoveHandler buyDevCardMoveHandler;
     private ProductionMoveHandler productionMoveHandler;
-    private GUI gui;
+    private final GUI gui;
 
     public InformationsGUI(GUI gui, TurnPhase turnPhase) {
         this.gui = gui;

@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InsertFirstShelfButtonListener implements ActionListener {
-    private ResourceInHandlerGUI resourceInHandlerGUI;
-    private WarehouseGUI warehouseGUI;
-    private ResourceInHandGUI resourceInHandGUI;
-    private GUI gui;
+    private final ResourceInHandlerGUI resourceInHandlerGUI;
+    private final WarehouseGUI warehouseGUI;
+    private final ResourceInHandGUI resourceInHandGUI;
+    private final GUI gui;
 
     public InsertFirstShelfButtonListener(ResourceInHandlerGUI resourceInHandlerGUI, WarehouseGUI warehouseGUI, ResourceInHandGUI resourceInHandGUI, GUI gui) {
         this.resourceInHandlerGUI = resourceInHandlerGUI;

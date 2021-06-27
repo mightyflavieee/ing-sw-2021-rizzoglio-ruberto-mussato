@@ -5,7 +5,7 @@ import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.playermove.interfaces.MoveHandler;
 
 public class PlayerDisconnectedRequestMove extends GameRequestMove implements MoveHandler {
-  private Player disconnectedPlayer;
+  private final Player disconnectedPlayer;
 
   public PlayerDisconnectedRequestMove(Player disconnectedPlayer) {
     this.disconnectedPlayer = disconnectedPlayer;

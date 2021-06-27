@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SelectLeaderCardProductionListener implements ActionListener {
-    private GUI gui;
+    private final GUI gui;
     private LeaderCard leaderCard;
 
     public SelectLeaderCardProductionListener(GUI gui, LeaderCard leaderCard) {

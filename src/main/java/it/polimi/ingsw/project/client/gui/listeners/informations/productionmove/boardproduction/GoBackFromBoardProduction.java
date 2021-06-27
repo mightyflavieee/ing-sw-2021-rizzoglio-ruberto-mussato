@@ -7,8 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GoBackFromBoardProduction implements ActionListener {
-    private GUI gui;
-    private boolean isManufacturingSelection;
+    private final GUI gui;
+    private final boolean isManufacturingSelection;
 
     public GoBackFromBoardProduction(GUI gui, boolean isManufacturingSelection) {
         this.gui = gui;

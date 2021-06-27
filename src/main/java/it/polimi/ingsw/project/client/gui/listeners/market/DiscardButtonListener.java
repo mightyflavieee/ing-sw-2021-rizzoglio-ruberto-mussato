@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DiscardButtonListener implements ActionListener {
-    private ResourceInHandlerGUI resourceInHandlerGUI;
-    private ResourceInHandGUI resourceInHandGUI;
-    private TakeMarketResourceBuilder takeMarketResourceBuilder;
-    private GUI gui;
+    private final ResourceInHandlerGUI resourceInHandlerGUI;
+    private final ResourceInHandGUI resourceInHandGUI;
+    private final TakeMarketResourceBuilder takeMarketResourceBuilder;
+    private final GUI gui;
 
     public DiscardButtonListener(ResourceInHandlerGUI resourceInHandlerGUI, ResourceInHandGUI resourceInHandGUI, GUI gui) {
         this.resourceInHandlerGUI = resourceInHandlerGUI;

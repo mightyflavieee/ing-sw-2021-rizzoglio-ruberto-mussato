@@ -5,8 +5,8 @@ import it.polimi.ingsw.project.messages.ErrorJoinMessage;
 import it.polimi.ingsw.project.server.SocketClientConnection;
 
 public class CreateRequestMove extends GameRequestMove {
-    private Integer numberOfPlayers;
-    private String nickName;
+    private final Integer numberOfPlayers;
+    private final String nickName;
 
     public CreateRequestMove(Integer numberOfPlayers, String nickname) {
         this.numberOfPlayers = numberOfPlayers;

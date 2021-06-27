@@ -9,9 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ChestGUISelectResourceListener implements ActionListener {
-    private ChestGUI chestGUI;
-    private InformationsGUI informationsGUI;
-    private ResourceType resourceType;
+    private final ChestGUI chestGUI;
+    private final InformationsGUI informationsGUI;
+    private final ResourceType resourceType;
 
 
     public ChestGUISelectResourceListener(ChestGUI chestGUI, InformationsGUI informationsGUI, ResourceType resourceType) {

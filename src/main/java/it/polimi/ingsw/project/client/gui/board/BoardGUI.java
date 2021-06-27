@@ -13,7 +13,7 @@ public class BoardGUI extends JInternalFrame {
     private final WarehouseGUI warehouse;
     private final MapTrayGUI mapTray;
     private final ChestGUI chest;
-    private InformationsGUI informationsGUI;
+    private final InformationsGUI informationsGUI;
     private Board boardModel;
 
     public BoardGUI(String nickname, InformationsGUI informationsGUI, Board board, boolean isSinglePlayer){

@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 public class LeaderCardDiscardButtonListener implements ActionListener {
     private String id;
-    private GUI gui;
+    private final GUI gui;
 
     public LeaderCardDiscardButtonListener(String id, GUI gui) {
         this.id = id;

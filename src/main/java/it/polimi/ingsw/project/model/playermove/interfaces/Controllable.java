@@ -5,5 +5,5 @@ import it.polimi.ingsw.project.view.View;
 
 public interface Controllable {
 
-  public void notifyMoveToController(Player player, View view, Controllable requestedMove);
+  void notifyMoveToController(Player player, View view, Controllable requestedMove);
 }

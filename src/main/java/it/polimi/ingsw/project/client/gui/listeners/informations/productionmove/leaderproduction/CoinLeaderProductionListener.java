@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CoinLeaderProductionListener implements ActionListener {
-    private GUI gui;
+    private final GUI gui;
 
     public CoinLeaderProductionListener(GUI gui) { this.gui = gui; }
 

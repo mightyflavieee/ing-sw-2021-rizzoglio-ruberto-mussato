@@ -8,9 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class InsertMatchIdListener implements ActionListener {
-    private ClientGUI clientGUI;
-    private JTextField idField;
-    private JButton submitButton;
+    private final ClientGUI clientGUI;
+    private final JTextField idField;
+    private final JButton submitButton;
 
     public InsertMatchIdListener(ClientGUI clientGUI, JTextField idField,JButton submitButton) {
         this.clientGUI = clientGUI;

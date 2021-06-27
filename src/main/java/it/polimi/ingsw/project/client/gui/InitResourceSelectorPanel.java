@@ -10,11 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InitResourceSelectorPanel extends JInternalFrame {
-        private ResourceButton coinButton, shieldButton, stoneButton, servantButton;
+        private final ResourceButton coinButton;
+    private final ResourceButton shieldButton;
+    private final ResourceButton stoneButton;
+    private final ResourceButton servantButton;
         private int coinInt, shieldInt, stoneInt, servantInt;
-        private ClientGUI clientGUI;
+        private final ClientGUI clientGUI;
         private int numberOfResourcesToChoose;
-        private NewGameHandler newGameHandler;
+        private final NewGameHandler newGameHandler;
     public InitResourceSelectorPanel(ClientGUI clientGUI, NewGameHandler newGameHandler, Integer numberOfResourcesToChoose) {
         this.setTitle("Select " + numberOfResourcesToChoose + " resources");
         this.clientGUI = clientGUI;

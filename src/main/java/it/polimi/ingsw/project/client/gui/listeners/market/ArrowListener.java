@@ -12,11 +12,12 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ArrowListener implements ActionListener {
-    private TrayGUI trayGui;
-    private int axis, position;
-    private ResourceInHandGUI resourceInHandGUI;
-    private GUI gui;
-    private TakeMarketResourceBuilder takeMarketResourceBuilder;
+    private final TrayGUI trayGui;
+    private final int axis;
+    private final int position;
+    private final ResourceInHandGUI resourceInHandGUI;
+    private final GUI gui;
+    private final TakeMarketResourceBuilder takeMarketResourceBuilder;
     public ArrowListener(TrayGUI trayGui, int axis, int position, ResourceInHandGUI resourceInHandGUI, GUI gui) {
         this.trayGui = trayGui;
         this.axis = axis;

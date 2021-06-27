@@ -7,8 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class JoinGameListener implements ActionListener {
-    private ClientGUI clientGUI;
-    private NewGameHandler newGameHandler;
+    private final ClientGUI clientGUI;
+    private final NewGameHandler newGameHandler;
 
     public JoinGameListener(ClientGUI clientGUI, NewGameHandler newGameHandler) {
         this.clientGUI = clientGUI;

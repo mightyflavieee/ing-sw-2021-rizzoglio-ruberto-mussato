@@ -6,7 +6,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 public class ResizeListener extends ComponentAdapter {
-    private GUI gui;
+    private final GUI gui;
 
     public ResizeListener(GUI gui) {
         this.gui = gui;

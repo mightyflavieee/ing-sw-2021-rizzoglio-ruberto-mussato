@@ -122,9 +122,9 @@ class ControllerTest {
                 assertEquals(TurnPhase.InitialPhase, model.getMatch().getTurnPhase(gianluca.getNickname()));
                 model.updateTurn(); // now i am in the main phase
                 assertEquals(TurnPhase.MainPhase, gianluca.getTurnPhase());
-                controller.update((MoveHandler) playerMove1Gian);
+                controller.update(playerMove1Gian);
                 assertEquals(TurnPhase.EndPhase, gianluca.getTurnPhase());
-                controller.update((MoveHandler) (new PlayerMove(gianluca, null, new NoMove())));
+                controller.update(new PlayerMove(gianluca, null, new NoMove()));
                 assertEquals(TurnPhase.WaitPhase, gianluca.getTurnPhase());
                 assertEquals(0, model.getMatch().getVictoryPoints(gianluca.getNickname()));
                 assertEquals(0, model.getMatch().getMarkerPosition(gianluca.getNickname()));
@@ -148,7 +148,7 @@ class ControllerTest {
                 assertEquals(TurnPhase.InitialPhase, flavio.getTurnPhase());
                 model.updateTurn();
                 assertEquals(TurnPhase.MainPhase, flavio.getTurnPhase());
-                controller.update((MoveHandler) playerMove1Flavio);
+                controller.update(playerMove1Flavio);
                 model.updateTurn();
                 assertEquals(0, flavio.getVictoryPoints());
                 assertEquals(0, flavio.getBoard().getFaithMap().getMarkerPosition());
@@ -169,7 +169,7 @@ class ControllerTest {
                 Move move1Leo = new TakeMarketResourcesMove(warehouse1Leo, new ArrayList<>(), localMarket, true);
                 PlayerMove playerMove1Leo = new PlayerMove(leo, null, move1Leo);
                 model.updateTurn();
-                controller.update((MoveHandler) playerMove1Leo);
+                controller.update(playerMove1Leo);
                 model.updateTurn();
                 assertEquals(0, leo.getVictoryPoints());
                 assertEquals(1, leo.getBoard().getFaithMap().getMarkerPosition());
@@ -187,7 +187,7 @@ class ControllerTest {
                                 new HashMap<>());
                 PlayerMove playerMove2Gian = new PlayerMove(gianluca, null, move2Gian);
                 model.updateTurn();
-                controller.update((MoveHandler) playerMove2Gian);
+                controller.update(playerMove2Gian);
                 model.updateTurn();
                 assertEquals(1, gianluca.getVictoryPoints());
                 assertEquals(0, gianluca.getBoard().getFaithMap().getMarkerPosition());
@@ -202,7 +202,7 @@ class ControllerTest {
                 resourcesToEliminateWarehouse.clear();
                 Move move2Flavio = new DiscardLeaderCardMove("id3");
                 PlayerMove playerMove2Flavio = new PlayerMove(flavio, null, move2Flavio);
-                controller.update((MoveHandler) playerMove2Flavio);
+                controller.update(playerMove2Flavio);
                 model.updateTurn();
                 model.updateTurn();
                 assertEquals(1, flavio.getBoard().getLeaderCards().size());
@@ -224,12 +224,12 @@ class ControllerTest {
                 discardedResources.add(new Resource(ResourceType.Servant));
                 Move move3Leo = new TakeMarketResourcesMove(warehouse2Leo, discardedResources, localMarket, false);
                 PlayerMove playerMove2Leo = new PlayerMove(leo, null, move2Leo);
-                controller.update((MoveHandler) playerMove2Leo);
+                controller.update(playerMove2Leo);
                 assertEquals(2, leo.getBoard().getLeaderCards().size());
                 assertEquals(1, leo.getBoard().getFaithMap().getMarkerPosition());
                 PlayerMove playerMove3Leo = new PlayerMove(leo, null, move3Leo);
                 model.updateTurn();
-                controller.update((MoveHandler) playerMove3Leo);
+                controller.update(playerMove3Leo);
                 model.updateTurn();
                 assertEquals(0, leo.getVictoryPoints());
                 assertEquals(4, flavio.getBoard().getFaithMap().getMarkerPosition());
@@ -246,7 +246,7 @@ class ControllerTest {
                                 ProductionType.Board, null);
                 PlayerMove playerMove3Gian = new PlayerMove(gianluca, null, move3Gian);
                 model.updateTurn();
-                controller.update((MoveHandler) playerMove3Gian);
+                controller.update(playerMove3Gian);
                 model.updateTurn();
                 // end game
                 flavio.getBoard().moveForward();// 1

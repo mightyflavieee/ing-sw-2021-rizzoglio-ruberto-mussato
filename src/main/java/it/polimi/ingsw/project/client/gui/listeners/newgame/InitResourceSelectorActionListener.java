@@ -7,8 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class InitResourceSelectorActionListener implements ActionListener {
-    private ResourceType resourceType;
-    private InitResourceSelectorPanel initResourceSelectorPanel;
+    private final ResourceType resourceType;
+    private final InitResourceSelectorPanel initResourceSelectorPanel;
 
     public InitResourceSelectorActionListener(ResourceType resourceType, InitResourceSelectorPanel initResourceSelectorPanel) {
         this.resourceType = resourceType;

@@ -210,10 +210,7 @@ public class Player implements Serializable, Cloneable {
   }
 
   public boolean hasSevenCards() {
-    if (this.board.countDevCards() == 7) {
-      return true;
-    }
-    return false;
+    return this.board.countDevCards() == 7;
   }
 
   public void addResourceVictoryPoints() {

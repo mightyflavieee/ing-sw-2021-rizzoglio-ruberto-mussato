@@ -6,40 +6,20 @@
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
       <artifact name="GC23:jarCLIENT" />
+      <artifact name="GC23:jarSERVER" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Corrected minor error in ClientCLI.showScoreboard">
-      <change afterPath="$PROJECT_DIR$/8124d.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d17fd.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/4801a.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/8124d.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/8aeff.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/d17fd.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_19_17__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_25_04_2021_19_17__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_01_08__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_01_08__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_13_41__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_13_41__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_16_07__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_16_07__Default_Changelist_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_17_27__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_28_05_2021_17_27__Default_Changelist_.xml" afterDir="false" />
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Corrected minor error in LeaderCardPlaceGUI.java">
+      <change afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/8d612.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GC23.iml" beforeDir="false" afterPath="$PROJECT_DIR$/GC23.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/c3d30.json" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/8aeff.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarCLIENT/CLIENT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarCLIENT/CLIENT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/GC23_jarSERVER/SERVER.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/ClientApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/ClientApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientCLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/ClientGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/informations/MainPhaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/client/gui/informations/MainPhaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/JoinAfterDisconnectionRequestMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/playermove/JoinAfterDisconnectionRequestMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/board/WarehouseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/board/WarehouseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/board/card/developmentCard/DevelopmentCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/board/card/developmentCard/DevelopmentCardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/board/card/leaderCard/LeaderCardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/board/card/leaderCard/LeaderCardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/market/MarketTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/market/MarketTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/playermove/ProductionMoveTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/project/model/playermove/ProductionMoveTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -468,21 +448,7 @@
       <workItem from="1624540245709" duration="1584000" />
       <workItem from="1624541892878" duration="14320000" />
       <workItem from="1624568777841" duration="40743000" />
-      <workItem from="1624776144967" duration="5790000" />
-    </task>
-    <task id="LOCAL-00180" summary="added refresh after every turn">
-      <created>1623108120759</created>
-      <option name="number" value="00180" />
-      <option name="presentableId" value="LOCAL-00180" />
-      <option name="project" value="LOCAL" />
-      <updated>1623108120759</updated>
-    </task>
-    <task id="LOCAL-00181" summary="updated listeners">
-      <created>1623108161483</created>
-      <option name="number" value="00181" />
-      <option name="presentableId" value="LOCAL-00181" />
-      <option name="project" value="LOCAL" />
-      <updated>1623108161483</updated>
+      <workItem from="1624776144967" duration="7242000" />
     </task>
     <task id="LOCAL-00182" summary="Added jar">
       <created>1623960795028</created>
@@ -813,7 +779,21 @@
       <option name="project" value="LOCAL" />
       <updated>1624697720960</updated>
     </task>
-    <option name="localTasksCounter" value="229" />
+    <task id="LOCAL-00229" summary="Corrected minor error in MainPhaseHandler.java">
+      <created>1624783622324</created>
+      <option name="number" value="00229" />
+      <option name="presentableId" value="LOCAL-00229" />
+      <option name="project" value="LOCAL" />
+      <updated>1624783622324</updated>
+    </task>
+    <task id="LOCAL-00230" summary="Corrected minor error in LeaderCardPlaceGUI.java">
+      <created>1624784423640</created>
+      <option name="number" value="00230" />
+      <option name="presentableId" value="LOCAL-00230" />
+      <option name="project" value="LOCAL" />
+      <updated>1624784423642</updated>
+    </task>
+    <option name="localTasksCounter" value="231" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -843,7 +823,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Corrected minor error in Warehouse.getExtraDepositToString" />
     <MESSAGE value="Corrected minor error in ClientCLI" />
     <MESSAGE value="Added LeaderCardPlaceGUI.enableButtonsForProduction" />
     <MESSAGE value="Implemented ClientGUI.chooseResources" />
@@ -864,11 +843,12 @@
     <MESSAGE value="Corrected minor error in Match.java" />
     <MESSAGE value="Corrected minor error in GUI.setMatch" />
     <MESSAGE value="Corrected minor error in HistoryGUI" />
-    <MESSAGE value="Corrected minor error in LeaderCardPlaceGUI.java" />
     <MESSAGE value="Added try catch to Integer.parseInt" />
     <MESSAGE value="Corrected minor error in ClientCLI.handleMainPhase" />
     <MESSAGE value="Corrected minor error in ClientCLI.showScoreboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected minor error in ClientCLI.showScoreboard" />
+    <MESSAGE value="Corrected minor error in MainPhaseHandler.java" />
+    <MESSAGE value="Corrected minor error in LeaderCardPlaceGUI.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected minor error in LeaderCardPlaceGUI.java" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

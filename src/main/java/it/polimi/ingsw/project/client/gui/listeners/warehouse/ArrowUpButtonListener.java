@@ -8,8 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ArrowUpButtonListener implements ActionListener {
-    private WarehouseGUI warehouseGUI;
-    private InformationsGUI informationsGUI;
+    private final WarehouseGUI warehouseGUI;
+    private final InformationsGUI informationsGUI;
 
     public ArrowUpButtonListener(WarehouseGUI warehouseGUI, InformationsGUI informationsGUI) {
         this.warehouseGUI = warehouseGUI;

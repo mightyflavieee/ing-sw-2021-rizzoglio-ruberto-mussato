@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StoneLeaderProductionListener implements ActionListener {
-    private GUI gui;
+    private final GUI gui;
 
     public StoneLeaderProductionListener(GUI gui) { this.gui = gui; }
 

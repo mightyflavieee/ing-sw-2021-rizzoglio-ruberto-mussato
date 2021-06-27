@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ShieldBoardProductionListener implements ActionListener {
-    private GUI gui;
-    private boolean isManufacturingSelection;
+    private final GUI gui;
+    private final boolean isManufacturingSelection;
 
     public ShieldBoardProductionListener(GUI gui, boolean isManufacturingSelection) {
         this.gui = gui;

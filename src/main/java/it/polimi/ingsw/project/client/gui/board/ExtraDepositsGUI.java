@@ -16,10 +16,10 @@ import java.util.List;
 public class ExtraDepositsGUI extends JInternalFrame {
     private List<JButton> firstExtraDepositButtons;
     private List<JButton> secondExtraDepositButtons;
-    private InformationsGUI informationsGUI;
+    private final InformationsGUI informationsGUI;
     private Map<ResourceType, Integer> resourcesInExtraDeposits;
     private Warehouse warehouseModel;
-    private Map<Integer, List<ActionListener>> actionListenersPerExtraDeposit;
+    private final Map<Integer, List<ActionListener>> actionListenersPerExtraDeposit;
     private boolean clickable;
 
     public ExtraDepositsGUI(InformationsGUI informationsGUI, Warehouse warehouseModel) {

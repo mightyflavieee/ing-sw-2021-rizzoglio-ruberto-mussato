@@ -9,9 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SelectGameTypeListener implements ActionListener {
-    private ClientGUI clientGUI;
-    private NewGameHandler newGameHandler;
-    private boolean isCreatingGame;
+    private final ClientGUI clientGUI;
+    private final NewGameHandler newGameHandler;
+    private final boolean isCreatingGame;
 
     public SelectGameTypeListener(ClientGUI clientGUI, NewGameHandler newGameHandler, boolean isCreatingGame) {
         this.clientGUI = clientGUI;

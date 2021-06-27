@@ -9,7 +9,7 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 public class LeaderCardsToChooseMessage implements ResponseMessage, Serializable {
     private static final long serialVersionUID = 3111280592475092704L;
     
-    private List<LeaderCard> leaderCardsToChoose;
+    private final List<LeaderCard> leaderCardsToChoose;
 
     public LeaderCardsToChooseMessage(List<LeaderCard> leaderCardsToChoose) {
         this.leaderCardsToChoose = leaderCardsToChoose;

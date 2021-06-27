@@ -7,8 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SelectCardForPurchaseListener implements ActionListener {
-    private InformationsGUI informationsGUI;
-    private DevelopmentCard developmentCard;
+    private final InformationsGUI informationsGUI;
+    private final DevelopmentCard developmentCard;
 
     public SelectCardForPurchaseListener(InformationsGUI informationsGUI, DevelopmentCard developmentCard) {
         this.informationsGUI = informationsGUI;

@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LeaderCardProductionListener implements ActionListener {
-    private GUI gui;
+    private final GUI gui;
 
     public LeaderCardProductionListener(GUI gui) {
         this.gui = gui;

@@ -14,8 +14,8 @@ public class MarketGUI extends JInternalFrame {
     //JPanel jPanel;
 
     private JLabel sfondo; //se lo metto in inglese mi da problemi
-    private TrayGUI trayGui;
-    private ResourceInHandGUI resourceInHandGUI;
+    private final TrayGUI trayGui;
+    private final ResourceInHandGUI resourceInHandGUI;
     public MarketGUI(GUI gui, Market market, InformationsGUI informationsGUI) {
       //  this.jPanel = new JPanel();
         this.setTitle("Market");

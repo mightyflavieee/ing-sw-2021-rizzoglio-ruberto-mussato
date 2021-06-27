@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ShieldLeaderProductionListener implements ActionListener {
-    private GUI gui;
+    private final GUI gui;
 
     public ShieldLeaderProductionListener(GUI gui) { this.gui = gui; }
 

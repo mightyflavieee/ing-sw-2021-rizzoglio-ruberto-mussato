@@ -7,9 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class OpponentsButtonListener implements ActionListener {
-    private GUI gui;
-    private PlayersBarGUI playersBarGUI;
-    private int index;
+    private final GUI gui;
+    private final PlayersBarGUI playersBarGUI;
+    private final int index;
 
     public OpponentsButtonListener(GUI gui, PlayersBarGUI playersBarGUI,int index) {
         this.gui = gui;

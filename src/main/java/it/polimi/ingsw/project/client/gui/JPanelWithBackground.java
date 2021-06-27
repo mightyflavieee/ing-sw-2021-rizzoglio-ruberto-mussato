@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class JPanelWithBackground extends JPanel {
-    private Image backgroundImage;
+    private final Image backgroundImage;
 
     public JPanelWithBackground(String fileName) throws IOException {
         this.backgroundImage = ImageIO.read(new File(fileName));

@@ -13,9 +13,9 @@ import java.util.NoSuchElementException;
 
 public class SocketClientConnection extends Observable<Controllable> implements ClientConnection, Runnable{
     private static final long serialVersionUID = 3840280592475092704L;
-    private Socket socket;
+    private final Socket socket;
     private ObjectOutputStream out;
-    private Server server;
+    private final Server server;
 
     private boolean active = true;
 

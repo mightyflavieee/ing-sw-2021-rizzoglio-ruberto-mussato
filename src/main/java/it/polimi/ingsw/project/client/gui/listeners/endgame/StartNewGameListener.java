@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StartNewGameListener implements ActionListener {
-    private ClientGUI clientGUI;
+    private final ClientGUI clientGUI;
 
     public StartNewGameListener(ClientGUI clientGUI) { this.clientGUI = clientGUI; }
 

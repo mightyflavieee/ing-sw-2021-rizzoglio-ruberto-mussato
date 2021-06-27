@@ -8,8 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TransmutationSelectorListener implements ActionListener {
-    private ResourceButton resourceButton;
-    private GUI gui;
+    private final ResourceButton resourceButton;
+    private final GUI gui;
 
     public TransmutationSelectorListener(ResourceButton resourceButton, GUI gui) {
         this.resourceButton = resourceButton;

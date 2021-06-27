@@ -4,8 +4,8 @@ import it.polimi.ingsw.project.messages.ErrorJoinMessage;
 import it.polimi.ingsw.project.server.SocketClientConnection;
 
 public class JoinRequestMove extends GameRequestMove {
-    private String nickName;
-    private String gameId;
+    private final String nickName;
+    private final String gameId;
 
     public JoinRequestMove(String nickname, String gameId) {
         this.nickName = nickname;

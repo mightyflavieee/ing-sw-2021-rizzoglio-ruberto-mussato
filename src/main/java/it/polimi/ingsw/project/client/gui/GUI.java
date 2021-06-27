@@ -23,18 +23,18 @@ import java.util.stream.Collectors;
 
 public class GUI extends Observable<Move>  {
     private static final long serialVersionUID = 3840332592475092704L;
-    private JFrame jFrame;
-    private ClientGUI clientGUI;
-    private BoardGUI boardGUI;
-    private MarketGUI marketGUI;
-    private LeaderCardPlaceGUI leaderCardPlaceGUI;
-    private CardContainerGUI cardContainerGUI;
+    private final JFrame jFrame;
+    private final ClientGUI clientGUI;
+    private final BoardGUI boardGUI;
+    private final MarketGUI marketGUI;
+    private final LeaderCardPlaceGUI leaderCardPlaceGUI;
+    private final CardContainerGUI cardContainerGUI;
     private Player mePlayer;
     private List<Player> opponentsPlayer;
-    private InformationsGUI informationsGUI;
-    private HistoryGUI historyGUI;
-    private PlayersBarGUI playersBarGUI;
-    private TakeMarketResourceBuilder takeMarketResourceBuilder;
+    private final InformationsGUI informationsGUI;
+    private final HistoryGUI historyGUI;
+    private final PlayersBarGUI playersBarGUI;
+    private final TakeMarketResourceBuilder takeMarketResourceBuilder;
     private BuyDevCardMoveHandler buyDevCardMoveHandler;
     private ProductionMoveHandler productionMoveHandler;
 

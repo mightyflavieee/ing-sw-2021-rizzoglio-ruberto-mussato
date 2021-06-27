@@ -10,14 +10,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class LeaderMovePanel extends JPanel {
-    private LeaderCard leaderCard;
-    private JButton discardButton, activateButton, productionButton;
+    private final LeaderCard leaderCard;
+    private final JButton discardButton;
+    private final JButton activateButton;
+    private final JButton productionButton;
     private boolean isActivable;
     private boolean isProductable;
-    private LeaderCardDiscardButtonListener leaderCardDiscardButtonListener;
-    private LeaderCardActivateButtonListener leaderCardActivateButtonListener;
-    private SelectLeaderCardProductionListener selectLeaderCardProductionListener;
-    private GUI gui;
+    private final LeaderCardDiscardButtonListener leaderCardDiscardButtonListener;
+    private final LeaderCardActivateButtonListener leaderCardActivateButtonListener;
+    private final SelectLeaderCardProductionListener selectLeaderCardProductionListener;
+    private final GUI gui;
 
     public LeaderMovePanel(LeaderCard leaderCard, GUI gui)  {
         this.leaderCard = leaderCard;

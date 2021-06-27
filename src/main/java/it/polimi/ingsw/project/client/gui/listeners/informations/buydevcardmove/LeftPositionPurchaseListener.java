@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LeftPositionPurchaseListener implements ActionListener {
-    private GUI gui;
+    private final GUI gui;
 
     public LeftPositionPurchaseListener(GUI gui) {
         this.gui = gui;

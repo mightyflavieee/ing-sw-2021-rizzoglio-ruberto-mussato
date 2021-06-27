@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class MapTrayGUI extends JInternalFrame {
     private Map<DevCardPosition, JButton> mapTrayButtons;
-    private InformationsGUI informationsGUI;
+    private final InformationsGUI informationsGUI;
     private Board boardModel;
     private boolean clickable;
     private int width = 100, height = 160;

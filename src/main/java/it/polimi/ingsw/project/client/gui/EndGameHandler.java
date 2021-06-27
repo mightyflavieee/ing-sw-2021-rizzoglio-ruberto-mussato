@@ -13,11 +13,11 @@ public class EndGameHandler extends JPanel {
     private static final String SINGLEPLAYERPANEL = "SINGLEPLAYERPANEL";
     private static final String MULTIPLAYERPANEL = "MULTIPLAYERPANEL";
 
-    private ClientGUI clientGUI;
-    private Match matchModel;
+    private final ClientGUI clientGUI;
+    private final Match matchModel;
 
-    private JPanel mainPanel;
-    private CardLayout mainLayout;
+    private final JPanel mainPanel;
+    private final CardLayout mainLayout;
     private JPanel singlePlayerPanel;
     private JPanel multiPlayerPanel;
 

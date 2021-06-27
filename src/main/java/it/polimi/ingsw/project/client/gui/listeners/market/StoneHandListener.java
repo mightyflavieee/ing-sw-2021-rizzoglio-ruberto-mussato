@@ -7,8 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class StoneHandListener implements ActionListener {
-    private ResourceInHandGUI resourceInHandGUI;
-    private InformationsGUI informationsGUI;
+    private final ResourceInHandGUI resourceInHandGUI;
+    private final InformationsGUI informationsGUI;
     public StoneHandListener(ResourceInHandGUI resourceInHandGUI, InformationsGUI informationsGUI) {
         this.resourceInHandGUI = resourceInHandGUI;
         this.informationsGUI = informationsGUI;

@@ -7,9 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CreateButtonListener implements ActionListener {
-    private ClientGUI clientGUI;
-    private JRadioButton createRadioButton, joinRadioButton;
-    private JButton submitButton;
+    private final ClientGUI clientGUI;
+    private final JRadioButton createRadioButton;
+    private final JRadioButton joinRadioButton;
+    private final JButton submitButton;
 
     public CreateButtonListener(ClientGUI clientGUI, JRadioButton createRadioButton, JRadioButton joinRadioButton, JButton submitButton) {
         this.clientGUI = clientGUI;

@@ -9,8 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class NoMoveButtonListener implements ActionListener {
-    private GUI gui;
-    private NoMoveHandlerGUI noMoveHandlerGUI;
+    private final GUI gui;
+    private final NoMoveHandlerGUI noMoveHandlerGUI;
 
     public NoMoveButtonListener(GUI gui, NoMoveHandlerGUI noMoveHandlerGUI) {
         this.gui = gui;

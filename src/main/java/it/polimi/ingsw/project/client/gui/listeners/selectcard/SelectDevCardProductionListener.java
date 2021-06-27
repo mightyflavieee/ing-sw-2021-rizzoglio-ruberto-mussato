@@ -7,8 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SelectDevCardProductionListener implements ActionListener {
-    private GUI gui;
-    private DevelopmentCard developmentCard;
+    private final GUI gui;
+    private final DevelopmentCard developmentCard;
 
     public SelectDevCardProductionListener(GUI gui, DevelopmentCard developmentCard) {
         this.gui = gui;

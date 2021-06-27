@@ -11,11 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ExtraDepositGUISelectResourceListener implements ActionListener {
-    private ExtraDepositsGUI extraDepositsGUI;
-    private InformationsGUI informationsGUI;
-    private ResourceType resourceType;
-    private int numOfExtraDeposit;
-    private int buttonNumber;
+    private final ExtraDepositsGUI extraDepositsGUI;
+    private final InformationsGUI informationsGUI;
+    private final ResourceType resourceType;
+    private final int numOfExtraDeposit;
+    private final int buttonNumber;
 
     public ExtraDepositGUISelectResourceListener (ExtraDepositsGUI extraDepositsGUI,
                                                   InformationsGUI informationsGUI,

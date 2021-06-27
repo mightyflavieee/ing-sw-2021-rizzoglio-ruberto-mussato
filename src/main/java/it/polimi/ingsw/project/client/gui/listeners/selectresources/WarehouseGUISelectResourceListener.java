@@ -12,11 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class WarehouseGUISelectResourceListener implements ActionListener {
-    private WarehouseGUI warehouseGUI;
-    private InformationsGUI informationsGUI;
-    private ResourceType resourceType;
-    private ShelfFloor floor;
-    private int buttonNumber;
+    private final WarehouseGUI warehouseGUI;
+    private final InformationsGUI informationsGUI;
+    private final ResourceType resourceType;
+    private final ShelfFloor floor;
+    private final int buttonNumber;
 
     public WarehouseGUISelectResourceListener(WarehouseGUI warehouseGUI,
                                               InformationsGUI informationsGUI,

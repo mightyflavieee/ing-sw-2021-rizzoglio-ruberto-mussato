@@ -18,7 +18,7 @@ import java.util.List;
 public class ChestGUI extends JInternalFrame {
     private Map<ResourceType, JButton> resourcesButtons;
     private Map<ResourceType, JLabel> numberOfResouces;
-    private InformationsGUI informationsGUI;
+    private final InformationsGUI informationsGUI;
     private Board boardModel;
     private boolean clickable;
 

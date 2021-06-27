@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TakeResourcesFromMarketButtonListener implements ActionListener {
-    private GUI gui;
+    private final GUI gui;
 
     public TakeResourcesFromMarketButtonListener(GUI gui) {
         this.gui = gui;

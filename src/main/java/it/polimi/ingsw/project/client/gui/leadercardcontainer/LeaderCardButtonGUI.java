@@ -5,8 +5,8 @@ import it.polimi.ingsw.project.utils.Utils;
 import javax.swing.*;
 
 public class LeaderCardButtonGUI extends JButton {
-    private String id;
-    private LeaderCardChoserGUI leaderCardChoserGUI;
+    private final String id;
+    private final LeaderCardChoserGUI leaderCardChoserGUI;
 //
 //    public LeaderCardButtonGUI(String id) { //used for the leadercard place
 //        this.id = id;

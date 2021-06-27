@@ -46,11 +46,7 @@ public class PlayersBarGUI extends JInternalFrame {
     public void clickOpponentButton(int index) {
         this.myButton.setEnabled(true);
         for(int i = 0; i < opponentsButtons.size(); i++){
-            if(i == index){
-                opponentsButtons.get(i).setEnabled(false);
-            }else{
-                opponentsButtons.get(i).setEnabled(true);
-            }
+            opponentsButtons.get(i).setEnabled(i != index);
         }
     }
 

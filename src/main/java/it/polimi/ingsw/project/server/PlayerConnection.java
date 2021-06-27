@@ -1,8 +1,8 @@
 package it.polimi.ingsw.project.server;
 
 public class PlayerConnection {
-  private String name;
-  private SocketClientConnection connection;
+  private final String name;
+  private final SocketClientConnection connection;
 
   public PlayerConnection(String name, SocketClientConnection connection) {
     this.name = name;

@@ -243,10 +243,7 @@ public class Warehouse extends Observable<Warehouse> {
       return false;
     }
 
-    if (floorsHaveSameTypeOfResource(shelvesToCheck)) {
-      return false;
-    }
-    return true;
+    return !floorsHaveSameTypeOfResource(shelvesToCheck);
   }
 
   public boolean insertInShelves(ShelfFloor shelfFloor, List<Resource> resourceList) {

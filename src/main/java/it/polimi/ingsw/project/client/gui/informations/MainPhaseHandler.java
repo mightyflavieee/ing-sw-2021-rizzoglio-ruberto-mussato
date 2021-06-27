@@ -36,8 +36,8 @@ public class MainPhaseHandler extends JInternalFrame {
     private List<JButton> boardRequiredResourcesButtons;
     private List<ResourceButton> resourceButtons;
     private JButton abortMoveButton;
-    private JPanel mainPanel;
-    private CardLayout mainPanelLayout;
+    private final JPanel mainPanel;
+    private final CardLayout mainPanelLayout;
     private JPanel mainPhasesPanel;
     private JPanel buyDevCardPanel;
     private JPanel productionPanel;
@@ -46,7 +46,7 @@ public class MainPhaseHandler extends JInternalFrame {
     private JPanel boardRequiredResourcesPanel;
     private JPanel abortMovePanel;
     private JPanel transmutationPanel;
-    private GUI gui;
+    private final GUI gui;
 
 
     public MainPhaseHandler(GUI gui) {

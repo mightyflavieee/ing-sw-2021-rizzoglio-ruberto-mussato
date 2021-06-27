@@ -31,9 +31,9 @@ import it.polimi.ingsw.project.view.RemoteView;
 
 public class Server {
     private static final int PORT = 12345;
-    private ServerSocket serverSocket;
-    private Map<String, Lobby> mapOfAvailableLobbies = new HashMap<String, Lobby>();
-    private Map<String, Lobby> mapOfUnavailableLobbies = new HashMap<String, Lobby>();
+    private final ServerSocket serverSocket;
+    private final Map<String, Lobby> mapOfAvailableLobbies = new HashMap<String, Lobby>();
+    private final Map<String, Lobby> mapOfUnavailableLobbies = new HashMap<String, Lobby>();
 
     public synchronized void addToLobby(String matchId, SocketClientConnection connection, String name)
             throws Exception {
@@ -93,20 +93,12 @@ public class Server {
 
     public synchronized boolean allPlayersHasChosenCards(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
-        if (currentLobby.getchosenLeaderCardsByPlayer().size() == currentLobby.getMaxNumberOfPlayers()) {
-            return true;
-        } else {
-            return false;
-        }
+        return currentLobby.getchosenLeaderCardsByPlayer().size() == currentLobby.getMaxNumberOfPlayers();
     }
 
     public synchronized boolean allPlayersHasChosenResources(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
-        if (currentLobby.getChosenResourcesByPlayer().size() == currentLobby.getMaxNumberOfPlayers() - 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return currentLobby.getChosenResourcesByPlayer().size() == currentLobby.getMaxNumberOfPlayers() - 1;
     }
 
     public void sendModelBackToPlayer(String matchId, String nickname) {
@@ -226,25 +218,16 @@ public class Server {
     }
 
     public synchronized boolean isGamePresent(String id) {
-        if (this.mapOfAvailableLobbies.keySet().contains(id)) {
-            return true;
-        }
-        return false;
+        return this.mapOfAvailableLobbies.containsKey(id);
     }
 
     public boolean isGameStarted(String id) {
-        if (this.mapOfUnavailableLobbies.keySet().contains(id)) {
-            return true;
-        }
-        return false;
+        return this.mapOfUnavailableLobbies.containsKey(id);
     }
 
     public boolean isNicknameUnique(String gameId, String nickName) {
         Lobby currentLobby = this.mapOfAvailableLobbies.get(gameId);
-        if (currentLobby.getMapOfSocketClientConnections().containsKey(nickName)) {
-            return false;
-        }
-        return true;
+        return !currentLobby.getMapOfSocketClientConnections().containsKey(nickName);
     }
 
     public boolean isPlayerPresentAndDisconnected(String gameId, String nickName) {
@@ -281,21 +264,15 @@ public class Server {
     }
 
     public boolean isGameNotFull(String gameId) {
-        if (this.mapOfAvailableLobbies.get(gameId).getMaxNumberOfPlayers() == this.mapOfAvailableLobbies.get(gameId)
-                .lenght()) {
-            return false;
-        } else {
-            return true;
-        }
+        return this.mapOfAvailableLobbies.get(gameId).getMaxNumberOfPlayers() != this.mapOfAvailableLobbies.get(gameId)
+                .lenght();
     }
 
     public boolean doesGameExistedAndHasNotRestarted(String gameId) {
         if (new File(gameId + ".json").exists()) {
             if (!this.mapOfUnavailableLobbies.containsKey(gameId)) {
                 return true;
-            } else if (!this.mapOfUnavailableLobbies.get(gameId).isGameStarted()) {
-                return true;
-            }
+            } else return !this.mapOfUnavailableLobbies.get(gameId).isGameStarted();
         }
         return false;
     }
@@ -308,10 +285,7 @@ public class Server {
                 playersConnectedCounter++;
             }
         }
-        if (playersConnectedCounter == currentLobby.getMaxNumberOfPlayers()) {
-            return true;
-        }
-        return false;
+        return playersConnectedCounter == currentLobby.getMaxNumberOfPlayers();
     }
 
     public void sendToAllPlayersMoveMessage(String matchId) {

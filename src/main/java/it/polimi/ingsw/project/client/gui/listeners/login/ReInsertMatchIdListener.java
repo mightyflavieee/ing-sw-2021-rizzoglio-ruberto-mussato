@@ -7,9 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ReInsertMatchIdListener implements ActionListener {
-    private ClientGUI clientGUI;
-    private JTextField idField;
-    private JFrame menuFrame;
+    private final ClientGUI clientGUI;
+    private final JTextField idField;
+    private final JFrame menuFrame;
 
     public ReInsertMatchIdListener(ClientGUI clientGUI, JTextField idField,JFrame menuFrame) {
         this.clientGUI = clientGUI;

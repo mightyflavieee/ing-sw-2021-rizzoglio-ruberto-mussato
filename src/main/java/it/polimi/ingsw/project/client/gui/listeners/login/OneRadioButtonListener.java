@@ -7,8 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class OneRadioButtonListener implements ActionListener {
-    private ClientGUI clientGUI;
-    private JRadioButton oneRadioButton, twoRadioButton, threeRadioButton, fourRadiobutton;
+    private final ClientGUI clientGUI;
+    private final JRadioButton oneRadioButton;
+    private final JRadioButton twoRadioButton;
+    private final JRadioButton threeRadioButton;
+    private final JRadioButton fourRadiobutton;
 
     public OneRadioButtonListener(ClientGUI clientGUI, JRadioButton oneRadioButton, JRadioButton twoRadioButton, JRadioButton threeRadioButton, JRadioButton fourRadiobutton) {
         this.clientGUI = clientGUI;

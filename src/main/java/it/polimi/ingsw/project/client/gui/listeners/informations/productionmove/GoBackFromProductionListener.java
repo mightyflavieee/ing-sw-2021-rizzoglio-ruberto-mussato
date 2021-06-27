@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GoBackFromProductionListener implements ActionListener {
-    private GUI gui;
+    private final GUI gui;
 
     public GoBackFromProductionListener(GUI gui) {
         this.gui = gui;

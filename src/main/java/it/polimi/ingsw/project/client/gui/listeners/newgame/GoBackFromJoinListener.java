@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GoBackFromJoinListener implements ActionListener {
-    private NewGameHandler newGameHandler;
+    private final NewGameHandler newGameHandler;
 
     public GoBackFromJoinListener(NewGameHandler newGameHandler) {
         this.newGameHandler = newGameHandler;

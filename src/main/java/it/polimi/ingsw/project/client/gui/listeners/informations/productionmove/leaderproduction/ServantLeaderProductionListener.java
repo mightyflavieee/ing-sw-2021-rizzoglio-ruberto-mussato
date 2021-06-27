@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ServantLeaderProductionListener implements ActionListener {
-    private GUI gui;
+    private final GUI gui;
 
     public ServantLeaderProductionListener(GUI gui) { this.gui = gui; }
 

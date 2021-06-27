@@ -18,7 +18,7 @@ public class FaithMapGUI extends JInternalFrame {
     private int blackMarkerPosition;
     private FaithMap faithMapModel;
     private boolean clickable;
-    private boolean isSinglePlayer;
+    private final boolean isSinglePlayer;
 
     public FaithMapGUI(FaithMap faithMap, boolean isSinglePlayer) {
         this.setTitle("FaithMap");

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TakeMarketResourceBuilder {
     private boolean hasRedMarble, isHandClear, isMarketClear;
-    private List<Resource> discardedResources;
+    private final List<Resource> discardedResources;
     private Warehouse warehouse;
     private Market market;
     public TakeMarketResourceBuilder() {

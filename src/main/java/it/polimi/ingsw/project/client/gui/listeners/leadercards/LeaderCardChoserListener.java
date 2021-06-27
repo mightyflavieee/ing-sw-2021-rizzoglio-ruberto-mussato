@@ -7,8 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LeaderCardChoserListener implements ActionListener {
-    private LeaderCardChoserGUI leaderCardChoserGUI;
-    private LeaderCardButtonGUI leaderCardButtonGUI;
+    private final LeaderCardChoserGUI leaderCardChoserGUI;
+    private final LeaderCardButtonGUI leaderCardButtonGUI;
 
     public LeaderCardChoserListener(LeaderCardButtonGUI leaderCardButtonGUI, LeaderCardChoserGUI leaderCardChoserGUI) {
         this.leaderCardChoserGUI = leaderCardChoserGUI;

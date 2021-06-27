@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class HistoryGUI extends JInternalFrame {
   //  private String history;
-    private JTextArea jTextArea;
+    private final JTextArea jTextArea;
 
     public HistoryGUI(String history) {
         this.setTitle("My History");

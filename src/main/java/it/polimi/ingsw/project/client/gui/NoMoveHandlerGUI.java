@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class NoMoveHandlerGUI extends JInternalFrame {
-    private JButton noMoveButton;
+    private final JButton noMoveButton;
 
     public NoMoveHandlerGUI(String string, GUI gui) {
         this.setTitle("Leader Card Action Phase");

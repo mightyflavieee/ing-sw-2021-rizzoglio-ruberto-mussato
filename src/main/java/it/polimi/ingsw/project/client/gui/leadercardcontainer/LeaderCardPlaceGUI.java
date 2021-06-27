@@ -12,10 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LeaderCardPlaceGUI extends JInternalFrame {
-    private List<LeaderCardJlabelGUI> leaderCardJlabelGUIList;
-    private List<LeaderMovePanel> leaderMovePanelList;
-    private JPanel imagesPanel, buttonsPanel;
-    private GUI gui;
+    private final List<LeaderCardJlabelGUI> leaderCardJlabelGUIList;
+    private final List<LeaderMovePanel> leaderMovePanelList;
+    private final JPanel imagesPanel;
+    private final JPanel buttonsPanel;
+    private final GUI gui;
 
     public LeaderCardPlaceGUI(List<LeaderCard> leaderCards, GUI gui) {
         this.gui = gui;

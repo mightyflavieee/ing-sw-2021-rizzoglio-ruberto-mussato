@@ -17,7 +17,7 @@ public class CardContainerGUI extends JInternalFrame {
     private CardContainer cardContainer;
     private List<String> cardsToShow;
     private List<JButton> showedCards;
-    private InformationsGUI informationsGUI;
+    private final InformationsGUI informationsGUI;
     private int width = 70, height = 140;
 
     public CardContainerGUI(InformationsGUI informationsGUI, CardContainer cardContainer) {

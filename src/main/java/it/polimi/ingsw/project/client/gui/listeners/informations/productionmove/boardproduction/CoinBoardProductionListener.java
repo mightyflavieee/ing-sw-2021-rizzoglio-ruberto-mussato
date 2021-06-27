@@ -12,8 +12,8 @@ import java.util.Map;
 import java.util.Set;
 
 public class CoinBoardProductionListener implements ActionListener {
-    private GUI gui;
-    private boolean isManufacturingSelection;
+    private final GUI gui;
+    private final boolean isManufacturingSelection;
 
     public CoinBoardProductionListener(GUI gui, boolean isManufacturingSelection) {
         this.gui = gui;

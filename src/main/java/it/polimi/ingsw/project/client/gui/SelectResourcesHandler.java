@@ -6,9 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SelectResourcesHandler {
-    private Map<ResourceType, Integer> resourcesFromWarehouse;
-    private Map<ResourceType, Integer> resourcesFromExtraDeposit;
-    private Map<ResourceType, Integer> resourcesFromChest;
+    private final Map<ResourceType, Integer> resourcesFromWarehouse;
+    private final Map<ResourceType, Integer> resourcesFromExtraDeposit;
+    private final Map<ResourceType, Integer> resourcesFromChest;
 
     public SelectResourcesHandler() {
         this.resourcesFromWarehouse = new HashMap<>();

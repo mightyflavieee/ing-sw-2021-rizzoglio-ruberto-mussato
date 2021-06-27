@@ -8,8 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MyButtonListener implements ActionListener {
-    private GUI gui;
-    private PlayersBarGUI playersBarGUI;
+    private final GUI gui;
+    private final PlayersBarGUI playersBarGUI;
 
     public MyButtonListener(GUI gui, PlayersBarGUI playersBarGUI) {
         this.gui = gui;

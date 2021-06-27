@@ -7,8 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ResourceButtonListener implements ActionListener {
-    private WarehouseGUI warehouseGUI;
-    private ShelfFloor floorToChange;
+    private final WarehouseGUI warehouseGUI;
+    private final ShelfFloor floorToChange;
 
     public ResourceButtonListener(WarehouseGUI warehouseGUI, ShelfFloor floorToChange) {
         this.warehouseGUI = warehouseGUI;

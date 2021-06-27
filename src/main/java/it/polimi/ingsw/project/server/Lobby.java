@@ -14,13 +14,13 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.view.RemoteView;
 
 public class Lobby {
-    private String id;
+    private final String id;
     private Model model;
-    private Integer maxNumberOfPlayers;
+    private final Integer maxNumberOfPlayers;
     private Map<String, SocketClientConnection> mapOfSocketClientConnections;
-    private LeaderCardContainer leaderCardContainer;
-    private Map<String, List<LeaderCard>> chosenLeaderCardsByPlayer;
-    private Map<String, List<ResourceType>> chosenResourcesByPlayer;
+    private final LeaderCardContainer leaderCardContainer;
+    private final Map<String, List<LeaderCard>> chosenLeaderCardsByPlayer;
+    private final Map<String, List<ResourceType>> chosenResourcesByPlayer;
     private Map<String, RemoteView> mapOfViews;
     private List<Player> playerList;
     private Controller controller;
@@ -83,9 +83,7 @@ public class Lobby {
 
     public boolean isPlayerPresentAndDisconnected(String nickName) {
         if (this.mapOfSocketClientConnections.containsKey(nickName)) {
-            if (this.mapOfSocketClientConnections.get(nickName).getSocket().isClosed()) {
-                return true;
-            }
+            return this.mapOfSocketClientConnections.get(nickName).getSocket().isClosed();
         }
         return false;
     }
@@ -103,10 +101,7 @@ public class Lobby {
                     counter++;
                 }
             }
-            if (counter != 2) {
-                return false;
-            }
-            return true;
+            return counter == 2;
         }
     }
 
