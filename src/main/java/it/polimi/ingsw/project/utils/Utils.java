@@ -67,7 +67,7 @@ public class Utils {
             return new ImageIcon(imageMap.get(src).getScaledInstance(width,height,Image.SCALE_SMOOTH));
         }else {
             try {
-                Image image = ImageIO.read(TrayGUI.class.getClassLoader().getResourceAsStream(src));
+                Image image = ImageIO.read(Objects.requireNonNull(TrayGUI.class.getClassLoader().getResourceAsStream(src)));
                 imageMap.put(src,image);
                 return new ImageIcon(image.getScaledInstance(width, height, Image.SCALE_SMOOTH));
             } catch (IOException e) {

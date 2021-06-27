@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MarketTest {
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     void getTray() {
         int grey = 0, blue = 0, purple = 0, red = 0, white = 0, yellow = 0;

@@ -17,19 +17,17 @@ public class PlayersBarGUI extends JInternalFrame {
             return;
         }
         this.setVisible(true);
-        List<String> opponentsIDs1 = opponentsIDs;
         String myNickname1 = myNickname;
         this.setTitle("Players Bar");
-        opponentsIDs1 = opponentsIDs;
         myNickname1 = myNickname;
-        this.setLayout(new GridLayout(1,1+ opponentsIDs1.size()));
+        this.setLayout(new GridLayout(1,1+ opponentsIDs.size()));
         this.myButton = new JButton(myNickname1);
         this.myButton.addActionListener(new MyButtonListener(gui,this));
         this.myButton.setEnabled(false);
         this.add(myButton);
         this.opponentsButtons = new ArrayList<>();
-        for(int i = 0; i < opponentsIDs1.size(); i++){
-            this.opponentsButtons.add(new JButton(opponentsIDs1.get(i)));
+        for(int i = 0; i < opponentsIDs.size(); i++){
+            this.opponentsButtons.add(new JButton(opponentsIDs.get(i)));
             this.add(this.opponentsButtons.get(i));
             this.opponentsButtons.get(i).addActionListener(new OpponentsButtonListener(gui,this,i));
         }

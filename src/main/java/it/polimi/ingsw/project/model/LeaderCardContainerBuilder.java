@@ -17,7 +17,8 @@ public class LeaderCardContainerBuilder implements Serializable {
         Gson gson = new Gson();
         try {
              InputStream inputStream = LeaderCardContainerBuilder.class.getClassLoader().getResourceAsStream("leadercards.json");
-             Scanner s = new Scanner(inputStream);
+            assert inputStream != null;
+            Scanner s = new Scanner(inputStream);
             StringBuilder string = new StringBuilder();
             while (s.hasNext()){
                 string.append(s.nextLine());

@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 public class ClientCLI extends Client {
 
     private Scanner stdin;
-    private boolean lock = true;
+    private boolean lock;
 
     public ClientCLI(String ip, int port) {
         super(ip, port);
@@ -459,7 +459,6 @@ public class ClientCLI extends Client {
     // constructs the BuyDevCardMove according to the player choices
     // TODO verify if the resources to eliminate chosen by the player are correct
     private Move constructBuyDevCardMove() {
-        Move playerMove = null;
         List<DevelopmentCard> availableDevCards = this.match.getCardContainer().getAvailableDevCards();
         DevelopmentCard devCardToBuy = showAndSelectDevCardToBuy(availableDevCards);
         if (devCardToBuy != null) {
@@ -516,7 +515,7 @@ public class ClientCLI extends Client {
             // }
             return this.selectResToBuyDevCard(devCardToBuy);
         }
-        return playerMove;
+        return null;
     }
 
     // TODO CON EXTRADEPOSIT
@@ -888,6 +887,7 @@ public class ClientCLI extends Client {
                     break;
             }
             // lets the user select the resorces he/she wants to eliminate from where he/she wants
+            assert requiredResources != null;
             selectResourcesFromBoard(requiredResources, resourcesToEliminateWarehouse,
                     resourcesToEliminateChest, resourcesToEliminateExtraDeposit);
             // constructs the move
@@ -1112,7 +1112,6 @@ public class ClientCLI extends Client {
                 }
                 break;
             default:
-                return;
         }
 
     }

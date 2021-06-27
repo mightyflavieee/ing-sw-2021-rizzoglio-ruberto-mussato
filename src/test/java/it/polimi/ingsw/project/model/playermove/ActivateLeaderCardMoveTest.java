@@ -174,6 +174,7 @@ class ActivateLeaderCardMoveTest {
         }
         }
         player.getBoard().getLeaderCards().add(leader);
+        assert leader != null;
         Move move = new ActivateLeaderCardMove(leader.getId());
         assertFalse(move.isFeasibleMove(match));
     }

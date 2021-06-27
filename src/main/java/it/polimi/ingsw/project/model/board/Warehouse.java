@@ -175,12 +175,6 @@ public class Warehouse extends Observable<Warehouse> {
     for (ShelfFloor shelfFloor : shelfs.keySet()) {
       Resource oldResourceOnFloor = null;
       for (Resource resource : shelfs.get(shelfFloor)) {
-        if (oldResourceOnFloor != null && resource != null) {
-          if (oldResourceOnFloor.getType() != resource.getType()) {
-            return true;
-          }
-          oldResourceOnFloor = resource;
-        }
       }
     }
     return false;

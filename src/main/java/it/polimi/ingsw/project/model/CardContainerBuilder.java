@@ -19,6 +19,7 @@ public class CardContainerBuilder implements Serializable {
         try {
             InputStream inputStream = CardContainerBuilder.class.getClassLoader()
                     .getResourceAsStream("developmentCards.json");
+            assert inputStream != null;
             Scanner s = new Scanner(inputStream);
             StringBuilder string = new StringBuilder();
             while (s.hasNext()) {

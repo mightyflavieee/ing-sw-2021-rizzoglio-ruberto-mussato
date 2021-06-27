@@ -124,10 +124,10 @@ public class FaithMap implements Serializable {
       switch (numTile) {
         case 1:
           if (this.markerPosition > 4) {
-            this.papalFavourSlots.get(numTile - 1).updateStatus(PapalSlotStatus.Taken);
-            return this.papalFavourSlots.get(numTile - 1).getVictoryPoints();
+            this.papalFavourSlots.get(0).updateStatus(PapalSlotStatus.Taken);
+            return this.papalFavourSlots.get(0).getVictoryPoints();
           } else {
-            this.papalFavourSlots.get(numTile - 1).updateStatus(PapalSlotStatus.Lost);
+            this.papalFavourSlots.get(0).updateStatus(PapalSlotStatus.Lost);
             return 0;
           }
         case 2:
