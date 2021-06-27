@@ -39,7 +39,7 @@ public class ClientGUI extends Client implements Observer<Move> {
         }
     }
 
-    public ClientGUI getInstance() {
+    private ClientGUI getInstance() {
         return this;
     }
 

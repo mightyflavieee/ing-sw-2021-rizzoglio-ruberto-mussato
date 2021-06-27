@@ -23,7 +23,6 @@ import it.polimi.ingsw.project.utils.Utils;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -38,8 +37,7 @@ public class ClientCLI extends Client {
         this.lock = true;
     }
 
-    @Override
-    public Client getInstance() {
+    private Client getInstance() {
         return this;
     }
 
@@ -338,15 +336,6 @@ public class ClientCLI extends Client {
         return t;
     }
 
-    private boolean verifyInput(String input, List<String> acceptedStrings) {
-        for (String acceptedString : acceptedStrings) {
-            if (input.equals(acceptedString)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public Move handleTurn() {
         // quando do come comando 0 entro SEMPRE in una funzione che mi permette di
         // visualizzare le varie informazioni
@@ -481,9 +470,6 @@ public class ClientCLI extends Client {
     // TODO verify if the resources to eliminate chosen by the player are correct
     private Move constructBuyDevCardMove() {
         Move playerMove = null;
-        Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
-        Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
-        boolean skipElimination = false;
         List<DevelopmentCard> availableDevCards = this.match.getCardContainer().getAvailableDevCards();
         DevelopmentCard devCardToBuy = showAndSelectDevCardToBuy(availableDevCards);
         if (devCardToBuy != null) {
@@ -608,36 +594,6 @@ public class ClientCLI extends Client {
         }
     }
 
-    private void chestfirst(Board board, ResourceType resourcetype, Integer integer,
-            Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-            Map<ResourceType, Integer> resourceToEliminateChest) {
-        Map<ResourceType, Integer> wareHouseMap = new HashMap<>();
-        Map<ResourceType, Integer> chestMap = new HashMap<>();
-        for (int i = 0; i <= integer; i++) {
-            wareHouseMap.put(resourcetype, i);
-            chestMap.put(resourcetype, integer - i);
-        }
-    }
-
-    // TODO METTERE MAPPA CON EXTRA DEPOSIT E SOSTITUIRLA ALLA new HashMap<>()
-    private void warehousefirst(Board board, ResourceType resourcetype, Integer integer,
-            Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-            Map<ResourceType, Integer> resourceToEliminateChest) {
-        Map<ResourceType, Integer> wareHouseMap = new HashMap<>();
-        Map<ResourceType, Integer> chestMap = new HashMap<>();
-        for (int i = 0; i <= integer; i++) {
-            wareHouseMap.put(resourcetype, integer - i);
-            chestMap.put(resourcetype, i);
-
-            // TODO METTERE MAPPA CON EXTRA DEPOSIT E SOSTITUIRLA ALLA new HashMap<>()
-            if (board.areEnoughResourcesPresentForBuyAndProduction(wareHouseMap, new HashMap<>(), chestMap)) {
-                break;
-            }
-        }
-        resourceToEliminateChest.put(resourcetype, chestMap.get(resourcetype));
-        resourcesToEliminateWarehouse.put(resourcetype, wareHouseMap.get(resourcetype));
-    }
-
     // provides the id of the DevelopmentCard the player wants to buy. Returns null
     // if the player
     // wants to go back
@@ -665,90 +621,6 @@ public class ClientCLI extends Client {
                 return null;
             }
         }
-    }
-
-    // helper for the selectResourcesToEliminate() function, asks the player to
-    // select how many
-    // of each resource to eliminate
-    private void selectResourcesToEliminateHelper(Map<ResourceType, Integer> resourcesToEliminate, ResourceType type) {
-        String stringType = null;
-        if (type.equals(ResourceType.Coin)) {
-            stringType = "Coin";
-        } else {
-            if (type.equals(ResourceType.Servant)) {
-                stringType = "Servant";
-            } else {
-                if (type.equals(ResourceType.Shield)) {
-                    stringType = "Shield";
-                } else {
-                    stringType = "Stone";
-                }
-            }
-        }
-        while (true) {
-            System.out.println("How many " + stringType + "s do you want to eliminate? (insert number): ");
-            try {
-                int numResourcesToEliminate = Integer.parseInt(this.stdin.nextLine());
-                resourcesToEliminate.put(type, numResourcesToEliminate);
-                break;
-            } catch (Exception e) {
-                System.out.println("Insert an answer with the correct format (number).");
-            }
-        }
-    }
-
-    // provides the resources to eliminate from the Warehouse or the Chest for the
-    // purchase of the
-    // DevelopmentCard the player wants to buy. Returns null if the player wants to
-    // go back.
-    private Map<ResourceType, Integer> selectResourcesToEliminate(String devCardToBuyID, String location) {
-        Map<ResourceType, Integer> resourcesToEliminate = new HashMap<>();
-        String answer = null;
-        boolean goBack = false;
-        boolean isDone = false;
-        do {
-            System.out.println("Select the resource type to eliminate from the " + location + " :\n" + "0 - Go Back;\n"
-                    + "1 - Coin;\n" + "2 - Servant;\n" + "3 - Shield;\n" + "4 - Stone;\n" + "Enter here your answer: ");
-            answer = stdin.nextLine();
-            switch (answer) {
-                case "0":
-                    goBack = true;
-                    break;
-                case "1":
-                    selectResourcesToEliminateHelper(resourcesToEliminate, ResourceType.Coin);
-                    break;
-                case "2":
-                    selectResourcesToEliminateHelper(resourcesToEliminate, ResourceType.Servant);
-                    break;
-                case "3":
-                    selectResourcesToEliminateHelper(resourcesToEliminate, ResourceType.Shield);
-                    break;
-                case "4":
-                    selectResourcesToEliminateHelper(resourcesToEliminate, ResourceType.Stone);
-                    break;
-                default:
-                    System.out.println("Choose a correct option.");
-            }
-            while (true) {
-                System.out.println("Do you want to keep choosing or do you want to go to the"
-                        + " next step? (Press 1 to keep choosing and 2 to go forward): ");
-                answer = this.stdin.nextLine();
-                if (answer.equals("1")) {
-                    break;
-                } else {
-                    if (answer.equals("2")) {
-                        isDone = true;
-                        break;
-                    } else {
-                        System.out.println("Choose a correct option.");
-                    }
-                }
-            }
-        } while (!isDone && !goBack);
-        if (goBack) {
-            resourcesToEliminate = null;
-        }
-        return resourcesToEliminate;
     }
 
     // provides the position on the MapTray of the DevelopmentCard once it is

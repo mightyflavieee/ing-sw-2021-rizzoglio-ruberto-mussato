@@ -11,8 +11,8 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 
 public abstract class Client {
 
-    protected String ip;
-    protected int port;
+    protected final String ip;
+    protected final int port;
     protected String gameId;
     private boolean active = true;
     protected Match match;
@@ -36,20 +36,8 @@ public abstract class Client {
         this.socketIn = socketIn;
     }
 
-    public ObjectInputStream getSocketIn() {
-        return this.socketIn;
-    }
-
     public ObjectOutputStream getSocketOut() {
         return this.socketOut;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
     }
 
     public String getIp() {
@@ -58,10 +46,6 @@ public abstract class Client {
 
     public int getPort() {
         return this.port;
-    }
-
-    public Client getInstance() {
-        return this;
     }
 
     public abstract void setMatch(Match match);
