@@ -17,7 +17,6 @@ public class FaithMapGUI extends JInternalFrame {
     private int markerPosition;
     private int blackMarkerPosition;
     private FaithMap faithMapModel;
-    private boolean clickable;
     private final boolean isSinglePlayer;
 
     public FaithMapGUI(FaithMap faithMap, boolean isSinglePlayer) {
@@ -145,19 +144,6 @@ public class FaithMapGUI extends JInternalFrame {
     public void moveForward() {
         this.faithMapModel.moveForward();
         refresh();
-    }
-
-    public void moveForwardBlack() {
-        this.faithMapModel.moveForwardBlack();
-        refresh();
-    }
-
-    public void disableAllButtons() {
-        this.clickable = false;
-    }
-
-    public void enableAllButtons() {
-        this.clickable = true;
     }
 
     public void setFaithMapByPlayer(Player mePlayer) {

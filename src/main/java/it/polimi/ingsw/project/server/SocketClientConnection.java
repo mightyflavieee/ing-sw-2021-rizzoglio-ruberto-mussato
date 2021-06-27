@@ -47,8 +47,7 @@ public class SocketClientConnection extends Observable<Controllable> implements 
         }
     }
 
-    @Override
-    public synchronized void closeConnection() {
+    private synchronized void closeConnection() {
         try {
             socket.close();
         } catch (IOException e) {
@@ -64,7 +63,6 @@ public class SocketClientConnection extends Observable<Controllable> implements 
         System.out.println("Done!");
     }
 
-    @Override
     public void asyncSend(final Object message) {
         new Thread(new Runnable() {
             @Override

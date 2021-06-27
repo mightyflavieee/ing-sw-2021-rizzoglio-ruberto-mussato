@@ -37,8 +37,7 @@ public class RemoteView extends View  {
         this.clientConnection.addObserver(new MessageReceiver());
     }
 
-    @Override
-    protected void showMessage(MoveMessage message) {
+    private void showMessage(MoveMessage message) {
         if (!this.clientConnection.getSocket().isClosed()) {
             this.clientConnection.asyncSend(message);
         }

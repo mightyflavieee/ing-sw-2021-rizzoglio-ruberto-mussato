@@ -14,10 +14,6 @@ public class Controller implements Observer<MoveHandler> {
         this.model = model;
     }
 
-    public Match getMatchCopy() {
-        return this.model.getMatchCopy();
-    }
-
     private synchronized void performMove(MoveHandler handableMove) {
         handableMove.handleMove(this.model, handableMove);
     }

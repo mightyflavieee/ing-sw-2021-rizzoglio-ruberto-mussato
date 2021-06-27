@@ -375,16 +375,6 @@ public class Match implements Serializable, Cloneable {
         return "";
     }
 
-    public void setLeaderCardsForPlayers(Map<String, List<LeaderCard>> chosenLeaderCardsMap) {
-        for (String nickname : chosenLeaderCardsMap.keySet()) {
-            for (Player player : this.playerList) {
-                if (player.getNickname().equals(nickname)) {
-                    player.setLeaderCards(chosenLeaderCardsMap.get(nickname));
-                }
-            }
-        }
-    }
-
     public int getBlackMarkerPosition() {
         return this.currentPlayer.getBlackMarkerPosition();
     }

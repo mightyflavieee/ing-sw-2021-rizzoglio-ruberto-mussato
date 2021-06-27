@@ -532,7 +532,6 @@ public class ClientCLI extends Client {
     // TODO CON EXTRADEPOSIT
     private Move selectResToBuyDevCard(DevelopmentCard developmentCard) {
         Board board = this.match.getBoardByPlayerNickname(myNickname);
-        String answer;
         Map<ResourceType, Integer> resourceRequired, resourcesToEliminateWarehouse, resourceToEliminateChest,
                 resourceToEliminateExtraDeposit;
         resourceRequired = developmentCard.getCost();
@@ -598,7 +597,6 @@ public class ClientCLI extends Client {
     // if the player
     // wants to go back
     private DevelopmentCard showAndSelectDevCardToBuy(List<DevelopmentCard> availableDevCards) {
-        boolean isCardPresent = false;
         String answer = null;
         System.out.println("Development Cards available for purchase:\n");
         for (DevelopmentCard devCard : availableDevCards) {

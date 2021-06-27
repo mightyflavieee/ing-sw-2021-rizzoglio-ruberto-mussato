@@ -29,16 +29,8 @@ public class ProductionMoveHandler {
         return leaderCard;
     }
 
-    public SelectResourcesHandler getSelectResourcesHandler() {
-        return selectResourcesHandler;
-    }
-
     public ProductionType getProductionType() {
         return productionType;
-    }
-
-    public List<ResourceType> getBoardOrPerkManufacturedResource() {
-        return boardOrPerkManufacturedResource;
     }
 
     public Map<ResourceType, Integer> getResourcesRequired() { return resourcesRequired; }

@@ -76,17 +76,9 @@ public class BoardGUI extends JInternalFrame {
     }
 
     public void disableAllButtons() {
-        this.faithMap.disableAllButtons();
         this.warehouse.disableAllButtons();
         this.mapTray.disableAllButtons();
         this.chest.disableAllButtons();
-    }
-
-    public void enableAllButtons() {
-        this.faithMap.enableAllButtons();
-        this.warehouse.enableAllButtons();
-        this.mapTray.enableAllButtons();
-        this.chest.enableAllButtons();
     }
 
     public void moveForward() {

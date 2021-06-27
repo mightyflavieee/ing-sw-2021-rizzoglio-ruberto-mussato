@@ -18,10 +18,6 @@ public class BuyDevCardMoveHandler {
         return this.developmentCard;
     }
 
-    public SelectResourcesHandler getSelectResourcesHandler() { return this.selectResourcesHandler; }
-
-    public DevCardPosition getPosition() { return this.position; }
-
     public void setDevelopmentCard(DevelopmentCard developmentCard) { this.developmentCard = developmentCard; }
 
     public void setSelectResourcesHandler(SelectResourcesHandler selectResourcesHandler) { this.selectResourcesHandler = selectResourcesHandler; }

@@ -17,7 +17,6 @@ public class ExtraDepositsGUI extends JInternalFrame {
     private List<JButton> firstExtraDepositButtons;
     private List<JButton> secondExtraDepositButtons;
     private final InformationsGUI informationsGUI;
-    private Map<ResourceType, Integer> resourcesInExtraDeposits;
     private Warehouse warehouseModel;
     private final Map<Integer, List<ActionListener>> actionListenersPerExtraDeposit;
     private boolean clickable;
@@ -178,11 +177,6 @@ public class ExtraDepositsGUI extends JInternalFrame {
 
     public void insertInExtraDeposit(List<Resource> resourcesToInsert) {
         this.warehouseModel.insertInExtraDeposit(resourcesToInsert);
-        refresh();
-    }
-
-    public void eliminateFromExtraDeposit(List<Resource> resourcesToEliminate) {
-        //todo this.warehouseModel.eliminateResourcesExtraDeposit(resourcesToEliminate);
         refresh();
     }
 

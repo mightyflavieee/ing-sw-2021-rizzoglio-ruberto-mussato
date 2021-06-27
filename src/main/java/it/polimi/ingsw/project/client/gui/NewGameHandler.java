@@ -260,10 +260,6 @@ public class NewGameHandler extends JPanel {
         return selectJoinGameIDTextField;
     }
 
-    public void setSelectJoinGameIDTextField(JTextField selectJoinGameIDTextField) {
-        this.selectJoinGameIDTextField = selectJoinGameIDTextField;
-    }
-
     public void goToResourceSelector(Integer numberOfResourcesToChoose){
         if(this.initResourceSelectorPanel!=null){
             this.mainLayout.removeLayoutComponent(leaderCardChooser);

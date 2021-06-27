@@ -11,11 +11,7 @@ public class PlayerDisconnectedRequestMove extends GameRequestMove implements Mo
     this.disconnectedPlayer = disconnectedPlayer;
   }
 
-  public Player getDisconnectedPlayer() {
-    return this.disconnectedPlayer;
-  }
-
-  @Override
+    @Override
   public void handleMove(Model model, MoveHandler requestedMove) {
     model.playerSkipTurn(disconnectedPlayer);
   }

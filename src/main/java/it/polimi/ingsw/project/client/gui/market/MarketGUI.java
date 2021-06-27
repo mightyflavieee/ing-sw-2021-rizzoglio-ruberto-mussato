@@ -13,7 +13,6 @@ import java.util.List;
 public class MarketGUI extends JInternalFrame {
     //JPanel jPanel;
 
-    private JLabel sfondo; //se lo metto in inglese mi da problemi
     private final TrayGUI trayGui;
     private final ResourceInHandGUI resourceInHandGUI;
     public MarketGUI(GUI gui, Market market, InformationsGUI informationsGUI) {

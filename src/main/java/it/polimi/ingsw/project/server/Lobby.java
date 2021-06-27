@@ -14,7 +14,6 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import it.polimi.ingsw.project.view.RemoteView;
 
 public class Lobby {
-    private final String id;
     private Model model;
     private final Integer maxNumberOfPlayers;
     private Map<String, SocketClientConnection> mapOfSocketClientConnections;
@@ -27,7 +26,6 @@ public class Lobby {
     private boolean isGameStarted = false;
 
     public Lobby(String id, Integer maxNumberOfPlayers) {
-        this.id = id;
         this.maxNumberOfPlayers = maxNumberOfPlayers;
         this.mapOfSocketClientConnections = new LinkedHashMap<String, SocketClientConnection>();
         this.leaderCardContainer = new LeaderCardContainer();
@@ -65,10 +63,6 @@ public class Lobby {
 
     public Map<String, RemoteView> getMapOfViews() {
         return this.mapOfViews;
-    }
-
-    public String getId() {
-        return this.id;
     }
 
     public void setModel(Model model) {

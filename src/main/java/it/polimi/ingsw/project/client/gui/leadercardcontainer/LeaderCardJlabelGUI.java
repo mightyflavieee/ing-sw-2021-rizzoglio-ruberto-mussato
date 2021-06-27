@@ -7,7 +7,6 @@ import java.awt.*;
 
 public class LeaderCardJlabelGUI extends JLabel {
     private String id;
-    private LeaderCardChoserGUI leaderCardChoserGUI;
     private int width = 200, height = 325;
 
 
@@ -17,10 +16,6 @@ public class LeaderCardJlabelGUI extends JLabel {
         this.setIcon(Utils.readIcon("leadercards/" + this.id + ".png",width,height));
 
         this.setVisible(true);
-    }
-
-    public String getID() {
-        return this.id;
     }
 
     public void setID(String id) {

@@ -35,7 +35,6 @@ public class GUI extends Observable<Move>  {
     private final HistoryGUI historyGUI;
     private final PlayersBarGUI playersBarGUI;
     private final TakeMarketResourceBuilder takeMarketResourceBuilder;
-    private BuyDevCardMoveHandler buyDevCardMoveHandler;
 
     public GUI(ClientGUI clientGUI, Match match, String myNickname) {
         this.clientGUI = clientGUI;
@@ -179,8 +178,6 @@ public class GUI extends Observable<Move>  {
 
     public CardContainerGUI getCardContainerGUI() { return this.cardContainerGUI; }
 
-    public MarketGUI getMarketGUI() { return this.marketGUI; }
-
     public LeaderCardPlaceGUI getLeaderCardPlaceGUI() { return this.leaderCardPlaceGUI; }
 
     public ResourceInHandGUI getResourceInHandGUI() {
@@ -190,8 +187,6 @@ public class GUI extends Observable<Move>  {
     public TakeMarketResourceBuilder getTakeMarketResourceBuilder() {
         return this.takeMarketResourceBuilder;
     }
-
-    public BuyDevCardMoveHandler getBuyDevCardMoveHandler() { return this.buyDevCardMoveHandler; }
 
     public void sendMarketMove() {
         disableAllButtons();
@@ -205,9 +200,8 @@ public class GUI extends Observable<Move>  {
         this.boardGUI.getWarehouseGUI().removeSelectResourceListeners();
         disableAllButtons();
         this.informationsGUI.refresh();
-        this.buyDevCardMoveHandler = buyDevCardMoveHandler;
-        this.send(this.buyDevCardMoveHandler.getMove());
-        this.buyDevCardMoveHandler.reset();
+        this.send(buyDevCardMoveHandler.getMove());
+        buyDevCardMoveHandler.reset();
     }
 
     public void sendProductionMove(ProductionMoveHandler productionMoveHandler) {

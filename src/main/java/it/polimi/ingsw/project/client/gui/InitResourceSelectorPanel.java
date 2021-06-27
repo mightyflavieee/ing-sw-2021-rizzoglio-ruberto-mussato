@@ -12,7 +12,7 @@ import java.util.List;
 public class InitResourceSelectorPanel extends JInternalFrame {
     private int coinInt, shieldInt, stoneInt, servantInt;
         private final ClientGUI clientGUI;
-        private int numberOfResourcesToChoose;
+        private final int numberOfResourcesToChoose;
         private final NewGameHandler newGameHandler;
     public InitResourceSelectorPanel(ClientGUI clientGUI, NewGameHandler newGameHandler, Integer numberOfResourcesToChoose) {
         this.setTitle("Select " + numberOfResourcesToChoose + " resources");
@@ -76,7 +76,4 @@ public class InitResourceSelectorPanel extends JInternalFrame {
     }
 
 
-    public void setNumberOfResourcesToChoose(int numberOfResourcesToChoose) {
-        this.numberOfResourcesToChoose = numberOfResourcesToChoose;
-    }
 }

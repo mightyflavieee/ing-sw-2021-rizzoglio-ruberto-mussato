@@ -44,8 +44,6 @@ public class ChestGUI extends JInternalFrame {
         }
     }
 
-    public Map<ResourceType, JButton> getResourcesButtons() { return resourcesButtons; }
-
     public Map<ResourceType, JLabel> getNumberOfResouces() { return numberOfResouces; }
 
     public void setBoardModel(Board boardModel) { this.boardModel = boardModel; }
@@ -129,14 +127,6 @@ public class ChestGUI extends JInternalFrame {
         this.numberOfResouces.put(ResourceType.Servant, servantLabel);
         this.numberOfResouces.put(ResourceType.Shield, shieldLabel);
         this.numberOfResouces.put(ResourceType.Stone, stoneLabel);
-    }
-
-    public void updateLabel(ResourceType type, int value) {
-        for (ResourceType resourceType : this.numberOfResouces.keySet()) {
-            if (resourceType == type) {
-                this.numberOfResouces.get(type).setText(String.valueOf(value));
-            }
-        }
     }
 
     public void disableAllButtons() {
