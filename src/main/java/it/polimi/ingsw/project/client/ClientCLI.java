@@ -137,20 +137,16 @@ public class ClientCLI extends Client {
     }
 
     public Thread asyncReadFromSocket() {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (isActive()) {
-                        ResponseMessage inputObject = (ResponseMessage) socketIn.readObject();
-                        inputObject.action(getInstance());
-                    }
-                } catch (Exception e) {
-                    setActive(false);
-                    unLock();
+        Thread t = new Thread(() -> {
+            try {
+                while (isActive()) {
+                    ResponseMessage inputObject = (ResponseMessage) socketIn.readObject();
+                    inputObject.action(getInstance());
                 }
+            } catch (Exception e) {
+                setActive(false);
+                unLock();
             }
-
         });
         t.start();
         return t;
@@ -176,7 +172,7 @@ public class ClientCLI extends Client {
         for (LeaderCard leader : possibleLeaderCards) {
             System.out.println(leader.getId());
         }
-        List<String> chosenIds = new ArrayList<String>();
+        List<String> chosenIds = new ArrayList<>();
         while (true) {
             String chosenId = this.stdin.nextLine();
             if (Utils.isIdPresent(possibleLeaderCards, chosenId)) {
@@ -218,33 +214,30 @@ public class ClientCLI extends Client {
     }
 
     private void buildGame() {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    System.out.println("Hello what is your name?");
-                    String tempNickName = stdin.nextLine();
-                    System.out.println("Your nickname is " + tempNickName + ", do you confirm? 'yes' | 'no'");
-                    String decision = stdin.nextLine();
-                    if (decision.equals("yes")) {
-                        setNickname(tempNickName);
-                        break;
-                    }
+        Thread t = new Thread(() -> {
+            while (true) {
+                System.out.println("Hello what is your name?");
+                String tempNickName = stdin.nextLine();
+                System.out.println("Your nickname is " + tempNickName + ", do you confirm? 'yes' | 'no'");
+                String decision = stdin.nextLine();
+                if (decision.equals("yes")) {
+                    setNickname(tempNickName);
+                    break;
                 }
-                while (true) {
-                    System.out.println("What do you want to 'join' or 'create' a game?");
-                    String request = stdin.nextLine();
-                    boolean wasValid = false;
-                    if (request.equals("join")) {
-                        wasValid = joinGame();
-                    } else if (request.equals("create")) {
-                        wasValid = createGame();
-                    } else {
-                        System.out.println("Request not valid!");
-                    }
-                    if (wasValid) {
-                        break;
-                    }
+            }
+            while (true) {
+                System.out.println("What do you want to 'join' or 'create' a game?");
+                String request = stdin.nextLine();
+                boolean wasValid = false;
+                if (request.equals("join")) {
+                    wasValid = joinGame();
+                } else if (request.equals("create")) {
+                    wasValid = createGame();
+                } else {
+                    System.out.println("Request not valid!");
+                }
+                if (wasValid) {
+                    break;
                 }
             }
         });
@@ -271,7 +264,7 @@ public class ClientCLI extends Client {
     }
 
     private boolean createGame() { // returns true if the creation request was created successfully
-        Integer playersNumber;
+        int playersNumber;
         while (true) {
             System.out.println("How many people do you want in your game? (max 4) Type 'exit' to leave.");
             try {
@@ -303,33 +296,30 @@ public class ClientCLI extends Client {
     }
 
     public Thread asyncCli() {// sends to server and shows the match
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (isActive()) {
-                        isLock();
-                        if (!isActive()) {
-                            System.out.println("The server is disconnected retry later.");
-                            break;
-                        }
-                        if (getMatch().isPresent()) {
-                            Request move = handleTurn();
-                            while (move == null) {
-                                move = handleTurn();
-                            }
-                            socketOut.writeObject(move);
-                            socketOut.flush();
-                            socketOut.reset();
-                            setLock();
-                        }
-
+        Thread t = new Thread(() -> {
+            try {
+                while (isActive()) {
+                    isLock();
+                    if (!isActive()) {
+                        System.out.println("The server is disconnected retry later.");
+                        break;
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    setActive(false);
+                    if (getMatch().isPresent()) {
+                        Request move = handleTurn();
+                        while (move == null) {
+                            move = handleTurn();
+                        }
+                        socketOut.writeObject(move);
+                        socketOut.flush();
+                        socketOut.reset();
+                        setLock();
+                    }
 
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+                setActive(false);
+
             }
         });
         t.start();
@@ -1124,7 +1114,6 @@ public class ClientCLI extends Client {
             default:
                 return;
         }
-        return;
 
     }
 
@@ -1152,7 +1141,6 @@ public class ClientCLI extends Client {
                 System.out.println(opponent + " Leader Cards are: " + this.match.getLeaderCardsToString(opponent));
                 break;
             default:
-                return;
         }
     }
 
@@ -1201,7 +1189,7 @@ public class ClientCLI extends Client {
         List<Resource> resourceList = market.insertMarble(axis, position,
                 this.handleTransmutationPerk(transmutationPerk));
 
-        Boolean hasRedMarble = false;
+        boolean hasRedMarble = false;
         for (int i = 0; i < resourceList.size(); i++) {
             if (resourceList.get(i).getType() == ResourceType.Faith) {
                 hasRedMarble = true;
@@ -1310,7 +1298,6 @@ public class ClientCLI extends Client {
                 resourcesInHand.put(resourceSelected._1, oldvalue);
             }
         }
-        return;
 
     }
 
@@ -1385,7 +1372,6 @@ public class ClientCLI extends Client {
                 resourcesInHand.put(resourceSelected._1, oldvalue);
             }
         }
-        return;
 
     }
 

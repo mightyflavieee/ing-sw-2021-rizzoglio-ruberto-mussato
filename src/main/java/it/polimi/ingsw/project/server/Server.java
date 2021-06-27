@@ -32,8 +32,8 @@ import it.polimi.ingsw.project.view.RemoteView;
 public class Server {
     private static final int PORT = 12345;
     private final ServerSocket serverSocket;
-    private final Map<String, Lobby> mapOfAvailableLobbies = new HashMap<String, Lobby>();
-    private final Map<String, Lobby> mapOfUnavailableLobbies = new HashMap<String, Lobby>();
+    private final Map<String, Lobby> mapOfAvailableLobbies = new HashMap<>();
+    private final Map<String, Lobby> mapOfUnavailableLobbies = new HashMap<>();
 
     public synchronized void addToLobby(String matchId, SocketClientConnection connection, String name)
             throws Exception {
@@ -130,16 +130,14 @@ public class Server {
 
     public void initPlayers(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
-        List<Player> listOfPlayer = new ArrayList<Player>();
-        currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
-            listOfPlayer.add(new Player(nickname));
-        });
+        List<Player> listOfPlayer = new ArrayList<>();
+        currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> listOfPlayer.add(new Player(nickname)));
         Map<String, SocketClientConnection> mapOfConnections = currentLobby.getMapOfSocketClientConnections();
         Collections.shuffle(listOfPlayer);
         for (int i = 0; i < listOfPlayer.size(); i++) {
             final Player player = listOfPlayer.get(i);
             if (i != 0) {
-                Integer numberOfResourcesToChoose = 0;
+                int numberOfResourcesToChoose = 0;
                 switch (i) {
                     case 1:
                     case 2:
@@ -179,9 +177,7 @@ public class Server {
         }
         currentLobby.getModel().getMatch().moveForwardForStartingGame();
         currentLobby.getModel().getMatch().setSelectedResourcesForEachPlayer(currentLobby.getChosenResourcesByPlayer());
-        currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
-            connection.asyncSend(new MoveMessage(currentLobby.getModel().getMatchCopy()));
-        });
+        currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> connection.asyncSend(new MoveMessage(currentLobby.getModel().getMatchCopy())));
     }
 
     public void recreateLobby(String gameId) {
@@ -194,7 +190,7 @@ public class Server {
             recreatedModel.reAddObserversOnMatch();
             Lobby recreatedLobby = new Lobby(recreatedModel.extractNumberOfPlayers());
             recreatedLobby.setModel(recreatedModel);
-            Map<String, SocketClientConnection> mapOfSocketClientConnection = new HashMap<String, SocketClientConnection>();
+            Map<String, SocketClientConnection> mapOfSocketClientConnection = new HashMap<>();
             Map<String, RemoteView> mapOfViews = new HashMap<>();
             for (Player player : recreatedLobby.getModel().getMatch().getPlayerList()) {
                 final Socket newSocket = new Socket();
@@ -291,9 +287,7 @@ public class Server {
 
     public void sendToAllPlayersMoveMessage(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
-        currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
-            connection.asyncSend(new MoveMessage(currentLobby.getModel().getMatchCopy()));
-        });
+        currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> connection.asyncSend(new MoveMessage(currentLobby.getModel().getMatchCopy())));
     }
 
     public void handleReconnectionAfterServerCrashed(SocketClientConnection connection, String gameId,

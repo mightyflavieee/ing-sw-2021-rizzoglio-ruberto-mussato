@@ -310,11 +310,11 @@ public class Warehouse extends Observable<Warehouse> {
     if (this.extraDeposit == null) {
       return "no extra deposit\n";
     }else{
-      String string = "";
+      StringBuilder string = new StringBuilder();
       for(ResourceType resourceType : extraDeposit.keySet()){
-        string = string + resourceType.toString() + " "+ extraDeposit.get(resourceType) + "\n";
+        string.append(resourceType.toString()).append(" ").append(extraDeposit.get(resourceType)).append("\n");
       }
-      return string;
+      return string.toString();
     }
   }
 

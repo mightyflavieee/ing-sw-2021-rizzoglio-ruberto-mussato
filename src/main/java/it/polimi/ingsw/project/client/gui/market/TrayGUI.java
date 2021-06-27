@@ -99,15 +99,14 @@ public class TrayGUI extends JPanel {
         //this.outsideMarbleJlabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + market.getOutSideMarble().toString()+ ".png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
         this.outsideMarbleJlabel.setIcon(Utils.readIcon("marbles/"  + market.getOutSideMarble().toString()+ ".png",width,width));
 
-        for(int i = 0; i < this.horizontalArrows.size(); i++)
-        {
+        for (JButton horizontalArrow : this.horizontalArrows) {
             //this.horizontalArrows.get(i).setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia orizzontale.png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
-            this.horizontalArrows.get(i).setIcon(Utils.readIcon("marbles/freccia orizzontale.png",width,width));
+            horizontalArrow.setIcon(Utils.readIcon("marbles/freccia orizzontale.png", width, width));
 
         }
-        for (int i = 0; i < this.verticalArrows.size(); i++){
-           // this.verticalArrows.get(i).setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia verticale.png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
-            this.verticalArrows.get(i).setIcon(Utils.readIcon("marbles/freccia verticale.png",width,width));
+        for (JButton verticalArrow : this.verticalArrows) {
+            // this.verticalArrows.get(i).setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia verticale.png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
+            verticalArrow.setIcon(Utils.readIcon("marbles/freccia verticale.png", width, width));
 
         }
 
@@ -139,11 +138,7 @@ public class TrayGUI extends JPanel {
     }
 
     public void refreshSize(int width, int height) {
-        if(width>height){
-            this.width = height;
-        }else {
-            this.width = width;
-        }
+        this.width = Math.min(width, height);
         this.refresh();
     }
 

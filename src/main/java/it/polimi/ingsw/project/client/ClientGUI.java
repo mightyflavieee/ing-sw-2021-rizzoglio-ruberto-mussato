@@ -125,18 +125,15 @@ public class ClientGUI extends Client implements Observer<Move> {
     }
 
     public Thread asyncReadFromSocket() {
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    while (isActive()) {
-                        ResponseMessage inputObject = (ResponseMessage) socketIn.readObject();
-                        inputObject.action(getInstance());
-                    }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                    setActive(false);
+        Thread t = new Thread(() -> {
+            try {
+                while (isActive()) {
+                    ResponseMessage inputObject = (ResponseMessage) socketIn.readObject();
+                    inputObject.action(getInstance());
                 }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                setActive(false);
             }
         });
         t.start();

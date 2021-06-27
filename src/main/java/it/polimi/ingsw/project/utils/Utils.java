@@ -25,8 +25,7 @@ public class Utils {
         return listOfOpponentsName;
     }
     public static Pair<Player, List<Player>> splitPlayers(Match match, String nickame){
-        List<Player> playerList = new ArrayList<>();
-        playerList.addAll(match.getPlayerList());
+        List<Player> playerList = new ArrayList<>(match.getPlayerList());
 
         Player player = null;
         for(int i = 0; i < playerList.size(); i++){

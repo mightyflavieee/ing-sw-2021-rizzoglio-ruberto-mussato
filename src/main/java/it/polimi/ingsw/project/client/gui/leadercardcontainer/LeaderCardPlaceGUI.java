@@ -30,16 +30,16 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         this.add(buttonsPanel,BorderLayout.CENTER);
         this.leaderCardJlabelGUIList = new ArrayList<>();
         this.leaderMovePanelList = new ArrayList<>();
-        for(int i = 0; i < leaderCards.size(); i++) {
-            this.leaderCardJlabelGUIList.add(new LeaderCardJlabelGUI(leaderCards.get(i).getId()));
-            this.leaderMovePanelList.add(new LeaderMovePanel(leaderCards.get(i), gui));
+        for (LeaderCard leaderCard : leaderCards) {
+            this.leaderCardJlabelGUIList.add(new LeaderCardJlabelGUI(leaderCard.getId()));
+            this.leaderMovePanelList.add(new LeaderMovePanel(leaderCard, gui));
         }
 
-        for(int i = 0; i < leaderCardJlabelGUIList.size(); i++){
-            imagesPanel.add(leaderCardJlabelGUIList.get(i));
+        for (LeaderCardJlabelGUI leaderCardJlabelGUI : leaderCardJlabelGUIList) {
+            imagesPanel.add(leaderCardJlabelGUI);
         }
-        for(int i = 0; i < leaderMovePanelList.size(); i++){
-            buttonsPanel.add(leaderMovePanelList.get(i));
+        for (LeaderMovePanel leaderMovePanel : leaderMovePanelList) {
+            buttonsPanel.add(leaderMovePanel);
         }
         for(int i = 0; i < leaderCards.size(); i++){
             leaderMovePanelList.get(i).setActivationPossible(false);
@@ -113,7 +113,7 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
     }
 
     public void enableButtonsForLeaderPhase() {
-        this.leaderMovePanelList.forEach(x -> x.enableButtonsForLeaderPhase());
+        this.leaderMovePanelList.forEach(LeaderMovePanel::enableButtonsForLeaderPhase);
     }
 
     public void refreshSize(int width, int height) {
@@ -123,12 +123,12 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         if(height < 2){
             width = 2;
         }
-        for(int j = 0; j < this.leaderCardJlabelGUIList.size(); j++){
-            this.leaderCardJlabelGUIList.get(j).refreshSize(width/2, (int) (height*0.8));
+        for (LeaderCardJlabelGUI leaderCardJlabelGUI : this.leaderCardJlabelGUIList) {
+            leaderCardJlabelGUI.refreshSize(width / 2, (int) (height * 0.8));
         }
     }
 
     public void enableButtonsForProduction() {
-        this.leaderMovePanelList.forEach(x -> x.enableButtonsForProduction());
+        this.leaderMovePanelList.forEach(LeaderMovePanel::enableButtonsForProduction);
     }
 }

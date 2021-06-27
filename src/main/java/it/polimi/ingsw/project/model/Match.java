@@ -76,7 +76,6 @@ public class Match implements Serializable, Cloneable {
                 break;
             } else {
                 loopCounter++;
-                continue;
             }
         }
     }

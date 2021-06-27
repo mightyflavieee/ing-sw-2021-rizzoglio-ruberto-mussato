@@ -33,13 +33,13 @@ public class CardContainerGUI extends JInternalFrame {
         this.cardsToShow = cardContainer.getAvailableDevCards().stream().map(DevelopmentCard::getId).collect(Collectors.toList());
         this.showedCards = new ArrayList<>();
         JButton jButton;
-        for(int i = 0; i < cardsToShow.size(); i++){
+        for (String s : cardsToShow) {
             jButton = new JButton();
             this.add(jButton);
             this.showedCards.add(jButton);
 
-            jButton.setIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
-            jButton.setDisabledIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
+            jButton.setIcon(Utils.readIcon("developmentcards/" + s + ".png", width, height));
+            jButton.setDisabledIcon(Utils.readIcon("developmentcards/" + s + ".png", width, height));
             jButton.setVisible(true);
         }
     }

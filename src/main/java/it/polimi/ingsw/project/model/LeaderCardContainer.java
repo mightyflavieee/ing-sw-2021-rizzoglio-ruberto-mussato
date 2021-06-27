@@ -19,7 +19,7 @@ public class LeaderCardContainer implements Serializable {
         );
         List<LeaderCard> leaderCards = leaderCardContainerBuilder.getLeaderCards();
         Collections.shuffle(leaderCards);
-        this.mapOfExtractedCards = new HashMap<String, List<LeaderCard>>();
+        this.mapOfExtractedCards = new HashMap<>();
         this.leaderCards = leaderCards;
     }
 

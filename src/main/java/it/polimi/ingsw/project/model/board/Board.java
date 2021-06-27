@@ -714,11 +714,11 @@ public class Board implements Serializable, Cloneable {
   }
 
   public String getLeaderCardsToString() {
-    String string = "\n";
-    for (int i = 0; i < this.leaderCards.size(); i++) {
-      string = string + this.leaderCards.get(i).toString();
+    StringBuilder string = new StringBuilder("\n");
+    for (LeaderCard leaderCard : this.leaderCards) {
+      string.append(leaderCard.toString());
     }
-    return string;
+    return string.toString();
   }
 
   public void setLeaderCards(List<LeaderCard> selectedLeaderCards) {
@@ -760,13 +760,13 @@ public class Board implements Serializable, Cloneable {
   }
 
   public String getMapTrayToString() {
-    String string = "";
+    StringBuilder string = new StringBuilder();
     for (DevCardPosition devCardPosition : this.mapTray.keySet()) {
-      string = string + devCardPosition + ":\n";
+      string.append(devCardPosition).append(":\n");
       if (mapTray.get(devCardPosition).size() != 0) {
-        string = string + mapTray.get(devCardPosition).get(mapTray.get(devCardPosition).size() - 1).toString() + "\n";
+        string.append(mapTray.get(devCardPosition).get(mapTray.get(devCardPosition).size() - 1).toString()).append("\n");
       }
     }
-    return string;
+    return string.toString();
   }
 }

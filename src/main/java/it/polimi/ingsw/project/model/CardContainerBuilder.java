@@ -20,12 +20,12 @@ public class CardContainerBuilder implements Serializable {
             InputStream inputStream = CardContainerBuilder.class.getClassLoader()
                     .getResourceAsStream("developmentCards.json");
             Scanner s = new Scanner(inputStream);
-            String string = "";
+            StringBuilder string = new StringBuilder();
             while (s.hasNext()) {
-                string = string + s.nextLine();
+                string.append(s.nextLine());
             }
             s.close();
-            this.allCards = gson.fromJson(string, CardContainerBuilder.class).allCards;
+            this.allCards = gson.fromJson(string.toString(), CardContainerBuilder.class).allCards;
 
         } catch (Exception e) {
             e.printStackTrace();

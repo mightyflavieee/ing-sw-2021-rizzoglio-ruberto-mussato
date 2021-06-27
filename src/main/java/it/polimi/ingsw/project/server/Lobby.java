@@ -27,10 +27,10 @@ public class Lobby {
 
     public Lobby(Integer maxNumberOfPlayers) {
         this.maxNumberOfPlayers = maxNumberOfPlayers;
-        this.mapOfSocketClientConnections = new LinkedHashMap<String, SocketClientConnection>();
+        this.mapOfSocketClientConnections = new LinkedHashMap<>();
         this.leaderCardContainer = new LeaderCardContainer();
-        this.chosenLeaderCardsByPlayer = new HashMap<String, List<LeaderCard>>();
-        this.chosenResourcesByPlayer = new HashMap<String, List<ResourceType>>();
+        this.chosenLeaderCardsByPlayer = new HashMap<>();
+        this.chosenResourcesByPlayer = new HashMap<>();
     }
 
     public List<Player> getPlayerList() {

@@ -11,12 +11,12 @@ public class ClientApp {
         Client client;
         String ip = "127.0.0.1";
          int port = 12345;
-        String input = "";
-        for (int i = 0; i < args.length; i++) {
-            input = input + args[i];
+        StringBuilder input = new StringBuilder();
+        for (String arg : args) {
+            input.append(arg);
         }
 
-        if (input.equals("cli")) {
+        if (input.toString().equals("cli")) {
             client = new ClientCLI(ip, port);
         } else {
             client = new ClientGUI(ip, port);
