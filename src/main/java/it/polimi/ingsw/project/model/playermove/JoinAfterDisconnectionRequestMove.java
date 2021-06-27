@@ -14,7 +14,7 @@ public class JoinAfterDisconnectionRequestMove extends GameRequestMove {
 
     @Override
     public void action(SocketClientConnection connection) {
-        if (connection.getServer().doesGameExisted(this.gameId)) {
+        if (connection.getServer().doesGameExistedAndHasNotRestarted(this.gameId)) {
             if (connection.getServer().isGameStarted(this.gameId)) {
                 if (connection.getServer().isPlayerPresentAndDisconnected(this.gameId, this.nickName)) {
                     connection.getServer().rejoinGame(this.gameId, connection, this.nickName);
