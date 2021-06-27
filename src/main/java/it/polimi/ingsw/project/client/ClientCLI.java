@@ -11,6 +11,7 @@ import it.polimi.ingsw.project.model.board.ShelfFloor;
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
+import it.polimi.ingsw.project.model.board.card.leaderCard.perk.PerkType;
 import it.polimi.ingsw.project.model.market.Market;
 import it.polimi.ingsw.project.model.playermove.*;
 import it.polimi.ingsw.project.model.playermove.interfaces.Request;
@@ -808,17 +809,18 @@ public class ClientCLI extends Client {
                         resourcesContainedInWarehouseAndChest.put(resource, numberOfResources);
                     }
                 });
-        while (resourcesForBoardProduction.size() < 2) {
-            System.out.println("Which resource do you want to use?\nYour resources are:\n");
+        int numberOfResourcesSelected = 0;
+        while (numberOfResourcesSelected < 2) {
+            System.out.println("Which resource do you want to use for the Board production?\nYour resources are:");
             StringBuilder mapToString = new StringBuilder();
             resourcesContainedInWarehouseAndChest.forEach((ResourceType resourceType, Integer numberOfResources) -> {
                 if (numberOfResources != 0) {
-                    mapToString.append(resourceType + ": " + numberOfResources);
+                    mapToString.append(resourceType).append(": ").append(numberOfResources).append("\n");
                 }
             });
-            System.out.println(mapToString.toString());
+            System.out.println(mapToString);
             System.out.println("Choose option from:\n" + "1 - Servant\n" + "2 - Shield\n" + "3 - Stone\n" + "4 - Coin\n"
-                    + "Which one do you choose? 'exit' to leave.\n");
+                    + "Which one do you choose? 'exit' to leave.");
             switch (this.stdin.nextLine()) {
                 case "1":
                     if (resourcesContainedInWarehouseAndChest.containsKey(ResourceType.Servant)) {
@@ -827,9 +829,10 @@ public class ClientCLI extends Client {
                                 resourcesForBoardProduction.put(ResourceType.Servant, 2);
                             } else {
                                 resourcesForBoardProduction.put(ResourceType.Servant, 1);
-                                resourcesContainedInWarehouseAndChest.replace(ResourceType.Servant,
+                                resourcesContainedInWarehouseAndChest.put(ResourceType.Servant,
                                         resourcesContainedInWarehouseAndChest.get(ResourceType.Servant) - 1);
                             }
+                            numberOfResourcesSelected++;
                         } else {
                             System.out.println("You don't have enough resources in your deposits!");
                         }
@@ -844,9 +847,10 @@ public class ClientCLI extends Client {
                                 resourcesForBoardProduction.put(ResourceType.Shield, 2);
                             } else {
                                 resourcesForBoardProduction.put(ResourceType.Shield, 1);
-                                resourcesContainedInWarehouseAndChest.replace(ResourceType.Shield,
+                                resourcesContainedInWarehouseAndChest.put(ResourceType.Shield,
                                         resourcesContainedInWarehouseAndChest.get(ResourceType.Shield) - 1);
                             }
+                            numberOfResourcesSelected++;
                         } else {
                             System.out.println("You don't have enough resources in your deposits!");
                         }
@@ -861,9 +865,10 @@ public class ClientCLI extends Client {
                                 resourcesForBoardProduction.put(ResourceType.Stone, 2);
                             } else {
                                 resourcesForBoardProduction.put(ResourceType.Stone, 1);
-                                resourcesContainedInWarehouseAndChest.replace(ResourceType.Stone,
+                                resourcesContainedInWarehouseAndChest.put(ResourceType.Stone,
                                         resourcesContainedInWarehouseAndChest.get(ResourceType.Stone) - 1);
                             }
+                            numberOfResourcesSelected++;
                         } else {
                             System.out.println("You don't have enough resources in your deposits!");
                         }
@@ -878,9 +883,10 @@ public class ClientCLI extends Client {
                                 resourcesForBoardProduction.put(ResourceType.Coin, 2);
                             } else {
                                 resourcesForBoardProduction.put(ResourceType.Coin, 1);
-                                resourcesContainedInWarehouseAndChest.replace(ResourceType.Coin,
+                                resourcesContainedInWarehouseAndChest.put(ResourceType.Coin,
                                         resourcesContainedInWarehouseAndChest.get(ResourceType.Coin) - 1);
                             }
+                            numberOfResourcesSelected++;
                         } else {
                             System.out.println("You don't have enough resources in your deposits!");
                         }
@@ -899,17 +905,16 @@ public class ClientCLI extends Client {
     }
 
     // constructs the ProductionMove according to the player choices
-    // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS
     private Move constructProductionMove() {
         Move playerMove = null;
         boolean goBack = false;
         ProductionType productionType = null;
         do {
             System.out.println("Which type of production do you want to activate?\n" + "0 - Go Back;\n"
-                    + "1 - Board Production;\n" + "2 - Development Card Production;\n" + "3 - Leader Card Production.\n"
+                    + "1 - Board Production;\n" + "2 - Development Card Production;\n" + "3 - Leader Card Production;\n"
                     + "4 - Board and Development Card Production;\n" + "5 - Board and Leader Card Production;\n"
                     + "6 - Board, Development Card and Leader Card Production;\n"
-                    + "7 - Development Card and Leader Card Production;\n" + "> ");
+                    + "7 - Development Card and Leader Card Production.\n");
             String answer = this.stdin.nextLine();
             switch (answer) {
                 case "0":
@@ -942,6 +947,10 @@ public class ClientCLI extends Client {
             }
         } while (productionType == null && !goBack);
         if (!goBack) {
+            Map<ResourceType, Integer> requiredResources = new HashMap<>();
+            Map<ResourceType, Integer> requiredResourcesDevelopmentCard = new HashMap<>();
+            Map<ResourceType, Integer> requiredResourcesLeader = new HashMap<>();
+            Map<ResourceType, Integer> requiredResourcesBoard = new HashMap<>();
             Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
             Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
             Map<ResourceType, Integer> resourcesToEliminateExtraDeposit = new HashMap<>();
@@ -950,18 +959,9 @@ public class ClientCLI extends Client {
             switch (productionType) {
                 case Board:
                     // selects which resources to eliminate and from where
-                    Map<ResourceType, Integer> requiredResourcesBoard = selectResourcesForBoardProduction();
-                    if (requiredResourcesBoard == null) {
+                    requiredResources = selectResourcesForBoardProduction();
+                    if (requiredResources == null) {
                         goBack = true;
-                    } else {
-                        selectResourcesFromBoard(requiredResourcesBoard, resourcesToEliminateWarehouse,
-                                resourcesToEliminateChest, resourcesToEliminateExtraDeposit);
-                        // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new
-                        // HashMap<>() )
-                        // constructs the move
-                        playerMove = new ProductionMove(null, null, resourcesToEliminateWarehouse, new HashMap<>(),
-                                resourcesToEliminateChest, productionType,
-                                selectBoardOrPerkManufacturedResource(productionType));
                     }
                     break;
                 case DevCard:
@@ -969,20 +969,9 @@ public class ClientCLI extends Client {
                     if (devCardID.equals("quit")) {
                         goBack = true;
                     } else {
-                        Map<ResourceType, Integer> requiredResourcesDevelopmentCard = new HashMap<>();
-                        for (DevelopmentCard developmentCard : this.match.getCurrentPlayer().getBoard()
-                                .getCurrentProductionCards().values()) {
-                            if (developmentCard.getId() == devCardID) {
-                                requiredResourcesDevelopmentCard.putAll(developmentCard.getRequiredResources());
-                            }
-                        }
-                        selectResourcesFromBoard(match.getCardContainer().fetchCard(devCardID).getRequiredResources(),
-                                resourcesToEliminateWarehouse, resourcesToEliminateChest,
-                                resourcesToEliminateExtraDeposit);
-                        // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new
-                        // HashMap<>() )
-                        playerMove = new ProductionMove(devCardID, null, resourcesToEliminateWarehouse, new HashMap<>(),
-                                resourcesToEliminateChest, productionType, null);
+                        requiredResources = new HashMap<>(this.match.
+                                getCurrentPlayer().getBoard().fetchDevCardById(devCardID)
+                                .getProduction().getRequiredResources());
                     }
                     break;
                 case LeaderCard:
@@ -991,20 +980,12 @@ public class ClientCLI extends Client {
                     if (leaderCardID.equals("quit")) {
                         goBack = true;
                     } else {
-                        Map<ResourceType, Integer> requiredResources = new HashMap<>();
-                        for (LeaderCard leaderCard : this.match.getCurrentPlayer().getLeaderCards()) {
-                            if (leaderCard.getId() == leaderCardID) {
-                                requiredResources.putAll(leaderCard.getRequiredResources());
-                            }
+                        ResourceType requiredResourcesTypeLeader = this.match.getCurrentPlayer().getBoard().fetchLeaderCardById(leaderCardID).getPerk().getResource().getType();
+                        requiredResourcesLeader.put(requiredResourcesTypeLeader, 1);
+                        if (productionType == ProductionType.BoardAndLeaderCard) {
+                            requiredResourcesBoard = selectResourcesForBoardProduction();
                         }
-
-                        selectResourcesFromBoard(requiredResources, resourcesToEliminateWarehouse,
-                                resourcesToEliminateChest, resourcesToEliminateExtraDeposit);
-                        // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new
-                        // HashMap<>() )
-                        playerMove = new ProductionMove(null, leaderCardID, resourcesToEliminateWarehouse,
-                                new HashMap<>(), resourcesToEliminateChest, productionType,
-                                selectBoardOrPerkManufacturedResource(productionType));
+                        requiredResources = sumRequiredResourceMaps(requiredResourcesLeader, requiredResourcesBoard);
                     }
                     break;
                 case BoardAndDevCard:
@@ -1012,64 +993,77 @@ public class ClientCLI extends Client {
                     if (devCardID.equals("quit")) {
                         goBack = true;
                     } else {
-                        Map<ResourceType, Integer> requiredResourcesDevelopmentCard = new HashMap<>();
-                        for (DevelopmentCard developmentCard : this.match.getCurrentPlayer().getBoard()
-                                .getCurrentProductionCards().values()) {
-                            if (developmentCard.getId() == devCardID) {
-                                requiredResourcesDevelopmentCard.putAll(developmentCard.getRequiredResources());
-                            }
-                        }
-                        selectResourcesFromBoard(requiredResourcesDevelopmentCard, resourcesToEliminateWarehouse,
-                                resourcesToEliminateChest, resourcesToEliminateExtraDeposit);
-                        // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new
-                        // HashMap<>() )
-                        playerMove = new ProductionMove(devCardID, null, resourcesToEliminateWarehouse, new HashMap<>(),
-                                resourcesToEliminateChest, productionType,
-                                selectBoardOrPerkManufacturedResource(productionType));
+                        requiredResourcesDevelopmentCard = new HashMap<>(this.match.
+                                getCurrentPlayer().getBoard().fetchDevCardById(devCardID)
+                                .getProduction().getRequiredResources());
+                        requiredResourcesBoard = selectResourcesForBoardProduction();
+                        requiredResources = sumRequiredResourceMaps(requiredResourcesDevelopmentCard, requiredResourcesBoard);
                     }
                     break;
                 case BoardAndDevCardAndLeaderCard:
                 case DevCardAndLeader:
                     devCardID = getDevCardIDForProduction();
-                    leaderCardID = getLeaderCardIDForProduction();
                     if (devCardID.equals("quit")) {
                         goBack = true;
                     } else {
-                        Map<ResourceType, Integer> requiredResources = new LinkedHashMap<>();
-                        for (LeaderCard leaderCard : this.match.getCurrentPlayer().getLeaderCards()) {
-                            if (leaderCard.getId() == leaderCardID) {
-                                requiredResources.putAll(leaderCard.getRequiredResources());
+                        leaderCardID = getLeaderCardIDForProduction();
+                        if (leaderCardID.equals("quit")) {
+                            goBack = true;
+                        } else {
+                            requiredResourcesDevelopmentCard = new HashMap<>(this.match.
+                                    getCurrentPlayer().getBoard().fetchDevCardById(devCardID)
+                                    .getProduction().getRequiredResources());
+                            ResourceType requiredResourcesTypeLeader = this.match.getCurrentPlayer().getBoard().fetchLeaderCardById(leaderCardID).getPerk().getResource().getType();
+                            requiredResourcesLeader.put(requiredResourcesTypeLeader, 1);
+                            requiredResources = sumRequiredResourceMaps(requiredResourcesDevelopmentCard, requiredResourcesLeader);
+                            if (productionType == ProductionType.BoardAndDevCardAndLeaderCard) {
+                                requiredResourcesBoard = selectResourcesForBoardProduction();
+                                requiredResources = sumRequiredResourceMaps(requiredResources, requiredResourcesBoard);
                             }
                         }
-                        Map<ResourceType, Integer> requiredResourcesDevelopmentCard = new HashMap<>();
-                        for (DevelopmentCard developmentCard : this.match.getCurrentPlayer().getBoard()
-                                .getCurrentProductionCards().values()) {
-                            if (developmentCard.getId() == devCardID) {
-                                requiredResourcesDevelopmentCard.putAll(developmentCard.getRequiredResources());
-                            }
-                        }
-                        requiredResourcesDevelopmentCard.forEach((ResourceType resource, Integer numberOfResources) -> {
-                            if (requiredResources.containsKey(resource)) {
-                                requiredResources.put(resource, requiredResources.get(resource) + numberOfResources);
-                            } else {
-                                requiredResources.put(resource, numberOfResources);
-                            }
-                        });
-                        selectResourcesFromBoard(requiredResources, resourcesToEliminateWarehouse,
-                                resourcesToEliminateChest, resourcesToEliminateExtraDeposit);
-                        // TODO ADATTARE ALLA NUOVA PRODUCTIONMOVE CON EXTRA DEPOSITS ( togli new
-                        // HashMap<>() )
-                        playerMove = new ProductionMove(devCardID, leaderCardID, resourcesToEliminateWarehouse,
-                                new HashMap<>(), resourcesToEliminateChest, productionType,
-                                selectBoardOrPerkManufacturedResource(productionType));
                     }
                     break;
                 default:
-                    System.out.println("Choose a correct option.");
                     break;
             }
+            // lets the user select the resorces he/she wants to eliminate from where he/she wants
+            selectResourcesFromBoard(requiredResources, resourcesToEliminateWarehouse,
+                    resourcesToEliminateChest, resourcesToEliminateExtraDeposit);
+            // constructs the move
+            playerMove = new ProductionMove(devCardID,
+                    leaderCardID,
+                    resourcesToEliminateWarehouse,
+                    resourcesToEliminateExtraDeposit,
+                    resourcesToEliminateChest,
+                    productionType,
+                    selectBoardOrPerkManufacturedResource(productionType));
         }
         return playerMove;
+    }
+
+    // sums to maps for the required resources for a Move
+    private Map<ResourceType, Integer> sumRequiredResourceMaps(Map<ResourceType, Integer> resourcesToSum1, Map<ResourceType, Integer> resourcesToSum2) {
+        Map<ResourceType, Integer> sumRequiredResources = new HashMap<>();
+        List<ResourceType> resourceTypes = new ArrayList<>();
+        resourceTypes.add(ResourceType.Coin);
+        resourceTypes.add(ResourceType.Servant);
+        resourceTypes.add(ResourceType.Shield);
+        resourceTypes.add(ResourceType.Stone);
+        for (ResourceType resourceType : resourceTypes) {
+            if (resourcesToSum1.containsKey(resourceType)) {
+                if (resourcesToSum2.containsKey(resourceType)) {
+                    sumRequiredResources.put(resourceType,
+                            resourcesToSum1.get(resourceType) + resourcesToSum2.get(resourceType));
+                } else {
+                    sumRequiredResources.put(resourceType, resourcesToSum1.get(resourceType));
+                }
+            } else {
+                if (resourcesToSum2.containsKey(resourceType)) {
+                    sumRequiredResources.put(resourceType, resourcesToSum2.get(resourceType));
+                }
+            }
+        }
+        return sumRequiredResources;
     }
 
     // handles the CLI aspect of choosing the LeaderCard for the ProductionMove
@@ -1084,16 +1078,19 @@ public class ClientCLI extends Client {
         }
         do {
             System.out.println(
-                    "Provide the ID of the Leader Card for the production or type 'quit'" + " to go back:\n" + "> ");
+                    "Provide the ID of the Leader Card for the production or type 'quit'" + " to go back:");
             String answer = this.stdin.nextLine();
             if (answer.equals("quit")) {
                 goBack = true;
+                break;
             } else {
                 for (LeaderCard leaderCard : leaderCards) {
                     if (leaderCard.getId().equals(answer)) {
-                        isCorrectID = true;
-                        leaderCardID = answer;
-                        break;
+                        if (leaderCard.getPerk().getType() == PerkType.Production) {
+                            isCorrectID = true;
+                            leaderCardID = answer;
+                            break;
+                        }
                     }
                 }
                 if (!isCorrectID) {
@@ -1114,7 +1111,7 @@ public class ClientCLI extends Client {
         String devCardID = null;
         Map<DevCardPosition, DevelopmentCard> productionDevCards = this.match.getCurrentPlayer().getBoard()
                 .getCurrentProductionCards();
-        System.out.println("Choose a Development Card:\n");
+        System.out.println("Choose a Development Card:");
         for (DevCardPosition position : productionDevCards.keySet()) {
             if (productionDevCards.get(position) != null) {
                 System.out.println(position + ":\n" + productionDevCards.get(position) + "\n");
@@ -1122,7 +1119,7 @@ public class ClientCLI extends Client {
         }
         do {
             System.out.println("Provide the ID of the Development Card for the production or type 'quit'"
-                    + " to go back:\n" + "> ");
+                    + " to go back:\n");
             String answer = this.stdin.nextLine();
             if (answer.equals("quit")) {
                 goBack = true;
@@ -1153,7 +1150,7 @@ public class ClientCLI extends Client {
             List<ResourceType> boardOrPerkManufacturedResource) {
         do {
             System.out.println("Choose the " + productionType + " production manufactured resource:\n" + "1 - Coin;\n"
-                    + "2 - Servant;\n" + "3 - Shield;\n" + "4 - Stone.\n" + "> ");
+                    + "2 - Servant;\n" + "3 - Shield;\n" + "4 - Stone.\n");
             String answer = this.stdin.nextLine();
             switch (answer) {
                 case "1":
@@ -1186,6 +1183,12 @@ public class ClientCLI extends Client {
         if (productionType.equals(ProductionType.BoardAndDevCardAndLeaderCard)
                 || productionType.equals(ProductionType.BoardAndLeaderCard)) {
             selectBoardOrPerkManufacturedResourceHelper(ProductionType.Board, boardOrPerkManufacturedResource);
+            selectBoardOrPerkManufacturedResourceHelper(ProductionType.LeaderCard, boardOrPerkManufacturedResource);
+        }
+        if (productionType.equals(ProductionType.BoardAndDevCard)) {
+            selectBoardOrPerkManufacturedResourceHelper(ProductionType.Board, boardOrPerkManufacturedResource);
+        }
+        if (productionType.equals(ProductionType.DevCardAndLeader)) {
             selectBoardOrPerkManufacturedResourceHelper(ProductionType.LeaderCard, boardOrPerkManufacturedResource);
         }
         return boardOrPerkManufacturedResource;
@@ -1289,8 +1292,8 @@ public class ClientCLI extends Client {
         String answer;
         int axis, position;
         do {
-            System.out.println("do you want to insert the marble horizontally or vertically?\n" + "0 - vertical\n"
-                    + "1 - horizontal\n" + "2 - go back and to an other move");
+            System.out.println("do you want to insert the marble horizontally or vertically?\n" + "0 - Vertical\n"
+                    + "1 - Horizontal\n" + "2 - Go back and to another move");
             try {
                 axis = Integer.parseInt(stdin.nextLine());
             }catch (NumberFormatException e){
@@ -1306,7 +1309,7 @@ public class ClientCLI extends Client {
                 try {
                     position = Integer.parseInt(stdin.nextLine());
                 }catch (NumberFormatException e){
-                    System.out.println("Wrong input");
+                    System.out.println("Please insert a number.");
                     position = - 1;
                 }
             } while (position > 3 || position < 0);
@@ -1316,7 +1319,7 @@ public class ClientCLI extends Client {
                 try {
                     position = Integer.parseInt(stdin.nextLine());
                 }catch (NumberFormatException e){
-                    System.out.println("Wrong input");
+                    System.out.println("Please insert a number.");
                     position = - 1;
                 }
             } while (position > 2 || position < 0);
@@ -1370,7 +1373,7 @@ public class ClientCLI extends Client {
                     swapShelves(warehouse);
                     break;
                 default:
-                    System.out.println("wrong input");
+                    System.out.println("Please insert a correct option.");
                     break;
             }
         }
@@ -1570,23 +1573,23 @@ public class ClientCLI extends Client {
         }
     }
 
-    private void selectResourcesFromBoard(Map<ResourceType, Integer> resourceRequired,
+    private void selectResourcesFromBoard(Map<ResourceType, Integer> resourcesRequired,
             Map<ResourceType, Integer> resourcesToEliminateWarehouse,
             Map<ResourceType, Integer> resourcesToEliminateChest,
             Map<ResourceType, Integer> resourceToEliminateExtraDeposit) {
         Board board = this.match.getBoardByPlayerNickname(myNickname);
         Warehouse warehouse = board.getWarehouse();
         System.out.println("Your resources are:\n" + board.resourcesToString());
-        for (ResourceType resourceType : resourceRequired.keySet()) {
+        for (ResourceType resourceType : resourcesRequired.keySet()) {
             for (int i = 0; i < 3; i++) {
-                if (resourceRequired.get(resourceType) == 0) {
+                if (resourcesRequired.get(resourceType) == 0) {
                     break;
                 }
                 int resourceSelected = 0;
                 switch (i) {
                     case 0:
                         do {
-                            System.out.println("You need " + resourceRequired.get(resourceType) + " " + resourceType);
+                            System.out.println("You need " + resourcesRequired.get(resourceType) + " " + resourceType);
                             System.out.println("How many " + resourceType + " do you want to take from the Shelves?");
                             System.out.print(warehouse.getShelvesToString());
                             String answer = stdin.nextLine();
@@ -1596,9 +1599,9 @@ public class ClientCLI extends Client {
                                 resourceSelected = -1;
                             }
 
-                        } while (resourceSelected > resourceRequired.get(resourceType) || resourceSelected < 0);
+                        } while (resourceSelected > resourcesRequired.get(resourceType) || resourceSelected < 0);
                         if (resourceSelected != 0) {
-                            resourceRequired.put(resourceType, resourceRequired.get(resourceType) - resourceSelected);
+                            resourcesRequired.put(resourceType, resourcesRequired.get(resourceType) - resourceSelected);
                             resourcesToEliminateWarehouse.put(resourceType, resourceSelected);
                         }
                         break;
@@ -1608,7 +1611,7 @@ public class ClientCLI extends Client {
                                 if (warehouse.getExtraDeposit().get(resourceType) != 0) {
                                     do {
                                         System.out.println(
-                                                "You need " + resourceRequired.get(resourceType) + " " + resourceType);
+                                                "You need " + resourcesRequired.get(resourceType) + " " + resourceType);
                                         System.out.println("How many " + resourceType
                                                 + " do you want to take from the Extra Deposit?");
                                         System.out.print(warehouse.getExtraDepositToString());
@@ -1618,11 +1621,11 @@ public class ClientCLI extends Client {
                                         } catch (NumberFormatException e) {
                                             resourceSelected = -1;
                                         }
-                                    } while (resourceSelected > resourceRequired.get(resourceType)
+                                    } while (resourceSelected > resourcesRequired.get(resourceType)
                                             || resourceSelected < 0);
                                     if (resourceSelected != 0) {
-                                        resourceRequired.put(resourceType,
-                                                resourceRequired.get(resourceType) - resourceSelected);
+                                        resourcesRequired.put(resourceType,
+                                                resourcesRequired.get(resourceType) - resourceSelected);
                                         resourceToEliminateExtraDeposit.put(resourceType, resourceSelected);
                                     }
                                 }
@@ -1635,7 +1638,7 @@ public class ClientCLI extends Client {
                             if (board.getChest().get(resourceType) != 0) {
                                 do {
                                     System.out.println(
-                                            "You need " + resourceRequired.get(resourceType) + " " + resourceType);
+                                            "You need " + resourcesRequired.get(resourceType) + " " + resourceType);
                                     System.out.println(
                                             "How many " + resourceType + " do you want to take from the Chest?");
                                     System.out.println(board.getChest().toString());
@@ -1645,10 +1648,10 @@ public class ClientCLI extends Client {
                                     } catch (NumberFormatException e) {
                                         resourceSelected = -1;
                                     }
-                                } while (resourceSelected > resourceRequired.get(resourceType) || resourceSelected < 0);
+                                } while (resourceSelected > resourcesRequired.get(resourceType) || resourceSelected < 0);
                                 if (resourceSelected != 0) {
-                                    resourceRequired.put(resourceType,
-                                            resourceRequired.get(resourceType) - resourceSelected);
+                                    resourcesRequired.put(resourceType,
+                                            resourcesRequired.get(resourceType) - resourceSelected);
                                     resourcesToEliminateChest.put(resourceType, resourceSelected);
                                 }
                             }
