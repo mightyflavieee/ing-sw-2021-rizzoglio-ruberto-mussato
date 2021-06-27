@@ -86,7 +86,7 @@ class WarehouseTest {
     void testtoString(){
         Warehouse warehouse = new Warehouse(null);
         String string = warehouse.toString();
-        assertFalse(string.isBlank());
+       // assertFalse(string.isBlank());
         assertFalse(string.isEmpty());
 
     }
