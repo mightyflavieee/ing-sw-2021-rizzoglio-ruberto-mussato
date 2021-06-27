@@ -53,12 +53,14 @@ public class TrayGUI extends JPanel {
             for (int i = 0; i < 4; i++) {
                 jLabel = new JLabel();
                 //jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + tray[i][j].toString()+ ".png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
+                //noinspection SuspiciousNameCombination
                 jLabel.setIcon(Utils.readIcon("marbles/" + tray[i][j].toString()+ ".png",width,width));
                 this.add(jLabel);
                 this.trayJlabel[i][j] = jLabel;
             }
             jButton = new JButton();
            // jButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia orizzontale.png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
+            //noinspection SuspiciousNameCombination
             jButton.setIcon(Utils.readIcon("marbles/freccia orizzontale.png",width,width));
             this.add(jButton);
             horizontalArrows.add(jButton);
@@ -66,12 +68,14 @@ public class TrayGUI extends JPanel {
         for(int i = 0; i < 4; i++){
             jButton = new JButton();
            // jButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia verticale.png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
+            //noinspection SuspiciousNameCombination
             jButton.setIcon(Utils.readIcon("marbles/freccia verticale.png",width,width));
             this.add(jButton);
             verticalArrows.add(jButton);
         }
         jLabel = new JLabel();
        // jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + market.getOutSideMarble().toString()+ ".png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
+        //noinspection SuspiciousNameCombination
         jLabel.setIcon(Utils.readIcon("marbles/"  + market.getOutSideMarble().toString()+ ".png",width,width));
 
         this.add(jLabel);
@@ -85,6 +89,7 @@ public class TrayGUI extends JPanel {
         return this.market.insertMarble(axis,position,resourceType);
     }
 
+    @SuppressWarnings("SuspiciousNameCombination")
     public void refresh(){
         Marble[][] tray = market.getTray();
 

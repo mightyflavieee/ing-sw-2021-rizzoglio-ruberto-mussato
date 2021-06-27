@@ -52,16 +52,7 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
     public void setMyLeaderCards(Player mePlayer) {
         List<LeaderCard> leaderCards = mePlayer.getLeaderCards();
         this.setTitle("My Leader Cards");
-        for (int k = leaderCardJlabelGUIList.size(); k < leaderCards.size(); k++){
-            LeaderCardJlabelGUI leaderCardJlabelGUI = new LeaderCardJlabelGUI(leaderCards.get(k).getId());
-            leaderCardJlabelGUIList.add(leaderCardJlabelGUI);
-            imagesPanel.add(leaderCardJlabelGUI);
-            LeaderMovePanel leaderMovePanel = new LeaderMovePanel(leaderCards.get(k),gui);
-            leaderMovePanelList.add(leaderMovePanel);
-            buttonsPanel.add(leaderMovePanel);
-            this.leaderMovePanelList.get(k).setActivated(leaderCards.get(k).getStatus()== Status.Active);
-        }
-
+        refreshShowed(leaderCards);
         int i;
         for(i = 0; i < leaderCards.size(); i++){
             leaderCardJlabelGUIList.get(i).setID(leaderCards.get(i).getId());
@@ -80,7 +71,8 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         }
 
     }
-    public void setOpponentLeaderCards(List<LeaderCard> leaderCards, String opponentNickName){
+
+    private void refreshShowed(List<LeaderCard> leaderCards) {
         for (int k = leaderCardJlabelGUIList.size(); k < leaderCards.size(); k++){
             LeaderCardJlabelGUI leaderCardJlabelGUI = new LeaderCardJlabelGUI(leaderCards.get(k).getId());
             leaderCardJlabelGUIList.add(leaderCardJlabelGUI);
@@ -90,7 +82,11 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
             buttonsPanel.add(leaderMovePanel);
             this.leaderMovePanelList.get(k).setActivated(leaderCards.get(k).getStatus()== Status.Active);
         }
+    }
+
+    public void setOpponentLeaderCards(List<LeaderCard> leaderCards, String opponentNickName){
         int i;
+        refreshShowed(leaderCards);
         for(i = 0; i < leaderCards.size(); i++){
             leaderCardJlabelGUIList.get(i).setID(leaderCards.get(i).getId());
             leaderCardJlabelGUIList.get(i).setVisible(true);

@@ -115,7 +115,7 @@ class TakeMarketResourcesMoveTest {
         Market localMarket = new Market();
         localMarket.setTray(tray);
         localMarket.setOutsideMarble(outsideMarble);
-        List<Resource> resourceList1Gian = new ArrayList<>();
+        List<Resource> resourceList1Gian;
         resourceList1Gian = localMarket.insertMarble(0, 1, null);
         assertEquals(2,resourceList1Gian.size());
         assertEquals(ResourceType.Shield,resourceList1Gian.get(0).getType());

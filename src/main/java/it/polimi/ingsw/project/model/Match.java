@@ -63,7 +63,7 @@ public class Match implements Serializable, Cloneable {
     }
 
     private void nextPlayer() {
-        int playerIndex = 0;
+        int playerIndex;
         int loopCounter = 0;
         while (loopCounter <= this.playerList.size()) {
             playerIndex = this.playerList.indexOf(currentPlayer);

@@ -17,7 +17,7 @@ public class PlayersBarGUI extends JInternalFrame {
             return;
         }
         this.setVisible(true);
-        String myNickname1 = myNickname;
+        String myNickname1;
         this.setTitle("Players Bar");
         myNickname1 = myNickname;
         this.setLayout(new GridLayout(1,1+ opponentsIDs.size()));

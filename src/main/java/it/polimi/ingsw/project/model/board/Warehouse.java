@@ -171,14 +171,6 @@ public class Warehouse extends Observable<Warehouse> {
     return false;
   }
 
-  private boolean oneFloorHasDifferentTypesOfResources(LinkedHashMap<ShelfFloor, List<Resource>> shelfs) {
-    for (ShelfFloor shelfFloor : shelfs.keySet()) {
-      Resource oldResourceOnFloor = null;
-      for (Resource resource : shelfs.get(shelfFloor)) {
-      }
-    }
-    return false;
-  }
 
   private boolean floorsHaveSameTypeOfResource(LinkedHashMap<ShelfFloor, List<Resource>> shelfs) {
     for (ShelfFloor shelfFloor : shelfs.keySet()) {
@@ -204,10 +196,6 @@ public class Warehouse extends Observable<Warehouse> {
   public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse) {
     final LinkedHashMap<ShelfFloor, List<Resource>> shelvesToCheck = warehouse.getShelves();
     if (hasMoreResourcesThanFloor(shelvesToCheck)) {
-      return false;
-    }
-
-    if (oneFloorHasDifferentTypesOfResources(shelvesToCheck)) {
       return false;
     }
 

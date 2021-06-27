@@ -261,8 +261,8 @@ public class Server {
     }
 
     public boolean isGameNotFull(String gameId) {
-        return this.mapOfAvailableLobbies.get(gameId).getMaxNumberOfPlayers() != this.mapOfAvailableLobbies.get(gameId)
-                .lenght();
+        return !this.mapOfAvailableLobbies.get(gameId).getMaxNumberOfPlayers().equals(this.mapOfAvailableLobbies.get(gameId)
+                .lenght());
     }
 
     public boolean doesGameExistedAndHasNotRestarted(String gameId) {

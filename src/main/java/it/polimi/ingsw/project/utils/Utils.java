@@ -80,8 +80,6 @@ public class Utils {
 
     public static boolean isOneLevelUpper(CardLevel big, CardLevel small) {
         switch (big) {
-            case One:
-                return false;
             case Two:
                 return small == CardLevel.One;
             case Three:

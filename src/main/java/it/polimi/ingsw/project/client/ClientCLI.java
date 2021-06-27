@@ -586,7 +586,7 @@ public class ClientCLI extends Client {
     // if the player
     // wants to go back
     private DevelopmentCard showAndSelectDevCardToBuy(List<DevelopmentCard> availableDevCards) {
-        String answer = null;
+        String answer;
         System.out.println("Development Cards available for purchase:\n");
         for (DevelopmentCard devCard : availableDevCards) {
             System.out.println(devCard.toString());
@@ -616,7 +616,7 @@ public class ClientCLI extends Client {
     private DevCardPosition selectPositionForDevCard(String devCardToBuyID) {
         DevelopmentCard devCardToBuy = this.match.getCardContainer().fetchCard(devCardToBuyID);
         DevCardPosition chosenPosition = null;
-        String answer = null;
+        String answer;
         do {
             while (chosenPosition == null) {
                 System.out.println("Choose an option:\n" + "0 - Go Back\n" + "1 - Left;\n" + "2 - Center;\n"
@@ -808,7 +808,7 @@ public class ClientCLI extends Client {
         } while (productionType == null && !goBack);
         if (!goBack) {
             Map<ResourceType, Integer> requiredResources = new HashMap<>();
-            Map<ResourceType, Integer> requiredResourcesDevelopmentCard = new HashMap<>();
+            Map<ResourceType, Integer> requiredResourcesDevelopmentCard;
             Map<ResourceType, Integer> requiredResourcesLeader = new HashMap<>();
             Map<ResourceType, Integer> requiredResourcesBoard = new HashMap<>();
             Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
@@ -820,15 +820,10 @@ public class ClientCLI extends Client {
                 case Board:
                     // selects which resources to eliminate and from where
                     requiredResources = selectResourcesForBoardProduction();
-                    if (requiredResources == null) {
-                        goBack = true;
-                    }
                     break;
                 case DevCard:
                     devCardID = getDevCardIDForProduction();
-                    if (devCardID.equals("quit")) {
-                        goBack = true;
-                    } else {
+                    if (!devCardID.equals("quit")) {
                         requiredResources = new HashMap<>(this.match.
                                 getCurrentPlayer().getBoard().fetchDevCardById(devCardID)
                                 .getProduction().getRequiredResources());
@@ -837,9 +832,7 @@ public class ClientCLI extends Client {
                 case LeaderCard:
                 case BoardAndLeaderCard:
                     leaderCardID = getLeaderCardIDForProduction();
-                    if (leaderCardID.equals("quit")) {
-                        goBack = true;
-                    } else {
+                    if (!leaderCardID.equals("quit")) {
                         ResourceType requiredResourcesTypeLeader = this.match.getCurrentPlayer().getBoard().fetchLeaderCardById(leaderCardID).getPerk().getResource().getType();
                         requiredResourcesLeader.put(requiredResourcesTypeLeader, 1);
                         if (productionType == ProductionType.BoardAndLeaderCard) {
@@ -850,9 +843,7 @@ public class ClientCLI extends Client {
                     break;
                 case BoardAndDevCard:
                     devCardID = getDevCardIDForProduction();
-                    if (devCardID.equals("quit")) {
-                        goBack = true;
-                    } else {
+                    if (!devCardID.equals("quit")) {
                         requiredResourcesDevelopmentCard = new HashMap<>(this.match.
                                 getCurrentPlayer().getBoard().fetchDevCardById(devCardID)
                                 .getProduction().getRequiredResources());
@@ -863,13 +854,9 @@ public class ClientCLI extends Client {
                 case BoardAndDevCardAndLeaderCard:
                 case DevCardAndLeader:
                     devCardID = getDevCardIDForProduction();
-                    if (devCardID.equals("quit")) {
-                        goBack = true;
-                    } else {
+                    if (!devCardID.equals("quit")) {
                         leaderCardID = getLeaderCardIDForProduction();
-                        if (leaderCardID.equals("quit")) {
-                            goBack = true;
-                        } else {
+                        if (!leaderCardID.equals("quit")) {
                             requiredResourcesDevelopmentCard = new HashMap<>(this.match.
                                     getCurrentPlayer().getBoard().fetchDevCardById(devCardID)
                                     .getProduction().getRequiredResources());
@@ -1441,7 +1428,7 @@ public class ClientCLI extends Client {
                 if (resourcesRequired.get(resourceType) == 0) {
                     break;
                 }
-                int resourceSelected = 0;
+                int resourceSelected;
                 switch (i) {
                     case 0:
                         do {
