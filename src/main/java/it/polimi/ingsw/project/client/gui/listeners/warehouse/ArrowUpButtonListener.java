@@ -31,6 +31,7 @@ public class ArrowUpButtonListener implements ActionListener {
                         case Second:
                             this.warehouseGUI.changeShelf(ShelfFloor.Second, ShelfFloor.First);
                             this.warehouseGUI.setFloorToChange(null);
+                            this.informationsGUI.getResourceInHandler().refresh();
                             break;
                         case Third:
                             if (this.warehouseGUI.getWarehouseModel().getShelves().get(ShelfFloor.Second).size() == 2) {
@@ -39,6 +40,7 @@ public class ArrowUpButtonListener implements ActionListener {
                                 this.warehouseGUI.changeShelf(ShelfFloor.Third, ShelfFloor.Second);
                             }
                             this.warehouseGUI.setFloorToChange(null);
+                            this.informationsGUI.getResourceInHandler().refresh();
                             break;
                     }
                     this.informationsGUI.getResourceInHandler().refresh();

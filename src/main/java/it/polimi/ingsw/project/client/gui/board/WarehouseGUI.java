@@ -248,7 +248,7 @@ public class WarehouseGUI extends JInternalFrame {
     public void changeShelf(ShelfFloor floorA, ShelfFloor floorB) {
         this.warehouseModel.swapShelves(floorA, floorB);
         refresh();
-        this.informationsGUI.getResourceInHandler().refresh();
+
     }
 
     public Map<ShelfFloor, Integer> getNumberOfResoucesPerShelf() {

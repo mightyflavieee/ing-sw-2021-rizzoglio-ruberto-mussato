@@ -57,21 +57,29 @@ public class CardContainerGUI extends JInternalFrame {
      * updates the visual representation based on the local model
      */
     public void refresh() {
-        int i;
-        this.cardsToShow = cardContainer.getAvailableDevCards().stream().map(DevelopmentCard::getId).collect(Collectors.toList());
-        Collections.reverse(cardsToShow);
-        for (i = 0; i < 12; i++){
-            this.showedCards.get(i).setIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
-            this.showedCards.get(i).setDisabledIcon(Utils.readIcon("developmentcards/"+ this.cardsToShow.get(i) + ".png",width,height));
-            if (Arrays.stream(this.showedCards.get(i).getActionListeners()).count() == 0) {
+        int size;
+
+        try {
+            this.cardsToShow = cardContainer.getAvailableDevCards().stream().map(DevelopmentCard::getId).collect(Collectors.toList());
+            Collections.reverse(cardsToShow);
+            size = cardsToShow.size();
+        }catch (Exception e){
+            size = 0;
+        }
+        for (int i = 0; i < 12; i++){
+            if(i < size) {
+                this.showedCards.get(i).setIcon(Utils.readIcon("developmentcards/" + this.cardsToShow.get(i) + ".png", width, height));
+                this.showedCards.get(i).setDisabledIcon(Utils.readIcon("developmentcards/" + this.cardsToShow.get(i) + ".png", width, height));
+                if (Arrays.stream(this.showedCards.get(i).getActionListeners()).count() == 0) {
                     this.showedCards.get(i).addActionListener(new SelectCardForPurchaseListener(this.informationsGUI,
-                        this.cardContainer.fetchCard(this.cardsToShow.get(i))));
+                            this.cardContainer.fetchCard(this.cardsToShow.get(i))));
                 } else {
                     this.showedCards.get(i).removeActionListener(this.showedCards.get(i).getActionListeners()[0]);
                     this.showedCards.get(i).addActionListener(new SelectCardForPurchaseListener(this.informationsGUI,
                             this.cardContainer.fetchCard(this.cardsToShow.get(i))));
                 }
-            if(i > cardsToShow.size()){
+            }else
+            {
                 this.showedCards.get(i).setIcon(Utils.readIcon("developmentcards/retro_devcard.png",width,height));
                 this.showedCards.get(i).setDisabledIcon(Utils.readIcon("developmentcards/retro_devcard.png",width,height));
                 this.showedCards.get(i).setEnabled(false);

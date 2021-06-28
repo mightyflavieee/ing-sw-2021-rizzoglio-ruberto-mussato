@@ -35,10 +35,12 @@ public class ArrowDownButtonListener implements ActionListener {
                                 this.warehouseGUI.changeShelf(ShelfFloor.First, ShelfFloor.Second);
                             }
                             this.warehouseGUI.setFloorToChange(null);
+                            this.informationsGUI.getResourceInHandler().refresh();
                             break;
                         case Second:
                             this.warehouseGUI.changeShelf(ShelfFloor.Second, ShelfFloor.Third);
                             this.warehouseGUI.setFloorToChange(null);
+                            this.informationsGUI.getResourceInHandler().refresh();
                             break;
                     }
                 } else {

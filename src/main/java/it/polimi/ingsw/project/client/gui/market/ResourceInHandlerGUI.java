@@ -74,7 +74,11 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         Map<ResourceType, Integer> extraDeposit = this.warehouseGUI.getWarehouseModel().getExtraDeposit();
 
         this.imageLabel.setIcon(Utils.readIcon("resourcetype/" + this.resourceType.toString() + ".png",30,30));
-        this.numLabel.setText(String.valueOf(this.resourceNum));
+        try {
+            this.numLabel.setText(String.valueOf(this.resourceNum));
+        }catch (NullPointerException e){
+            return;
+        }
         switch (this.resourceNum){
             case 0:
                 this.firstShelfButton.setEnabled(false);
