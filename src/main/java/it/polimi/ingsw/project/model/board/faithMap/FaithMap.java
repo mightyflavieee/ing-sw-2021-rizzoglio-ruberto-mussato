@@ -104,8 +104,10 @@ public class FaithMap implements Serializable {
   }
 
   public void moveForward() {
-    faithTiles.get(markerPosition).activate();
-    markerPosition++;
+    if(markerPosition < 24) {
+      faithTiles.get(markerPosition).activate();
+      markerPosition++;
+    }
   }
 
   public int moveForwardBlack() {

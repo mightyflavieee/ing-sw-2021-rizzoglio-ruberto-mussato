@@ -9,8 +9,8 @@ import java.io.IOException;
 public class ClientApp {
     public static void main(String[] args) {
         Client client;
-        String ip = "4.tcp.ngrok.io";
-         int port = 10665;
+        String ip = "127.0.0.1";
+         int port = 12345;
         StringBuilder input = new StringBuilder();
         for (String arg : args) {
             input.append(arg);

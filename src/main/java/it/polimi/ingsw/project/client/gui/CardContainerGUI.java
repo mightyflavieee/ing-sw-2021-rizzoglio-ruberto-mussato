@@ -42,6 +42,15 @@ public class CardContainerGUI extends JInternalFrame {
             jButton.setDisabledIcon(Utils.readIcon("developmentcards/" + s + ".png", width, height));
             jButton.setVisible(true);
         }
+        for(int i = cardsToShow.size(); i < 12; i++){
+            jButton = new JButton();
+            this.add(jButton);
+            this.showedCards.add(jButton);
+
+            jButton.setIcon(Utils.readIcon("developmentcards/retro_devcard.png", width, height));
+            jButton.setDisabledIcon(Utils.readIcon("developmentcards/retro_devcard.png", width, height));
+            jButton.setVisible(true);
+        }
     }
 
     public void refresh() {

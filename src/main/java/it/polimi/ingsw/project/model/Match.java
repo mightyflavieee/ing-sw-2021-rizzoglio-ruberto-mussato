@@ -156,8 +156,10 @@ public class Match implements Serializable, Cloneable {
     public void end() {
         if (this.isLastTurn && this.currentPlayer.getNickname()
                 .equals(this.playerList.get(this.playerList.size() - 1).getNickname())) {
-            addResourceVictoryPoints();
-            this.isOver = true;
+            if(this.currentPlayer.getTurnPhase() == TurnPhase.EndPhase) {
+                addResourceVictoryPoints();
+                this.isOver = true;
+            }
         }
     }
 
