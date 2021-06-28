@@ -14,6 +14,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * it shows the resources that you collected from the market during the market move
+ */
 public class ResourceInHandGUI extends JInternalFrame {
     private final JButton coinButton;
     private final JButton stoneButton;
@@ -29,22 +32,18 @@ public class ResourceInHandGUI extends JInternalFrame {
         this.setTitle("Resources in Hand");
         this.setLayout(new GridLayout(2,4));
         this.coinButton = new JButton();
-       // this.coinButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/resourcetype/Coin.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         this.coinButton.setIcon(Utils.readIcon("resourcetype/Coin.png",30,30));
         this.add(coinButton);
         this.coinButton.addActionListener(new CoinHandListener(this,informationsGUI));
         this.stoneButton = new JButton();
-       // this.stoneButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/resourcetype/Stone.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         this.stoneButton.setIcon(Utils.readIcon("resourcetype/Stone.png",30,30));
         this.add(stoneButton);
         this.stoneButton.addActionListener(new StoneHandListener(this,informationsGUI));
         this.shieldButton = new JButton();
-        //this.shieldButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/resourcetype/Shield.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         this.shieldButton.setIcon(Utils.readIcon("resourcetype/Shield.png",30,30));
         this.add(shieldButton);
         this.shieldButton.addActionListener(new ShieldHandListener(this,informationsGUI));
         this.servantButton = new JButton();
-        //this.servantButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/resourcetype/Servant.png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         this.servantButton.setIcon(Utils.readIcon("resourcetype/Servant.png",30,30));
         this.add(servantButton);
         this.servantButton.addActionListener(new ServantHandListener(this,informationsGUI));
@@ -69,6 +68,9 @@ public class ResourceInHandGUI extends JInternalFrame {
         this.takeMarketResourceBuilder = takeMarketResourceBuilder;
     }
 
+    /**
+     * it is used to set the local model of the resources that you collected from the market move
+     */
     public void refresh(List<Resource> resourceList) {
         int coin = 0, stone = 0, shield = 0, servant = 0;
         ResourceType type;
@@ -99,6 +101,10 @@ public class ResourceInHandGUI extends JInternalFrame {
         this.refresh();
 
     }
+
+    /**
+     * shows the collected resources based on the local model and enables all the button for the selection
+     */
     public void refresh(){
         this.coinLabel.setText(String.valueOf(this.coinInt));
         this.stoneLabel.setText(String.valueOf(this.stoneInt));
@@ -110,6 +116,10 @@ public class ResourceInHandGUI extends JInternalFrame {
         this.servantButton.setEnabled(this.servantInt != 0);
         takeMarketResourceBuilder.setMarketClear(coinInt + stoneInt + servantInt + shieldInt == 0);
     }
+
+    /**
+     * decreases the number of coins, shows this change and disables all the other buttons in order to select only one type of resource per time
+     */
     public void decreaseCoin(){
         this.coinInt --;
         refresh();
@@ -119,6 +129,9 @@ public class ResourceInHandGUI extends JInternalFrame {
 
     }
 
+    /**
+     * decreases the number of stones, shows this change and disables all the other buttons in order to select only one type of resource per time
+     */
     public void decreaseStone() {
         this.stoneInt --;
         refresh();
@@ -127,6 +140,9 @@ public class ResourceInHandGUI extends JInternalFrame {
         this.servantButton.setEnabled(false);
     }
 
+    /**
+     * decreases the number of shields, shows this change and disables all the other buttons in order to select only one type of resource per time
+     */
     public void decreaseShield() {
         this.shieldInt --;
         refresh();
@@ -135,6 +151,9 @@ public class ResourceInHandGUI extends JInternalFrame {
         this.servantButton.setEnabled(false);
     }
 
+    /**
+     * decreases the number of servants, shows this change and disables all the other buttons in order to select only one type of resource per time
+     */
     public void decreaseServant() {
         this.servantInt --;
         refresh();
@@ -143,6 +162,9 @@ public class ResourceInHandGUI extends JInternalFrame {
         this.shieldButton.setEnabled(false);
     }
 
+    /**
+     * adds back the resources that have been deselected during the market move and updates the visual representation
+     */
     public void addResource(ResourceType resourceType, int n){
         switch (resourceType) {
             case Coin:

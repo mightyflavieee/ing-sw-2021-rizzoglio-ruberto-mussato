@@ -41,7 +41,6 @@ public class ArrowDownButtonListener implements ActionListener {
                             this.warehouseGUI.setFloorToChange(null);
                             break;
                     }
-                    this.informationsGUI.getResourceInHandler().refresh();
                 } else {
                     this.warehouseGUI.getInformationsGUI().getjTextArea().setText("Cannot move down the third shelf floor!");
                 }

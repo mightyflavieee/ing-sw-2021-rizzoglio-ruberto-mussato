@@ -53,6 +53,9 @@ public class CardContainerGUI extends JInternalFrame {
         }
     }
 
+    /**
+     * updates the visual representation based on the local model
+     */
     public void refresh() {
         int i;
         this.cardsToShow = cardContainer.getAvailableDevCards().stream().map(DevelopmentCard::getId).collect(Collectors.toList());
@@ -94,6 +97,9 @@ public class CardContainerGUI extends JInternalFrame {
         }
     }
 
+    /**
+     * changes the size of the displayed pictures
+     */
     public void refreshSize(int width, int height) {
         this.width = width/4;
         this.height = height/3;

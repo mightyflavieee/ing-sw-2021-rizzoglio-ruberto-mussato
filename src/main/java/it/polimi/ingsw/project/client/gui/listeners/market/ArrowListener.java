@@ -2,8 +2,8 @@ package it.polimi.ingsw.project.client.gui.listeners.market;
 
 import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.GUI;
+import it.polimi.ingsw.project.client.gui.market.MarbleTrayGUI;
 import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
-import it.polimi.ingsw.project.client.gui.market.TrayGUI;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
@@ -15,14 +15,14 @@ import java.util.List;
  * it is used when you want to insert a marble in the market
  */
 public class ArrowListener implements ActionListener {
-    private final TrayGUI trayGui;
+    private final MarbleTrayGUI marbleTrayGui;
     private final int axis;
     private final int position;
     private final ResourceInHandGUI resourceInHandGUI;
     private final GUI gui;
     private final TakeMarketResourceBuilder takeMarketResourceBuilder;
-    public ArrowListener(TrayGUI trayGui, int axis, int position, ResourceInHandGUI resourceInHandGUI, GUI gui) {
-        this.trayGui = trayGui;
+    public ArrowListener(MarbleTrayGUI marbleTrayGui, int axis, int position, ResourceInHandGUI resourceInHandGUI, GUI gui) {
+        this.marbleTrayGui = marbleTrayGui;
         this.axis = axis;
         this.position = position;
         this.resourceInHandGUI = resourceInHandGUI;
@@ -33,10 +33,10 @@ public class ArrowListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         boolean hasFaith = false;
-        List<Resource> resourceList = this.trayGui.insertMarble(axis,position);
-        this.trayGui.refresh();
+        List<Resource> resourceList = this.marbleTrayGui.insertMarble(axis,position);
+        this.marbleTrayGui.refresh();
         this.resourceInHandGUI.refresh(resourceList);
-        this.trayGui.disableButtons();
+        this.marbleTrayGui.disableButtons();
         for(int i = 0; i < resourceList.size(); i++){
             if(resourceList.get(i).getType() == ResourceType.Faith){
                 hasFaith = true;

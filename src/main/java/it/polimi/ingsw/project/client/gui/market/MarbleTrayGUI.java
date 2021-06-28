@@ -14,7 +14,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrayGUI extends JPanel {
+public class MarbleTrayGUI extends JPanel {
     private List<ResourceType> transmutationPerks;
     private ResourceType chosedTransmutationPerk;
     private Market market;
@@ -23,7 +23,7 @@ public class TrayGUI extends JPanel {
     private final JLabel[][] trayJlabel = new JLabel[4][3];
     private JLabel outsideMarbleJlabel;
     private int width = 60;
-    public TrayGUI(ResourceInHandGUI resourceInHandGUI, GUI gui, Market market)  {
+    public MarbleTrayGUI(ResourceInHandGUI resourceInHandGUI, GUI gui, Market market)  {
         this.market = market;
         GridLayout gridLayout = new GridLayout(4, 5);
         this.setLayout(gridLayout);
@@ -52,14 +52,12 @@ public class TrayGUI extends JPanel {
 
             for (int i = 0; i < 4; i++) {
                 jLabel = new JLabel();
-                //jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + tray[i][j].toString()+ ".png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
                 //noinspection SuspiciousNameCombination
                 jLabel.setIcon(Utils.readIcon("marbles/" + tray[i][j].toString()+ ".png",width,width));
                 this.add(jLabel);
                 this.trayJlabel[i][j] = jLabel;
             }
             jButton = new JButton();
-           // jButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia orizzontale.png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
             //noinspection SuspiciousNameCombination
             jButton.setIcon(Utils.readIcon("marbles/freccia orizzontale.png",width,width));
             this.add(jButton);
@@ -67,14 +65,12 @@ public class TrayGUI extends JPanel {
         }
         for(int i = 0; i < 4; i++){
             jButton = new JButton();
-           // jButton.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia verticale.png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
             //noinspection SuspiciousNameCombination
             jButton.setIcon(Utils.readIcon("marbles/freccia verticale.png",width,width));
             this.add(jButton);
             verticalArrows.add(jButton);
         }
         jLabel = new JLabel();
-       // jLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + market.getOutSideMarble().toString()+ ".png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
         //noinspection SuspiciousNameCombination
         jLabel.setIcon(Utils.readIcon("marbles/"  + market.getOutSideMarble().toString()+ ".png",width,width));
 
@@ -89,6 +85,9 @@ public class TrayGUI extends JPanel {
         return this.market.insertMarble(axis,position,resourceType);
     }
 
+    /**
+     * updates the visual representation of the marble tray based on the local model
+     */
     @SuppressWarnings("SuspiciousNameCombination")
     public void refresh(){
         Marble[][] tray = market.getTray();
@@ -96,21 +95,17 @@ public class TrayGUI extends JPanel {
         for(int j = 2; j > -1; j--) {
 
             for (int i = 0; i < 4; i++) {
-                //this.trayJlabel[i][j].setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + tray[i][j].toString()+ ".png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
                 this.trayJlabel[i][j].setIcon(Utils.readIcon("marbles/" + tray[i][j].toString()+ ".png",width,width));
 
             }
         }
-        //this.outsideMarbleJlabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/" + market.getOutSideMarble().toString()+ ".png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
         this.outsideMarbleJlabel.setIcon(Utils.readIcon("marbles/"  + market.getOutSideMarble().toString()+ ".png",width,width));
 
         for (JButton horizontalArrow : this.horizontalArrows) {
-            //this.horizontalArrows.get(i).setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia orizzontale.png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
             horizontalArrow.setIcon(Utils.readIcon("marbles/freccia orizzontale.png", width, width));
 
         }
         for (JButton verticalArrow : this.verticalArrows) {
-            // this.verticalArrows.get(i).setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/marbles/freccia verticale.png").getImage().getScaledInstance(this.width, this.width, Image.SCALE_SMOOTH)));
             verticalArrow.setIcon(Utils.readIcon("marbles/freccia verticale.png", width, width));
 
         }
@@ -136,17 +131,22 @@ public class TrayGUI extends JPanel {
         return this.market;
     }
 
-
     public void enableButtons() {
         this.verticalArrows.forEach(x -> x.setEnabled(true));
         this.horizontalArrows.forEach(x -> x.setEnabled(true));
     }
 
+    /**
+     * changes the size of the displayed pictures using the smaller input
+     */
     public void refreshSize(int width, int height) {
         this.width = Math.min(width, height);
         this.refresh();
     }
 
+    /**
+     * returns true if you have 2 transmutation perk activated (corner case)
+     */
     public boolean isTransmutationChosable() {
         switch (this.transmutationPerks.size()){
             case 0:
@@ -165,7 +165,7 @@ public class TrayGUI extends JPanel {
         return this.transmutationPerks;
     }
 
-    public void setChosedTransmutationPerk(ResourceType resourceType) {
+    public void setChosenTransmutationPerk(ResourceType resourceType) {
         this.chosedTransmutationPerk = resourceType;
     }
 }

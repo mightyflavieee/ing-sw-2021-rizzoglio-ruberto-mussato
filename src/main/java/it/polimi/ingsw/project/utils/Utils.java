@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
-import it.polimi.ingsw.project.client.gui.market.TrayGUI;
+import it.polimi.ingsw.project.client.gui.market.MarbleTrayGUI;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.card.CardLevel;
@@ -68,7 +68,7 @@ public class Utils {
             return new ImageIcon(imageMap.get(src).getScaledInstance(width,height,Image.SCALE_SMOOTH));
         }else {
             try {
-                Image image = ImageIO.read(Objects.requireNonNull(TrayGUI.class.getClassLoader().getResourceAsStream(src)));
+                Image image = ImageIO.read(Objects.requireNonNull(MarbleTrayGUI.class.getClassLoader().getResourceAsStream(src)));
                 imageMap.put(src,image);
                 return new ImageIcon(image.getScaledInstance(width, height, Image.SCALE_SMOOTH));
             } catch (IOException e) {

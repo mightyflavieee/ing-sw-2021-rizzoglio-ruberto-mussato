@@ -243,11 +243,12 @@ public class WarehouseGUI extends JInternalFrame {
 
     /**
      * swaps two shelves floor and updates the visual representation
+     * it also updates the insertion options in the ResourceInHandler menu
      */
     public void changeShelf(ShelfFloor floorA, ShelfFloor floorB) {
         this.warehouseModel.swapShelves(floorA, floorB);
-        this.informationsGUI.getResourceInHandler().refresh();
         refresh();
+        this.informationsGUI.getResourceInHandler().refresh();
     }
 
     public Map<ShelfFloor, Integer> getNumberOfResoucesPerShelf() {

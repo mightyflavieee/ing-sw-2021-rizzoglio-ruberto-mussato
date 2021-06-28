@@ -5,6 +5,9 @@ import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import it.polimi.ingsw.project.model.playermove.BuyDevCardMove;
 import it.polimi.ingsw.project.model.playermove.Move;
 
+/**
+ * it is a buffer class to create the BuyDevCard Move
+ */
 public class BuyDevCardMoveHandler {
     private DevelopmentCard developmentCard;
     private SelectResourcesHandler selectResourcesHandler;
@@ -20,6 +23,9 @@ public class BuyDevCardMoveHandler {
 
     public void setPosition(DevCardPosition position) { this.position = position; }
 
+    /**
+     * returns the move that is now ready do be sent using the local fields as parameters
+     */
     public Move getMove() {
         return new BuyDevCardMove(this.developmentCard.getId(),
                 this.position,

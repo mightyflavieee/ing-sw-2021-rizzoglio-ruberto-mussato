@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MarketGUI extends JInternalFrame {
 
-    private final TrayGUI trayGui;
+    private final MarbleTrayGUI marbleTrayGui;
     private final ResourceInHandGUI resourceInHandGUI;
     public MarketGUI(GUI gui, Market market, InformationsGUI informationsGUI) {
         this.setTitle("Market");
@@ -20,9 +20,9 @@ public class MarketGUI extends JInternalFrame {
         this.setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
 
         this.resourceInHandGUI = new ResourceInHandGUI(informationsGUI, gui.getTakeMarketResourceBuilder());
-        this.trayGui = new TrayGUI(this.resourceInHandGUI, gui, market);
+        this.marbleTrayGui = new MarbleTrayGUI(this.resourceInHandGUI, gui, market);
         this.setLayout(new BorderLayout());
-        this.add(trayGui,BorderLayout.CENTER);
+        this.add(marbleTrayGui,BorderLayout.CENTER);
         this.add(resourceInHandGUI,BorderLayout.SOUTH);
     }
 
@@ -30,7 +30,7 @@ public class MarketGUI extends JInternalFrame {
      * updates the local and displayed model
      */
     public void setMarket(Market market, Player mePlayer){
-        this.trayGui.setMarket(market,mePlayer);
+        this.marbleTrayGui.setMarket(market,mePlayer);
     }
 
 
@@ -39,39 +39,39 @@ public class MarketGUI extends JInternalFrame {
     }
 
     public Market getMarket() {
-        return  this.trayGui.getMarket();
+        return  this.marbleTrayGui.getMarket();
     }
 
     public void disableButtons() {
-        this.trayGui.disableButtons();
+        this.marbleTrayGui.disableButtons();
     }
 
     public void enableButtons() {
-        this.trayGui.enableButtons();
+        this.marbleTrayGui.enableButtons();
     }
 
     /**
      changes the size of the displayed pictures in the market
      */
     public void refreshSize(int width, int height) {
-        this.trayGui.refreshSize(width/4,height/3);
+        this.marbleTrayGui.refreshSize(width/4,height/3);
     }
 
     /**
      * returns true if you have two transmutation perks activated (corner case)
      */
     public boolean isTransmutationChosable() {
-        return this.trayGui.isTransmutationChosable();
+        return this.marbleTrayGui.isTransmutationChosable();
     }
 
     public List<ResourceType> getTransmutationPerks() {
-        return this.trayGui.getTransmutationPerks();
+        return this.marbleTrayGui.getTransmutationPerks();
     }
 
     /**
      * sets the transmutation perk that you choose in the case that you have two transmutation perks available
      */
     public void setChosenTransmutationPerk(ResourceType resourceType) {
-        this.trayGui.setChosedTransmutationPerk(resourceType);
+        this.marbleTrayGui.setChosenTransmutationPerk(resourceType);
     }
 }

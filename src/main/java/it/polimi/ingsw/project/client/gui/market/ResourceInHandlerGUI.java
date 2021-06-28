@@ -65,7 +65,6 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         Map<ShelfFloor,ResourceType> resourceTypePerShelf = this.warehouseGUI.getResourceTypePerShelf();
         Map<ResourceType, Integer> extraDeposit = this.warehouseGUI.getWarehouseModel().getExtraDeposit();
 
-        //this.imageLabel.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/resourcetype/" + this.resourceType.toString() + ".png").getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH)));
         this.imageLabel.setIcon(Utils.readIcon("resourcetype/" + this.resourceType.toString() + ".png",30,30));
         this.numLabel.setText(String.valueOf(this.resourceNum));
         switch (this.resourceNum){
