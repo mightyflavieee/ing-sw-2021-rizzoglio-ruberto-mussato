@@ -5,6 +5,9 @@ import it.polimi.ingsw.project.client.gui.GUI;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
+/**
+ * it is used to change the dimensions of each picture of the GUI when you change the side of the outer Jframe
+ */
 public class ResizeListener extends ComponentAdapter {
     private final GUI gui;
 

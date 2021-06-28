@@ -5,6 +5,9 @@ import it.polimi.ingsw.project.client.gui.GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to make you cancel the buy move
+ */
 public class GoBackFromPurchaseListener implements ActionListener {
     private final GUI gui;
 

@@ -6,6 +6,9 @@ import it.polimi.ingsw.project.messages.DiscardLeaderCardMove;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used when you want to activate a leader card
+ */
 public class LeaderCardDiscardButtonListener implements ActionListener {
     private String id;
     private final GUI gui;

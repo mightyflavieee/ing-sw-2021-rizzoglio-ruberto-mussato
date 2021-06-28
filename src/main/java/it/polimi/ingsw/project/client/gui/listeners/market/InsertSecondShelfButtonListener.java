@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * it is used to insert the resources that you selected during the market move in the second shelf
+ */
 public class InsertSecondShelfButtonListener implements ActionListener {
     private final ResourceInHandlerGUI resourceInHandlerGUI;
     private final WarehouseGUI warehouseGUI;

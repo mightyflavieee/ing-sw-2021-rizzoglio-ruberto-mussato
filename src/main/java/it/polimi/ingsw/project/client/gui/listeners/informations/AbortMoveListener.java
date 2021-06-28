@@ -6,6 +6,9 @@ import it.polimi.ingsw.project.model.TurnPhase;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to make you cancel a move that you are doing when you are in its final part
+ */
 public class AbortMoveListener implements ActionListener {
     private final GUI gui;
 

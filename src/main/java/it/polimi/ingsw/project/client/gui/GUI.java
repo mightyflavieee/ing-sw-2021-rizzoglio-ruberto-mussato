@@ -236,7 +236,7 @@ public class GUI extends Observable<Move>  {
     }
 
     public void setChosedTransmutationPerk(ResourceType resourceType) {
-        this.marketGUI.setChosedTransmutationPerk(resourceType);
+        this.marketGUI.setChosenTransmutationPerk(resourceType);
         this.marketGUI.enableButtons();
         this.boardGUI.getWarehouseGUI().enableAllButtons();
         this.informationsGUI.getMainPhaseHandler().goToAbortMovePanel();

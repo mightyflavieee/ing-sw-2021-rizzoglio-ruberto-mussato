@@ -6,6 +6,9 @@ import it.polimi.ingsw.project.model.playermove.ActivateLeaderCardMove;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used when you want to activate a leader card
+ */
 public class LeaderCardActivateButtonListener implements ActionListener {
     private String id;
     private final GUI gui;

@@ -11,12 +11,10 @@ import java.awt.*;
 import java.util.List;
 
 public class MarketGUI extends JInternalFrame {
-    //JPanel jPanel;
 
     private final TrayGUI trayGui;
     private final ResourceInHandGUI resourceInHandGUI;
     public MarketGUI(GUI gui, Market market, InformationsGUI informationsGUI) {
-      //  this.jPanel = new JPanel();
         this.setTitle("Market");
         this.setVisible(true);
         this.setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
@@ -27,7 +25,11 @@ public class MarketGUI extends JInternalFrame {
         this.add(trayGui,BorderLayout.CENTER);
         this.add(resourceInHandGUI,BorderLayout.SOUTH);
     }
-public void setMarket(Market market, Player mePlayer){
+
+    /**
+     * updates the local and displayed model
+     */
+    public void setMarket(Market market, Player mePlayer){
         this.trayGui.setMarket(market,mePlayer);
     }
 
@@ -48,10 +50,16 @@ public void setMarket(Market market, Player mePlayer){
         this.trayGui.enableButtons();
     }
 
+    /**
+     changes the size of the displayed pictures in the market
+     */
     public void refreshSize(int width, int height) {
         this.trayGui.refreshSize(width/4,height/3);
     }
 
+    /**
+     * returns true if you have two transmutation perks activated (corner case)
+     */
     public boolean isTransmutationChosable() {
         return this.trayGui.isTransmutationChosable();
     }
@@ -60,7 +68,10 @@ public void setMarket(Market market, Player mePlayer){
         return this.trayGui.getTransmutationPerks();
     }
 
-    public void setChosedTransmutationPerk(ResourceType resourceType) {
+    /**
+     * sets the transmutation perk that you choose in the case that you have two transmutation perks available
+     */
+    public void setChosenTransmutationPerk(ResourceType resourceType) {
         this.trayGui.setChosedTransmutationPerk(resourceType);
     }
 }

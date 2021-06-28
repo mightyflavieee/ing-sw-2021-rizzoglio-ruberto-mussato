@@ -7,6 +7,9 @@ import it.polimi.ingsw.project.model.board.ShelfFloor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to move up the shelf that you selected during the market move
+ */
 public class ArrowUpButtonListener implements ActionListener {
     private final WarehouseGUI warehouseGUI;
     private final InformationsGUI informationsGUI;
@@ -16,6 +19,9 @@ public class ArrowUpButtonListener implements ActionListener {
         this.informationsGUI = informationsGUI;
     }
 
+    /**
+     * moves the shelf if possible or shows an error message
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (this.warehouseGUI.getCanChangeShelves()) {

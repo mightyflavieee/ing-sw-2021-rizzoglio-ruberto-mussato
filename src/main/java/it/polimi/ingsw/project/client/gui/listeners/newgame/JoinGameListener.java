@@ -6,6 +6,9 @@ import it.polimi.ingsw.project.client.gui.NewGameHandler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to send a join request to the server at the beginning of the game
+ */
 public class JoinGameListener implements ActionListener {
     private final ClientGUI clientGUI;
     private final NewGameHandler newGameHandler;
@@ -15,6 +18,9 @@ public class JoinGameListener implements ActionListener {
         this.newGameHandler = newGameHandler;
     }
 
+    /**
+     * it sends a join request if you actually wrote an id
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (!newGameHandler.getSelectJoinGameIDTextField().getText().isEmpty()) {

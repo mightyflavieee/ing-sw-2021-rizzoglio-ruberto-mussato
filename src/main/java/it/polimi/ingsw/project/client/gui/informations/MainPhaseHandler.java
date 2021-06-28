@@ -130,7 +130,7 @@ public class MainPhaseHandler extends JInternalFrame {
         for (ResourceButton resourceButton : this.resourceButtons) {
             this.transmutationPanel.add(resourceButton);
         }
-        this.abortMovePanel.add(this.abortMoveButton);
+        this.abortMovePanel.add(this.abortMoveButton, BorderLayout.SOUTH);
     }
 
     private void createButtons() {
@@ -291,7 +291,7 @@ public class MainPhaseHandler extends JInternalFrame {
         this.resourceButtons.add(resourceButton1);
         this.resourceButtons.add(resourceButton2);
         // creates Abort Move button
-        this.abortMoveButton = new JButton("Abort Move");
+        this.abortMoveButton = new JButton("Cancel Move");
         // adds listeners
         this.abortMoveButton.addActionListener(new AbortMoveListener(this.gui));
     }

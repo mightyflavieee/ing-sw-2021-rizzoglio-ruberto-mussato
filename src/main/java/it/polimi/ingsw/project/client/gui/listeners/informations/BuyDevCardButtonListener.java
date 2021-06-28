@@ -5,6 +5,9 @@ import it.polimi.ingsw.project.client.gui.GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used during the main phase to make you choose which type of move you want to do
+ */
 public class BuyDevCardButtonListener implements ActionListener {
     private final GUI gui;
 

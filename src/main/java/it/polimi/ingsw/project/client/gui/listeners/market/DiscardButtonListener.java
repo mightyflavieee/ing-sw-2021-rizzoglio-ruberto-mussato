@@ -11,6 +11,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * it is used to make you discard the resources that you selected during the market move
+ */
 public class DiscardButtonListener implements ActionListener {
     private final ResourceInHandlerGUI resourceInHandlerGUI;
     private final ResourceInHandGUI resourceInHandGUI;

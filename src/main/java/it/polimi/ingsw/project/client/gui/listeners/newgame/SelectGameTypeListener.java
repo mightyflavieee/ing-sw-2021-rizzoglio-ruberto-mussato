@@ -7,17 +7,28 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
+/**
+ * it is used to select if you want to join or create a game
+ */
 public class SelectGameTypeListener implements ActionListener {
     private final ClientGUI clientGUI;
     private final NewGameHandler newGameHandler;
     private final boolean isCreatingGame;
 
+    /**
+     * when the listener is created, the field isCreatingGame is put to true if it is listening to the create button
+     * and it is put to false if it is listening to the join button
+     */
     public SelectGameTypeListener(ClientGUI clientGUI, NewGameHandler newGameHandler, boolean isCreatingGame) {
         this.clientGUI = clientGUI;
         this.newGameHandler = newGameHandler;
         this.isCreatingGame = isCreatingGame;
     }
 
+    /**
+     * if you want to create a game it ensures that you selected the number of the players and store the information
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         this.clientGUI.setCreateGame(isCreatingGame);
@@ -47,8 +58,6 @@ public class SelectGameTypeListener implements ActionListener {
                 return;
             this.clientGUI.createOrJoinGame();
 
-            // todo andare nella waiting room (da ClientGUI forse?)
-            // this.newGameHandler.goToWaitingRoom();
 
         } else {
             this.newGameHandler.goTOSelectJoinGameID();

@@ -11,6 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * it is used when you want to insert a marble in the market
+ */
 public class ArrowListener implements ActionListener {
     private final TrayGUI trayGui;
     private final int axis;

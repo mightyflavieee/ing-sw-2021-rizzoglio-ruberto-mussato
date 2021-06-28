@@ -6,6 +6,9 @@ import it.polimi.ingsw.project.model.board.DevCardPosition;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to make you choose in which position put the bought development card
+ */
 public class RightPositionPurchaseListener implements ActionListener {
     private final GUI gui;
 

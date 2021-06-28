@@ -6,6 +6,9 @@ import it.polimi.ingsw.project.model.playermove.ProductionType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to make you choose which type of production move you want to do
+ */
 public class BoardDevLeaderCardsProdListener implements ActionListener {
     private final GUI gui;
 

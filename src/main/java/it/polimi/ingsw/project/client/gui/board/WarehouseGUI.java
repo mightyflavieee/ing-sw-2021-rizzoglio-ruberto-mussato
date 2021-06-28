@@ -154,21 +154,6 @@ public class WarehouseGUI extends JInternalFrame {
         JButton button1ThirdFloor = new JButton();
         JButton button2ThirdFloor = new JButton();
         JButton button3ThirdFloor = new JButton();
-        button1SecondFloor.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-        button2SecondFloor.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-        button1ThirdFloor.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-        button2ThirdFloor.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
-        button3ThirdFloor.setIcon(new ImageIcon(new javax.swing
-                .ImageIcon("src/main/resources/warehouse/warehouse_no_resource.png")
-                .getImage().getScaledInstance(10, 10, Image.SCALE_SMOOTH)));
         button1FirstFloor.setIcon(Utils.readIcon("warehouse/warehouse_no_resource.png",10,10));
         button1SecondFloor.setIcon(Utils.readIcon("warehouse/warehouse_no_resource.png",10,10));
         button2SecondFloor.setIcon(Utils.readIcon("warehouse/warehouse_no_resource.png",10,10));

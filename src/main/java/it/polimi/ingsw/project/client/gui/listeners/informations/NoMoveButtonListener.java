@@ -8,6 +8,9 @@ import it.polimi.ingsw.project.model.playermove.NoMove;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to skip the leader card move
+ */
 public class NoMoveButtonListener implements ActionListener {
     private final GUI gui;
     private final NoMoveHandlerGUI noMoveHandlerGUI;

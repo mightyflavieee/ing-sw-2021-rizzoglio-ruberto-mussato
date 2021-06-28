@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * it is used to insert the resources that you selected during the market move in the extradeposit
+ */
 public class InsertExtraDepositButtonListener implements ActionListener {
     private final ResourceInHandlerGUI resourceInHandlerGUI;
     private final ExtraDepositsGUI extraDepositsGUI;

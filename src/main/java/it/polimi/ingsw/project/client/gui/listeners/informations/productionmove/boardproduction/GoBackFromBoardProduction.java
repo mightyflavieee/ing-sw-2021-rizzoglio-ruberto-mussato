@@ -6,6 +6,9 @@ import it.polimi.ingsw.project.model.TurnPhase;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to make you cancel the production move
+ */
 public class GoBackFromBoardProduction implements ActionListener {
     private final GUI gui;
     private final boolean isManufacturingSelection;

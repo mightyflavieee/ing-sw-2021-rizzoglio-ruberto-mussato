@@ -6,6 +6,9 @@ import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardButtonGU
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used when you need to select a leader card at he beginning of the game
+ */
 public class LeaderCardChoserListener implements ActionListener {
     private final LeaderCardChoserGUI leaderCardChoserGUI;
     private final LeaderCardButtonGUI leaderCardButtonGUI;
@@ -15,6 +18,9 @@ public class LeaderCardChoserListener implements ActionListener {
         this.leaderCardButtonGUI = leaderCardButtonGUI;
     }
 
+    /**
+     * it saves you choice and disables the leader card chosen so you can't choose it again
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         this.leaderCardButtonGUI.setEnabled(false);

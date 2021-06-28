@@ -5,6 +5,9 @@ import it.polimi.ingsw.project.client.gui.NewGameHandler;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to go back from the join menu at the login gui
+ */
 public class GoBackFromJoinListener implements ActionListener {
     private final NewGameHandler newGameHandler;
 

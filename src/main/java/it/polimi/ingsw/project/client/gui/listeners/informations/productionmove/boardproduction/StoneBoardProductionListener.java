@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * it is used to make you choose which resources you want to use for the board productions
+ */
 public class StoneBoardProductionListener implements ActionListener {
     private final GUI gui;
     private final boolean isManufacturingSelection;
@@ -18,6 +21,9 @@ public class StoneBoardProductionListener implements ActionListener {
         this.isManufacturingSelection = isManufacturingSelection;
     }
 
+    /**
+     * saves your choice and goes on if you have selected all resources required
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (this.isManufacturingSelection) {

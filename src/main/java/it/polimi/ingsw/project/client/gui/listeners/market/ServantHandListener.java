@@ -6,6 +6,9 @@ import it.polimi.ingsw.project.client.gui.market.ResourceInHandGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to make you select a servant when you collected it in the market move
+ */
 public class ServantHandListener implements ActionListener {
     private final ResourceInHandGUI resourceInHandGUI;
     private final InformationsGUI informationsGUI;

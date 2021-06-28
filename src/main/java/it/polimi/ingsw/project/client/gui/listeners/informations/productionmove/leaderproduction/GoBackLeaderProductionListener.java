@@ -6,6 +6,9 @@ import it.polimi.ingsw.project.model.TurnPhase;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to make you cancel the production leader card move and its combinations
+ */
 public class GoBackLeaderProductionListener implements ActionListener {
     private final GUI gui;
 

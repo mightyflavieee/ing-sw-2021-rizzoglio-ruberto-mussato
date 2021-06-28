@@ -6,6 +6,9 @@ import it.polimi.ingsw.project.client.gui.PlayersBarGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to show the view of an opponent when you click on the button with its name
+ */
 public class OpponentsButtonListener implements ActionListener {
     private final GUI gui;
     private final PlayersBarGUI playersBarGUI;

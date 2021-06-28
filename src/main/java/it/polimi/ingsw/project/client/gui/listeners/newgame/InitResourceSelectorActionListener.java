@@ -6,6 +6,9 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to select a resource at the beginning of the game
+ */
 public class InitResourceSelectorActionListener implements ActionListener {
     private final ResourceType resourceType;
     private final InitResourceSelectorPanel initResourceSelectorPanel;

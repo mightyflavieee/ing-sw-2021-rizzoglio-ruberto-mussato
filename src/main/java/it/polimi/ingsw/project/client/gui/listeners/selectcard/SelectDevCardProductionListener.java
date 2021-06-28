@@ -6,6 +6,9 @@ import it.polimi.ingsw.project.model.board.card.developmentCard.DevelopmentCard;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * it is used to select a development card from your board that you want to use for the production
+ */
 public class SelectDevCardProductionListener implements ActionListener {
     private final GUI gui;
     private final DevelopmentCard developmentCard;
@@ -15,6 +18,10 @@ public class SelectDevCardProductionListener implements ActionListener {
         this.developmentCard = developmentCard;
     }
 
+    /**
+     * adds a development card to the chosen development card for the production if it wasn't chosen before
+     * it displays also the resources required for the production and enables their buttons from the board in order to select them
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (this.gui.getBoardGUI().getMapTrayGUI().isClickable()) {
@@ -29,7 +36,6 @@ public class SelectDevCardProductionListener implements ActionListener {
             }
             if (!isAlreadyClicked) {
                 this.gui.getInformationsGUI().getProductionMoveHandler().setDevCard(this.developmentCard);
-                //this.gui.getBoardGUI().getMapTrayGUI().disableAllButtons();
                 switch (this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType()) {
                     case DevCard:
                     case BoardAndDevCard:
