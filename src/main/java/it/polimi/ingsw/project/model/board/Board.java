@@ -790,7 +790,8 @@ public class Board implements Serializable, Cloneable {
     if (hasRedMarble) {
       this.moveForward();
     }
-    this.warehouse = warehouse;
+    this.warehouse.setShelves(warehouse.getShelves());
+    this.warehouse.setExtraDeposit(warehouse.getExtraDeposit());
     this.warehouse.discardResourcesInHand(discardedResources);
   }
 

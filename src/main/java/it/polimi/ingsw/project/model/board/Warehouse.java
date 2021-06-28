@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Warehouse extends Observable<Warehouse> {
   private static final long serialVersionUID = 3840284672475092704L;
-  private final LinkedHashMap<ShelfFloor, List<Resource>> shelves;
+  private LinkedHashMap<ShelfFloor, List<Resource>> shelves;
   private LinkedHashMap<ResourceType, Integer> extraDeposit; // da mettere nel costruttore
   private int numResourcesToDiscard;
 
@@ -18,7 +18,8 @@ public class Warehouse extends Observable<Warehouse> {
     this.shelves = this.initShelves();
     this.extraDeposit = null;
     this.numResourcesToDiscard = 0;
-    this.addObserver(new WarehouseObserver(match));
+    WarehouseObserver warehouseObserver = new WarehouseObserver(match);
+    this.addObserver(warehouseObserver);
   }
 
   public void readdObservers(Match match) {
@@ -321,5 +322,13 @@ public class Warehouse extends Observable<Warehouse> {
         }
       }
     }
+  }
+
+  public void setExtraDeposit(LinkedHashMap<ResourceType, Integer> extraDeposit) {
+    this.extraDeposit = extraDeposit;
+  }
+
+  public void setShelves(LinkedHashMap<ShelfFloor, List<Resource>> shelves){
+    this.shelves = shelves;
   }
 }
