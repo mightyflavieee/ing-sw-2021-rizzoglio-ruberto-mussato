@@ -22,7 +22,7 @@ public class GoBackFromBoardProduction implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (this.isManufacturingSelection) {
             this.gui.getInformationsGUI().getMainPhaseHandler().goToProductionButtons();
-            this.gui.disableButtonsHandler(TurnPhase.MainPhase);
+            this.gui.disableLeaderButtonsHandler(TurnPhase.MainPhase);
         } else {
             this.gui.getInformationsGUI().getMainPhaseHandler().goToBoardProductionButtons();
         }

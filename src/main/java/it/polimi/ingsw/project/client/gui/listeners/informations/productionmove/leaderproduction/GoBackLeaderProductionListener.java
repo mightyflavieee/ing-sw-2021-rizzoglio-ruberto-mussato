@@ -16,7 +16,7 @@ public class GoBackLeaderProductionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.gui.disableButtonsHandler(TurnPhase.MainPhase);
+        this.gui.disableLeaderButtonsHandler(TurnPhase.MainPhase);
         this.gui.getInformationsGUI().getMainPhaseHandler().goToProductionButtons();
     }
 }

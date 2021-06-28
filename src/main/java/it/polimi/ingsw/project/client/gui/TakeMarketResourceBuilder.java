@@ -1,4 +1,4 @@
-package it.polimi.ingsw.project.client;
+package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.model.board.Warehouse;
 import it.polimi.ingsw.project.model.market.Market;

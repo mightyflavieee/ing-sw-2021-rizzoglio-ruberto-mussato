@@ -22,6 +22,6 @@ public class TransmutationSelectorListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         ResourceType resourceType = resourceButton.getResourceType();
-        this.gui.setChosedTransmutationPerk(resourceType);
+        this.gui.setChosenTransmutationPerk(resourceType);
     }
 }

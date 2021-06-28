@@ -1,7 +1,6 @@
 package it.polimi.ingsw.project.client.gui;
 
 import it.polimi.ingsw.project.client.ClientGUI;
-import it.polimi.ingsw.project.client.TakeMarketResourceBuilder;
 import it.polimi.ingsw.project.client.gui.board.*;
 import it.polimi.ingsw.project.client.gui.leadercardcontainer.LeaderCardPlaceGUI;
 import it.polimi.ingsw.project.client.gui.listeners.ResizeListener;
@@ -77,7 +76,7 @@ public class GUI extends Observable<Move>  {
         this.jFrame.setVisible(true);
         this.jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.jFrame.pack();
-        this.disableButtonsHandler(this.mePlayer.getTurnPhase());
+        this.disableLeaderButtonsHandler(this.mePlayer.getTurnPhase());
 
         this.jFrame.addComponentListener(new ResizeListener(this));
         this.jFrame.setMinimumSize(new Dimension(1460,760));
@@ -86,10 +85,12 @@ public class GUI extends Observable<Move>  {
     public void send(Move move){
         super.notify(move);
         this.disableAllButtons(); //devo attendere una risposta dal server
-        //todo lo chiamo da un listener e mando la move al server
     }
 
-    public void disableButtonsHandler(TurnPhase turnPhase){
+    /**
+     * disables the buttons of LeaderCardPlaceGUI based on the turn Phase
+     */
+    public void disableLeaderButtonsHandler(TurnPhase turnPhase){
         switch (turnPhase) {
             case WaitPhase:
             case MainPhase:
@@ -126,7 +127,7 @@ public class GUI extends Observable<Move>  {
             this.leaderCardPlaceGUI.setMyLeaderCards(this.mePlayer);
             this.boardGUI.refresh(this.mePlayer.getBoard());
             this.boardGUI.setBoardTitle(this.mePlayer.getNickname(), this.mePlayer.getVictoryPoints());
-            this.disableButtonsHandler(this.mePlayer.getTurnPhase());
+            this.disableLeaderButtonsHandler(this.mePlayer.getTurnPhase());
             if (!this.playersBarGUI.isClosed()) {
                 this.playersBarGUI.clickMyButton();
             }
@@ -136,6 +137,9 @@ public class GUI extends Observable<Move>  {
         }
     }
 
+    /**
+     * updates the informations gui and the boardGUI after collecting resources from the market
+     */
     public void showMarketInformations(boolean hasFaith) {
         this.informationsGUI.showMarketInformations(hasFaith);
         if(hasFaith){
@@ -144,7 +148,9 @@ public class GUI extends Observable<Move>  {
         this.boardGUI.setCanChangeShelves(true);
     }
 
-    // shows your view
+    /**
+     * shows your view
+     */
     public void showMyView() {
         if (playersBarGUI.isClosed()) {
             return;
@@ -160,7 +166,9 @@ public class GUI extends Observable<Move>  {
         }
     }
 
-    // show the view of the opponent opponentPLayers(index)
+    /**
+     * show the view of the opponent opponentPLayers(index)
+     */
     public void showOpponentView(int index) {
         this.historyGUI.setHistory(this.opponentsPlayer.get(index).getHistoryToString(),this.opponentsPlayer.get(index).getNickname());
         this.informationsGUI.showOpponentView(this.opponentsPlayer.get(index).getNickname());
@@ -188,6 +196,9 @@ public class GUI extends Observable<Move>  {
         return this.takeMarketResourceBuilder;
     }
 
+    /**
+     * sends the market move to the server creating it from the TakeMarketResourceBuilder
+     */
     public void sendMarketMove() {
         disableAllButtons();
         this.takeMarketResourceBuilder.setWarehouse(this.boardGUI.getWarehouseModel());
@@ -196,6 +207,9 @@ public class GUI extends Observable<Move>  {
         this.takeMarketResourceBuilder.reset();
     }
 
+    /**
+     * sends the Buy development card move to the server creating it from the BuyDevCardMoveHandler and removes the listener used for the selection of the resources in the warehouse
+     */
     public void sendBuyDevCardMove(BuyDevCardMoveHandler buyDevCardMoveHandler) {
         this.boardGUI.getWarehouseGUI().removeSelectResourceListeners();
         disableAllButtons();
@@ -204,6 +218,9 @@ public class GUI extends Observable<Move>  {
         buyDevCardMoveHandler.reset();
     }
 
+    /**
+     * sends the Production move to the server creating it from the ProductionMoveHandler and removes the listener used for the selection of the resources in the warehouse
+     */
     public void sendProductionMove(ProductionMoveHandler productionMoveHandler) {
         this.boardGUI.getWarehouseGUI().removeSelectResourceListeners();
         disableAllButtons();
@@ -211,16 +228,22 @@ public class GUI extends Observable<Move>  {
         productionMoveHandler.reset();
     }
 
+    /**
+     * updates the size of all the pictures
+     */
     public void refreshSize(){
         Dimension d = this.jFrame.getSize();
         this.leaderCardPlaceGUI.refreshSize((int) (d.width*0.25), (int) (d.height*0.4));
         this.boardGUI.refreshSize((int) (d.width*0.75), (int) (d.height*0.48));
         this.marketGUI.refreshSize((int) (d.width*0.2), (int) (d.height*0.2));
         this.cardContainerGUI.refreshSize(d.width/4, (int) (d.height*0.4));
-       // this.leaderCardPlaceGUI.refreshSize(d.width-boardGUI.getWidth(), (int) (d.height*0.48));
 
     }
 
+    /**
+     * it is used at the beginning of the market move and it shows she transmutation panel if you have two transmutation perk enabled (corner case),
+     * it enables the market's buttons and the warehouse's buttons if you don't need to choose
+     */
     public void startMarketMove() {
         if(this.marketGUI.isTransmutationChosable()){
             this.informationsGUI.goToTransmutationPanel();
@@ -235,7 +258,10 @@ public class GUI extends Observable<Move>  {
         return this.marketGUI.getTransmutationPerks();
     }
 
-    public void setChosedTransmutationPerk(ResourceType resourceType) {
+    /**
+     * set the chosen transmutation perk and enables the market's buttons and the warehouse's buttons
+     */
+    public void setChosenTransmutationPerk(ResourceType resourceType) {
         this.marketGUI.setChosenTransmutationPerk(resourceType);
         this.marketGUI.enableButtons();
         this.boardGUI.getWarehouseGUI().enableAllButtons();

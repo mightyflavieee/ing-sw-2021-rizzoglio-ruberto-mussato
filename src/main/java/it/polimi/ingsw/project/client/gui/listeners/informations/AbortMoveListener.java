@@ -19,7 +19,7 @@ public class AbortMoveListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.gui.getInformationsGUI().getMainPhaseHandler().goToMainButtons();
-        this.gui.disableButtonsHandler(TurnPhase.MainPhase);
+        this.gui.disableLeaderButtonsHandler(TurnPhase.MainPhase);
         this.gui.getBoardGUI().refresh(this.gui.getBoardGUI().getBoardModel());
         this.gui.getCardContainerGUI().refresh();
     }
