@@ -1,6 +1,6 @@
 package it.polimi.ingsw.project.server;
 
-import it.polimi.ingsw.project.model.playermove.DisconnectRequestMove;
+import it.polimi.ingsw.project.messages.DisconnectRequestMove;
 import it.polimi.ingsw.project.model.playermove.interfaces.Controllable;
 import it.polimi.ingsw.project.model.playermove.interfaces.Request;
 import it.polimi.ingsw.project.observer.*;

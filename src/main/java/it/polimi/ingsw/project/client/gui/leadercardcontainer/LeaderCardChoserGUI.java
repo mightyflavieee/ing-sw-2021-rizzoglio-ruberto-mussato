@@ -4,7 +4,7 @@ import it.polimi.ingsw.project.client.ClientGUI;
 import it.polimi.ingsw.project.client.gui.NewGameHandler;
 import it.polimi.ingsw.project.client.gui.listeners.leadercards.LeaderCardChoserListener;
 import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
-import it.polimi.ingsw.project.model.playermove.ChooseLeaderCardMove;
+import it.polimi.ingsw.project.messages.ChooseLeaderCardMove;
 
 import javax.swing.*;
 import java.awt.*;

@@ -19,8 +19,6 @@ public class BoardGUI extends JInternalFrame {
         this.setTitle(nickname + " - VP: 0");
         this.setVisible(true);
 
-        // this.setLayout(new GridBagLayout());
-
         this.boardModel = board;
         this.faithMap = new FaithMapGUI(board.getFaithMap(), isSinglePlayer);
         this.warehouse = new WarehouseGUI(informationsGUI, this.boardModel.getWarehouse());

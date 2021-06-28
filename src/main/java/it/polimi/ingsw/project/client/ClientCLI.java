@@ -1,6 +1,6 @@
 package it.polimi.ingsw.project.client;
 
-import it.polimi.ingsw.project.messages.ResponseMessage;
+import it.polimi.ingsw.project.messages.*;
 import it.polimi.ingsw.project.model.CardContainer;
 import it.polimi.ingsw.project.model.Match;
 import it.polimi.ingsw.project.model.Player;
