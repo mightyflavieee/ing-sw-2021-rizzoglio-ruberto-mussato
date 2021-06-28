@@ -50,6 +50,9 @@ public class ExtraDepositsGUI extends JInternalFrame {
         refresh();
     }
 
+    /**
+     * updates the visual representation based on the local model
+     */
     public void refresh() {
         if (this.warehouseModel.getExtraDeposit() != null) {
             int count = 1;
@@ -175,17 +178,32 @@ public class ExtraDepositsGUI extends JInternalFrame {
         return secondExtraDepositButtons;
     }
 
+    /**
+     * @param resourcesToInsert are inserted in the local model of the extradeposit
+     */
     public void insertInExtraDeposit(List<Resource> resourcesToInsert) {
         this.warehouseModel.insertInExtraDeposit(resourcesToInsert);
         refresh();
     }
 
+    /**
+     * it sets the local model
+     */
     public void setWarehouseModel(Warehouse warehouseModel) { this.warehouseModel = warehouseModel; }
 
+    /**
+     * clicking on the button has no effect
+     */
     public void disableAllButtons() { this.clickable = false; }
 
+    /**
+     * clicking on the button has effect
+     */
     public void enableAllButtons() { this.clickable = true; }
 
+    /**
+     * returns true if the button is enabled, this method is used by the listeners to see if they need to perform an action or not
+     */
     public boolean isClickable() {
         return this.clickable;
     }

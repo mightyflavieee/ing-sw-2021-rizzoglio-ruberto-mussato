@@ -19,6 +19,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * it is used in the informations gui to interact with the player in each phase of the turn
+ */
 public class MainPhaseHandler extends JInternalFrame {
     private static final String MAINPHASESPANEL = "Main Phase";
     private static final String PRODUCTIONPANEL = "Production Move";

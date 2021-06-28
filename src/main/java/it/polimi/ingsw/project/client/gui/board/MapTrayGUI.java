@@ -37,6 +37,9 @@ public class MapTrayGUI extends JInternalFrame {
         refresh();
     }
 
+    /**
+     * updates the visual representation based on the local model
+     */
     public void refresh() {
         for (DevCardPosition position : this.boardModel.getMapTray().keySet()) {
             if (this.boardModel.getMapTray().get(position).size() == 0) {
@@ -82,23 +85,38 @@ public class MapTrayGUI extends JInternalFrame {
 
     public void setBoardModel(Board boardModel) { this.boardModel = boardModel; }
 
+    /**
+     * clicking on the button has no effect
+     */
     public void disableAllButtons() {
         this.clickable = false;
     }
 
+    /**
+     * clicking on the button has effect
+     */
     public void enableAllButtons() {
         this.clickable = true;
     }
 
+    /**
+     * returns true if the button is enabled, this method is used by the listeners to see if they need to perform an action or not
+     */
     public boolean isClickable() {
         return this.clickable;
     }
 
+    /**
+     * updates the local model and the visual representation based on the input player
+     */
     public void setMapTrayByPlayer(Player mePlayer) {
         this.boardModel = mePlayer.getBoard();
         refresh();
     }
 
+    /**
+     * changes the size of the pictures
+     */
     public void refreshSize(int width, int height) {
         this.width = width/3;
         this.height = height;

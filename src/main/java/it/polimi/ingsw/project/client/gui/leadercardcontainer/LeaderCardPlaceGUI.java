@@ -49,6 +49,9 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
     }
 
 
+    /**
+     * shows the player's leaderCards and sets all the buttons
+     */
     public void setMyLeaderCards(Player mePlayer) {
         List<LeaderCard> leaderCards = mePlayer.getLeaderCards();
         this.setTitle("My Leader Cards");
@@ -84,6 +87,9 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         }
     }
 
+    /**
+     * shows an opponent's leadercards and set all buttons to disabled
+     */
     public void setOpponentLeaderCards(List<LeaderCard> leaderCards, String opponentNickName){
         int i;
         refreshShowed(leaderCards);
@@ -112,6 +118,9 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         this.leaderMovePanelList.forEach(LeaderMovePanel::enableButtonsForLeaderPhase);
     }
 
+    /**
+     * updates the size of the displayed pictures
+     */
     public void refreshSize(int width, int height) {
         if(width < 2){
             width = 2;

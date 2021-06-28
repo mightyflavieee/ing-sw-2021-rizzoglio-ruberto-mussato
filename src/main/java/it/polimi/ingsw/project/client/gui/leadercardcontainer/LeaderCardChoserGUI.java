@@ -25,7 +25,7 @@ public class LeaderCardChoserGUI extends JInternalFrame {
         List<LeaderCardButtonGUI> leaderCardButtonGUIList = new ArrayList<>();
         this.setLayout(new GridLayout(2,2));
         for(String id : this.leadercards.stream().map(LeaderCard::getId).collect(Collectors.toList())){
-            LeaderCardButtonGUI leaderCardButtonGUI = new LeaderCardButtonGUI(id, this);
+            LeaderCardButtonGUI leaderCardButtonGUI = new LeaderCardButtonGUI(id);
             leaderCardButtonGUI.addActionListener(new LeaderCardChoserListener(leaderCardButtonGUI,this));
             leaderCardButtonGUIList.add(leaderCardButtonGUI);
             this.add(leaderCardButtonGUI);
@@ -38,6 +38,9 @@ public class LeaderCardChoserGUI extends JInternalFrame {
     }
 
 
+    /**
+     * @param id is added to the leadercards' chosed at the beginning of the game, if you have selected two leadercards it sends the selection to the server
+     */
     public void selectID(String id) {
         this.chosedIDs.add(id);
         if(chosedIDs.size()==2){
@@ -51,7 +54,6 @@ public class LeaderCardChoserGUI extends JInternalFrame {
             }
             this.clientGUI.send(new ChooseLeaderCardMove(this.clientGUI.getNickname(), this.clientGUI.getGameId(), leaderCardsToSend));
             this.newGameHandler.goToWaitingRoom(clientGUI.getGameId());
-           // this.dispose();
         }
 
     }

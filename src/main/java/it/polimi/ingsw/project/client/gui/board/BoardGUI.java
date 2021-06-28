@@ -57,6 +57,9 @@ public class BoardGUI extends JInternalFrame {
       return this.warehouse.getWarehouseModel();
     }
 
+    /**
+     * @param boardModel updates the local model shows the visual representation of the received Board
+     */
     public void refresh(Board boardModel) {
         this.boardModel = boardModel;
         this.warehouse.setWarehouseModel(boardModel.getWarehouse());
@@ -69,6 +72,10 @@ public class BoardGUI extends JInternalFrame {
         this.faithMap.refresh();
     }
 
+    /**
+     * @param nickname it is showed as a title of the JinternalFrame
+     * @param victoryPoints it is showed next to the nickname
+     */
     public void setBoardTitle(String nickname, int victoryPoints) {
         this.setTitle(nickname + " - VP:" + victoryPoints);
     }
@@ -79,10 +86,16 @@ public class BoardGUI extends JInternalFrame {
         this.chest.disableAllButtons();
     }
 
+    /**
+     * updates the marker position of the local model and updates the visual representation
+     */
     public void moveForward() {
         this.faithMap.moveForward();
     }
 
+    /**
+     * @param mePlayer shows the visual representation of the input player, it is used to see an opponent player's board
+     */
     public void setBoardByPlayer(Player mePlayer) {
         this.setTitle(mePlayer.getNickname() + " - VP:" + mePlayer.getVictoryPoints());
         this.warehouse.setWarehouseByPlayer(mePlayer);
@@ -91,11 +104,17 @@ public class BoardGUI extends JInternalFrame {
         this.faithMap.setFaithMapByPlayer(mePlayer);
     }
 
+    /**
+     * changes the size of the pictures of the maptray
+     */
     public void refreshSize(int width, int height) {
         this.mapTray.refreshSize(
                 (int) (width*0.4), (int) (height*0.6));
     }
 
+    /**
+     * @param b if true you can change the shelves, it is used in the Market move
+     */
     public void setCanChangeShelves(boolean b) {
         this.warehouse.setCanChangeShelves(b);
     }

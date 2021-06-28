@@ -45,11 +45,17 @@ public class LeaderMovePanel extends JPanel {
         this.isProductable = false;
     }
 
+    /**
+     * enables or disables the activate button based on the input
+     */
     public void setActivationPossible(Boolean value){
         this.activateButton.setEnabled(value);
         this.isActivable = value;
     }
 
+    /**
+     * enables or disables the production button based on the input
+     */
     public void setProductable(boolean productable) {
         isProductable = productable;
     }
@@ -60,18 +66,27 @@ public class LeaderMovePanel extends JPanel {
         this.productionButton.setEnabled(false);
     }
 
+    /**
+     * enables the button discard and activate if possible and disables use for production button
+     */
     public void enableButtonsForLeaderPhase() {
         this.disableButtons();
         this.discardButton.setEnabled(true);
         this.activateButton.setEnabled(this.isActivable);
            }
 
+    /**
+     * updates the listener's id of the leadercard so each buttons refers to the correct leadercard
+     */
     public void setID(LeaderCard leaderCard) {
         this.leaderCardActivateButtonListener.setID(leaderCard.getId());
         this.leaderCardDiscardButtonListener.setID(leaderCard.getId());
         this.selectLeaderCardProductionListener.setLeaderCard(leaderCard);
     }
 
+    /**
+     * changes the displayed text of the activate button based on the leadercard's status
+     */
     public void setActivated(boolean b) {
         if(b){
             this.activateButton.setText("Activated");
@@ -81,6 +96,9 @@ public class LeaderMovePanel extends JPanel {
         }
     }
 
+    /**
+     * enables the button use for production if possible and disables discard and activate buttons
+     */
     public void enableButtonsForProduction() {
         this.disableButtons();
         this.productionButton.setEnabled(isProductable);

@@ -11,7 +11,6 @@ public class LeaderCardJlabelGUI extends JLabel {
 
     public LeaderCardJlabelGUI(String id) { //used for the leadercard place
         this.id = id;
-        //this.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/leadercards/"+ this.id + ".png").getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
         this.setIcon(Utils.readIcon("leadercards/" + this.id + ".png",width,height));
 
         this.setVisible(true);
@@ -23,11 +22,13 @@ public class LeaderCardJlabelGUI extends JLabel {
     }
 
     private void refresh() {
-       // this.setIcon(new ImageIcon(new javax.swing.ImageIcon("src/main/resources/leadercards/"+ this.id + ".png").getImage().getScaledInstance(this.width, this.height, Image.SCALE_SMOOTH)));
         this.setIcon(Utils.readIcon("leadercards/" + this.id + ".png",width,height));
 
     }
 
+    /**
+     * changes the size of the pictures
+     */
     public void refreshSize(int width, int height) {
         this.width = width;
         this.height = height;

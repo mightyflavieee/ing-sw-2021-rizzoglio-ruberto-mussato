@@ -120,8 +120,14 @@ public class FaithMapGUI extends JInternalFrame {
         }
     }
 
+    /**
+     * @param boardModel is set as the local model
+     */
     public void setBoardModel(Board boardModel) { this.faithMapModel = boardModel.getFaithMap(); }
 
+    /**
+     * it updates the local representation based on the local model
+     */
     public void refresh() {
         this.markerPosition = this.faithMapModel.getMarkerPosition();
         this.blackMarkerPosition = this.faithMapModel.getBlackMarkerPosition();
@@ -141,11 +147,17 @@ public class FaithMapGUI extends JInternalFrame {
         }
     }
 
+    /**
+     * updates the marker position of the local model and updates the visual representation
+     */
     public void moveForward() {
         this.faithMapModel.moveForward();
         refresh();
     }
 
+    /**
+     * updates the local model and the visual representation based on the input player
+     */
     public void setFaithMapByPlayer(Player mePlayer) {
         this.faithMapModel = mePlayer.getBoard().getFaithMap();
         refresh();

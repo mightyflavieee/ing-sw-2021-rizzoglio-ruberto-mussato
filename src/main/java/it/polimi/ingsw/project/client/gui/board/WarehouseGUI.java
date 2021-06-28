@@ -94,12 +94,19 @@ public class WarehouseGUI extends JInternalFrame {
 
     public InformationsGUI getInformationsGUI() { return this.informationsGUI; }
 
-    // returns this.canChangeShelves
+    /**
+     * returns this.canChangeShelves
+     */
     public boolean getCanChangeShelves() { return this.canChangeShelves; }
 
-    // returns this.floorToChange
+    /**
+     * returns this.floorToChange
+     */
     public ShelfFloor getFloorToChange() { return this.floorToChange; }
 
+    /**
+     * updates the local model and its visual representation
+     */
     public void setWarehouseModel(Warehouse warehouseModel) {
         this.warehouseModel = warehouseModel;
         this.extraDepositsGUI.setWarehouseModel(warehouseModel);
@@ -108,13 +115,17 @@ public class WarehouseGUI extends JInternalFrame {
 
     }
 
-    // sets this.canChangeShelves to true or false
+    /**
+     * @param value sets this.canChangeShelves to true or false
+     */
     public void setCanChangeShelves(boolean value) {
         this.canChangeShelves = value;
         this.refresh();
     }
 
-    // sets floor to change for change shelf move
+    /**
+     * @param floor sets floor to change for change shelf move
+     */
     public void setFloorToChange(ShelfFloor floor) { this.floorToChange = floor; }
 
     // creates the arrow buttons on the left of the warehouse
@@ -180,6 +191,9 @@ public class WarehouseGUI extends JInternalFrame {
         this.shelvesButtons.put(ShelfFloor.Third, thirdFloor);
     }
 
+    /**
+     * updates the visual representation based on the local model
+     */
     public void refresh() {
         this.extraDepositsGUI.refresh();
         for (ShelfFloor floor : this.warehouseModel.getShelves().keySet()) {
@@ -201,6 +215,9 @@ public class WarehouseGUI extends JInternalFrame {
         }
     }
 
+    /**
+     * changed the buttons' listener to listener used for the selection of the resources
+     */
     public void addSelectResourceListeners() {
         int count;
         for (ShelfFloor floor : this.warehouseModel.getShelves().keySet()) {
@@ -213,6 +230,9 @@ public class WarehouseGUI extends JInternalFrame {
         }
     }
 
+    /**
+     * removes the buttons' listeners used for the selection of the resources
+     */
     public void removeSelectResourceListeners() {
         for (ShelfFloor floor : this.shelvesButtons.keySet()) {
             for (JButton button : this.shelvesButtons.get(floor)) {
@@ -228,12 +248,17 @@ public class WarehouseGUI extends JInternalFrame {
         }
     }
 
-    // inserts the resources indicated in the chosen shelf
+    /**
+     * inserts the resources indicated in the chosen shelf and updates the visual representation
+     */
     public void insertInShelf(ShelfFloor floor, List<Resource> resourcesToInsert) {
         this.warehouseModel.insertInShelves(floor, resourcesToInsert);
         refresh();
     }
 
+    /**
+     * swaps two shelves floor and updates the visual representation
+     */
     public void changeShelf(ShelfFloor floorA, ShelfFloor floorB) {
         this.warehouseModel.swapShelves(floorA, floorB);
         this.informationsGUI.getResourceInHandler().refresh();
@@ -256,20 +281,32 @@ public class WarehouseGUI extends JInternalFrame {
         return extraDepositsGUI;
     }
 
+    /**
+     * clicking on the button has no effect
+     */
     public void disableAllButtons() {
         this.clickable = false;
         this.extraDepositsGUI.disableAllButtons();
     }
 
+    /**
+     * clicking on the button has effect
+     */
     public void enableAllButtons() {
         this.clickable = true;
         this.extraDepositsGUI.enableAllButtons();
     }
 
+    /**
+     * returns true if the button is enabled, this method is used by the listeners to see if they need to perform an action or not
+     */
     public boolean isClickable() {
         return this.clickable;
     }
 
+    /**
+     * updates the local model and the visual representation based on the input player
+     */
     public void setWarehouseByPlayer(Player mePlayer) {
         this.warehouseModel = mePlayer.getWarehouse();
         refresh();

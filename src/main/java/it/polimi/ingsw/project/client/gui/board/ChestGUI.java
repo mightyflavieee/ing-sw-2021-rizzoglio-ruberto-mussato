@@ -36,6 +36,9 @@ public class ChestGUI extends JInternalFrame {
         refresh();
     }
 
+    /**
+     * updates the visual representation of the chest based on the local model
+     */
     public void refresh() {
         for (ResourceType type : this.boardModel.getChest().keySet()) {
             String numeberOfResourceInChest = this.boardModel.getChest().get(type).toString();
@@ -128,14 +131,26 @@ public class ChestGUI extends JInternalFrame {
         this.numberOfResouces.put(ResourceType.Stone, stoneLabel);
     }
 
+    /**
+     * clicking on the button has no effect
+     */
     public void disableAllButtons() {
         this.clickable = false;
     }
 
+    /**
+     * clicking on the button has effect
+     */
     public void enableAllButtons() { this.clickable = true; }
 
+    /**
+     * returns true if the button is enabled, this method is used by the listeners to see if they need to perform an action or not
+     */
     public boolean isClickable() { return this.clickable; }
 
+    /**
+     * @param mePlayer updates the local model and the visual representation based on the input player
+     */
     public void setChestByPlayer(Player mePlayer) {
         this.boardModel = mePlayer.getBoard();
         refresh();
