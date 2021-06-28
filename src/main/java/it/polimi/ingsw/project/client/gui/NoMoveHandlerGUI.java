@@ -5,12 +5,14 @@ import it.polimi.ingsw.project.client.gui.listeners.informations.NoMoveButtonLis
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * it is used in the informations gui during a leader card phase and it informs you about that
+ */
 public class NoMoveHandlerGUI extends JInternalFrame {
 
     public NoMoveHandlerGUI(String string, GUI gui) {
         this.setTitle("Leader Card Action Phase");
         this.setVisible(true);
-       // this.setLayout(new GridLayout(2,1));
         this.setLayout(new BorderLayout());
         JTextArea jTextArea = new JTextArea("You can Activate or Discard a Leader Card by clicking on it.\n" +
                 " If you want " + string + " and you don't want to perform a Leader Card Action click on Next Phase");

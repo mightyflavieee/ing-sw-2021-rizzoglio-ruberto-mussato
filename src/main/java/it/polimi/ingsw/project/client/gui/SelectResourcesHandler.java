@@ -5,6 +5,10 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * this is a buffer class for the Production and the Buy move
+ * it stores the resources used from the board
+ */
 public class SelectResourcesHandler {
     private final Map<ResourceType, Integer> resourcesFromWarehouse;
     private final Map<ResourceType, Integer> resourcesFromExtraDeposit;

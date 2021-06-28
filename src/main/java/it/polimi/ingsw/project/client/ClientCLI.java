@@ -41,12 +41,15 @@ public class ClientCLI extends Client {
         return this;
     }
 
-    public synchronized void isLock() throws InterruptedException {
+    private synchronized void isLock() throws InterruptedException {
         if (this.lock) {
             wait();
         }
     }
 
+    /**
+     * sets the local match and goes on with the turn if the game is non ended
+     */
     @Override
     public void setMatch(Match match) {
         TurnPhase oldTurnPhase = TurnPhase.MainPhase;
@@ -91,6 +94,10 @@ public class ClientCLI extends Client {
         }
     }
 
+    /**
+     * makes you choose the number of resources in input.
+     * it is used at the beginning of the game
+     */
     @Override
     public void chooseResources(Integer numberOfResourcesToChoose) {
         List<ResourceType> listOfChosenResources = new ArrayList<>();
@@ -98,8 +105,8 @@ public class ClientCLI extends Client {
             listOfChosenResources.add(chooseSingleResource(numberOfResourcesToChoose - listOfChosenResources.size()));
         }
         try {
-            getSocketOut().writeObject(new ChooseResourcesMove(this.myNickname, this.gameId, listOfChosenResources));
-            getSocketOut().flush();
+            socketOut.writeObject(new ChooseResourcesMove(this.myNickname, this.gameId, listOfChosenResources));
+            socketOut.flush();
         } catch (Exception e) {
             System.out.println(e.getMessage());
             setActive(false);
@@ -127,16 +134,16 @@ public class ClientCLI extends Client {
         unLock();
     }
 
-    public synchronized void unLock() {
+    private synchronized void unLock() {
         this.lock = false;
         notifyAll();
     }
 
-    public synchronized void setLock() {
+    private synchronized void setLock() {
         this.lock = true;
     }
 
-    public Thread asyncReadFromSocket() {
+    private Thread asyncReadFromSocket() {
         Thread t = new Thread(() -> {
             try {
                 while (isActive()) {
@@ -152,7 +159,7 @@ public class ClientCLI extends Client {
         return t;
     }
 
-    public void showErrorMessage(String error) {
+    private void showErrorMessage(String error) {
         System.out.println(error);
     }
 
@@ -161,6 +168,10 @@ public class ClientCLI extends Client {
         System.out.println("Wait for the other players.");
     }
 
+    /**
+     * makes you choose two leader cards from the input leader cards
+     * it is used at the beginning of the game
+     */
     @Override
     public void chooseLeaderCards(List<LeaderCard> possibleLeaderCards) {
         final List<LeaderCard> allLeaderCard = possibleLeaderCards;
@@ -201,12 +212,18 @@ public class ClientCLI extends Client {
         }
     }
 
+    /**
+     * prints the error message and makes you choose again the leader cards
+     */
     @Override
     public void reChooseLeaderCards(String errorMessage, List<LeaderCard> possibleLeaderCards) {
         System.out.println(errorMessage);
         chooseLeaderCards(possibleLeaderCards);
     }
 
+    /**
+     * prints the error message and makes you start again the login process
+     */
     @Override
     public void reBuildGame(String errorMessage) {
         this.showErrorMessage(errorMessage);
@@ -295,7 +312,7 @@ public class ClientCLI extends Client {
         return true;
     }
 
-    public Thread asyncCli() {// sends to server and shows the match
+    private Thread asyncCli() {// sends to server and shows the match
         Thread t = new Thread(() -> {
             try {
                 while (isActive()) {
@@ -326,7 +343,7 @@ public class ClientCLI extends Client {
         return t;
     }
 
-    public Move handleTurn() {
+    private Move handleTurn() {
         // quando do come comando 0 entro SEMPRE in una funzione che mi permette di
         // visualizzare le varie informazioni
 
@@ -457,68 +474,15 @@ public class ClientCLI extends Client {
     }
 
     // constructs the BuyDevCardMove according to the player choices
-    // TODO verify if the resources to eliminate chosen by the player are correct
     private Move constructBuyDevCardMove() {
         List<DevelopmentCard> availableDevCards = this.match.getCardContainer().getAvailableDevCards();
         DevelopmentCard devCardToBuy = showAndSelectDevCardToBuy(availableDevCards);
         if (devCardToBuy != null) {
-            // while (true) {
-            // System.out.println("Do you want to eliminate resources from the Warehouse?
-            // (y/n): ");
-            // String answer = this.stdin.nextLine();
-            // if (answer.equals("y")) {
-            // resourcesToEliminateWarehouse = selectResourcesToEliminate(devCardToBuyID,
-            // "Warehouse");
-            // break;
-            // } else {
-            // if (answer.equals("n")) {
-            // skipElimination = true;
-            // break;
-            // } else {
-            // System.out.println("Choose a correct option.\n");
-            // }
-            // }
-            // }
-            // if (!resourcesToEliminateWarehouse.isEmpty() || skipElimination) {
-            // skipElimination = false;
-            // while (true) {
-            // System.out.println("Do you want to eliminate resources from the Chest? (y/n):
-            // ");
-            // String answer = this.stdin.nextLine();
-            // if (answer.equals("y")) {
-            // resourcesToEliminateChest = selectResourcesToEliminate(devCardToBuyID,
-            // "Chest");
-            // break;
-            // } else {
-            // if (answer.equals("n")) {
-            // skipElimination = true;
-            // break;
-            // } else {
-            // System.out.println("Choose a correct option.\n");
-            // }
-            // }
-            // }
-            // if (!resourcesToEliminateChest.isEmpty() || skipElimination) {
-            // if (resourcesToEliminateWarehouse.isEmpty() &&
-            // resourcesToEliminateChest.isEmpty()) {
-            // System.out.println("You did not select any resource to be eliminated. Move
-            // aborted.\n");
-            // } else {
-            // DevCardPosition position = selectPositionForDevCard(devCardToBuyID);
-            // if (position != null) {
-            // playerMove = new BuyDevCardMove(devCardToBuyID, position,
-            // resourcesToEliminateWarehouse,
-            // resourcesToEliminateChest);
-            // }
-            // }
-            // }
-            // }
             return this.selectResToBuyDevCard(devCardToBuy);
         }
         return null;
     }
 
-    // TODO CON EXTRADEPOSIT
     private Move selectResToBuyDevCard(DevelopmentCard developmentCard) {
         Board board = this.match.getBoardByPlayerNickname(myNickname);
         Map<ResourceType, Integer> resourceRequired, resourcesToEliminateWarehouse, resourceToEliminateChest,
@@ -531,34 +495,8 @@ public class ClientCLI extends Client {
         if (!board.areEnoughResourcesPresent(resourceRequired)) {
             System.out.println("Not enough resources!");
             return null;
-            // questo mi attesta che le risorse ci sono di sicuro, devo solo scegliere
-            // l'ordine
+            //this means that i have the resource required and i need to select them properly
         }
-        // for (Map.Entry<ResourceType, Integer> entry : resourceRequired.entrySet()) {
-        // System.out.println(entry.getKey() + " required : " + entry.getValue());
-        // System.out.println("\nYour Resources: \n" + board.resourcesToString());
-        // System.out.println("0 - go back\n" + "1 - use Warehouse's resources first and
-        // then Chest's\n"
-        // + "2 - use Chest's resources first and then Warehouse's");
-        // answer = stdin.nextLine();
-        // switch (answer) {
-        // // uno di questi metodi deve per forza andare bene a causa del controllo
-        // // precedente
-        // case "1":
-        // this.warehousefirst(board, entry.getKey(), entry.getValue(),
-        // resourcesToEliminateWarehouse,
-        // resourceToEliminateChest);
-        // break;
-        // case "2":
-        // this.chestfirst(board, entry.getKey(), entry.getValue(),
-        // resourcesToEliminateWarehouse,
-        // resourceToEliminateChest);
-        // break;
-        // case "0":
-        // default:
-        // return null;
-        // }
-        // }
         DevCardPosition devCardPosition = selectPositionForDevCard(developmentCard.getId());
         if (devCardPosition == null) {
             return null;
@@ -814,8 +752,8 @@ public class ClientCLI extends Client {
             Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
             Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
             Map<ResourceType, Integer> resourcesToEliminateExtraDeposit = new HashMap<>();
-            String devCardID = null;
-            String leaderCardID = null;
+            String devCardID;
+            String leaderCardID;
             switch (productionType) {
                 case Board:
                     // selects which resources to eliminate and from where
@@ -878,16 +816,6 @@ public class ClientCLI extends Client {
             selectResourcesFromBoard(requiredResources, resourcesToEliminateWarehouse,
                     resourcesToEliminateChest, resourcesToEliminateExtraDeposit);
             // constructs the move
-
-            // TODO COMPLETE THIS MOVE CORRECTLY
-
-            /*playerMove = new ProductionMove(devCardID,
-                    leaderCardID,
-                    resourcesToEliminateWarehouse,
-                    resourcesToEliminateExtraDeposit,
-                    resourcesToEliminateChest,
-                    productionType,
-                    selectBoardOrPerkManufacturedResource(productionType));*/
         }
         return playerMove;
     }
@@ -995,57 +923,7 @@ public class ClientCLI extends Client {
         return devCardID;
     }
 
-    // helper function for selectBoardOrPerkManufacturedResource(), handles the main
-    // CLI logic
-    private void selectBoardOrPerkManufacturedResourceHelper(ProductionType productionType,
-            List<ResourceType> boardOrPerkManufacturedResource) {
-        do {
-            System.out.println("Choose the " + productionType + " production manufactured resource:\n" + "1 - Coin;\n"
-                    + "2 - Servant;\n" + "3 - Shield;\n" + "4 - Stone.\n");
-            String answer = this.stdin.nextLine();
-            switch (answer) {
-                case "1":
-                    boardOrPerkManufacturedResource.add(ResourceType.Coin);
-                    break;
-                case "2":
-                    boardOrPerkManufacturedResource.add(ResourceType.Servant);
-                    break;
-                case "3":
-                    boardOrPerkManufacturedResource.add(ResourceType.Shield);
-                    break;
-                case "4":
-                    boardOrPerkManufacturedResource.add(ResourceType.Stone);
-                    break;
-                default:
-                    System.out.println("Choose a correct number.");
-                    break;
-            }
-        } while (boardOrPerkManufacturedResource.size() == 0);
-    }
-
-    // asks the player to choose which resource he/she wants to manufacture for the
-    // Board or LeaderCard production
-    // or both combined
-    private List<ResourceType> selectBoardOrPerkManufacturedResource(ProductionType productionType) {
-        List<ResourceType> boardOrPerkManufacturedResource = new ArrayList<>();
-        if (productionType.equals(ProductionType.Board) || productionType.equals(ProductionType.LeaderCard)) {
-            selectBoardOrPerkManufacturedResourceHelper(productionType, boardOrPerkManufacturedResource);
-        }
-        if (productionType.equals(ProductionType.BoardAndDevCardAndLeaderCard)
-                || productionType.equals(ProductionType.BoardAndLeaderCard)) {
-            selectBoardOrPerkManufacturedResourceHelper(ProductionType.Board, boardOrPerkManufacturedResource);
-            selectBoardOrPerkManufacturedResourceHelper(ProductionType.LeaderCard, boardOrPerkManufacturedResource);
-        }
-        if (productionType.equals(ProductionType.BoardAndDevCard)) {
-            selectBoardOrPerkManufacturedResourceHelper(ProductionType.Board, boardOrPerkManufacturedResource);
-        }
-        if (productionType.equals(ProductionType.DevCardAndLeader)) {
-            selectBoardOrPerkManufacturedResourceHelper(ProductionType.LeaderCard, boardOrPerkManufacturedResource);
-        }
-        return boardOrPerkManufacturedResource;
-    }
-
-    public void viewer() {
+    private void viewer() {
         int gameSize = this.match.getPlayerList().size();
         if (gameSize == 1) {
             System.out.println("0 - Go Back\n" + "1 - Show the Black Marker Position\n" + "2 - show your Points\n"
@@ -1516,11 +1394,14 @@ public class ClientCLI extends Client {
 
     }
 
+    /**
+     * connects to the server, starts the threads for input and output and starts the login process
+     */
     public void run() throws IOException {
-        Socket socket = new Socket(getIp(), getPort());
+        Socket socket = new Socket(ip, port);
         System.out.println("Connection established");
-        setSocketOut(new ObjectOutputStream(socket.getOutputStream()));
-        setSocketIn(new ObjectInputStream(socket.getInputStream()));
+        socketOut = (new ObjectOutputStream(socket.getOutputStream()));
+        socketIn = (new ObjectInputStream(socket.getInputStream()));
         this.stdin = new Scanner(System.in);
         try {
             Thread t0 = asyncReadFromSocket();

@@ -34,11 +34,17 @@ public class PlayersBarGUI extends JInternalFrame {
 
     }
 
+    /**
+     * updates the buttons according to the fact that you clicked on your button
+     */
     public void clickMyButton() {
         this.myButton.setEnabled(false);
         this.opponentsButtons.forEach(x -> x.setEnabled(true));
     }
 
+    /**
+     * updates the buttons according to the fact that you clicked on an opponent
+     */
     public void clickOpponentButton(int index) {
         this.myButton.setEnabled(true);
         for(int i = 0; i < opponentsButtons.size(); i++){

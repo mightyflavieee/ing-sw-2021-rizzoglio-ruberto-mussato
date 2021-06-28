@@ -53,6 +53,9 @@ public class InformationsGUI extends JInternalFrame {
 
     public GUI getGUI() { return gui; }
 
+    /**
+     * shows the initial message for each turn phase
+     */
     public void refresh() {
         switch (turnPhase) {
             case InitialPhase:
@@ -122,6 +125,9 @@ public class InformationsGUI extends JInternalFrame {
         }
     }
 
+    /**
+     * shows the message when you collected some resources from the market
+     */
     public void showMarketInformations(Boolean hasfaith){
 
         this.mainPhaseHandler.setVisible(false);
@@ -135,7 +141,6 @@ public class InformationsGUI extends JInternalFrame {
             this.jTextArea.setText("You collected some resources from the Market!\n" +
                 "You can see them in the Resources in Hand panel" +
                 "\nStore them in the Shelves");}
-        //todo creare resourceinHandler se serve
         if(this.resourceInHandler==null){
             this.resourceInHandler = new ResourceInHandlerGUI(this.gui.getBoardGUI().getWarehouseGUI(),
                     this.gui.getResourceInHandGUI(),gui);
@@ -150,25 +155,34 @@ public class InformationsGUI extends JInternalFrame {
         this.refresh();
     }
 
+    /**
+     * show a message that informs you that you are watching the view of an opponent of yours
+     */
     public void showOpponentView(String nickname) {
         this.jTextArea.setText("Your are watching "+ nickname +" view");
         this.jTextArea.setVisible(true);
     }
 
-    // creates the ProductionMoveHandler
+    /**
+     * creates the ProductionMoveHandler
+     */
     public void createProductionMoveHandler(ProductionType productionType) {
         this.productionMoveHandler = new ProductionMoveHandler();
         this.productionMoveHandler.setProductionType(productionType);
     }
 
-    // creates the SelectResourcesHandler and updates the informationsGUI
+    /**
+     * creates the SelectResourcesHandler and updates the informationsGUI
+     */
     public void createSelectResourcesHandlerForProduction() {
         this.selectResourcesHandler = new SelectResourcesHandler();
         this.productionMoveHandler.setSelectResourcesHandler(this.selectResourcesHandler);
         showProductionInfo();
     }
 
-    // Shows on the informationsGUI the necessary information for the BuyDevCardMove
+    /**
+     * Shows on the informationsGUI the necessary information for the BuyDevCardMove
+     */
     public void showProductionInfo() {
         String selectedResourcesFromWarehouse = convertResourcesToString(this.selectResourcesHandler.getResourcesFromWarehouse());
         String selectResourcesFromExtraDeposit = convertResourcesToString(this.selectResourcesHandler.getResourcesFromExtraDeposit());
@@ -190,13 +204,18 @@ public class InformationsGUI extends JInternalFrame {
         }
     }
 
+    /**
+     * initializes the buffer class buyDevCardMoveHandler after you selected a position for the development card
+     */
     public void createBuyDevCardHandler(DevCardPosition position) {
         this.buyDevCardMoveHandler = new BuyDevCardMoveHandler();
         this.buyDevCardMoveHandler.setPosition(position);
     }
 
-    // creates the BuyDevCardMoveHandler and the SelectResourcesHandler and updates
-    // the informationsGUI
+    /**
+     * creates the BuyDevCardMoveHandler and the SelectResourcesHandler and updates
+     * the informationsGUI
+     */
     public void createSelectResourcesHandlerForPurchase(DevelopmentCard developmentCard) {
         this.selectResourcesHandler = new SelectResourcesHandler();
         this.buyDevCardMoveHandler.setDevelopmentCard(developmentCard);
@@ -204,7 +223,9 @@ public class InformationsGUI extends JInternalFrame {
         showDevCardPurchaseInfo();
     }
 
-    // Shows on the informationsGUI the necessary information for the BuyDevCardMove
+    /**
+     * Shows on the informationsGUI the necessary information for the BuyDevCardMove
+     */
     public void showDevCardPurchaseInfo() {
         // creates the string for the informationsGUI for the selected resources from warehouse
         // and selected resources from the chest
@@ -231,7 +252,9 @@ public class InformationsGUI extends JInternalFrame {
         }
     }
 
-    // verifies if yourResources has reached the target of resources
+    /**
+     * verifies if yourResources has reached the target of resources
+     */
     private boolean verifyResourcesTargetReached(Map<ResourceType, Integer> yourResources, Map<ResourceType, Integer> target) {
         for (ResourceType type : target.keySet()) {
             if (yourResources.containsKey(type)) {
@@ -245,7 +268,9 @@ public class InformationsGUI extends JInternalFrame {
         return true;
     }
 
-    // calculates the missing resources from target
+    /**
+     * calculates the missing resources from target
+     */
     private Map<ResourceType, Integer> calculateMissingResources(Map<ResourceType, Integer> yourResources, Map<ResourceType, Integer> target) {
         Map<ResourceType, Integer> missingResources = new HashMap<>();
         List<ResourceType> discounts = this.gui.getBoardGUI().getBoardModel().getDiscounts();
@@ -270,7 +295,9 @@ public class InformationsGUI extends JInternalFrame {
         return missingResources;
     }
 
-    // counts the current resources selected
+    /**
+     * counts the current resources selected
+     */
     public Map<ResourceType, Integer> countResources(SelectResourcesHandler selectResourcesHandler) {
         Map<ResourceType, Integer> insertedResources = new HashMap<>();
         List<ResourceType> resourceTypeList = new ArrayList<>();
@@ -319,7 +346,9 @@ public class InformationsGUI extends JInternalFrame {
         return insertedResources;
     }
 
-    // Creates the string for the informationsGUI for the selected resources
+    /**
+     * Creates the string for the informationsGUI for the selected resources
+     */
     private String convertResourcesToString(Map<ResourceType, Integer> selectedResources) {
         StringBuilder selectedResourcesString = new StringBuilder();
         for (ResourceType type : selectedResources.keySet()) {
@@ -328,7 +357,9 @@ public class InformationsGUI extends JInternalFrame {
         return selectedResourcesString.toString();
     }
 
-    // updates the SelectResourcesHandler incrementing the current resources chosen
+    /**
+     * updates the SelectResourcesHandler incrementing the current resources chosen
+     */
     public void updateSelectResourcesHandler(ResourceType resourceType, String location) {
         switch (location) {
             case "Warehouse":
@@ -343,12 +374,24 @@ public class InformationsGUI extends JInternalFrame {
         }
     }
 
+    /**
+     * adds a coin to the resource selected in the resource in handler frame
+     */
     public void addCoin() { this.resourceInHandler.addCoin(); }
 
+    /**
+     * adds a stone to the resource selected in the resource in handler frame
+     */
     public void addStone() { this.resourceInHandler.addStone(); }
 
+    /**
+     * adds a shield to the resource selected in the resource in handler frame
+     */
     public void addShield() { this.resourceInHandler.addShield(); }
 
+    /**
+     * adds a servant to the resource selected in the resource in handler frame
+     */
     public void addServant() { this.resourceInHandler.addServant(); }
 
     public void goToTransmutationPanel() { this.mainPhaseHandler.goToTransmutationPanel(); }

@@ -13,6 +13,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * this is the buffer class for the production move
+ */
 public class ProductionMoveHandler {
     private List<DevelopmentCard> developmentCards;
     private List<LeaderCard> leaderCards;
@@ -41,8 +44,6 @@ public class ProductionMoveHandler {
 
     public ResourceType getBoardManufacturedResource() { return boardManufacturedResource; }
 
-    public List<ResourceType> getPerkManufacturedResource() { return perkManufacturedResources; }
-
     public void setDevCard(DevelopmentCard developmentCard) {
         if (this.developmentCards == null) {
             this.developmentCards = new ArrayList<>();
@@ -69,14 +70,6 @@ public class ProductionMoveHandler {
         this.productionType = productionType;
     }
 
-//    public void setBoardOrPerkManufacturedResource(ResourceType resourceType) {
-//        if (this.boardOrPerkManufacturedResource == null) {
-//            this.boardOrPerkManufacturedResource = new ArrayList<>();
-//            this.boardOrPerkManufacturedResource.add(resourceType);
-//        } else {
-//            this.boardOrPerkManufacturedResource.add(resourceType);
-//        }
-//    }
 
     public void setBoardManufacturedResource(ResourceType boardManufacturedResource) {
         this.boardManufacturedResource = boardManufacturedResource;
@@ -96,7 +89,9 @@ public class ProductionMoveHandler {
         this.boardRequiredResources = boardRequireResources;
     }
 
-    // calculates the combined required resources for the production
+    /**
+     * calculates the combined required resources for the production
+     */
     public Map<ResourceType, Integer> calculateResourcesRequired() {
         Map<ResourceType, Integer> totalResourcesRequired = new HashMap<>();
         Map<ResourceType, Integer> devCardsRequiredResources = new HashMap<>();
@@ -115,19 +110,14 @@ public class ProductionMoveHandler {
         switch (this.productionType) {
             case DevCard:
                 totalResourcesRequired = devCardsRequiredResources;
-//                for (ResourceType type : developmentCard.getProduction().getRequiredResources().keySet()) {
-//                    totalResourcesRequired.put(type, developmentCard.getProduction().getRequiredResources().get(type));
-//                }
+
                 break;
             case LeaderCard:
                 totalResourcesRequired = leaderCardsRequiredResources;
-//                totalResourcesRequired.put(leaderCard.getPerk().getResource().getType(), 1);
                 break;
             case Board:
                 totalResourcesRequired = this.boardRequiredResources;
-//                for (ResourceType type : boardRequiredResources.keySet()) {
-//                    totalResourcesRequired.put(type, boardRequiredResources.get(type));
-//                }
+
                 break;
             case BoardAndDevCard:
                 for (ResourceType type : resourceTypeList) {
@@ -242,6 +232,9 @@ public class ProductionMoveHandler {
         return devCardsRequiredResources;
     }
 
+    /**
+     * returns a complete Production Move ready to be sent to the server using the class fields
+     */
     public Move getMove() {
         ProductionMove productionMove = null;
         List<String> devCardIDs = new ArrayList<>();
@@ -308,6 +301,9 @@ public class ProductionMoveHandler {
         return productionMove;
     }
 
+    /**
+     * resets the class fields in order to be ready for the next turn
+     */
     public void reset() {
         this.developmentCards = null;
         this.leaderCards = null;

@@ -13,6 +13,10 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this is the first frame that is showed when the program is launched
+ * it handles all the initial login logic part
+ */
 public class NewGameHandler extends JPanel {
     private static final String SELECTNICKNAME = "SELECT_NICKNAME";
     private static final String SELECTTYPEOFGAME = "SELECT_TYPE_OF_GAME";

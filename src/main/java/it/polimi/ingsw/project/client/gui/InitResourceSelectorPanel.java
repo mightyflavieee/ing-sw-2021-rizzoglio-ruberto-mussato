@@ -9,6 +9,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * it is used to select the resources at the beginning of the game
+ */
 public class InitResourceSelectorPanel extends JInternalFrame {
     private int coinInt, shieldInt, stoneInt, servantInt;
         private final ClientGUI clientGUI;
@@ -39,6 +42,10 @@ public class InitResourceSelectorPanel extends JInternalFrame {
 
     }
 
+    /**
+     * adds a resource and if you have reached the necessary number sends the message to the match
+     * and displays a wait message
+     */
     public void addResource(ResourceType resourceType) {
         switch (resourceType){
             case Coin:

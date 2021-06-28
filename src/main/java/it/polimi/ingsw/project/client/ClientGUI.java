@@ -54,6 +54,10 @@ public class ClientGUI extends Client implements Observer<Move> {
         return Optional.ofNullable(match);
     }
 
+    /**
+     * creates a new gui if it is the first time that the match is received.
+     * if not updates the gui
+     */
     @Override
     public void setMatch(Match match) {
         this.match = match.clone();
@@ -66,14 +70,23 @@ public class ClientGUI extends Client implements Observer<Move> {
         }
     }
 
+    /**
+     * used at the beginning of the game as a buffer for the first message sent to the server
+     */
     public void setCreateGame(boolean createGame) {
         this.createGame = createGame;
     }
 
+    /**
+     * used at the beginning of the game as a buffer for the first message sent to the server
+     */
     public void setNumPlayers(int numPlayers) {
         this.numPlayers = numPlayers;
     }
 
+    /**
+     * receives the game id from the server and goes to the waiting room displaying it
+     */
     @Override
     public void setGameId(String gameId) {
         this.gameId = gameId;
@@ -81,22 +94,31 @@ public class ClientGUI extends Client implements Observer<Move> {
 
     }
 
+    /**
+     * goes again to the initial logic phase
+     * it is used if there was an error during the communication
+     */
     @Override
     public void reBuildGame(String errorMessage) {
-
-        // todo change to fit new structure with NewGameHandler
 
         this.newGameHandler.goToSelectNickname();
     }
 
+    /**
+     * shows the available leadercards
+     * it is used at the beginning of the game
+     */
     @Override
     public void chooseLeaderCards(List<LeaderCard> possibleLeaderCards) {
         this.newGameHandler.goToLeaderCardChooser(possibleLeaderCards);
     }
 
+    /**
+     * shows again the available leadercards
+     * it is used if the there was an error during the communication
+     */
     @Override
     public void reChooseLeaderCards(String errorMessage, List<LeaderCard> possibleLeaderCards) {
-        //todo display error message
 
         this.newGameHandler.goToLeaderCardChooser(possibleLeaderCards);
     }
@@ -104,17 +126,21 @@ public class ClientGUI extends Client implements Observer<Move> {
     @Override
     public void showWaitMessageForOtherPlayers() {
 
-        // todo change to fit new structure with NewGameHandler
-
         this.newGameHandler.goToWaitingRoom(this.gameId);
 
     }
 
+    /**
+     * shows the menu for the selection of the resources at the beginning of the game
+     */
     @Override
     public void chooseResources(Integer numberOfResourcesToChoose) {
         this.newGameHandler.goToResourceSelector(numberOfResourcesToChoose);
     }
 
+    /**
+     * sends a message to the server
+     */
     public void send(Request request){
         try {
             this.socketOut.reset();
@@ -127,7 +153,7 @@ public class ClientGUI extends Client implements Observer<Move> {
         }
     }
 
-    public Thread asyncReadFromSocket() {
+    private Thread asyncReadFromSocket() {
         Thread t = new Thread(() -> {
             try {
                 while (isActive()) {
@@ -154,13 +180,15 @@ public class ClientGUI extends Client implements Observer<Move> {
         this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.newGameHandler = new NewGameHandler(this);
         this.jFrame.add(this.newGameHandler);
-        //this.jFrame.pack();
 
         this.jFrame.setPreferredSize(new Dimension(400,680));
         this.jFrame.pack();
 
     }
 
+    /**
+     * sends a join request or a create request to the server based on the local variable that was previous set
+     */
     public void createOrJoinGame() {
         if (this.createGame) {
             this.createGame();
@@ -179,6 +207,9 @@ public class ClientGUI extends Client implements Observer<Move> {
         this.send(new CreateRequestMove(this.numPlayers, this.myNickname));
     }
 
+    /**
+     * shows the scoreboard at the end of the game
+     */
     public void endGame() {
         this.gui.getJFrame().dispose();
         EndGameHandler endGameHandler = new EndGameHandler(this.match, this);
@@ -192,56 +223,19 @@ public class ClientGUI extends Client implements Observer<Move> {
         jFrame.setLocation(600,100);
     }
 
+    /**
+     * makes the game and the login to start again from the beginning
+     * it is used at the of the game to start a new one
+     */
     public void restart() {
         this.jFrame.dispose();
         buildGame();
     }
 
-    /*// public Thread asyncCli() {// sends to server and shows the match
-    // Thread t = new Thread(new Runnable() {
-    // @Override
-    // public void run() {
-    // try {
-    // while (isActive()) {
-    // isLock();
-    // if (!getMatch().isEmpty()) {
-    // Request move = handleTurn();
-    // if (move != null) {
-    // socketOut.writeObject(move);
-    // }
-    // socketOut.flush();
-    // }
-    // setLock();
-    // }
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // setActive(false);
-    // }
-    // }
-    // });
-    // t.start();
-    // return t;
-    // }
 
-    // public Move handleTurn() {
-    // // quando do come comando 0 entro SEMPRE in una funzione che mi permette di
-    // // visualizzare le varie informazioni
-    //
-    // switch (this.match.getTurnPhase(myNickname)) {
-    // case WaitPhase:
-    // viewer();
-    // break;
-    // case InitialPhase:
-    // case EndPhase:
-    // return handleLeaderAction();
-    // case MainPhase:
-    // return handleMainPhase();
-    //
-    // }
-    //
-    // return null;
-    // }*/
-
+    /**
+     * connects to the server, starts the thread to receive message from the server and starts the login process
+     */
     public void run() throws IOException {
         Socket socket = new Socket(ip, port);
         socketOut = new ObjectOutputStream(socket.getOutputStream());
@@ -249,11 +243,8 @@ public class ClientGUI extends Client implements Observer<Move> {
 
         try {
             Thread t0 = asyncReadFromSocket();
-            // Thread t1 = asyncCli();
             this.buildGame();
             t0.join();
-            // t1.join();
-
         } catch (InterruptedException | NoSuchElementException e) {
             System.out.println("Connection closed from the client side");
         } finally {
@@ -263,18 +254,18 @@ public class ClientGUI extends Client implements Observer<Move> {
         }
     }
 
+    /**
+     * calls the send method
+     */
     @Override
     public void update(Move message) {
         this.send(message);
     }
 
+    /**
+     * send the list of chosen resources at the beginning of the game
+     */
     public void sendListOfChosenResources(List<ResourceType> resourceTypeList) {
-        try {
-            getSocketOut().writeObject(new ChooseResourcesMove(this.myNickname, this.gameId, resourceTypeList));
-            getSocketOut().flush();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            setActive(false);
-        }
+        send(new ChooseResourcesMove(this.myNickname, this.gameId, resourceTypeList) );
     }
 }

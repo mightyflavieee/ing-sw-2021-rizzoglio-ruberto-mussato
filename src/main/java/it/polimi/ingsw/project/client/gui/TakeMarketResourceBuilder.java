@@ -8,6 +8,9 @@ import it.polimi.ingsw.project.model.resource.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this is a buffer class used for the creation of the Market move
+ */
 public class TakeMarketResourceBuilder {
     private boolean hasRedMarble, isHandClear, isMarketClear;
     private final List<Resource> discardedResources;
@@ -27,6 +30,9 @@ public class TakeMarketResourceBuilder {
         this.hasRedMarble = hasRedMarble;
     }
 
+    /**
+     * returns true when you took all the resources that you collected from the market and you have them all stored or discarded
+     */
     public boolean setHandClear(){
         if(this.isMarketClear){
             this.isHandClear = true;
@@ -45,9 +51,16 @@ public class TakeMarketResourceBuilder {
         this.market = market;
     }
 
+    /**
+     * returns a take market move created with the local fields
+     */
     public TakeMarketResourcesMove getMove(){
         return new TakeMarketResourcesMove(warehouse,discardedResources,market,hasRedMarble);
     }
+
+    /**
+     * resets the local fields in order do be ready for the next turn
+     */
     public void reset(){
         this.discardedResources.clear();
         this.isMarketClear = false;

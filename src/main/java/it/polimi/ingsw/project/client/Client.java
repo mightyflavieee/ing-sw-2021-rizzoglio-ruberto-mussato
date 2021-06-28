@@ -28,26 +28,6 @@ public abstract class Client {
         this.gameId = "";
     }
 
-    public void setSocketOut(ObjectOutputStream socketOut) {
-        this.socketOut = socketOut;
-    }
-
-    public void setSocketIn(ObjectInputStream socketIn) {
-        this.socketIn = socketIn;
-    }
-
-    public ObjectOutputStream getSocketOut() {
-        return this.socketOut;
-    }
-
-    public String getIp() {
-        return this.ip;
-    }
-
-    public int getPort() {
-        return this.port;
-    }
-
     public abstract void setMatch(Match match);
 
     public void setNickname(String name) {
@@ -76,14 +56,11 @@ public abstract class Client {
         return this.gameId;
     }
 
-    public abstract void reBuildGame(String errorMessage); // todo la stringa è sempre uguale?
+    public abstract void reBuildGame(String errorMessage);
 
     public abstract void chooseLeaderCards(List<LeaderCard> possibleLeaderCards);
 
-    public abstract void reChooseLeaderCards(String errorMessage, List<LeaderCard> possibleLeaderCards); // todo la
-                                                                                                         // stringa è
-                                                                                                         // sempre
-                                                                                                         // uguale?
+    public abstract void reChooseLeaderCards(String errorMessage, List<LeaderCard> possibleLeaderCards);
 
     public abstract void showWaitMessageForOtherPlayers();
 

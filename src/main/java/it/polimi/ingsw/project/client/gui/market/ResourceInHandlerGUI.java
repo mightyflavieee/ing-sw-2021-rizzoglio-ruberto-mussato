@@ -11,6 +11,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 
+/**
+ * it is used to select the resources that you collected from the market in order to put them in the warehouse
+ */
 public class ResourceInHandlerGUI extends JInternalFrame {
     private ResourceType resourceType;
     private final JButton firstShelfButton;
@@ -60,6 +63,11 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         this.discardButton.addActionListener(new DiscardButtonListener(this,resourceInHandGUI,gui));
         this.deselectButton.addActionListener(new DeselectButtonListener(this,resourceInHandGUI));
     }
+
+
+    /**
+     * enables or disables the insert buttons according to the rules
+     */
     public void refresh(){
         Map<ShelfFloor,Integer> numOfResourcesPerShelves = this.warehouseGUI.getNumberOfResoucesPerShelf();
         Map<ShelfFloor,ResourceType> resourceTypePerShelf = this.warehouseGUI.getResourceTypePerShelf();
@@ -145,26 +153,43 @@ public class ResourceInHandlerGUI extends JInternalFrame {
         }
 
     }
+
+    /**
+     * adds a coin to the resource selected
+     */
     public void addCoin(){
         this.resourceType = ResourceType.Coin;
         this.resourceNum ++;
         this.refresh();
     }
+    /**
+     * adds a stone to the resource selected
+     */
     public void addStone() {
         this.resourceType = ResourceType.Stone;
         this.resourceNum ++;
         this.refresh();
     }
+    /**
+     * adds a shield to the resource selected
+     */
     public void addShield() {
         this.resourceType = ResourceType.Shield;
         this.resourceNum ++;
         this.refresh();
     }
+    /**
+     * adds a servant to the resource selected
+     */
     public void addServant() {
         this.resourceType = ResourceType.Servant;
         this.resourceNum ++;
         this.refresh();
     }
+
+    /**
+     * set to 0 the number of selected resources, it is used when the resources are moved somewhere else
+     */
     public void removeResource(){
         this.resourceNum = 0;
         this.refresh();

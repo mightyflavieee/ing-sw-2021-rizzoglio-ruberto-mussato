@@ -5,6 +5,9 @@ import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
 
+/**
+ * resource button used for the selection of the resources at the beginning of the game
+ */
 public class ResourceButton extends JButton {
     private ResourceType resourceType;
 
