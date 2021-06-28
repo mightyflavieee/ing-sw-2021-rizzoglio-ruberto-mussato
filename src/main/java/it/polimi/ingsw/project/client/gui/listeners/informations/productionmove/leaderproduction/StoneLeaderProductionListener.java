@@ -13,7 +13,7 @@ public class StoneLeaderProductionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.gui.getInformationsGUI().getProductionMoveHandler().setBoardOrPerkManufacturedResource(ResourceType.Coin);
+        this.gui.getInformationsGUI().getProductionMoveHandler().setPerkManufacturedResources(ResourceType.Stone);
         switch (this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType()) {
             case LeaderCard:
             case BoardAndLeaderCard:
@@ -25,7 +25,7 @@ public class StoneLeaderProductionListener implements ActionListener {
                 break;
             case DevCardAndLeader:
             case BoardAndDevCardAndLeaderCard:
-                if (this.gui.getInformationsGUI().getProductionMoveHandler().getDevCard() != null) {
+                if (this.gui.getInformationsGUI().getProductionMoveHandler().getDevCards() != null) {
                     this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
                     this.gui.getBoardGUI().getChestGUI().enableAllButtons();
                     this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();

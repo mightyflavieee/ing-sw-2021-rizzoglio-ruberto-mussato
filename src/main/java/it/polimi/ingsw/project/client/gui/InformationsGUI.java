@@ -174,11 +174,7 @@ public class InformationsGUI extends JInternalFrame {
         String selectResourcesFromExtraDeposit = convertResourcesToString(this.selectResourcesHandler.getResourcesFromExtraDeposit());
         String selectedResourcesFromChest = convertResourcesToString(this.selectResourcesHandler.getResourcesFromChest());
         Map<ResourceType, Integer> insertedResources = countResources(this.selectResourcesHandler);
-        Map<ResourceType, Integer> resourcesRequired = this.productionMoveHandler.calculateResourcesRequired(
-                this.productionMoveHandler.getDevCard(),
-                this.productionMoveHandler.getLeaderCard(),
-                this.productionMoveHandler.getBoardRequiredResources(),
-                this.productionMoveHandler.getProductionType());
+        Map<ResourceType, Integer> resourcesRequired = this.productionMoveHandler.calculateResourcesRequired();
         if (verifyResourcesTargetReached(insertedResources, this.productionMoveHandler.getResourcesRequired())) {
             this.gui.sendProductionMove(this.productionMoveHandler);
             this.productionMoveHandler = null;

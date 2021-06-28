@@ -1,6 +1,7 @@
 package it.polimi.ingsw.project.client.gui.listeners.informations.productionmove.leaderproduction;
 
 import it.polimi.ingsw.project.client.gui.GUI;
+import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
 import java.awt.event.ActionEvent;
@@ -13,7 +14,7 @@ public class CoinLeaderProductionListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.gui.getInformationsGUI().getProductionMoveHandler().setBoardOrPerkManufacturedResource(ResourceType.Coin);
+        this.gui.getInformationsGUI().getProductionMoveHandler().setPerkManufacturedResources(ResourceType.Coin);
         switch (this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType()) {
             case LeaderCard:
             case BoardAndLeaderCard:
@@ -25,7 +26,7 @@ public class CoinLeaderProductionListener implements ActionListener {
                 break;
             case DevCardAndLeader:
             case BoardAndDevCardAndLeaderCard:
-                if (this.gui.getInformationsGUI().getProductionMoveHandler().getDevCard() != null) {
+                if (this.gui.getInformationsGUI().getProductionMoveHandler().getDevCards() != null) {
                     this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
                     this.gui.getBoardGUI().getChestGUI().enableAllButtons();
                     this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();

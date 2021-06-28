@@ -21,7 +21,7 @@ public class CoinBoardProductionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (this.isManufacturingSelection) {
-            this.gui.getInformationsGUI().getProductionMoveHandler().setBoardOrPerkManufacturedResource(ResourceType.Coin);
+            this.gui.getInformationsGUI().getProductionMoveHandler().setBoardManufacturedResource(ResourceType.Coin);
             this.gui.getInformationsGUI().getMainPhaseHandler().goToBoardRequiredResourcesButtons();
             this.gui.getInformationsGUI().getjTextArea().setText("Select the two resources you want to use for the Board production:");
         } else {

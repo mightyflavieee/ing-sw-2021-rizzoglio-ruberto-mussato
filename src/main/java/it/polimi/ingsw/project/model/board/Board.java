@@ -243,6 +243,7 @@ public class Board implements Serializable, Cloneable {
     resourceTypes.add(ResourceType.Servant);
     resourceTypes.add(ResourceType.Shield);
     resourceTypes.add(ResourceType.Stone);
+    resourceTypes.add(ResourceType.Faith);
     for (ResourceType resourceType : resourceTypes) {
       if (resourcesToSum1.containsKey(resourceType)) {
         if (resourcesToSum2.containsKey(resourceType)) {
@@ -581,7 +582,6 @@ public class Board implements Serializable, Cloneable {
                                           Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
                                           Map<ResourceType, Integer> resourcesToEliminateChest,
                                           ProductionType productionType) {
-    boolean isDevCardInLastPosition = false;
     // checks if the DevelopmentCard selected is in the last position (if the
     // DevelopmentCard is required
     // for the production)

@@ -18,25 +18,41 @@ public class SelectDevCardProductionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (this.gui.getBoardGUI().getMapTrayGUI().isClickable()) {
-            this.gui.getInformationsGUI().getProductionMoveHandler().setDevCard(this.developmentCard);
-            this.gui.getBoardGUI().getMapTrayGUI().disableAllButtons();
-            switch (this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType()) {
-                case DevCard:
-                case BoardAndDevCard:
-                    this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
-                    this.gui.getBoardGUI().getChestGUI().enableAllButtons();
-                    this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
-                    break;
-                case DevCardAndLeader:
-                case BoardAndDevCardAndLeaderCard:
-                    if (this.gui.getInformationsGUI().getProductionMoveHandler().getLeaderCard() != null) {
-                        this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
-                        this.gui.getBoardGUI().getChestGUI().enableAllButtons();
-                        this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
-                        this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
-                        this.gui.getInformationsGUI().showProductionInfo();
+            boolean isAlreadyClicked = false;
+            if (this.gui.getInformationsGUI().getProductionMoveHandler().getDevCards() != null) {
+                for (DevelopmentCard devCard : this.gui.getInformationsGUI().getProductionMoveHandler().getDevCards()) {
+                    if (devCard.getId().equals(this.developmentCard.getId())) {
+                        isAlreadyClicked = true;
+                        break;
                     }
-                    break;
+                }
+            }
+            if (!isAlreadyClicked) {
+                this.gui.getInformationsGUI().getProductionMoveHandler().setDevCard(this.developmentCard);
+                //this.gui.getBoardGUI().getMapTrayGUI().disableAllButtons();
+                switch (this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType()) {
+                    case DevCard:
+                    case BoardAndDevCard:
+                        if (this.gui.getInformationsGUI().getProductionMoveHandler().getDevCards().size() == 1) {
+                            this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
+                            this.gui.getBoardGUI().getChestGUI().enableAllButtons();
+                            this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
+                        }
+                        this.gui.getInformationsGUI().showProductionInfo();
+                        break;
+                    case DevCardAndLeader:
+                    case BoardAndDevCardAndLeaderCard:
+                        if (this.gui.getInformationsGUI().getProductionMoveHandler().getLeaderCards() != null) {
+                            if (this.gui.getInformationsGUI().getProductionMoveHandler().getDevCards().size() == 1) {
+                                this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
+                                this.gui.getBoardGUI().getChestGUI().enableAllButtons();
+                                this.gui.getInformationsGUI().createSelectResourcesHandlerForProduction();
+                                this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
+                            }
+                            this.gui.getInformationsGUI().showProductionInfo();
+                        }
+                        break;
+                }
             }
         }
     }

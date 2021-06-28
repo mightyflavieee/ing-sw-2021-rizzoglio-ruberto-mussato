@@ -878,13 +878,16 @@ public class ClientCLI extends Client {
             selectResourcesFromBoard(requiredResources, resourcesToEliminateWarehouse,
                     resourcesToEliminateChest, resourcesToEliminateExtraDeposit);
             // constructs the move
-            playerMove = new ProductionMove(devCardID,
+
+            // TODO COMPLETE THIS MOVE CORRECTLY
+
+            /*playerMove = new ProductionMove(devCardID,
                     leaderCardID,
                     resourcesToEliminateWarehouse,
                     resourcesToEliminateExtraDeposit,
                     resourcesToEliminateChest,
                     productionType,
-                    selectBoardOrPerkManufacturedResource(productionType));
+                    selectBoardOrPerkManufacturedResource(productionType));*/
         }
         return playerMove;
     }
