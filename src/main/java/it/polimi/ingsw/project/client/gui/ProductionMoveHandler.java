@@ -186,6 +186,9 @@ public class ProductionMoveHandler {
                                         devCardsRequiredResources.get(type) +
                                         leaderCardsRequiredResources.get(type) +
                                         this.boardRequiredResources.get(type));
+                            } else {
+                                totalResourcesRequired.put(type,
+                                        devCardsRequiredResources.get(type) + leaderCardsRequiredResources.get(type));
                             }
                         } else {
                             if (this.boardRequiredResources.containsKey(type)) {
