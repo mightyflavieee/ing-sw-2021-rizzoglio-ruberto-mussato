@@ -24,21 +24,16 @@ public class EndGameHandler extends JPanel {
     public EndGameHandler(Match matchModel, ClientGUI clientGUI) {
         this.clientGUI = clientGUI;
         this.matchModel = matchModel;
-
         this.mainLayout = new CardLayout();
-
         this.mainPanel = new JPanel();
-
         this.mainPanel.setLayout(this.mainLayout);
-
-        //this.mainPanel.setLayout(new GridLayout(3, 1));
 
         createPanels();
         this.mainPanel.add(SINGLEPLAYERPANEL, this.singlePlayerPanel);
-        //this.mainPanel.add(MULTIPLAYERPANEL, this.multiPlayerPanel);
+        this.mainPanel.add(MULTIPLAYERPANEL, this.multiPlayerPanel);
         this.mainLayout.show(this.mainPanel, SINGLEPLAYERPANEL);
 
-        /*JPanel titlePanel = new JPanel();
+        JPanel titlePanel = new JPanel();
         JPanel leaderboardPanel = new JPanel();
         JPanel bottomPanel = new JPanel();
         createTitlePanel(titlePanel);
@@ -46,14 +41,14 @@ public class EndGameHandler extends JPanel {
         createBottomPanel(bottomPanel);
         this.mainPanel.add(titlePanel);
         this.mainPanel.add(leaderboardPanel);
-        this.mainPanel.add(bottomPanel);*/
+        this.mainPanel.add(bottomPanel);
 
         this.add(this.mainPanel);
     }
 
     private void createPanels() {
         createSinglePlayerPanel();
-        //createMultiPlayerPanel();
+        createMultiPlayerPanel();
     }
 
     private void createSinglePlayerPanel() {
