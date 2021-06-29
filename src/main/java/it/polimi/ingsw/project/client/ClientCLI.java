@@ -746,78 +746,184 @@ public class ClientCLI extends Client {
         } while (productionType == null && !goBack);
         if (!goBack) {
             Map<ResourceType, Integer> requiredResources = new HashMap<>();
-            Map<ResourceType, Integer> requiredResourcesDevelopmentCard;
+            Map<ResourceType, Integer> requiredResourcesDevelopmentCard = new HashMap<>();
             Map<ResourceType, Integer> requiredResourcesLeader = new HashMap<>();
             Map<ResourceType, Integer> requiredResourcesBoard = new HashMap<>();
             Map<ResourceType, Integer> resourcesToEliminateWarehouse = new HashMap<>();
             Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
             Map<ResourceType, Integer> resourcesToEliminateExtraDeposit = new HashMap<>();
-            String devCardID;
-            String leaderCardID;
+            List<String> devCardIDs = null;
+            List<String> leaderCardIDs = null;
+            List<ResourceType> perkManufacturedResources = new ArrayList<>();
             switch (productionType) {
                 case Board:
                     // selects which resources to eliminate and from where
                     requiredResources = selectResourcesForBoardProduction();
                     break;
                 case DevCard:
-                    devCardID = getDevCardIDForProduction();
-                    if (!devCardID.equals("quit")) {
-                        requiredResources = new HashMap<>(this.match.
-                                getCurrentPlayer().getBoard().fetchDevCardById(devCardID)
-                                .getProduction().getRequiredResources());
+                    devCardIDs = getDevCardIDsForProduction();
+                    if (devCardIDs != null) {
+                        // adds to the required resources from the dev cards to requiredResource for the playerMove 
+                        for (String devCardID : devCardIDs) {
+                            requiredResources = sumRequiredResourceMaps(requiredResources , this.match.getCurrentPlayer()
+                                    .getBoard().fetchDevCardById(devCardID)
+                                    .getProduction().getRequiredResources());
+                        }
+                    } else {
+                        goBack = true;
                     }
                     break;
                 case LeaderCard:
                 case BoardAndLeaderCard:
-                    leaderCardID = getLeaderCardIDForProduction();
-                    if (!leaderCardID.equals("quit")) {
-                        ResourceType requiredResourcesTypeLeader = this.match.getCurrentPlayer().getBoard().fetchLeaderCardById(leaderCardID).getPerk().getResource().getType();
-                        requiredResourcesLeader.put(requiredResourcesTypeLeader, 1);
+                    leaderCardIDs = getLeaderCardIDsForProduction();
+                    if (leaderCardIDs != null) {
+                        // adds to the required resources from the leader cards to requiredResource for the playerMove 
+                        for (String leaderCardID : leaderCardIDs) {
+                            ResourceType requiredResourcesTypeLeader = this.match.getCurrentPlayer()
+                                    .getBoard().fetchLeaderCardById(leaderCardID).getPerk().getResource().getType();
+                            if (requiredResourcesLeader.containsKey(requiredResourcesTypeLeader)) {
+                                requiredResourcesLeader.put(requiredResourcesTypeLeader, 
+                                        requiredResourcesLeader.get(requiredResourcesTypeLeader) + 1);
+                            } else {
+                                requiredResourcesLeader.put(requiredResourcesTypeLeader, 1);
+                            }
+                        }
+                        perkManufacturedResources = selectPerkManufacturedResources(leaderCardIDs.size());
+                        // adds to the required resources from the board (if necessary) to requiredResource
+                        // for the playerMove
                         if (productionType == ProductionType.BoardAndLeaderCard) {
                             requiredResourcesBoard = selectResourcesForBoardProduction();
                         }
                         requiredResources = sumRequiredResourceMaps(requiredResourcesLeader, requiredResourcesBoard);
+                    } else {
+                        goBack = true;
                     }
                     break;
                 case BoardAndDevCard:
-                    devCardID = getDevCardIDForProduction();
-                    if (!devCardID.equals("quit")) {
-                        requiredResourcesDevelopmentCard = new HashMap<>(this.match.
-                                getCurrentPlayer().getBoard().fetchDevCardById(devCardID)
-                                .getProduction().getRequiredResources());
+                    devCardIDs = getDevCardIDsForProduction();
+                    if (devCardIDs != null) {
+                        // adds to the required resources from the dev cards to requiredResource for the playerMove 
+                        for (String devCardID : devCardIDs) {
+                            requiredResourcesDevelopmentCard = sumRequiredResourceMaps(requiredResourcesDevelopmentCard, this.match.getCurrentPlayer()
+                                    .getBoard().fetchDevCardById(devCardID)
+                                    .getProduction().getRequiredResources());
+                        }
+                        // adds to the required resources from the board (if necessary) to requiredResource
+                        // for the playerMove
                         requiredResourcesBoard = selectResourcesForBoardProduction();
                         requiredResources = sumRequiredResourceMaps(requiredResourcesDevelopmentCard, requiredResourcesBoard);
+                    } else {
+                        goBack = true;
                     }
                     break;
                 case BoardAndDevCardAndLeaderCard:
                 case DevCardAndLeader:
-                    devCardID = getDevCardIDForProduction();
-                    if (!devCardID.equals("quit")) {
-                        leaderCardID = getLeaderCardIDForProduction();
-                        if (!leaderCardID.equals("quit")) {
-                            requiredResourcesDevelopmentCard = new HashMap<>(this.match.
-                                    getCurrentPlayer().getBoard().fetchDevCardById(devCardID)
-                                    .getProduction().getRequiredResources());
-                            ResourceType requiredResourcesTypeLeader = this.match.getCurrentPlayer().getBoard().fetchLeaderCardById(leaderCardID).getPerk().getResource().getType();
-                            requiredResourcesLeader.put(requiredResourcesTypeLeader, 1);
+                    devCardIDs = getDevCardIDsForProduction();
+                    if (devCardIDs != null) {
+                        leaderCardIDs = getLeaderCardIDsForProduction();
+                        if (leaderCardIDs != null) {
+                            // adds to the required resources from the dev cards to requiredResource for the playerMove 
+                            for (String devCardID : devCardIDs) {
+                                requiredResourcesDevelopmentCard = sumRequiredResourceMaps(requiredResourcesDevelopmentCard, this.match.getCurrentPlayer()
+                                        .getBoard().fetchDevCardById(devCardID)
+                                        .getProduction().getRequiredResources());
+                            }
+                            // adds to the required resources from the leader cards to requiredResource for the playerMove 
+                            for (String leaderCardID : leaderCardIDs) {
+                                ResourceType requiredResourcesTypeLeader = this.match.getCurrentPlayer()
+                                        .getBoard().fetchLeaderCardById(leaderCardID).getPerk().getResource().getType();
+                                if (requiredResourcesLeader.containsKey(requiredResourcesTypeLeader)) {
+                                    requiredResourcesLeader.put(requiredResourcesTypeLeader,
+                                            requiredResourcesLeader.get(requiredResourcesTypeLeader) + 1);
+                                } else {
+                                    requiredResourcesLeader.put(requiredResourcesTypeLeader, 1);
+                                }
+                            }
+                            perkManufacturedResources = selectPerkManufacturedResources(leaderCardIDs.size());
                             requiredResources = sumRequiredResourceMaps(requiredResourcesDevelopmentCard, requiredResourcesLeader);
+                            // adds to the required resources from the board (if necessary) to requiredResource
+                            // for the playerMove
                             if (productionType == ProductionType.BoardAndDevCardAndLeaderCard) {
                                 requiredResourcesBoard = selectResourcesForBoardProduction();
                                 requiredResources = sumRequiredResourceMaps(requiredResources, requiredResourcesBoard);
                             }
+                        } else {
+                            goBack = true;
                         }
+                    } else {
+                        goBack = true;
                     }
                     break;
                 default:
                     break;
             }
+            // if the user wants to go back, returns null playerMove
+            if (goBack) {
+                return null;
+            }
             // lets the user select the resorces he/she wants to eliminate from where he/she wants
             assert requiredResources != null;
-            selectResourcesFromBoard(requiredResources, resourcesToEliminateWarehouse,
+            Map<ResourceType, Integer> targetResources = new HashMap<>(requiredResources);
+            selectResourcesFromBoard(targetResources, resourcesToEliminateWarehouse,
                     resourcesToEliminateChest, resourcesToEliminateExtraDeposit);
             // constructs the move
+            playerMove = new ProductionMove(devCardIDs,
+                    leaderCardIDs,
+                    requiredResources,
+                    resourcesToEliminateWarehouse,
+                    resourcesToEliminateExtraDeposit,
+                    resourcesToEliminateChest,
+                    productionType,
+                    selectBoardManufacturedResource(productionType),
+                    perkManufacturedResources);
         }
         return playerMove;
+    }
+
+    private List<ResourceType> selectPerkManufacturedResources(int numberOfLeaderCards) {
+        List<ResourceType> perkManufacturedResources = new ArrayList<>();
+        for (int i = 0; i < numberOfLeaderCards; i++) {
+            perkManufacturedResources.add(selectBoardOrPerkManufacturedResourceHelper(ProductionType.LeaderCard));
+        }
+        return perkManufacturedResources;
+    }
+
+    // asks the player to choose which resource he/she wants to manufacture for the
+    // Board
+    private ResourceType selectBoardManufacturedResource(ProductionType productionType) {
+        switch (productionType) {
+            case Board:
+            case BoardAndDevCard:
+            case BoardAndLeaderCard:
+            case BoardAndDevCardAndLeaderCard:
+                return selectBoardOrPerkManufacturedResourceHelper(ProductionType.Board);
+            default:
+                return null;
+        }
+
+    }
+
+    // helper function for selectBoardManufacturedResource(), handles the main
+    // CLI logic
+    private ResourceType selectBoardOrPerkManufacturedResourceHelper(ProductionType productionType) {
+        do {
+            System.out.println("Choose the " + productionType + " production manufactured resource:\n" + "1 - Coin;\n"
+                    + "2 - Servant;\n" + "3 - Shield;\n" + "4 - Stone.\n");
+            String answer = this.stdin.nextLine();
+            switch (answer) {
+                case "1":
+                    return ResourceType.Coin;
+                case "2":
+                    return ResourceType.Servant;
+                case "3":
+                    return ResourceType.Shield;
+                case "4":
+                    return ResourceType.Stone;
+                default:
+                    System.out.println("Choose a correct number.");
+                    break;
+            }
+        } while (true);
     }
 
     // sums to maps for the required resources for a Move
@@ -846,50 +952,86 @@ public class ClientCLI extends Client {
     }
 
     // handles the CLI aspect of choosing the LeaderCard for the ProductionMove
-    private String getLeaderCardIDForProduction() {
+    private List<String> getLeaderCardIDsForProduction() {
+        boolean isSelectionFinished = false;
         boolean isCorrectID = false;
         boolean goBack = false;
-        String leaderCardID = null;
+        int numberOfLeaderCardsSelected = 0;
+        List<String> leaderCardIDs = new ArrayList<>();
         List<LeaderCard> leaderCards = this.match.getCurrentPlayer().getBoard().getLeaderCards();
-        System.out.println("Choose a Development Card:\n");
+        System.out.println("Choose a Leader Card:\n");
         for (LeaderCard leaderCard : leaderCards) {
             System.out.println(leaderCard + "\n");
         }
         do {
-            System.out.println(
-                    "Provide the ID of the Leader Card for the production or type 'quit'" + " to go back:");
+            isCorrectID = false;
+            System.out.println("Provide the ID of the Leader Card for the production or type 'quit'" + " to go back:");
             String answer = this.stdin.nextLine();
             if (answer.equals("quit")) {
                 goBack = true;
                 break;
             } else {
-                for (LeaderCard leaderCard : leaderCards) {
-                    if (leaderCard.getId().equals(answer)) {
-                        if (leaderCard.getPerk().getType() == PerkType.Production) {
-                            isCorrectID = true;
-                            leaderCardID = answer;
-                            break;
+                if (leaderCardIDs.contains(answer)) {
+                    System.out.println("Leader Card already selected!");
+                } else {
+                    for (LeaderCard leaderCard : leaderCards) {
+                        if (leaderCard.getId().equals(answer)) {
+                            if (leaderCard.getPerk().getType() == PerkType.Production) {
+                                isCorrectID = true;
+                                leaderCardIDs.add(answer);
+                                numberOfLeaderCardsSelected++;
+                                break;
+                            } else {
+                                System.out.println("This is not a Production Leader Card!");
+                            }
                         }
                     }
                 }
                 if (!isCorrectID) {
                     System.out.println("Choose a correct ID!");
+                } else {
+                    boolean isInputCorrect = false;
+                    if (numberOfLeaderCardsSelected < 2) {
+                        do {
+                            System.out.println("Do you want to select another Leader Card? [y/n]");
+                            switch (this.stdin.nextLine()) {
+                                case "y":
+                                case "yes":
+                                case "Yes":
+                                case "YES":
+                                    isSelectionFinished = false;
+                                    isInputCorrect = true;
+                                    break;
+                                case "n":
+                                case "no":
+                                case "No":
+                                case "NO":
+                                    isSelectionFinished = true;
+                                    isInputCorrect = true;
+                                    break;
+                                default:
+                                    System.out.println("Choose a correct option.");
+                            }
+                        } while (!isInputCorrect);
+                    } else {
+                        isSelectionFinished = true;
+                    }
                 }
             }
-        } while (!isCorrectID);
+        } while (!isSelectionFinished);
         if (goBack) {
-            return "quit";
+            return null;
         }
-        return leaderCardID;
+        return leaderCardIDs;
     }
 
     // handles the CLI aspect of choosing the DevelopmentCard for the ProductionMove
-    private String getDevCardIDForProduction() {
+    private List<String> getDevCardIDsForProduction() {
+        boolean isSelectionFinished = false;
         boolean isCorrectID = false;
         boolean goBack = false;
-        String devCardID = null;
-        Map<DevCardPosition, DevelopmentCard> productionDevCards = this.match.getCurrentPlayer().getBoard()
-                .getCurrentProductionCards();
+        List<String> devCardIDs = new ArrayList<>();
+        Map<DevCardPosition, DevelopmentCard> productionDevCards = this.match.getCurrentPlayer().getBoard().getCurrentProductionCards();
         System.out.println("Choose a Development Card:");
         for (DevCardPosition position : productionDevCards.keySet()) {
             if (productionDevCards.get(position) != null) {
@@ -897,33 +1039,84 @@ public class ClientCLI extends Client {
             }
         }
         do {
+            isCorrectID = false;
             System.out.println("Provide the ID of the Development Card for the production or type 'quit'"
                     + " to go back:\n");
             String answer = this.stdin.nextLine();
             if (answer.equals("quit")) {
                 goBack = true;
+                break;
             } else {
                 for (DevCardPosition position : productionDevCards.keySet()) {
                     if (productionDevCards.get(position) != null) {
                         if (productionDevCards.get(position).getId().equals(answer)) {
                             isCorrectID = true;
-                            devCardID = answer;
+                            if (devCardIDs.contains(answer)) {
+                                System.out.println("Development Card already selected!");
+                            } else {
+                                devCardIDs.add(answer);
+                            }
                             break;
                         }
                     }
                 }
                 if (!isCorrectID) {
                     System.out.println("Choose a correct ID!");
+                } else {
+                    boolean isInputCorrect = false;
+                    do {
+                        System.out.println("Do you want to select another DevelopmentCard? [y/n]");
+                        switch (this.stdin.nextLine()) {
+                            case "y":
+                            case "yes":
+                            case "Yes":
+                            case "YES":
+                                isSelectionFinished = false;
+                                isInputCorrect = true;
+                                break;
+                            case "n":
+                            case "no":
+                            case "No":
+                            case "NO":
+                                isSelectionFinished = true;
+                                isInputCorrect = true;
+                                break;
+                            default:
+                                System.out.println("Choose a correct option.");
+                        }
+                    } while (!isInputCorrect);
                 }
             }
-        } while (!isCorrectID);
+        } while (!isSelectionFinished);
         if (goBack) {
-            return "quit";
+            return null;
         }
-        return devCardID;
+        return devCardIDs;
     }
 
-    private void viewer() {
+    // asks the player to choose which resource he/she wants to manufacture for the
+    // Board or LeaderCard production
+    // or both combined
+//    private List<ResourceType> selectBoardOrPerkManufacturedResource(ProductionType productionType) {
+//        List<ResourceType> boardOrPerkManufacturedResource = new ArrayList<>();
+//        if (productionType.equals(ProductionType.Board) || productionType.equals(ProductionType.LeaderCard)) {
+//            selectBoardOrPerkManufacturedResourceHelper(productionType, boardOrPerkManufacturedResource);
+//        }
+//        if (productionType.equals(ProductionType.BoardAndDevCardAndLeaderCard)
+//                || productionType.equals(ProductionType.BoardAndLeaderCard)) {
+//            selectBoardOrPerkManufacturedResourceHelper(ProductionType.Board, boardOrPerkManufacturedResource);
+//            selectBoardOrPerkManufacturedResourceHelper(ProductionType.LeaderCard, boardOrPerkManufacturedResource);
+//        }
+//        if (productionType.equals(ProductionType.BoardAndDevCard)) {
+//            selectBoardOrPerkManufacturedResourceHelper(ProductionType.Board, boardOrPerkManufacturedResource);
+//        }
+//        if (productionType.equals(ProductionType.DevCardAndLeader)) {
+//            selectBoardOrPerkManufacturedResourceHelper(ProductionType.LeaderCard, boardOrPerkManufacturedResource);
+//        }
+//        return boardOrPerkManufacturedResource;
+//    }
+
+    public void viewer() {
         int gameSize = this.match.getPlayerList().size();
         if (gameSize == 1) {
             System.out.println("0 - Go Back\n" + "1 - Show the Black Marker Position\n" + "2 - show your Points\n"
