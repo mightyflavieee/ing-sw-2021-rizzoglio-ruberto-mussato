@@ -3,6 +3,8 @@ package it.polimi.ingsw.project.client.gui.board;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
+import it.polimi.ingsw.project.model.board.faithMap.PapalFavourSlot;
+import it.polimi.ingsw.project.model.board.faithMap.PapalSlotStatus;
 import it.polimi.ingsw.project.utils.Utils;
 
 import javax.swing.*;
@@ -134,6 +136,27 @@ public class FaithMapGUI extends JInternalFrame {
         for (JButton button : this.tiles) {
             button.setBackground(new Color(255, 255, 255));
             button.setForeground(new Color(0, 0, 0));
+        }
+        for (int i = 0; i < this.faithMapModel.getPapalFavourSlots().size(); i++) {
+            if (this.faithMapModel.getPapalFavourSlots().get(i).getStatus() == PapalSlotStatus.Taken) {
+                switch (i) {
+                    case 0:
+                        this.papalCuoncilTiles.get(5).setIcon(null);
+                        this.papalCuoncilTiles.get(5).setBackground(Color.GREEN);
+                        this.papalCuoncilTiles.get(5).setText("VP:2");
+                        break;
+                    case 1:
+                        this.papalCuoncilTiles.get(13).setIcon(null);
+                        this.papalCuoncilTiles.get(13).setBackground(Color.YELLOW);
+                        this.papalCuoncilTiles.get(5).setText("VP:3");
+                        break;
+                    case 2:
+                        this.papalCuoncilTiles.get(20).setIcon(null);
+                        this.papalCuoncilTiles.get(20).setBackground(Color.YELLOW);
+                        this.papalCuoncilTiles.get(5).setText("VP:4");
+                        break;
+                }
+            }
         }
         if(blackMarkerPosition > 0) {
             if (this.isSinglePlayer) {
