@@ -156,6 +156,18 @@ public class FaithMapGUI extends JInternalFrame {
                         this.papalCuoncilTiles.get(20).setText("VP:4");
                         break;
                 }
+            } else {
+                switch (i) {
+                    case 0:
+                        this.papalCuoncilTiles.get(5).setIcon(Utils.readIcon("tiles/quadrato giallo.png",30,30));
+                        break;
+                    case 1:
+                        this.papalCuoncilTiles.get(13).setIcon(Utils.readIcon("tiles/quadrato arancione.png",30,30));
+                        break;
+                    case 2:
+                        this.papalCuoncilTiles.get(20).setIcon(Utils.readIcon("tiles/quadrato rosso.png",30,30));
+                        break;
+                }
             }
         }
         if(blackMarkerPosition > 0) {
