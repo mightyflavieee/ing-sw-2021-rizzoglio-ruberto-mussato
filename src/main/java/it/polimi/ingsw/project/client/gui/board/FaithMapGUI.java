@@ -147,13 +147,13 @@ public class FaithMapGUI extends JInternalFrame {
                         break;
                     case 1:
                         this.papalCuoncilTiles.get(13).setIcon(null);
-                        this.papalCuoncilTiles.get(13).setBackground(Color.YELLOW);
-                        this.papalCuoncilTiles.get(5).setText("VP:3");
+                        this.papalCuoncilTiles.get(13).setBackground(Color.GREEN);
+                        this.papalCuoncilTiles.get(13).setText("VP:3");
                         break;
                     case 2:
                         this.papalCuoncilTiles.get(20).setIcon(null);
-                        this.papalCuoncilTiles.get(20).setBackground(Color.YELLOW);
-                        this.papalCuoncilTiles.get(5).setText("VP:4");
+                        this.papalCuoncilTiles.get(20).setBackground(Color.GREEN);
+                        this.papalCuoncilTiles.get(20).setText("VP:4");
                         break;
                 }
             }

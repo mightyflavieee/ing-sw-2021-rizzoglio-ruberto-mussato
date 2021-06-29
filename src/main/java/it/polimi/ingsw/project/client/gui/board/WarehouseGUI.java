@@ -38,6 +38,8 @@ public class WarehouseGUI extends JInternalFrame {
         JPanel mainWarehouse = new JPanel();
         mainWarehouse.setLayout(new GridLayout(1, 2));
 
+        this.informationsGUI = informationsGUI;
+
         JPanel resourcesColumns = new JPanel();
         JPanel arrowColumns = new JPanel();
         resourcesColumns.setLayout(new GridLayout(3, 1));
@@ -72,7 +74,6 @@ public class WarehouseGUI extends JInternalFrame {
         mainWarehouse.add(resourcesColumns);
         mainWarehouse.add(arrowColumns);
 
-        this.informationsGUI = informationsGUI;
         this.extraDepositsGUI = new ExtraDepositsGUI(this.informationsGUI, warehouse);
         this.add(mainWarehouse);
         this.add(this.extraDepositsGUI);
