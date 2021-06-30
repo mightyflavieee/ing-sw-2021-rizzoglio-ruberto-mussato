@@ -32,7 +32,12 @@ public class EndGameHandler extends JPanel {
         createPanels();
         mainPanel.add(SINGLEPLAYERPANEL, this.singlePlayerPanel);
         mainPanel.add(MULTIPLAYERPANEL, this.multiPlayerPanel);
-        mainLayout.show(mainPanel, SINGLEPLAYERPANEL);
+
+        if (matchModel.getPlayerList().size() == 1) {
+            mainLayout.show(mainPanel, SINGLEPLAYERPANEL);
+        } else {
+            mainLayout.show(mainPanel, SINGLEPLAYERPANEL);
+        }
 
         JPanel titlePanel = new JPanel();
         JPanel leaderboardPanel = new JPanel();
