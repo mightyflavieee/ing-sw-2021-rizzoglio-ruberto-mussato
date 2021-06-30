@@ -31,14 +31,15 @@ public class Match implements Serializable, Cloneable {
     public Match(List<Player> playerList) {
         this.playerList = new ArrayList<>();
         this.playerList.addAll(playerList); // la lista mi arriva già shuffled
-        //this.playerList.forEach(x -> x.createFaithMapAndWarehouse(this)); // serve per l'inizio partita
-        for(int i = 0; i < playerList.size(); i++){
+        // this.playerList.forEach(x -> x.createFaithMapAndWarehouse(this)); // serve
+        // per l'inizio partita
+        for (int i = 0; i < playerList.size(); i++) {
             playerList.get(i).createFaithMapAndWarehouse(this);
         }
         this.market = new Market();
         this.cardContainer = new CardContainer();
-      //  if (playerList.size() == 1) {
-            actionTokenContainer = new ActionTokenContainer(this);
+        // if (playerList.size() == 1) {
+        actionTokenContainer = new ActionTokenContainer(this);
 
         this.currentPlayer = playerList.get(0);
         this.currentPlayer.updateTurnPhase();
@@ -155,14 +156,14 @@ public class Match implements Serializable, Cloneable {
 
     public void end() {
         List<Player> connectedPlayer = new ArrayList<>();
-        for(Player player : connectedPlayer){
-            if(player.getIsConnected()){
+        for (Player player : connectedPlayer) {
+            if (player.getIsConnected()) {
                 connectedPlayer.add(player);
             }
         }
         if (this.isLastTurn && this.currentPlayer.getNickname()
                 .equals(connectedPlayer.get(connectedPlayer.size() - 1).getNickname())) {
-            if(this.currentPlayer.getTurnPhase() == TurnPhase.EndPhase) {
+            if (this.currentPlayer.getTurnPhase() == TurnPhase.EndPhase) {
                 addResourceVictoryPoints();
                 this.isOver = true;
             }
@@ -205,11 +206,9 @@ public class Match implements Serializable, Cloneable {
         this.currentPlayer.performDiscardLeaderCardMove(leaderCardID);
     }
 
-    public boolean isFeasibleBuyDevCardMove(String devCardID,
-                                            Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-                                            Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
-                                            Map<ResourceType, Integer> resourcesToEliminateChest,
-                                            DevCardPosition position) {
+    public boolean isFeasibleBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+            Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+            Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
         if (!this.cardContainer.isCardPresent(devCardID)) {
             return false;
         } else {
@@ -219,23 +218,18 @@ public class Match implements Serializable, Cloneable {
         }
     }
 
-    public void performBuyDevCardMove(String devCardID,
-                                      Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-                                      Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
-                                      Map<ResourceType, Integer> resourcesToEliminateChest,
-                                      DevCardPosition position) {
+    public void performBuyDevCardMove(String devCardID, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+            Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+            Map<ResourceType, Integer> resourcesToEliminateChest, DevCardPosition position) {
         DevelopmentCard devCard = this.cardContainer.removeBoughtCard(devCardID);
-        this.currentPlayer.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit,
-                resourcesToEliminateChest, position);
+        this.currentPlayer.performBuyDevCardMove(devCard, resourcesToEliminateWarehouse,
+                resourcesToEliminateExtraDeposit, resourcesToEliminateChest, position);
     }
 
-    public boolean isFeasibleProductionMove(List<String> devCardIDs,
-                                            List<String> leaderCardIDs,
-                                            Map<ResourceType, Integer> requiredResources,
-                                            Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-                                            Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
-                                            Map<ResourceType, Integer> resourcesToEliminateChest,
-                                            ProductionType productionType) {
+    public boolean isFeasibleProductionMove(List<String> devCardIDs, List<String> leaderCardIDs,
+            Map<ResourceType, Integer> requiredResources, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+            Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+            Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType) {
         if (devCardIDs != null) {
             for (String devCardID : devCardIDs) {
                 if (this.cardContainer.isCardPresent(devCardID)) {
@@ -243,19 +237,18 @@ public class Match implements Serializable, Cloneable {
                 }
             }
         }
-        return this.currentPlayer.isFeasibleProductionMove(devCardIDs, leaderCardIDs, requiredResources, resourcesToEliminateWarehouse,
-                resourcesToEliminateExtraDeposit, resourcesToEliminateChest, productionType);
+        return this.currentPlayer.isFeasibleProductionMove(devCardIDs, leaderCardIDs, requiredResources,
+                resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit, resourcesToEliminateChest,
+                productionType);
     }
 
-    public void performProductionMove(List<String> devCardIDs,
-                                      Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-                                      Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
-                                      Map<ResourceType, Integer> resourcesToEliminateChest,
-                                      ProductionType productionType,
-                                      ResourceType boardManufacturedResource,
-                                      List<ResourceType> perkManufacturedResource) {
-        this.currentPlayer.performProductionMove(devCardIDs, resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit,
-                resourcesToEliminateChest, productionType, boardManufacturedResource, perkManufacturedResource);
+    public void performProductionMove(List<String> devCardIDs, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
+            Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
+            Map<ResourceType, Integer> resourcesToEliminateChest, ProductionType productionType,
+            ResourceType boardManufacturedResource, List<ResourceType> perkManufacturedResource) {
+        this.currentPlayer.performProductionMove(devCardIDs, resourcesToEliminateWarehouse,
+                resourcesToEliminateExtraDeposit, resourcesToEliminateChest, productionType, boardManufacturedResource,
+                perkManufacturedResource);
     }
 
     public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse) {
@@ -411,9 +404,9 @@ public class Match implements Serializable, Cloneable {
         for (Player player : this.playerList) {
             if (player.getNickname().equals(disconnectedPlayerNickname)) {
                 player.setIsConnected(true);
-                if (!currentPlayer.getIsConnected() ) {
+                if (!currentPlayer.getIsConnected()) {
                     currentPlayer = player;
-                    if(currentPlayer.getTurnPhase() == TurnPhase.WaitPhase){
+                    if (currentPlayer.getTurnPhase() == TurnPhase.WaitPhase) {
                         this.updatePlayer();
                     }
                 }
@@ -448,6 +441,12 @@ public class Match implements Serializable, Cloneable {
             if (selectedResources != null) {
                 player.setResources(selectedResources);
             }
+        }
+    }
+
+    public void setAllPlayersToDisconnected() {
+        for (Player player : this.playerList) {
+            player.setIsConnected(false);
         }
     }
 }

@@ -12,7 +12,7 @@ import it.polimi.ingsw.project.model.playermove.PlayerMove;
 import it.polimi.ingsw.project.observer.Observable;
 import it.polimi.ingsw.project.utils.TypeAdapters.AdapterModel;
 
-public class Model extends Observable<MoveMessage> {
+public class Model extends Observable<MoveMessage> implements Cloneable {
     private static final long serialVersionUID = 3843380592475092704L;
     private final Match match;
     private final String matchUID;
@@ -27,8 +27,8 @@ public class Model extends Observable<MoveMessage> {
         this.matchUID = matchUID;
     }
 
-    public void reAddObserversOnMatch(){
-         this.match.readdObservers();
+    public void reAddObserversOnMatch() {
+        this.match.readdObservers();
     }
 
     public int extractNumberOfPlayers() {
@@ -93,9 +93,10 @@ public class Model extends Observable<MoveMessage> {
     }
 
     public void saveModelOnServer() {
-        Gson gson = new GsonBuilder().registerTypeAdapter(Model.class, new AdapterModel())
-                .create();
-        String modelToJson = gson.toJson(this);
+        Gson gson = new GsonBuilder().registerTypeAdapter(Model.class, new AdapterModel()).create();
+        Model toJsonModel = new Model(this.getMatchCopy(), matchUID);
+        toJsonModel.match.setAllPlayersToDisconnected();
+        String modelToJson = gson.toJson(toJsonModel);
         if (this.matchUID != null) {
             try {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(this.matchUID + ".json"));
@@ -106,4 +107,5 @@ public class Model extends Observable<MoveMessage> {
             }
         }
     }
+
 }
