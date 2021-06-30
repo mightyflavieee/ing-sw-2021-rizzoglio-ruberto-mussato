@@ -144,6 +144,8 @@ public class InformationsGUI extends JInternalFrame {
         if(this.resourceInHandler==null){
             this.resourceInHandler = new ResourceInHandlerGUI(this.gui.getBoardGUI().getWarehouseGUI(),
                     this.gui.getResourceInHandGUI(),gui);
+        }else{
+            this.resourceInHandler.reset();
         }
         this.resourceInHandler.setVisible(true);
         this.add(resourceInHandler);

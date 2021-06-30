@@ -954,7 +954,7 @@ public class ClientCLI extends Client {
     // handles the CLI aspect of choosing the LeaderCard for the ProductionMove
     private List<String> getLeaderCardIDsForProduction() {
         boolean isSelectionFinished = false;
-        boolean isCorrectID = false;
+        boolean isCorrectID;
         boolean goBack = false;
         int numberOfLeaderCardsSelected = 0;
         List<String> leaderCardIDs = new ArrayList<>();
@@ -1028,7 +1028,7 @@ public class ClientCLI extends Client {
     // handles the CLI aspect of choosing the DevelopmentCard for the ProductionMove
     private List<String> getDevCardIDsForProduction() {
         boolean isSelectionFinished = false;
-        boolean isCorrectID = false;
+        boolean isCorrectID;
         boolean goBack = false;
         List<String> devCardIDs = new ArrayList<>();
         Map<DevCardPosition, DevelopmentCard> productionDevCards = this.match.getCurrentPlayer().getBoard().getCurrentProductionCards();
@@ -1179,10 +1179,20 @@ public class ClientCLI extends Client {
 
     private void viewer(String myNickname) {
         // shows informations about other players
-        System.out
-                .println("Your opponents are : " + this.match.getOpponentsToString(myNickname) + "\nTell the nickname");
+        boolean correctName = false;
+        List<Player> opponents = Utils.splitPlayers(match,myNickname)._2;
+        System.out.println("Your opponents are : " + this.match.getOpponentsToString(myNickname) + "\nTell the nickname");
 
         String opponent = stdin.nextLine();
+        for(Player player : opponents){
+            if(opponent.equals(player.getNickname())){
+                correctName = true;
+                break;
+            }
+        }
+        if(!correctName){
+            return;
+        }
         System.out.println(
                 "0 - Go Back\n" + "1 - show " + opponent + " Points\n" + "2 - show " + opponent + " Marker Position\n"
                         + "3 - show " + opponent + " Leader Cards\n" + "4 - show " + opponent + " Development Cards\n");
