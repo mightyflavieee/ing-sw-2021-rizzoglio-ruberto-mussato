@@ -49,6 +49,8 @@ public class InformationsGUI extends JInternalFrame {
 
     public ResourceInHandlerGUI getResourceInHandler() { return resourceInHandler; }
 
+    public BuyDevCardMoveHandler getBuyDevCardMoveHandler() { return buyDevCardMoveHandler; }
+
     public ProductionMoveHandler getProductionMoveHandler() { return productionMoveHandler; }
 
     public GUI getGUI() { return gui; }
@@ -238,7 +240,7 @@ public class InformationsGUI extends JInternalFrame {
         // prints in the informationsGUI the necessary information
         Map<ResourceType, Integer> insertedResources = countResources(this.selectResourcesHandler);
         if (verifyResourcesTargetReached(insertedResources,
-                this.buyDevCardMoveHandler.getDevelopmentCard().getRequiredResources())) {
+                decreaseIfDiscounted(this.buyDevCardMoveHandler.getDevelopmentCard().getRequiredResources()))) {
             this.gui.sendBuyDevCardMove(this.buyDevCardMoveHandler);
             this.buyDevCardMoveHandler = null;
         } else {
@@ -271,16 +273,36 @@ public class InformationsGUI extends JInternalFrame {
     }
 
     /**
+     * decreases the resources required for a purchase if you have any discounts activated
+     */
+    private Map<ResourceType, Integer> decreaseIfDiscounted(Map<ResourceType, Integer> targetToDiscount) {
+        Map<ResourceType, Integer> decreasedMap = new HashMap<>(targetToDiscount);
+        List<ResourceType> discounts = this.gui.getBoardGUI().getBoardModel().getDiscounts();
+        if (discounts.size() > 0) {
+            for (ResourceType targetType : decreasedMap.keySet()) {
+                for (ResourceType discountType : discounts) {
+                    if (targetType == discountType) {
+                        decreasedMap.put(targetType, decreasedMap.get(targetType) - 1);
+                    }
+                }
+            }
+        }
+        return decreasedMap;
+    }
+
+    /**
      * calculates the missing resources from target
      */
     private Map<ResourceType, Integer> calculateMissingResources(Map<ResourceType, Integer> yourResources, Map<ResourceType, Integer> target) {
         Map<ResourceType, Integer> missingResources = new HashMap<>();
         List<ResourceType> discounts = this.gui.getBoardGUI().getBoardModel().getDiscounts();
-        if (discounts.size() > 0) {
-            for (ResourceType targetType : target.keySet()) {
-                for (ResourceType discountType : discounts) {
-                    if (targetType == discountType) {
-                        target.put(targetType, target.get(targetType) - 1);
+        if (this.buyDevCardMoveHandler != null) {
+            if (discounts.size() > 0) {
+                for (ResourceType targetType : target.keySet()) {
+                    for (ResourceType discountType : discounts) {
+                        if (targetType == discountType) {
+                            target.put(targetType, target.get(targetType) - 1);
+                        }
                     }
                 }
             }
