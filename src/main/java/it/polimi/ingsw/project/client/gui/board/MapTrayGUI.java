@@ -41,6 +41,8 @@ public class MapTrayGUI extends JInternalFrame {
      * updates the visual representation based on the local model
      */
     public void refresh() {
+        int numberOfDevCards = this.boardModel.countDevCards();
+        this.setTitle("Map Tray - Number of Development Cards: " + numberOfDevCards);
         for (DevCardPosition position : this.boardModel.getMapTray().keySet()) {
             if (this.boardModel.getMapTray().get(position).size() == 0) {
                 // shows back of the devcard in that DevCardPosition
