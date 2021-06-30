@@ -49,7 +49,7 @@ public class LeaderMovePanel extends JPanel {
      * enables or disables the activate button based on the input
      */
     public void setActivationPossible(Boolean value){
-        this.activateButton.setEnabled(value);
+        this.isActivable = value;
     }
 
     /**
