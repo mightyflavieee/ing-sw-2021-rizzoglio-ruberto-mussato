@@ -11,7 +11,7 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import java.io.*;
 import java.util.*;
 
-public class Player implements Serializable, Cloneable {
+public class Player implements Serializable, Cloneable, Comparable<Player> {
   private static final long serialVersionUID = 3840280592475092888L;
 
   private Board board;
@@ -225,5 +225,10 @@ public class Player implements Serializable, Cloneable {
 
   public void setResources(List<ResourceType> listOfResources) {
     this.board.insertChosenResources(listOfResources);
+  }
+
+  @Override
+  public int compareTo(Player d) {
+    return this.victoryPoints - d.getVictoryPoints();
   }
 }
