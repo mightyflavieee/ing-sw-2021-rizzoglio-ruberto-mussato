@@ -206,4 +206,9 @@ public class ResourceInHandlerGUI extends JInternalFrame {
     public int getResourceNum() {
         return this.resourceNum;
     }
+
+    public void reset() {
+        this.resourceNum = 0;
+        this.refresh();
+    }
 }
