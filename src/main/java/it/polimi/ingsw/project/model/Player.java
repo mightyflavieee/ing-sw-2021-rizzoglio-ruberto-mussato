@@ -188,6 +188,9 @@ public class Player implements Serializable, Cloneable {
   }
 
   public void updateHistory(String stringMove) {
+    if(stringMove.equals("No Move")) {
+      return;
+    }
     this.history.add(stringMove);
   }
 
