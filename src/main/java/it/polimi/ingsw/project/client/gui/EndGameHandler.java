@@ -36,7 +36,7 @@ public class EndGameHandler extends JPanel {
         if (matchModel.getPlayerList().size() == 1) {
             mainLayout.show(mainPanel, SINGLEPLAYERPANEL);
         } else {
-            mainLayout.show(mainPanel, SINGLEPLAYERPANEL);
+            mainLayout.show(mainPanel, MULTIPLAYERPANEL);
         }
 
         JPanel titlePanel = new JPanel();
