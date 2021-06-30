@@ -154,8 +154,14 @@ public class Match implements Serializable, Cloneable {
     }
 
     public void end() {
+        List<Player> connectedPlayer = new ArrayList<>();
+        for(Player player : connectedPlayer){
+            if(player.getIsConnected()){
+                connectedPlayer.add(player);
+            }
+        }
         if (this.isLastTurn && this.currentPlayer.getNickname()
-                .equals(this.playerList.get(this.playerList.size() - 1).getNickname())) {
+                .equals(connectedPlayer.get(connectedPlayer.size() - 1).getNickname())) {
             if(this.currentPlayer.getTurnPhase() == TurnPhase.EndPhase) {
                 addResourceVictoryPoints();
                 this.isOver = true;
