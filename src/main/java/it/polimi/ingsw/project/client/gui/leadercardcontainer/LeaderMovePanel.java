@@ -50,7 +50,6 @@ public class LeaderMovePanel extends JPanel {
      */
     public void setActivationPossible(Boolean value){
         this.activateButton.setEnabled(value);
-        this.isActivable = value;
     }
 
     /**
