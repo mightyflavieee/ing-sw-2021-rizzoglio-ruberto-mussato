@@ -68,7 +68,6 @@ public class ShieldBoardProductionListener implements ActionListener {
                         this.gui.getLeaderCardPlaceGUI().enableButtonsForProduction();
                         break;
                 }
-                this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
             }
         }
     }

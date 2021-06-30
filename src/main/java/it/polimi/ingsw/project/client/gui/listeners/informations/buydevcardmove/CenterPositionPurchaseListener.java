@@ -21,5 +21,6 @@ public class CenterPositionPurchaseListener implements ActionListener {
         this.gui.getInformationsGUI().createBuyDevCardHandler(DevCardPosition.Center);
         this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
         this.gui.getCardContainerGUI().enableAllButtons();
+        this.gui.getInformationsGUI().getjTextArea().setText("Choose which Development Card to buy!");
     }
 }
