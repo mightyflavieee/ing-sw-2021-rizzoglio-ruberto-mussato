@@ -47,6 +47,7 @@ public class ServantBoardProductionListener implements ActionListener {
             // with the cards selection or the resources selection (based on the ProductionType)
             if (checkHasSelectedTwoResources(this.gui.getInformationsGUI().getProductionMoveHandler().getBoardRequiredResources())) {
                 ProductionType productionType = this.gui.getInformationsGUI().getProductionMoveHandler().getProductionType();
+                this.gui.getInformationsGUI().getMainPhaseHandler().goToAbortMovePanel();
                 switch (productionType) {
                     case Board:
                         this.gui.getBoardGUI().getWarehouseGUI().enableAllButtons();
