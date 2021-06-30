@@ -9,6 +9,7 @@ import it.polimi.ingsw.project.model.resource.ResourceType;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -99,5 +100,38 @@ class BoardTest {
         player.getBoard().getChest().put(ResourceType.Stone, 5);
         // tests method
         assertEquals(2, player.getBoard().calculateResourceVictoryPoints());
+    }
+
+    @Test
+    void isNumberOfResourcesEqual_TrueResult() {
+        // creates the Player and the Match
+        Player player = new Player("flavio99");
+        // creates two resources maps
+        Map<ResourceType, Integer> requiredResource = new HashMap<>();
+        Map<ResourceType, Integer> resourcesSelected = new HashMap<>();
+        requiredResource.put(ResourceType.Stone, 1);
+        requiredResource.put(ResourceType.Coin, 1);
+        requiredResource.put(ResourceType.Servant, 1);
+        resourcesSelected.put(ResourceType.Stone, 1);
+        resourcesSelected.put(ResourceType.Coin, 1);
+        resourcesSelected.put(ResourceType.Servant, 1);
+        // tests method
+        assertTrue(player.getBoard().isNumberOfResourcesEqual(requiredResource, resourcesSelected));
+    }
+
+    @Test
+    void isNumberOfResourcesEqual_FalseResult() {
+        // creates the Player and the Match
+        Player player = new Player("flavio99");
+        // creates two resources maps
+        Map<ResourceType, Integer> requiredResource = new HashMap<>();
+        Map<ResourceType, Integer> resourcesSelected = new HashMap<>();
+        requiredResource.put(ResourceType.Stone, 1);
+        requiredResource.put(ResourceType.Coin, 1);
+        resourcesSelected.put(ResourceType.Stone, 1);
+        resourcesSelected.put(ResourceType.Coin, 1);
+        resourcesSelected.put(ResourceType.Servant, 1);
+        // tests method
+        assertFalse(player.getBoard().isNumberOfResourcesEqual(requiredResource, resourcesSelected));
     }
 }

@@ -12,6 +12,7 @@ import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
 import it.polimi.ingsw.project.model.playermove.ProductionType;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
+import it.polimi.ingsw.project.utils.Utils;
 
 import java.io.Serializable;
 import java.util.*;
@@ -438,6 +439,30 @@ public class Board implements Serializable, Cloneable {
     return currentDevCardsHigherLevels;
   }
 
+  public boolean isNumberOfResourcesEqual(Map<ResourceType, Integer> requiredResources, Map<ResourceType, Integer> resourcesSelected) {
+    List<ResourceType> resourceTypes = new ArrayList<>();
+    resourceTypes.add(ResourceType.Coin);
+    resourceTypes.add(ResourceType.Servant);
+    resourceTypes.add(ResourceType.Shield);
+    resourceTypes.add(ResourceType.Stone);
+    for (ResourceType resourceType : resourceTypes) {
+      if (requiredResources.containsKey(resourceType)) {
+        if (resourcesSelected.containsKey(resourceType)) {
+          if (!requiredResources.get(resourceType).equals(resourcesSelected.get(resourceType))) {
+            return false;
+          }
+        } else {
+          return false;
+        }
+      } else {
+        if (resourcesSelected.containsKey(resourceType)) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
   public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID) {
     for (LeaderCard leaderCard : this.leaderCards) {
       if (leaderCard.getId().equals(leaderCardID)) {
@@ -465,6 +490,12 @@ public class Board implements Serializable, Cloneable {
     int intLevel = 0;
     boolean isOneLessCardLevelPresent = false;
     boolean isDiscountPresent;
+    // checks if the number of resources selected are equal to the resources required
+    Map<ResourceType, Integer> resourcesSelected = Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+    resourcesSelected = Utils.sumResourcesMaps(resourcesSelected, resourcesToEliminateExtraDeposit);
+    if (!isNumberOfResourcesEqual(devCard.getRequiredResources(), resourcesSelected)) {
+      return false;
+    }
     // double checks if the resources indicated by the user are actually present
     if (!areEnoughResourcesPresentForBuyAndProduction(resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit,
         resourcesToEliminateChest)) {
