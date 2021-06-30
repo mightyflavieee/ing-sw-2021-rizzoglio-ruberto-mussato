@@ -9,29 +9,30 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
+/**
+ * it is used at the end of the game to show the scoreboard
+ */
 public class EndGameHandler extends JPanel {
     private static final String SINGLEPLAYERPANEL = "SINGLEPLAYERPANEL";
     private static final String MULTIPLAYERPANEL = "MULTIPLAYERPANEL";
 
-    private ClientGUI clientGUI;
-    private Match matchModel;
+    private final ClientGUI clientGUI;
+    private final Match matchModel;
 
-    private JPanel mainPanel;
-    private CardLayout mainLayout;
     private JPanel singlePlayerPanel;
     private JPanel multiPlayerPanel;
 
     public EndGameHandler(Match matchModel, ClientGUI clientGUI) {
         this.clientGUI = clientGUI;
         this.matchModel = matchModel;
-        this.mainLayout = new CardLayout();
-        this.mainPanel = new JPanel();
-        this.mainPanel.setLayout(this.mainLayout);
+        CardLayout mainLayout = new CardLayout();
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(mainLayout);
 
         createPanels();
-        this.mainPanel.add(SINGLEPLAYERPANEL, this.singlePlayerPanel);
-        this.mainPanel.add(MULTIPLAYERPANEL, this.multiPlayerPanel);
-        this.mainLayout.show(this.mainPanel, SINGLEPLAYERPANEL);
+        mainPanel.add(SINGLEPLAYERPANEL, this.singlePlayerPanel);
+        mainPanel.add(MULTIPLAYERPANEL, this.multiPlayerPanel);
+        mainLayout.show(mainPanel, SINGLEPLAYERPANEL);
 
         JPanel titlePanel = new JPanel();
         JPanel leaderboardPanel = new JPanel();
@@ -39,11 +40,11 @@ public class EndGameHandler extends JPanel {
         createTitlePanel(titlePanel);
         createLeaderboardPanel(leaderboardPanel);
         createBottomPanel(bottomPanel);
-        this.mainPanel.add(titlePanel);
-        this.mainPanel.add(leaderboardPanel);
-        this.mainPanel.add(bottomPanel);
+        mainPanel.add(titlePanel);
+        mainPanel.add(leaderboardPanel);
+        mainPanel.add(bottomPanel);
 
-        this.add(this.mainPanel);
+        this.add(mainPanel);
     }
 
     private void createPanels() {
