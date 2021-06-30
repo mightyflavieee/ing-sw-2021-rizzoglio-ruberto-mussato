@@ -34,12 +34,12 @@ public class ClientGUI extends Client implements Observer<Move> {
     public ClientGUI(String ip, int port) {
         super(ip, port);
         this.numPlayers = 0;
-        try {
-            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-
-        }
+//        try {
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
+//        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+//            e.printStackTrace();
+//
+//        }
     }
 
     private ClientGUI getInstance() {
