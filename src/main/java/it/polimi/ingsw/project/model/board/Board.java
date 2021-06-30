@@ -493,7 +493,13 @@ public class Board implements Serializable, Cloneable {
     // checks if the number of resources selected are equal to the resources required
     Map<ResourceType, Integer> resourcesSelected = Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
     resourcesSelected = Utils.sumResourcesMaps(resourcesSelected, resourcesToEliminateExtraDeposit);
-    if (!isNumberOfResourcesEqual(devCard.getRequiredResources(), resourcesSelected)) {
+    Map<ResourceType, Integer> resourcesRequired = new HashMap<>(devCard.getRequiredResources());
+    if (!this.discounts.isEmpty()) {
+      for (ResourceType resourceType : this.discounts) {
+        resourcesRequired.put(resourceType, resourcesRequired.get(resourceType) - 1);
+      }
+    }
+    if (!isNumberOfResourcesEqual(resourcesRequired, resourcesSelected)) {
       return false;
     }
     // double checks if the resources indicated by the user are actually present
