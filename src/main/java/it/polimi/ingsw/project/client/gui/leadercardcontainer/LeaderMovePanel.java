@@ -71,8 +71,12 @@ public class LeaderMovePanel extends JPanel {
     public void enableButtonsForLeaderPhase() {
         this.disableButtons();
         this.discardButton.setEnabled(true);
-        this.activateButton.setEnabled(this.isActivable);
-           }
+        if(this.activateButton.getText().equals("Activate")) {
+            this.activateButton.setEnabled(this.isActivable);
+        }else{
+            this.activateButton.setEnabled(false);
+        }
+    }
 
     /**
      * updates the listener's id of the leadercard so each buttons refers to the correct leadercard
