@@ -1,6 +1,8 @@
 package it.polimi.ingsw.project.client.gui.informations;
 
+import it.polimi.ingsw.project.client.gui.BuyDevCardMoveHandler;
 import it.polimi.ingsw.project.client.gui.GUI;
+import it.polimi.ingsw.project.client.gui.ProductionMoveHandler;
 import it.polimi.ingsw.project.client.gui.listeners.informations.*;
 import it.polimi.ingsw.project.client.gui.listeners.informations.buydevcardmove.CenterPositionPurchaseListener;
 import it.polimi.ingsw.project.client.gui.listeners.informations.buydevcardmove.GoBackFromPurchaseListener;
@@ -314,13 +316,22 @@ public class MainPhaseHandler extends JInternalFrame {
         this.mainPanelLayout.show(this.mainPanel, BUYDEVCARDMOVE);
     }
 
-    public void goToProductionButtons() { this.mainPanelLayout.show(this.mainPanel, PRODUCTIONPANEL); }
+    public void goToProductionButtons() {
+        this.gui.getInformationsGUI().getjTextArea().setText("Select Production type:");
+        this.mainPanelLayout.show(this.mainPanel, PRODUCTIONPANEL);
+    }
 
     public void goToLeaderProductionButtons() { this.mainPanelLayout.show(this.mainPanel, LEADERMANUFACTURINGPANEL); }
 
-    public void goToBoardProductionButtons() { this.mainPanelLayout.show(this.mainPanel, BOARDMANUFACTURINGPANEL); }
+    public void goToBoardProductionButtons() {
+        this.gui.getInformationsGUI().getjTextArea().setText("Select the resource you want to produce with the board:");
+        this.mainPanelLayout.show(this.mainPanel, BOARDMANUFACTURINGPANEL);
+    }
 
-    public void goToBoardRequiredResourcesButtons() { this.mainPanelLayout.show(this.mainPanel, BOARDREQUIREDRESOURCESPANEL); }
+    public void goToBoardRequiredResourcesButtons() {
+        this.gui.getInformationsGUI().getjTextArea().setText("Select the two resources you want to use for the Board production:");
+        this.mainPanelLayout.show(this.mainPanel, BOARDREQUIREDRESOURCESPANEL);
+    }
 
     public void goToTransmutationPanel() {
         List<ResourceType> transmutationPerks = this.gui.getTransmutationPerks();
@@ -329,7 +340,8 @@ public class MainPhaseHandler extends JInternalFrame {
         this.mainPanelLayout.show(this.mainPanel,TRANSMUTATIONPANEL);
     }
 
-    public void goToAbortMovePanel() { this.mainPanelLayout.show(this.mainPanel, ABORTMOVEPANEL);
+    public void goToAbortMovePanel() {
+        this.mainPanelLayout.show(this.mainPanel, ABORTMOVEPANEL);
         this.gui.showMyView();
         if (!this.gui.getPlayersBarGUI().isClosed()) {
             this.gui.getPlayersBarGUI().disableAllButtons();
