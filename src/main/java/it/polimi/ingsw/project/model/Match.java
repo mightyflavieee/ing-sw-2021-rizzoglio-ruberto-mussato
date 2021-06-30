@@ -428,6 +428,7 @@ public class Match implements Serializable, Cloneable {
         List<Player> orderedListOfPlayers = new ArrayList<>();
         orderedListOfPlayers.addAll(playerList);
         Collections.sort(orderedListOfPlayers);
+        Collections.reverse(orderedListOfPlayers);
         for (int i = 0; i < orderedListOfPlayers.size(); i++) {
             leaderboard.put(i, orderedListOfPlayers.get(i));
         }
