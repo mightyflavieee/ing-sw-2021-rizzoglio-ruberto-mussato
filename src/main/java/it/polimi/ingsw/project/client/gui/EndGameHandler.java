@@ -112,10 +112,26 @@ public class EndGameHandler extends JPanel {
         leftPanel.setLayout(new GridLayout(4, 1));
         centerPanel.setLayout(new GridLayout(4, 1));
         rightPanel.setLayout(new GridLayout(4, 1));
-        leftPanel.add(new JLabel("1."));
-        leftPanel.add(new JLabel("2."));
-        leftPanel.add(new JLabel("3."));
-        leftPanel.add(new JLabel("4."));
+        switch (this.matchModel.getPlayerList().size()) {
+            case 1:
+                leftPanel.add(new JLabel("1."));
+                break;
+            case 2:
+                leftPanel.add(new JLabel("1."));
+                leftPanel.add(new JLabel("2."));
+                break;
+            case 3:
+                leftPanel.add(new JLabel("1."));
+                leftPanel.add(new JLabel("2."));
+                leftPanel.add(new JLabel("3."));
+                break;
+            case 4:
+                leftPanel.add(new JLabel("1."));
+                leftPanel.add(new JLabel("2."));
+                leftPanel.add(new JLabel("3."));
+                leftPanel.add(new JLabel("4."));
+                break;
+        }
         for (Integer position : leaderboard.keySet()) {
            centerPanel.add(leaderboardNicknames.get(position));
            rightPanel.add(leaderboardVictoryPoints.get(position));

@@ -3,7 +3,6 @@ package it.polimi.ingsw.project.client.gui.board;
 import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.board.Board;
 import it.polimi.ingsw.project.model.board.faithMap.FaithMap;
-import it.polimi.ingsw.project.model.board.faithMap.PapalFavourSlot;
 import it.polimi.ingsw.project.model.board.faithMap.PapalSlotStatus;
 import it.polimi.ingsw.project.utils.Utils;
 
@@ -32,8 +31,41 @@ public class FaithMapGUI extends JInternalFrame {
         this.tiles = new ArrayList<>();
         this.papalCuoncilTiles = new ArrayList<>();
         for (int i = 0; i < 24; i++) {
-            JButton button = new JButton(String.valueOf(i+1));
+            JButton button = new JButton();
             button.setBackground(new Color(255, 255, 255));
+            switch (i+1) {
+                case 3:
+                    button.setBackground(Color.YELLOW);
+                    button.setText("1");
+                    break;
+                case 6:
+                    button.setBackground(Color.YELLOW);
+                    button.setText("2");
+                    break;
+                case 9:
+                    button.setBackground(Color.YELLOW);
+                    button.setText("4");
+                    break;
+                case 12:
+                    button.setBackground(Color.YELLOW);
+                    button.setText("6");
+                    break;
+                case 15:
+                    button.setBackground(Color.YELLOW);
+                    button.setText("9");
+                    break;
+                case 18:
+                    button.setBackground(Color.YELLOW);
+                    button.setText("12");
+                    break;
+                case 21:
+                    button.setBackground(Color.YELLOW);
+                    button.setText("16");
+                    break;
+                default:
+                    button.setText(String.valueOf(i+1));
+                    break;
+            }
             this.tiles.add(button);
         }
         for (int i = 0; i < 23; i++) {
@@ -56,7 +88,6 @@ public class FaithMapGUI extends JInternalFrame {
         for (JButton button : this.tiles) {
             this.add(button);
         }
-        //this.tiles.get(0).setBackground(new Color(105, 105, 105));
         for (JButton button : this.papalCuoncilTiles) {
             this.add(button);
         }
@@ -133,9 +164,8 @@ public class FaithMapGUI extends JInternalFrame {
     public void refresh() {
         this.markerPosition = this.faithMapModel.getMarkerPosition();
         this.blackMarkerPosition = this.faithMapModel.getBlackMarkerPosition();
-        for (JButton button : this.tiles) {
-            button.setBackground(new Color(255, 255, 255));
-            button.setForeground(new Color(0, 0, 0));
+        for (int i = 0; i < this.tiles.size(); i++) {
+            setDefaulStyleOfTile(this.tiles.get(i), i);
         }
         for (int i = 0; i < this.faithMapModel.getPapalFavourSlots().size(); i++) {
             if (this.faithMapModel.getPapalFavourSlots().get(i).getStatus() == PapalSlotStatus.Taken) {
@@ -179,6 +209,24 @@ public class FaithMapGUI extends JInternalFrame {
         if(markerPosition > 0) {
             this.tiles.get(this.markerPosition-1).setBackground(new Color(105, 105, 105));
             this.tiles.get(this.markerPosition-1).setForeground(new Color(255, 255, 255));
+        }
+    }
+
+    private void setDefaulStyleOfTile(JButton jButton, int i) {
+        switch (i+1) {
+            case 3:
+            case 6:
+            case 9:
+            case 12:
+            case 15:
+            case 18:
+            case 21:
+                jButton.setBackground(Color.YELLOW);
+                break;
+            default:
+                this.tiles.get(i).setBackground(new Color(255, 255, 255));
+                this.tiles.get(i).setForeground(new Color(0, 0, 0));
+                break;
         }
     }
 
