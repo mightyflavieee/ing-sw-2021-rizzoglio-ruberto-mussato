@@ -125,7 +125,6 @@ public class Match implements Serializable, Cloneable {
     }
 
     public void notifyFaithMapsForCouncil(int numTile) {
-        // TODO devo notificare anche lorenzo?
         playerList.forEach(x -> x.papalCouncil(numTile));
         if (numTile == 3) {
             this.isLastTurn = true; // qualcuno è arrivato all'ultima casella
@@ -133,7 +132,6 @@ public class Match implements Serializable, Cloneable {
     }
 
     public void notifyFaithMapsForDiscard(int numDiscardedResources) {
-        // TODO devo far avanzare anche lorenzo?
         for (int i = 0; i < numDiscardedResources; i++) {
             playerList.stream().filter(x -> !x.getNickname().equals(currentPlayer.getNickname()))
                     .forEach(Player::moveForward);
@@ -447,5 +445,14 @@ public class Match implements Serializable, Cloneable {
             player.setIsConnected(false);
         }
         currentPlayer.setIsConnected(false);
+    }
+
+    public String getActivatedLeaderCardsToString(String nickname) {
+        for (Player player : playerList) {
+            if (player.getNickname().equals(nickname)) {
+                return player.getActivatedLeaderCardsToString();
+            }
+        }
+        return "";
     }
 }

@@ -231,4 +231,8 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
   public int compareTo(Player d) {
     return this.victoryPoints - d.getVictoryPoints();
   }
+
+  public String getActivatedLeaderCardsToString() {
+      return this.board.getActivatedLeaderCardsToString();
+    }
 }
