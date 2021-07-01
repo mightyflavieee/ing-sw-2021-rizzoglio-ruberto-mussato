@@ -1208,7 +1208,7 @@ public class ClientCLI extends Client {
                 System.out.println(opponent + " marker position is: " + this.match.getMarkerPosition(opponent) + "/24");
                 break;
             case "3":
-                System.out.println(opponent + " Leader Cards are: " + this.match.getLeaderCardsToString(opponent));
+                System.out.println(opponent + " Leader Cards are: " + this.match.getActivatedLeaderCardsToString(opponent));
                 break;
             case "4":
                 System.out.println(opponent + " Development Cards are: " + this.match.getBoardByPlayerNickname(opponent).getMapTrayToString());

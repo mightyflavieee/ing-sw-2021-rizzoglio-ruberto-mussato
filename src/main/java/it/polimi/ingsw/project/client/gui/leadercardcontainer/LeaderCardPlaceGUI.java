@@ -95,9 +95,9 @@ public class LeaderCardPlaceGUI extends JInternalFrame {
         refreshShowed(leaderCards);
         for(i = 0; i < leaderCards.size(); i++){
             leaderCardJlabelGUIList.get(i).setID(leaderCards.get(i).getId());
-            leaderCardJlabelGUIList.get(i).setVisible(true);
+            leaderCardJlabelGUIList.get(i).setVisible(leaderCards.get(i).getStatus()== Status.Active);
             leaderMovePanelList.get(i).setID(leaderCards.get(i));
-            leaderMovePanelList.get(i).setVisible(true);
+            leaderMovePanelList.get(i).setVisible(leaderCards.get(i).getStatus()== Status.Active);
             leaderMovePanelList.get(i).disableButtons();
             this.leaderMovePanelList.get(i).setActivated(leaderCards.get(i).getStatus()== Status.Active);
         }        this.setTitle(opponentNickName + "'s Leader Cards");

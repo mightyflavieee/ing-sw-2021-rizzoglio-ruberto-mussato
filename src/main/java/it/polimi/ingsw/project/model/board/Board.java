@@ -892,4 +892,20 @@ public class Board implements Serializable, Cloneable {
     }
     return string.toString();
   }
+
+    public String getActivatedLeaderCardsToString() {
+      StringBuilder string = new StringBuilder("\n");
+      boolean existActivated = false;
+      for (LeaderCard leaderCard : this.leaderCards) {
+        if(leaderCard.getStatus() == Status.Active) {
+          string.append(leaderCard);
+          existActivated = true;
+        }
+      }
+      if(!existActivated){
+        return "The leadercards are not activated";
+      }else {
+        return string.toString();
+      }
+    }
 }
