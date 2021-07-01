@@ -190,14 +190,17 @@ public class FaithMapGUI extends JInternalFrame {
                 switch (i) {
                     case 0:
                         this.papalCuoncilTiles.get(5).setText("");
+                        this.papalCuoncilTiles.get(5).setBackground(new Color(255, 255, 255));
                         this.papalCuoncilTiles.get(5).setIcon(Utils.readIcon("tiles/quadrato giallo.png",30,30));
                         break;
                     case 1:
-                        this.papalCuoncilTiles.get(5).setText("");
+                        this.papalCuoncilTiles.get(13).setText("");
+                        this.papalCuoncilTiles.get(13).setBackground(new Color(255, 255, 255));
                         this.papalCuoncilTiles.get(13).setIcon(Utils.readIcon("tiles/quadrato arancione.png",30,30));
                         break;
                     case 2:
-                        this.papalCuoncilTiles.get(5).setText("");
+                        this.papalCuoncilTiles.get(20).setText("");
+                        this.papalCuoncilTiles.get(20).setBackground(new Color(255, 255, 255));
                         this.papalCuoncilTiles.get(20).setIcon(Utils.readIcon("tiles/quadrato rosso.png",30,30));
                         break;
                 }
