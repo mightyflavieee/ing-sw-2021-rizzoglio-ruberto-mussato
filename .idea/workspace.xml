@@ -14,8 +14,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Corrected minor error in Match.getLeaderboard">
+    <list default="true" id="263573d8-fb87-41fc-892e-ca55eff76096" name="Default Changelist" comment="Corrected minor error in Match.end">
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_CONTROLLER.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_CONTROLLER.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_MESSAGES.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_MESSAGES.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_MODEL.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_MODEL.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_OBSERVER.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_OBSERVER.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_SERVER.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_SERVER.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_UTILS.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_UTILS.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_VIEW.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/deliverables/UML/UML_VIEW.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deliverables/UML.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/deliverables/UML/UML.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deliverables/UML.vsdx" beforeDir="false" afterPath="$PROJECT_DIR$/deliverables/UML/UML.vsdx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +46,7 @@
   </component>
   <component name="ExportToHTMLSettings">
     <option name="OPEN_IN_BROWSER" value="true" />
-    <option name="OUTPUT_DIRECTORY" value="C:\Users\gianl\Desktop\test4" />
+    <option name="OUTPUT_DIRECTORY" value="C:\Users\gianl\Desktop\test5" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -53,9 +69,6 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="1qr6yOXo6JG8nHlrSUjH6bFrZI6" />
   <component name="ProjectLevelVcsManager">
@@ -105,11 +118,11 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\deliverables\UML" />
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\deliverables" />
       <recent name="D:\ZONA PERSONALE\Politecnico\TERZO ANNO\PROVA FINALE INGEGNERIA DEL SOFTWARE\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources\developmentcards" />
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources\resourcetype" />
       <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources\developmentcards" />
-      <recent name="C:\Users\gianl\IdeaProjects\ing-sw-2021-rizzoglio-ruberto-mussato\src\main\resources\marbles" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="it.polimi.ingsw.project.utils" />
@@ -153,6 +166,17 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -273,8 +297,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GUI" />
         <item itemvalue="Application.ServerApp" />
+        <item itemvalue="Application.GUI" />
         <item itemvalue="JUnit.ControllerTest.completeTest" />
         <item itemvalue="JUnit.ProductionMoveTest" />
         <item itemvalue="JUnit.ProductionMoveTest.enoughResourcesBoardProduction" />
@@ -456,41 +480,9 @@
       <workItem from="1625074608636" duration="44000" />
       <workItem from="1625079010914" duration="6000" />
       <workItem from="1625082777230" duration="10685000" />
-    </task>
-    <task id="LOCAL-00214" summary="Corrected minor error in  LeaderCardChoserGUI">
-      <created>1624605130863</created>
-      <option name="number" value="00214" />
-      <option name="presentableId" value="LOCAL-00214" />
-      <option name="project" value="LOCAL" />
-      <updated>1624605130863</updated>
-    </task>
-    <task id="LOCAL-00215" summary="Corrected minor error in Server.initPlayers">
-      <created>1624609218318</created>
-      <option name="number" value="00215" />
-      <option name="presentableId" value="LOCAL-00215" />
-      <option name="project" value="LOCAL" />
-      <updated>1624609218318</updated>
-    </task>
-    <task id="LOCAL-00216" summary="Changed disabled icon in CardContainerGUI.java">
-      <created>1624638517325</created>
-      <option name="number" value="00216" />
-      <option name="presentableId" value="LOCAL-00216" />
-      <option name="project" value="LOCAL" />
-      <updated>1624638517325</updated>
-    </task>
-    <task id="LOCAL-00217" summary="Updated GUI look and feel">
-      <created>1624641966403</created>
-      <option name="number" value="00217" />
-      <option name="presentableId" value="LOCAL-00217" />
-      <option name="project" value="LOCAL" />
-      <updated>1624641966403</updated>
-    </task>
-    <task id="LOCAL-00218" summary="Centered login panel">
-      <created>1624650789459</created>
-      <option name="number" value="00218" />
-      <option name="presentableId" value="LOCAL-00218" />
-      <option name="project" value="LOCAL" />
-      <updated>1624650789459</updated>
+      <workItem from="1625157487333" duration="195000" />
+      <workItem from="1625157891258" duration="4000" />
+      <workItem from="1625158688491" duration="9482000" />
     </task>
     <task id="LOCAL-00219" summary="Corrected minor error in GUI.showMyView">
       <created>1624651274085</created>
@@ -800,7 +792,42 @@
       <option name="project" value="LOCAL" />
       <updated>1625093452027</updated>
     </task>
-    <option name="localTasksCounter" value="263" />
+    <task id="LOCAL-00263" summary="Updated jar">
+      <created>1625157648190</created>
+      <option name="number" value="00263" />
+      <option name="presentableId" value="LOCAL-00263" />
+      <option name="project" value="LOCAL" />
+      <updated>1625157648190</updated>
+    </task>
+    <task id="LOCAL-00264" summary="Corrected minor error about leadercards visibility">
+      <created>1625159994856</created>
+      <option name="number" value="00264" />
+      <option name="presentableId" value="LOCAL-00264" />
+      <option name="project" value="LOCAL" />
+      <updated>1625159994857</updated>
+    </task>
+    <task id="LOCAL-00265" summary="Updated jar">
+      <created>1625160173252</created>
+      <option name="number" value="00265" />
+      <option name="presentableId" value="LOCAL-00265" />
+      <option name="project" value="LOCAL" />
+      <updated>1625160173252</updated>
+    </task>
+    <task id="LOCAL-00266" summary="Corrected minor error in LeaderCardPlaceGUI.java">
+      <created>1625160765104</created>
+      <option name="number" value="00266" />
+      <option name="presentableId" value="LOCAL-00266" />
+      <option name="project" value="LOCAL" />
+      <updated>1625160765104</updated>
+    </task>
+    <task id="LOCAL-00267" summary="Corrected minor error in Match.end">
+      <created>1625167520310</created>
+      <option name="number" value="00267" />
+      <option name="presentableId" value="LOCAL-00267" />
+      <option name="project" value="LOCAL" />
+      <updated>1625167520310</updated>
+    </task>
+    <option name="localTasksCounter" value="268" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -835,14 +862,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Corrected minor error in Match.java" />
     <MESSAGE value="Corrected minor error in GUI.setMatch" />
     <MESSAGE value="Corrected minor error in HistoryGUI" />
     <MESSAGE value="Added try catch to Integer.parseInt" />
     <MESSAGE value="Corrected minor error in ClientCLI.handleMainPhase" />
     <MESSAGE value="Corrected minor error in ClientCLI.showScoreboard" />
     <MESSAGE value="Corrected minor error in MainPhaseHandler.java" />
-    <MESSAGE value="Corrected minor error in LeaderCardPlaceGUI.java" />
     <MESSAGE value="Code cleanup" />
     <MESSAGE value="Messages Refactor and created Javadoc" />
     <MESSAGE value="Updated JavaDoc" />
@@ -853,14 +878,16 @@
     <MESSAGE value="Added ResourceInHandlerGUI.refresh and corrected minor error in ClientCLI.viewer" />
     <MESSAGE value="updated Player.updateHistory" />
     <MESSAGE value="Corrected minor error in LeaderMovePanel.setActivationPossible" />
-    <MESSAGE value="Updated jar" />
     <MESSAGE value="Corrected minor error in Match.setPlayerConnectionToTrue" />
     <MESSAGE value="Updated JAR" />
     <MESSAGE value="Corrected minor error Match.getLeaderboard" />
     <MESSAGE value="LeaderMovePanel.setActivationPossible" />
-    <MESSAGE value="Corrected minor error in Match.end" />
     <MESSAGE value="Corrected minor error in Match.getLeaderboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrected minor error in Match.getLeaderboard" />
+    <MESSAGE value="Corrected minor error about leadercards visibility" />
+    <MESSAGE value="Updated jar" />
+    <MESSAGE value="Corrected minor error in LeaderCardPlaceGUI.java" />
+    <MESSAGE value="Corrected minor error in Match.end" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrected minor error in Match.end" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -896,7 +923,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/project/model/Match.java</url>
-          <line>194</line>
+          <line>198</line>
           <properties class="it.polimi.ingsw.project.model.Match">
             <option name="EMULATED" value="true" />
           </properties>
@@ -959,6 +986,6 @@
     <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$ActivateLeaderCardMoveTest_notFeasibleDevLeaderCard.ic" NAME="ActivateLeaderCardMoveTest.notFeasibleDevLeaderCard Coverage Results" MODIFIED="1622053334719" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.project.model.playermove.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$testCoverage.ic" NAME="testCoverage Coverage Results" MODIFIED="1625068188977" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ing_sw_2021_rizzoglio_ruberto_mussato$testCoverage.ic" NAME="testCoverage Coverage Results" MODIFIED="1625167445004" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
