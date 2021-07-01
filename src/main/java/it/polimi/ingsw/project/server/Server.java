@@ -189,6 +189,7 @@ public class Server {
             reader.close();
             recreatedModel.reAddObserversOnMatch();
             Lobby recreatedLobby = new Lobby(recreatedModel.extractNumberOfPlayers());
+            
             recreatedLobby.setModel(recreatedModel);
             Map<String, SocketClientConnection> mapOfSocketClientConnection = new HashMap<>();
             Map<String, RemoteView> mapOfViews = new HashMap<>();

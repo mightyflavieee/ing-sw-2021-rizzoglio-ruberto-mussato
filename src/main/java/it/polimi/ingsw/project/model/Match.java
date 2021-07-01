@@ -189,7 +189,7 @@ public class Match implements Serializable, Cloneable {
         final Match result = new Match();
         result.actionTokenContainer = actionTokenContainer;
         result.cardContainer = cardContainer;
-        result.currentPlayer = currentPlayer;
+        result.currentPlayer = currentPlayer.clone();
         result.isLastTurn = isLastTurn;
         result.isOver = isOver;
         result.market = market;
@@ -404,15 +404,13 @@ public class Match implements Serializable, Cloneable {
         for (Player player : this.playerList) {
             if (player.getNickname().equals(disconnectedPlayerNickname)) {
                 player.setIsConnected(true);
-                if (!currentPlayer.getIsConnected()) {
+                if (player.getNickname().equals(currentPlayer.getNickname())) {
                     currentPlayer = player;
-                    if (currentPlayer.getTurnPhase() == TurnPhase.WaitPhase) {
-                        this.updatePlayer();
-                    }
                 }
                 break;
             }
         }
+
     }
 
     public void readdObservers() {
@@ -448,5 +446,6 @@ public class Match implements Serializable, Cloneable {
         for (Player player : this.playerList) {
             player.setIsConnected(false);
         }
+        currentPlayer.setIsConnected(false);
     }
 }

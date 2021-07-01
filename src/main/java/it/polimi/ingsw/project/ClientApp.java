@@ -9,7 +9,7 @@ import java.io.IOException;
 public class ClientApp {
     public static void main(String[] args) {
         Client client;
-        String ip = "ec2-18-224-181-236.us-east-2.compute.amazonaws.com";
+        String ip = "127.0.0.1";
          int port = 12345;
         StringBuilder input = new StringBuilder();
         for (String arg : args) {
