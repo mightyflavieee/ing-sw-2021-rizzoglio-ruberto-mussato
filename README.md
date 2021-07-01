@@ -1,4 +1,5 @@
 # Progetto di Ingegneria del Software
+### *Masters Of Renaissance*
 ##### Flavio Rizzoglio, Gianluca Ruberto, Leonardo Mussato
 ###### Anno 2020/2021
 
@@ -35,4 +36,7 @@ Il file .jar del server è hostato su una macchina Linux (EC2 di Amazon AWS) ed 
 Il file .jar del server è stato comunque incluso nella cartella `/deliverables`. 
 
 ### Coverage
-![alt text](https://github.com/mightyflavieee/ing-sw-2021-rizzoglio-ruberto-mussato/blob/master/deliverables/coverage.PNG)
+La Coverage del Model è di circa l'80%. I metodi non testati sono i vari getter, setter e toString.
+
+![alt text](https://github.com/mightyflavieee/ing-sw-2021-rizzoglio-ruberto-mussato/blob/master/deliverables/readme_images/coverage_pt1.PNG)
+![alt text](https://github.com/mightyflavieee/ing-sw-2021-rizzoglio-ruberto-mussato/blob/master/deliverables/readme_images/coverage_pt2.PNG)
