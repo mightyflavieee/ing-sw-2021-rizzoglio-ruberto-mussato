@@ -19,6 +19,9 @@ public class DiscardActionToken extends Observable<CardColor> implements ActionT
         return cardColor;
     }
 
+    /**
+     * it notifies the other observers of the DiscardActionToken
+     */
     @Override
     public void Action() {
         super.notify(this.cardColor);

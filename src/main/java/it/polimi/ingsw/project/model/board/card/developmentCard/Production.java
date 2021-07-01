@@ -10,6 +10,10 @@ public class Production implements Serializable{
     private final Map<ResourceType, Integer> requiredResources;
     private final Map<ResourceType, Integer> manufacturedResources;
 
+    /**
+     * @param requiredResources it is the map of the resources needed for the production
+     * @param manufacturedResources it is the map of the resources gained after this production
+     */
     public Production(Map<ResourceType, Integer> requiredResources, Map<ResourceType, Integer> manufacturedResources) {
         this.requiredResources = requiredResources;
         this.manufacturedResources = manufacturedResources;
@@ -23,6 +27,9 @@ public class Production implements Serializable{
         return new HashMap<>(this.requiredResources);
     }
 
+    /**
+     * @return returns the formatted string for the cli
+     */
     public String toString() {
         StringBuilder converted;
         converted = new StringBuilder("Required resources:\n");

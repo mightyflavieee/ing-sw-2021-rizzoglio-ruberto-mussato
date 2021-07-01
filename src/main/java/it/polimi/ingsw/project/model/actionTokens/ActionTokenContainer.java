@@ -17,9 +17,11 @@ public class ActionTokenContainer implements Serializable {
 
     private final List<ActionToken> actionTokens;
 
-    // constructor of
-    // it.polimi.ingsw.project.model.ActionTokens.ActionTokenContainer, it adds all
-    // the different types of actionToken and then shuffles all actionToken
+    /**
+     * constructor of it.polimi.ingsw.project.model.ActionTokens.ActionTokenContainer, it adds all the different types of actionToken and then shuffles all actionToken
+     * @param match the match passed by the controller
+     */
+
     public ActionTokenContainer(Match match) {
         this.actionTokens = new ArrayList<>();
         MoveActionToken moveActionToken = new MoveActionToken();
@@ -51,6 +53,10 @@ public class ActionTokenContainer implements Serializable {
         Collections.shuffle(actionTokens);
     }
 
+    /**
+     * it extracted the token for single player
+     * @return it returns the token extracted for the single player
+     */
     public String drawToken() {
         ActionToken firstActionToken = this.actionTokens.get(0);
         firstActionToken.Action();
@@ -59,6 +65,10 @@ public class ActionTokenContainer implements Serializable {
         return firstActionToken.toString();
     }
 
+    /**
+     * it readds all the observers after recreation of the game
+     * @param match it is passed by controller
+     */
     public void readdObservers(Match match) {
         for (ActionToken actionToken : actionTokens) {
             actionToken.addObserverBasedOnType(match, this);

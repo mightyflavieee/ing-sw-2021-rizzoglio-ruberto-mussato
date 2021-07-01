@@ -17,6 +17,15 @@ public class LeaderCard extends Card {
   final private Map<CardColor, CardLevel> requiredDevCardLevel;
   private Status status;
 
+  /**
+   * constructor of the Leaader Card at least one between requiredResurces, requiredDevCards and requiredDevCardLevel has to be not null.
+   * @param id it is the unique id of the card
+   * @param assignedPerk it is the perk of the card
+   * @param victoryPoints are the points gained by activating the card
+   * @param requiredResources are the resources required for activating the card, it can be null
+   * @param requiredDevCards are the DevCardsColors required for activating the card, it can be null
+   * @param requiredDevCardLevel are the DevCardLevels required for activating the card, it can be null
+   */
   // creates a LeaderCard activable with a requirement in resources
   public LeaderCard(String id, Perk assignedPerk, int victoryPoints, Map<ResourceType, Integer> requiredResources,
       Map<CardColor, Integer> requiredDevCards, Map<CardColor, CardLevel> requiredDevCardLevel) {
@@ -53,11 +62,17 @@ public class LeaderCard extends Card {
     return requiredDevCardLevel;
   }
 
+  /**
+   * it change the status of the card to active
+   */
   // changes the status of the LeaderCard to Active
   public void activateCard() {
     this.status = Status.Active;
   }
 
+  /**
+   * @return returns the formatted string for the cli
+   */
   // converts the object to a printable string
   public String toString() {
     String converted;

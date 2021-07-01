@@ -11,6 +11,9 @@ public class MoveActionToken extends Observable<MoveActionToken> implements Acti
         super.setType("moveActionToken");
     }
 
+    /**
+     * it notifies the other observers of the MoveActionToken
+     */
     @Override
     public void Action() {
         super.notify(this);
