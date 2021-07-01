@@ -5,7 +5,7 @@
 ## Istruzioni per esecuzione:
 ### CLI
 Per startare la CLI, aprire il terminale e scrivere:
-`java -jar MastersOfRenaissance cli`
+`java -jar MastersOfRenaissance.jar cli`
 
 Una volta runnato il comando, selezionare il proprio nickname. A questo punto indicare se si vuole creare o joinare un game, tramite uno di questi due comandi:
 1. Creazione: `create`;
@@ -16,13 +16,8 @@ Attendere gli altri giocatori (se presenti) e iniziare a giocare!
 
 ### GUI
 Ci sono due modi per inizializzare la GUI:
-1. Tramite CLI;
-2. Tramite file .jar
-
-Tramite CLI immettere il seguente comando:
-`java -jar MastersOfRenaissance gui`
-
-Tramite file .jar: cliccare sul file!
+1. Tramite CLI: immettere il seguente comando `java -jar MastersOfRenaissance.jar gui`;
+2. Tramite file .jar: cliccare sul file!
 
 ### Coverage
 ![alt text](https://github.com/mightyflavieee/ing-sw-2021-rizzoglio-ruberto-mussato/blob/master/deliverables/coverage.PNG)
