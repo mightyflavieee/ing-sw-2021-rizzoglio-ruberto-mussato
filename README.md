@@ -2,7 +2,18 @@
 ##### Flavio Rizzoglio, Gianluca Ruberto, Leonardo Mussato
 ###### Anno 2020/2021
 
-## Istruzioni per esecuzione:
+## 1. Funzioni implementate
+Sono state implementate le seguenti funzionalità:
+
+![alt text](https://github.com/mightyflavieee/ing-sw-2021-rizzoglio-ruberto-mussato/blob/master/deliverables/readme_images/implemented_functions.PNG)
+
+### Funzionalità aggiuntive
+Le funzionalità aggiuntive scelte e implementate sono:
+1. Partite multiple;
+2. Persistenza;
+3. Resilienza alle disconnessioni.
+
+## 2. Istruzioni per l'esecuzione del Client
 ### CLI
 Per startare la CLI, aprire il terminale e scrivere:
 `java -jar MastersOfRenaissance.jar cli`
@@ -18,6 +29,10 @@ Attendere gli altri giocatori (se presenti) e iniziare a giocare!
 Ci sono due modi per inizializzare la GUI:
 1. Tramite CLI: immettere il seguente comando `java -jar MastersOfRenaissance.jar gui`;
 2. Tramite file .jar: cliccare sul file!
+
+## 3. Server
+Il file .jar del server è hostato su una macchina Linux (EC2 di Amazon AWS) ed è permanentemente attivo. Chiunque in possesso del .jar (client-side) può automaticamente connettersi al server.
+Il file .jar del server è stato comunque incluso nella cartella `/deliverables`. 
 
 ### Coverage
 ![alt text](https://github.com/mightyflavieee/ing-sw-2021-rizzoglio-ruberto-mussato/blob/master/deliverables/coverage.PNG)
