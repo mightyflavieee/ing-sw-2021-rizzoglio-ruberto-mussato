@@ -19,7 +19,7 @@ public class BoardDevLeaderCardsProdListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.gui.getInformationsGUI().createProductionMoveHandler(ProductionType.BoardAndDevCardAndLeaderCard);
-        this.gui.getInformationsGUI().getjTextArea().setText("Select the resource you want to produce with the board:");
         this.gui.getInformationsGUI().getMainPhaseHandler().goToBoardProductionButtons();
+        this.gui.getInformationsGUI().getjTextArea().setText("Select the resource you want to produce with the board:");
     }
 }

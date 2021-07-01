@@ -222,6 +222,7 @@ public class FaithMapGUI extends JInternalFrame {
             case 18:
             case 21:
                 jButton.setBackground(Color.YELLOW);
+                this.tiles.get(i).setForeground(new Color(0, 0, 0));
                 break;
             default:
                 this.tiles.get(i).setBackground(new Color(255, 255, 255));
