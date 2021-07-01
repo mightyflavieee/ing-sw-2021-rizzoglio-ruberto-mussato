@@ -11,6 +11,9 @@ public class MoveAndShuffleActionToken extends Observable<MoveAndShuffleActionTo
         super.setType("moveAndShuffleActionToken");
     }
 
+    /**
+     * it notifies the other observers of the MoveAndShuffleActionToken
+     */
     @Override
     public void Action() {
         super.notify(this);

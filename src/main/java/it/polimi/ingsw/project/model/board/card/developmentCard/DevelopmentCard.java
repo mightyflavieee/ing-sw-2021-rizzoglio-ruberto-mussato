@@ -15,6 +15,14 @@ public class DevelopmentCard extends Card {
   final private String id;
   final private Map<ResourceType, Integer> cost;
 
+  /**
+   * @param color it is the enum for the Color of the card
+   * @param level it is the enum for the Level of the card
+   * @param production it is the Class that contains all the information for the production
+   * @param id it is unique identification of the card
+   * @param victoryPoints are the points gained by the card when you buy it
+   * @param cost it is the cost of the production in a Map<ResourceType,Integer>
+   */
   public DevelopmentCard(CardColor color, CardLevel level, Production production, String id, int victoryPoints,
       Map<ResourceType, Integer> cost) {
     super(victoryPoints);
@@ -45,6 +53,9 @@ public class DevelopmentCard extends Card {
       return new HashMap<>(this.cost);
   }
 
+  /**
+   * @return returns the formatted string for the cli
+   */
   public String toString() {
     StringBuilder converted;
     converted = new StringBuilder("Id: " + this.id + "\n" + "Production:\n" + this.production + "Level: " + this.level + "\nColor: " + this.color + "\n");
@@ -55,6 +66,9 @@ public class DevelopmentCard extends Card {
     return converted.toString();
   }
 
+  /**
+   * @return it returns the cost of the card
+   */
   public Map<ResourceType, Integer> getCost() {
     return cost;
   }

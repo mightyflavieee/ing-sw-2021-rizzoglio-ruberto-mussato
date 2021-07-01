@@ -9,6 +9,10 @@ public class Perk implements Serializable {
   final Resource resource;
   final PerkType type;
 
+  /**
+   * @param resource it is the resource used in the perk
+   * @param type it is the enum that define the Type of the perk
+   */
   public Perk(Resource resource, PerkType type) {
     this.resource = resource;
     this.type = type;

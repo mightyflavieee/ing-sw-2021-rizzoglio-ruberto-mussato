@@ -10,6 +10,10 @@ public class VictoryPointsTile extends Observable<VictoryPointsTile> implements 
     private static final long serialVersionUID = 3840280548375092704L;
     private final int victoryPoints;
 
+    /**
+     * it is the constructor of this tile and sets the type to papalCouncilTile for the type adapters
+     * @param victoryPoints it contains how many points needs to be added to the players when they go over the papalCouncilTile
+     */
     public VictoryPointsTile(int victoryPoints) {
         this.victoryPoints = victoryPoints;
         super.setType("victoryPointsTile");
