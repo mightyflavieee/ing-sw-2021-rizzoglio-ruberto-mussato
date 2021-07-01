@@ -4,6 +4,7 @@
 
 ## 1. Funzioni implementate
 Sono state implementate le seguenti funzionalità:
+
 ![alt text](https://github.com/mightyflavieee/ing-sw-2021-rizzoglio-ruberto-mussato/blob/master/deliverables/readme_images/implemented_functions.PNG)
 
 ### Funzionalità aggiuntive
