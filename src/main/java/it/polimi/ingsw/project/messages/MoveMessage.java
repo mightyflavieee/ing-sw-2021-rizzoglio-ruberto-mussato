@@ -5,6 +5,9 @@ import java.io.Serializable;
 import it.polimi.ingsw.project.client.Client;
 import it.polimi.ingsw.project.model.Match;
 
+/**
+ * message sent back to the player on each move completed after the game has started
+ */
 public class MoveMessage implements Serializable, ResponseMessage { // messaggio che rimando al player che viene poi
                                                                     // visualizzato
     private final Match match;

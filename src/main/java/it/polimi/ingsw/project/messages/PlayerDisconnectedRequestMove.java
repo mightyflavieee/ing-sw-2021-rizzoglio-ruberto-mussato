@@ -6,14 +6,24 @@ import it.polimi.ingsw.project.model.Player;
 import it.polimi.ingsw.project.model.playermove.interfaces.MoveHandler;
 
 public class PlayerDisconnectedRequestMove extends GameRequestMove implements MoveHandler {
-  private final Player disconnectedPlayer;
+    private final Player disconnectedPlayer;
 
-  public PlayerDisconnectedRequestMove(Player disconnectedPlayer) {
-    this.disconnectedPlayer = disconnectedPlayer;
-  }
+    /**
+     * it construct the move with player that has just disconnected
+     *
+     * @param disconnectedPlayer the player that just disconnected
+     */
+    public PlayerDisconnectedRequestMove(Player disconnectedPlayer) {
+        this.disconnectedPlayer = disconnectedPlayer;
+    }
 
+    /**
+     * it calls the function on the model to make the player skip the turn for the disconnection
+     * @param model it is passed by the controller to update the connection status on the disconnected player
+     * @param requestedMove it is not used in this case
+     */
     @Override
-  public void handleMove(Model model, MoveHandler requestedMove) {
-    model.playerSkipTurn(disconnectedPlayer);
-  }
+    public void handleMove(Model model, MoveHandler requestedMove) {
+        model.playerSkipTurn(disconnectedPlayer);
+    }
 }

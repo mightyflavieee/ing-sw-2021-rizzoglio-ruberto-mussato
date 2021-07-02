@@ -47,10 +47,13 @@ public class Server {
      * @param connection socketClient connection of the player that wants to join
      * @param name it is the name of the player
      */
-    public synchronized void addToLobby(String matchId, SocketClientConnection connection, String name){
+    public synchronized void addToLobby(String matchId, SocketClientConnection connection, String name)
+            throws Exception {
         Lobby currentLobby = mapOfAvailableLobbies.get(matchId);
         if (currentLobby.lenght() + 1 <= currentLobby.getMaxNumberOfPlayers()) {
             currentLobby.insertPlayer(name, connection);
+        } else {
+            throw new Exception("The lobby is already full.");
         }
     }
 
@@ -139,6 +142,13 @@ public class Server {
         currentLobby.getMapOfSocketClientConnections().get(nickname).asyncSend(new WaitForOtherPlayersMessage());
     }
 
+    /**
+     * it adds the leaderCards chosen by the player to the player with that specific nickname
+     * and in case on wrong ids it resends the cards to the player
+     * @param matchId it is the id of the game
+     * @param nickname it is the name of the player that is choosing the cards
+     * @param chosenLeaderCards the list of the cards choosen by the player
+     */
     public synchronized void addChosenCardsToPlayer(String matchId, String nickname,
             List<LeaderCard> chosenLeaderCards) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);

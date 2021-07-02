@@ -6,11 +6,19 @@ public class JoinRequestMove extends GameRequestMove {
     private final String nickName;
     private final String gameId;
 
+    /**
+     * @param nickname it is the name of the player that sent the request
+     * @param gameId it is the unique id of the game where the above player wants to join
+     */
     public JoinRequestMove(String nickname, String gameId) {
         this.nickName = nickname;
         this.gameId = gameId;
     }
 
+    /**
+     * it handles the joining of the player
+     * @param connection it is needed to send messages back to the player
+     */
     @Override
     public void action(SocketClientConnection connection) {
         if (connection.getServer().doesGameExistedAndHasNotRestarted(this.gameId)) {

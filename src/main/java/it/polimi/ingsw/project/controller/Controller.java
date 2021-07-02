@@ -4,6 +4,9 @@ import it.polimi.ingsw.project.model.playermove.interfaces.MoveHandler;
 import it.polimi.ingsw.project.model.Model;
 import it.polimi.ingsw.project.observer.Observer;
 
+/**
+ * it is needed to update the model
+ */
 public class Controller implements Observer<MoveHandler> {
 
     private final Model model;
