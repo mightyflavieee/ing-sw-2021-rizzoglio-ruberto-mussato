@@ -6,6 +6,7 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.LeaderCard;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
 
+import it.polimi.ingsw.project.utils.Utils;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -116,7 +117,7 @@ class BoardTest {
         resourcesSelected.put(ResourceType.Coin, 1);
         resourcesSelected.put(ResourceType.Servant, 1);
         // tests method
-        assertTrue(player.getBoard().isNumberOfResourcesEqual(requiredResource, resourcesSelected));
+        assertTrue(Utils.compareResourcesMaps(requiredResource, resourcesSelected));
     }
 
     @Test
@@ -132,6 +133,6 @@ class BoardTest {
         resourcesSelected.put(ResourceType.Coin, 1);
         resourcesSelected.put(ResourceType.Servant, 1);
         // tests method
-        assertFalse(player.getBoard().isNumberOfResourcesEqual(requiredResource, resourcesSelected));
+        assertFalse(Utils.compareResourcesMaps(requiredResource, resourcesSelected));
     }
 }

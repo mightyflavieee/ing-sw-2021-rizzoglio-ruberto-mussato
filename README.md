@@ -1,42 +1,43 @@
-# Progetto di Ingegneria del Software
+# Software Engineering Project
 ### *Masters Of Renaissance*
 ##### Flavio Rizzoglio, Gianluca Ruberto, Leonardo Mussato
 ###### Anno 2020/2021
 
-## 1. Funzioni implementate
-Sono state implementate le seguenti funzionalità:
+## 1. Functions implemented
+The following functionalities have been implemented:
 
 ![alt text](https://github.com/mightyflavieee/ing-sw-2021-rizzoglio-ruberto-mussato/blob/master/deliverables/readme_images/implemented_functions.PNG)
 
-### Funzionalità aggiuntive
-Le funzionalità aggiuntive scelte e implementate sono:
-1. Partite multiple;
-2. Persistenza;
-3. Resilienza alle disconnessioni.
+### 1.1 Additional functionalities
+The additional functionalities chosen and implemented are:
+1. Multiple games;
+2. Persistence;
+3. Resilience to disconnections.
 
-## 2. Istruzioni per l'esecuzione del Client
-### CLI
-Per startare la CLI, aprire il terminale e scrivere:
+## 2. Instructions for running the Client
+### 2.1 CLI
+To run the CLI version, open the terminal and type:
 `java -jar MastersOfRenaissance.jar cli`
 
-Una volta runnato il comando, selezionare il proprio nickname. A questo punto indicare se si vuole creare o joinare un game, tramite uno di questi due comandi:
-1. Creazione: `create`;
+Once you have run the command, select your nickname. Now, indicate whether you want to create or join a game, using one of these two commands:
+1. Creation: `create`;
 2. Join: `join`.
 
-Se si è selezionata la prima opzione, selezionare il numero di giocatori con i quali si vuole giocare. Se si è selezionata la seconda opzione, inserire l'id del game a cui si vuole partecipare. 
-Attendere gli altri giocatori (se presenti) e iniziare a giocare!
+If you selected the first option, select the number of players you wish to play with. Otherwise, if you selected the second option, enter the id of the game in which you wish to play. 
+Wait for the other players (if any) and start playing!
 
-### GUI
-Ci sono due modi per inizializzare la GUI:
-1. Tramite CLI: immettere il seguente comando `java -jar MastersOfRenaissance.jar gui`;
-2. Tramite file .jar: cliccare sul file!
+### 2.2 GUI
+There are two ways to run the GUI version:
+1. Through the CLI: enter the following command `java -jar MastersOfRenaissance.jar gui`;
+2. Through the .jar file: click on the file!
 
 ## 3. Server
-Il file .jar del server è hostato su una macchina Linux (EC2 di Amazon AWS) ed è permanentemente attivo. Chiunque in possesso del .jar (client-side) può automaticamente connettersi al server.
-Il file .jar del server è stato comunque incluso nella cartella `/deliverables`. 
+The server's .jar file is hosted on a Linux machine (EC2 of Amazon AWS) and is permanently active. Anyone in possession of the client-side .jar file can automatically connect to the server.
 
-### Coverage
-La Coverage del Model è di circa l'80%. I metodi non testati sono i vari getter, setter e toString.
+The server's .jar file has however been included in the folder `/deliverables`. 
+
+## 4. Coverage
+The coverage of the Model is about 80% and 100% for the Controller. The untested methods are the various getters, setters and toString functions.
 
 ![alt text](https://github.com/mightyflavieee/ing-sw-2021-rizzoglio-ruberto-mussato/blob/master/deliverables/readme_images/coverage_pt1.PNG)
 ![alt text](https://github.com/mightyflavieee/ing-sw-2021-rizzoglio-ruberto-mussato/blob/master/deliverables/readme_images/coverage_pt2.PNG)

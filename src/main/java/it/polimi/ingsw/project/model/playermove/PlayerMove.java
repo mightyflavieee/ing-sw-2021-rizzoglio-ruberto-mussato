@@ -14,6 +14,11 @@ public class PlayerMove implements Serializable, MoveHandler {
     private final View view;
     private final Move move;
 
+    /**
+     * @param player player added by the view
+     * @param view added by the RemoteView
+     * @param move it is sent by the player
+     */
     public PlayerMove(Player player, View view, Move move) {
         this.player = player;
         this.view = view;
@@ -45,6 +50,11 @@ public class PlayerMove implements Serializable, MoveHandler {
         this.player.updateHistory(this.move.toString());
     }
 
+    /**
+     * function called by the controller when it receives the notify by the remoteView
+     * @param model it is passed by the controller to exec the functions on it
+     * @param requestedMove move that needs to be done on the model
+     */
     @Override
     public void handleMove(Model model, MoveHandler requestedMove) {
         PlayerMove playerMove = (PlayerMove) requestedMove;

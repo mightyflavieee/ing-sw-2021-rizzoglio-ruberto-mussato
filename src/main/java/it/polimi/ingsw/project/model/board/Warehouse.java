@@ -14,6 +14,9 @@ public class Warehouse extends Observable<Warehouse> {
   private LinkedHashMap<ResourceType, Integer> extraDeposit; // da mettere nel costruttore
   private int numResourcesToDiscard;
 
+  /**
+   * @param match needed to add observers on this object
+   */
   public Warehouse(Match match) {
     this.shelves = this.initShelves();
     this.extraDeposit = null;
@@ -22,11 +25,16 @@ public class Warehouse extends Observable<Warehouse> {
     this.addObserver(warehouseObserver);
   }
 
+  /**
+   * @param match it is needed to re-add the observers for the persistence
+   */
   public void readdObservers(Match match) {
     this.addObserver(new WarehouseObserver(match));
   }
 
-  // returns ALL resources presents in the warehouse
+  /**
+   * @return all contained resources in the warehouse and extra deposit
+   */
   public LinkedHashMap<ResourceType, Integer> mapAllContainedResources() {
     LinkedHashMap<ResourceType, Integer> currentResourcesLinkedHashMap = new LinkedHashMap<>();
     currentResourcesLinkedHashMap.put(ResourceType.Coin, 0);
@@ -51,6 +59,9 @@ public class Warehouse extends Observable<Warehouse> {
     return currentResourcesLinkedHashMap;
   }
 
+  /**
+   * @return it creates the shelves for the deposit
+   */
   private LinkedHashMap<ShelfFloor, List<Resource>> initShelves() {
     LinkedHashMap<ShelfFloor, List<Resource>> tempShelf = new LinkedHashMap<>();
     tempShelf.put(ShelfFloor.First, new ArrayList<>());
@@ -59,6 +70,11 @@ public class Warehouse extends Observable<Warehouse> {
     return tempShelf;
   }
 
+  /**
+   * it adds to the currentResourcesMap all the resources present in the floor
+   * @param currentResourcesLinkedHashMap map of all the resources collected until this moment
+   * @param listOfResources list of resources collected in the floor
+   */
   // helper for listToLinkedHashMapResources
   private void mapResourcesHelper(LinkedHashMap<ResourceType, Integer> currentResourcesLinkedHashMap,
       List<Resource> listOfResources) {
@@ -73,7 +89,11 @@ public class Warehouse extends Observable<Warehouse> {
     });
   }
 
-  // transform a list to a LinkedHashMap
+  /**
+   * transform a list to a LinkedHashMap
+   * @param inputResourcesList input list of resources
+   * @return returns the linkHashMap of the list of resources as input
+   */
   public LinkedHashMap<ResourceType, Integer> listToMapResources(List<Resource> inputResourcesList) {
     LinkedHashMap<ResourceType, Integer> currentResourcesLinkedHashMap = new LinkedHashMap<>();
     mapResourcesHelper(currentResourcesLinkedHashMap, inputResourcesList);
@@ -92,18 +112,30 @@ public class Warehouse extends Observable<Warehouse> {
     return this.numResourcesToDiscard;
   }
 
+  /**
+   * method called when we need to discard some resources from the takeMarketResourcesMove
+   * @param numDiscardedResources number of resources to be discarded
+   */
   private void discardResources(int numDiscardedResources) {
     this.numResourcesToDiscard = numDiscardedResources;
     super.notify(this);
   }
 
+  /**
+   * it swaps the two floors one another
+   * @param swapper initial shelfFloor
+   * @param swappee final shelfFLoor
+   */
   public void swapShelves(ShelfFloor swapper, ShelfFloor swappee) {
     List<Resource> listOfResourcesSwappee = shelves.get(swappee);
     shelves.put(swappee, shelves.get(swapper));
     shelves.put(swapper, listOfResourcesSwappee);
   }
 
-  // creates the extra deposit
+  /**
+   * creates the extra deposit
+   * @param resource input resource of the extraDeposit
+   */
   public void createExtraDeposit(Resource resource) {
     if (this.extraDeposit == null) {
       LinkedHashMap<ResourceType, Integer> newExtraDeposit = new LinkedHashMap<>();
@@ -114,12 +146,20 @@ public class Warehouse extends Observable<Warehouse> {
     }
   }
 
+  /**
+   * @param discardedResources list of resources to be discarded in hand
+   */
   public void discardResourcesInHand(List<Resource> discardedResources) {
     this.discardResources(discardedResources.size());
   }
 
-  // eliminates resources from the warehouse (the correctness of the overall
-  // elimination must be done beforehand)
+  /**
+   * eliminates resources from the warehouse (the correctness of the overall
+   * elimination must be done beforehand)
+   * @param resourcesToEliminateShelves list of resources to be eliminated from the shelf
+   * @param resourcesToEliminateExtraDeposit list of resources to be eliminated from the extraDeposit
+   */
+
   public void eliminateResources(Map<ResourceType, Integer> resourcesToEliminateShelves,
                                  Map<ResourceType, Integer> resourcesToEliminateExtraDeposit) {
     if (!resourcesToEliminateShelves.isEmpty()) {
@@ -146,9 +186,14 @@ public class Warehouse extends Observable<Warehouse> {
 
   }
 
-  private boolean hasMoreResourcesThanFloor(LinkedHashMap<ShelfFloor, List<Resource>> shelfs) {
-    for (ShelfFloor shelfFloor : shelfs.keySet()) {
-      final List<Resource> resourcesOnFloor = shelfs.get(shelfFloor);
+  /**
+   * it checks the correctness of the deposit for the resources on the floor
+   * @param shelves the entire deposit of a player
+   * @return it returns true if all checks are passed, false if not
+   */
+  private boolean hasMoreResourcesThanFloor(LinkedHashMap<ShelfFloor, List<Resource>> shelves) {
+    for (ShelfFloor shelfFloor : shelves.keySet()) {
+      final List<Resource> resourcesOnFloor = shelves.get(shelfFloor);
       if (shelfFloor == ShelfFloor.First) {
         if (resourcesOnFloor.size() > 1) {
           return true;
@@ -173,14 +218,19 @@ public class Warehouse extends Observable<Warehouse> {
   }
 
 
-  private boolean floorsHaveSameTypeOfResource(LinkedHashMap<ShelfFloor, List<Resource>> shelfs) {
-    for (ShelfFloor shelfFloor : shelfs.keySet()) {
-      if (!shelfs.get(shelfFloor).isEmpty()) {
-        Resource resourceOfThisFloor = shelfs.get(shelfFloor).get(0);
-        for (ShelfFloor shelfFloor2 : shelfs.keySet()) {
+  /**
+   * it checks the correctness of the deposit for the resources on the floor with same type
+   * @param shelves the entire deposit of a player
+   * @return it returns true if all checks are passed, false if not
+   */
+  private boolean floorsHaveSameTypeOfResource(LinkedHashMap<ShelfFloor, List<Resource>> shelves) {
+    for (ShelfFloor shelfFloor : shelves.keySet()) {
+      if (!shelves.get(shelfFloor).isEmpty()) {
+        Resource resourceOfThisFloor = shelves.get(shelfFloor).get(0);
+        for (ShelfFloor shelfFloor2 : shelves.keySet()) {
           if (shelfFloor2 != shelfFloor) {
-            if (!shelfs.get(shelfFloor2).isEmpty()) {
-              Resource resourceOnOtherFloor = shelfs.get(shelfFloor2).get(0);
+            if (!shelves.get(shelfFloor2).isEmpty()) {
+              Resource resourceOnOtherFloor = shelves.get(shelfFloor2).get(0);
               if (resourceOnOtherFloor != null && resourceOfThisFloor != null) {
                 if (resourceOnOtherFloor.getType() == resourceOfThisFloor.getType()) {
                   return true;
@@ -194,6 +244,11 @@ public class Warehouse extends Observable<Warehouse> {
     return false;
   }
 
+  /**
+   * it calls other function to verify the isFeasible of the TakeMarketResourcesMove
+   * @param warehouse sent by the player to verify its correctness
+   * @return true if it pass all the checks, false if not
+   */
   public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse) {
     final LinkedHashMap<ShelfFloor, List<Resource>> shelvesToCheck = warehouse.getShelves();
     if (hasMoreResourcesThanFloor(shelvesToCheck)) {
@@ -203,6 +258,12 @@ public class Warehouse extends Observable<Warehouse> {
     return !floorsHaveSameTypeOfResource(shelvesToCheck);
   }
 
+  /**
+   * checks if the action of inserting the resources in the floor is possible and it adds them if it is possible
+   * @param shelfFloor designated floor to insert the resources
+   * @param resourceList list of resources to be inserted in the floor
+   * @return true if all checks are passed and resources inserted, false if not
+   */
   public boolean insertInShelves(ShelfFloor shelfFloor, List<Resource> resourceList) {
     switch (shelfFloor) {
       case First:
@@ -242,6 +303,11 @@ public class Warehouse extends Observable<Warehouse> {
     return true;
   }
 
+  /**
+   * it inserts the resources in the extraDeposit if everyThing is okay
+   * @param resourceList list of resources to be inserted to the extraDeposit
+   * @return true if the resources are isnerted and checks passed, false if not
+   */
   public boolean insertInExtraDeposit(List<Resource> resourceList) {
     if (this.extraDeposit == null) {
       return false;
@@ -257,12 +323,18 @@ public class Warehouse extends Observable<Warehouse> {
     return true;
   }
 
+  /**
+   * @return it returns the cli representation of this objects
+   */
   public String toString() {
     String string = "";
     string = string + "Shelves:\n" + this.getShelvesToString() + "\nExtra Deposit: \n" + this.getExtraDepositToString();
     return string;
   }
 
+  /**
+   * @return it returns the cli representation of the deposit
+   */
   public String getShelvesToString() {
     StringBuilder string = new StringBuilder();
     for (Map.Entry<ShelfFloor, List<Resource>> entry : shelves.entrySet()) {
@@ -275,20 +347,11 @@ public class Warehouse extends Observable<Warehouse> {
       string.append("\n");
     }
     return string.toString();
-    // string = this.shelves
-    // .entrySet()
-    // .stream()
-    // .LinkedHashMap(x -> x.getKey().toString() +
-    // x.getValue().stream().LinkedHashMap(y -> " " +
-    // y.toString()) + "\n")
-    // .collect(Collectors.toList())
-    // .stream()
-    // .reduce("", (a,b)-> a + b);
-
-    // .stream()
-    // .collect(Collectors.joining(" "));
   }
 
+  /**
+   * @return it returns the cli representation of the extraDeposit
+   */
   public String getExtraDepositToString() {
     if (this.extraDeposit == null) {
       return "no extra deposit\n";
@@ -301,6 +364,9 @@ public class Warehouse extends Observable<Warehouse> {
     }
   }
 
+  /**
+   * @return it returns the sum of the victory points of the resources in the deposits / 5
+   */
   public int calculateResourceVictoryPoints() {
     double totalResources = 0;
     LinkedHashMap<ResourceType, Integer> containedResources = mapAllContainedResources();
@@ -310,7 +376,10 @@ public class Warehouse extends Observable<Warehouse> {
     return (int) Math.floor(totalResources / 5);
   }
 
-  public void insertResources(List<ResourceType> listOfResources) {
+  /**
+   * @param listOfResources it inserts the resources for the first choice of the player
+   */
+  public void insertResourcesForInitMatch(List<ResourceType> listOfResources) {
     for (ResourceType resourceType : listOfResources) {
       if (shelves.get(ShelfFloor.Third).isEmpty()) {
         shelves.get(ShelfFloor.Third).add(new Resource(resourceType));

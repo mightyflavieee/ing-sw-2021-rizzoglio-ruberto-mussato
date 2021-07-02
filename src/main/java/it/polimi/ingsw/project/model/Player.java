@@ -94,6 +94,10 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
     this.board.moveForward();
   }
 
+  /**
+   * it moves forward Lorenzo for single player game
+   * @return the new position of the black Marker for Lorenzo
+   */
   public int moveForwardBlack() {
     return this.board.moveForwardBlack();
   }
@@ -102,14 +106,32 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
     this.victoryPoints += this.board.papalCouncil(numTile);
   }
 
+  /**
+   * it checks if the discardAction is feasible
+   * @param leaderCardID id to check if present
+   * @return true if the id is present, false if not
+   */
   public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID) {
     return this.board.isFeasibleDiscardLeaderCardMove(leaderCardID);
   }
 
+  /**
+   * it removes the LeaderCard with that id
+   * @param leaderCardID id of the card to remove
+   */
   public void performDiscardLeaderCardMove(String leaderCardID) {
     this.board.performDiscardLeaderCardMove(leaderCardID);
   }
 
+  /**
+   * it checks if the move Buy Development Card it makes sense
+   * @param devCard card to buy
+   * @param resourcesToEliminateWarehouse resources selected from the warehouse
+   * @param resourcesToEliminateExtraDeposit resources selected from the extradeposit
+   * @param resourcesToEliminateChest resources selected from the chest
+   * @param position position of the card where I want to put it
+   * @return it returns true if all checks are passed, false if not
+   */
   public boolean isFeasibleBuyDevCardMove(DevelopmentCard devCard,
                                           Map<ResourceType, Integer> resourcesToEliminateWarehouse,
                                           Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
@@ -119,6 +141,14 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
             resourcesToEliminateChest, position);
   }
 
+  /**
+   * it buys the requested development card
+   * @param devCard card selected to be bought
+   * @param resourcesToEliminateWarehouse resources selected from warehouse
+   * @param resourcesToEliminateExtraDeposit resources selected from extra deposit
+   * @param resourcesToEliminateChest resources selected from chest
+   * @param position position selected for the card
+   */
   public void performBuyDevCardMove(DevelopmentCard devCard,
                                     Map<ResourceType, Integer> resourcesToEliminateWarehouse,
                                     Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
@@ -128,6 +158,17 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
             resourcesToEliminateChest, position);
   }
 
+  /**
+   * it checks if the production Move is feasible
+   * @param devCardIDs ids of the developmentCards selected fro the production
+   * @param leaderCardIDs ids of the leaderCards selected for the production
+   * @param requiredResources resources required for the production
+   * @param resourcesToEliminateWarehouse resources selected from the warehouse
+   * @param resourcesToEliminateExtraDeposit resources selected from the extraDeposit
+   * @param resourcesToEliminateChest resources selected from the chest
+   * @param productionType enum of the productionType
+   * @return true is the action is feasible, false if not
+   */
   public boolean isFeasibleProductionMove(List<String> devCardIDs,
                                           List<String> leaderCardIDs,
                                           Map<ResourceType, Integer> requiredResources,
@@ -139,6 +180,17 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
             resourcesToEliminateExtraDeposit, resourcesToEliminateChest, productionType);
   }
 
+  /**
+   * performs the production putting the resources manufactured in the strongbox
+   * and eliminating the resources required
+   * @param devCardIDs ids of developmentCards selected by the user
+   * @param resourcesToEliminateWarehouse resources selected from the warehouse
+   * @param resourcesToEliminateExtraDeposit resources selected from the extraDeposit
+   * @param resourcesToEliminateChest resources selected from the chest
+   * @param productionType enum of the productionType
+   * @param boardManufacturedResource resources manufactured by the board
+   * @param perkManufacturedResource resources manufactured from the perk
+   */
   public void performProductionMove(List<String> devCardIDs,
                                     Map<ResourceType, Integer> resourcesToEliminateWarehouse,
                                     Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
@@ -150,18 +202,37 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
             resourcesToEliminateChest, productionType, boardManufacturedResource, perkManufacturedResource);
   }
 
+  /**
+   * checks if the current player can activate a LeaderCard
+   * @param leaderCardID id of the leaderCard
+   * @return it returns true if all checks are passed, false if not
+   */
   public boolean isFeasibleActivateLeaderCardMove(String leaderCardID) {
     return this.board.isFeasibleActivateLeaderCardMove(leaderCardID);
   }
 
+  /**
+   * activates a LeaderCard and its respective Perk
+   * @param leaderCardID id of the selected leaderCard
+   */
   public void performActivateLeaderCardMove(String leaderCardID) {
     this.board.performActivateLeaderCardMove(leaderCardID);
   }
 
+  /**
+   * checks if the warehouse is feasible for the takeMarketResourceMove
+   * @param warehouse sent by the player to check if it has the right format
+   * @return true if it pass all the checks, false if not
+   */
   public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse) {
     return this.board.isFeasibleTakeMarketResourcesMove(warehouse);
   }
 
+  /**
+   * @param warehouse  sent by the player
+   * @param discardedResources list of resources discarded
+   * @param hasRedMarble true if he got the red marble from the market
+   */
   public void performTakeMarketResourceMove(Warehouse warehouse, List<Resource> discardedResources,
       Boolean hasRedMarble) {
     this.board.performTakeMarketResourceMove(warehouse, discardedResources, hasRedMarble);
@@ -187,6 +258,10 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
     return this.board.getTransmutation();
   }
 
+  /**
+   * it attaches to the history the new move done by the player
+   * @param stringMove the move to string that needs to be saved in the History
+   */
   public void updateHistory(String stringMove) {
     if(stringMove.equals("No Move")) {
       return;

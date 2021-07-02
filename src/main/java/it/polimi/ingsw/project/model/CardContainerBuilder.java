@@ -13,6 +13,10 @@ public class CardContainerBuilder implements Serializable {
     private static final long serialVersionUID = 3840280592473292704L;
     public List<DevelopmentCard> allCards;
 
+    /**
+     * it is the builder used to read the json of the cardContainer
+     * @param fileSrc file source for the json
+     */
     public CardContainerBuilder(String fileSrc) {
         Gson gson = new Gson();
 

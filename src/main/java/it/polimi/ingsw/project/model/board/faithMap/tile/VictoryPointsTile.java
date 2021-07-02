@@ -23,11 +23,20 @@ public class VictoryPointsTile extends Observable<VictoryPointsTile> implements 
         return victoryPoints;
     }
 
+    /**
+     * it notifies the observers with this class
+     */ 
     @Override
     public void activate() {
         super.notify(this);
     }
+    
 
+    /**
+     * it re-adds the specificObserver for the persistance
+     * @param _match it is passed by the server but it is not needed in this case
+     * @param player it is passed by the server and it adds the observer for the VictoryPoints
+     */
     @Override
     public void addObserverBasedOnType(Match _match, Player player) {
         this.addObserver(new VictoryPointsObserver(player));

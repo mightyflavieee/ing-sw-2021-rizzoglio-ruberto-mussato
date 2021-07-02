@@ -14,8 +14,10 @@ public class Market extends Observable<Market> implements Cloneable {
     // (0,1),(1,1),(2,1),(3,1)
     // (0,0),(1,0),(2,0),(3,0)
     private Marble outsideMarble;
-    // TODO costruttore
 
+    /**
+     * it constructs and init the market with a random tray
+     */
     public Market() {
         List<Marble> trayList = new ArrayList<>();
         trayList.add(new Marble(MarbleType.White));
@@ -57,6 +59,11 @@ public class Market extends Observable<Market> implements Cloneable {
         return outsideMarble;
     }
 
+    /**
+     * @param marble input marble that needs to be converted
+     * @param transmutationPerk it can be present if the leaderCard has one
+     * @return it returns the ResourceType of the marble in input
+     */
     private ResourceType convertMarbleToResourceType(Marble marble, ResourceType transmutationPerk) {
         switch (marble.getType()) {
             case Grey:
@@ -74,6 +81,12 @@ public class Market extends Observable<Market> implements Cloneable {
         }
     }
 
+    /**
+     * extracts the resources in the specific column
+     * @param columnIndex index of the column
+     * @param transmutationPerk if it has the transmutationPerk it is different from null
+     * @return it returns all the resources extracted by this column
+     */
     private List<Resource> getResourceInColumn(Integer columnIndex, ResourceType transmutationPerk) {
         List<Resource> listOfObteinedResources = new ArrayList<>();
         Marble[] marbleColumn = tray[columnIndex];
@@ -86,6 +99,12 @@ public class Market extends Observable<Market> implements Cloneable {
         return listOfObteinedResources;
     }
 
+    /**
+     * extracts the resources in the specific row
+     * @param rowIndex index of the row
+     * @param transmutationPerk if it has the transmutationPerk it is different from null
+     * @return it returns all the resources extracted by this column
+     */
     private List<Resource> getResourceInRow(Integer rowIndex, ResourceType transmutationPerk) {
         List<Resource> listOfObteinedResources = new ArrayList<>();
         Marble[] oldArrayOfMarbles = new Marble[4];
@@ -101,26 +120,41 @@ public class Market extends Observable<Market> implements Cloneable {
         return listOfObteinedResources;
     }
 
-    private void shiftMarblesInColumn(Integer position) {
-        Marble[] oldArrayOfMarbles = tray[position].clone();
-        tray[position][0] = outsideMarble;
-        if (tray[position].length - 1 >= 0)
-            System.arraycopy(oldArrayOfMarbles, 0, tray[position], 1, tray[position].length - 1);
+    /**
+     * it shifts the market in that chosen direction
+     * @param index index of the column chosen for the shift
+     */
+    private void shiftMarblesInColumn(Integer index) {
+        Marble[] oldArrayOfMarbles = tray[index].clone();
+        tray[index][0] = outsideMarble;
+        if (tray[index].length - 1 >= 0)
+            System.arraycopy(oldArrayOfMarbles, 0, tray[index], 1, tray[index].length - 1);
         outsideMarble = oldArrayOfMarbles[oldArrayOfMarbles.length - 1];
     }
 
-    private void shiftMarblesInRow(Integer position) {
+    /**
+     * it shifts the market in that chosen direction
+     * @param index index of the row chosen for the shift
+     */
+    private void shiftMarblesInRow(Integer index) {
         Marble[] oldArrayOfMarbles = new Marble[4];
         for (int i = tray.length - 1; i >= 0; i--) {
-            oldArrayOfMarbles[i] = tray[i][position];
+            oldArrayOfMarbles[i] = tray[i][index];
         }
         for (int j = 1; j < tray.length; j++) {
-            tray[j - 1][position] = oldArrayOfMarbles[j];
+            tray[j - 1][index] = oldArrayOfMarbles[j];
         }
-        tray[3][position] = outsideMarble;
+        tray[3][index] = outsideMarble;
         outsideMarble = oldArrayOfMarbles[0];
     }
 
+    /**
+     * it inserts the marble in the market, updates the market and returns the list of obtained Resources
+     * @param axis chosen axis for the shift
+     * @param position chosen index for the shift
+     * @param transmutationPerk perk selected for the transmutation
+     * @return it returns the list of the obtained resources
+     */
     public List<Resource> insertMarble(Integer axis, Integer position, ResourceType transmutationPerk) {
         // axis = 1 = horizontal, position can be 0 1 2
         // axis = 0 = vertical, position can be 0 1 2 3
@@ -139,6 +173,10 @@ public class Market extends Observable<Market> implements Cloneable {
         }
         return listOfObteinResources;
     }
+
+    /**
+     * @return it returns the market to string for the cli
+     */
     public String toString(){
         StringBuilder string = new StringBuilder();
         for(int j = 2; j > -1; j--) {

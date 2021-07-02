@@ -17,8 +17,20 @@ public class ProductionMove extends Move{
     private final ResourceType boardManufacturedResource;
     private final List<ResourceType> perkManufacturedResource;
 
-    // constructs the ProductionMove. If either devCardID or leaderCardId (or both) aren't required,
-    // put null as a parameter
+    /**
+     * constructs the ProductionMove. If either devCardID or leaderCardId (or both) aren't required,
+     * put null as a parameter
+     * @param devCardIDs id of the developmentCards selected for the production
+     * @param leaderCardIDs id of the leaderCards selected for the production
+     * @param requiredResources the map of the resources required for the production
+     * @param resourcesToEliminateWarehouse resources selected from the warehouse
+     * @param resourcesToEliminateExtraDeposit resources selected from the extra deposit
+     * @param resourcesToEliminateChest resources selected from the chest
+     * @param productionType type of the production chosen
+     * @param boardManufacturedResource resources manufactured by the board
+      * @param perkManufacturedResource resources manufactured by the leaderCard perk
+     */
+
     public ProductionMove(List<String> devCardIDs,
                           List<String> leaderCardIDs,
                           Map<ResourceType, Integer> requiredResources,
@@ -39,6 +51,11 @@ public class ProductionMove extends Move{
         this.perkManufacturedResource = perkManufacturedResource;
     }
 
+    /**
+     * it checks the correctness of the move
+     * @param match it is passed by the controller to check the move
+     * @return true if all checks are passed, false if not
+     */
     @Override
     public boolean isFeasibleMove(Match match){
         return match.isFeasibleProductionMove(this.devCardIDs,
@@ -50,6 +67,10 @@ public class ProductionMove extends Move{
                 this.productionType);
     }
 
+    /**
+     * it performs the productionMove on the current match
+     * @param match it is passed by the controller to check the move
+     */
     @Override
     public void performMove(Match match){
         match.performProductionMove(this.devCardIDs,
@@ -63,7 +84,6 @@ public class ProductionMove extends Move{
 
     @Override
     public String toString(){
-        //TODO
         return "Production Move, type: " + this.productionType;
     }
 }

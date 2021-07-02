@@ -21,6 +21,11 @@ public class FaithMap implements Serializable {
   private final List<PapalFavourSlot> papalFavourSlots;
   // definire un costruttore (bisogna specificare ogni casella della mappa)
 
+  /**
+   * it construct the FaithMap Object
+   * @param match added by the model to connect the match to the observers
+   * @param player added by the model to generate the map on each player and add the observers
+   */
   public FaithMap(Match match, Player player) {
     this.markerPosition = 0;
     this.blackMarkerPosition = 0;
@@ -31,6 +36,11 @@ public class FaithMap implements Serializable {
     this.papalFavourSlots.add(new PapalFavourSlot(4));
   }
 
+  /**
+   * it generates the map of the game
+   * @param match added by the faithMap constructor to attach the observers
+   * @param player added by the faithMap constructor to attach the observers
+   */
   private void generateMap(Match match, Player player) { // la faithmap è fissa
 
     this.faithTiles = new ArrayList<>();
@@ -81,6 +91,11 @@ public class FaithMap implements Serializable {
                                           // it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile
   }
 
+  /**
+   * function called for the persistence when a game is reloaded from the disk on the server
+   * @param match passed by the model to re-add the specific observer we need
+   * @param player passed by the model to re-add the specific observer we need
+   */
   public void readdObservers(Match match, Player player) {
     for (ActivableTile activableTile : faithTiles) {
       activableTile.addObserverBasedOnType(match, player);
@@ -103,6 +118,9 @@ public class FaithMap implements Serializable {
     return papalFavourSlots;
   }
 
+  /**
+   * it moves forward the position of the player. It does nothing on the last position
+   */
   public void moveForward() {
     if(markerPosition < 24) {
       faithTiles.get(markerPosition).activate();
@@ -110,6 +128,10 @@ public class FaithMap implements Serializable {
     }
   }
 
+  /**
+   * it moves forward Lorenzo for single player game
+   * @return the new position of the black Marker for Lorenzo
+   */
   public int moveForwardBlack() {
     if(blackMarkerPosition < 24) {
       faithTiles.get(blackMarkerPosition).activate();
@@ -118,6 +140,11 @@ public class FaithMap implements Serializable {
     return blackMarkerPosition;
   }
 
+  /**
+   * it is called when someone steps on a PapalFavourSlot
+   * @param numTile it is the tile of the position of the player
+   * @return it returns the points gained by stepping over this papalFavourSlot
+   */
   public int papalCouncil(int numTile) {
     if (this.papalFavourSlots.get(numTile - 1).getStatus() != PapalSlotStatus.Available) {
       // cioè se l'ho già presa o persa

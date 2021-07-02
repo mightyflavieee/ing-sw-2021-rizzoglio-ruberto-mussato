@@ -21,7 +21,7 @@ public class DevelopmentCard extends Card {
    * @param production it is the Class that contains all the information for the production
    * @param id it is unique identification of the card
    * @param victoryPoints are the points gained by the card when you buy it
-   * @param cost it is the cost of the production in a Map<ResourceType,Integer>
+   * @param cost it is the cost of the production in a Map of ResourceType,Integer
    */
   public DevelopmentCard(CardColor color, CardLevel level, Production production, String id, int victoryPoints,
       Map<ResourceType, Integer> cost) {
