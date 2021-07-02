@@ -15,9 +15,10 @@ public class CardContainer implements Cloneable, Serializable {
     return cardContainer;
   }
 
-  // DA MIGLIORARE CON JSON
+  /**
+   * it construct the cardContainer from the JSON file
+   */
   public CardContainer() {
-
     // Convert JSON File to Java Object
     CardContainerBuilder cardContainerBuilder = new CardContainerBuilder("");
     List<DevelopmentCard> allCards = cardContainerBuilder.allCards;
@@ -30,6 +31,9 @@ public class CardContainer implements Cloneable, Serializable {
 
   }
 
+  /**
+   * @return it removes the entire tray for the development Cards
+   */
   private LinkedHashMap<CardLevel, LinkedHashMap<CardColor, List<DevelopmentCard>>> initLinkedHashMapCards() {
     LinkedHashMap<CardLevel, LinkedHashMap<CardColor, List<DevelopmentCard>>> tempCardContainer = new LinkedHashMap<>();
     for (CardLevel cardLevel : CardLevel.values()) {
@@ -42,10 +46,20 @@ public class CardContainer implements Cloneable, Serializable {
     return tempCardContainer;
   }
 
+  /**
+   * it adds a card to the card container
+   * @param developmentCard card to add to the container (it is used in the tests)
+   */
   public void addCardToContainer(DevelopmentCard developmentCard) {
     this.cardContainer.get(developmentCard.getLevel()).get(developmentCard.getColor()).add(developmentCard);
   }
 
+  /**
+   * it tries to discard a card from the cardContainer
+   * @param cardColor color of the card you are trying to discard
+   * @param cardLevel level of the card you are trying to discard
+   * @return it returns true if the card and level you are trying to discard is empty, false it discard and then check the same thing
+   */
   private boolean tryToDiscard(CardColor cardColor, CardLevel cardLevel) {
     if (cardContainer.get(cardLevel).get(cardColor).isEmpty()) {
       return true;
@@ -55,6 +69,11 @@ public class CardContainer implements Cloneable, Serializable {
     return cardContainer.get(CardLevel.Three).get(cardColor).isEmpty();
   }
 
+  /**
+   * it discard the cards for the single player game
+   * @param cardColor color selected to be discarded
+   * @return it returns true if you have finished the card of a specific color, false if not
+   */
   public boolean discard(CardColor cardColor) {
     for (int i = 0; i < 2; i++)
       if (tryToDiscard(cardColor, CardLevel.One))
@@ -65,6 +84,11 @@ public class CardContainer implements Cloneable, Serializable {
     return false;
   }
 
+  /**
+   * checks if the card of that specific id is present
+   * @param devCardID id of the selected card to check
+   * @return true if the card is present, false if not
+   */
   public boolean isCardPresent(String devCardID) {
     for (CardLevel level : this.cardContainer.keySet()) {
       for (CardColor color : this.cardContainer.get(level).keySet()) {
@@ -78,6 +102,11 @@ public class CardContainer implements Cloneable, Serializable {
     return false;
   }
 
+  /**
+   * it returns the card from the cardContainer
+   * @param devCardID id of the selected Card
+   * @return it returns the selected card, null if it is not present
+   */
   public DevelopmentCard fetchCard(String devCardID) {
     for (CardLevel level : this.cardContainer.keySet()) {
       for (CardColor color : this.cardContainer.get(level).keySet()) {
@@ -91,6 +120,11 @@ public class CardContainer implements Cloneable, Serializable {
     return null;
   }
 
+  /**
+   * it removes the wanted card after it has been selected
+   * @param devCardID selected card id
+   * @return it removes the remove developmentCard
+   */
   public DevelopmentCard removeBoughtCard(String devCardID) {
     DevelopmentCard boughtCard = fetchCard(devCardID);
     for (CardLevel level : this.cardContainer.keySet()) {
@@ -106,6 +140,10 @@ public class CardContainer implements Cloneable, Serializable {
     return boughtCard;
   }
 
+  /**
+   * used when we want to visualize the status of the card container
+   * @return it returns all available cards from the cardContainer
+   */
   public List<DevelopmentCard> getAvailableDevCards() {
     List<DevelopmentCard> availableDevCards = new ArrayList<>();
     for (CardLevel level : this.cardContainer.keySet()) {

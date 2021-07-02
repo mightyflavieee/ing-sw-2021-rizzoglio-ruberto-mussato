@@ -14,6 +14,9 @@ public class LeaderCardContainer implements Serializable {
     private final List<LeaderCard> leaderCards;
     private final Map<String, List<LeaderCard>> mapOfExtractedCards;
 
+    /**
+     * it construct the container of the leaderCards, all read from a Json File
+     */
     public LeaderCardContainer() {
         LeaderCardContainerBuilder leaderCardContainerBuilder = new LeaderCardContainerBuilder(""
         );
@@ -31,6 +34,12 @@ public class LeaderCardContainer implements Serializable {
         return mapOfExtractedCards;
     }
 
+    /**
+     * it extracts and remove from the leaderCardsContainer the 4 cards chosen for the player and saves the choices for
+     * the player in a map nickname,list of leaderCard to check if the chosen leaderCards are right
+     * @param nicknameForCards nickname of the player to where we sent the card
+     * @return it returns the list of cards selected for the player
+     */
     public List<LeaderCard> getFourCardsForPlayer(String nicknameForCards) {
         List<LeaderCard> cardsToAssign = new ArrayList<>();
         for (int i = 0; i < 4; i++) {

@@ -13,14 +13,15 @@ import java.io.Serializable;
 public class Move implements Serializable, Request, Controllable {
     private static final long serialVersionUID = 3842222222475092704L;
     public boolean isFeasibleMove(Match match) {
-        // TODO
         return true;
     }
 
     public void performMove(Match match) {
-        // TODO
     }
 
+    /**
+     * @return it returns the debug print
+     */
     public String toString() {
         return "Generic Move";
     }

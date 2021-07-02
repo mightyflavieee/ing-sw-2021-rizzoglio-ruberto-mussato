@@ -696,7 +696,6 @@ class ProductionMoveTest {
     }
     @Test
     void testToString(){
-        //TODO
         List<String> devCardIDs = new ArrayList<>();
         devCardIDs.add("ciaoDevCard");
         List<String> leaderCardIDs = new ArrayList<>();

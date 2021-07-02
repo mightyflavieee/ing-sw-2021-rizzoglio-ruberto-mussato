@@ -20,7 +20,6 @@ import java.util.*;
 public class Board implements Serializable, Cloneable {
   private static final long serialVersionUID = 3840280592466662704L;
 
-  // TODO: fare clone di tutti gli oggetti
   private Map<ResourceType, Integer> chest;
   private LinkedHashMap<DevCardPosition, List<DevelopmentCard>> mapTray;
   private Warehouse warehouse;
@@ -66,7 +65,6 @@ public class Board implements Serializable, Cloneable {
    */
   @Override
   public final Board clone() {
-    // TODO clone interne
     final Board result = new Board();
     result.chest = chest;
     result.mapTray = mapTray;
@@ -579,6 +577,14 @@ public class Board implements Serializable, Cloneable {
     return isOneLessCardLevelPresent;
   }
 
+  /**
+   * it buys the requested development card
+   * @param devCard card selected to be bought
+   * @param resourcesToEliminateWarehouse resources selected from warehouse
+   * @param resourcesToEliminateExtraDeposit resources selected from extra deposit
+   * @param resourcesToEliminateChest resources selected from chest
+   * @param position position selected for the card
+   */
   // puts the bought DevelopmentCard in the mapTray and eliminates the required
   // resources from the warehouse or the strongbox (this.chest)
   public void performBuyDevCardMove(DevelopmentCard devCard, Map<ResourceType, Integer> resourcesToEliminateWarehouse,
@@ -589,6 +595,17 @@ public class Board implements Serializable, Cloneable {
     eliminateResourcesFromChest(resourcesToEliminateChest);
   }
 
+  /**
+   * it checks if the production Move is feasible
+   * @param devCardIDs ids of the developmentCards selected fro the production
+   * @param leaderCardIDs ids of the leaderCards selected for the production
+   * @param requiredResources resources required for the production
+   * @param resourcesToEliminateWarehouse resources selected from the warehouse
+   * @param resourcesToEliminateExtraDeposit resources selected from the extraDeposit
+   * @param resourcesToEliminateChest resources selected from the chest
+   * @param productionType enum of the productionType
+   * @return true is the action is feasible, false if not
+   */
   // checks if the current player can activate the production selected
   public boolean isFeasibleProductionMove(List<String> devCardIDs,
                                           List<String> leaderCardIDs,
@@ -631,9 +648,18 @@ public class Board implements Serializable, Cloneable {
         resourcesToEliminateChest);
   }
 
-  // performs the production putting the resources manufactured in the strongbox
-  // and eliminating
-  // the resources required
+  /**
+   * performs the production putting the resources manufactured in the strongbox
+   * and eliminating the resources required
+   * @param devCardIDs ids of developmentCards selected by the user
+   * @param resourcesToEliminateWarehouse resources selected from the warehouse
+   * @param resourcesToEliminateExtraDeposit resources selected from the extraDeposit
+   * @param resourcesToEliminateChest resources selected from the chest
+   * @param productionType enum of the productionType
+   * @param boardManufacturedResource resources manufactured by the board
+   * @param perkManufacturedResources resources manufactured from the perk
+   */
+
   public void performProductionMove(List<String> devCardIDs,
                                     Map<ResourceType, Integer> resourcesToEliminateWarehouse,
                                     Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
@@ -727,7 +753,11 @@ public class Board implements Serializable, Cloneable {
     }
   }
 
-  // checks if the current player can activate a LeaderCard
+  /**
+   * checks if the current player can activate a LeaderCard
+   * @param leaderCardID id of the leaderCard
+   * @return it returns true if all checks are passed, false if not
+   */
   public boolean isFeasibleActivateLeaderCardMove(String leaderCardID) {
     LeaderCard card = fetchLeaderCardById(leaderCardID);
     // checks if such a card is present in the player hand and if so checks if it is
@@ -771,7 +801,10 @@ public class Board implements Serializable, Cloneable {
     return true;
   }
 
-  // activates a LeaderCard and its respective Perk
+  /**
+   * activates a LeaderCard and its respective Perk
+   * @param leaderCardID id of the selected leaderCard
+   */
   public void performActivateLeaderCardMove(String leaderCardID) {
     for (LeaderCard card : this.leaderCards) {
       if (card.getId().equals(leaderCardID)) {
@@ -796,10 +829,20 @@ public class Board implements Serializable, Cloneable {
     }
   }
 
+  /**
+   * checks if the warehouse is feasible for the takeMarketResourceMove
+   * @param warehouse sent by the player to check if it has the right format
+   * @return true if it pass all the checks, false if not
+   */
   public boolean isFeasibleTakeMarketResourcesMove(Warehouse warehouse) {
     return this.warehouse.isFeasibleTakeMarketResourcesMove(warehouse);
   }
 
+  /**
+   * @param warehouse  sent by the player
+   * @param discardedResources list of resources discarded
+   * @param hasRedMarble true if he got the red marble from the market
+   */
   public void performTakeMarketResourceMove(Warehouse warehouse, List<Resource> discardedResources,
       boolean hasRedMarble) {
     if (hasRedMarble) {
@@ -857,9 +900,12 @@ public class Board implements Serializable, Cloneable {
   }
 
   public void insertChosenResources(List<ResourceType> listOfResources) {
-    this.warehouse.insertResources(listOfResources);
+    this.warehouse.insertResourcesForInitMatch(listOfResources);
   }
 
+  /**
+   * @return it returns the maptray for the cli
+   */
   public String getMapTrayToString() {
     StringBuilder string = new StringBuilder();
     for (DevCardPosition devCardPosition : this.mapTray.keySet()) {
@@ -871,6 +917,9 @@ public class Board implements Serializable, Cloneable {
     return string.toString();
   }
 
+  /**
+   * @return it returns the activated leaderCards for the cli
+   */
     public String getActivatedLeaderCardsToString() {
       StringBuilder string = new StringBuilder("\n");
       boolean existActivated = false;

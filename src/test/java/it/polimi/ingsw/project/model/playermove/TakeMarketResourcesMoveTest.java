@@ -124,7 +124,6 @@ class TakeMarketResourcesMoveTest {
         warehouse1Gian.insertInShelves(ShelfFloor.Second,resourceList1Gian);
         Move move1Gian = new TakeMarketResourcesMove(warehouse1Gian, new ArrayList<>(), localMarket, false);
         assertTrue(move1Gian.isFeasibleMove(match));
-        //todo da fixare
     }
 
     @Test

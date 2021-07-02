@@ -1,6 +1,9 @@
 package it.polimi.ingsw.project.model.playermove;
 
 
+/**
+ * it is the move sent it by the player to skip the leaderCard phase (Initial Phase, and End Phase)
+ */
 public class NoMove extends Move{
 
 
