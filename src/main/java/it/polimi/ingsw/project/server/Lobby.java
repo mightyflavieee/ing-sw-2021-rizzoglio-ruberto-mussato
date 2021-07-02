@@ -75,6 +75,11 @@ public class Lobby {
         return model;
     }
 
+    /**
+     * checks if the player is present and disconnected in the lobby
+     * @param nickName player name to check
+     * @return it returns true if is present and disconnected, false if not
+     */
     public boolean isPlayerPresentAndDisconnected(String nickName) {
         if (this.mapOfSocketClientConnections.containsKey(nickName)) {
             return this.mapOfSocketClientConnections.get(nickName).getSocket().isClosed();
@@ -82,6 +87,11 @@ public class Lobby {
         return false;
     }
 
+    /**
+     * @param nickname player name to check
+     * @param chosenLeaderCards leaderCards chosen for the player
+     * @return checks if the player has chosen cards right for him
+     */
     public boolean leaderCardsChosenWereRight(String nickname, List<LeaderCard> chosenLeaderCards) {
         Map<String, List<LeaderCard>> mapToCheck = this.leaderCardContainer.getMapOfExtractedCards();
         if (!mapToCheck.containsKey(nickname)) {
@@ -99,6 +109,10 @@ public class Lobby {
         }
     }
 
+    /**
+     * @param nickname player name of the player to check
+     * @param leaderCards cards to be added to the player
+     */
     public void addChosenLeaderCardsToPlayer(String nickname, List<LeaderCard> leaderCards) {
         this.chosenLeaderCardsByPlayer.put(nickname, leaderCards);
     }

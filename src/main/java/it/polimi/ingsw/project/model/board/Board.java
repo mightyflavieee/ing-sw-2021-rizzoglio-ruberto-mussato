@@ -885,12 +885,18 @@ public class Board implements Serializable, Cloneable {
     return count;
   }
 
+  /**
+   * @return it returns the sum of the victory points of the resources in the deposits + chest / 5
+   */
   public int calculateResourceVictoryPoints() {
     int resourceVictoryPointsWarehouse = this.warehouse.calculateResourceVictoryPoints();
     int resourceVictoryPointsChest = calculateChestResourceVictoryPoints();
     return resourceVictoryPointsWarehouse + resourceVictoryPointsChest;
   }
 
+  /**
+   * @return it returns the sum of the victory points of the resources in the chest / 5
+   */
   private int calculateChestResourceVictoryPoints() {
     double totalResources = 0;
     for (ResourceType resourceType : this.chest.keySet()) {

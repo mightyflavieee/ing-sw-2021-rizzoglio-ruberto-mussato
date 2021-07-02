@@ -35,16 +35,22 @@ public class Server {
     private final Map<String, Lobby> mapOfAvailableLobbies = new HashMap<>();
     private final Map<String, Lobby> mapOfUnavailableLobbies = new HashMap<>();
 
-    public synchronized void addToLobby(String matchId, SocketClientConnection connection, String name)
-            throws Exception {
+    /**
+     * @param matchId unique id of the game
+     * @param connection socketClient connection of the player that wants to join
+     * @param name it is the name of the player
+     */
+    public synchronized void addToLobby(String matchId, SocketClientConnection connection, String name){
         Lobby currentLobby = mapOfAvailableLobbies.get(matchId);
         if (currentLobby.lenght() + 1 <= currentLobby.getMaxNumberOfPlayers()) {
             currentLobby.insertPlayer(name, connection);
-        } else {
-            throw new Exception("The lobby is already full.");
         }
     }
 
+    /**
+     * @param matchId the id of the wanted match
+     * @return it returns true if the game is readyToStart, false if not
+     */
     public synchronized boolean tryToStartGame(String matchId) {
         Lobby currentLobby = mapOfAvailableLobbies.get(matchId);
         if (currentLobby.lenght().equals(currentLobby.getMaxNumberOfPlayers())) {
@@ -56,6 +62,12 @@ public class Server {
         }
     }
 
+    /**
+     * it is used to rejoin a game after disconnection
+     * @param matchId unique id of the match
+     * @param connection SocketClient connection of the player that is rejoining
+     * @param nickName the name of the player that it's trying to rejoin
+     */
     public void rejoinGame(String matchId, SocketClientConnection connection, String nickName) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
         currentLobby.insertPlayer(nickName, connection);
@@ -63,6 +75,10 @@ public class Server {
         currentLobby.getModel().setPlayerConnectionToTrue(nickName);
     }
 
+    /**
+     * @param matchId unique id of the player
+     * @param nickname name of the player that needs the cards back
+     */
     public void resendCardsToPlayer(String matchId, String nickname) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
         List<LeaderCard> possibleCardsToChoose = currentLobby.getLeaderCardContainer().getMapOfExtractedCards()
@@ -73,6 +89,10 @@ public class Server {
         }
     }
 
+    /**
+     * it sends to the players the leaderCards that they need to choose
+     * @param matchId unique id of the match needed to access the lobby
+     */
     public void sendChooseLeaderCards(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
         currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> {
@@ -81,6 +101,12 @@ public class Server {
         });
     }
 
+    /**
+     * 
+     * @param matchId
+     * @param nickname
+     * @param selectedResources
+     */
     public void addChosenResourcesToPlayer(String matchId, String nickname, List<ResourceType> selectedResources) {
         Lobby currentLobby = this.mapOfUnavailableLobbies.get(matchId);
         currentLobby.addChosenResourcesToPlayer(nickname, selectedResources);

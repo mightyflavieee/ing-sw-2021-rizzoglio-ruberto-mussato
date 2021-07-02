@@ -1,5 +1,8 @@
 package it.polimi.ingsw.project.model;
 
+/**
+ * enum for the Phase of the turn
+ */
 public enum TurnPhase {
     WaitPhase, InitialPhase, MainPhase, EndPhase;
 

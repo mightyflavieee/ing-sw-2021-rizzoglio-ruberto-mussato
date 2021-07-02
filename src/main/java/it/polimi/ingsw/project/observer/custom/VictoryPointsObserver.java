@@ -10,6 +10,9 @@ public class VictoryPointsObserver implements Observer<VictoryPointsTile> , Seri
     private static final long serialVersionUID = 2140280592475092704L;
     private final Player myplayer;
 
+    /**
+     * @param player it is needed to notify to add points to the player
+     */
     public VictoryPointsObserver(Player player) {
         this.myplayer = player;
     }

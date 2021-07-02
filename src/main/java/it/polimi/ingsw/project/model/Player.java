@@ -21,6 +21,11 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
   private TurnPhase turnPhase;
   private List<String> history;
 
+
+  /**
+   * it is used when you create a normal game
+   * @param nickname it is the name of the player
+   */
   public Player(String nickname) {
     this.board = new Board();
     this.isConnected = true; // Da gestire stato della connessione del player (con funzione apposita)
@@ -30,6 +35,9 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
     this.history = new ArrayList<>();
   }
 
+  /**
+   * it is used for the clone
+   */
   public Player() {
     this.board = new Board();
     this.isConnected = true; // Da gestire stato della connessione del player (con funzione apposita)
@@ -40,6 +48,9 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
     this.board.createFaithMapAndWarehouse(match, this);
   }
 
+  /**
+   * @return the clone of the player
+   */
   @Override
   protected final Player clone() {
     final Player result = new Player();
@@ -52,6 +63,10 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
     return result;
   }
 
+  /**
+   * function called for the persistence when a game is reloaded from the disk on the server
+   * @param match passed by the model to re-add the specific observer we need
+   */
   public void readdObservers(Match match) {
     this.board.readdObservers(match, this);
   }
@@ -102,6 +117,11 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
     return this.board.moveForwardBlack();
   }
 
+  /**
+   * it is called when someone steps on a PapalFavourSlot
+   * @param numTile it is the tile of the position of the player
+   * @return it returns the points gained by stepping over this papalFavourSlot
+   */
   public void papalCouncil(int numTile) {
     this.victoryPoints += this.board.papalCouncil(numTile);
   }
@@ -293,6 +313,9 @@ public class Player implements Serializable, Cloneable, Comparable<Player> {
     return this.board.countDevCards() == 7;
   }
 
+  /**
+   * it adds the sum of the victory points of the resources in the deposits + chest / 5 to the player
+   */
   public void addResourceVictoryPoints() {
     int victoryPointsToAdd = this.board.calculateResourceVictoryPoints();
     addVictoryPoints(victoryPointsToAdd);

@@ -11,6 +11,9 @@ public class DiscardActionTokenObserver implements Observer<CardColor>, Serializ
     private static final long serialVersionUID = 3840280595555504L;
     private final Match match;
 
+    /**
+     * @param match it is needed to notify the match when to discard a card
+     */
     public DiscardActionTokenObserver(Match match) {
         this.match = match;
     }

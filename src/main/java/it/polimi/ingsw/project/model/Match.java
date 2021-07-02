@@ -400,9 +400,9 @@ public class Match implements Serializable, Cloneable {
     }
 
     /**
-     * 
-     * @param playerMove
-     * @return
+     * it checks if the Phase is the right one for the move
+     * @param playerMove move sent by the player
+     * @return it returns true if the player that sent the move is in the right Phase for the move
      */
     public boolean isRightTurnPhase(PlayerMove playerMove) {
         if (currentPlayer.getTurnPhase() == TurnPhase.WaitPhase) {
@@ -416,6 +416,10 @@ public class Match implements Serializable, Cloneable {
 
     }
 
+    /**
+     * @param nickname it is the nickname of the player you want to check
+     * @return it returns of the Turn phase of the player
+     */
     public TurnPhase getTurnPhase(String nickname) {
 
         for (Player player : playerList) {
@@ -426,6 +430,10 @@ public class Match implements Serializable, Cloneable {
         return TurnPhase.WaitPhase;
     }
 
+    /**
+     * @param nickname it is the nickname of the player you want to check
+     * @return it returns of the victory points of the player
+     */
     public int getVictoryPoints(String nickname) {
         for (Player player : playerList) {
             if (player.getNickname().equals(nickname)) {
@@ -435,6 +443,10 @@ public class Match implements Serializable, Cloneable {
         return 0;
     }
 
+    /**
+     * @param nickname it is the nickname of the player you want to check
+     * @return it returns of the marker position of the player
+     */
     public int getMarkerPosition(String nickname) {
         for (Player player : playerList) {
             if (player.getNickname().equals(nickname)) {
@@ -538,6 +550,9 @@ public class Match implements Serializable, Cloneable {
 
     }
 
+    /**
+     * function called for the persistence when a game is reloaded from the disk on the server
+     */
     public void readdObservers() {
         this.actionTokenContainer.readdObservers(this);
         for (Player player : this.playerList) {

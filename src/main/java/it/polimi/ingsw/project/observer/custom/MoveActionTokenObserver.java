@@ -10,6 +10,9 @@ public class MoveActionTokenObserver implements Observer<MoveActionToken>,Serial
     private static final long serialVersionUID = 383333592475092704L;
     private final Match match;
 
+    /**
+     * @param match it is needed to notify the match to move Lorenzo forward by two steps
+     */
     public MoveActionTokenObserver(Match match) {
         this.match = match;
     }
