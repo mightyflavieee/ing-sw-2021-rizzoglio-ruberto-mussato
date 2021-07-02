@@ -37,7 +37,7 @@ The server's .jar file is hosted on a Linux machine (EC2 of Amazon AWS) and is p
 The server's .jar file has however been included in the folder `/deliverables`. 
 
 ## 4. Coverage
-The coverage of the Model is about 80%. The untested methods are the various getters, setters and toString functions.
+The coverage of the Model is about 80% and 100% for the Controller. The untested methods are the various getters, setters and toString functions.
 
 ![alt text](https://github.com/mightyflavieee/ing-sw-2021-rizzoglio-ruberto-mussato/blob/master/deliverables/readme_images/coverage_pt1.PNG)
 ![alt text](https://github.com/mightyflavieee/ing-sw-2021-rizzoglio-ruberto-mussato/blob/master/deliverables/readme_images/coverage_pt2.PNG)
