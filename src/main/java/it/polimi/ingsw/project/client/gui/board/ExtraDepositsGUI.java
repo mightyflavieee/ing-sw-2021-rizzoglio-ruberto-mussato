@@ -92,7 +92,7 @@ public class ExtraDepositsGUI extends JInternalFrame {
                     if (count == 1) {
                         // adds updated images
                         this.firstExtraDepositButtons.get(0).setIcon(Utils.readIcon("resourcetype/" + type + ".png",20,20));
-                        this.firstExtraDepositButtons.get(0).setIcon(Utils.readIcon("resourcetype/" + type + ".png",20,20));
+                        this.firstExtraDepositButtons.get(1).setIcon(Utils.readIcon("resourcetype/" + type + ".png",20,20));
                         // adds listener and checks if there aren't already other listeners on the objects
                         if (Arrays.stream(this.firstExtraDepositButtons.get(0).getActionListeners()).count() == 0) {
                             ActionListener actionListener = new ExtraDepositGUISelectResourceListener(this,
