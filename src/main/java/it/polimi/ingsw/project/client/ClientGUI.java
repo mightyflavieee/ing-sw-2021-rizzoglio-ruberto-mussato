@@ -30,6 +30,7 @@ public class ClientGUI extends Client implements Observer<Move> {
     private boolean createGame; // true create, false join
     private int numPlayers;
     private NewGameHandler newGameHandler;
+    private EndGameHandler endGameHandler;
 
     public ClientGUI(String ip, int port) {
         super(ip, port);
@@ -211,16 +212,18 @@ public class ClientGUI extends Client implements Observer<Move> {
      * shows the scoreboard at the end of the game
      */
     public void endGame() {
-        this.gui.getJFrame().dispose();
-        EndGameHandler endGameHandler = new EndGameHandler(this.match, this);
-        this.jFrame = new JFrame();
-        this.jFrame.setTitle("Master of Renaissance");
-        this.jFrame.setVisible(true);
-        this.jFrame.setLayout(new GridLayout(1,1));
-        this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.jFrame.add(endGameHandler);
-        this.jFrame.pack();
-        jFrame.setLocation(600,100);
+        if (this.endGameHandler == null) {
+            this.gui.getJFrame().dispose();
+            this.endGameHandler = new EndGameHandler(this.match, this);
+            this.jFrame = new JFrame();
+            this.jFrame.setTitle("Master of Renaissance");
+            this.jFrame.setVisible(true);
+            this.jFrame.setLayout(new GridLayout(1,1));
+            this.jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            this.jFrame.add(this.endGameHandler);
+            this.jFrame.pack();
+            jFrame.setLocation(600,100);
+        }
     }
 
     /**
