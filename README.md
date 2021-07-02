@@ -28,11 +28,12 @@ Wait for the other players (if any) and start playing!
 
 ### 2.2 GUI
 There are two ways to run the GUI version:
-1. Tramite CLI: immettere il seguente comando `java -jar MastersOfRenaissance.jar gui`;
-2. Tramite file .jar: cliccare sul file!
+1. Through the CLI: enter the following command `java -jar MastersOfRenaissance.jar gui`;
+2. Through the .jar file: click on the file!
 
 ## 3. Server
 The server's .jar file is hosted on a Linux machine (EC2 of Amazon AWS) and is permanently active. Anyone in possession of the client-side .jar file can automatically connect to the server.
+
 The server's .jar file has however been included in the folder `/deliverables`. 
 
 ## 4. Coverage
