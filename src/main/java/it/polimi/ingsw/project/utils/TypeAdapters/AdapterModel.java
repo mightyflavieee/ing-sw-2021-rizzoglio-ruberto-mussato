@@ -16,6 +16,9 @@ import it.polimi.ingsw.project.model.board.faithMap.tile.PapalCouncilTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile;
 import it.polimi.ingsw.project.model.market.Market;
 
+/**
+ * it is used to serialize to json the Model object
+ */
 public class AdapterModel extends TypeAdapter<Model> {
 
   @Override 

@@ -9,6 +9,9 @@ import it.polimi.ingsw.project.server.SocketClientConnection;
 
 public class RemoteView extends View  {
 
+    /**
+     * it notifies to the controller the playerMove received and it logs it
+     */
     private class MessageReceiver implements Observer<Controllable> {
 
         @Override
@@ -24,6 +27,11 @@ public class RemoteView extends View  {
 
     private SocketClientConnection clientConnection;
 
+    /**
+     * it construct the remoteView with the player that needs to be used to create the playerMove and his socketClientConnection
+     * @param player the one that needs to be used in the playerMove
+     * @param c connection of the player
+     */
     public RemoteView(Player player, SocketClientConnection c) {
         super(player);
         this.clientConnection = c;
@@ -43,6 +51,10 @@ public class RemoteView extends View  {
         }
     }
 
+    /**
+     * it is called by the Observable of the model
+     * @param message the object that needs to be notified to the controller
+     */
     @Override
     public void update(MoveMessage message) {
         // messaggio che mando al player

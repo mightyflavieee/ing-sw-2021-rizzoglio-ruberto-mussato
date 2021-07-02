@@ -15,6 +15,10 @@ public abstract class View extends Observable<MoveHandler> implements Observer<M
         this.player = player;
     }
 
+    /**
+     * it notifies the controller with the move
+     * @param requestedMove move sent it by the player or by the server
+     */
     void handleMove(Controllable requestedMove) {
         // stampo nel server la mossa che sto facendo, e poi la passo al controller
         requestedMove.notifyMoveToController(this.player, this, requestedMove);

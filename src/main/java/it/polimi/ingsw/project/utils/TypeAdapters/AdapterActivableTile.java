@@ -13,6 +13,9 @@ import it.polimi.ingsw.project.model.board.faithMap.tile.PapalCouncilTile;
 import it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile;
 import it.polimi.ingsw.project.utils.TypeAdapters.Deserializers.ActivableTileDeserializer;
 
+/**
+ * it is used to deserialize from json to the ActivableTile object
+ */
 public class AdapterActivableTile extends TypeAdapter<ActivableTile> {
 
   @Override

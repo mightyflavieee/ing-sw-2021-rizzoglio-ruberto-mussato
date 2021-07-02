@@ -19,6 +19,11 @@ public class SocketClientConnection extends Observable<Controllable> implements 
 
     private boolean active = true;
 
+    /**
+     * it construct the socketClientConnection object
+     * @param socket it is the socket passed by the server
+     * @param server it is the server used to call methods on it
+     */
     public SocketClientConnection(Socket socket, Server server) {
         this.socket = socket;
         this.server = server;
@@ -36,6 +41,9 @@ public class SocketClientConnection extends Observable<Controllable> implements 
         return server;
     }
 
+    /**
+     * @param message it is the Object that you want to send on the socket
+     */
     public synchronized void send(Object message) {
         try {
             out.reset();
@@ -56,6 +64,9 @@ public class SocketClientConnection extends Observable<Controllable> implements 
         active = false;
     }
 
+    /**
+     * it closes the socketClient connection
+     */
     private void close() {
         closeConnection();
         notify(new DisconnectRequestMove());
@@ -63,10 +74,16 @@ public class SocketClientConnection extends Observable<Controllable> implements 
         System.out.println("Done!");
     }
 
+    /**
+     * @param message it is the Object that you want to send on the socket on a new Thread
+     */
     public void asyncSend(final Object message) {
         new Thread(() -> send(message)).start();
     }
 
+    /**
+     * it is the method called on the start of the socketCLientConnection
+     */
     @Override
     public void run() {
         try {

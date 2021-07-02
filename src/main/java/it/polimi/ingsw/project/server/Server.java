@@ -36,6 +36,13 @@ public class Server {
     private final Map<String, Lobby> mapOfUnavailableLobbies = new HashMap<>();
 
     /**
+     * it creates the server and the serverSocket on the specified port
+     * @throws IOException
+     */
+    public Server() throws IOException {
+        this.serverSocket = new ServerSocket(PORT);
+    }
+    /**
      * @param matchId unique id of the game
      * @param connection socketClient connection of the player that wants to join
      * @param name it is the name of the player
@@ -101,12 +108,6 @@ public class Server {
         });
     }
 
-    /**
-     * 
-     * @param matchId
-     * @param nickname
-     * @param selectedResources
-     */
     public void addChosenResourcesToPlayer(String matchId, String nickname, List<ResourceType> selectedResources) {
         Lobby currentLobby = this.mapOfUnavailableLobbies.get(matchId);
         currentLobby.addChosenResourcesToPlayer(nickname, selectedResources);
@@ -154,6 +155,11 @@ public class Server {
 
     }
 
+
+    /**
+     * it shuffles the players of the game before starting the game and sends the right messages to the players
+     * @param matchId unique id of the game
+     */
     public void initPlayers(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
         List<Player> listOfPlayer = new ArrayList<>();
@@ -183,6 +189,10 @@ public class Server {
         }
     }
 
+    /**
+     * it initiates the model for a normal start of the game
+     * @param matchId unique id of the game for the request
+     */
     public void initModel(String matchId) {
         Lobby currentLobby = mapOfUnavailableLobbies.get(matchId);
         List<Player> listOfPlayer = currentLobby.getPlayerList();
@@ -206,6 +216,10 @@ public class Server {
         currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> connection.asyncSend(new MoveMessage(currentLobby.getModel().getMatchCopy())));
     }
 
+    /**
+     * it recreates the lobby after the crash of the server when a player wants to join
+     * @param gameId it is the gameId of the requested game
+     */
     public void recreateLobby(String gameId) {
         Gson gson = new GsonBuilder().registerTypeAdapter(ActivableTile.class, new AdapterActivableTile())
                 .registerTypeAdapter(ActionToken.class, new AdapterActionToken()).serializeNulls().create();
@@ -258,10 +272,9 @@ public class Server {
         return currentLobby.isPlayerPresentAndDisconnected(nickName);
     }
 
-    public Server() throws IOException {
-        this.serverSocket = new ServerSocket(PORT);
-    }
-
+    /**
+     * it is called when the server starts and it launches the socket of the clients that tries to connect to the server
+     */
     public void run() {
         while (true) {
             try {
@@ -276,6 +289,11 @@ public class Server {
         }
     }
 
+    /**
+     * it creates the lobby on the server
+     * @param playersNumber it is the number of the players wanted for the game
+     * @return it returns the UUID of the just created game
+     */
     public String createGame(Integer playersNumber) {
         while (true) {
             UUID uuid = UUID.randomUUID();
@@ -317,6 +335,12 @@ public class Server {
         currentLobby.getMapOfSocketClientConnections().forEach((String nickname, SocketClientConnection connection) -> connection.asyncSend(new MoveMessage(currentLobby.getModel().getMatchCopy())));
     }
 
+    /**
+     * it is called in the join action when a player is trying to rejoin a game after crash
+     * @param connection socketClient connection of the player that is trying to join
+     * @param gameId unique id of the wanted game
+     * @param nickName it is the name of the player that is trying to join
+     */
     public void handleReconnectionAfterServerCrashed(SocketClientConnection connection, String gameId,
             String nickName) {
         if (this.isGameStarted(gameId)) {
@@ -370,6 +394,12 @@ public class Server {
         return false;
     }
 
+    /**
+     * it is called in the join action when a player is trying to rejoin a game after start of the game
+     * @param connection socketClient connection of the player that is trying to join
+     * @param gameId unique id of the wanted game
+     * @param nickName it is the name of the player that is trying to join
+     */
     public void handleReconnectionOnNotStartedGame(SocketClientConnection connection, String gameId, String nickName) {
         if (this.isGameNotFull(gameId)) {
             if (this.isNicknameUnique(gameId, nickName)) {
@@ -393,6 +423,12 @@ public class Server {
         }
     }
 
+    /**
+     * it is called in the join action when a player is trying to rejoin a game before start of the game
+     * @param connection socketClient connection of the player that is trying to join
+     * @param gameId unique id of the wanted game
+     * @param nickName it is the name of the player that is trying to join
+     */
     public void handleReconnectionOnStartedGame(SocketClientConnection connection, String gameId, String nickName) {
         if (this.isPlayerPresentAndDisconnected(gameId, nickName)) {
             this.rejoinGame(gameId, connection, nickName);

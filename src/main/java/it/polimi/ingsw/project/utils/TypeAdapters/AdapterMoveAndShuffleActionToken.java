@@ -8,6 +8,9 @@ import com.google.gson.stream.JsonWriter;
 
 import it.polimi.ingsw.project.model.actionTokens.MoveAndShuffleActionToken;
 
+/**
+ * it is used to serialize to json the MoveAndShuffleActionToken object
+ */
 public class AdapterMoveAndShuffleActionToken extends TypeAdapter<MoveAndShuffleActionToken> {
 
   @Override

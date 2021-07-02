@@ -9,6 +9,9 @@ import com.google.gson.stream.JsonWriter;
 
 import it.polimi.ingsw.project.model.board.Warehouse;
 
+/**
+ * it is used to serialize to json the Warehouse object
+ */
 public class AdapterWarehouse extends TypeAdapter<Warehouse> {
 
   @Override

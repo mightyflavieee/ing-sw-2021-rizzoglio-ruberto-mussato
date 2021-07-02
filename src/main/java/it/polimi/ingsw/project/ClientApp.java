@@ -7,6 +7,10 @@ import it.polimi.ingsw.project.client.ClientGUI;
 import java.io.IOException;
 
 public class ClientApp {
+    /**
+     * the constructor of the clientApp and it creates the gui or the cli
+     * @param args it opens as default the gui or the cli if you put cli as args
+     */
     public static void main(String[] args) {
         Client client;
         String ip = "ec2-18-224-181-236.us-east-2.compute.amazonaws.com";

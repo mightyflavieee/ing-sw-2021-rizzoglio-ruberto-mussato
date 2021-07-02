@@ -9,6 +9,9 @@ import com.google.gson.stream.JsonWriter;
 
 import it.polimi.ingsw.project.model.actionTokens.DiscardActionToken;
 
+/**
+ * it is used to serialize to json the DiscardActionToken object
+ */
 public class AdapterDiscardActionToken extends TypeAdapter<DiscardActionToken> {
 
   @Override

@@ -8,6 +8,9 @@ import com.google.gson.stream.JsonWriter;
 
 import it.polimi.ingsw.project.model.board.faithMap.tile.VictoryPointsTile;
 
+/**
+ * it is used to serialize to json the VictoryPointsTile object
+ */
 public class AdapterVictoryPointsTile extends TypeAdapter<VictoryPointsTile> {
 
   @Override

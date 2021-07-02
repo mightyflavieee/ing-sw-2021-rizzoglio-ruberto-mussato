@@ -92,6 +92,12 @@ public class Utils {
         }
     }
 
+    /**
+     * it sums the resources between to maps
+     * @param resourcesToSum1 first resource map to sum
+     * @param resourcesToSum2 second resource map to su,
+     * @return it returns the sum of the two resources map
+     */
     public static Map<ResourceType, Integer> sumResourcesMaps(Map<ResourceType, Integer> resourcesToSum1, Map<ResourceType, Integer> resourcesToSum2) {
         Map<ResourceType, Integer> sumRequiredResources = new HashMap<>();
         List<ResourceType> resourceTypes = new ArrayList<>();

@@ -9,6 +9,9 @@ import com.google.gson.stream.JsonWriter;
 
 import it.polimi.ingsw.project.model.market.Market;
 
+/**
+ * it is used to serialize to json the Market object
+ */
 public class AdapterMarket extends TypeAdapter<Market> {
 
   @Override

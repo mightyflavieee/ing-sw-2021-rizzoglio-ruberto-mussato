@@ -1,5 +1,9 @@
 package it.polimi.ingsw.project.utils.TypeAdapters.Deserializers;
 
+
+/**
+ * it is used to deserialize from json the ActivableTile
+ */
 public class ActivableTileDeserializer {
   private int numTile;
   private int victoryPoints;

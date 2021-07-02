@@ -15,6 +15,9 @@ import it.polimi.ingsw.project.model.actionTokens.MoveAndShuffleActionToken;
 import it.polimi.ingsw.project.model.board.card.CardColor;
 import it.polimi.ingsw.project.utils.TypeAdapters.Deserializers.ActionTokenDeserializer;
 
+/**
+ * it is used to deserialize from json to the ActionToken object
+ */
 public class AdapterActionToken extends TypeAdapter<ActionToken> {
 
   @Override

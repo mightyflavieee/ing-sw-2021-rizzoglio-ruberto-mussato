@@ -8,6 +8,9 @@ import com.google.gson.stream.JsonWriter;
 
 import it.polimi.ingsw.project.model.board.faithMap.tile.PapalCouncilTile;
 
+/**
+ * it is used to serialize to json the PapalCouncilTile object
+ */
 public class AdapterPapalCouncilTile extends TypeAdapter<PapalCouncilTile> {
 
   @Override
