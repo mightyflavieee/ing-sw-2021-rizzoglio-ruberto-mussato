@@ -765,7 +765,7 @@ public class ClientCLI extends Client {
                     if (devCardIDs != null) {
                         // adds to the required resources from the dev cards to requiredResource for the playerMove 
                         for (String devCardID : devCardIDs) {
-                            requiredResources = sumRequiredResourceMaps(requiredResources , this.match.getCurrentPlayer()
+                            requiredResources = Utils.sumResourcesMaps(requiredResources , this.match.getCurrentPlayer()
                                     .getBoard().fetchDevCardById(devCardID)
                                     .getProduction().getRequiredResources());
                         }
@@ -794,7 +794,7 @@ public class ClientCLI extends Client {
                         if (productionType == ProductionType.BoardAndLeaderCard) {
                             requiredResourcesBoard = selectResourcesForBoardProduction();
                         }
-                        requiredResources = sumRequiredResourceMaps(requiredResourcesLeader, requiredResourcesBoard);
+                        requiredResources = Utils.sumResourcesMaps(requiredResourcesLeader, requiredResourcesBoard);
                     } else {
                         goBack = true;
                     }
@@ -804,14 +804,14 @@ public class ClientCLI extends Client {
                     if (devCardIDs != null) {
                         // adds to the required resources from the dev cards to requiredResource for the playerMove 
                         for (String devCardID : devCardIDs) {
-                            requiredResourcesDevelopmentCard = sumRequiredResourceMaps(requiredResourcesDevelopmentCard, this.match.getCurrentPlayer()
+                            requiredResourcesDevelopmentCard = Utils.sumResourcesMaps(requiredResourcesDevelopmentCard, this.match.getCurrentPlayer()
                                     .getBoard().fetchDevCardById(devCardID)
                                     .getProduction().getRequiredResources());
                         }
                         // adds to the required resources from the board (if necessary) to requiredResource
                         // for the playerMove
                         requiredResourcesBoard = selectResourcesForBoardProduction();
-                        requiredResources = sumRequiredResourceMaps(requiredResourcesDevelopmentCard, requiredResourcesBoard);
+                        requiredResources = Utils.sumResourcesMaps(requiredResourcesDevelopmentCard, requiredResourcesBoard);
                     } else {
                         goBack = true;
                     }
@@ -824,7 +824,7 @@ public class ClientCLI extends Client {
                         if (leaderCardIDs != null) {
                             // adds to the required resources from the dev cards to requiredResource for the playerMove 
                             for (String devCardID : devCardIDs) {
-                                requiredResourcesDevelopmentCard = sumRequiredResourceMaps(requiredResourcesDevelopmentCard, this.match.getCurrentPlayer()
+                                requiredResourcesDevelopmentCard = Utils.sumResourcesMaps(requiredResourcesDevelopmentCard, this.match.getCurrentPlayer()
                                         .getBoard().fetchDevCardById(devCardID)
                                         .getProduction().getRequiredResources());
                             }
@@ -840,12 +840,12 @@ public class ClientCLI extends Client {
                                 }
                             }
                             perkManufacturedResources = selectPerkManufacturedResources(leaderCardIDs.size());
-                            requiredResources = sumRequiredResourceMaps(requiredResourcesDevelopmentCard, requiredResourcesLeader);
+                            requiredResources = Utils.sumResourcesMaps(requiredResourcesDevelopmentCard, requiredResourcesLeader);
                             // adds to the required resources from the board (if necessary) to requiredResource
                             // for the playerMove
                             if (productionType == ProductionType.BoardAndDevCardAndLeaderCard) {
                                 requiredResourcesBoard = selectResourcesForBoardProduction();
-                                requiredResources = sumRequiredResourceMaps(requiredResources, requiredResourcesBoard);
+                                requiredResources = Utils.sumResourcesMaps(requiredResources, requiredResourcesBoard);
                             }
                         } else {
                             goBack = true;
@@ -924,31 +924,6 @@ public class ClientCLI extends Client {
                     break;
             }
         } while (true);
-    }
-
-    // sums to maps for the required resources for a Move
-    private Map<ResourceType, Integer> sumRequiredResourceMaps(Map<ResourceType, Integer> resourcesToSum1, Map<ResourceType, Integer> resourcesToSum2) {
-        Map<ResourceType, Integer> sumRequiredResources = new HashMap<>();
-        List<ResourceType> resourceTypes = new ArrayList<>();
-        resourceTypes.add(ResourceType.Coin);
-        resourceTypes.add(ResourceType.Servant);
-        resourceTypes.add(ResourceType.Shield);
-        resourceTypes.add(ResourceType.Stone);
-        for (ResourceType resourceType : resourceTypes) {
-            if (resourcesToSum1.containsKey(resourceType)) {
-                if (resourcesToSum2.containsKey(resourceType)) {
-                    sumRequiredResources.put(resourceType,
-                            resourcesToSum1.get(resourceType) + resourcesToSum2.get(resourceType));
-                } else {
-                    sumRequiredResources.put(resourceType, resourcesToSum1.get(resourceType));
-                }
-            } else {
-                if (resourcesToSum2.containsKey(resourceType)) {
-                    sumRequiredResources.put(resourceType, resourcesToSum2.get(resourceType));
-                }
-            }
-        }
-        return sumRequiredResources;
     }
 
     // handles the CLI aspect of choosing the LeaderCard for the ProductionMove

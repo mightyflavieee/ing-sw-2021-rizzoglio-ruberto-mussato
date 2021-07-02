@@ -7,6 +7,9 @@ public class PapalFavourSlot implements Serializable {
     private final int victoryPoints;
     private PapalSlotStatus status;
 
+    /**
+     * @param victoryPoints are the points gained when you step over this tile if it's not been activated already
+     */
     public PapalFavourSlot(int victoryPoints) {
         this.victoryPoints = victoryPoints;
         this.status = PapalSlotStatus.Available;

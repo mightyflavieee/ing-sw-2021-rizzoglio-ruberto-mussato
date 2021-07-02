@@ -29,6 +29,9 @@ public class Board implements Serializable, Cloneable {
   private List<ResourceType> discounts;
   private List<ResourceType> transmutation;
 
+  /**
+   * it construct the board Object initializing the chest, the deposit and the list of cards
+   */
   public Board() {
     this.chest = new HashMap<>();
     this.chest.put(ResourceType.Coin, 0);
@@ -47,11 +50,20 @@ public class Board implements Serializable, Cloneable {
     this.transmutation = new ArrayList<>();
   }
 
+  /**
+   * it calls the constructors of the FaithMap and the Warehouse
+   * @param match it is passed by the constructor of the player to add observers on it
+   * @param player it is passed by the constructor of the player to add observers on it
+   */
   public void createFaithMapAndWarehouse(Match match, Player player) {
     this.faithMap = new FaithMap(match, player);
     this.warehouse = new Warehouse(match);
   }
 
+  /**
+   * fucntion called when we need to pass the board object but not the reference
+   * @return it returns the cloned Board the pass a different reference
+   */
   @Override
   public final Board clone() {
     // TODO clone interne
@@ -66,6 +78,11 @@ public class Board implements Serializable, Cloneable {
     return result;
   }
 
+  /**
+   * function called for the persistence when a game is reloaded from the disk on the server
+   * @param match passed by the model to re-add the specific observer we need
+   * @param player passed by the model to re-add the specific observer we need
+   */
   public void readdObservers(Match match, Player player) {
     this.warehouse.readdObservers(match);
     this.faithMap.readdObservers(match, player);
@@ -99,7 +116,11 @@ public class Board implements Serializable, Cloneable {
     return this.transmutation;
   }
 
-  // it extracts the last DevelopmentCard in from the mapTray at that position
+  /**
+   * it extracts the last DevelopmentCard in from the mapTray at that position
+   * @param position position enum that can be Left Center Right
+   * @return it returns the list of cards in that position
+   */
   private DevelopmentCard getLastFromPosition(DevCardPosition position) {
     if (this.mapTray.get(position).size() == 0) {
       return null;
@@ -107,7 +128,9 @@ public class Board implements Serializable, Cloneable {
     return mapTray.get(position).get(mapTray.get(position).size() - 1);
   }
 
-  // it extracts all the last cards for the production
+  /**
+   * @return it returns the available cards for the production
+   */
   public Map<DevCardPosition, DevelopmentCard> getCurrentProductionCards() {
     Map<DevCardPosition, DevelopmentCard> productionCardsMap = new HashMap<>();
     productionCardsMap.put(DevCardPosition.Left, getLastFromPosition(DevCardPosition.Left));
@@ -116,18 +139,34 @@ public class Board implements Serializable, Cloneable {
     return productionCardsMap;
   }
 
-  // it moves the player forward on the faithMap
+  /**
+   * it moves the player forward on the faithMap
+   */
+
   public void moveForward() { this.faithMap.moveForward(); }
 
+  /**
+   * it is called when someone steps on a PapalFavourSlot
+   * @param numTile it is the tile of the position of the player
+   * @return it returns the points gained by stepping over this papalFavourSlot
+   */
   public int papalCouncil(int numTile) {
     return this.faithMap.papalCouncil(numTile);
   }
 
+  /**
+   * it moves forward Lorenzo for single player game
+   * @return the new position of the black Marker for Lorenzo
+   */
   public int moveForwardBlack() {
     return this.faithMap.moveForwardBlack();
   }
 
-  // fetches a DevelopmentCard by Id in the mapTray, returns null if not present
+  /**
+   * fetches a DevelopmentCard by Id in the mapTray, returns null if not present
+   * @param devCardID id of the card you are trying to find
+   * @return it returns the Card you wanted
+   */
   public DevelopmentCard fetchDevCardById(String devCardID) {
     for (DevCardPosition position : this.mapTray.keySet()) {
       for (DevelopmentCard card : this.mapTray.get(position)) {
@@ -140,7 +179,11 @@ public class Board implements Serializable, Cloneable {
     return null;
   }
 
-  // fetches a LeaderCard by Id in this.leaderCards, returns null if not present
+  /**
+   * fetches a LeaderCard by Id in this.leaderCards, returns null if not present
+   * @param leaderCardID id of the card you are trying to find
+   * @return it returns the Card you wanted
+   */
   public LeaderCard fetchLeaderCardById(String leaderCardID) {
     for (LeaderCard card : this.leaderCards) {
       if (card.getId().equals(leaderCardID)) {
@@ -150,6 +193,10 @@ public class Board implements Serializable, Cloneable {
     return null;
   }
 
+  /**
+   * it adds the resources in input to the chest and move forward the player if he got the faith resource
+   * @param resourcesToAdd resources to add to the chest
+   */
   // adds the indicated resources to the Strongbox
   private void addToStrongbox(Map<ResourceType, Integer> resourcesToAdd) {
     for (ResourceType type : resourcesToAdd.keySet()) {
@@ -167,14 +214,21 @@ public class Board implements Serializable, Cloneable {
     }
   }
 
-  // double checks if the resources indicated by the user are actually present
-  // usable in "isFeasible" and "perform" methods only within BuyDevCardMove
-  // and DevCardProductionMove
+  /**
+   * double checks if the resources indicated by the user are actually present
+   * usable in "isFeasible" and "perform"
+   * methods only within BuyDevCardMoveand DevCardProductionMove
+   * @param resourcesToEliminateWarehouse resources we want to select from the warehouse
+   * @param resourcesToEliminateExtraDeposit resources we want to select from the extradeposit
+   * @param resourcesToEliminateChest resources we want to select from the chest
+   * @return it returns true if the resources are right, false if they are not
+   */
+
   public boolean areEnoughResourcesPresentForBuyAndProduction(Map<ResourceType, Integer> resourcesToEliminateWarehouse,
       Map<ResourceType, Integer> resourcesToEliminateExtraDeposit,
       Map<ResourceType, Integer> resourcesToEliminateChest) {
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
-    Map<ResourceType, Integer> resourcesToEliminateWarehouseAndExtraDeposit = sumWarehouseResources(resourcesToEliminateWarehouse,
+    Map<ResourceType, Integer> resourcesToEliminateWarehouseAndExtraDeposit = Utils.sumResourcesMaps(resourcesToEliminateWarehouse,
             resourcesToEliminateExtraDeposit);
     if (!resourcesToEliminateWarehouseAndExtraDeposit.isEmpty()) {
       for (ResourceType type : resourcesToEliminateWarehouseAndExtraDeposit.keySet()) {
@@ -201,93 +255,13 @@ public class Board implements Serializable, Cloneable {
     return true;
   }
 
-  // sums the resources fron the warehouse and the extr deposit indicated by the
-  // user
-  private Map<ResourceType, Integer> sumWarehouseResources(Map<ResourceType, Integer> resourcesToEliminateWarehouse,
-                                                           Map<ResourceType, Integer> resourcesToEliminateExtraDeposit) {
-    Map<ResourceType, Integer> summedWarehouseResources = new HashMap<>();
-    List<ResourceType> resourceTypes = new ArrayList<>();
-    resourceTypes.add(ResourceType.Coin);
-    resourceTypes.add(ResourceType.Servant);
-    resourceTypes.add(ResourceType.Shield);
-    resourceTypes.add(ResourceType.Stone);
-    if (resourcesToEliminateWarehouse != null) {
-      if (resourcesToEliminateExtraDeposit != null) {
-        for (ResourceType resourceType : resourceTypes) {
-          if (resourcesToEliminateWarehouse.containsKey(resourceType)) {
-            if (resourcesToEliminateExtraDeposit.containsKey(resourceType)) {
-              summedWarehouseResources.put(resourceType,
-                      resourcesToEliminateWarehouse.get(resourceType) +
-                              resourcesToEliminateExtraDeposit.get(resourceType));
-            } else {
-              summedWarehouseResources.put(resourceType, resourcesToEliminateWarehouse.get(resourceType));
-            }
-          } else {
-            if (resourcesToEliminateExtraDeposit.containsKey(resourceType)) {
-              summedWarehouseResources.put(resourceType, resourcesToEliminateExtraDeposit.get(resourceType));
-            }
-          }
-        }
-      } else {
-        summedWarehouseResources = resourcesToEliminateWarehouse;
-      }
-    } else {
-      summedWarehouseResources = resourcesToEliminateExtraDeposit;
-    }
-    return summedWarehouseResources;
-  }
 
-  public Map<ResourceType, Integer> sumResourcesMaps(Map<ResourceType, Integer> resourcesToSum1, Map<ResourceType, Integer> resourcesToSum2) {
-    Map<ResourceType, Integer> sumRequiredResources = new HashMap<>();
-    List<ResourceType> resourceTypes = new ArrayList<>();
-    resourceTypes.add(ResourceType.Coin);
-    resourceTypes.add(ResourceType.Servant);
-    resourceTypes.add(ResourceType.Shield);
-    resourceTypes.add(ResourceType.Stone);
-    resourceTypes.add(ResourceType.Faith);
-    for (ResourceType resourceType : resourceTypes) {
-      if (resourcesToSum1.containsKey(resourceType)) {
-        if (resourcesToSum2.containsKey(resourceType)) {
-          sumRequiredResources.put(resourceType,
-                  resourcesToSum1.get(resourceType) + resourcesToSum2.get(resourceType));
-        } else {
-          sumRequiredResources.put(resourceType, resourcesToSum1.get(resourceType));
-        }
-      } else {
-        if (resourcesToSum2.containsKey(resourceType)) {
-          sumRequiredResources.put(resourceType, resourcesToSum2.get(resourceType));
-        }
-      }
-    }
-    return sumRequiredResources;
-  }
 
-  // checks if two maps have the same values
-  private boolean compareResourcesMaps(Map<ResourceType, Integer> resourcesMap1, Map<ResourceType, Integer> resourcesMap2) {
-    List<ResourceType> resourceTypes = new ArrayList<>();
-    resourceTypes.add(ResourceType.Coin);
-    resourceTypes.add(ResourceType.Servant);
-    resourceTypes.add(ResourceType.Shield);
-    resourceTypes.add(ResourceType.Stone);
-    for (ResourceType type : resourceTypes) {
-      if (resourcesMap1.containsKey(type)) {
-        if (resourcesMap2.containsKey(type)) {
-          if (!resourcesMap1.get(type).equals(resourcesMap2.get(type))) {
-            return false;
-          }
-        } else {
-          return false;
-        }
-      } else {
-        if (resourcesMap2.containsKey(type)) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  // checks if the resources indicated in the parameter are actually present
+  /**
+   * checks if the resources indicated in the parameter are actually present
+   * @param resourcesToCheck map to check in the warehouse or chest or extra-deposit
+   * @return true if the resources are present in the containers, false if not
+   */
   public boolean areEnoughResourcesPresent(Map<ResourceType, Integer> resourcesToCheck) {
     Map<ResourceType, Integer> warehouseResources = this.warehouse.mapAllContainedResources();
     if (resourcesToCheck != null) {
@@ -316,7 +290,12 @@ public class Board implements Serializable, Cloneable {
     return true;
   }
 
-  // checks if a DevelopmentCard is a production card
+  /**
+   * checks if a DevelopmentCard is a production card
+   * @param devCardID id to check if the selected card is on the top of the list of production card
+   * @return true if the card isValid as production card, false if not
+   */
+
   public boolean isDevCardAProductionCard(String devCardID) {
     Map<DevCardPosition, DevelopmentCard> currentProductionCards = getCurrentProductionCards();
     for (DevCardPosition position : currentProductionCards.keySet()) {
@@ -329,8 +308,10 @@ public class Board implements Serializable, Cloneable {
     return false;
   }
 
-  // eliminates resources from the chest, usable only within
-  // performBuyDevCardMove()
+  /**
+   * eliminates resources from the chest, usable only within performBuyDevCardMove()
+   * @param resourcesToEliminate resources to eliminate from chest
+   */
   private void eliminateResourcesFromChest(Map<ResourceType, Integer> resourcesToEliminate) {
     for (ResourceType type : this.chest.keySet()) {
       if (resourcesToEliminate.containsKey(type)) {
@@ -386,6 +367,9 @@ public class Board implements Serializable, Cloneable {
     return currentDevCards;
   }
 
+  /**
+   * @return self explanatory
+   */
   private Map<CardColor, CardLevel> getCurrentDevCardHigherLevelForEachCardColor() {
     Map<CardColor, CardLevel> currentDevCardsHigherLevels = new HashMap<>();
     currentDevCardsHigherLevels.put(CardColor.Gold, null);
@@ -439,30 +423,11 @@ public class Board implements Serializable, Cloneable {
     return currentDevCardsHigherLevels;
   }
 
-  public boolean isNumberOfResourcesEqual(Map<ResourceType, Integer> requiredResources, Map<ResourceType, Integer> resourcesSelected) {
-    List<ResourceType> resourceTypes = new ArrayList<>();
-    resourceTypes.add(ResourceType.Coin);
-    resourceTypes.add(ResourceType.Servant);
-    resourceTypes.add(ResourceType.Shield);
-    resourceTypes.add(ResourceType.Stone);
-    for (ResourceType resourceType : resourceTypes) {
-      if (requiredResources.containsKey(resourceType)) {
-        if (resourcesSelected.containsKey(resourceType)) {
-          if (!requiredResources.get(resourceType).equals(resourcesSelected.get(resourceType))) {
-            return false;
-          }
-        } else {
-          return false;
-        }
-      } else {
-        if (resourcesSelected.containsKey(resourceType)) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
+  /**
+   * it checks if the discardAction is feasible
+   * @param leaderCardID id to check if present
+   * @return true if the id is present, false if not
+   */
   public boolean isFeasibleDiscardLeaderCardMove(String leaderCardID) {
     for (LeaderCard leaderCard : this.leaderCards) {
       if (leaderCard.getId().equals(leaderCardID)) {
@@ -472,6 +437,10 @@ public class Board implements Serializable, Cloneable {
     return false;
   }
 
+  /**
+   * it removes the LeaderCard with that id
+   * @param leaderCardID id of the card to remove
+   */
   public void performDiscardLeaderCardMove(String leaderCardID) {
     this.moveForward();
     for (int i = 0; i < this.leaderCards.size(); i++) {
@@ -482,6 +451,15 @@ public class Board implements Serializable, Cloneable {
     }
   }
 
+  /**
+   * it checks if the move Buy Development Card it makes sense
+   * @param devCard card to buy
+   * @param resourcesToEliminateWarehouse resources selected from the warehouse
+   * @param resourcesToEliminateExtraDeposit resources selected from the extradeposit
+   * @param resourcesToEliminateChest resources selected from the chest
+   * @param position position of the card where I want to put it
+   * @return it returns true if all checks are passed, false if not
+   */
   // checks if the current player can buy the card he/she selected
   public boolean isFeasibleBuyDevCardMove(DevelopmentCard devCard,
       Map<ResourceType, Integer> resourcesToEliminateWarehouse,
@@ -499,7 +477,7 @@ public class Board implements Serializable, Cloneable {
         resourcesRequired.put(resourceType, resourcesRequired.get(resourceType) - 1);
       }
     }
-    if (!isNumberOfResourcesEqual(resourcesRequired, resourcesSelected)) {
+    if (!Utils.compareResourcesMaps(resourcesRequired, resourcesSelected)) {
       return false;
     }
     // double checks if the resources indicated by the user are actually present
@@ -520,7 +498,7 @@ public class Board implements Serializable, Cloneable {
           }
         }
       }
-      Map<ResourceType, Integer> resourcesToEliminateWarehouseAndExtraDeposit = sumWarehouseResources(resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit);
+      Map<ResourceType, Integer> resourcesToEliminateWarehouseAndExtraDeposit = Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit);
       // verifies if there are enough resources to buy the DevelopmentCard
       // (takes into account the eventual discounts)
       if (resourcesToEliminateWarehouseAndExtraDeposit.containsKey(type)) {
@@ -643,9 +621,9 @@ public class Board implements Serializable, Cloneable {
       }
     }
     // checks if the requiredResources are met
-    Map<ResourceType, Integer> allResourcesSelected = sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit);
-    allResourcesSelected = sumResourcesMaps(allResourcesSelected, resourcesToEliminateChest);
-    if (!compareResourcesMaps(requiredResources, allResourcesSelected)) {
+    Map<ResourceType, Integer> allResourcesSelected = Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit);
+    allResourcesSelected = Utils.sumResourcesMaps(allResourcesSelected, resourcesToEliminateChest);
+    if (!Utils.compareResourcesMaps(requiredResources, allResourcesSelected)) {
       return false;
     }
     // double checks if the resources indicated by the user are actually present
@@ -667,7 +645,7 @@ public class Board implements Serializable, Cloneable {
     if (productionType == ProductionType.DevCard || productionType == ProductionType.BoardAndDevCard) {
       for (String devCardID : devCardIDs) {
         DevelopmentCard card = fetchDevCardById(devCardID);
-        manufacturedResources = sumResourcesMaps(manufacturedResources, card.getProduction().getManufacturedResources());
+        manufacturedResources = Utils.sumResourcesMaps(manufacturedResources, card.getProduction().getManufacturedResources());
       }
       if (productionType == ProductionType.BoardAndDevCard) {
         // aggiunge a manufacturedResources le risorse prodotte dalla Board
@@ -706,7 +684,7 @@ public class Board implements Serializable, Cloneable {
     if (productionType == ProductionType.DevCardAndLeader) {
       for (String devCardID : devCardIDs) {
         DevelopmentCard card = fetchDevCardById(devCardID);
-        manufacturedResources = sumResourcesMaps(manufacturedResources, card.getProduction().getManufacturedResources());
+        manufacturedResources = Utils.sumResourcesMaps(manufacturedResources, card.getProduction().getManufacturedResources());
       }
       for (ResourceType resourceType : perkManufacturedResources) {
         moveForward();
@@ -722,7 +700,7 @@ public class Board implements Serializable, Cloneable {
     if (productionType == ProductionType.BoardAndDevCardAndLeaderCard) {
       for (String devCardID : devCardIDs) {
         DevelopmentCard card = fetchDevCardById(devCardID);
-        manufacturedResources = sumResourcesMaps(manufacturedResources, card.getProduction().getManufacturedResources());
+        manufacturedResources = Utils.sumResourcesMaps(manufacturedResources, card.getProduction().getManufacturedResources());
       }
       for (ResourceType resourceType : perkManufacturedResources) {
         moveForward();

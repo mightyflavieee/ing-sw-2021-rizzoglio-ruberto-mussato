@@ -13,6 +13,8 @@ import it.polimi.ingsw.project.model.board.card.leaderCard.perk.Perk;
 import it.polimi.ingsw.project.model.board.card.leaderCard.perk.PerkType;
 import it.polimi.ingsw.project.model.resource.Resource;
 import it.polimi.ingsw.project.model.resource.ResourceType;
+import it.polimi.ingsw.project.utils.Utils;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -42,7 +44,7 @@ class ProductionMoveTest {
         ResourceType boardManufacturedResource = ResourceType.Shield;
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 1);
-        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Map<ResourceType, Integer> requiredResources = Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
         ProductionMove productionMove = new ProductionMove(null, null, requiredResources,
                 resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest, ProductionType.Board,
                 boardManufacturedResource, null);
@@ -81,7 +83,7 @@ class ProductionMoveTest {
         ResourceType boardManufacturedResource = ResourceType.Shield;
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 1);
-        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Map<ResourceType, Integer> requiredResources = Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
         ProductionMove productionMove = new ProductionMove(null, null, requiredResources,
                 resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
                 ProductionType.Board, boardManufacturedResource, null);
@@ -129,8 +131,8 @@ class ProductionMoveTest {
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateExtraDeposit.put(ResourceType.Stone, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
-        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
-        requiredResources = player.getBoard().sumResourcesMaps(requiredResources, resourcesToEliminateExtraDeposit);
+        Map<ResourceType, Integer> requiredResources =  Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        requiredResources =  Utils.sumResourcesMaps(requiredResources, resourcesToEliminateExtraDeposit);
         ProductionMove productionMove = new ProductionMove(devCardIDs, null, requiredResources,
                 resourcesToEliminateWarehouse, resourcesToEliminateExtraDeposit, resourcesToEliminateChest,
                 ProductionType.DevCard, null, null);
@@ -179,7 +181,7 @@ class ProductionMoveTest {
         Map<ResourceType, Integer> resourcesToEliminateChest = new HashMap<>();
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 1);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
-        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Map<ResourceType, Integer> requiredResources =  Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
         ProductionMove productionMove = new ProductionMove(devCardIDs, null, requiredResources,
                 resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
                 ProductionType.DevCard, null, null);
@@ -298,7 +300,7 @@ class ProductionMoveTest {
         ResourceType boardManufacturedResource = ResourceType.Shield;
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 3);
-        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Map<ResourceType, Integer> requiredResources =  Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
         ProductionMove productionMove = new ProductionMove(devCardIDs, null, requiredResources,
                 resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
                 ProductionType.BoardAndDevCard, boardManufacturedResource, null);
@@ -341,7 +343,7 @@ class ProductionMoveTest {
         ResourceType boardManufacturedResource = ResourceType.Shield;
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 3);
-        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Map<ResourceType, Integer> requiredResources =  Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
         ProductionMove productionMove = new ProductionMove(devCardIDs, null, requiredResources, resourcesToEliminateWarehouse,
                 new HashMap<>(), resourcesToEliminateChest, ProductionType.BoardAndDevCard, boardManufacturedResource, null);
         // tests the move
@@ -382,7 +384,7 @@ class ProductionMoveTest {
         perkManufacturedResource.add(ResourceType.Servant);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 1);
-        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Map<ResourceType, Integer> requiredResources = Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
         ProductionMove productionMove = new ProductionMove(null, leaderCardIDs, requiredResources,
                 resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
                 ProductionType.BoardAndLeaderCard, boardManufacturedResource, perkManufacturedResource);
@@ -436,7 +438,7 @@ class ProductionMoveTest {
         perkManufacturedResource.add(ResourceType.Servant);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 1);
-        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Map<ResourceType, Integer> requiredResources =  Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
         ProductionMove productionMove = new ProductionMove(null, leaderCardIDs, requiredResources,
                 resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
                 ProductionType.BoardAndLeaderCard, boardManufacturedResource, perkManufacturedResource);
@@ -497,7 +499,7 @@ class ProductionMoveTest {
         perkManufacturedResource.add(ResourceType.Servant);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 3);
         resourcesToEliminateChest.put(ResourceType.Stone, 3);
-        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Map<ResourceType, Integer> requiredResources =  Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
         ProductionMove productionMove = new ProductionMove(devCardIDs, leaderCardIDs, requiredResources,
                 resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
                 ProductionType.BoardAndDevCardAndLeaderCard, boardManufacturedResource, perkManufacturedResource);
@@ -563,7 +565,7 @@ class ProductionMoveTest {
         perkManufacturedResource.add(ResourceType.Servant);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 3);
         resourcesToEliminateChest.put(ResourceType.Stone, 3);
-        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Map<ResourceType, Integer> requiredResources =  Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
         ProductionMove productionMove = new ProductionMove(devCardIDs, leaderCardIDs, requiredResources,
                 resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
                 ProductionType.BoardAndDevCardAndLeaderCard, boardManufacturedResource, perkManufacturedResource);
@@ -619,7 +621,7 @@ class ProductionMoveTest {
         perkManufacturedResource.add(ResourceType.Servant);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
-        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Map<ResourceType, Integer> requiredResources =  Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
         ProductionMove productionMove = new ProductionMove(devCardIDs, leaderCardIDs, requiredResources, resourcesToEliminateWarehouse,
                 new HashMap<>(), resourcesToEliminateChest, ProductionType.DevCardAndLeader, null, perkManufacturedResource);
         // tests the move
@@ -685,7 +687,7 @@ class ProductionMoveTest {
         perkManufacturedResource.add(ResourceType.Servant);
         resourcesToEliminateWarehouse.put(ResourceType.Coin, 2);
         resourcesToEliminateChest.put(ResourceType.Stone, 2);
-        Map<ResourceType, Integer> requiredResources = player.getBoard().sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
+        Map<ResourceType, Integer> requiredResources =  Utils.sumResourcesMaps(resourcesToEliminateWarehouse, resourcesToEliminateChest);
         ProductionMove productionMove = new ProductionMove(devCardIDs, leaderCardIDs, requiredResources,
                 resourcesToEliminateWarehouse, new HashMap<>(), resourcesToEliminateChest,
                 ProductionType.DevCardAndLeader, null, perkManufacturedResource);
